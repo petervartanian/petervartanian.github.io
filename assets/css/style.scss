@@ -2,7 +2,9 @@
 ---
 @import "{{ site.theme }}";
 
-/* ---------- Base palette (fallback) ---------- */
+/* =========================================================
+   Base + per-page color themes
+   ========================================================= */
 
 :root {
   --pv-bg: #050506;
@@ -13,10 +15,7 @@
   --pv-muted: #9a8f80;
 }
 
-/* ---------- Page-specific palette overrides ---------- */
-
 /* About: deep midnight + warm paper + blue ink */
-
 body.pv-about {
   --pv-bg: #02030b;
   --pv-card: #f6f1e6;
@@ -26,7 +25,6 @@ body.pv-about {
 }
 
 /* Projects: dark teal atmosphere, cool card, teal accents */
-
 body.pv-projects {
   --pv-bg: #021417;
   --pv-card: #edf3f0;
@@ -36,7 +34,6 @@ body.pv-projects {
 }
 
 /* CV: charcoal exterior, neutral grey card, graphite accents */
-
 body.pv-cv {
   --pv-bg: #050506;
   --pv-card: #f4f4f3;
@@ -46,7 +43,6 @@ body.pv-cv {
 }
 
 /* Contact: deep red-brown exterior, warm peach card, wine accents */
-
 body.pv-contact {
   --pv-bg: #230506;
   --pv-card: #f6e7dd;
@@ -55,10 +51,23 @@ body.pv-contact {
   --pv-muted: #8a746c;
 }
 
-/* ---------- Base layout / typography ---------- */
+/* =========================================================
+   Global resets / typography
+   ========================================================= */
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
 body {
   margin: 0;
+  padding: 0;
+}
+
+body {
   background: radial-gradient(circle at top left, #151822 0, var(--pv-bg) 60%);
   color: var(--pv-ink);
   font-family:
@@ -73,6 +82,15 @@ body {
   font-size: 17px;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================================================
+   Page scaffold
+   ========================================================= */
+
 .pv-page {
   min-height: 100vh;
   display: flex;
@@ -86,7 +104,7 @@ body {
 }
 
 .pv-header-inner {
-  max-width: 60rem;
+  max-width: 64rem;
   margin: 0 auto;
   padding: 0 1.75rem;
 }
@@ -109,39 +127,31 @@ body {
   margin-top: 0.15rem;
 }
 
-/* ---------- Main layout (card + side index) ---------- */
+/* =========================================================
+   Main card layout (sidebar + article)
+   ========================================================= */
 
 .pv-main {
   flex: 1;
-  max-width: 60rem;
+  max-width: 64rem;
   margin: 0 auto 3rem;
-  padding: 0 1.75rem 0.5rem;
+  padding: 0 1.75rem 0.75rem;
   background: var(--pv-card);
   border-radius: 14px 14px 18px 18px;
   box-shadow:
     0 24px 60px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(0, 0, 0, 0.12);
-  display: grid;
-  grid-template-columns: 13rem minmax(0, 1fr); /* wider sidebar */
-  column-gap: 2.8rem;                           /* more space between */
-  position: relative;
+  display: flex;               /* FLEX, NOT GRID */
+  align-items: stretch;
 }
 
-.pv-main::before {
-  content: "";
-  position: absolute;
-  left: 13rem;          /* align with new sidebar width */
-  top: 1.75rem;
-  bottom: 1.75rem;
-  width: 1px;
-  background: rgba(0, 0, 0, 0.14);
-}
-
-/* ---------- Side index ---------- */
+/* ---------- Sidebar ---------- */
 
 .pv-side-index {
-  padding: 1.75rem 0 1.75rem 0.5rem;
+  flex: 0 0 12rem;             /* fixed sidebar width */
+  padding: 1.75rem 0.75rem 1.75rem 0.5rem;
   font-size: 0.8rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.14);
 }
 
 .pv-side-list {
@@ -157,6 +167,7 @@ body {
   text-transform: lowercase;
   letter-spacing: 0.12em;
   color: var(--pv-muted);
+  white-space: nowrap;
 }
 
 .pv-side-link.is-active {
@@ -167,11 +178,15 @@ body {
   color: var(--pv-accent);
 }
 
-/* ---------- Article ---------- */
+/* ---------- Article area ---------- */
 
 .pv-article {
-  padding: 1.75rem 0 2rem 0;
+  flex: 1 1 auto;
+  padding: 1.75rem 2.2rem 2.1rem 2rem;
+  min-width: 0; /* crucial to prevent overflow in flex layouts */
 }
+
+/* Titles */
 
 .pv-article h1,
 .pv-article h2,
@@ -199,6 +214,8 @@ body {
   margin-bottom: 0.4rem;
 }
 
+/* Body text */
+
 .pv-article p,
 .pv-article li {
   font-size: 0.97rem;
@@ -210,7 +227,7 @@ body {
   text-indent: 0.75rem;
 }
 
-/* links inside content */
+/* Links inside content */
 
 .pv-article a {
   color: var(--pv-accent);
@@ -222,21 +239,25 @@ body {
   color: var(--pv-accent-soft);
 }
 
-/* ---------- Footer ---------- */
+/* =========================================================
+   Footer
+   ========================================================= */
 
 .pv-footer {
   padding: 1.5rem 0 2.5rem;
 }
 
 .pv-footer-inner {
-  max-width: 60rem;
+  max-width: 64rem;
   margin: 0 auto;
   padding: 0 1.75rem;
   font-size: 0.78rem;
   color: rgba(245, 240, 229, 0.66);
 }
 
-/* ---------- Mobile ---------- */
+/* =========================================================
+   Mobile
+   ========================================================= */
 
 @media (max-width: 800px) {
   .pv-header-inner {
@@ -246,34 +267,32 @@ body {
   .pv-main {
     margin: 0 0.75rem 2.5rem;
     padding: 0.75rem 1.1rem 1.3rem;
-    grid-template-columns: 1fr;
-  }
-
-  .pv-main::before {
-    display: none;
+    flex-direction: column;
   }
 
   .pv-side-index {
-    padding: 0.5rem 0 0;
+    flex: 0 0 auto;
+    padding: 0.5rem 0 0.5rem 0;
+    border-right: none;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    margin-bottom: 0.75rem;
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
     gap: 0.5rem 1.25rem;
   }
 
   .pv-side-list {
     display: flex;
     flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
   }
 
   .pv-side-link {
-    padding: 0.1rem 0.4rem 0.1rem 0;
+    padding: 0.1rem 0.6rem 0.1rem 0;
   }
 
   .pv-article {
-    padding: 1rem 0 1.25rem;
+    padding: 1rem 0 1.25rem 0;
   }
 
   .pv-footer-inner {
