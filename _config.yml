@@ -1,16 +1,21 @@
 title: "Peter H. Vartanian"
 description: "Notes, experiments, and working ideas in geo-technology (and beyond)."
-url: "https://petervartanian.github.io"
+url: "https://petervartanian.xyz"
 
 theme: jekyll-theme-minimal
 
 github_username: petervartanian
+
+# Default image
+og_image: /assets/img/card-default.jpeg
 
 navigation:
   - title: "About"
     url: /
   - title: "Projects"
     url: /projects
+  - title: "Media"
+    url: /media
   - title: "CV"
     url: /cv
   - title: "Contact"
