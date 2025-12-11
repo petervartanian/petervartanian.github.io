@@ -122,15 +122,15 @@ body {
     0 24px 60px rgba(0, 0, 0, 0.6),
     0 0 0 1px rgba(0, 0, 0, 0.12);
   display: grid;
-  grid-template-columns: 12rem minmax(0, 1fr);
-  column-gap: 2.4rem;
+  grid-template-columns: 13rem minmax(0, 1fr); /* wider sidebar */
+  column-gap: 2.8rem;                           /* more space between */
   position: relative;
 }
 
 .pv-main::before {
   content: "";
   position: absolute;
-  left: 11.5rem;
+  left: 13rem;          /* align with new sidebar width */
   top: 1.75rem;
   bottom: 1.75rem;
   width: 1px;
