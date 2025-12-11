@@ -10,27 +10,29 @@
 
     <meta name="description" content="{{ meta_description | strip_newlines | strip | escape }}">
 
-    <!-- Open Graph -->
+    <!-- Open Graph for rich previews (iMessage, WhatsApp, etc.) -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ meta_title }} · {{ site.title }}">
     <meta property="og:description" content="{{ meta_description | strip_newlines | strip | escape }}">
     <meta property="og:url" content="{{ page.url | absolute_url }}">
     <meta property="og:image" content="{{ page.og_image | default: site.og_image | default: '/assets/img/card-default.png' | absolute_url }}">
 
-    <!-- Twitter / X -->
+    <!-- Twitter / X card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ meta_title }} · {{ site.title }}">
     <meta name="twitter:description" content="{{ meta_description | strip_newlines | strip | escape }}">
     <meta name="twitter:image" content="{{ page.og_image | default: site.og_image | default: '/assets/img/card-default.png' | absolute_url }}">
 
-    <!-- Icons (we'll drop the actual files later) -->
+    <!-- iOS-style name -->
     <meta name="apple-mobile-web-app-title" content="{{ site.title }}">
+
+    <!-- Favicon / icon (we'll add favicon.png under assets/img/) -->
     <link rel="icon" type="image/png" href="{{ '/assets/img/favicon.png' | relative_url }}">
     <link rel="apple-touch-icon" href="{{ '/assets/img/favicon.png' | relative_url }}">
 
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   </head>
-  <body class="{% if page.page_key %}pv-{{ page.page_key }}{% endif %}">
+  <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-about{% elsif p == '/projects' %}pv-projects{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
     <div class="pv-page">
       <header class="pv-header">
         <div class="pv-header-inner">
@@ -43,10 +45,11 @@
 
       <main class="pv-main" role="main">
         <aside class="pv-side-index">
+          {% assign current = page.permalink | default: page.url %}
           <ul class="pv-side-list">
             {% for item in site.navigation %}
               <li>
-                <a class="pv-side-link{% if item.url == page.url %} is-active{% endif %}"
+                <a class="pv-side-link{% if item.url == current %} is-active{% endif %}"
                    href="{{ item.url | relative_url }}">
                   {{ item.title }}
                 </a>
