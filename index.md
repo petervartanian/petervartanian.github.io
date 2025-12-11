@@ -2,6 +2,7 @@
 layout: default
 title: "About"
 permalink: /
+page_key: about
 ---
 
 # Peter H. Vartanian
