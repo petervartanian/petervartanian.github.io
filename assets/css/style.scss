@@ -2,50 +2,56 @@
 ---
 @import "{{ site.theme }}";
 
-/* ---------- Base palette ---------- */
+/* ---------- Base palette (fallback / About) ---------- */
 
 :root {
   --pv-bg: #050506;
   --pv-card: #f6f1e6;
   --pv-ink: #201a17;
-  --pv-accent: #233a8f;       /* default accent (About) */
+  --pv-accent: #233a8f;
   --pv-accent-soft: #9b6a3c;
   --pv-muted: #9a8f80;
 }
 
-/* ---------- Per-page accent overrides ---------- */
+/* ---------- Page-specific palette overrides ---------- */
 
-/* page.title: "About" */
-.pv-page-about {
+/* About: the “canonical” palette, warm paper + deep blue */
+
+body.pv-about {
+  --pv-card: #f6f1e6;
   --pv-accent: #233a8f;
   --pv-accent-soft: #9b6a3c;
+  --pv-muted: #9a8f80;
 }
 
-/* page.title: "Projects" */
-.pv-page-projects {
-  --pv-accent: #2b6f4f;
-  --pv-accent-soft: #c28b3a;
+/* Projects: slightly cooler, more experimental */
+
+body.pv-projects {
+  --pv-card: #f2f4ed;
+  --pv-accent: #1e5b57;      /* deep teal */
+  --pv-accent-soft: #c27a3c; /* copper */
+  --pv-muted: #7f867f;
 }
 
-/* page.title: "CV" */
-.pv-page-cv {
-  --pv-accent: #7d2034;
-  --pv-accent-soft: #c46b5e;
+/* CV: sober, archival */
+
+body.pv-cv {
+  --pv-card: #f8f7f5;
+  --pv-accent: #343642;      /* ink-grey */
+  --pv-accent-soft: #8f7245; /* subdued bronze */
+  --pv-muted: #8a8a8a;
 }
 
-/* page.title: "Contact" */
-.pv-page-contact {
-  --pv-accent: #185c6a;
-  --pv-accent-soft: #6d8f9b;
+/* Contact: warmer, more intimate */
+
+body.pv-contact {
+  --pv-card: #f5ebe6;
+  --pv-accent: #7a2f30;      /* deep red-brown */
+  --pv-accent-soft: #b6724a; /* terracotta */
+  --pv-muted: #8f7b72;
 }
 
-/* page.title: "Not found" (404) */
-.pv-page-not-found {
-  --pv-accent: #5a5a63;
-  --pv-accent-soft: #8f8f9a;
-}
-
-/* ---------- Base ---------- */
+/* ---------- Base layout / typography ---------- */
 
 body {
   margin: 0;
@@ -141,7 +147,6 @@ body {
   grid-template-columns: 12rem minmax(0, 1fr);
   column-gap: 2.4rem;
   position: relative;
-  border-top: 4px solid var(--pv-accent); /* page accent visible */
 }
 
 .pv-main::before {
@@ -289,7 +294,6 @@ body {
   .pv-side-list {
     display: flex;
     flex-wrap: wrap;
-    padding-top: 0;
   }
 
   .pv-side-link {
