@@ -9,7 +9,7 @@
     {%- endif -%}
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   </head>
-  <body class="pv-body pv-page-{% if page.slug %}{{ page.slug | slugify }}{% elsif page.title %}{{ page.title | slugify }}{% else %}default{% endif %}">
+  <body class="{% if page.page_key %}pv-{{ page.page_key }}{% endif %}">
     <div class="pv-page">
       <header class="pv-header">
         <div class="pv-header-inner">
