@@ -2,7 +2,7 @@
 ---
 @import "{{ site.theme }}";
 
-/* ---------- Base palette (fallback / About) ---------- */
+/* ---------- Base palette (fallback) ---------- */
 
 :root {
   --pv-bg: #050506;
@@ -15,47 +15,51 @@
 
 /* ---------- Page-specific palette overrides ---------- */
 
-/* About: the “canonical” palette, warm paper + deep blue */
+/* About: deep midnight + warm paper + blue ink */
 
 body.pv-about {
+  --pv-bg: #02030b;
   --pv-card: #f6f1e6;
-  --pv-accent: #233a8f;
-  --pv-accent-soft: #9b6a3c;
-  --pv-muted: #9a8f80;
+  --pv-accent: #1f3a8a;
+  --pv-accent-soft: #b0783e;
+  --pv-muted: #8d8578;
 }
 
-/* Projects: slightly cooler, more experimental */
+/* Projects: dark teal atmosphere, cool card, teal accents */
 
 body.pv-projects {
-  --pv-card: #f2f4ed;
-  --pv-accent: #1e5b57;      /* deep teal */
-  --pv-accent-soft: #c27a3c; /* copper */
-  --pv-muted: #7f867f;
+  --pv-bg: #021417;
+  --pv-card: #edf3f0;
+  --pv-accent: #11605b;
+  --pv-accent-soft: #d28a3c;
+  --pv-muted: #6d7c76;
 }
 
-/* CV: sober, archival */
+/* CV: charcoal exterior, neutral grey card, graphite accents */
 
 body.pv-cv {
-  --pv-card: #f8f7f5;
-  --pv-accent: #343642;      /* ink-grey */
-  --pv-accent-soft: #8f7245; /* subdued bronze */
-  --pv-muted: #8a8a8a;
+  --pv-bg: #050506;
+  --pv-card: #f4f4f3;
+  --pv-accent: #343642;
+  --pv-accent-soft: #90724a;
+  --pv-muted: #858585;
 }
 
-/* Contact: warmer, more intimate */
+/* Contact: deep red-brown exterior, warm peach card, wine accents */
 
 body.pv-contact {
-  --pv-card: #f5ebe6;
-  --pv-accent: #7a2f30;      /* deep red-brown */
-  --pv-accent-soft: #b6724a; /* terracotta */
-  --pv-muted: #8f7b72;
+  --pv-bg: #230506;
+  --pv-card: #f6e7dd;
+  --pv-accent: #7a2f30;
+  --pv-accent-soft: #b56242;
+  --pv-muted: #8a746c;
 }
 
 /* ---------- Base layout / typography ---------- */
 
 body {
   margin: 0;
-  background: radial-gradient(circle at top left, #151822 0, var(--pv-bg) 55%);
+  background: radial-gradient(circle at top left, #151822 0, var(--pv-bg) 60%);
   color: var(--pv-ink);
   font-family:
     "Iowan Old Style",
@@ -78,16 +82,13 @@ body {
 /* ---------- Header ---------- */
 
 .pv-header {
-  padding: 1.25rem 0;
+  padding: 1.25rem 0 0.75rem;
 }
 
 .pv-header-inner {
   max-width: 60rem;
   margin: 0 auto;
   padding: 0 1.75rem;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
 }
 
 .pv-brand {
@@ -106,29 +107,6 @@ body {
   font-size: 0.78rem;
   color: var(--pv-muted);
   margin-top: 0.15rem;
-}
-
-/* top navigation */
-
-.pv-main-nav {
-  display: flex;
-  gap: 1.4rem;
-}
-
-.pv-main-link {
-  text-transform: lowercase;
-  letter-spacing: 0.16em;
-  font-size: 0.78rem;
-  text-decoration: none;
-  color: var(--pv-muted);
-}
-
-.pv-main-link.is-active {
-  color: var(--pv-card);
-}
-
-.pv-main-link:hover {
-  color: var(--pv-accent-soft);
 }
 
 /* ---------- Main layout (card + side index) ---------- */
@@ -262,13 +240,7 @@ body {
 
 @media (max-width: 800px) {
   .pv-header-inner {
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .pv-main-nav {
-    flex-wrap: wrap;
-    gap: 0.7rem;
+    padding: 0 1.2rem;
   }
 
   .pv-main {
