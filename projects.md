@@ -2,6 +2,7 @@
 layout: default
 title: "Projects"
 permalink: /projects
+page_key: projects
 ---
 
 # Projects
@@ -11,7 +12,7 @@ What follows will become a catalogue of instruments rather than products. Most w
 For now, only headings:
 
 <ol type="i">
-  <li>Experiments that convert vague anxieties into concrete scenarios (:]);</li>
+  <li>Experiments that convert vague anxieties into concrete scenarios (☺︎);</li>
   <li>Sketches that treat maps, networks, and ledgers as different views of the same underlying machinery;</li>
   <li>Readings of institutions not by their slogans but by the failures for which they quietly prepare;</li>
 </ol>
