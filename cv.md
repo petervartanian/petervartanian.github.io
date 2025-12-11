@@ -2,11 +2,12 @@
 layout: default
 title: "CV"
 permalink: /cv
-page_key: cv
 ---
 
 # Curriculum Vitæ
 
-A complete CV is not yet linked here...
+You may find my comprehensive record of education, research, publications, and professional experience:
 
-When it is (which shall be soon!), this page will provide a single downloadable document rather than a fragmented summary, so that chronology and context remain easy to see.
+[Peter's CV (PDF)](/assets/pdf/cv.pdf){: .pv-cv-download}
+
+For specific inquiries regarding ongoing projects or opportunities for collaboration, please refer to my [Contact](/contact) page.
