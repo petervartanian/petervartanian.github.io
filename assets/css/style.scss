@@ -33,6 +33,15 @@ body.pv-projects {
   --pv-muted: #6d7c76;
 }
 
+/* Media: deep indigo + slightly cooler paper */
+body.pv-media {
+  --pv-bg: #050219;
+  --pv-card: #f1f2f8;
+  --pv-accent: #3e2f8f;
+  --pv-accent-soft: #c27a3c;
+  --pv-muted: #7a7892;
+}
+
 /* CV: charcoal + neutral grey */
 body.pv-cv {
   --pv-bg: #050506;
@@ -249,6 +258,7 @@ body {
   }
 
   .pv-main::before {
+    display: false;
     display: none;
   }
 
