@@ -2,9 +2,10 @@
 layout: default
 title: "CV"
 permalink: /cv
+page_key: cv
 ---
 
-# Curriculum Vitae
+# Curriculum Vitæ
 
 A complete CV is not yet linked here...
 
