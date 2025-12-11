@@ -1,42 +1,76 @@
 <!doctype html>
-<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<html lang="{{ page.lang | default: site.lang | default: 'en-US' }}">
   <head>
     <meta charset="utf-8">
-    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     {%- assign meta_title = page.title | default: site.title -%}
     {%- assign meta_description = page.excerpt | default: site.description -%}
-
+    
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+    
+    <!-- SEO Plugin handles most meta tags -->
+    {% seo %}
+    
+    <!-- Additional meta tags -->
     <meta name="description" content="{{ meta_description | strip_newlines | strip | escape }}">
-
-    <!-- Open Graph for rich previews (iMessage, WhatsApp, etc.) -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ meta_title }} · {{ site.title }}">
-    <meta property="og:description" content="{{ meta_description | strip_newlines | strip | escape }}">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:image" content="{{ page.og_image | default: site.og_image | default: '/assets/img/card-default.png' | absolute_url }}">
-
-    <!-- Twitter / X card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ meta_title }} · {{ site.title }}">
-    <meta name="twitter:description" content="{{ meta_description | strip_newlines | strip | escape }}">
-    <meta name="twitter:image" content="{{ page.og_image | default: site.og_image | default: '/assets/img/card-default.png' | absolute_url }}">
-
-    <!-- iOS-style name -->
     <meta name="apple-mobile-web-app-title" content="{{ site.title }}">
-
-    <!-- Favicon / icon (we'll add favicon.png under assets/img/) -->
-    <link rel="icon" type="image/png" href="{{ '/assets/img/favicon.png' | relative_url }}">
-    <link rel="apple-touch-icon" href="{{ '/assets/img/favicon.png' | relative_url }}">
-
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/favicon-32x32.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/img/favicon-16x16.png' | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "{{ site.title }}",
+      "url": "{{ site.url }}",
+      "description": "{{ site.description }}",
+      "email": "{{ site.author.email }}",
+      "jobTitle": "Scholar and Researcher",
+      "sameAs": [
+        "https://twitter.com/{{ site.twitter.username }}",
+        "https://github.com/{{ site.github.username }}"
+      ]
+    }
+    </script>
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    
+    <!-- Optional: Analytics (uncomment and add your tracking ID) -->
+    <!-- Google Analytics 4 -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+    
+    <!-- Plausible Analytics (privacy-friendly alternative) -->
+    <!-- <script defer data-domain="petervartanian.xyz" src="https://plausible.io/js/script.js"></script> -->
   </head>
   <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-about{% elsif p == '/projects' %}pv-projects{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
+    
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <div class="pv-page">
-      <header class="pv-header">
+      <header class="pv-header" role="banner">
         <div class="pv-header-inner">
-          <a class="pv-brand" href="{{ '/' | relative_url }}">
+          <a class="pv-brand" href="{{ '/' | relative_url }}" aria-label="Return to homepage">
             <span class="pv-brand-title">{{ site.title }}</span>
             <span class="pv-brand-tagline">{{ site.description }}</span>
           </a>
@@ -44,28 +78,31 @@
       </header>
 
       <main class="pv-main" role="main">
-        <aside class="pv-side-index">
+        <nav class="pv-side-index" aria-label="Primary navigation">
           {% assign current = page.permalink | default: page.url %}
           <ul class="pv-side-list">
             {% for item in site.navigation %}
               <li>
                 <a class="pv-side-link{% if item.url == current %} is-active{% endif %}"
-                   href="{{ item.url | relative_url }}">
+                   href="{{ item.url | relative_url }}"
+                   {% if item.url == current %}aria-current="page"{% endif %}>
                   {{ item.title }}
                 </a>
               </li>
             {% endfor %}
           </ul>
-        </aside>
+        </nav>
 
-        <article class="pv-article">
+        <article class="pv-article" id="main-content">
           {{ content }}
         </article>
       </main>
 
-      <footer class="pv-footer">
+      <footer class="pv-footer" role="contentinfo">
         <div class="pv-footer-inner">
-          <span>© {{ site.time | date: '%Y' }} {{ site.title }}</span>
+          <span>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</span>
+          <span class="pv-footer-separator">·</span>
+          <a href="{{ '/feed.xml' | relative_url }}" class="pv-footer-link" aria-label="Subscribe to RSS feed">RSS</a>
         </div>
       </footer>
     </div>
