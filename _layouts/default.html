@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%- if site.description -%}
+    <meta name="description" content="{{ site.description | escape }}">
+    {%- endif -%}
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  </head>
+  <body>
+    <div class="pv-page">
+      <header class="pv-header">
+        <div class="pv-header-inner">
+          <a class="pv-brand" href="{{ '/' | relative_url }}">
+            <span class="pv-brand-title">{{ site.title }}</span>
+            <span class="pv-brand-tagline">{{ site.description }}</span>
+          </a>
+          <nav class="pv-main-nav">
+            {% for item in site.navigation %}
+              <a class="pv-main-link{% if item.url == page.url %} is-active{% endif %}"
+                 href="{{ item.url | relative_url }}">
+                {{ item.title }}
+              </a>
+            {% endfor %}
+          </nav>
+        </div>
+      </header>
+
+      <main class="pv-main" role="main">
+        <aside class="pv-side-index">
+          <div class="pv-hamlet">
+            <span class="pv-hamlet-label">origin</span>
+            <a href="https://mapcarta.com/N1938447213" target="_blank" rel="noreferrer">
+              Weng, Tyrol
+            </a>
+          </div>
+          <ul class="pv-side-list">
+            {% for item in site.navigation %}
+              <li>
+                <a class="pv-side-link{% if item.url == page.url %} is-active{% endif %}"
+                   href="{{ item.url | relative_url }}">
+                  {{ item.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </aside>
+
+        <article class="pv-article">
+          {{ content }}
+        </article>
+      </main>
+
+      <footer class="pv-footer">
+        <div class="pv-footer-inner">
+          <span>© {{ site.time | date: '%Y' }} {{ site.title }}</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
