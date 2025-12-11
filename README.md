@@ -1,2 +1,2 @@
 # petervartanian.github.io
-Personal site and experimental projects in geo-technology (and beyond).
+A personal site: for notes, experiments, and working ideas in geo-technology (and beyond).
