@@ -5,17 +5,19 @@
 /* ---------- Palette ---------- */
 
 :root {
-  --pv-bg: #0f1115;         /* deep, almost-black blue */
-  --pv-card: #f5f0e5;       /* aged paper */
-  --pv-ink: #231f20;        /* dark ink */
-  --pv-accent: #2c3f8f;     /* reserved, serious blue */
-  --pv-marginalia: #d3c2a0; /* muted gold for the margin band */
+  --pv-bg: #050506;
+  --pv-card: #f6f1e6;
+  --pv-ink: #201a17;
+  --pv-accent: #233a8f;
+  --pv-accent-soft: #9b6a3c;
+  --pv-muted: #9a8f80;
 }
 
-/* ---------- Page scaffold ---------- */
+/* ---------- Base ---------- */
 
 body {
-  background: radial-gradient(circle at top left, #181c26 0, var(--pv-bg) 55%);
+  margin: 0;
+  background: radial-gradient(circle at top left, #151822 0, var(--pv-bg) 55%);
   color: var(--pv-ink);
   font-family:
     "Iowan Old Style",
@@ -29,148 +31,263 @@ body {
   font-size: 17px;
 }
 
-/* central card with a marginalia band on the left */
-
-.wrapper {
-  max-width: 52rem;
-  margin: 4rem auto;
-  background: linear-gradient(to right, var(--pv-marginalia) 7rem, var(--pv-card) 7rem);
-  border-radius: 12px;
-  box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(0, 0, 0, 0.25);
-  padding: 2.5rem 3.25rem 3rem 3.75rem;
-  position: relative;
+.pv-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* thin inner rule between margin band and text */
+/* ---------- Header ---------- */
 
-.wrapper::before {
-  content: "";
-  position: absolute;
-  left: 7rem;
-  top: 2rem;
-  bottom: 2rem;
-  width: 1px;
-  background: rgba(0, 0, 0, 0.16);
+.pv-header {
+  padding: 1.25rem 0;
 }
 
-/* ---------- Header & navigation ---------- */
-
-.site-header {
-  border: none;
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
+.pv-header-inner {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0 1.75rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
 }
 
-.site-title {
-  font-variant-caps: small-caps;
-  letter-spacing: 0.18em;
-  font-size: 0.95rem;
-  color: var(--pv-ink);
+.pv-brand {
   text-decoration: none;
+  color: var(--pv-card);
 }
 
-.site-nav {
-  float: right;
+.pv-brand-title {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.16em;
+  font-size: 0.92rem;
 }
 
-.site-nav .page-link {
+.pv-brand-tagline {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--pv-muted);
+  margin-top: 0.15rem;
+}
+
+/* top navigation */
+
+.pv-main-nav {
+  display: flex;
+  gap: 1.4rem;
+}
+
+.pv-main-link {
   text-transform: lowercase;
   letter-spacing: 0.16em;
   font-size: 0.78rem;
-  margin-left: 1.2rem;
-  color: rgba(0, 0, 0, 0.68);
+  text-decoration: none;
+  color: var(--pv-muted);
 }
 
-.site-nav .page-link:hover {
+.pv-main-link.is-active {
+  color: var(--pv-card);
+}
+
+.pv-main-link:hover {
+  color: var(--pv-accent-soft);
+}
+
+/* ---------- Main layout (card + side index) ---------- */
+
+.pv-main {
+  flex: 1;
+  max-width: 60rem;
+  margin: 0 auto 3rem;
+  padding: 0 1.75rem 0.5rem;
+  background: var(--pv-card);
+  border-radius: 14px 14px 18px 18px;
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.12);
+  display: grid;
+  grid-template-columns: 12rem minmax(0, 1fr);
+  column-gap: 2.4rem;
+  position: relative;
+}
+
+.pv-main::before {
+  content: "";
+  position: absolute;
+  left: 11.5rem;
+  top: 1.75rem;
+  bottom: 1.75rem;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.14);
+}
+
+/* ---------- Side index ---------- */
+
+.pv-side-index {
+  padding: 1.75rem 0 1.75rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.pv-hamlet-label {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.68rem;
+  color: var(--pv-muted);
+}
+
+.pv-hamlet a {
+  display: block;
+  margin-top: 0.25rem;
+  font-style: italic;
+  color: var(--pv-accent-soft);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+.pv-hamlet a:hover {
   color: var(--pv-accent);
 }
 
-/* ---------- Headings ---------- */
+.pv-side-list {
+  list-style: none;
+  padding: 1.25rem 0 0;
+  margin: 0;
+}
 
-h1, h2, h3 {
+.pv-side-link {
+  display: block;
+  padding: 0.15rem 0.1rem;
+  text-decoration: none;
+  text-transform: lowercase;
+  letter-spacing: 0.12em;
+  color: var(--pv-muted);
+}
+
+.pv-side-link.is-active {
+  color: var(--pv-ink);
+}
+
+.pv-side-link:hover {
+  color: var(--pv-accent);
+}
+
+/* ---------- Article ---------- */
+
+.pv-article {
+  padding: 1.75rem 1.75rem 2rem 0;
+}
+
+.pv-article h1,
+.pv-article h2,
+.pv-article h3 {
   font-variant-caps: small-caps;
   letter-spacing: 0.12em;
   color: var(--pv-accent);
 }
 
-h1 {
-  font-size: 1.4rem;
-  margin-top: 0.4rem;
-  margin-bottom: 1.2rem;
+.pv-article h1 {
+  font-size: 1.35rem;
+  margin-top: 0.3rem;
+  margin-bottom: 1.4rem;
 }
 
-h2 {
-  font-size: 1.05rem;
+.pv-article h2 {
+  font-size: 1.02rem;
   margin-top: 2.4rem;
   margin-bottom: 0.6rem;
 }
 
-h3 {
-  font-size: 0.95rem;
+.pv-article h3 {
+  font-size: 0.94rem;
   margin-top: 1.6rem;
   margin-bottom: 0.4rem;
 }
 
-/* ---------- Body text ---------- */
-
-p, li {
+.pv-article p,
+.pv-article li {
   font-size: 0.97rem;
 }
 
-/* slight indent for paragraphs following headings */
-
-h1 + p,
-h2 + p,
-h3 + p {
+.pv-article h1 + p,
+.pv-article h2 + p,
+.pv-article h3 + p {
   text-indent: 0.75rem;
 }
 
-/* ---------- Links ---------- */
+/* links inside content */
 
-a {
+.pv-article a {
   color: var(--pv-accent);
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.18em;
 }
 
-a:hover,
-a:focus {
-  color: var(--pv-ink);
-}
-
-/* the hamlet link should feel like a note in the margin */
-
-a[href*="mapcarta.com/N1938447213"] {
-  font-style: italic;
+.pv-article a:hover {
+  color: var(--pv-accent-soft);
 }
 
 /* ---------- Footer ---------- */
 
-.site-footer {
-  border-top: none;
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  font-size: 0.78rem;
-  color: rgba(0, 0, 0, 0.6);
+.pv-footer {
+  padding: 1.5rem 0 2.5rem;
 }
 
-/* ---------- Mobile adjustments ---------- */
+.pv-footer-inner {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0 1.75rem;
+  font-size: 0.78rem;
+  color: rgba(245, 240, 229, 0.66);
+}
 
-@media (max-width: 720px) {
-  .wrapper {
-    margin: 1.75rem 0.75rem;
-    padding: 1.75rem 1.5rem 2rem 1.75rem;
-    background: linear-gradient(to right, var(--pv-marginalia) 4.5rem, var(--pv-card) 4.5rem);
+/* ---------- Mobile ---------- */
+
+@media (max-width: 800px) {
+  .pv-header-inner {
+    flex-direction: column;
+    gap: 0.6rem;
   }
 
-  .wrapper::before {
-    left: 4.5rem;
+  .pv-main-nav {
+    flex-wrap: wrap;
+    gap: 0.7rem;
   }
 
-  .site-nav {
-    float: none;
-    margin-top: 0.6rem;
+  .pv-main {
+    margin: 0 0.75rem 2.5rem;
+    padding: 0.75rem 1.1rem 1.3rem;
+    grid-template-columns: 1fr;
+  }
+
+  .pv-main::before {
+    display: none;
+  }
+
+  .pv-side-index {
+    padding: 0.5rem 0 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1.25rem;
+  }
+
+  .pv-side-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 0;
+  }
+
+  .pv-side-link {
+    padding: 0.1rem 0.4rem 0.1rem 0;
+  }
+
+  .pv-article {
+    padding: 1rem 0 1.25rem;
+  }
+
+  .pv-footer-inner {
+    padding: 0 1.2rem;
   }
 }
