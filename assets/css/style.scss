@@ -2,15 +2,47 @@
 ---
 @import "{{ site.theme }}";
 
-/* ---------- Palette ---------- */
+/* ---------- Base palette ---------- */
 
 :root {
   --pv-bg: #050506;
   --pv-card: #f6f1e6;
   --pv-ink: #201a17;
-  --pv-accent: #233a8f;
+  --pv-accent: #233a8f;       /* default accent (About) */
   --pv-accent-soft: #9b6a3c;
   --pv-muted: #9a8f80;
+}
+
+/* ---------- Per-page accent overrides ---------- */
+
+/* page.title: "About" */
+.pv-page-about {
+  --pv-accent: #233a8f;
+  --pv-accent-soft: #9b6a3c;
+}
+
+/* page.title: "Projects" */
+.pv-page-projects {
+  --pv-accent: #2b6f4f;
+  --pv-accent-soft: #c28b3a;
+}
+
+/* page.title: "CV" */
+.pv-page-cv {
+  --pv-accent: #7d2034;
+  --pv-accent-soft: #c46b5e;
+}
+
+/* page.title: "Contact" */
+.pv-page-contact {
+  --pv-accent: #185c6a;
+  --pv-accent-soft: #6d8f9b;
+}
+
+/* page.title: "Not found" (404) */
+.pv-page-not-found {
+  --pv-accent: #5a5a63;
+  --pv-accent-soft: #8f8f9a;
 }
 
 /* ---------- Base ---------- */
@@ -109,6 +141,7 @@ body {
   grid-template-columns: 12rem minmax(0, 1fr);
   column-gap: 2.4rem;
   position: relative;
+  border-top: 4px solid var(--pv-accent); /* page accent visible */
 }
 
 .pv-main::before {
@@ -128,29 +161,9 @@ body {
   font-size: 0.8rem;
 }
 
-.pv-hamlet-label {
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.68rem;
-  color: var(--pv-muted);
-}
-
-.pv-hamlet a {
-  display: block;
-  margin-top: 0.25rem;
-  font-style: italic;
-  color: var(--pv-accent-soft);
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.18em;
-}
-
-.pv-hamlet a:hover {
-  color: var(--pv-accent);
-}
-
 .pv-side-list {
   list-style: none;
-  padding: 1.25rem 0 0;
+  padding: 0;
   margin: 0;
 }
 
