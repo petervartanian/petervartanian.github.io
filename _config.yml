@@ -1,14 +1,39 @@
 title: "Peter H. Vartanian"
 description: "Notes, experiments, and working ideas in geo-technology (and beyond)."
 url: "https://petervartanian.xyz"
+baseurl: ""
 
+# Author information for structured data
+author:
+  name: "Peter H. Vartanian"
+  email: "contact@petervartanian.xyz"
+
+# Social profiles (update as needed)
+twitter:
+  username: petervartanian
+  card: summary_large_image
+
+# Theme
 theme: jekyll-theme-minimal
 
-github_username: petervartanian
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
 
-# Default image
-og_image: /assets/img/card-default.jpeg
+# Feed settings
+feed:
+  path: feed.xml
 
+# SEO settings
+lang: en-US
+timezone: America/New_York
+
+# Default OpenGraph image
+og_image: /assets/img/card-default.jpg
+
+# Navigation
 navigation:
   - title: "About"
     url: /
@@ -20,3 +45,18 @@ navigation:
     url: /cv
   - title: "Contact"
     url: /contact
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - LICENSE
