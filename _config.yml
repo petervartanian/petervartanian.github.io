@@ -3,60 +3,49 @@ description: "Notes, experiments, and working ideas in geo-technology (and beyon
 url: "https://petervartanian.xyz"
 baseurl: ""
 
-# Author information for structured data
 author:
   name: "Peter H. Vartanian"
   email: "contact@petervartanian.xyz"
 
-# Social profiles (update as needed)
-twitter:
-  username: petervartanian
-  card: summary_large_image
+github_username: petervartanian
 
-# Theme
 theme: jekyll-theme-minimal
 
-# Plugins
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-feed
 
-# Feed settings
 feed:
   path: feed.xml
 
-# SEO settings
 lang: en-US
 timezone: America/New_York
 
-# Default OpenGraph image
 og_image: /assets/img/card-default.jpg
 
-# Navigation
 navigation:
-  - title: "About"
+  - title: "about"
     url: /
-  - title: "Projects"
+  - title: "projects"
     url: /projects
-  - title: "Media"
+  - title: "media"
     url: /media
-  - title: "CV"
+  - title: "cv"
     url: /cv
-  - title: "Contact"
+  - title: "contact"
     url: /contact
 
-# Build settings
 markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-# Exclude from processing
+sass:
+  style: compressed
+
 exclude:
   - Gemfile
   - Gemfile.lock
-  - node_modules
-  - vendor
   - README.md
   - LICENSE
