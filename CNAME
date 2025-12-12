@@ -1,1 +1,30 @@
-petervartanian.xyz
+{
+  "name": "Peter H. Vartanian",
+  "short_name": "P. Vartanian",
+  "description": "Notes, experiments, and working ideas in geo-technology (and beyond).",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0514",
+  "theme_color": "#0a0514",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/img/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "lang": "en-US",
+  "dir": "ltr"
+}
