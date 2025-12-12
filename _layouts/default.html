@@ -56,6 +56,8 @@
   </head>
   <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-about{% elsif p == '/projects' %}pv-projects{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
     
+    <div class="reading-progress" role="progressbar" aria-label="Reading progress"></div>
+    
     <a href="#main-content" class="skip-link">skip to content</a>
     
     <div class="pv-page">
@@ -97,5 +99,27 @@
         </div>
       </footer>
     </div>
+
+    <script>
+      (function() {
+        const progressBar = document.querySelector('.reading-progress');
+        const article = document.querySelector('.pv-article');
+        
+        if (!progressBar || !article) return;
+        
+        function updateProgress() {
+          const windowHeight = window.innerHeight;
+          const documentHeight = article.scrollHeight;
+          const scrollTop = window.scrollY;
+          const trackLength = documentHeight - windowHeight;
+          const percent = Math.min(Math.floor((scrollTop / trackLength) * 100), 100);
+          progressBar.style.width = percent + '%';
+        }
+        
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        window.addEventListener('resize', updateProgress, { passive: true });
+        updateProgress();
+      })();
+    </script>
   </body>
 </html>
