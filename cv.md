@@ -6,8 +6,8 @@ permalink: /cv
 
 # Curriculum Vitæ
 
-You may find my comprehensive record of education, research, publications, and professional experience:
+My complete academic and professional history is available here: [cv.pdf](/assets/pdf/cv.pdf)
 
-[Peter's CV (PDF)](/assets/pdf/cv.pdf){: .pv-cv-download}
+The document includes what one would expect: education, appointments, publications, presentations, teaching, service.
 
-For specific inquiries regarding ongoing projects or opportunities for collaboration, please refer to my [Contact](/contact) page.
+For inquiries about ongoing work or potential collaboration, the [contact](/contact) page is more useful than the CV.
