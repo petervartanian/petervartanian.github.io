@@ -2,67 +2,65 @@
 ---
 @import "{{ site.theme }}";
 
-/* ========================================
-   BASE PALETTE & PAGE-SPECIFIC OVERRIDES
-   ======================================== */
-
 :root {
-  --pv-bg: #050506;
-  --pv-card: #f6f1e6;
-  --pv-ink: #201a17;
-  --pv-accent: #233a8f;
-  --pv-accent-soft: #9b6a3c;
-  --pv-muted: #9a8f80;
+  --bg: #0a0514;
+  --card: #f8f3e8;
+  --ink: #1a1410;
+  --accent: #4a5fd9;
+  --accent-soft: #d946a6;
+  --muted: #8a7f72;
+  --glow: rgba(217, 70, 166, 0.3);
 }
 
-/* About: deep midnight + warm paper + blue ink */
 body.pv-about {
-  --pv-bg: #02030b;
-  --pv-card: #f6f1e6;
-  --pv-accent: #1f3a8a;
-  --pv-accent-soft: #b0783e;
-  --pv-muted: #8d8578;
+  --bg: #0a0514;
+  --card: #fef8ea;
+  --ink: #1a1410;
+  --accent: #5865f2;
+  --accent-soft: #e85d75;
+  --muted: #9d8b7a;
+  --glow: rgba(88, 101, 242, 0.25);
 }
 
-/* Projects: dark teal + cool card */
 body.pv-projects {
-  --pv-bg: #021417;
-  --pv-card: #edf3f0;
-  --pv-accent: #11605b;
-  --pv-accent-soft: #d28a3c;
-  --pv-muted: #6d7c76;
+  --bg: #051a1a;
+  --card: #f0f7f4;
+  --ink: #0d1f1a;
+  --accent: #1abc9c;
+  --accent-soft: #f39c12;
+  --muted: #7a9189;
+  --glow: rgba(26, 188, 156, 0.25);
 }
 
-/* Media: deep indigo + slightly cooler paper */
 body.pv-media {
-  --pv-bg: #050219;
-  --pv-card: #f1f2f8;
-  --pv-accent: #3e2f8f;
-  --pv-accent-soft: #c27a3c;
-  --pv-muted: #7a7892;
+  --bg: #14051a;
+  --card: #f5f0f8;
+  --ink: #1a0d1f;
+  --accent: #9b59b6;
+  --accent-soft: #e74c3c;
+  --muted: #9a8599;
+  --glow: rgba(155, 89, 182, 0.25);
 }
 
-/* CV: charcoal + neutral grey */
 body.pv-cv {
-  --pv-bg: #050506;
-  --pv-card: #f4f4f3;
-  --pv-accent: #343642;
-  --pv-accent-soft: #90724a;
-  --pv-muted: #858585;
+  --bg: #1a0f05;
+  --card: #f9f5f0;
+  --ink: #1f1a14;
+  --accent: #d68a3e;
+  --accent-soft: #8b4513;
+  --muted: #a89580;
+  --glow: rgba(214, 138, 62, 0.25);
 }
 
-/* Contact: deep red-brown + warm peach */
 body.pv-contact {
-  --pv-bg: #230506;
-  --pv-card: #f6e7dd;
-  --pv-accent: #7a2f30;
-  --pv-accent-soft: #b56242;
-  --pv-muted: #8a746c;
+  --bg: #1a050a;
+  --card: #fdf0f3;
+  --ink: #1f0d14;
+  --accent: #c0392b;
+  --accent-soft: #e67e22;
+  --muted: #a8828e;
+  --glow: rgba(192, 57, 43, 0.25);
 }
-
-/* ========================================
-   BASE LAYOUT & TYPOGRAPHY
-   ======================================== */
 
 * {
   box-sizing: border-box;
@@ -70,16 +68,9 @@ body.pv-contact {
 
 body {
   margin: 0;
-  background: radial-gradient(circle at top left, #151822 0%, var(--pv-bg) 60%);
-  color: var(--pv-ink);
-  font-family:
-    "Iowan Old Style",
-    "Palatino",
-    "Palatino Linotype",
-    "Book Antiqua",
-    Georgia,
-    "Times New Roman",
-    serif;
+  background: radial-gradient(ellipse at top, rgba(255, 255, 255, 0.08) 0%, var(--bg) 60%);
+  color: var(--ink);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   line-height: 1.7;
   font-size: 17px;
   min-height: 100vh;
@@ -93,33 +84,25 @@ body {
   margin: 0 auto;
 }
 
-/* ========================================
-   ACCESSIBILITY: SKIP LINK
-   ======================================== */
-
 .skip-link {
   position: absolute;
   top: -100px;
   left: 0;
-  background: var(--pv-accent);
-  color: var(--pv-card);
+  background: var(--accent);
+  color: var(--card);
   padding: 0.75rem 1.5rem;
   text-decoration: none;
   z-index: 1000;
   font-weight: 600;
-  border-radius: 0 0 4px 0;
-  transition: top 0.2s ease;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
 }
 
 .skip-link:focus {
   top: 0;
-  outline: 3px solid var(--pv-accent-soft);
+  outline: 3px solid var(--accent-soft);
   outline-offset: 2px;
 }
-
-/* ========================================
-   HEADER
-   ======================================== */
 
 .pv-header {
   padding: 1.5rem 0 1rem;
@@ -133,8 +116,8 @@ body {
 
 .pv-brand {
   text-decoration: none;
-  color: var(--pv-card);
-  transition: opacity 0.2s ease;
+  color: var(--card);
+  display: inline-block;
 }
 
 .pv-brand:hover {
@@ -142,9 +125,8 @@ body {
 }
 
 .pv-brand:focus {
-  outline: 2px solid var(--pv-card);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
-  border-radius: 2px;
 }
 
 .pv-brand-title {
@@ -157,13 +139,10 @@ body {
 .pv-brand-tagline {
   display: block;
   font-size: 0.78rem;
-  color: var(--pv-muted);
+  color: var(--muted);
   margin-top: 0.15rem;
+  font-style: italic;
 }
-
-/* ========================================
-   MAIN LAYOUT (CARD + NAV + ARTICLE)
-   ======================================== */
 
 .pv-main {
   flex: 1;
@@ -171,39 +150,9 @@ body {
   margin: 0 auto 3rem;
   padding: 0 2rem;
   width: 100%;
-}
-
-.pv-main > * {
-  background: var(--pv-card);
-  border-radius: 14px 14px 18px 18px;
-  box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(0, 0, 0, 0.12);
-  display: grid;
-  grid-template-columns: 11rem minmax(0, 1fr);
-  column-gap: 2.4rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.pv-main::before {
-  content: "";
-  position: absolute;
-  left: calc(11rem + 2rem);
-  top: 1.75rem;
-  bottom: 1.75rem;
-  width: 1px;
-  background: rgba(0, 0, 0, 0.14);
-  pointer-events: none;
-}
-
-/* Alternative approach: wrap nav and article */
-.pv-main {
-  background: var(--pv-card);
-  border-radius: 14px 14px 18px 18px;
-  box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(0, 0, 0, 0.12);
+  background: var(--card);
+  border-radius: 14px;
+  box-shadow: 0 0 80px var(--glow), 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
   display: grid;
   grid-template-columns: 11rem minmax(0, 1fr);
   column-gap: 2.4rem;
@@ -218,13 +167,10 @@ body {
   top: 1.75rem;
   bottom: 1.75rem;
   width: 1px;
-  background: rgba(0, 0, 0, 0.14);
+  background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  opacity: 0.3;
   pointer-events: none;
 }
-
-/* ========================================
-   SIDE NAVIGATION
-   ======================================== */
 
 .pv-side-index {
   padding: 0;
@@ -244,32 +190,29 @@ body {
   text-decoration: none;
   text-transform: lowercase;
   letter-spacing: 0.12em;
-  color: var(--pv-muted);
-  transition: all 0.2s ease;
+  color: var(--muted);
   border-left: 2px solid transparent;
+  transition: all 0.2s ease;
 }
 
 .pv-side-link:hover {
-  color: var(--pv-accent);
-  background: rgba(0, 0, 0, 0.03);
+  color: var(--accent);
+  background: rgba(0, 0, 0, 0.02);
+  transform: translateX(2px);
+  border-left-color: var(--accent);
 }
 
 .pv-side-link:focus {
-  outline: 2px solid var(--pv-accent);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 2px;
 }
 
 .pv-side-link.is-active {
-  color: var(--pv-ink);
-  border-left-color: var(--pv-accent);
-  background: rgba(0, 0, 0, 0.04);
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: var(--glow);
   font-weight: 600;
 }
-
-/* ========================================
-   ARTICLE CONTENT
-   ======================================== */
 
 .pv-article {
   padding: 0;
@@ -281,7 +224,7 @@ body {
 .pv-article h3 {
   font-variant-caps: small-caps;
   letter-spacing: 0.12em;
-  color: var(--pv-accent);
+  color: var(--accent);
   line-height: 1.3;
 }
 
@@ -319,7 +262,6 @@ body {
   text-indent: 0.75rem;
 }
 
-/* Lists */
 .pv-article ul,
 .pv-article ol {
   margin-left: 1.5rem;
@@ -330,56 +272,54 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* Links */
 .pv-article a {
-  color: var(--pv-accent);
+  color: var(--accent);
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.18em;
-  transition: color 0.2s ease;
+  transition: color 0.15s ease;
 }
 
 .pv-article a:hover {
-  color: var(--pv-accent-soft);
+  color: var(--accent-soft);
 }
 
 .pv-article a:focus {
-  outline: 2px solid var(--pv-accent);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 2px;
 }
 
-/* Code blocks */
 .pv-article code {
-  background: rgba(0, 0, 0, 0.06);
+  background: var(--glow);
   padding: 0.2em 0.4em;
   border-radius: 3px;
   font-size: 0.9em;
   font-family: "Consolas", "Monaco", "Courier New", monospace;
+  color: var(--accent);
 }
 
 .pv-article pre {
-  background: rgba(0, 0, 0, 0.06);
+  background: var(--glow);
   padding: 1rem;
   border-radius: 6px;
   overflow-x: auto;
   margin: 1.5rem 0;
+  border-left: 3px solid var(--accent);
 }
 
 .pv-article pre code {
   background: none;
   padding: 0;
+  color: var(--ink);
 }
 
-/* Blockquotes */
 .pv-article blockquote {
-  border-left: 3px solid var(--pv-accent);
+  border-left: 3px solid var(--accent);
   margin: 1.5rem 0;
   padding-left: 1.5rem;
   font-style: italic;
-  color: var(--pv-muted);
+  color: var(--muted);
 }
 
-/* Images */
 .pv-article img {
   max-width: 100%;
   height: auto;
@@ -387,9 +327,14 @@ body {
   margin: 1.5rem 0;
 }
 
-/* ========================================
-   FOOTER
-   ======================================== */
+.pv-article picture {
+  display: block;
+  margin: 1.5rem 0;
+}
+
+.pv-article picture img {
+  margin: 0;
+}
 
 .pv-footer {
   padding: 1.5rem 0 2.5rem;
@@ -400,35 +345,31 @@ body {
   margin: 0 auto;
   padding: 0 2rem;
   font-size: 0.78rem;
-  color: rgba(245, 240, 229, 0.66);
+  color: rgba(248, 243, 232, 0.6);
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.pv-footer-separator {
-  color: rgba(245, 240, 229, 0.4);
+.pv-footer-sep {
+  color: rgba(248, 243, 232, 0.3);
 }
 
 .pv-footer-link {
-  color: rgba(245, 240, 229, 0.66);
+  color: rgba(248, 243, 232, 0.6);
   text-decoration: none;
-  transition: color 0.2s ease;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
 }
 
 .pv-footer-link:hover {
-  color: rgba(245, 240, 229, 0.9);
+  color: rgba(248, 243, 232, 0.9);
 }
 
 .pv-footer-link:focus {
-  outline: 2px solid rgba(245, 240, 229, 0.66);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 2px;
 }
-
-/* ========================================
-   RESPONSIVE: TABLET
-   ======================================== */
 
 @media (max-width: 900px) {
   body {
@@ -444,6 +385,7 @@ body {
     padding: 0 1.5rem;
     grid-template-columns: 10rem minmax(0, 1fr);
     column-gap: 2rem;
+    padding: 1.5rem 1.5rem 1.75rem 0.75rem;
   }
 
   .pv-main::before {
@@ -454,10 +396,6 @@ body {
     padding: 0 1.5rem;
   }
 }
-
-/* ========================================
-   RESPONSIVE: MOBILE
-   ======================================== */
 
 @media (max-width: 700px) {
   body {
@@ -481,7 +419,7 @@ body {
 
   .pv-side-index {
     padding: 0.5rem 0 0.75rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--glow);
     margin-bottom: 1.25rem;
   }
 
@@ -499,7 +437,7 @@ body {
   }
 
   .pv-side-link.is-active {
-    background: rgba(0, 0, 0, 0.08);
+    background: var(--glow);
     border-left: none;
   }
 
@@ -509,19 +447,18 @@ body {
 
   .pv-footer-inner {
     padding: 0 1.2rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
-  }
-
-  .pv-footer-separator {
-    display: none;
   }
 }
 
-/* ========================================
-   PRINT STYLES
-   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 
 @media print {
   body {
@@ -578,7 +515,7 @@ body {
     text-decoration: underline;
   }
 
-  .pv-article a[href]::after {
+  .pv-article a[href^="http"]::after {
     content: " (" attr(href) ")";
     font-size: 0.9em;
     color: #666;
@@ -589,30 +526,3 @@ body {
     page-break-inside: avoid;
   }
 }
-
-/* ========================================
-   DARK MODE SUPPORT (OPTIONAL)
-   ======================================== */
-
-/*
-@media (prefers-color-scheme: light) {
-  :root {
-    --pv-bg: #f5f5f5;
-    --pv-card: #ffffff;
-    --pv-ink: #1a1a1a;
-    --pv-accent: #1f3a8a;
-    --pv-accent-soft: #b0783e;
-    --pv-muted: #666666;
-  }
-
-  body {
-    background: linear-gradient(135deg, #f0f0f0 0%, var(--pv-bg) 100%);
-  }
-
-  .pv-brand,
-  .pv-footer-inner,
-  .pv-footer-link {
-    color: var(--pv-ink);
-  }
-}
-*/
