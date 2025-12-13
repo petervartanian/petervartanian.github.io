@@ -1,12 +1,16 @@
 ---
 layout: default
 title: "Contact"
+description: "Contact and professional channels"
 permalink: /contact
 page_key: contact
 ---
 
 # Contact
 
-A public contact address will be added here when it is clear which channel is best suited for it!
+For now, the most reliable channels are the professional ones:
 
-Until then, _please_ assume that existing professional channels remain preferable for anything that requires a considered reply.
+- **LinkedIn:** {% if site.linkedin_url %}[{{ site.linkedin_url }}]({{ site.linkedin_url }}){% else %}(add `linkedin_url` in `_config.yml`){% endif %}
+- **GitHub:** [https://github.com/{{ site.github_username }}](https://github.com/{{ site.github_username }})
+
+If you genuinely need email, it is published for now as: **{{ site.author.email }}**.
