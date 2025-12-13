@@ -3,11 +3,29 @@ description: "Notes, experiments, and working ideas in geo-technology (and beyon
 url: "https://petervartanian.xyz"
 baseurl: ""
 
+lang: en-US
+timezone: America/New_York
+
 author:
   name: "Peter H. Vartanian"
   email: "contact@petervartanian.xyz"
 
 github_username: petervartanian
+
+# TODO: replace with your real profile URL
+linkedin_url: "https://www.linkedin.com/in/YOUR-HANDLE/"
+
+# Default social/share image (used by jekyll-seo-tag)
+image: /assets/img/card-default.jpg
+og_image: /assets/img/card-default.jpg
+logo: /assets/img/apple-touch-icon.png
+
+# Used by jekyll-seo-tag structured data
+social:
+  name: "Peter H. Vartanian"
+  links:
+    - "https://github.com/petervartanian"
+    - "https://www.linkedin.com/in/YOUR-HANDLE/"
 
 theme: jekyll-theme-minimal
 
@@ -18,11 +36,6 @@ plugins:
 
 feed:
   path: feed.xml
-
-lang: en-US
-timezone: America/New_York
-
-og_image: /assets/img/card-default.jpg
 
 navigation:
   - title: "about"
