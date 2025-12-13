@@ -12,8 +12,7 @@ author:
 
 github_username: petervartanian
 
-# TODO: replace with your real profile URL
-linkedin_url: "https://www.linkedin.com/in/YOUR-HANDLE/"
+linkedin_url: "https://www.linkedin.com/in/petervartanian/"
 
 # Default social/share image (used by jekyll-seo-tag)
 image: /assets/img/card-default.jpg
@@ -25,7 +24,7 @@ social:
   name: "Peter H. Vartanian"
   links:
     - "https://github.com/petervartanian"
-    - "https://www.linkedin.com/in/YOUR-HANDLE/"
+    - "https://www.linkedin.com/in/petervartanian/"
 
 theme: jekyll-theme-minimal
 
