@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "About"
-description: "Notes, experiments, and working ideas by Peter H. Vartanian: geo-technology, geopolitics, critical infrastructure, and strategic foresight."
+description: "Notes, experiments, and working ideas in geo-technology (and beyond)."
 permalink: /
 page_key: about
 ---
