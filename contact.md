@@ -1,16 +1,18 @@
 ---
 layout: default
 title: "Contact"
-description: "Contact and professional channels"
+description: "Email, phone, and professional channels for Peter H. Vartanian."
 permalink: /contact
 page_key: contact
 ---
 
 # Contact
 
-For now, the most reliable channels are the professional ones:
+A public “contact form” is easy; a good contact channel is harder.
 
-- **LinkedIn:** {% if site.linkedin_url %}[{{ site.linkedin_url }}]({{ site.linkedin_url }}){% else %}(add `linkedin_url` in `_config.yml`){% endif %}
-- **GitHub:** [https://github.com/{{ site.github_username }}](https://github.com/{{ site.github_username }})
+If you’re reaching out — which elates me — I would rather it land somewhere I can actually answer with care, not just expediency:
 
-If you genuinely need email, it is published for now as: **{{ site.author.email }}**.
+1. **Email:** [peter.vartanian@icloud.com](mailto:peter.vartanian@icloud.com)
+2. **Phone:** +1 (747) 786-9132
+3. **LinkedIn:** https://www.linkedin.com/in/petervartanian/
+4. **GitHub:** https://github.com/petervartanian
