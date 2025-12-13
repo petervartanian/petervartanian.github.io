@@ -25,11 +25,6 @@
     <link rel="canonical" href="{{ page.url | absolute_url }}">
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
     
-    <style>
-      :root{--bg:#0a0514;--card:#f8f3e8;--ink:#1a1410;--accent:#4a5fd9;--glow:#d946a6;--muted:#8a7f72}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#1a1434 0%,var(--bg) 60%);color:var(--ink);font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;line-height:1.7;font-size:17px;min-height:100vh}.pv-page{min-height:100vh;display:flex;flex-direction:column;max-width:1400px;margin:0 auto}.skip-link{position:absolute;top:-100px;left:0;background:var(--accent);color:var(--card);padding:.75rem 1.5rem;text-decoration:none;z-index:1000;font-weight:600}.skip-link:focus{top:0;outline:3px solid var(--glow);outline-offset:2px}
-    </style>
-    
-    <link rel="preload" href="{{ '/assets/css/style.css' | relative_url }}" as="style">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     
     <script type="application/ld+json">
@@ -55,8 +50,6 @@
     </script>
   </head>
   <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-about{% elsif p == '/projects' %}pv-projects{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
-    
-    <div class="reading-progress" role="progressbar" aria-label="Reading progress"></div>
     
     <a href="#main-content" class="skip-link">skip to content</a>
     
@@ -99,27 +92,5 @@
         </div>
       </footer>
     </div>
-
-    <script>
-      (function() {
-        const progressBar = document.querySelector('.reading-progress');
-        const article = document.querySelector('.pv-article');
-        
-        if (!progressBar || !article) return;
-        
-        function updateProgress() {
-          const windowHeight = window.innerHeight;
-          const documentHeight = article.scrollHeight;
-          const scrollTop = window.scrollY;
-          const trackLength = documentHeight - windowHeight;
-          const percent = Math.min(Math.floor((scrollTop / trackLength) * 100), 100);
-          progressBar.style.width = percent + '%';
-        }
-        
-        window.addEventListener('scroll', updateProgress, { passive: true });
-        window.addEventListener('resize', updateProgress, { passive: true });
-        updateProgress();
-      })();
-    </script>
   </body>
 </html>
