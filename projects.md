@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Projects"
+description: "A portfolio-in-progress"
 permalink: /projects
 page_key: projects
 ---
