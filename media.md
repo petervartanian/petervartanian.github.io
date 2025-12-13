@@ -1,7 +1,9 @@
 ---
 layout: default
 title: "Media"
+description: "External coverage and references"
 permalink: /media
+page_key: media
 ---
 
 # Media
@@ -10,4 +12,4 @@ This page will eventually collect fragments of the public record: profiles, inte
 
 For now, it is empty.
 
-Items will appear here when they exist and when they add more signal than noise...!
+Items will appear here when they exist and when they add more signal than noise.
