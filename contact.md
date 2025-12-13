@@ -10,7 +10,7 @@ page_key: contact
 
 A public “contact form” is easy; a good contact channel is harder.
 
-If you are reaching out — the thought of which elates me — I would rather it land somewhere I can actually answer with care, not just expediency.
+If you are reaching out — the thought of which elates me — I would rather it land somewhere I can actually answer with care, not just expediency:
 
 1. **Email:** [peter.vartanian@icloud.com](mailto:peter.vartanian@icloud.com)
 2. **Phone:** [+1 (747) 786-9132](tel:+17477869132)
