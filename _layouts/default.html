@@ -1,58 +1,66 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="{{ site.lang | default: 'en-US' }}">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    {%- assign meta_title = page.title | default: site.title -%}
-    {%- assign meta_description = page.excerpt | default: site.description -%}
-    
+
     <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
-    
+
     {% seo %}
-    
-    <meta name="description" content="{{ meta_description | strip_newlines | strip | escape }}">
+
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#0a0514">
-    
+    <meta name="theme-color" content="#0b0f1a">
+
+    <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/favicon-32x32.png' | relative_url }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/img/favicon-16x16.png' | relative_url }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
     <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
-    
-    <link rel="canonical" href="{{ page.url | absolute_url }}">
+
     <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
-    
+
+    <link rel="me" href="https://github.com/{{ site.github_username }}">
+    {% if site.linkedin_url %}
+    <link rel="me" href="{{ site.linkedin_url }}">
+    {% endif %}
+
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-    
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "{{ site.title }}",
+      "@id": "{{ site.url }}/#person",
+      "name": "{{ site.author.name | default: site.title }}",
       "url": "{{ site.url }}",
       "description": "{{ site.description }}",
+      "image": "{{ site.image | absolute_url }}",
       "email": "{{ site.author.email }}",
       "jobTitle": "Scholar and Researcher",
-      "sameAs": ["https://github.com/{{ site.github_username }}"],
-      "knowsAbout": ["Geopolitics", "Technology", "Critical Infrastructure", "Strategic Foresight"]
+      "sameAs": {{ site.social.links | jsonify }},
+      "knowsAbout": [
+        "Geopolitics",
+        "Geo-technology",
+        "Critical Infrastructure",
+        "Strategic Foresight"
+      ]
     }
     </script>
-    
+
     <script>
-      if('serviceWorker' in navigator){
-        window.addEventListener('load',function(){
-          navigator.serviceWorker.register('/sw.js');
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('{{ "/sw.js" | relative_url }}');
         });
       }
     </script>
   </head>
+
   <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-about{% elsif p == '/projects' %}pv-projects{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
-    
     <a href="#main-content" class="skip-link">skip to content</a>
-    
+
     <div class="pv-page">
       <header class="pv-header" role="banner">
         <div class="pv-header-inner">
@@ -87,8 +95,17 @@
       <footer class="pv-footer" role="contentinfo">
         <div class="pv-footer-inner">
           <span>© {{ site.time | date: '%Y' }} {{ site.title }}</span>
+
           <span class="pv-footer-sep">·</span>
           <a href="{{ '/feed.xml' | relative_url }}" class="pv-footer-link">rss</a>
+
+          <span class="pv-footer-sep">·</span>
+          <a href="https://github.com/{{ site.github_username }}" class="pv-footer-link">github</a>
+
+          {% if site.linkedin_url %}
+          <span class="pv-footer-sep">·</span>
+          <a href="{{ site.linkedin_url }}" class="pv-footer-link">linkedin</a>
+          {% endif %}
         </div>
       </footer>
     </div>
