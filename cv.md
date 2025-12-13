@@ -1,12 +1,14 @@
 ---
 layout: default
 title: "CV"
+description: "Education, appointments, publications, teaching, and service"
 permalink: /cv
+page_key: cv
 ---
 
 # Curriculum Vitæ
 
-My complete academic and professional history is available here: [cv.pdf](/assets/pdf/cv.pdf)
+My complete academic and professional history is available [here](/assets/pdf/cv.pdf).
 
 The document includes what one would expect: education, appointments, publications, presentations, teaching, service.
 
