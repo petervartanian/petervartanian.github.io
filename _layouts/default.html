@@ -38,6 +38,7 @@
       "description": "{{ site.description }}",
       "image": "{{ site.image | absolute_url }}",
       "email": "{{ site.author.email }}",
+      "telephone": "{{ site.telephone | default: '+1-747-786-9132' }}",
       "jobTitle": "Scholar and Researcher",
       "sameAs": {{ site.social.links | jsonify }},
       "knowsAbout": [
@@ -99,13 +100,13 @@
           <span class="pv-footer-sep">·</span>
           <a href="{{ '/feed.xml' | relative_url }}" class="pv-footer-link">rss</a>
 
-          <span class="pv-footer-sep">·</span>
-          <a href="https://github.com/{{ site.github_username }}" class="pv-footer-link">github</a>
-
           {% if site.linkedin_url %}
           <span class="pv-footer-sep">·</span>
           <a href="{{ site.linkedin_url }}" class="pv-footer-link">linkedin</a>
           {% endif %}
+
+          <span class="pv-footer-sep">·</span>
+          <a href="https://github.com/{{ site.github_username }}" class="pv-footer-link">github</a>
         </div>
       </footer>
     </div>
