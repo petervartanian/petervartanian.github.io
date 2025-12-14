@@ -8,7 +8,7 @@ page_key: cv
 
 # Curriculum Vitæ
 
-My complete academic and professional history is available [here](/assets/pdf/cv.pdf).
+My complete academic and professional history is available [here](/404.md).
 
 The document includes what one would expect: education, appointments, publications, presentations, teaching, service.
 
