@@ -40,10 +40,10 @@ feed:
 navigation:
   - title: "about"
     url: /
-  - title: "portfolio"
-    url: /portfolio
   - title: "projects"
     url: /projects
+  - title: "portfolio"
+    url: /portfolio
   - title: "media"
     url: /media
   - title: "timeline"

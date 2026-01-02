@@ -8,8 +8,6 @@ page_key: media
 
 # Media
 
-This page will eventually collect fragments of the public record: profiles, interviews, podcasts, and other attempts by third parties to make sense of what I do.
+An index of third‑party traces: interviews, citations, appearances, and other artifacts of the public record.
 
-For now, it is empty.
-
-Items will appear here when they exist and when they add more signal than noise.
+If this page is sparse, it is because I prefer signal to provenance.

@@ -59,7 +59,7 @@
     </script>
   </head>
 
-  <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-about{% elsif p == '/portfolio' %}pv-portfolio{% elsif p == '/projects' %}pv-projects{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
+  <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-about{% elsif p == '/projects' %}pv-projects{% elsif p == '/media' %}pv-media{% elsif p == '/portfolio' %}pv-portfolio{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
     <a href="#main-content" class="skip-link">skip to content</a>
 
     <div class="pv-page">
@@ -89,7 +89,7 @@
         </nav>
 
         <article class="pv-article" id="main-content">
-          <div class="pv-prose">{{ content }}</div>
+          {{ content }}
         </article>
       </main>
 
