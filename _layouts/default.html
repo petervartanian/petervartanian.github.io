@@ -59,8 +59,7 @@
     </script>
   </head>
 
-  {% assign p = page.permalink | default: page.url %}
-  <body class="{% if p == '/' %}pv-about pv-has-hero{% elsif p == '/projects' %}pv-projects{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
+  <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-about{% elsif p == '/portfolio' %}pv-portfolio{% elsif p == '/projects' %}pv-projects{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
     <a href="#main-content" class="skip-link">skip to content</a>
 
     <div class="pv-page">
@@ -70,27 +69,27 @@
             <span class="pv-brand-title">{{ site.title }}</span>
             <span class="pv-brand-tagline">{{ site.description }}</span>
           </a>
-
-          <nav class="pv-top-nav" aria-label="Primary navigation">
-            {% assign current = page.permalink | default: page.url %}
-            <ul class="pv-top-list">
-              {% for item in site.navigation %}
-                <li class="pv-top-item">
-                  <a class="pv-top-link{% if item.url == current %} is-active{% endif %}"
-                     href="{{ item.url | relative_url }}"
-                     {% if item.url == current %}aria-current="page"{% endif %}>
-                    {{ item.title }}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-          </nav>
         </div>
       </header>
 
       <main class="pv-main" role="main">
+        <nav class="pv-side-index" aria-label="Primary navigation">
+          {% assign current = page.permalink | default: page.url %}
+          <ul class="pv-side-list">
+            {% for item in site.navigation %}
+              <li>
+                <a class="pv-side-link{% if item.url == current %} is-active{% endif %}"
+                   href="{{ item.url | relative_url }}"
+                   {% if item.url == current %}aria-current="page"{% endif %}>
+                  {{ item.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+
         <article class="pv-article" id="main-content">
-          {{ content }}
+          <div class="pv-prose">{{ content }}</div>
         </article>
       </main>
 

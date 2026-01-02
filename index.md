@@ -19,28 +19,3 @@ This site is only a small room in that larger project: It will — in the _longu
 If something here is unfinished, that is a feature moreso than a defect.
 
 It means... that the question is still alive.
-
----
-
-<div class="pv-callout">
-  <strong>Start here:</strong> the site is small on purpose. These are the main doors.
-</div>
-
-<div class="pv-card-grid">
-  <a class="pv-card" href="/projects">
-    <span class="pv-card-title">Projects</span>
-    <span class="pv-card-desc">Models, maps, and structured exercises—tools that turn vague questions into concrete tests.</span>
-  </a>
-  <a class="pv-card" href="/media">
-    <span class="pv-card-title">Media</span>
-    <span class="pv-card-desc">External references and public fragments, when they add more signal than noise.</span>
-  </a>
-  <a class="pv-card" href="/cv">
-    <span class="pv-card-title">CV</span>
-    <span class="pv-card-desc">A conventional record: education, appointments, publications, teaching, and service.</span>
-  </a>
-  <a class="pv-card" href="/contact">
-    <span class="pv-card-title">Contact</span>
-    <span class="pv-card-desc">Email, phone, and professional channels (no contact-form black hole).</span>
-  </a>
-</div>
