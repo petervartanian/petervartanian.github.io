@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+
+    <meta name="theme-color" content="#0b0f1a">
+
+    <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
+
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  </head>
+
+  <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-about{% elsif p == '/projects' %}pv-projects{% elsif p == '/portfolio' %}pv-portfolio{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
+    <a href="#main-content" class="skip-link">skip to content</a>
+
+    <div class="pv-page">
+      <header class="pv-header" role="banner">
+        <div class="pv-header-inner">
+          <a class="pv-brand" href="{{ '/' | relative_url }}">
+            <span class="pv-brand-title">{{ site.title }}</span>
+            <span class="pv-brand-tagline">{{ site.tagline }}</span>
+            <span class="pv-brand-lines">
+              <span class="pv-brand-line">
+                {% for a in site.affiliations %}<span class="pv-pill">{{ a }}</span>{% endfor %}
+              </span>
+              <span class="pv-brand-line">
+                <span class="pv-pill">{{ site.location_line }}</span>
+                <span class="pv-pill">{{ site.connections_line }}</span>
+              </span>
+            </span>
+          </a>
+        </div>
+      </header>
+
+      <main class="pv-main" role="main">
+        <nav class="pv-side-index" aria-label="Primary navigation">
+          {% assign current = page.permalink | default: page.url %}
+          <ul class="pv-side-list">
+            {% for item in site.navigation %}
+              <li>
+                <a class="pv-side-link{% if item.url == current %} is-active{% endif %}"
+                   href="{{ item.url | relative_url }}"
+                   {% if item.url == current %}aria-current="page"{% endif %}>
+                  {{ item.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </nav>
+
+        <article class="pv-article" id="main-content">
+          {{ content }}
+        </article>
+      </main>
+
+      <footer class="pv-footer" role="contentinfo">
+        <div class="pv-footer-inner">
+          <span>© {{ site.time | date: '%Y' }} {{ site.title }}</span>
+
+          <span class="pv-footer-sep">·</span>
+          <a href="{{ '/feed.xml' | relative_url }}" class="pv-footer-link">rss</a>
+
+          {% if site.linkedin_url %}
+          <span class="pv-footer-sep">·</span>
+          <a href="{{ site.linkedin_url }}" class="pv-footer-link">linkedin</a>
+          {% endif %}
+
+          <span class="pv-footer-sep">·</span>
+          <a href="https://github.com/{{ site.github_username }}" class="pv-footer-link">github</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
