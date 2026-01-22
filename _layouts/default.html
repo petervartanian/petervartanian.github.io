@@ -18,16 +18,18 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   </head>
 
-  <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-home{% elsif p == '/poiesis' %}pv-poiesis{% elsif p == '/praxis' %}pv-praxis{% elsif p == '/projects' %}pv-projects{% elsif p == '/portfolio' %}pv-portfolio{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
-    <a href="#main-content" class="skip-link">skip to content</a>
+  <body class="pv-{{ page.page_key | default: 'default' }}">
+    <a class="pv-skip" href="#main-content">Skip to content</a>
 
-    <div class="pv-page">
+    <div class="pv-shell">
       <header class="pv-header" role="banner">
         <div class="pv-header-inner">
           <div class="pv-header-top">
             <a class="pv-brand" href="{{ '/' | relative_url }}">
               <span class="pv-brand-title">{{ site.title }}</span>
+              {% if site.description %}
               <span class="pv-brand-sub">{{ site.description }}</span>
+              {% endif %}
               {% if site.location_line %}
               <span class="pv-brand-meta">{{ site.location_line }}</span>
               {% endif %}
@@ -41,7 +43,11 @@
                     <a class="pv-nav-link{% if item.url == current %} is-active{% endif %}"
                        href="{{ item.url | relative_url }}"
                        {% if item.url == current %}aria-current="page"{% endif %}>
-                      {{ item.title }}
+                      {% if item.url == '/poiesis' or item.url == '/praxis' %}
+                        <em>{{ item.title }}</em>
+                      {% else %}
+                        {{ item.title }}
+                      {% endif %}
                     </a>
                   </li>
                 {% endfor %}
@@ -61,18 +67,7 @@
 
       <footer class="pv-footer" role="contentinfo">
         <div class="pv-footer-inner">
-          <span>© {{ site.time | date: '%Y' }} {{ site.title }}</span>
-
-          <span class="pv-footer-sep">·</span>
-          <a href="{{ '/feed.xml' | relative_url }}" class="pv-footer-link">rss</a>
-
-          {% if site.linkedin_url %}
-          <span class="pv-footer-sep">·</span>
-          <a href="{{ site.linkedin_url }}" class="pv-footer-link">linkedin</a>
-          {% endif %}
-
-          <span class="pv-footer-sep">·</span>
-          <a href="https://github.com/{{ site.github_username }}" class="pv-footer-link">github</a>
+          <span class="pv-footer-note">{{ site.title }}</span>
         </div>
       </footer>
     </div>
@@ -85,5 +80,9 @@
         });
       })();
     </script>
+
+    {% if page.page_key == 'praxis' %}
+    <script defer src="{{ '/assets/js/praxis.js' | relative_url }}"></script>
+    {% endif %}
   </body>
 </html>

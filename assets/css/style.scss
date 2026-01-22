@@ -360,3 +360,148 @@ body::before {
   .pv-article { border: none; box-shadow: none; padding: 0; }
   .pv-prose { max-width: none; }
 }
+
+
+/* Praxis month-grid timeline */
+.pv-month-grid-wrap {
+  margin-top: 1.6rem;
+  margin-bottom: 2.2rem;
+}
+
+.pv-month-grid-head,
+.pv-year-row {
+  display: grid;
+  grid-template-columns: 3.2rem repeat(12, minmax(0, 1fr));
+  column-gap: 0.35rem;
+  align-items: center;
+}
+
+.pv-month-grid-head {
+  margin-bottom: 0.55rem;
+  opacity: 0.8;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pv-month-label,
+.pv-year-label {
+  color: rgba(21, 22, 26, 0.7);
+}
+
+.pv-year-row {
+  margin-bottom: 0.35rem;
+}
+
+.pv-year-label {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.82rem;
+  opacity: 0.75;
+}
+
+.pv-month-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pv-month-cell {
+  position: relative;
+  height: 0.95rem;
+  border-radius: 0.35rem;
+  border: 1px solid rgba(21, 22, 26, 0.10);
+  background: rgba(21, 22, 26, calc(var(--n, 0) * 0.045));
+  overflow: hidden;
+}
+
+.pv-month-cell.is-future {
+  border-color: rgba(21, 22, 26, 0.05);
+  background: transparent;
+}
+
+.pv-month-cell.has-roles {
+  cursor: pointer;
+}
+
+.pv-month-cell:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.pv-chips {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.pv-chip {
+  position: absolute;
+  inset: 12%;
+  border-radius: 0.32rem;
+  background: var(--chip-color);
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+}
+
+.pv-chip:nth-child(1) { transform: translate(-2px, -2px); }
+.pv-chip:nth-child(2) { transform: translate(2px, -2px); }
+.pv-chip:nth-child(3) { transform: translate(-2px, 2px); }
+.pv-chip:nth-child(4) { transform: translate(2px, 2px); }
+.pv-chip:nth-child(5) { transform: translate(0px, -3px); }
+.pv-chip:nth-child(6) { transform: translate(0px, 3px); }
+.pv-chip:nth-child(7) { transform: translate(-3px, 0px); }
+.pv-chip:nth-child(8) { transform: translate(3px, 0px); }
+
+.pv-month-detail {
+  margin-top: 1.1rem;
+  padding-top: 1.0rem;
+  border-top: 1px solid rgba(21, 22, 26, 0.14);
+  min-height: 3.2rem;
+}
+
+.pv-month-detail-inner {
+  display: grid;
+  grid-template-columns: 6.2rem 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.pv-month-detail-month {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+.pv-month-detail-list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.pv-month-detail-list li {
+  margin: 0.15rem 0;
+}
+
+.pv-praxis-places {
+  margin-top: 2.0rem;
+  border-top: 1px solid rgba(21, 22, 26, 0.14);
+  padding-top: 1.1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.35rem;
+}
+
+.pv-praxis-place {
+  color: rgba(21, 22, 26, 0.86);
+}
+
+@media (max-width: 720px) {
+  .pv-month-grid-head,
+  .pv-year-row {
+    grid-template-columns: 2.6rem repeat(12, minmax(0, 1fr));
+    column-gap: 0.25rem;
+  }
+  .pv-month-grid-head { font-size: 0.65rem; }
+  .pv-month-cell { height: 0.85rem; }
+  .pv-month-detail-inner { grid-template-columns: 1fr; }
+}
+
