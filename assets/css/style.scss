@@ -10,11 +10,15 @@
   --accent: #c95a74;
 }
 
+body.pv-poiesis { --accent: #2a9d8f; }
+body.pv-praxis { --accent: #e07a5f; }
+body.pv-contact { --accent: #6d597a; }
+
+/* legacy routes (kept but no longer primary navigation) */
 body.pv-projects { --accent: #2a9d8f; }
 body.pv-portfolio { --accent: #8a5bd6; }
 body.pv-media { --accent: #d17a6a; }
 body.pv-cv { --accent: #e07a5f; }
-body.pv-contact { --accent: #6d597a; }
 
 * { box-sizing: border-box; }
 

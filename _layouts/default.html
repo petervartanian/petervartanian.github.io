@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   </head>
 
-  <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-about{% elsif p == '/projects' %}pv-projects{% elsif p == '/portfolio' %}pv-portfolio{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
+  <body class="{% assign p = page.permalink | default: page.url %}{% if p == '/' %}pv-home{% elsif p == '/poiesis' %}pv-poiesis{% elsif p == '/praxis' %}pv-praxis{% elsif p == '/projects' %}pv-projects{% elsif p == '/portfolio' %}pv-portfolio{% elsif p == '/media' %}pv-media{% elsif p == '/cv' %}pv-cv{% elsif p == '/contact' %}pv-contact{% else %}pv-default{% endif %}">
     <a href="#main-content" class="skip-link">skip to content</a>
 
     <div class="pv-page">

@@ -4,6 +4,7 @@ title: "Portfolio"
 description: "Selected artifacts"
 permalink: /portfolio
 page_key: portfolio
+sitemap: false
 ---
 
 # Portfolio

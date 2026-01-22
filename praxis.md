@@ -1,13 +1,14 @@
 ---
 layout: default
-title: "Experience"
-description: "A working chronology"
-permalink: /cv
-page_key: cv
-sitemap: false
+title: "Praxis"
+description: "Appointments, fellowships, and operational work."
+permalink: /praxis
+page_key: praxis
 ---
 
-# Experience
+# Praxis
+
+A working chronology, oriented toward what I was actually doing: the institutional setting, the task, and the learned constraint.
 
 <div class="pv-timeline">
   <div class="pv-entry">
@@ -197,59 +198,5 @@ sitemap: false
       <div class="pv-dates">Dec 2022 — Jan 2023</div>
     </div>
     <p>Legal work and front-of-house reality in the same frame: contracts, clients, timing, and the discipline of being exact when the room is noisy.</p>
-  </div>
-
-  <div class="pv-entry">
-    <div class="pv-entry-head">
-      <div class="pv-fn">Event Management</div>
-      <div class="pv-place">European Forum Alpbach</div>
-      <div class="pv-dates">May 2022 — Aug 2022</div>
-    </div>
-    <p>Logistics as diplomacy: moving people, schedules, and constraints so that the conversation can happen where it is supposed to happen.</p>
-  </div>
-
-  <div class="pv-entry">
-    <div class="pv-entry-head">
-      <div class="pv-fn">(Winter) Legal + Business Development</div>
-      <div class="pv-place">Wolf Theiss</div>
-      <div class="pv-dates">Dec 2021 — Jan 2022</div>
-    </div>
-    <p>Learning the private sector's cadence: how deals are formed, how narratives are sold, and how law functions as a set of rails.</p>
-  </div>
-
-  <div class="pv-entry">
-    <div class="pv-entry-head">
-      <div class="pv-fn">Research + pedagogy + leadership + analysis</div>
-      <div class="pv-place">Occidental College</div>
-      <div class="pv-dates">Aug 2021 — May 2025</div>
-    </div>
-    <p>A long stretch of building and being built: honors and grant-supported research; teaching and interim language instruction (German, French, Russian, Spanish) alongside economics support and linguistic advising; program-building (STOXY, OXY Microfinance Club, Occidental Law Society, the Kahane UN Program, international/exchange affairs); and public-facing analysis through consulting and journalism. The throughline was craft: making institutions legible and then making them work.</p>
-  </div>
-
-  <div class="pv-entry">
-    <div class="pv-entry-head">
-      <div class="pv-fn">IVLP | Global Ties U.S.</div>
-      <div class="pv-place">Bureau of Educational and Cultural Affairs (ECA), U.S. Department of State</div>
-      <div class="pv-dates">Oct 2020 — Mar 2021</div>
-    </div>
-    <p>Work in cultural exchange where the product is relationship: small, repeated acts of translation between institutions that otherwise talk past each other.</p>
-  </div>
-
-  <div class="pv-entry">
-    <div class="pv-entry-head">
-      <div class="pv-fn">R&amp;D + Engineering | Advanced Optics</div>
-      <div class="pv-place">SWAROVSKI OPTIK</div>
-      <div class="pv-dates">Jul 2020 — Sep 2020</div>
-    </div>
-    <p>Time spent with physical reality: tolerances, materials, and the kind of rigor that does not forgive hand-waving.</p>
-  </div>
-
-  <div class="pv-entry">
-    <div class="pv-entry-head">
-      <div class="pv-fn">Research Study | Applied Mathematics</div>
-      <div class="pv-place">HUN-REN Rényi Institute of Mathematics</div>
-      <div class="pv-dates">Feb 2018 — Jun 2020</div>
-    </div>
-    <p>Early apprenticeship in formal thinking: proofs, models, and the austere beauty of being forced to say exactly what you mean.</p>
   </div>
 </div>

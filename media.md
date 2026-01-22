@@ -4,6 +4,7 @@ title: "Media"
 description: "External coverage and references"
 permalink: /media
 page_key: media
+sitemap: false
 ---
 
 # Media

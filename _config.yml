@@ -39,17 +39,13 @@ feed:
   path: feed.xml
 
 navigation:
-  - title: "about"
+  - title: "Home"
     url: /
-  - title: "projects"
-    url: /projects
-  - title: "portfolio"
-    url: /portfolio
-  - title: "media"
-    url: /media
-  - title: "experience"
-    url: /cv
-  - title: "contact"
+  - title: "Poiesis"
+    url: /poiesis
+  - title: "Praxis"
+    url: /praxis
+  - title: "Contact"
     url: /contact
 
 markdown: kramdown

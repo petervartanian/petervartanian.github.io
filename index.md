@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "About"
+title: "Home"
 description: "Notes, experiments, and working ideas in geo-technology (and beyond)."
 permalink: /
 page_key: about
 ---
 
-# About
+# Home
 
 Pertinacious experimentalist from an agrarian hamlet in the Austrian Alps — now dividing time between NYC, D.C., and LA. Read at Caltech for graduate work and a B.A. (Hons.) in Diplomacy & World Affairs at Occidental College. Building capabilities across technē, statecraft, and jurisprudence in the world's highest deliberative fora.
 
