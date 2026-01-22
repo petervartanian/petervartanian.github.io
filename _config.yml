@@ -1,0 +1,67 @@
+title: "Peter H. Vartanian"
+description: "From Weng in the Tyrolean Alps. Now between New York City, Washington, and Los Angeles. Notes, diagrams, and working artifacts on geo-technology, law, and statecraft."
+
+location_line: "New York City · Washington · Los Angeles"
+url: "https://petervartanian.xyz"
+baseurl: ""
+
+lang: en-US
+timezone: America/New_York
+
+author:
+  name: "Peter H. Vartanian"
+  email: "peter.vartanian@icloud.com"
+
+github_username: petervartanian
+
+telephone: "+1-747-786-9132"
+linkedin_url: "https://www.linkedin.com/in/petervartanian/"
+
+# Used by jekyll-seo-tag for social previews
+image: /assets/img/og-card.jpg
+og_image: /assets/img/og-card.jpg
+logo: /assets/img/apple-touch-icon.png
+
+social:
+  name: "Peter H. Vartanian"
+  links:
+    - "https://github.com/petervartanian"
+    - "https://www.linkedin.com/in/petervartanian/"
+
+theme: jekyll-theme-minimal
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-feed
+
+feed:
+  path: feed.xml
+
+navigation:
+  - title: "about"
+    url: /
+  - title: "projects"
+    url: /projects
+  - title: "portfolio"
+    url: /portfolio
+  - title: "media"
+    url: /media
+  - title: "experience"
+    url: /cv
+  - title: "contact"
+    url: /contact
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+sass:
+  style: compressed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
