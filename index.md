@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Home"
+description: "From Weng to American institutions: notes, working artifacts, and public traces."
 permalink: /
 page_key: about
 ---

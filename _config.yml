@@ -1,7 +1,7 @@
 title: "Peter H. Vartanian"
 description: "Notes and working artifacts in geo-technology, law, and statecraft."
 
-location_line: "New York City · Washington · Los Angeles"
+location_line: "NEW YORK CITY (Fungible where called)"
 url: "https://petervartanian.xyz"
 baseurl: ""
 
@@ -16,6 +16,7 @@ github_username: petervartanian
 
 telephone: "+1 747 786 9132"
 linkedin_url: "https://www.linkedin.com/in/petervartanian/"
+github_url: "https://github.com/petervartanian"
 
 # Used by jekyll-seo-tag for social previews
 image: /assets/img/og-card.jpg

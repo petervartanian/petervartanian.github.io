@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Contact"
+description: "Email, phone, and professional indices."
 permalink: /contact
 page_key: contact
 ---
@@ -16,9 +17,9 @@ Thoughtful correspondence and collaborations of consequence are welcomed; genera
 [{{ site.telephone }}](tel:{{ site.telephone | replace: ' ', '' | replace: '-', '' }})
 
 **LinkedIn**  
-<{{ site.linkedin_url }}>
+[@petervartanian]({{ site.linkedin_url }})
 
 **GitHub**  
-<https://github.com/petervartanian>
+[@petervartanian]({{ site.github_url }})
 
 More to come: Zenodo · arXiv · Harvard Dataverse

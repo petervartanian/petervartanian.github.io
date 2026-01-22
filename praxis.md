@@ -1,6 +1,7 @@
 ---
 layout: default
 title: "Praxis"
+description: "A full timeline of institutional stations, rendered as overlapping monthly strata."
 permalink: /praxis
 page_key: praxis
 ---
