@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pv-site-v4';
+const CACHE_NAME = 'pv-site-v5';
 
 const URLS = [
   '/',

@@ -60,7 +60,9 @@
   var maxEnd = Math.max.apply(null, rows.map(function (r) { return r.end; }));
 
   // Layout constants.
-  var PX_PER_MONTH = 18;
+  // Visual resolution: pixels per month on the vertical axis.
+  // Higher values read less "compressed" and improve overlap legibility.
+  var PX_PER_MONTH = 26;
   var TOP_PAD = 14;
   var BOTTOM_PAD = 18;
   var HEIGHT = TOP_PAD + (maxEnd - minStart + 1) * PX_PER_MONTH + BOTTOM_PAD;
@@ -170,7 +172,8 @@
       block.className = 'pv-vtimeline-block pv-vtimeline-block--' + (g || '').toLowerCase();
       block.style.top = top + 'px';
       block.style.height = Math.max(14, h) + 'px';
-      block.style.background = COLORS[g] || '#555';
+      // Set background color only; CSS may layer patterns/textures atop.
+      block.style.backgroundColor = COLORS[g] || '#555';
 
       // Lane positioning in percentages.
       var leftPct = (r._lane / laneCount) * 100;

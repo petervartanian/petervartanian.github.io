@@ -531,11 +531,11 @@ body::before {
 /* Poiesis plate */
 .pv-poiesis-plate{
   margin: 1.1rem auto 1.2rem auto;
-  max-width: 240px;
+  max-width: 420px;
 }
 .pv-poiesis-image{
   display:block;
-  max-height: 18vh;
+  max-height: 34vh;
   background: var(--paper);
   padding: 0.55rem;
   border: 1px solid rgba(21, 22, 26, 0.18);
@@ -554,9 +554,11 @@ body::before {
   color: rgba(21, 22, 26, 0.78);
 }
 
+.pv-poiesis-meaning{ margin-top: 0.58rem; }
+
 @media (max-width: 520px) {
-  .pv-poiesis-plate{ max-width: 220px; }
-  .pv-poiesis-image{ max-height: 30vh; }
+  .pv-poiesis-plate{ max-width: 320px; }
+  .pv-poiesis-image{ max-height: 42vh; }
 }
 
 
@@ -571,23 +573,41 @@ body::before {
   margin: 0 0 0.85rem 0;
 }
 .pv-ital{ font-style: italic; }
-.pv-cite-rule{
+.pv-awardband{
+  margin-top: 0.45rem;
+  display: inline-block;
+  padding: 0.35rem 0.55rem;
+  border-radius: 10px;
+  background: rgba(56, 75, 90, 0.10);
+  color: rgba(21, 22, 26, 0.80);
   position: relative;
-  padding-left: 0.9rem;
 }
-.pv-cite-rule:before{
-  content: "";
+.pv-awardband:hover{ background: rgba(56, 75, 90, 0.14); }
+.pv-awardband::after{
+  content: attr(data-tip);
   position: absolute;
   left: 0;
-  top: 0.25rem;
-  bottom: 0.25rem;
-  width: 3px;
-  background: rgba(201, 90, 116, 0.9);
-  border-radius: 2px;
+  top: calc(100% + 10px);
+  max-width: 340px;
+  width: min(340px, 70vw);
+  white-space: normal;
+  padding: 0.45rem 0.55rem;
+  border-radius: 10px;
+  background: rgba(21, 22, 26, 0.92);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.82rem;
+  line-height: 1.25;
+  box-shadow: 0 12px 28px rgba(21, 22, 26, 0.18);
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 140ms ease, transform 140ms ease;
+  z-index: 10;
 }
-.pv-awardline{
-  margin-top: 0.3rem;
-  color: rgba(21, 22, 26, 0.72);
+.pv-awardband:hover::after,
+.pv-awardband:focus::after{
+  opacity: 1;
+  transform: translateY(0);
 }
 
 
@@ -617,6 +637,7 @@ body::before {
   border-radius: 18px;
   border: 1px solid rgba(21, 22, 26, 0.12);
   background: #faf9f4;
+  --pv-timeline-bg: #faf9f4;
   overflow: hidden;
 }
 
@@ -667,21 +688,102 @@ body::before {
   box-shadow: 0 10px 22px rgba(21, 22, 26, 0.08);
   border: 1px solid rgba(255,255,255,0.55);
   cursor: pointer;
+  background-image: none;
 }
 
-.pv-vtimeline-block--academic{ border-radius: 0; }
+/* Five rubrics, five abstract grammars */
+/* Academic — edged, hatched */
+.pv-vtimeline-block--academic{
+  border-radius: 0;
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.32) 0 1px, transparent 1px 8px);
+}
 
-.pv-vtimeline-block--public{ border-radius: 999px; }
+/* Public — scalloped sides */
+.pv-vtimeline-block--public{
+  border-radius: 999px;
+  overflow: hidden;
+}
+.pv-vtimeline-block--public::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle 7px at 0 7px, var(--pv-timeline-bg) 7px, transparent 7.6px) 0 0/100% 14px repeat-y,
+    radial-gradient(circle 7px at 100% 7px, var(--pv-timeline-bg) 7px, transparent 7.6px) 0 0/100% 14px repeat-y;
+  pointer-events: none;
+}
 
+/* Multilateral — chevron caps */
 .pv-vtimeline-block--multilateral{
   border-radius: 0;
-  -webkit-clip-path: polygon(50% 0%, 100% 10px, 100% calc(100% - 10px), 50% 100%, 0 calc(100% - 10px), 0 10px);
-  clip-path: polygon(50% 0%, 100% 10px, 100% calc(100% - 10px), 50% 100%, 0 calc(100% - 10px), 0 10px);
+  -webkit-clip-path: polygon(0 0, 50% 14px, 100% 0, 100% 100%, 50% calc(100% - 14px), 0 100%);
+  clip-path: polygon(0 0, 50% 14px, 100% 0, 100% 100%, 50% calc(100% - 14px), 0 100%);
 }
 
+/* Private — sawtooth edge + X brace */
 .pv-vtimeline-block--private{
   border-radius: 10px;
   overflow: hidden;
+  -webkit-clip-path: polygon(
+    0 0,
+    86% 0,
+    100% 4%,
+    86% 8%,
+    100% 12%,
+    86% 16%,
+    100% 20%,
+    86% 24%,
+    100% 28%,
+    86% 32%,
+    100% 36%,
+    86% 40%,
+    100% 44%,
+    86% 48%,
+    100% 52%,
+    86% 56%,
+    100% 60%,
+    86% 64%,
+    100% 68%,
+    86% 72%,
+    100% 76%,
+    86% 80%,
+    100% 84%,
+    86% 88%,
+    100% 92%,
+    86% 96%,
+    100% 100%,
+    0 100%
+  );
+  clip-path: polygon(
+    0 0,
+    86% 0,
+    100% 4%,
+    86% 8%,
+    100% 12%,
+    86% 16%,
+    100% 20%,
+    86% 24%,
+    100% 28%,
+    86% 32%,
+    100% 36%,
+    86% 40%,
+    100% 44%,
+    86% 48%,
+    100% 52%,
+    86% 56%,
+    100% 60%,
+    86% 64%,
+    100% 68%,
+    86% 72%,
+    100% 76%,
+    86% 80%,
+    100% 84%,
+    86% 88%,
+    100% 92%,
+    86% 96%,
+    100% 100%,
+    0 100%
+  );
 }
 .pv-vtimeline-block--private::before,
 .pv-vtimeline-block--private::after{
@@ -693,14 +795,16 @@ body::before {
   height: 1px;
   background: rgba(255,255,255,0.45);
   transform-origin: center;
+  pointer-events: none;
 }
 .pv-vtimeline-block--private::before{ transform: translate(-50%, -50%) rotate(45deg); }
 .pv-vtimeline-block--private::after{ transform: translate(-50%, -50%) rotate(-45deg); }
 
+/* Civil — stippled */
 .pv-vtimeline-block--civil{
-  border-radius: 0;
-  -webkit-clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
-  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+  border-radius: 16px;
+  background-image: radial-gradient(rgba(255,255,255,0.35) 1px, transparent 1.7px);
+  background-size: 9px 9px;
 }
 
 

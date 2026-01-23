@@ -31,7 +31,7 @@ page_key: poiesis
 
   <li class="pv-cite-rule">
     Vartanian, Peter H. <span class="pv-ital">Allied Mettle, Allied Metals: A Market-Based Playbook for Critical-Mineral Supply Chains</span>. Stanford, CA: Hoover Institution, 2025.
-    <a href="/assets/pdf/Vartanian,%20SPAR%20Sample.pdf">/assets/pdf/Vartanian, SPAR Sample.pdf</a>.
-    <div class="pv-awardline">Hoover Institution Summer Policy Boot Camp Director’s Award.</div>
+    <a href="/assets/pdf/Vartanian,%20SPAR%20Sample.pdf">PDF</a>.
+    <div class="pv-awardband" data-tip="Awarded to the top proposals in the Hoover Institution Summer Policy Boot Camp.">This proposal received the Hoover Institution Summer Policy Boot Camp Director’s Award.</div>
   </li>
 </ol>
