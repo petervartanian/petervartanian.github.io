@@ -5,6 +5,7 @@ description: "From Weng to American institutions: notes, working artifacts, and 
 permalink: /
 page_key: about
 ---
+# Home
 
 I am from an agrarian hamlet tucked into stone and pasture in the Tyrolean Alps: [Weng](https://mapcarta.com/N1938447213). It is neither (<u>a</u>) a place that tends to produce theorists nor (<u>b</u>) one that is conspicuous enough to not miss if one blinked on the wrong bend in the road. The scale there was human and weather-sized; mountains set the boundary conditions; and, seasons explained more than any market did.
 

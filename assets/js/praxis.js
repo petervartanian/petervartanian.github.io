@@ -60,7 +60,7 @@
   var maxEnd = Math.max.apply(null, rows.map(function (r) { return r.end; }));
 
   // Layout constants.
-  var PX_PER_MONTH = 12;
+  var PX_PER_MONTH = 18;
   var TOP_PAD = 14;
   var BOTTOM_PAD = 18;
   var HEIGHT = TOP_PAD + (maxEnd - minStart + 1) * PX_PER_MONTH + BOTTOM_PAD;
@@ -167,7 +167,7 @@
       var h = (r.end - r.start + 1) * PX_PER_MONTH;
 
       var block = document.createElement('div');
-      block.className = 'pv-vtimeline-block';
+      block.className = 'pv-vtimeline-block pv-vtimeline-block--' + (g || '').toLowerCase();
       block.style.top = top + 'px';
       block.style.height = Math.max(14, h) + 'px';
       block.style.background = COLORS[g] || '#555';

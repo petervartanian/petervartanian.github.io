@@ -531,13 +531,13 @@ body::before {
 /* Poiesis plate */
 .pv-poiesis-plate{
   margin: 1.1rem auto 1.2rem auto;
-  max-width: 380px;
+  max-width: 320px;
 }
 .pv-poiesis-image{
   display:block;
   width: 100%;
   height: auto;
-  max-height: 28vh;
+  max-height: 22vh;
   object-fit: contain;
   border-radius: 16px;
   background: #f7f5ee;
@@ -553,7 +553,7 @@ body::before {
 }
 
 @media (max-width: 520px) {
-  .pv-poiesis-plate{ max-width: 360px; }
+  .pv-poiesis-plate{ max-width: 300px; }
   .pv-poiesis-image{ max-height: 30vh; }
 }
 
@@ -577,6 +577,7 @@ body::before {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(21, 22, 26, 0.58);
+  text-align: center;
 }
 
 .pv-vtimeline{
@@ -635,6 +636,41 @@ body::before {
   border: 1px solid rgba(255,255,255,0.55);
   cursor: pointer;
 }
+
+.pv-vtimeline-block--academic{ border-radius: 0; }
+
+.pv-vtimeline-block--public{ border-radius: 999px; }
+
+.pv-vtimeline-block--multilateral{
+  border-radius: 0;
+  -webkit-clip-path: polygon(50% 0%, 100% 10px, 100% calc(100% - 10px), 50% 100%, 0 calc(100% - 10px), 0 10px);
+  clip-path: polygon(50% 0%, 100% 10px, 100% calc(100% - 10px), 50% 100%, 0 calc(100% - 10px), 0 10px);
+}
+
+.pv-vtimeline-block--private{
+  border-radius: 10px;
+  overflow: hidden;
+}
+.pv-vtimeline-block--private::before,
+.pv-vtimeline-block--private::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 140%;
+  height: 1px;
+  background: rgba(255,255,255,0.45);
+  transform-origin: center;
+}
+.pv-vtimeline-block--private::before{ transform: translate(-50%, -50%) rotate(45deg); }
+.pv-vtimeline-block--private::after{ transform: translate(-50%, -50%) rotate(-45deg); }
+
+.pv-vtimeline-block--civil{
+  border-radius: 0;
+  -webkit-clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px);
+}
+
 
 .pv-vtimeline-block:focus{
   outline: 2px solid rgba(21, 22, 26, 0.45);
