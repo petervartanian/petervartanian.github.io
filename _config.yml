@@ -1,64 +1,49 @@
-title: "Peter H. Vartanian"
-description: "Notes and working artifacts in geo-technology, law, and statecraft."
-
-location_line: "NEW YORK CITY (BUT FUNGIBLE WHERE CALLED!)"
-url: "https://petervartanian.xyz"
-baseurl: ""
-
+title: Peter H. Vartanian
+description: Notes and working artifacts in geo-technology, law, and statecraft.
+location_line: NEW YORK CITY (BUT FUNGIBLE WHERE CALLED!)
+url: https://petervartanian.xyz
+baseurl: ''
 lang: en-US
 timezone: America/New_York
-
 author:
-  name: "Peter H. Vartanian"
-  email: "peter.vartanian@icloud.com"
-
+  name: Peter H. Vartanian
+  email: peter.vartanian@icloud.com
 github_username: petervartanian
-
-telephone: "+1 747 786 9132"
-linkedin_url: "https://www.linkedin.com/in/petervartanian/"
-github_url: "https://github.com/petervartanian"
-
-# Used by jekyll-seo-tag for social previews
+telephone: +1 747 786 9132
+linkedin_url: https://www.linkedin.com/in/petervartanian/
+github_url: https://github.com/petervartanian
 image: /assets/img/og-card.jpg
 og_image: /assets/img/og-card.jpg
 logo: /assets/img/apple-touch-icon.png
-
 social:
-  name: "Peter H. Vartanian"
+  name: Peter H. Vartanian
   links:
-    - "https://github.com/petervartanian"
-    - "https://www.linkedin.com/in/petervartanian/"
-
+  - https://github.com/petervartanian
+  - https://www.linkedin.com/in/petervartanian/
 theme: jekyll-theme-minimal
-
 plugins:
-  - jekyll-sitemap
-  - jekyll-seo-tag
-  - jekyll-feed
-
+- jekyll-sitemap
+- jekyll-seo-tag
+- jekyll-feed
 feed:
   path: feed.xml
-
 navigation:
-  - title: "Home"
-    url: /
-  - title: "Poiesis"
-    url: /poiesis
-  - title: "Praxis"
-    url: /praxis
-  - title: "Contact"
-    url: /contact
-
+- title: Home
+  url: /
+- title: Poiesis
+  url: /poiesis
+- title: Praxis
+  url: /praxis
+- title: Contact
+  url: /contact
 markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-
 sass:
   style: compressed
-
 exclude:
-  - Gemfile
-  - Gemfile.lock
-  - README.md
-  - LICENSE
+- Gemfile
+- Gemfile.lock
+- README.md
+- LICENSE

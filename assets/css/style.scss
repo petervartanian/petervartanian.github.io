@@ -2,6 +2,7 @@
 ---
 
 :root {
+  --font: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   --bg: #fbfaf6;
   --paper: #ffffff;
   --ink: #15161a;
@@ -29,7 +30,7 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--ink);
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-size: 18px;
   line-height: 1.7;
 }
@@ -58,7 +59,7 @@ body::before {
   z-index: 50;
   transform: translateY(-160%);
   transition: transform 120ms ease;
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-weight: 650;
   font-size: 0.9rem;
 }
@@ -104,7 +105,7 @@ body::before {
 
 .pv-brand-title {
   display: block;
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-weight: 760;
   letter-spacing: -0.02em;
   font-size: 1.7rem;
@@ -114,7 +115,7 @@ body::before {
   display: block;
   margin-top: 0.5rem;
   color: var(--muted);
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-weight: 480;
   letter-spacing: 0.01em;
   font-size: 0.98rem;
@@ -124,7 +125,7 @@ body::before {
   display: block;
   margin-top: 0.65rem;
   color: rgba(21, 22, 26, 0.58);
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-weight: 520;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -148,7 +149,7 @@ body::before {
   padding: 0.1rem 0;
   text-decoration: none;
   color: rgba(21, 22, 26, 0.70);
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-weight: 600;
   letter-spacing: 0.02em;
   border-bottom: 1px solid transparent;
@@ -190,7 +191,7 @@ body::before {
 }
 
 .pv-article h1 {
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-size: 1.9rem;
   letter-spacing: -0.02em;
   margin: 0 0 1.25rem;
@@ -198,7 +199,7 @@ body::before {
 }
 
 .pv-article h2 {
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-size: 1.15rem;
   letter-spacing: -0.01em;
   margin: 2.25rem 0 0.6rem;
@@ -217,9 +218,21 @@ body::before {
   color: var(--muted);
 }
 
+/* media */
+.pv-article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 1.6rem;
+  max-height: 72vh;
+  object-fit: contain;
+  border-radius: 14px;
+  background: var(--bg);
+}
+
 .pv-meta {
   color: var(--muted);
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-size: 0.95rem;
 }
 
@@ -243,7 +256,7 @@ body::before {
 
 .pv-card h3 {
   margin: 0 0 0.45rem;
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-size: 1rem;
   letter-spacing: -0.01em;
 }
@@ -258,7 +271,7 @@ body::before {
 }
 
 .pv-tag {
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-size: 0.82rem;
   padding: 0.18rem 0.55rem;
   border-radius: 999px;
@@ -300,7 +313,7 @@ body::before {
 .pv-entry-head { display: grid; grid-template-columns: 1fr; gap: 0.25rem; }
 
 .pv-fn {
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -309,14 +322,14 @@ body::before {
 }
 
 .pv-place {
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-size: 1.05rem;
   letter-spacing: -0.01em;
   font-weight: 740;
 }
 
 .pv-dates {
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-size: 0.92rem;
   color: var(--muted);
 }
@@ -335,7 +348,7 @@ body::before {
 .pv-footer-link {
   color: rgba(21, 22, 26, 0.78);
   text-decoration: none;
-  font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  font-family: var(--font);
   font-weight: 650;
   letter-spacing: 0.02em;
 }
