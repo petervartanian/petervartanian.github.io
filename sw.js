@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pv-site-v3';
+const CACHE_NAME = 'pv-site-v4';
 
 const URLS = [
   '/',
@@ -6,10 +6,12 @@ const URLS = [
   '/praxis',
   '/contact',
   '/assets/css/style.css',
+  '/assets/js/praxis.js',
   '/assets/img/favicon-16x16.png',
   '/assets/img/favicon-32x32.png',
   '/assets/img/apple-touch-icon.png',
   '/assets/img/og-card.jpg',
+  '/assets/img/poiesis.jpg',
   '/site.webmanifest'
 ];
 

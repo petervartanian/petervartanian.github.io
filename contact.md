@@ -8,26 +8,26 @@ page_key: contact
 
 # Contact
 
-Thoughtful correspondence and collaborations of consequence are welcomed; generally, I reply within twelve hours.
+Thoughtful correspondence and collaborations of consequence are welcomed; generally, I reply within twelve hours:
 
-**Email**  
+Email  
 [{{ site.author.email }}](mailto:{{ site.author.email }})
 
-**Phone**  
+Phone  
 [{{ site.telephone }}](tel:{{ site.telephone | replace: ' ', '' | replace: '-', '' }})
 
-**LinkedIn**  
+LinkedIn  
 [@petervartanian]({{ site.linkedin_url }})
 
-## Additional profiles
+Please also find me on...:
 
-**GitHub**  
+GitHub  
 [@petervartanian]({{ site.github_url }})
 
-**X**  
+X  
 [@petervartanian]({{ site.x_url }})
 
-**ORCID**  
+ORCID  
 <{{ site.orcid_url }}>
 
-More to come: Zenodo · arXiv · Harvard Dataverse
+... and, on more to come: Zenodo · arXiv · Harvard Dataverse

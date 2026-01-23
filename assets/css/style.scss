@@ -528,49 +528,142 @@ body::before {
 
 
 
-/* Poiesis image */
+/* Poiesis plate */
+.pv-poiesis-plate{
+  margin: 1.1rem auto 1.2rem auto;
+  max-width: 380px;
+}
 .pv-poiesis-image{
   display:block;
-  margin: 1.2rem auto 1.6rem auto;
   width: 100%;
-  max-width: 560px;
-  max-height: 48vh;
+  height: auto;
+  max-height: 28vh;
   object-fit: contain;
-  border-radius: 14px;
-}
-
-
-
-/* Timeline */
-.pv-timeline-wrap{
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
   border-radius: 16px;
+  background: #f7f5ee;
+  border: 1px solid rgba(21, 22, 26, 0.14);
+  padding: 10px;
+  box-shadow: 0 10px 28px rgba(21, 22, 26, 0.06);
 }
-.pv-timeline{
-  min-width: 720px;
+.pv-poiesis-caption{
+  margin-top: 0.65rem;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  color: rgba(21, 22, 26, 0.78);
 }
-.pv-timeline-svg{
-  display:block;
+
+@media (max-width: 520px) {
+  .pv-poiesis-plate{ max-width: 360px; }
+  .pv-poiesis-image{ max-height: 30vh; }
 }
-.pv-year-line{
-  stroke: rgba(21, 22, 26, 0.10);
-  stroke-width: 1;
+
+
+
+/* Praxis vertical timeline */
+.pv-vtimeline-wrap{
+  margin-top: 1.2rem;
 }
-.pv-year-label{
-  font-size: 12px;
-  fill: rgba(21, 22, 26, 0.55);
+
+.pv-vtimeline-head{
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 0.9rem;
+  padding-left: 64px;
+  margin-bottom: 0.55rem;
 }
-.pv-group-label{
-  font-size: 12px;
-  fill: rgba(21, 22, 26, 0.55);
+
+.pv-vtimeline-head-item{
+  font-size: 0.82rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: rgba(21, 22, 26, 0.58);
 }
-.pv-role-label{
-  font-size: 13px;
-  fill: rgba(21, 22, 26, 0.78);
+
+.pv-vtimeline{
+  position: relative;
+  border-radius: 18px;
+  border: 1px solid rgba(21, 22, 26, 0.12);
+  background: #faf9f4;
+  overflow: hidden;
 }
-.pv-role-bar{
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.06));
+
+.pv-vtimeline-axis{
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 64px;
+  border-right: 1px solid rgba(21, 22, 26, 0.10);
+}
+
+.pv-vtimeline-axis-year{
+  position: absolute;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 0.78rem;
+  color: rgba(21, 22, 26, 0.56);
+}
+
+.pv-vtimeline-axis-line{
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(21, 22, 26, 0.08);
+}
+
+.pv-vtimeline-grid{
+  margin-left: 64px;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 0.9rem;
+  padding: 14px;
+}
+
+.pv-vtimeline-lane{
+  position: relative;
+  border-radius: 14px;
+  background: rgba(21, 22, 26, 0.018);
+  outline: 1px solid rgba(21, 22, 26, 0.06);
+}
+
+.pv-vtimeline-block{
+  position: absolute;
+  border-radius: 12px;
+  box-shadow: 0 10px 22px rgba(21, 22, 26, 0.08);
+  border: 1px solid rgba(255,255,255,0.55);
+  cursor: pointer;
+}
+
+.pv-vtimeline-block:focus{
+  outline: 2px solid rgba(21, 22, 26, 0.45);
+  outline-offset: 2px;
+}
+
+.pv-vtimeline-detail{
+  margin-top: 1.1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(21, 22, 26, 0.12);
+  background: #fbfaf6;
+  min-height: 3.1rem;
+}
+
+.pv-vtimeline-detail .pv-detail-title{
+  font-size: 1.02rem;
+  color: rgba(21, 22, 26, 0.90);
+}
+
+.pv-vtimeline-detail .pv-detail-meta{
+  margin-top: 0.25rem;
+  font-size: 0.90rem;
+  color: rgba(21, 22, 26, 0.62);
+}
+
+@media (max-width: 840px) {
+  .pv-vtimeline-head,
+  .pv-vtimeline-grid{
+    column-gap: 0.55rem;
+  }
 }
