@@ -531,20 +531,22 @@ body::before {
 /* Poiesis plate */
 .pv-poiesis-plate{
   margin: 1.1rem auto 1.2rem auto;
-  max-width: 320px;
+  max-width: 240px;
 }
 .pv-poiesis-image{
   display:block;
+  max-height: 18vh;
+  background: var(--paper);
+  padding: 0.55rem;
+  border: 1px solid rgba(21, 22, 26, 0.18);
   width: 100%;
   height: auto;
-  max-height: 22vh;
   object-fit: contain;
   border-radius: 16px;
-  background: #f7f5ee;
-  border: 1px solid rgba(21, 22, 26, 0.14);
-  padding: 10px;
   box-shadow: 0 10px 28px rgba(21, 22, 26, 0.06);
 }
+.pv-poiesis-title{ font-style: italic; }
+
 .pv-poiesis-caption{
   margin-top: 0.65rem;
   font-size: 0.92rem;
@@ -553,10 +555,40 @@ body::before {
 }
 
 @media (max-width: 520px) {
-  .pv-poiesis-plate{ max-width: 300px; }
+  .pv-poiesis-plate{ max-width: 220px; }
   .pv-poiesis-image{ max-height: 30vh; }
 }
 
+
+
+
+/* Poiesis citations */
+.pv-citations{
+  margin: 1.2rem 0 0 0;
+  padding-left: 1.4rem;
+}
+.pv-citations li{
+  margin: 0 0 0.85rem 0;
+}
+.pv-ital{ font-style: italic; }
+.pv-cite-rule{
+  position: relative;
+  padding-left: 0.9rem;
+}
+.pv-cite-rule:before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 3px;
+  background: rgba(201, 90, 116, 0.9);
+  border-radius: 2px;
+}
+.pv-awardline{
+  margin-top: 0.3rem;
+  color: rgba(21, 22, 26, 0.72);
+}
 
 
 /* Praxis vertical timeline */
