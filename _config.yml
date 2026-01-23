@@ -1,0 +1,50 @@
+title: Peter H. Vartanian
+description: 'Notes, experiments, and working artifacts in "geo-technology," law, and statecraft.'
+url: https://petervartanian.xyz
+baseurl: ''
+lang: en-US
+timezone: America/New_York
+author:
+  name: Peter H. Vartanian
+  email: peter.vartanian@icloud.com
+github_username: petervartanian
+telephone: +1 747 786 9132
+linkedin_url: https://www.linkedin.com/in/petervartanian/
+github_url: https://github.com/petervartanian
+x_url: https://x.com/petervartanian
+orcid_url: https://orcid.org/0009-0009-8538-5811
+image: /assets/img/og-card.jpg
+og_image: /assets/img/og-card.jpg
+logo: /assets/img/apple-touch-icon.png
+social:
+  name: Peter H. Vartanian
+  links:
+  - https://github.com/petervartanian
+  - https://www.linkedin.com/in/petervartanian/
+theme: jekyll-theme-minimal
+plugins:
+- jekyll-sitemap
+- jekyll-seo-tag
+- jekyll-feed
+feed:
+  path: feed.xml
+navigation:
+- title: Home
+  url: /
+- title: Poiesis
+  url: /poiesis
+- title: Praxis
+  url: /praxis
+- title: Contact
+  url: /contact
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+sass:
+  style: compressed
+exclude:
+- Gemfile
+- Gemfile.lock
+- README.md
+- LICENSE

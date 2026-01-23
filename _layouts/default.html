@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    {% seo %}
+
+    <meta name="theme-color" content="#fbfaf6">
+
+    <link rel="icon" href="{{ '/favicon.ico' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/img/favicon-32x32.png' | relative_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/img/favicon-16x16.png' | relative_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+    <link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  </head>
+
+  <body class="pv-{{ page.page_key | default: 'default' }}">
+<div class="pv-shell">
+      <header class="pv-header" role="banner">
+        <div class="pv-header-inner">
+          <div class="pv-header-top">
+            {% assign current = page.permalink | default: page.url %}
+            {% if current == '/' %}
+            <div class="pv-brand" aria-label="Home">
+
+              <span class="pv-brand-title">{{ site.title }}</span>
+              {% if site.description %}
+              <span class="pv-brand-sub">{{ site.description }}</span>
+              {% endif %}
+            </div>
+            {% else %}
+            <a class="pv-brand" href="{{ '/' | relative_url }}">
+
+              <span class="pv-brand-title">{{ site.title }}</span>
+              {% if site.description %}
+              <span class="pv-brand-sub">{{ site.description }}</span>
+              {% endif %}
+            </a>
+            {% endif %}
+
+            <nav class="pv-nav" aria-label="Primary navigation">
+              {% assign current = page.permalink | default: page.url %}
+              <ul class="pv-nav-list">
+                {% for item in site.navigation %}
+                  <li class="pv-nav-item">
+                    {% if item.url == current %}
+                      <span class="pv-nav-link is-active" aria-current="page">
+                        {% if item.url == '/poiesis' or item.url == '/praxis' %}
+                          <em>{{ item.title }}</em>
+                        {% else %}
+                          {{ item.title }}
+                        {% endif %}
+                      </span>
+                    {% else %}
+                      <a class="pv-nav-link" href="{{ item.url | relative_url }}">
+                        {% if item.url == '/poiesis' or item.url == '/praxis' %}
+                          <em>{{ item.title }}</em>
+                        {% else %}
+                          {{ item.title }}
+                        {% endif %}
+                      </a>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <main class="pv-main" id="main-content" role="main">
+        <article class="pv-article">
+          <div class="pv-prose">
+            {{ content }}
+          </div>
+        </article>
+      </main>
+
+      <footer class="pv-footer" role="contentinfo">
+        <div class="pv-footer-inner">
+          <span class="pv-footer-note">© {{ "now" | date: "%Y" }} Peter Hrant Vartanian</span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        if (!('serviceWorker' in navigator)) return;
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('{{ "/sw.js" | relative_url }}').catch(function () {});
+        });
+      })();
+    </script>
+
+    {% if page.page_key == 'praxis' %}
+    <script defer src="{{ '/assets/js/praxis.js' | relative_url }}"></script>
+    {% endif %}
+  </body>
+</html>
