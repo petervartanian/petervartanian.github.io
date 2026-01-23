@@ -19,7 +19,15 @@ Thoughtful correspondence and collaborations of consequence are welcomed; genera
 **LinkedIn**  
 [@petervartanian]({{ site.linkedin_url }})
 
+## Additional profiles
+
 **GitHub**  
 [@petervartanian]({{ site.github_url }})
+
+**X**  
+[@petervartanian]({{ site.x_url }})
+
+**ORCID**  
+<{{ site.orcid_url }}>
 
 More to come: Zenodo · arXiv · Harvard Dataverse

@@ -1,108 +1,144 @@
-- label: "HUN-REN Alfréd Rényi Institute of Mathematics"
-  start: "2018-02"
-  end: "2020-06"
-- label: "SWAROVSKI OPTIK"
-  start: "2020-07"
-  end: "2020-09"
-- label: "U.S. International Visitor Leadership Program"
-  start: "2020-10"
-  end: "2021-03"
-- label: "Wiktionary"
-  start: "2020-12"
-  end: "2025-05"
-- label: "OpenStreetMap"
-  start: "2021-05"
-  end: "2025-05"
-- label: "Missing Maps"
-  start: "2021-08"
-  end: "2025-05"
-- label: "Occidental College"
-  start: "2021-08"
-  end: "2025-05"
-- label: "The Occidental Consulting Group"
-  start: "2021-08"
-  end: "2025-05"
-- label: "The Occidental Weekly"
-  start: "2021-08"
-  end: "2025-05"
-- label: "Wolf Theiss"
-  start: "2021-12"
-  end: "2022-01"
-- label: "Oxypreneurship"
-  start: "2022-01"
-  end: "2023-05"
-- label: "The-U.N.-at-Oxy"
-  start: "2022-01"
-  end: "2025-05"
-- label: "European Forum Alpbach"
-  start: "2022-05"
-  end: "2022-08"
-- label: "McKinnon Center for Global Affairs"
-  start: "2022-08"
-  end: "2024-05"
-- label: "Occidental College Blyth Fund"
-  start: "2022-08"
-  end: "2025-05"
-- label: "Geneva Graduate Institute"
-  start: "2022-10"
-  end: "2022-12"
-- label: "John Parke Young Initiative on the Global Political Economy"
-  start: "2023-01"
-  end: "2025-05"
-- label: "VCIC"
-  start: "2023-02"
-  end: "2023-02"
-- label: "Global Case Competition at Harvard"
-  start: "2023-04"
-  end: "2023-04"
-- label: "Lemkin Institute for Genocide Prevention"
-  start: "2023-05"
-  end: "2023-08"
-- label: "Bureau of Industry and Security"
-  start: "2023-08"
-  end: "2024-05"
-- label: "Ford Foundation"
-  start: "2023-12"
-  end: "2025-05"
-- label: "AI-and-EdTech Stealth Startup"
-  start: "2024-01"
-  end: "2025-05"
-- label: "UNHRC Investigative Bodies"
-  start: "2024-01"
-  end: "2024-05"
-- label: "Verum Legalis"
-  start: "2024-01"
-  end: "2025-01"
-- label: "Urban and Environmental Policy Institute"
-  start: "2024-05"
-  end: "2024-08"
-- label: "UNGA 1C Chair’s Office"
-  start: "2024-08"
-  end: "2024-12"
-- label: "William and Elizabeth Kahane Fellowship"
-  start: "2024-08"
-  end: "2024-12"
-- label: "OECD Mission Action Lab"
-  start: "2024-12"
-  end: "2025-01"
-- label: "County of Los Angeles"
-  start: "2025-01"
-  end: "2025-05"
-- label: "Harvard Negotiation Project"
-  start: "2025-01"
-  end: "2025-05"
-- label: "Los Angeles Mayor’s Office of International Affairs"
-  start: "2025-01"
-  end: "2025-05"
-- label: "FutureSafe at NTI"
-  start: "2025-06"
-  end: "2025-08"
-- label: "Hoover Institution on War, Revolution, and Peace"
-  start: "2025-08"
-  end: "2025-08"
-- label: "U.S. Foreign-Trade Zone 49"
-  start: "2025-09"
-  end: "2025-10"
-- label: "GéoPoly Global"
-  start: "2025-10"
+- label: HUN-REN Alfréd Rényi Institute of Mathematics
+  group: Academia
+  start: 2018-02
+  end: 2020-06
+- label: SWAROVSKI OPTIK
+  group: Industry
+  start: 2020-07
+  end: 2020-09
+- label: U.S. International Visitor Leadership Program
+  group: Government
+  start: 2020-10
+  end: 2021-03
+- label: Wiktionary
+  group: Open infrastructure
+  start: 2020-12
+  end: 2025-05
+- label: OpenStreetMap
+  group: Open infrastructure
+  start: 2021-05
+  end: 2025-05
+- label: Missing Maps
+  group: Open infrastructure
+  start: 2021-08
+  end: 2025-05
+- label: Occidental College
+  group: Academia
+  start: 2021-08
+  end: 2025-05
+- label: The Occidental Consulting Group
+  group: Media
+  start: 2021-08
+  end: 2025-05
+- label: The Occidental Weekly
+  group: Media
+  start: 2021-08
+  end: 2025-05
+- label: Wolf Theiss
+  group: Industry
+  start: 2021-12
+  end: 2022-01
+- label: Oxypreneurship
+  group: Entrepreneurship
+  start: 2022-01
+  end: 2023-05
+- label: The-U.N.-at-Oxy
+  group: Academia
+  start: 2022-01
+  end: 2025-05
+- label: European Forum Alpbach
+  group: Government
+  start: 2022-05
+  end: 2022-08
+- label: McKinnon Center for Global Affairs
+  group: Academia
+  start: 2022-08
+  end: 2024-05
+- label: Occidental College Blyth Fund
+  group: Academia
+  start: 2022-08
+  end: 2025-05
+- label: Geneva Graduate Institute
+  group: Academia
+  start: 2022-10
+  end: 2022-12
+- label: John Parke Young Initiative on the Global Political Economy
+  group: Academia
+  start: 2023-01
+  end: 2025-05
+- label: VCIC
+  group: Competitions
+  start: 2023-02
+  end: 2023-02
+- label: Global Case Competition at Harvard
+  group: Competitions
+  start: 2023-04
+  end: 2023-04
+- label: Lemkin Institute for Genocide Prevention
+  group: Multilateral
+  start: 2023-05
+  end: 2023-08
+- label: Bureau of Industry and Security
+  group: Government
+  start: 2023-08
+  end: 2024-05
+- label: Ford Foundation
+  group: Philanthropy
+  start: 2023-12
+  end: 2025-05
+- label: AI-and-EdTech Stealth Startup
+  group: Entrepreneurship
+  start: 2024-01
+  end: 2025-05
+- label: UNHRC Investigative Bodies
+  group: Multilateral
+  start: 2024-01
+  end: 2024-05
+- label: Verum Legalis
+  group: Academia
+  start: 2024-01
+  end: 2025-01
+- label: Urban and Environmental Policy Institute
+  group: Academia
+  start: 2024-05
+  end: 2024-08
+- label: UNGA 1C Chair’s Office
+  group: Multilateral
+  start: 2024-08
+  end: 2024-12
+- label: William and Elizabeth Kahane Fellowship
+  group: Multilateral
+  start: 2024-08
+  end: 2024-12
+- label: OECD Mission Action Lab
+  group: Multilateral
+  start: 2024-12
+  end: 2025-01
+- label: County of Los Angeles
+  group: Government
+  start: 2025-01
+  end: 2025-05
+- label: Harvard Negotiation Project
+  group: Academia
+  start: 2025-01
+  end: 2025-05
+- label: Los Angeles Mayor’s Office of International Affairs
+  group: Government
+  start: 2025-01
+  end: 2025-05
+- label: FutureSafe at NTI
+  group: Think tank
+  start: 2025-06
+  end: 2025-08
+- label: Hoover Institution on War, Revolution, and Peace
+  group: Think tank
+  start: 2025-08
+  end: 2025-08
+- label: U.S. Foreign-Trade Zone 49
+  group: Government
+  start: 2025-09
+  end: 2025-10
+- label: GéoPoly Global
+  group: Consortia
+  start: 2025-10
   end: null

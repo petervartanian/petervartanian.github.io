@@ -19,13 +19,14 @@
   </head>
 
   <body class="pv-{{ page.page_key | default: 'default' }}">
-    <a class="pv-skip" href="#main-content">Skip to content</a>
-
-    <div class="pv-shell">
+<div class="pv-shell">
       <header class="pv-header" role="banner">
         <div class="pv-header-inner">
           <div class="pv-header-top">
-            <a class="pv-brand" href="{{ '/' | relative_url }}">
+            {% assign current = page.permalink | default: page.url %}
+            {% if current == '/' %}
+            <div class="pv-brand" aria-label="Home">
+
               <span class="pv-brand-title">{{ site.title }}</span>
               {% if site.description %}
               <span class="pv-brand-sub">{{ site.description }}</span>
@@ -33,7 +34,21 @@
               {% if site.location_line %}
               <span class="pv-brand-meta">{{ site.location_line }}</span>
               {% endif %}
+            
+            </div>
+            {% else %}
+            <a class="pv-brand" href="{{ '/' | relative_url }}">
+
+              <span class="pv-brand-title">{{ site.title }}</span>
+              {% if site.description %}
+              <span class="pv-brand-sub">{{ site.description }}</span>
+              {% endif %}
+              {% if site.location_line %}
+              <span class="pv-brand-meta">{{ site.location_line }}</span>
+              {% endif %}
+            
             </a>
+            {% endif %}
 
             <nav class="pv-nav" aria-label="Primary navigation">
               {% assign current = page.permalink | default: page.url %}
@@ -67,7 +82,7 @@
 
       <footer class="pv-footer" role="contentinfo">
         <div class="pv-footer-inner">
-          <span class="pv-footer-note">{{ site.title }}</span>
+          <span class="pv-footer-note">© {{ "now" | date: "%Y" }} Peter Hrant Vartanian</span>
         </div>
       </footer>
     </div>

@@ -526,3 +526,51 @@ body::before {
   .pv-month-detail-inner { grid-template-columns: 1fr; }
 }
 
+
+
+/* Poiesis image */
+.pv-poiesis-image{
+  display:block;
+  margin: 1.2rem auto 1.6rem auto;
+  width: 100%;
+  max-width: 560px;
+  max-height: 48vh;
+  object-fit: contain;
+  border-radius: 14px;
+}
+
+
+
+/* Timeline */
+.pv-timeline-wrap{
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  border-radius: 16px;
+}
+.pv-timeline{
+  min-width: 720px;
+}
+.pv-timeline-svg{
+  display:block;
+}
+.pv-year-line{
+  stroke: rgba(21, 22, 26, 0.10);
+  stroke-width: 1;
+}
+.pv-year-label{
+  font-size: 12px;
+  fill: rgba(21, 22, 26, 0.55);
+}
+.pv-group-label{
+  font-size: 12px;
+  fill: rgba(21, 22, 26, 0.55);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.pv-role-label{
+  font-size: 13px;
+  fill: rgba(21, 22, 26, 0.78);
+}
+.pv-role-bar{
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.06));
+}
