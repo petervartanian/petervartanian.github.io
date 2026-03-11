@@ -22,7 +22,7 @@ page_key: portfolio
   </li>
 
   <li>
-    Vartanian, Peter H. “EU (Legal) Statecraft in an Age of Coercion.” <span class="pv-ital">Claremont-UC Undergraduate Research Conference on the European Union</span> 2025, art. 14 (October 30, 2025), pp. 129–149.<a href="https://doi.org/10.5642/urceu.VGLR6395">https://doi.org/10.5642/urceu.VGLR6395</a>.<sup class="pv-note pv-note-purple">i</sup>
+    Vartanian, Peter H. “EU (Legal) Statecraft in an Age of Coercion.” <span class="pv-ital">Claremont-UC Undergraduate Research Conference on the European Union</span> 2025, art. 14 (October 30, 2025), pp. 129–149. <a href="https://doi.org/10.5642/urceu.VGLR6395">https://doi.org/10.5642/urceu.VGLR6395</a>.<sup class="pv-note pv-note-purple">i</sup>
   </li>
 
   <li class="pv-cite-rule">
