@@ -32,5 +32,5 @@ page_key: portfolio
 
 <ol class="pv-endnotes" aria-label="Portfolio notes">
   <li><sup class="pv-endnote-marker pv-note pv-note-green">i</sup><span class="pv-note-block pv-note-block-green">It received the Director’s Award from Condoleezza Rice.</span></li>
-  <li><sup class="pv-endnote-marker pv-note pv-note-yellow">ii</sup><span class="pv-note-block pv-note-block-yellow">A copyediting mistake lists an incorrect institutional affiliation; it should instead read _Fas/Jus_---my own startup.</span></li>
+  <li><sup class="pv-endnote-marker pv-note pv-note-yellow">ii</sup><span class="pv-note-block pv-note-block-yellow">A copyediting mistake lists an incorrect institutional affiliation; it should instead read _Fas/Jus_—my own startup.</span></li>
 </ol>
