@@ -22,11 +22,11 @@ page_key: portfolio
   </li>
 
   <li>
-    Vartanian, Peter H. “EU (Legal) Statecraft in an Age of Coercion.” <span class="pv-ital">Claremont-UC Undergraduate Research Conference on the European Union</span> 2025, art. 14 (October 30, 2025). <a href="https://doi.org/10.5642/urceu.VGLR6395">https://doi.org/10.5642/urceu.VGLR6395</a>.<sup class="pv-note pv-note-purple">ii</sup>
+    Vartanian, Peter H. “EU (Legal) Statecraft in an Age of Coercion.” <span class="pv-ital">Claremont-UC Undergraduate Research Conference on the European Union</span> 2025, art. 14 (October 30, 2025). <a href="https://doi.org/10.5642/urceu.VGLR6395">https://doi.org/10.5642/urceu.VGLR6395</a>.<sup class="pv-note pv-note-purple">i</sup>
   </li>
 
   <li class="pv-cite-rule">
-    Vartanian, Peter H. <span class="pv-ital">Allied Mettle, Allied Metals: A Market-Based Playbook for Critical-Mineral Supply Chains</span>. Stanford, CA: Hoover Institution, 2025. <a href="https://www.hoover.org/sites/default/files/2026-02/HISPBC2025_DirectorsAward_2025.pdf#page=28">https://www.hoover.org/sites/default/files/2026-02/HISPBC2025_DirectorsAward_2025.pdf#page=28</a>.<sup class="pv-note pv-note-green">i</sup><sup class="pv-note pv-note-orange">iii</sup>
+    Vartanian, Peter H. <span class="pv-ital">Allied Mettle, Allied Metals: A Market-Based Playbook for Critical-Mineral Supply Chains</span>. Stanford, CA: Hoover Institution, 2025. <a href="https://www.hoover.org/sites/default/files/2026-02/HISPBC2025_DirectorsAward_2025.pdf#page=28">https://www.hoover.org/sites/default/files/2026-02/HISPBC2025_DirectorsAward_2025.pdf#page=28</a>.<sup class="pv-note pv-note-green">ii</sup><sup class="pv-note pv-note-orange">iii</sup>
   </li>
 </ol>
 
