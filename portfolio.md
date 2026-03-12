@@ -33,5 +33,5 @@ page_key: portfolio
 <ol class="pv-endnotes" aria-label="Notes">
   <li><sup class="pv-endnote-marker pv-note pv-note-purple">i</sup><span class="pv-note-block pv-note-block-purple">Post-publication addenda and corrigenda. <em>Social Science Research Network</em>, November 6, 2025; last revised November 10, 2025. <a href="https://doi.org/10.2139/ssrn.5711403">https://doi.org/10.2139/ssrn.5711403</a>.</span></li>
   <li><sup class="pv-endnote-marker pv-note pv-note-green">ii</sup><span class="pv-note-block pv-note-block-green">This policy proposal received the Hoover Institution Summer Policy Boot Camp’s <em>Director’s Award</em> from Secretary (ret.) Condoleezza Rice.</span></li>
-  <li><sup class="pv-endnote-marker pv-note pv-note-orange">iii</sup><span class="pv-note-block pv-note-block-orange">A copyediting mistake lists an incorrect institutional affiliation; it should instead read <em>Fas/Jus</em>, my own startup.</span></li>
+  <li><sup class="pv-endnote-marker pv-note pv-note-orange">iii</sup><span class="pv-note-block pv-note-block-orange">A copyediting mistake lists an incorrect institutional affiliation; it should instead read <em>Fas/Jus</em>—my own startup.</span></li>
 </ol>
