@@ -32,6 +32,6 @@ page_key: portfolio
 
 <ol class="pv-endnotes" aria-label="Notes">
   <li><sup class="pv-endnote-marker pv-note pv-note-purple">i</sup><span class="pv-note-block pv-note-block-purple">Post-publication addenda and corrigenda. SSRN, November 6, 2025; last revised November 10, 2025. <a href="https://doi.org/10.2139/ssrn.5711403">https://doi.org/10.2139/ssrn.5711403</a>.</span></li>
-  <li><sup class="pv-endnote-marker pv-note pv-note-green">ii</sup><span class="pv-note-block pv-note-block-green">It received the Director’s Award from Condoleezza Rice.</span></li>
-  <li><sup class="pv-endnote-marker pv-note pv-note-orange">iii</sup><span class="pv-note-block pv-note-block-orange">A copyediting mistake lists an incorrect institutional affiliation; it should instead read Fas/Jus, my own startup.</span></li>
+  <li><sup class="pv-endnote-marker pv-note pv-note-green">ii</sup><span class="pv-note-block pv-note-block-green">My policy proposal received the Hoover Institution's Summer Policy Boot Camp's _Director’s Award_ from Secretary (ret.) Condoleezza Rice.</span></li>
+  <li><sup class="pv-endnote-marker pv-note pv-note-orange">iii</sup><span class="pv-note-block pv-note-block-orange">A copyediting mistake (on the Hoover Institution's part) lists an incorrect institutional affiliation; it should instead read _Fas/Jus_—my own startup.</span></li>
 </ol>
