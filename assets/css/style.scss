@@ -86,7 +86,8 @@ body::before {
 
 .pv-header-top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   justify-content: space-between;
   gap: 2rem;
 }
@@ -344,6 +345,7 @@ body::before {
   gap: 0.6rem;
   flex-wrap: wrap;
   align-items: center;
+  text-align: center;
 }
 
 .pv-footer-link {
@@ -394,6 +396,7 @@ body::before {
   grid-template-columns: 3.2rem repeat(12, minmax(0, 1fr));
   column-gap: 0.35rem;
   align-items: center;
+  text-align: center;
 }
 
 .pv-month-grid-head {
@@ -805,9 +808,6 @@ body::before {
   .pv-vtimeline-head,
   .pv-vtimeline-grid{
     column-gap: 0.55rem;
-  }
-}
-
 
 /* ══════════════════════════════════════════════════════════
    FAS/JUS PAGE — FINAL
@@ -825,7 +825,8 @@ body.pv-fasjus .pv-prose {
 .pv-fasjus-head {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   gap: 0.6rem;
   padding: 2.8rem 0 2.4rem;
   border-bottom: 1px solid var(--hair);
@@ -852,9 +853,9 @@ body.pv-fasjus .pv-prose {
   line-height: 1;
 }
 
-.pv-fasjus-word-fas   { color: #a0a0a0; }
-.pv-fasjus-word-slash { color: var(--hair); margin: 0 0.04em; }
-.pv-fasjus-word-jus   { color: #2e2e2e; }
+.pv-fasjus-word-fas   { color: #999999; }
+.pv-fasjus-word-slash { color: #cccccc; margin: 0 0.04em; }
+.pv-fasjus-word-jus   { color: #333333; }
 
 /* ── SPLIT ── */
 .pv-fj-split {
@@ -884,8 +885,8 @@ body.pv-fasjus .pv-prose {
   line-height: 1;
 }
 
-.pv-fj-half--fas .pv-fj-half-arm { color: rgba(21,22,26,0.38); }
-.pv-fj-half--jus .pv-fj-half-arm { color: rgba(255,255,255,0.22); }
+.pv-fj-half--fas .pv-fj-half-arm { color: #999999; }
+.pv-fj-half--jus .pv-fj-half-arm { color: #666666; }
 
 .pv-fj-half-body {
   font-size: 0.93rem;
@@ -893,18 +894,21 @@ body.pv-fasjus .pv-prose {
   margin: 0 0 0.85rem;
 }
 
-.pv-fj-half--fas .pv-fj-half-body { color: rgba(21,22,26,0.78); }
-.pv-fj-half--jus .pv-fj-half-body { color: rgba(255,255,255,0.55); }
+.pv-fj-half--fas .pv-fj-half-body { color: #333333; }
+.pv-fj-half--jus .pv-fj-half-body { color: #999999; }
 
 /* ── BELOW ── */
 .pv-fj-below {
   padding: 2.4rem 0 3.2rem;
   max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
 .pv-fj-lede {
   font-family: var(--font);
-  font-size: 1.06rem;
+  font-size: 0.97rem;
   font-style: italic;
   line-height: 1.6;
   color: var(--ink);
@@ -912,14 +916,14 @@ body.pv-fasjus .pv-prose {
 }
 
 .pv-fj-below p {
-  font-size: 0.93rem;
-  line-height: 1.75;
+  font-size: 0.82rem;
+  line-height: 1.78;
   color: var(--muted);
   margin-bottom: 1.1rem;
 }
 
 .pv-fj-coda {
-  font-size: 0.8rem !important;
+  font-size: 0.75rem !important;
   font-style: italic;
   color: var(--muted);
   opacity: 0.7;
