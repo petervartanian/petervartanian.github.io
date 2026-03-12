@@ -946,3 +946,83 @@ body.pv-fasjus .pv-prose {
     padding: 2rem 0 2.4rem;
   }
 }
+
+/* ── WORKING PAPER CARD ── */
+.pv-fj-papers {
+  border-top: 1px solid var(--hair);
+  padding: 2rem 0 3.2rem;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pv-fj-paper {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  align-items: start;
+  gap: 0.4rem 1rem;
+  padding: 1.4rem 1.6rem;
+  background: #f2f0ea;
+  border: 1px solid var(--hair);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 180ms, background 180ms;
+}
+
+.pv-fj-paper:hover {
+  border-color: rgba(21,22,26,0.3);
+  background: #eceae3;
+}
+
+.pv-fj-paper-meta {
+  display: flex;
+  gap: 1.2rem;
+  align-items: baseline;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.pv-fj-paper-type {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  font-style: italic;
+  color: #999999;
+}
+
+.pv-fj-paper-date {
+  font-size: 0.7rem;
+  color: #999999;
+  font-style: italic;
+}
+
+.pv-fj-paper-title {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #333333;
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
+}
+
+.pv-fj-paper-arrow {
+  font-size: 1.1rem;
+  color: #999999;
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  transition: color 180ms;
+}
+
+.pv-fj-paper:hover .pv-fj-paper-arrow {
+  color: #333333;
+}
+
+@media (max-width: 600px) {
+  .pv-fj-papers {
+    padding: 1.6rem 0 2.4rem;
+  }
+  .pv-fj-paper {
+    padding: 1.1rem 1.2rem;
+  }
+}

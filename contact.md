@@ -8,7 +8,7 @@ page_key: contact
 
 # Contact
 
-Thoughtful correspondence and collaborations of consequence are welcomed, and, generally, I reply within twelve hours:
+Thoughtful correspondence and collaborations of consequence are welcomed; generally, I reply within twelve hours:
 
 Email  
 [{{ site.author.email }}](mailto:{{ site.author.email }})

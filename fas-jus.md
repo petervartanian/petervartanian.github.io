@@ -43,4 +43,15 @@ page_key: fasjus
 
   </div>
 
+  <div class="pv-fj-papers">
+    <a class="pv-fj-paper" href="/assets/pdf/entrepot-2.0.pdf" target="_blank" rel="noopener">
+      <div class="pv-fj-paper-meta">
+        <span class="pv-fj-paper-type">Working Paper &middot; Jus</span>
+        <span class="pv-fj-paper-date">18 January 2026</span>
+      </div>
+      <p class="pv-fj-paper-title">Entrep&ocirc;t 2.0: Hainan&#8217;s &#8220;Island-Wide Independent Customs Operation&#8221; and Its Implications for Trade, Compliance, and Market Access</p>
+      <span class="pv-fj-paper-arrow" aria-hidden="true">&#8599;</span>
+    </a>
+  </div>
+
 </div>
