@@ -808,242 +808,122 @@ body::before {
   }
 }
 
+
 /* ══════════════════════════════════════════════════════════
-   FAS/JUS PAGE
+   FAS/JUS PAGE — FINAL
 ══════════════════════════════════════════════════════════ */
 
 body.pv-fasjus {
   --accent: #787878;
 }
 
-/* strip the pv-prose max-width constraint on this page */
 body.pv-fasjus .pv-prose {
   max-width: none;
 }
 
-/* ── SHELL ── */
-.pv-fasjus-shell {
-  width: 100%;
-}
-
-/* ── HEAD: logo + wordmark + tagline ── */
+/* ── HEAD ── */
 .pv-fasjus-head {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.5rem;
-  padding: 2.8rem 0 2rem;
+  gap: 0.6rem;
+  padding: 2.8rem 0 2.4rem;
   border-bottom: 1px solid var(--hair);
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
 .pv-fasjus-logo {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 0.4rem;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 0.2rem;
 }
 
-.pv-fasjus-logo svg {
+.pv-fasjus-logo img {
   width: 100%;
   height: 100%;
+  display: block;
 }
 
 .pv-fasjus-wordmark {
   font-family: var(--font);
-  font-size: 1.7rem;
+  font-size: 1.65rem;
   font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 1;
 }
 
-.pv-fasjus-word-fas  { color: #9a9a9a; }
-.pv-fasjus-word-slash { color: var(--hair); margin: 0 0.05em; }
-.pv-fasjus-word-jus  { color: #3a3a3a; }
+.pv-fasjus-word-fas   { color: #a0a0a0; }
+.pv-fasjus-word-slash { color: var(--hair); margin: 0 0.04em; }
+.pv-fasjus-word-jus   { color: #2e2e2e; }
 
-.pv-fasjus-tagline {
-  font-size: 0.8rem;
-  font-style: italic;
-  color: var(--muted);
-  letter-spacing: 0.02em;
-  margin: 0;
-}
-
-/* ── SUBNAV ── */
-.pv-fasjus-subnav {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid var(--hair);
-  margin-bottom: 0;
-}
-
-.pv-fasjus-tab {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--font);
-  font-size: 0.86rem;
-  color: var(--muted);
-  padding: 0.45rem 1.1rem 0.6rem;
-  position: relative;
-  transition: color 150ms;
-  letter-spacing: 0.01em;
-}
-
-.pv-fasjus-tab::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0; right: 0;
-  height: 1.5px;
-  transform: scaleX(0);
-  transition: transform 200ms ease;
-}
-
-.pv-tab-fas::after  { background: #b0b0b0; }
-.pv-tab-jus::after  { background: #3a3a3a; }
-.pv-fasjus-tab:not(.pv-tab-fas):not(.pv-tab-jus)::after { background: var(--muted); }
-
-.pv-fasjus-tab.is-active            { color: var(--ink); }
-.pv-fasjus-tab.is-active::after     { transform: scaleX(1); }
-
-/* ── VIEWS ── */
-.pv-fasjus-views {
-  width: 100%;
-}
-
-.pv-fasjus-view {
-  display: none;
-}
-
-.pv-fasjus-view.is-active {
-  display: block;
-  animation: pv-fj-fade 240ms ease both;
-}
-
-@keyframes pv-fj-fade {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── OVERVIEW: SPLIT ── */
+/* ── SPLIT ── */
 .pv-fj-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 320px;
-  margin-top: 0;
+  border-bottom: 1px solid var(--hair);
 }
 
 .pv-fj-half {
-  padding: 2.4rem 2rem 2.4rem;
+  padding: 2.6rem 2.2rem 2.8rem;
 }
 
 .pv-fj-half--fas {
-  background: #eeede8;
-  border-right: 1px solid rgba(150,150,150,0.2);
+  background: #eceae4;
+  border-right: 1px solid rgba(140,140,140,0.18);
 }
 
 .pv-fj-half--jus {
-  background: #1c1c1c;
+  background: #191919;
 }
 
-.pv-fj-half-label {
-  display: block;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
+.pv-fj-half-arm {
+  font-family: var(--font);
   font-style: italic;
-  margin-bottom: 0.9rem;
+  font-size: 1.05rem;
+  margin: 0 0 1.1rem;
+  line-height: 1;
 }
 
-.pv-fj-half--fas .pv-fj-half-label { color: rgba(21,22,26,0.38); }
-.pv-fj-half--jus .pv-fj-half-label { color: rgba(255,255,255,0.28); }
-
-.pv-fj-half-hed {
-  font-size: 1rem;
-  font-style: italic;
-  line-height: 1.4;
-  margin-bottom: 1.1rem !important;
-}
-
-.pv-fj-half--fas .pv-fj-half-hed { color: var(--ink); }
-.pv-fj-half--jus .pv-fj-half-hed { color: rgba(255,255,255,0.9); }
+.pv-fj-half--fas .pv-fj-half-arm { color: rgba(21,22,26,0.38); }
+.pv-fj-half--jus .pv-fj-half-arm { color: rgba(255,255,255,0.22); }
 
 .pv-fj-half-body {
-  font-size: 0.88rem;
-  line-height: 1.65;
-  margin-bottom: 0.8rem !important;
+  font-size: 0.93rem;
+  line-height: 1.72;
+  margin: 0 0 0.85rem;
 }
 
-.pv-fj-half--fas .pv-fj-half-body { color: rgba(21,22,26,0.72); }
-.pv-fj-half--jus .pv-fj-half-body { color: rgba(255,255,255,0.52); }
+.pv-fj-half--fas .pv-fj-half-body { color: rgba(21,22,26,0.78); }
+.pv-fj-half--jus .pv-fj-half-body { color: rgba(255,255,255,0.55); }
 
-/* ── OVERVIEW: BELOW ── */
+/* ── BELOW ── */
 .pv-fj-below {
-  padding: 2.2rem 0 0;
-  max-width: 620px;
+  padding: 2.4rem 0 3.2rem;
+  max-width: 680px;
+}
+
+.pv-fj-lede {
+  font-family: var(--font);
+  font-size: 1.06rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 1.8rem;
 }
 
 .pv-fj-below p {
   font-size: 0.93rem;
+  line-height: 1.75;
   color: var(--muted);
-  margin-bottom: 0.9rem;
+  margin-bottom: 1.1rem;
 }
 
-.pv-fj-note {
-  font-size: 0.78rem !important;
+.pv-fj-coda {
+  font-size: 0.8rem !important;
   font-style: italic;
   color: var(--muted);
-  opacity: 0.75;
-  margin-top: 1.4rem;
-}
-
-/* ── FAS PANEL: light ── */
-.pv-fj-panel {
-  padding: 2.6rem 2.4rem;
-  max-width: 640px;
-  margin-top: 0;
-}
-
-.pv-fj-panel--fas {
-  background: #eeede8;
-}
-
-.pv-fj-panel--jus {
-  background: #1c1c1c;
-  max-width: 100%;
-}
-
-.pv-fj-panel-overline {
-  font-size: 0.72rem !important;
-  letter-spacing: 0.1em;
-  font-style: italic;
-  margin-bottom: 1rem !important;
-}
-
-.pv-fj-panel--fas .pv-fj-panel-overline { color: rgba(21,22,26,0.38); }
-.pv-fj-panel--jus .pv-fj-panel-overline { color: rgba(255,255,255,0.28); }
-
-.pv-fj-panel-hed {
-  font-size: 1.18rem !important;
-  font-style: italic;
-  line-height: 1.4;
-  margin-bottom: 1.4rem !important;
-}
-
-.pv-fj-panel--fas .pv-fj-panel-hed { color: var(--ink); }
-.pv-fj-panel--jus .pv-fj-panel-hed { color: rgba(255,255,255,0.9); }
-
-.pv-fj-panel--fas p {
-  font-size: 0.93rem;
-  color: rgba(21,22,26,0.75);
-  margin-bottom: 1rem;
-  max-width: 520px;
-}
-
-.pv-fj-panel--jus p {
-  font-size: 0.93rem;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 1rem;
-  max-width: 560px;
+  opacity: 0.7;
+  margin-top: 1.8rem;
 }
 
 /* ── RESPONSIVE ── */
@@ -1053,9 +933,12 @@ body.pv-fasjus .pv-prose {
   }
   .pv-fj-half--fas {
     border-right: none;
-    border-bottom: 1px solid rgba(150,150,150,0.2);
+    border-bottom: 1px solid rgba(140,140,140,0.18);
   }
-  .pv-fj-panel {
-    padding: 1.8rem 1.4rem;
+  .pv-fj-half {
+    padding: 2rem 1.4rem;
+  }
+  .pv-fj-below {
+    padding: 2rem 0 2.4rem;
   }
 }
