@@ -86,7 +86,8 @@ body::before {
 
 .pv-header-top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   justify-content: space-between;
   gap: 2rem;
 }
@@ -344,6 +345,7 @@ body::before {
   gap: 0.6rem;
   flex-wrap: wrap;
   align-items: center;
+  text-align: center;
 }
 
 .pv-footer-link {
@@ -394,6 +396,7 @@ body::before {
   grid-template-columns: 3.2rem repeat(12, minmax(0, 1fr));
   column-gap: 0.35rem;
   align-items: center;
+  text-align: center;
 }
 
 .pv-month-grid-head {
@@ -825,7 +828,8 @@ body.pv-fasjus .pv-prose {
 .pv-fasjus-head {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   gap: 0.6rem;
   padding: 2.8rem 0 2.4rem;
   border-bottom: 1px solid var(--hair);
@@ -900,6 +904,9 @@ body.pv-fasjus .pv-prose {
 .pv-fj-below {
   padding: 2.4rem 0 3.2rem;
   max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
 .pv-fj-lede {
