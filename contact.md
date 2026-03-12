@@ -24,10 +24,7 @@ Please also find me on...:
 GitHub  
 [@petervartanian]({{ site.github_url }})
 
-X  
-[@petervartanian]({{ site.x_url }})
-
 ORCID  
 <{{ site.orcid_url }}>
 
-... and, on more to come: Zenodo · arXiv · Harvard Dataverse
+... and, on more to come: X · arXiv · Harvard Dataverse · Zenodo

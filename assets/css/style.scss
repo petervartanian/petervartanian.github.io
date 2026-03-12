@@ -807,3 +807,179 @@ body::before {
     column-gap: 0.55rem;
   }
 }
+
+/* ── FAS/JUS PAGE ─────────────────────────────────────── */
+
+body.pv-fasjus { --accent: #6b6b6b; }
+
+.pv-fasjus-lede {
+  font-size: 1.08rem;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  margin-top: -0.4rem;
+}
+
+/* subnav */
+.pv-fasjus-subnav {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--hair);
+  margin-bottom: 2.4rem;
+}
+
+.pv-fasjus-tab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.88rem;
+  color: var(--muted);
+  padding: 0.4rem 1.2rem 0.55rem;
+  position: relative;
+  transition: color 150ms;
+  letter-spacing: 0.01em;
+}
+
+.pv-fasjus-tab::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0; right: 0;
+  height: 1.5px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transition: transform 180ms;
+}
+
+.pv-fasjus-tab.is-active {
+  color: var(--ink);
+}
+
+.pv-fasjus-tab.is-active::after {
+  transform: scaleX(1);
+}
+
+/* views */
+.pv-fasjus-view {
+  display: none;
+  animation: pv-fj-in 220ms ease both;
+}
+
+.pv-fasjus-view.is-active {
+  display: block;
+}
+
+@keyframes pv-fj-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* overview body */
+.pv-fasjus-overview-body p {
+  max-width: 640px;
+}
+
+/* arms grid */
+.pv-fasjus-arms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--hair);
+  margin: 2.4rem 0;
+}
+
+.pv-fasjus-arm {
+  padding: 1.6rem 1.5rem;
+}
+
+.pv-fasjus-arm p {
+  font-size: 0.93rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.pv-fasjus-arm--fas {
+  background: #f2f1ed;
+}
+
+.pv-fasjus-arm--jus {
+  background: #1e1e1e;
+}
+
+.pv-fasjus-arm--jus p {
+  color: rgba(255,255,255,0.55);
+}
+
+.pv-fasjus-arm-label {
+  display: block;
+  font-family: var(--font);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.7rem;
+  font-style: italic;
+}
+
+.pv-fasjus-arm--fas .pv-fasjus-arm-label {
+  color: rgba(21,22,26,0.45);
+}
+
+.pv-fasjus-arm--jus .pv-fasjus-arm-label {
+  color: rgba(255,255,255,0.35);
+}
+
+.pv-fasjus-footer-note {
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+
+/* fas side view — light */
+.pv-fasjus-view--fas .pv-fasjus-side-body {
+  background: #f2f1ed;
+  padding: 2rem 2rem;
+  max-width: 640px;
+}
+
+.pv-fasjus-view--fas .pv-fasjus-side-lede {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  font-style: italic;
+  color: rgba(21,22,26,0.45);
+  margin-bottom: 1.2rem;
+}
+
+.pv-fasjus-view--fas .pv-fasjus-side-body p {
+  font-size: 0.95rem;
+  color: var(--ink);
+  max-width: 560px;
+}
+
+/* jus side view — dark */
+.pv-fasjus-view--jus .pv-fasjus-side-body {
+  background: #1e1e1e;
+  padding: 2rem 2rem;
+  max-width: 640px;
+}
+
+.pv-fasjus-view--jus .pv-fasjus-side-lede {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  font-style: italic;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 1.2rem;
+}
+
+.pv-fasjus-view--jus .pv-fasjus-side-body p {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.78);
+  max-width: 560px;
+}
+
+@media (max-width: 600px) {
+  .pv-fasjus-arms {
+    grid-template-columns: 1fr;
+  }
+}

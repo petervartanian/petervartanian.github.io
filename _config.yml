@@ -31,6 +31,8 @@ feed:
 navigation:
 - title: Home
   url: /
+- title: Fas/Jus
+  url: /fas-jus
 - title: Portfolio
   url: /portfolio
 - title: Praxis
