@@ -25,17 +25,17 @@ page_key: fasjus
 
       <div class="pv-fj-half pv-fj-half--fas" style="text-align: center; max-width: 340px;">
         <p class="pv-fj-half-arm"><strong>Fas</strong></p>
-        <p class="pv-fj-half-body">The generative arm: for clients devising a policy architecture, legal instrument, or institutional form before the line is drawn and the framework hardens fully. It asks <em>what should this look like.</em></p>
+        <p class="pv-fj-half-body">The generative arm: for clients devising a policy architecture, legal instrument, or institutional form before the line is drawn and the framework hardens fully.<br><em>What should be built?</em></p>
       </div>
 
       <div class="pv-fj-half pv-fj-half--jus" style="text-align: center; max-width: 340px;">
         <p class="pv-fj-half-arm"><strong>Jus</strong></p>
-        <p class="pv-fj-half-body">The diagnostic arm: for clients navigating a contested legal landscape shaped by sanctions, export controls, investment restrictions, and jurisdictional conflict. It asks <em>what are you dealing with.</em></p>
+        <p class="pv-fj-half-body">The diagnostic arm: for clients navigating a contested legal landscape shaped by sanctions, export controls, investment restrictions, and jurisdictional conflict.<br><em>What, precisely, confronts you?</em></p>
       </div>
 
     </div>
 
-    <p>Our work concerns the "gray 'zone'" in which authority is projected, contested, and remade through legal form.</p>
+    <p>Our work concerns the &#8220;gray zone&#8221; in which authority is projected, contested, and remade through legal form.</p>
 
     <p class="pv-fj-coda">Engagements are by invitation only; outputs are owned by the client and governed by unilateral confidentiality.</p>
 
