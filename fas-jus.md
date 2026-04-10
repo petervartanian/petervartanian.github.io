@@ -35,7 +35,7 @@ page_key: fasjus
 
     </div>
 
-    <p>Its work concerns the gray zone in which authority is projected, contested, and remade through legal form.</p>
+    <p>Its work concerns the "gray 'zone'" in which authority is projected, contested, and remade through legal form.</p>
 
     <p class="pv-fj-coda">Engagements are by invitation only; outputs are owned by the client and governed by unilateral confidentiality.</p>
 
