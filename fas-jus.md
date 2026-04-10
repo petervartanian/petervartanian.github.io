@@ -1,14 +1,14 @@
 ---
 layout: default
 title: "Fas/Jus"
-description: "A juridical-intelligence studio."
+description: "A juridical-intelligence and R+D+I studio."
 permalink: /fas-jus
 page_key: fasjus
 ---
 
-<div class="pv-fasjus-shell">
+<div class="pv-fasjus-shell" style="text-align: center; display: flex; flex-direction: column; align-items: center;">
 
-  <div class="pv-fasjus-head">
+  <div class="pv-fasjus-head" style="text-align: center;">
     <div class="pv-fasjus-logo">
       <img src="/assets/img/fasjus-logo.png" alt="Fas/Jus mark">
     </div>
@@ -17,25 +17,25 @@ page_key: fasjus
     </div>
   </div>
 
-  <div class="pv-fj-below">
+  <div class="pv-fj-below" style="text-align: center; max-width: 900px; margin: 0 auto;">
 
-    <p class="pv-fj-lede">Fas/Jus studies the &#8220;zone&#8221; where power becomes law and law becomes strategy.</p>
+    <p class="pv-fj-lede" style="font-variant: small-caps;">Fas/Jus studies the &#8220;zone&#8221; where power becomes law and law becomes strategy.</p>
 
-    <div class="pv-fj-split">
+    <div class="pv-fj-split" style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
 
-      <div class="pv-fj-half pv-fj-half--fas">
+      <div class="pv-fj-half pv-fj-half--fas" style="text-align: center; max-width: 700px;">
         <p class="pv-fj-half-arm">Fas</p>
-        <p class="pv-fj-half-body">The generative arm: for clients building a policy architecture, legal instrument, or institutional design before the line is drawn. It asks <em>what should this look like.</em></p>
+        <p class="pv-fj-half-body">The generative arm: for clients devising a policy architecture, legal instrument, or institutional form before the line is drawn and the framework hardens fully. It asks <em>what should this look like.</em></p>
       </div>
 
-      <div class="pv-fj-half pv-fj-half--jus">
+      <div class="pv-fj-half pv-fj-half--jus" style="text-align: center; max-width: 700px;">
         <p class="pv-fj-half-arm">Jus</p>
-        <p class="pv-fj-half-body">The diagnostic arm: for clients operating within a contested legal landscape shaped by sanctions, export controls, investment restrictions, and jurisdictional conflict. It asks <em>what are you dealing with.</em></p>
+        <p class="pv-fj-half-body">The diagnostic arm: for clients navigating a contested legal landscape shaped by sanctions, export controls, investment restrictions, and jurisdictional conflict. It asks <em>what are you dealing with.</em></p>
       </div>
 
     </div>
 
-    <p>Its work concerns the "gray 'zone'" in which authority is projected, contested, and remade through legal form.</p>
+    <p>Its work concerns the gray zone in which authority is projected, contested, and remade through legal form.</p>
 
     <p class="pv-fj-coda">Engagements are by invitation only; outputs are owned by the client and governed by unilateral confidentiality.</p>
 
