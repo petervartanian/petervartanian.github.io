@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Fas/Jus"
-description: "A studio for world-order analysis."
+description: "A research laboratory for world-order analysis."
 permalink: /fas-jus
 page_key: fasjus
 ---
