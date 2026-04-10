@@ -35,8 +35,6 @@ navigation:
   url: /fas-jus
 - title: Portfolio
   url: /portfolio
-- title: Praxis
-  url: /praxis
 - title: Contact
   url: /contact
 markdown: kramdown

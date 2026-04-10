@@ -22,7 +22,7 @@ page_key: portfolio
   </li>
 
   <li>
-    Vartanian, Peter H. “EU (Legal) Statecraft in an Age of Coercion.” <em>Claremont-UC Undergraduate Research Conference on the European Union</em> 2025, art. 14 (October 30, 2025): 129–49. <a href="https://doi.org/10.5642/urceu.VGLR6395">https://doi.org/10.5642/urceu.VGLR6395</a>.<sup class="pv-note pv-note-purple">i</sup>
+    Vartanian, Peter H. “EU (Legal) Statecraft in an Age of Coercion.” <em>Claremont-UC Undergraduate Research Conference on the European Union</em> 2025, art. 14 (October 30, 2025): 129–49. <a href="https://doi.org/10.5642/urceu.VGLR6395">https://doi.org/10.5642/urceu.VGLR6395</a>.<sup class="pv-note pv-note-purple">i</sup><sup class="pv-note pv-note-blue">iv</sup>
   </li>
 
   <li class="pv-cite-rule">
@@ -34,4 +34,5 @@ page_key: portfolio
   <li><sup class="pv-endnote-marker pv-note pv-note-purple">i</sup><span class="pv-note-block pv-note-block-purple">Post-publication addenda and corrigenda. <em>Social Science Research Network</em>, November 6, 2025; last revised November 10, 2025. <a href="https://doi.org/10.2139/ssrn.5711403">https://doi.org/10.2139/ssrn.5711403</a>.</span></li>
   <li><sup class="pv-endnote-marker pv-note pv-note-green">ii</sup><span class="pv-note-block pv-note-block-green">This policy proposal received the Hoover Institution Summer Policy Boot Camp’s <em>Director’s Award</em> from Secretary (ret.) Condoleezza Rice.</span></li>
   <li><sup class="pv-endnote-marker pv-note pv-note-orange">iii</sup><span class="pv-note-block pv-note-block-orange">A copyediting mistake lists an incorrect institutional affiliation; it should instead read <em>Fas/Jus</em>—my own startup.</span></li>
+  <li><sup class="pv-endnote-marker pv-note pv-note-blue">iv</sup><span class="pv-note-block pv-note-block-blue">The term “geo-legality” from this article was cited by Hakkı Öcal in “Nothing More Than Vassals or Slaves: Time for Europe to Wake Up,” <em>Daily Sabah</em>, January 26, 2026. <a href="https://www.dailysabah.com/opinion/columns/nothing-more-than-vassals-or-slaves-time-for-europe-to-wake-up">https://www.dailysabah.com/opinion/columns/nothing-more-than-vassals-or-slaves-time-for-europe-to-wake-up</a>.</span></li>
 </ol>
