@@ -25,12 +25,12 @@ page_key: fasjus
 
       <div class="pv-fj-half pv-fj-half--fas" style="text-align: center; max-width: 340px;">
         <p class="pv-fj-half-arm"><strong>Fas</strong></p>
-        <p class="pv-fj-half-body">The generative arm: for clients devising a policy architecture, legal instrument, or institutional form before the line is drawn and the framework hardens fully.<br><em>What should be built?</em></p>
+        <p class="pv-fj-half-body">The generative arm: for clients devising a policy architecture, legal instrument, or institutional form before the line is drawn and the framework hardens fully.<br><br>It asks:<br><em>What should be built?</em></p>
       </div>
 
       <div class="pv-fj-half pv-fj-half--jus" style="text-align: center; max-width: 340px;">
         <p class="pv-fj-half-arm"><strong>Jus</strong></p>
-        <p class="pv-fj-half-body">The diagnostic arm: for clients navigating a contested legal landscape shaped by sanctions, export controls, investment restrictions, and jurisdictional conflict.<br><em>What, precisely, confronts you?</em></p>
+        <p class="pv-fj-half-body">The diagnostic arm: for clients navigating a contested legal landscape shaped by sanctions, export controls, investment restrictions, and jurisdictional conflict.<br><br>It asks:<br><em>What, precisely, confronts you?</em></p>
       </div>
 
     </div>
