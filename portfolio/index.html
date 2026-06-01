@@ -115,28 +115,27 @@
 <div class="port-grid">
 
   <a href="https://www.hoover.org/sites/default/files/2026-02/HISPBC2025_DirectorsAward_2025.pdf#page=28" class="port-card">
-    <div class="port-card-info">ⓘ<div class="port-card-tooltip">Received the Director's Award from Secretary (ret.) Condoleezza Rice. Note: a copyediting error lists an incorrect institutional affiliation — it should read Fas/Jus.</div></div>
+    <div class="port-card-info" role="button" aria-label="Note" tabindex="0">ⓘ<div class="port-card-tooltip">Received the Director's Award from Secretary (ret.) Condoleezza Rice. A copyediting error lists an incorrect institutional affiliation — a firm that briefly retained me on contract. It should read Fas/Jus. For more, see <span class="tt-link" onclick="event.stopPropagation();event.preventDefault();window.location.href='/cv/';">CV</span>.</div></div>
     <div class="port-card-venue">Hoover Institution</div>
     <div class="port-card-title">Allied Mettle, Allied Metals: A Market-Based Playbook for Critical-Mineral Supply Chains</div>
     <div class="port-card-foot">Feb. 2026 · Solo-authored · Director's Award</div>
   </a>
 
   <a href="https://doi.org/10.2139/ssrn.5711403" class="port-card">
-    <div class="port-card-info">ⓘ<div class="port-card-tooltip">Post-publication addenda on SSRN (Nov. 10, 2025). The term "geo-legality" from this article was cited by Hakkı Öcal in Daily Sabah, Jan. 26, 2026.</div></div>
+    <div class="port-card-info">ⓘ<div class="port-card-tooltip">The term “geo-legality” coined here was cited by Hakkı Öcal in Daily Sabah, Jan. 26, 2026.</div></div>
     <div class="port-card-venue">Claremont-UC Conference on the EU</div>
     <div class="port-card-title">EU (Legal) Statecraft in an Age of Coercion</div>
     <div class="port-card-foot">Nov. 2025 · Solo-authored</div>
   </a>
 
   <a href="https://nationalinterest.org/blog/energy-world/u-s-energy-leadership-in-the-21st-century" class="port-card">
-    <div class="port-card-info">ⓘ<div class="port-card-tooltip">Co-authored with Dr. Igor O. Logvinenko.</div></div>
     <div class="port-card-venue">The National Interest</div>
     <div class="port-card-title">The Lone Star Paradigm: A Texan Blueprint for U.S. Energy Leadership in the Twenty-First Century</div>
     <div class="port-card-foot">Feb. 2025 · Co-authored with Igor Logvinenko</div>
   </a>
 
   <a href="https://github.com/petervartanian/omphalos" class="port-card">
-    <div class="port-card-info">ⓘ<div class="port-card-tooltip">An adversarial Python/Rust/Go toolkit built at BIS in direct support of the Disruptive Technology Strike Force, with 20,000+ SQL queries for detecting illicit procurement of AI and dual-use hardware.</div></div>
+    <div class="port-card-info">ⓘ<div class="port-card-tooltip">An adversarial Python/Rust/Go toolkit with 20,000+ SQL queries for detecting illicit procurement of AI and dual-use hardware, as well as luxury goods.</div></div>
     <div class="port-card-venue">Bureau of Industry and Security</div>
     <div class="port-card-title">omphalOS</div>
     <div class="port-card-foot">May 2024 · Solo-authored</div>
@@ -168,5 +167,19 @@
       }
     </script>
 
-  </body>
+  <script>
+document.querySelectorAll('.port-card-info').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var isOpen = this.classList.contains('open');
+    document.querySelectorAll('.port-card-info').forEach(function(b) { b.classList.remove('open'); });
+    if (!isOpen) this.classList.add('open');
+  });
+});
+document.addEventListener('click', function() {
+  document.querySelectorAll('.port-card-info').forEach(function(b) { b.classList.remove('open'); });
+});
+</script>
+</body>
 </html>
