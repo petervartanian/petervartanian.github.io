@@ -1,18 +1,32 @@
 ---
 layout: default
-title: "Home"
-description: "From Weng to American institutions: notes, working artifacts, and public traces."
+title: "Peter H. Vartanian"
+description: "Immanentizing the eschaton"
 permalink: /
-page_key: about
+page_key: default
 ---
-# Home
 
-I am from an agrarian hamlet tucked into stone and pasture in the Tyrolean Alps: [Weng](https://mapcarta.com/N1938447213). It is neither (<u>a</u>) a place that tends to produce theorists nor (<u>b</u>) one that is conspicuous enough to not miss if one blinked on the wrong bend in the road. The scale there was human and weather-sized; mountains set the boundary conditions; and, seasons explained more than any market did.
+<div class="home-text">
+  <h1>Immanentizing the eschaton</h1>
+  
+  <p>Pertinacious thinker-and-doer from a hamlet in the Austrian Alps — now mapping the conduct of power in an age of dual-use everything.</p>
+  
+  <p><strong>Currently:</strong> Lead Research Fellow at MIT FutureTech, Risk Analyst at AI Risk Explorer, exploring critical minerals, compute substrata, and the intersection of AI + statecraft.</p>
+  
+  <p><strong>Recent:</strong> W. Kurt Hauser Scholar at Hoover Institution (Director's Award, "Allied Mettle, Allied Metals"); Penholder & Speechwriter to the Chair of the UNGA First Committee; Research Consultant to LA Mayor's Office; Fellow at Harvard Law School's Program on Negotiation.</p>
+</div>
 
-Since self-transplanting into the manifold of U.S. urban life, my world has arrived in files, cables, contracts, rumors, maps, datasets, and half-remembered conversations on trains. I try to hold them together long enough to see a pattern and then let the pattern fracture again, so that it does not become an idol.
-
-My work, then, is a flexuous attempt to look at power without flattery and at fragility without romance.
-
-What follows are that attempt's traces.
-
-If one such trace is fragmentary, it means... that the question is still alive.
+<div class="home-sidebar">
+  <div class="sidebar-stat">
+    <div class="stat-num">3</div>
+    <div class="stat-lbl">Publications</div>
+  </div>
+  <div class="sidebar-stat">
+    <div class="stat-num">2021</div>
+    <div class="stat-lbl">Active since</div>
+  </div>
+  <div class="sidebar-stat">
+    <div class="stat-num">Cambridge, MA</div>
+    <div class="stat-lbl">Based</div>
+  </div>
+</div>

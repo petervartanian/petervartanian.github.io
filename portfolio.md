@@ -1,38 +1,36 @@
 ---
 layout: default
 title: "Portfolio"
-description: "Published and work-in-progress."
+description: "Published and forthcoming work."
 permalink: /portfolio
 page_key: portfolio
 ---
 
-# *Portfolio*
+<div class="port-header">
+  <div class="port-header-title">Portfolio</div>
+  <div class="port-header-sub">Published work and working papers</div>
+</div>
 
-<figure class="pv-portfolio-plate">
-  <img src="/assets/img/portfolio.jpg" alt="Cristoforo Munari, Still Life (1709)" class="pv-portfolio-image" loading="eager" decoding="async">
-  <figcaption class="pv-portfolio-caption">
-    <div class="pv-portfolio-cite">Munari, Cristoforo. <em>Still Life</em>. 1709. Oil on canvas, 74 × 128.5 cm. Gallerie degli Uffizi, Florence.</div>
-    <div class="pv-portfolio-meaning"><em>For me: The working table, where time, score, and yield share a single surface.</em></div>
-  </figcaption>
-</figure>
+<div class="port-grid">
+  <a href="https://nationalinterest.org/blog/energy-world/u-s-energy-leadership-in-the-21st-century" class="port-card c1">
+    <div class="port-card-venue">The National Interest</div>
+    <div class="port-card-title">The Lone Star Paradigm: A Texan Blueprint for U.S. Energy Leadership in the Twenty-First Century</div>
+    <div class="port-card-foot">Feb 2025 · Co-authored with Igor Logvinenko</div>
+  </a>
 
-<ol class="pv-citations">
-  <li>
-    Vartanian, Peter H., and Igor Logvinenko. “The Lone Star Paradigm: A Texan Blueprint for U.S. Energy Leadership in the Twenty-First Century.” <em>The National Interest</em>, February 11, 2025. <a href="https://nationalinterest.org/blog/energy-world/u-s-energy-leadership-in-the-21st-century">https://nationalinterest.org/blog/energy-world/u-s-energy-leadership-in-the-21st-century</a>.
-  </li>
+  <a href="https://doi.org/10.2139/ssrn.5711403" class="port-card c2">
+    <div class="port-card-venue">Claremont-UC Conference</div>
+    <div class="port-card-title">EU (Legal) Statecraft in an Age of Coercion</div>
+    <div class="port-card-foot">Oct 2025 · Solo-authored</div>
+  </a>
 
-  <li>
-    Vartanian, Peter H. “EU (Legal) Statecraft in an Age of Coercion.” <em>Claremont-UC Undergraduate Research Conference on the European Union</em> 2025, art. 14 (October 30, 2025): 129–49. <a href="https://doi.org/10.5642/urceu.VGLR6395">https://doi.org/10.5642/urceu.VGLR6395</a>.<sup class="pv-note pv-note-purple">i</sup><sup class="pv-note pv-note-blue">ii</sup>
-  </li>
+  <a href="https://www.hoover.org/sites/default/files/2026-02/HISPBC2025_DirectorsAward_2025.pdf#page=28" class="port-card c3">
+    <div class="port-card-venue">Hoover Institution</div>
+    <div class="port-card-title">Allied Mettle, Allied Metals: A Market-Based Playbook for Critical-Mineral Supply Chains</div>
+    <div class="port-card-foot">Feb 2026 · Solo-authored</div>
+  </a>
 
-  <li class="pv-cite-rule">
-    Vartanian, Peter H. <em>Allied Mettle, Allied Metals: A Market-Based Playbook for Critical-Mineral Supply Chains</em>. Stanford, CA: Hoover Institution, 2025, 28–43. <a href="https://www.hoover.org/sites/default/files/2026-02/HISPBC2025_DirectorsAward_2025.pdf#page=28">https://www.hoover.org/sites/default/files/2026-02/HISPBC2025_DirectorsAward_2025.pdf#page=28</a>.<sup class="pv-note pv-note-green">iii</sup><sup class="pv-note pv-note-orange">iv</sup>
-  </li>
-</ol>
-
-<ol class="pv-endnotes" aria-label="Notes">
-  <li><sup class="pv-endnote-marker pv-note pv-note-purple">i</sup><span class="pv-note-block pv-note-block-purple">Post-publication addenda and corrigenda: <em>Social Science Research Network</em>, November 6, 2025; last revised November 10, 2025. <a href="https://doi.org/10.2139/ssrn.5711403">https://doi.org/10.2139/ssrn.5711403</a>.</span></li>
-  <li><sup class="pv-endnote-marker pv-note pv-note-blue">ii</sup><span class="pv-note-block pv-note-block-blue">The term “geo-legality” from my article was cited by Hakkı Öcal in “Nothing More Than Vassals or Slaves: Time for Europe to Wake Up,” <em>Daily Sabah</em>, January 26, 2026. <a href="https://www.dailysabah.com/opinion/columns/nothing-more-than-vassals-or-slaves-time-for-europe-to-wake-up">https://www.dailysabah.com/opinion/columns/nothing-more-than-vassals-or-slaves-time-for-europe-to-wake-up</a>.</span></li>
-  <li><sup class="pv-endnote-marker pv-note pv-note-green">iii</sup><span class="pv-note-block pv-note-block-green">This policy proposal received the Hoover Institution Summer Policy Boot Camp’s <em>Director’s Award</em> from Secretary (ret.) Condoleezza Rice.</span></li>
-  <li><sup class="pv-endnote-marker pv-note pv-note-orange">iv</sup><span class="pv-note-block pv-note-block-orange">A copyediting mistake lists an incorrect institutional affiliation; it should instead read <em>Fas/Jus</em>—my own startup.</span></li>
-</ol>
+  <div class="port-card c4" style="display:flex;align-items:center;justify-content:center;border-style:dashed;opacity:0.5;cursor:default;">
+    <div style="font-size:0.85rem;color:var(--color-text-tertiary);text-align:center;">+ forthcoming</div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 title: Peter H. Vartanian
-description: "Notes, experiments, and working artifacts in technē, statecraft, and jurisprudence."
+description: "Immanentizing the eschaton"
 url: https://petervartanian.xyz
 baseurl: ''
 lang: en-US
@@ -31,10 +31,12 @@ feed:
 navigation:
 - title: Home
   url: /
-- title: Fas/Jus
-  url: /fas-jus
+- title: CV
+  url: /cv
 - title: Portfolio
   url: /portfolio
+- title: Working Artifacts
+  url: /working-artifacts
 - title: Contact
   url: /contact
 markdown: kramdown

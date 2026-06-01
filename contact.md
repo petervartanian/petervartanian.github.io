@@ -6,25 +6,43 @@ permalink: /contact
 page_key: contact
 ---
 
-# Contact
+<div class="contact-grid">
+  <div class="contact-left">
+    <div class="contact-big">Let's<br>talk.</div>
+    <div class="contact-sub">Thoughtful correspondence and collaborations of consequence are welcomed. Generally, I reply within twelve hours.</div>
+  </div>
+  
+  <div class="contact-right">
+    <div class="contact-links">
+      <a href="mailto:peter.vartanian@icloud.com" class="contact-link-row">
+        <div class="contact-link-icon"><i class="ti ti-mail" aria-hidden="true"></i></div>
+        <div class="contact-link-label">Email</div>
+        <div class="contact-link-val">peter.vartanian@…</div>
+      </a>
+      
+      <a href="https://www.linkedin.com/in/petervartanian/" class="contact-link-row">
+        <div class="contact-link-icon"><i class="ti ti-brand-linkedin" aria-hidden="true"></i></div>
+        <div class="contact-link-label">LinkedIn</div>
+        <div class="contact-link-val">@petervartanian</div>
+      </a>
+      
+      <a href="https://github.com/petervartanian" class="contact-link-row">
+        <div class="contact-link-icon"><i class="ti ti-brand-github" aria-hidden="true"></i></div>
+        <div class="contact-link-label">GitHub</div>
+        <div class="contact-link-val">@petervartanian</div>
+      </a>
+      
+      <a href="https://orcid.org/0009-0009-8538-5811" class="contact-link-row">
+        <div class="contact-link-icon"><i class="ti ti-world" aria-hidden="true"></i></div>
+        <div class="contact-link-label">ORCID</div>
+        <div class="contact-link-val">0009-0009-…</div>
+      </a>
 
-Thoughtful correspondence and collaborations of consequence are welcomed; generally, I reply within twelve hours:
-
-Email  
-[{{ site.author.email }}](mailto:{{ site.author.email }})
-
-Phone  
-[{{ site.telephone }}](tel:{{ site.telephone | replace: ' ', '' | replace: '-', '' }})
-
-LinkedIn  
-[@petervartanian]({{ site.linkedin_url }})
-
-Please also find me on...:
-
-GitHub  
-[@petervartanian]({{ site.github_url }})
-
-ORCID  
-<{{ site.orcid_url }}>
-
-... and, on more to come: X · arXiv · Harvard Dataverse · Zenodo
+      <a href="https://x.com/petervartanian" class="contact-link-row">
+        <div class="contact-link-icon"><i class="ti ti-brand-x" aria-hidden="true"></i></div>
+        <div class="contact-link-label">X</div>
+        <div class="contact-link-val">@petervartanian</div>
+      </a>
+    </div>
+  </div>
+</div>
