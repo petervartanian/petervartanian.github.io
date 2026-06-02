@@ -196,7 +196,7 @@ body.pv-default .pv-prose {
 }
 .sidebar-stat .stat-sub {
   font-size: 0.65rem;
-  color: var(--color-text-tertiary);
+  color: var(--color-text-secondary);
   margin-top: 0.35rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -204,35 +204,39 @@ body.pv-default .pv-prose {
 }
 .sidebar-stat-split {
   display: grid;
-  gap: 0.55rem;
-  padding: 0.85rem 1rem;
+  gap: 0;
+  overflow: hidden;
+  padding: 0;
 }
 .stat-split-row {
-  align-items: baseline;
-  display: flex;
-  gap: 0.6rem;
-  justify-content: space-between;
+  display: block;
+  padding: 1rem;
+  text-align: center;
 }
 .stat-split-row + .stat-split-row {
   border-top: 0.5px solid rgba(21, 22, 26, 0.12);
-  padding-top: 0.55rem;
 }
 .stat-split-label {
   color: var(--color-text-secondary);
+  display: block;
   font-size: 0.68rem;
   letter-spacing: 0.08em;
-  text-align: left;
   text-transform: uppercase;
 }
 .stat-split-year {
   color: var(--color-text-primary);
+  display: block;
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1;
+  margin-top: 0.35rem;
 }
 .stat-split-row-accent .stat-split-label,
 .stat-split-row-accent .stat-split-year {
-  color: #c95a74;
+  color: var(--color-text-primary);
+}
+.stat-split-row-accent .stat-split-label {
+  color: var(--color-text-secondary);
 }
 body.pv-cv .pv-prose {
   padding: 0;
@@ -379,7 +383,7 @@ body.pv-cv .pv-prose {
 }
 .cv-lang-group {
   margin: 0.45rem 0 0.55rem 2.6rem;
-  padding: 0.35rem 0 0.2rem 1rem;
+  padding: 0.35rem 0 0.2rem 0;
   position: relative;
 }
 .cv-lang-group::before {
@@ -404,17 +408,11 @@ body.pv-cv .pv-prose {
   transform: translateX(-50%);
 }
 .cv-lang-subrow {
-  gap: 6px;
+  gap: 10px;
   margin-bottom: 0.32rem;
+  overflow: hidden;
+  padding-left: 1rem;
   position: relative;
-}
-.cv-lang-subrow::before {
-  border-top: 1px solid rgba(245, 244, 240, 0.22);
-  content: "";
-  left: -1rem;
-  position: absolute;
-  top: 50%;
-  width: 1.25rem;
 }
 .cv-lang-subrow .cv-lang-name {
   color: rgba(245, 244, 240, 0.72);
@@ -422,6 +420,18 @@ body.pv-cv .pv-prose {
   min-width: 118px;
   padding-left: 0;
   text-align: right;
+}
+.cv-lang-name-text {
+  display: inline-block;
+  position: relative;
+}
+.cv-lang-name-text::before {
+  border-top: 1px solid rgba(245, 244, 240, 0.22);
+  content: "";
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  width: 999px;
 }
 .cv-lang-philo {
   opacity: 0.55;
@@ -892,6 +902,9 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   }
   .cv-lang-row {
     gap: 8px;
+  }
+  .cv-lang-subrow {
+    gap: 10px;
   }
   .cv-lang-name {
     min-width: 112px;
