@@ -1,10 +1,10 @@
-const CACHE_NAME = "pv-site-v58";
+const CACHE_NAME = "pv-site-v59";
 
 const URLS = [
   "/",
   "/cv/",
   "/portfolio/",
-  "/working-artifacts/",
+  "/artifacts",
   "/contact/",
   "/assets/css/style.css?v=58",
   "/assets/img/favicon-16.png",

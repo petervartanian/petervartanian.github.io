@@ -11,7 +11,7 @@ geo-legality, AI governance, open-source intelligence, and dual-use procurement.
 - [Home](https://petervartanian.xyz/)
 - [CV](https://petervartanian.xyz/cv/)
 - [Portfolio](https://petervartanian.xyz/portfolio/)
-- [Working Artifacts](https://petervartanian.xyz/working-artifacts/)
+- [(Working) Artifacts](https://petervartanian.xyz/artifacts)
 - [Contact](https://petervartanian.xyz/contact/)
 
 ## Public Profiles
