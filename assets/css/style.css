@@ -1171,10 +1171,8 @@ body.pv-cv .pv-prose {
   color: var(--color-text-primary);
   font-family: var(--font-serif);
   font-size: 0.82rem;
-  font-variant: small-caps;
-  font-variant-caps: small-caps;
-  font-style: normal;
-  letter-spacing: 0.04em;
+  font-style: italic;
+  letter-spacing: 0;
   margin: 0.25rem 0 -0.1rem;
   text-align: center;
   text-transform: none;
