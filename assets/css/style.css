@@ -703,14 +703,23 @@ body.pv-cv .pv-prose {
   color: rgba(255, 255, 255, 0.96);
   text-shadow: 0 1px 2px rgba(21, 22, 26, 0.38);
 }
+.cv-notes-divider {
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(21, 22, 26, 0.98) 0 3px,
+    rgba(21, 22, 26, 0) 3px 7px
+  );
+  flex: 0 0 auto;
+  height: 2px;
+  margin: 0.28rem 0 0.72rem;
+}
 .cv-notes {
-  border-top: 0.5px solid var(--color-border-tertiary);
   color: var(--color-text-secondary);
   display: grid;
   flex: 0 0 auto;
   gap: 0.22rem;
-  margin-top: 0.45rem;
-  padding-top: 0.55rem;
+  margin-top: 0;
+  padding-top: 0;
 }
 .cv-notes p {
   font-size: 0.66rem;
@@ -1028,6 +1037,7 @@ body.pv-cv .pv-prose {
   flex-wrap: wrap;
 }
 .wa-filter-btn {
+  font-family: var(--font-serif);
   font-size: 0.75rem;
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
