@@ -2,12 +2,11 @@
   "name": "Peter H. Vartanian",
   "short_name": "P. Vartanian",
   "description": "From Weng in the Tyrolean Alps. A personal repository of notes, experiments, and inquiry in techn\u0113, statecraft, and jurisprudence.",
-  "id": "https://petervartanian.xyz/",
   "start_url": "/",
-  "scope": "/",
   "display": "standalone",
   "background_color": "#fbfaf6",
   "theme_color": "#fbfaf6",
+  "orientation": "portrait-primary",
   "categories": [
     "education",
     "productivity"

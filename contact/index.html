@@ -4,7 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Begin Jekyll SEO tag v2.9.0 -->
     <title>Contact | Peter H. Vartanian</title>
+    <meta name="generator" content="Jekyll v4.4.1" />
     <meta property="og:title" content="Peter H. Vartanian — Contact" />
     <meta name="author" content="Peter H. Vartanian" />
     <meta property="og:locale" content="en_US" />
@@ -58,6 +61,7 @@
         "url": "https://petervartanian.xyz/contact/"
       }
     </script>
+    <!-- End Jekyll SEO tag -->
 
     <meta name="theme-color" content="#fbfaf6" />
 
@@ -80,7 +84,18 @@
       href="../assets/img/apple-touch-icon.png"
     />
     <link rel="manifest" href="../site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css"
+    />
   
     <link rel="alternate" hreflang="en-US" href="https://petervartanian.xyz/contact/" />
     <link rel="alternate" hreflang="x-default" href="https://petervartanian.xyz/contact/" />
@@ -203,7 +218,10 @@
                 <div class="contact-links">
                   <div class="contact-link-group contact-link-group-primary">
                     <div class="contact-link-row contact-link-row-static">
-                      <span class="contact-link-icon" aria-hidden="true">TXT</span>
+                      <i
+                        class="ti ti-phone contact-link-icon"
+                        aria-hidden="true"
+                      ></i>
                       <span class="contact-link-label">Text</span>
                       <span class="contact-link-val"
                         >([plus] one) seven four seven • seven eight six •
@@ -211,7 +229,10 @@
                       >
                     </div>
                     <div class="contact-link-row contact-link-row-static">
-                      <span class="contact-link-icon" aria-hidden="true">@</span>
+                      <i
+                        class="ti ti-mail contact-link-icon"
+                        aria-hidden="true"
+                      ></i>
                       <span class="contact-link-label">Email</span>
                       <span class="contact-link-val"
                         >peter [dot] vartanian [at] icloud [dot] com</span
@@ -221,7 +242,10 @@
                       href="https://www.linkedin.com/in/petervartanian/"
                       class="contact-link-row"
                     >
-                      <span class="contact-link-icon" aria-hidden="true">LI</span>
+                      <i
+                        class="ti ti-brand-linkedin contact-link-icon"
+                        aria-hidden="true"
+                      ></i>
                       <span class="contact-link-label">LinkedIn</span>
                       <span class="contact-link-val">@petervartanian</span>
                     </a>
@@ -236,7 +260,10 @@
                       href="https://substack.com/@petervartanian"
                       class="contact-link-row contact-link-row-small"
                     >
-                      <span class="contact-link-icon" aria-hidden="true">SS</span>
+                      <i
+                        class="ti ti-pencil contact-link-icon"
+                        aria-hidden="true"
+                      ></i>
                       <span class="contact-link-label">Substack</span>
                       <span class="contact-link-val">@petervartanian</span>
                     </a>
@@ -244,7 +271,10 @@
                       href="https://github.com/petervartanian"
                       class="contact-link-row contact-link-row-small"
                     >
-                      <span class="contact-link-icon" aria-hidden="true">GH</span>
+                      <i
+                        class="ti ti-brand-github contact-link-icon"
+                        aria-hidden="true"
+                      ></i>
                       <span class="contact-link-label">GitHub</span>
                       <span class="contact-link-val">@petervartanian</span>
                     </a>
@@ -252,7 +282,10 @@
                       href="https://huggingface.co/petervartanian"
                       class="contact-link-row contact-link-row-small"
                     >
-                      <span class="contact-link-icon" aria-hidden="true">HF</span>
+                      <i
+                        class="ti ti-mood-smile-beam contact-link-icon"
+                        aria-hidden="true"
+                      ></i>
                       <span class="contact-link-label">Hugging Face</span>
                       <span class="contact-link-val">@petervartanian</span>
                     </a>
@@ -260,7 +293,10 @@
                       href="https://x.com/petervartanian"
                       class="contact-link-row contact-link-row-small"
                     >
-                      <span class="contact-link-icon" aria-hidden="true">X</span>
+                      <i
+                        class="ti ti-brand-x contact-link-icon"
+                        aria-hidden="true"
+                      ></i>
                       <span class="contact-link-label">X</span>
                       <span class="contact-link-val">@petervartanian</span>
                     </a>
@@ -268,7 +304,10 @@
                       href="https://orcid.org/0009-0009-8538-5811"
                       class="contact-link-row contact-link-row-small"
                     >
-                      <span class="contact-link-icon" aria-hidden="true">ID</span>
+                      <i
+                        class="ti ti-world contact-link-icon"
+                        aria-hidden="true"
+                      ></i>
                       <span class="contact-link-label">ORCID</span>
                       <span class="contact-link-val">0009-0009-8538-5811</span>
                     </a>
@@ -286,6 +325,15 @@
         </div>
       </footer>
     </div>
-    <script src="../assets/js/site.js" defer></script>
+
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function (regs) {
+          regs.forEach(function (reg) {
+            reg.unregister();
+          });
+        });
+      }
+    </script>
   </body>
 </html>
