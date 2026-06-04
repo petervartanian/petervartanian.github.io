@@ -699,7 +699,8 @@ body.pv-cv .pv-prose {
   background-size: 100% 0.26em;
   box-decoration-break: clone;
 }
-.cv-entry-current-accent .cv-entry-org {
+.cv-entry-current-accent .cv-entry-org,
+.cv-entry-current-accent .cv-entry-date {
   -webkit-box-decoration-break: clone;
   background-image: linear-gradient(
     90deg,
