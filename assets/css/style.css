@@ -685,8 +685,9 @@ body.pv-cv .pv-prose {
 .cv-entry-muted .cv-entry-org,
 .cv-entry-muted .cv-entry-date {
   -webkit-box-decoration-break: clone;
-  background: rgba(21, 22, 26, 0.08);
+  background: #e6e6e6;
   box-decoration-break: clone;
+  box-shadow: 0 0.04em 0 #e6e6e6, 0 -0.04em 0 #e6e6e6;
 }
 .cv-entry-note {
   color: var(--color-text-tertiary);
@@ -1064,12 +1065,20 @@ body.pv-cv .pv-prose {
   font-weight: 600;
 }
 .wa-filter-btn[data-filter="all"] {
-  border-color: var(--color-border-primary);
+  border-color: #4b4c52;
   color: var(--color-background-primary);
-  background: var(--color-text-primary);
+  background: #4b4c52;
 }
-.wa-filter-btn[data-filter="all"]:hover,
+.wa-filter-btn[data-filter="all"]:not(.active):not(:hover) {
+  border-color: #4b4c52;
+  background: #4b4c52;
+}
+.wa-filter-btn[data-filter="all"]:not(.active):hover {
+  border-color: #3d3e44;
+  background: #3d3e44;
+}
 .wa-filter-btn[data-filter="all"].active {
+  border-color: var(--color-border-primary);
   color: var(--color-background-primary);
   background: var(--color-text-primary);
 }
