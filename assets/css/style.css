@@ -704,8 +704,8 @@ body.pv-cv .pv-prose {
   -webkit-box-decoration-break: clone;
   background-image: linear-gradient(
     90deg,
-    rgba(255, 252, 218, 0.74),
-    rgba(203, 255, 244, 0.58)
+    rgba(255, 252, 218, 0.42),
+    rgba(203, 255, 244, 0.32)
   );
   background-position: 0 94%;
   background-repeat: no-repeat;
