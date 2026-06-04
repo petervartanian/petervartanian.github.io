@@ -682,6 +682,12 @@ body.pv-cv .pv-prose {
   color: var(--color-text-tertiary);
   white-space: nowrap;
 }
+.cv-entry-muted .cv-entry-org,
+.cv-entry-muted .cv-entry-date {
+  -webkit-box-decoration-break: clone;
+  background: rgba(21, 22, 26, 0.08);
+  box-decoration-break: clone;
+}
 .cv-entry-note {
   color: var(--color-text-tertiary);
   font-size: 0.75rem;
@@ -1038,8 +1044,8 @@ body.pv-cv .pv-prose {
   padding: 0.4rem 0.8rem;
   border-radius: 999px;
   border: 0.5px solid var(--color-border-secondary);
-  color: var(--color-text-secondary);
-  background: rgba(0, 0, 0, 0);
+  color: var(--color-text-primary);
+  background: var(--color-background-primary);
   cursor: pointer;
   transition: all 150ms ease;
   font-weight: 500;
@@ -1049,15 +1055,7 @@ body.pv-cv .pv-prose {
 .wa-filter-btn:hover {
   border-color: var(--color-border-primary);
   color: var(--color-text-primary);
-}
-.wa-filter-btn[data-filter="all"] {
-  border-color: var(--color-border-primary);
-  color: var(--color-background-primary);
-  background: var(--color-text-primary);
-}
-.wa-filter-btn[data-filter="all"]:hover {
-  color: var(--color-background-primary);
-  background: var(--color-text-primary);
+  background: var(--color-background-secondary);
 }
 .wa-filter-btn.active {
   border-color: var(--color-border-primary);
@@ -1065,6 +1063,12 @@ body.pv-cv .pv-prose {
   background: var(--color-background-secondary);
   font-weight: 600;
 }
+.wa-filter-btn[data-filter="all"] {
+  border-color: var(--color-border-primary);
+  color: var(--color-background-primary);
+  background: var(--color-text-primary);
+}
+.wa-filter-btn[data-filter="all"]:hover,
 .wa-filter-btn[data-filter="all"].active {
   color: var(--color-background-primary);
   background: var(--color-text-primary);
