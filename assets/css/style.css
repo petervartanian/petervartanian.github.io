@@ -454,6 +454,10 @@ body.pv-cv .pv-prose {
   padding: 2rem 1.5rem;
   color: #f5f4f0;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.05rem;
 }
 .cv-left .cv-name {
   color: #f5f4f0;
@@ -471,6 +475,9 @@ body.pv-cv .pv-prose {
 }
 .cv-left .cv-section {
   margin-bottom: 1.5rem;
+}
+.cv-left .cv-section:last-child {
+  margin-bottom: 0;
 }
 .cv-left .cv-sec-label {
   font-size: 0.7rem;
@@ -705,7 +712,7 @@ body.pv-cv .pv-prose {
   background-image: linear-gradient(
     90deg,
     rgba(255, 252, 218, 0.42),
-    rgba(203, 255, 244, 0.32)
+    rgba(203, 255, 244, 0.34)
   );
   background-position: 0 94%;
   background-repeat: no-repeat;
