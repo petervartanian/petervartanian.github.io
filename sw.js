@@ -1,4 +1,4 @@
-const CACHE_NAME = "pv-site-v65";
+const CACHE_NAME = "pv-site-v123";
 
 const URLS = [
   "/",
@@ -6,7 +6,7 @@ const URLS = [
   "/portfolio/",
   "/artifacts",
   "/contact/",
-  "/assets/css/style.css?v=65",
+  "/assets/css/style.css?v=123",
   "/assets/img/favicon-16.png",
   "/assets/img/favicon-32.png",
   "/apple-touch-icon.png",
