@@ -562,7 +562,18 @@ body.pv-cv .pv-prose {
   width: 0.55rem;
 }
 .cv-symbol-education {
-  font-size: 0.82rem;
+  flex-basis: 0.85rem;
+  flex-direction: column;
+  font-size: 0.68rem;
+  gap: 0.03rem;
+  width: 0.85rem;
+}
+.cv-edu-fleuron {
+  display: block;
+  line-height: 0.8;
+}
+.cv-edu-fleuron-invert {
+  transform: rotate(180deg);
 }
 .cv-symbol-honor {
   font-size: 0.7rem;
@@ -571,7 +582,7 @@ body.pv-cv .pv-prose {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #c95a74;
+  background: rgba(245, 244, 240, 0.48);
   align-self: center;
   flex-shrink: 0;
 }
