@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>iPhone 17 Pro Preview</title>
+    <title>Mobile Preview</title>
     <style>
       :root {
         color-scheme: light;
@@ -64,6 +64,7 @@
       }
 
       .notch {
+        display: none;
         position: absolute;
         top: 10px;
         left: 50%;
@@ -86,14 +87,14 @@
     </style>
   </head>
   <body>
-    <main class="phone-scale" aria-label="iPhone 17 Pro preview">
+    <main class="phone-scale" aria-label="Mobile preview">
       <div class="phone">
         <div class="screen">
           <div class="notch" aria-hidden="true"></div>
           <iframe
             id="preview"
-            title="iPhone 17 Pro site preview"
-            src="/?mobile-preview=130"
+            title="Mobile site preview"
+            src="/?mobile-preview=131"
           ></iframe>
         </div>
       </div>
@@ -103,7 +104,7 @@
       const frame = document.querySelector("#preview");
       const scaleTarget = document.querySelector(".phone-scale");
       const requestedPath = new URLSearchParams(window.location.search).get("path");
-      const previewToken = "mobile-preview=130";
+      const previewToken = "mobile-preview=131";
 
       function previewUrl(path) {
         const separator = path.includes("?") ? "&" : "?";

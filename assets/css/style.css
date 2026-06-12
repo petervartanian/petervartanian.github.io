@@ -1657,12 +1657,24 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
 }
 @media (max-width: 640px) {
   .pv-header {
-    padding: 3.25rem 1rem 0.75rem;
+    padding: 1.15rem 1rem 0.75rem;
   }
   .pv-header-inner,
   .pv-header-top,
-  .pv-brand {
+  .pv-brand,
+  .pv-nav {
     width: 100%;
+  }
+  .pv-header-top {
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    text-align: center;
+  }
+  .pv-brand {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
   }
   .pv-brand-title {
     font-size: 1.1rem;
@@ -1671,10 +1683,12 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
     font-size: 0.7rem;
   }
   .pv-nav-list {
+    align-items: center;
     column-gap: 0;
     justify-content: center;
     text-align: center;
     row-gap: 0.5rem;
+    width: 100%;
   }
   .pv-nav-break {
     display: block;
@@ -1732,16 +1746,68 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
     align-items: start;
     grid-template-columns: 18px minmax(4.25rem, max-content) minmax(0, 1fr);
   }
+  .cv-right {
+    align-items: stretch;
+    overflow-y: visible;
+    padding: 1.35rem 1.1rem;
+    text-align: center;
+  }
+  .cv-intro,
+  .cv-period-label {
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .cv-current-group {
+    flex: none;
+    margin: 0 -1.1rem;
+    min-height: 0;
+    width: calc(100% + 2.2rem);
+  }
+  .cv-entry {
+    align-items: center;
+    flex: none;
+    justify-content: center;
+    min-height: auto;
+    padding: 0.82rem 0;
+    text-align: center;
+  }
+  .cv-entry-current {
+    flex: none;
+    justify-content: center;
+    min-height: auto;
+    padding: 1rem 1.1rem;
+  }
   .cv-entry-top {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.2rem;
+    align-items: center;
+    gap: 0.28rem;
+    justify-content: center;
+    text-align: center;
   }
-  .cv-entry-date {
-    white-space: normal;
-  }
+  .cv-entry-org,
   .cv-entry-current .cv-entry-org {
+    display: block;
+    line-height: 1.35;
     max-width: 100%;
+    text-align: center;
+    width: 100%;
+  }
+  .cv-entry-date,
+  .cv-entry-date-split {
+    display: block;
+    line-height: 1.35;
+    text-align: center;
+    white-space: normal;
+    width: 100%;
+  }
+  .cv-entry-note {
+    display: block;
+    margin: 0.16rem auto 0;
+    text-align: center;
+  }
+  .cv-notes {
+    text-align: left;
   }
   .cv-lang-row {
     gap: 8px;
