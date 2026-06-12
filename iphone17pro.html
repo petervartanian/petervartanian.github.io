@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>iPhone 17 Pro Preview</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --canvas: #efede7;
+        --paper: #fbfaf7;
+        --bezel: #171717;
+        --edge: #0d0d0d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: auto;
+        padding: 12px;
+        background: var(--canvas);
+      }
+
+      .phone-scale {
+        width: calc(438px * var(--fit-scale, 1));
+        height: calc(910px * var(--fit-scale, 1));
+        margin-top: -10px;
+      }
+
+      .phone {
+        width: 438px;
+        height: 910px;
+        padding: 18px;
+        border-radius: 42px;
+        background:
+          linear-gradient(135deg, #292929, #101010 58%, #252525),
+          var(--bezel);
+        box-shadow: 0 20px 46px rgba(43, 38, 30, 0.24);
+        transform: scale(var(--fit-scale, 1));
+        transform-origin: top left;
+      }
+
+      .screen {
+        position: relative;
+        width: 402px;
+        height: 874px;
+        overflow: hidden;
+        border: 1px solid var(--edge);
+        border-radius: 29px;
+        background: var(--paper);
+      }
+
+      .notch {
+        position: absolute;
+        top: 10px;
+        left: 50%;
+        z-index: 2;
+        width: 116px;
+        height: 31px;
+        border-radius: 20px;
+        background: #111;
+        transform: translateX(-50%);
+        pointer-events: none;
+      }
+
+      iframe {
+        display: block;
+        width: 402px;
+        height: 874px;
+        border: 0;
+        background: var(--paper);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="phone-scale" aria-label="iPhone 17 Pro preview">
+      <div class="phone">
+        <div class="screen">
+          <div class="notch" aria-hidden="true"></div>
+          <iframe
+            id="preview"
+            title="iPhone 17 Pro site preview"
+            src="/?mobile-preview=130"
+          ></iframe>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const frame = document.querySelector("#preview");
+      const scaleTarget = document.querySelector(".phone-scale");
+      const requestedPath = new URLSearchParams(window.location.search).get("path");
+      const previewToken = "mobile-preview=130";
+
+      function previewUrl(path) {
+        const separator = path.includes("?") ? "&" : "?";
+        return `${path}${separator}${previewToken}`;
+      }
+
+      if (requestedPath && requestedPath.startsWith("/") && !requestedPath.startsWith("//")) {
+        frame.src = previewUrl(requestedPath);
+      }
+
+      function fitPhone() {
+        const margin = 24;
+        const scale = Math.min(
+          1,
+          (window.innerWidth - margin) / 438,
+          (window.innerHeight - margin) / 910
+        );
+        scaleTarget.style.setProperty("--fit-scale", Math.max(0.2, scale));
+      }
+
+      function prepareFrame() {
+        const doc = frame.contentDocument;
+        if (!doc) return;
+
+        doc.addEventListener("click", (event) => {
+          const anchor = event.target.closest("a[href]");
+          if (!anchor) return;
+
+          const url = new URL(anchor.href);
+          if (url.origin === window.location.origin) return;
+
+          anchor.target = "_blank";
+          anchor.rel = "noopener";
+        });
+      }
+
+      window.addEventListener("resize", fitPhone);
+      frame.addEventListener("load", prepareFrame);
+      fitPhone();
+    </script>
+  </body>
+</html>

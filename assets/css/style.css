@@ -105,6 +105,9 @@ textarea {
   align-items: center;
   display: flex;
 }
+.pv-nav-break {
+  display: none;
+}
 .pv-nav-item + .pv-nav-item::before {
   background:
     radial-gradient(circle, rgba(35, 167, 158, 0.86) 0 2px, transparent 2.5px),
@@ -1328,6 +1331,7 @@ body.pv-cv .pv-prose {
   line-height: 1.2;
   margin-bottom: 1.25rem;
   font-family: var(--font-serif);
+  text-align: left;
 }
 .contact-big-line {
   display: block;
@@ -1404,7 +1408,7 @@ body.pv-cv .pv-prose {
   color: var(--color-text-secondary);
   line-height: 1.8;
   font-family: var(--font-serif);
-  text-align: justify;
+  text-align: left;
 }
 .contact-sub-gap {
   margin-top: 0.5rem;
@@ -1412,7 +1416,7 @@ body.pv-cv .pv-prose {
   color: var(--color-text-secondary);
   line-height: 1.8;
   font-family: var(--font-serif);
-  text-align: justify;
+  text-align: left;
 }
 .contact-human-note {
   color: var(--color-text-tertiary);
@@ -1420,7 +1424,7 @@ body.pv-cv .pv-prose {
   font-size: 0.76rem;
   line-height: 1.65;
   margin-top: 1.1rem;
-  text-align: justify;
+  text-align: left;
 }
 .contact-human-note span {
   display: block;
@@ -1459,7 +1463,8 @@ body.pv-cv .pv-prose {
   text-transform: none;
 }
 .contact-link-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 18px minmax(5.75rem, max-content) minmax(0, 1fr);
   align-items: center;
   gap: 0.85rem;
   padding: 0.75rem 1.25rem;
@@ -1510,19 +1515,21 @@ a.contact-link-row:hover {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-weight: 500;
-  flex-shrink: 0;
   font-family: var(--font-serif);
+  min-width: 0;
+  text-align: left;
 }
 .contact-link-val {
   font-size: 0.85rem;
   color: var(--color-text-primary);
-  margin-left: auto;
   font-weight: 500;
   min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: var(--font-serif);
+  justify-self: end;
+  text-align: right;
 }
 h1,
 h2,
@@ -1566,6 +1573,12 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
 }
 .pv-nav-list {
   flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+.pv-nav-item,
+.pv-nav-break {
+  margin: 0;
 }
 .pv-nav-link {
   white-space: nowrap;
@@ -1595,8 +1608,12 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   }
   .pv-header-top {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 1rem;
+  }
+  .pv-brand {
+    width: 100%;
+    text-align: center;
   }
   .pv-nav {
     margin-left: 0;
@@ -1604,6 +1621,7 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   }
   .pv-nav-list {
     gap: 0;
+    justify-content: center;
   }
   .pv-main {
     padding: 1.5rem;
@@ -1639,7 +1657,12 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
 }
 @media (max-width: 640px) {
   .pv-header {
-    padding: 1rem 1rem 0.75rem;
+    padding: 3.25rem 1rem 0.75rem;
+  }
+  .pv-header-inner,
+  .pv-header-top,
+  .pv-brand {
+    width: 100%;
   }
   .pv-brand-title {
     font-size: 1.1rem;
@@ -1648,9 +1671,24 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
     font-size: 0.7rem;
   }
   .pv-nav-list {
-    gap: 0;
+    column-gap: 0;
+    justify-content: center;
+    text-align: center;
+    row-gap: 0.5rem;
+  }
+  .pv-nav-break {
+    display: block;
+    flex: 0 0 100%;
+    height: 0;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .pv-nav-artifacts::before {
+    display: none;
   }
   .pv-nav-item + .pv-nav-item::before {
+    display: block;
     height: 0.95rem;
     margin: 0 0.5rem;
   }
@@ -1686,16 +1724,13 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
     margin-top: 0.5rem;
   }
   .contact-link-val {
-    margin-left: 0;
-    width: auto;
     max-width: 100%;
     white-space: normal;
     word-break: break-word;
-    text-align: left;
   }
   .contact-link-row {
-    align-items: flex-start;
-    flex-wrap: wrap;
+    align-items: start;
+    grid-template-columns: 18px minmax(4.25rem, max-content) minmax(0, 1fr);
   }
   .cv-entry-top {
     flex-direction: column;
