@@ -579,6 +579,9 @@ body.pv-cv .pv-prose {
   margin-left: 0.75rem;
   white-space: nowrap;
 }
+.cv-honor-mobile-break {
+  display: none;
+}
 .cv-education-date {
   color: rgba(245, 244, 240, 0.5);
   font-size: 0.62rem;
@@ -1284,22 +1287,22 @@ body.pv-cv .pv-prose {
   font-weight: 600;
 }
 .wa-filter-btn[data-filter="all"] {
-  border-color: #94969c;
+  border-color: #a5a7ad;
   color: var(--color-background-primary);
-  background: #94969c;
+  background: #a5a7ad;
 }
 .wa-filter-btn[data-filter="all"]:not(.active):not(:hover) {
-  border-color: #94969c;
-  background: #94969c;
+  border-color: #a5a7ad;
+  background: #a5a7ad;
 }
 .wa-filter-btn[data-filter="all"]:not(.active):hover {
-  border-color: #84868d;
-  background: #84868d;
+  border-color: #96989e;
+  background: #96989e;
 }
 .wa-filter-btn[data-filter="all"].active {
-  border-color: #71737a;
+  border-color: #85878e;
   color: var(--color-background-primary);
-  background: #71737a;
+  background: #85878e;
 }
 .wa-list {
   display: flex;
@@ -1743,7 +1746,7 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   }
   .pv-nav-link {
     font-size: 0.68rem;
-    gap: 0.2rem;
+    gap: 0.32rem;
     letter-spacing: 0.04em;
     padding: 0.3rem 0;
   }
@@ -1877,6 +1880,9 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   .cv-notes {
     text-align: left;
   }
+  .cv-honor-mobile-break {
+    display: block;
+  }
   .cv-lang-row {
     align-items: center;
     display: grid;
@@ -1944,13 +1950,17 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
     overflow: visible;
     padding-left: 0;
   }
+  .cv-lang-arabic-group .cv-lang-name,
+  .cv-lang-philo-group .cv-lang-name {
+    padding-left: 1.35rem;
+  }
   .cv-lang-arabic-group::before,
   .cv-lang-philo-group::before {
     background: rgba(245, 244, 240, 0.22);
     bottom: 1rem;
     content: "";
     display: block;
-    left: -1.2rem;
+    left: 0;
     position: absolute;
     top: 1.95rem;
     width: 1px;
@@ -1958,15 +1968,15 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   .cv-lang-philo-group::before {
     top: 4.6rem;
   }
-  .cv-lang-arabic-group .cv-lang-name-text::before,
-  .cv-lang-philo-group .cv-lang-name-text::before {
+  .cv-lang-arabic-group .cv-lang-subrow::before,
+  .cv-lang-philo-group .cv-lang-subrow::before {
     border-top: 1px solid rgba(245, 244, 240, 0.22);
     content: "";
     display: block;
+    left: 0;
     position: absolute;
-    right: calc(100% + 0.35rem);
     top: 50%;
-    width: 1.55rem;
+    width: 1.35rem;
   }
   .cv-lang-separator {
     margin: 0.9rem 0 0.85rem;
