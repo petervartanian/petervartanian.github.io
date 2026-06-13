@@ -128,7 +128,10 @@ textarea {
   width: 0.5rem;
 }
 .pv-nav-link {
-  display: inline-block;
+  align-items: center;
+  display: inline-flex;
+  gap: 0.35rem;
+  justify-content: center;
   padding: 0.4rem 0;
   text-decoration: none;
   color: var(--color-text-secondary);
@@ -138,6 +141,33 @@ textarea {
   text-transform: uppercase;
   border-bottom: 2px solid rgba(0, 0, 0, 0);
   transition: all 150ms ease;
+}
+.pv-nav-link::before {
+  color: var(--color-text-tertiary);
+  content: "";
+  display: inline-block;
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  min-width: 1.45em;
+  text-align: center;
+  text-transform: none;
+}
+.pv-nav-item:nth-of-type(1) .pv-nav-link::before {
+  content: "0";
+}
+.pv-nav-item:nth-of-type(2) .pv-nav-link::before {
+  content: "I";
+}
+.pv-nav-item:nth-of-type(3) .pv-nav-link::before {
+  content: "II";
+}
+.pv-nav-item:nth-of-type(5) .pv-nav-link::before {
+  content: "III";
+}
+.pv-nav-item:nth-of-type(6) .pv-nav-link::before {
+  content: "IV";
 }
 .pv-nav-link:hover {
   color: var(--color-text-primary);
@@ -1712,8 +1742,14 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
     margin: 0 0.5rem;
   }
   .pv-nav-link {
-    font-size: 0.75rem;
+    font-size: 0.68rem;
+    gap: 0.2rem;
+    letter-spacing: 0.04em;
     padding: 0.3rem 0;
+  }
+  .pv-nav-link::before {
+    font-size: 0.76em;
+    min-width: 1.15em;
   }
   .pv-main {
     padding: 1rem;
@@ -1821,7 +1857,24 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   }
   .cv-entry-rainbow .cv-entry-org-text,
   .cv-entry-current-accent .cv-entry-org-text {
+    -webkit-box-decoration-break: clone;
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 999px;
+    box-decoration-break: clone;
+    box-shadow:
+      0 0 0.72rem rgba(35, 167, 158, 0.16),
+      0 0 1.15rem rgba(187, 93, 169, 0.14);
     display: inline;
+    padding: 0 0.1em;
+  }
+  .cv-entry-current-accent .cv-entry-org-text {
+    box-shadow:
+      0 0 0.75rem rgba(255, 253, 203, 0.16),
+      0 0 1.18rem rgba(201, 255, 244, 0.14);
+  }
+  .cv-entry-rainbow .cv-entry-org-text::before,
+  .cv-entry-current-accent .cv-entry-org-text::before {
+    display: none;
   }
   .cv-entry-date,
   .cv-entry-date-split {
@@ -1840,33 +1893,73 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
     text-align: left;
   }
   .cv-lang-row {
-    gap: 8px;
+    align-items: center;
+    display: grid;
+    gap: 0.62rem;
+    grid-template-columns: 6rem minmax(0, 1fr) 1.7rem;
+    margin-bottom: 0.4rem;
+    width: 100%;
+  }
+  .cv-languages::before,
+  .cv-lang-group::before,
+  .cv-lang-name-text::before {
+    display: none;
   }
   .cv-lang-subrow {
-    gap: 10px;
-  }
-  .cv-lang-name {
-    min-width: 112px;
-  }
-  .cv-lang-arabic-group::before {
-    left: 72px;
-  }
-  .cv-lang-arabic-group .cv-lang-group-title {
-    width: 112px;
-  }
-  .cv-lang-arabic-group .cv-lang-subrow {
-    margin-left: 40px;
+    gap: 0.62rem;
+    margin-left: 0;
+    overflow: visible;
     padding-left: 0;
   }
-  .cv-lang-arabic-group .cv-lang-name-text::before {
-    width: calc(76px - 100%);
+  .cv-lang-name,
+  .cv-lang-row:not(.cv-lang-subrow) .cv-lang-name,
+  .cv-lang-subrow .cv-lang-name,
+  .cv-lang-arabic-group .cv-lang-name,
+  .cv-lang-philo-group .cv-lang-name,
+  .cv-lang-philo .cv-lang-name {
+    min-width: 0;
+    padding-left: 0;
+    text-align: left;
   }
+  .cv-lang-bar {
+    min-width: 0;
+    width: 100%;
+  }
+  .cv-lang-level,
+  .cv-lang-philo .cv-lang-level {
+    font-size: 0.62rem;
+    padding-left: 0;
+    text-align: right;
+    width: auto;
+  }
+  .cv-lang-group,
+  .cv-lang-arabic-group,
+  .cv-lang-philo-group {
+    margin: 0.58rem 0 0.55rem;
+    padding: 0;
+    transform: none;
+    width: 100%;
+  }
+  .cv-lang-group-title,
+  .cv-lang-arabic-group .cv-lang-group-title,
+  .cv-lang-philo-title {
+    display: block;
+    margin: 0 0 0.4rem;
+    max-width: none;
+    text-align: left;
+    transform: none;
+    width: auto;
+  }
+  .cv-lang-arabic-group .cv-lang-group-title {
+    letter-spacing: 0.1em;
+  }
+  .cv-lang-arabic-group .cv-lang-subrow,
   .cv-lang-philo-group .cv-lang-subrow {
     margin-left: 0;
     padding-left: 0;
   }
-  .cv-lang-philo-group .cv-lang-name {
-    min-width: 112px;
+  .cv-lang-separator {
+    margin: 0.9rem 0 0.85rem;
   }
   .pv-nav-list {
     row-gap: 0.35rem;
