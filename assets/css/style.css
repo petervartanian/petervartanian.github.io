@@ -1039,12 +1039,16 @@ body.pv-cv .pv-prose {
   text-align: right;
 }
 .cv-lang-arabic-group {
+  --cv-lang-connector-x: 100px;
+  --cv-lang-connector-gap: 10px;
+  --cv-lang-subrow-name-right: 204px;
   margin-left: 0;
   transform: translateX(-100px);
   width: calc(100% + 100px);
 }
 .cv-lang-arabic-group::before {
-  left: 100px;
+  left: var(--cv-lang-connector-x);
+  top: 1.5rem;
 }
 .cv-lang-arabic-group .cv-lang-group-title {
   display: block;
@@ -1062,7 +1066,10 @@ body.pv-cv .pv-prose {
   text-align: right;
 }
 .cv-lang-arabic-group .cv-lang-name-text::before {
-  width: calc(94px - 100%);
+  width: calc(
+    var(--cv-lang-subrow-name-right) - var(--cv-lang-connector-x) -
+      var(--cv-lang-connector-gap) - 100%
+  );
 }
 .cv-lang-name-text {
   display: inline-block;
@@ -1094,6 +1101,9 @@ body.pv-cv .pv-prose {
   margin: 1.05rem 0 0.95rem;
 }
 .cv-lang-philo-group {
+  --cv-lang-connector-x: 0px;
+  --cv-lang-connector-gap: 10px;
+  --cv-lang-subrow-name-right: 104px;
   margin-bottom: 0.65rem;
   margin-left: 0;
   margin-top: 0;
@@ -1101,7 +1111,7 @@ body.pv-cv .pv-prose {
 }
 .cv-lang-philo-group::before {
   bottom: 1.18rem;
-  left: 0;
+  left: var(--cv-lang-connector-x);
   top: 2.9rem;
 }
 .cv-lang-philo-title {
@@ -1128,7 +1138,10 @@ body.pv-cv .pv-prose {
   opacity: 0.72;
 }
 .cv-lang-philo-group .cv-lang-name-text::before {
-  width: calc(94px - 100%);
+  width: calc(
+    var(--cv-lang-subrow-name-right) - var(--cv-lang-connector-x) -
+      var(--cv-lang-connector-gap) - 100%
+  );
 }
 .cv-lang-philo .cv-lang-level {
   font-style: italic;
@@ -1961,7 +1974,8 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   .cv-lang-philo-group {
     --cv-lang-label-indent: 1.35rem;
     --cv-lang-connector-gap: 10px;
-    --cv-lang-connector-x: 0;
+    --cv-lang-connector-x: 0px;
+    --cv-lang-subrow-name-right: 6rem;
   }
   .cv-lang-arabic-group .cv-lang-subrow,
   .cv-lang-philo-group .cv-lang-subrow {
@@ -2002,7 +2016,10 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
     position: absolute;
     right: calc(100% + var(--cv-lang-connector-gap));
     top: 50%;
-    width: 999px;
+    width: calc(
+      var(--cv-lang-subrow-name-right) - var(--cv-lang-connector-x) -
+        var(--cv-lang-connector-gap) - var(--cv-lang-label-indent) - 100%
+    );
     z-index: 2;
   }
   .cv-lang-separator {
