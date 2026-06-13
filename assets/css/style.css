@@ -1284,22 +1284,22 @@ body.pv-cv .pv-prose {
   font-weight: 600;
 }
 .wa-filter-btn[data-filter="all"] {
-  border-color: #4b4c52;
+  border-color: #94969c;
   color: var(--color-background-primary);
-  background: #4b4c52;
+  background: #94969c;
 }
 .wa-filter-btn[data-filter="all"]:not(.active):not(:hover) {
-  border-color: #4b4c52;
-  background: #4b4c52;
+  border-color: #94969c;
+  background: #94969c;
 }
 .wa-filter-btn[data-filter="all"]:not(.active):hover {
-  border-color: #3d3e44;
-  background: #3d3e44;
+  border-color: #84868d;
+  background: #84868d;
 }
 .wa-filter-btn[data-filter="all"].active {
-  border-color: var(--color-border-primary);
+  border-color: #71737a;
   color: var(--color-background-primary);
-  background: var(--color-text-primary);
+  background: #71737a;
 }
 .wa-list {
   display: flex;
@@ -1857,24 +1857,9 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   }
   .cv-entry-rainbow .cv-entry-org-text,
   .cv-entry-current-accent .cv-entry-org-text {
-    -webkit-box-decoration-break: clone;
-    background: rgba(255, 255, 255, 0.01);
-    border-radius: 999px;
-    box-decoration-break: clone;
-    box-shadow:
-      0 0 0.72rem rgba(35, 167, 158, 0.16),
-      0 0 1.15rem rgba(187, 93, 169, 0.14);
-    display: inline;
-    padding: 0 0.1em;
-  }
-  .cv-entry-current-accent .cv-entry-org-text {
-    box-shadow:
-      0 0 0.75rem rgba(255, 253, 203, 0.16),
-      0 0 1.18rem rgba(201, 255, 244, 0.14);
-  }
-  .cv-entry-rainbow .cv-entry-org-text::before,
-  .cv-entry-current-accent .cv-entry-org-text::before {
-    display: none;
+    display: inline-block;
+    max-width: 100%;
+    text-wrap: balance;
   }
   .cv-entry-date,
   .cv-entry-date-split {
@@ -1956,7 +1941,32 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   .cv-lang-arabic-group .cv-lang-subrow,
   .cv-lang-philo-group .cv-lang-subrow {
     margin-left: 0;
+    overflow: visible;
     padding-left: 0;
+  }
+  .cv-lang-arabic-group::before,
+  .cv-lang-philo-group::before {
+    background: rgba(245, 244, 240, 0.22);
+    bottom: 1rem;
+    content: "";
+    display: block;
+    left: -1.2rem;
+    position: absolute;
+    top: 1.95rem;
+    width: 1px;
+  }
+  .cv-lang-philo-group::before {
+    top: 4.6rem;
+  }
+  .cv-lang-arabic-group .cv-lang-name-text::before,
+  .cv-lang-philo-group .cv-lang-name-text::before {
+    border-top: 1px solid rgba(245, 244, 240, 0.22);
+    content: "";
+    display: block;
+    position: absolute;
+    right: calc(100% + 0.35rem);
+    top: 50%;
+    width: 1.55rem;
   }
   .cv-lang-separator {
     margin: 0.9rem 0 0.85rem;
