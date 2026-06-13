@@ -582,6 +582,9 @@ body.pv-cv .pv-prose {
 .cv-honor-mobile-break {
   display: none;
 }
+.cv-honor-desktop-break {
+  display: block;
+}
 .cv-education-date {
   color: rgba(245, 244, 240, 0.5);
   font-size: 0.62rem;
@@ -1066,7 +1069,7 @@ body.pv-cv .pv-prose {
   position: relative;
 }
 .cv-lang-prefix {
-  color: rgba(245, 244, 240, 0.85);
+  color: rgba(245, 244, 240, 0.42);
 }
 .cv-lang-name-text::before {
   border-top: 1px solid rgba(245, 244, 240, 0.22);
@@ -1890,6 +1893,9 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   .cv-honor-mobile-break {
     display: block;
   }
+  .cv-honor-desktop-break {
+    display: none;
+  }
   .cv-lang-row {
     align-items: center;
     display: grid;
@@ -1953,18 +1959,20 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   }
   .cv-lang-arabic-group,
   .cv-lang-philo-group {
-    --cv-lang-connector-x: 0.35rem;
     --cv-lang-label-indent: 1.35rem;
+    --cv-lang-connector-gap: 10px;
+    --cv-lang-connector-x: 0;
   }
   .cv-lang-arabic-group .cv-lang-subrow,
   .cv-lang-philo-group .cv-lang-subrow {
     margin-left: 0;
-    overflow: visible;
+    overflow: hidden;
     padding-left: 0;
   }
   .cv-lang-arabic-group .cv-lang-name,
   .cv-lang-philo-group .cv-lang-name {
     padding-left: var(--cv-lang-label-indent);
+    text-align: right;
   }
   .cv-lang-arabic-group::before,
   .cv-lang-philo-group::before {
@@ -1974,23 +1982,27 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
     display: block;
     left: var(--cv-lang-connector-x);
     position: absolute;
-    top: 1.95rem;
+    top: 1.45rem;
     width: 1px;
     z-index: 1;
   }
   .cv-lang-philo-group::before {
-    top: 3.35rem;
+    top: 2.85rem;
   }
   .cv-lang-arabic-group .cv-lang-subrow::before,
   .cv-lang-philo-group .cv-lang-subrow::before {
+    display: none;
+  }
+  .cv-lang-arabic-group .cv-lang-name-text::before,
+  .cv-lang-philo-group .cv-lang-name-text::before {
     background: rgba(245, 244, 240, 0.22);
     content: "";
     display: block;
     height: 1px;
-    left: var(--cv-lang-connector-x);
     position: absolute;
+    right: calc(100% + var(--cv-lang-connector-gap));
     top: 50%;
-    width: calc(var(--cv-lang-label-indent) - var(--cv-lang-connector-x));
+    width: 999px;
     z-index: 2;
   }
   .cv-lang-separator {
