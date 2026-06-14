@@ -9,5 +9,5 @@ Location: Cambridge, MA
 
 Description: A personal repository of notes, experiments, and inquiry.
 Typography: Spectral
-Icons: Tabler Icons, custom PHV brand assets
-Last updated: 2026-06-02
+Icons: Tabler Icons, custom PhV brand assets
+Last updated: 2026-06-14

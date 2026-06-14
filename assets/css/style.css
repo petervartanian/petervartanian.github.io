@@ -2047,3 +2047,98 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
     padding: 0;
   }
 }
+
+
+/* Connector registration override: Arabic and philological language trees.
+   The vertical rule is now composed of row-to-row segments, so its endpoints
+   coincide with the horizontal branch centerlines instead of using arbitrary
+   group top/bottom offsets. */
+.cv-lang-arabic-group::before,
+.cv-lang-philo-group::before {
+  display: none;
+}
+.cv-lang-arabic-group .cv-lang-name-text::before,
+.cv-lang-philo-group .cv-lang-name-text::before {
+  display: none;
+}
+.cv-lang-arabic-group .cv-lang-subrow,
+.cv-lang-philo-group .cv-lang-subrow {
+  overflow: visible;
+  position: relative;
+}
+.cv-lang-arabic-group .cv-lang-subrow {
+  --cv-lang-row-connector-x: 40px;
+  --cv-lang-horizontal-width: 290px;
+}
+.cv-lang-philo-group .cv-lang-subrow {
+  --cv-lang-row-connector-x: 40px;
+  --cv-lang-horizontal-width: 235px;
+}
+.cv-lang-arabic-group .cv-lang-subrow::before,
+.cv-lang-philo-group .cv-lang-subrow::before {
+  background: rgba(245, 244, 240, 0.22);
+  content: "";
+  display: block;
+  height: 1px;
+  left: var(--cv-lang-row-connector-x);
+  position: absolute;
+  top: 50%;
+  width: var(--cv-lang-horizontal-width);
+  z-index: 1;
+}
+.cv-lang-arabic-group .cv-lang-subrow:not(:last-child)::after,
+.cv-lang-philo-group .cv-lang-subrow:not(:last-child)::after {
+  background: rgba(245, 244, 240, 0.22);
+  content: "";
+  display: block;
+  height: calc(100% + 0.32rem);
+  left: var(--cv-lang-row-connector-x);
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  z-index: 2;
+}
+.cv-lang-arabic-group .cv-lang-subrow::before,
+.cv-lang-philo-group .cv-lang-subrow::before {
+  z-index: 3;
+}
+
+@media screen and (max-width: 720px) {
+  .cv-lang-arabic-group::before,
+  .cv-lang-philo-group::before,
+  .cv-lang-arabic-group .cv-lang-name-text::before,
+  .cv-lang-philo-group .cv-lang-name-text::before {
+    display: none;
+  }
+  .cv-lang-arabic-group .cv-lang-subrow,
+  .cv-lang-philo-group .cv-lang-subrow {
+    --cv-lang-row-connector-x: 0px;
+    --cv-lang-horizontal-width: calc(6rem + var(--cv-lang-label-indent) - 10px);
+    overflow: visible;
+    position: relative;
+  }
+  .cv-lang-arabic-group .cv-lang-subrow::before,
+  .cv-lang-philo-group .cv-lang-subrow::before {
+    background: rgba(245, 244, 240, 0.22);
+    content: "";
+    display: block;
+    height: 1px;
+    left: var(--cv-lang-row-connector-x);
+    position: absolute;
+    top: 50%;
+    width: var(--cv-lang-horizontal-width);
+    z-index: 3;
+  }
+  .cv-lang-arabic-group .cv-lang-subrow:not(:last-child)::after,
+  .cv-lang-philo-group .cv-lang-subrow:not(:last-child)::after {
+    background: rgba(245, 244, 240, 0.22);
+    content: "";
+    display: block;
+    height: calc(100% + 0.4rem);
+    left: var(--cv-lang-row-connector-x);
+    position: absolute;
+    top: 50%;
+    width: 1px;
+    z-index: 2;
+  }
+}
