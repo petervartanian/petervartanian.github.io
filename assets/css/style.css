@@ -2058,6 +2058,9 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
 .cv-lang-philo-group::before {
   display: block;
 }
+.cv-lang-philo-group::before {
+  top: 2.84rem;
+}
 .cv-lang-arabic-group .cv-lang-name-text::before,
 .cv-lang-philo-group .cv-lang-name-text::before {
   background: rgba(245, 244, 240, 0.22);
@@ -2114,7 +2117,7 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
   }
   .cv-lang-philo-group::before {
     bottom: 0.54rem;
-    top: 3.16rem;
+    top: 2.89rem;
   }
   .cv-lang-arabic-group .cv-lang-group-title,
   .cv-lang-philo-title {
