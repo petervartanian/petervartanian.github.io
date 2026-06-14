@@ -1,0 +1,24 @@
+# Peter H. Vartanian
+
+> A personal repository of notes, experiments, and inquiry.
+
+This site collects Peter H. Vartanian's CV, portfolio, working artifacts, and
+contact information. Its recurring subjects include international security,
+geo-legality, AI governance, open-source intelligence, and dual-use procurement.
+
+## Core Pages
+
+- [Home](https://petervartanian.xyz/)
+- [CV](https://petervartanian.xyz/cv/)
+- [Portfolio](https://petervartanian.xyz/portfolio/)
+- [(Working) Artifacts](https://petervartanian.xyz/artifacts)
+- [Contact](https://petervartanian.xyz/contact/)
+
+## Public Profiles
+
+- [GitHub](https://github.com/petervartanian)
+- [Hugging Face](https://huggingface.co/petervartanian)
+- [LinkedIn](https://www.linkedin.com/in/petervartanian/)
+- [ORCID](https://orcid.org/0009-0009-8538-5811)
+- [Substack](https://substack.com/@petervartanian)
+- [X](https://x.com/petervartanian)
