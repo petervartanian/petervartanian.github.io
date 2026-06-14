@@ -1110,9 +1110,9 @@ body.pv-cv .pv-prose {
   padding-top: 0.25rem;
 }
 .cv-lang-philo-group::before {
-  bottom: 1.18rem;
+  bottom: 1.12rem;
   left: var(--cv-lang-connector-x);
-  top: 2.9rem;
+  top: 3.72rem;
 }
 .cv-lang-philo-title {
   line-height: 1.2;
@@ -1147,7 +1147,7 @@ body.pv-cv .pv-prose {
   font-style: italic;
   font-size: 0.56rem;
   opacity: 0.78;
-  width: 30px;
+  width: 22px;
 }
 .cv-lang-level {
   font-size: 0.65rem;
@@ -2049,161 +2049,94 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
 }
 
 
-/* Connector registration override: Arabic and philological language trees.
-   The vertical rule is now composed of row-to-row segments, so its endpoints
-   coincide with the horizontal branch centerlines instead of using arbitrary
-   group top/bottom offsets. */
+/* Connector registration override: Arabic and philological language trees. */
+.cv-lang-arabic-group,
+.cv-lang-philo-group {
+  --cv-lang-label-shift: 8px;
+}
 .cv-lang-arabic-group::before,
 .cv-lang-philo-group::before {
-  display: none;
+  display: block;
 }
 .cv-lang-arabic-group .cv-lang-name-text::before,
 .cv-lang-philo-group .cv-lang-name-text::before {
-  display: none;
+  background: rgba(245, 244, 240, 0.22);
+  border: 0;
+  content: "";
+  display: block;
+  height: 1px;
+  position: absolute;
+  right: calc(100% + var(--cv-lang-connector-gap));
+  top: 50%;
+  width: calc(
+    var(--cv-lang-subrow-name-right) - var(--cv-lang-connector-x) -
+      var(--cv-lang-connector-gap) - var(--cv-lang-label-shift) - 100%
+  );
+  z-index: 1;
+}
+.cv-lang-arabic-group .cv-lang-name,
+.cv-lang-philo-group .cv-lang-name {
+  padding-right: var(--cv-lang-label-shift);
 }
 .cv-lang-arabic-group .cv-lang-subrow,
 .cv-lang-philo-group .cv-lang-subrow {
   overflow: visible;
   position: relative;
 }
-.cv-lang-arabic-group .cv-lang-subrow {
-  --cv-lang-row-connector-x: 40px;
-  --cv-lang-horizontal-width: 290px;
-}
-.cv-lang-philo-group .cv-lang-subrow {
-  --cv-lang-row-connector-x: 40px;
-  --cv-lang-horizontal-width: 235px;
-}
 .cv-lang-arabic-group .cv-lang-subrow::before,
-.cv-lang-philo-group .cv-lang-subrow::before {
-  background: rgba(245, 244, 240, 0.22);
-  content: "";
-  display: block;
-  height: 1px;
-  left: var(--cv-lang-row-connector-x);
-  position: absolute;
-  top: 50%;
-  width: var(--cv-lang-horizontal-width);
-  z-index: 1;
-}
+.cv-lang-philo-group .cv-lang-subrow::before,
 .cv-lang-arabic-group .cv-lang-subrow:not(:last-child)::after,
 .cv-lang-philo-group .cv-lang-subrow:not(:last-child)::after {
-  background: rgba(245, 244, 240, 0.22);
-  content: "";
-  display: block;
-  height: calc(100% + 0.32rem);
-  left: var(--cv-lang-row-connector-x);
-  position: absolute;
-  top: 50%;
-  width: 1px;
-  z-index: 2;
-}
-.cv-lang-arabic-group .cv-lang-subrow::before,
-.cv-lang-philo-group .cv-lang-subrow::before {
-  z-index: 3;
+  display: none;
 }
 
 @media screen and (max-width: 720px) {
+  .cv-lang-arabic-group,
+  .cv-lang-philo-group {
+    --cv-lang-connector-gap: 10px;
+    --cv-lang-connector-x: 0px;
+    --cv-lang-label-shift: 16px;
+    --cv-lang-subrow-name-right: 6rem;
+  }
   .cv-lang-arabic-group::before,
-  .cv-lang-philo-group::before,
-  .cv-lang-arabic-group .cv-lang-name-text::before,
-  .cv-lang-philo-group .cv-lang-name-text::before {
-    display: none;
-  }
-  .cv-lang-arabic-group .cv-lang-subrow,
-  .cv-lang-philo-group .cv-lang-subrow {
-    --cv-lang-row-connector-x: 0px;
-    --cv-lang-horizontal-width: calc(6rem + var(--cv-lang-label-indent) - 10px);
-    overflow: visible;
-    position: relative;
-  }
-  .cv-lang-arabic-group .cv-lang-subrow::before,
-  .cv-lang-philo-group .cv-lang-subrow::before {
+  .cv-lang-philo-group::before {
     background: rgba(245, 244, 240, 0.22);
     content: "";
     display: block;
-    height: 1px;
-    left: var(--cv-lang-row-connector-x);
+    left: var(--cv-lang-connector-x);
     position: absolute;
-    top: 50%;
-    width: var(--cv-lang-horizontal-width);
-    z-index: 3;
-  }
-  .cv-lang-arabic-group .cv-lang-subrow:not(:last-child)::after,
-  .cv-lang-philo-group .cv-lang-subrow:not(:last-child)::after {
-    background: rgba(245, 244, 240, 0.22);
-    content: "";
-    display: block;
-    height: calc(100% + 0.4rem);
-    left: var(--cv-lang-row-connector-x);
-    position: absolute;
-    top: 50%;
-    width: 1px;
-    z-index: 2;
-  }
-}
-
-/* Final language-tree mobile correction.
-   Arabic and philological entries are connector trees, not proficiency rows.
-   On narrow screens, suppress the inherited bar/level columns and anchor each
-   label to a fixed branch endpoint so the bracket geometry cannot collide with
-   progress bars or scores. */
-@media screen and (max-width: 720px) {
-  .cv-lang-arabic-group .cv-lang-bar,
-  .cv-lang-arabic-group .cv-lang-level,
-  .cv-lang-philo-group .cv-lang-bar,
-  .cv-lang-philo-group .cv-lang-level {
-    display: none !important;
-  }
-
-  .cv-lang-arabic-group .cv-lang-subrow,
-  .cv-lang-philo-group .cv-lang-subrow {
-    --cv-lang-row-connector-x: 0px;
-    --cv-lang-horizontal-width: 5.6rem;
-    display: block;
-    height: 2.05rem;
-    margin: 0 0 0.4rem;
-    overflow: visible;
-    padding-left: 0;
-    position: relative;
-  }
-
-  .cv-lang-arabic-group .cv-lang-subrow::before,
-  .cv-lang-philo-group .cv-lang-subrow::before {
-    background: rgba(245, 244, 240, 0.22);
-    content: "";
-    display: block;
-    height: 1px;
-    left: var(--cv-lang-row-connector-x);
-    position: absolute;
-    top: 50%;
-    width: var(--cv-lang-horizontal-width);
-    z-index: 2;
-  }
-
-  .cv-lang-arabic-group .cv-lang-subrow:not(:last-child)::after,
-  .cv-lang-philo-group .cv-lang-subrow:not(:last-child)::after {
-    background: rgba(245, 244, 240, 0.22);
-    content: "";
-    display: block;
-    height: calc(100% + 0.4rem);
-    left: var(--cv-lang-row-connector-x);
-    position: absolute;
-    top: 50%;
     width: 1px;
     z-index: 1;
   }
-
+  .cv-lang-arabic-group::before {
+    bottom: 0.54rem;
+    top: 1.45rem;
+  }
+  .cv-lang-philo-group::before {
+    bottom: 0.54rem;
+    top: 3.16rem;
+  }
+  .cv-lang-arabic-group .cv-lang-group-title,
+  .cv-lang-philo-title {
+    padding-left: 0;
+  }
   .cv-lang-arabic-group .cv-lang-name,
-  .cv-lang-philo-group .cv-lang-name,
-  .cv-lang-philo .cv-lang-name {
-    left: calc(var(--cv-lang-row-connector-x) + var(--cv-lang-horizontal-width) + 0.72rem);
-    min-width: 0;
-    padding-left: 0 !important;
+  .cv-lang-philo-group .cv-lang-name {
+    padding-right: var(--cv-lang-label-shift);
+  }
+  .cv-lang-arabic-group .cv-lang-name-text::before,
+  .cv-lang-philo-group .cv-lang-name-text::before {
+    background: rgba(245, 244, 240, 0.22);
+    content: "";
+    display: block;
+    height: 1px;
     position: absolute;
-    text-align: left;
+    right: calc(100% + var(--cv-lang-connector-gap));
     top: 50%;
-    transform: translateY(-50%);
-    white-space: nowrap;
+    width: calc(
+      var(--cv-lang-subrow-name-right) - var(--cv-lang-connector-x) -
+        var(--cv-lang-connector-gap) - var(--cv-lang-label-shift) - 100%
+    );
+    z-index: 2;
   }
 }
