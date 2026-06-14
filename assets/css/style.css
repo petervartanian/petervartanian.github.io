@@ -2142,3 +2142,68 @@ article a:not(.wa-row):not(.port-card):not(.contact-link-row):hover {
     z-index: 2;
   }
 }
+
+/* Final language-tree mobile correction.
+   Arabic and philological entries are connector trees, not proficiency rows.
+   On narrow screens, suppress the inherited bar/level columns and anchor each
+   label to a fixed branch endpoint so the bracket geometry cannot collide with
+   progress bars or scores. */
+@media screen and (max-width: 720px) {
+  .cv-lang-arabic-group .cv-lang-bar,
+  .cv-lang-arabic-group .cv-lang-level,
+  .cv-lang-philo-group .cv-lang-bar,
+  .cv-lang-philo-group .cv-lang-level {
+    display: none !important;
+  }
+
+  .cv-lang-arabic-group .cv-lang-subrow,
+  .cv-lang-philo-group .cv-lang-subrow {
+    --cv-lang-row-connector-x: 0px;
+    --cv-lang-horizontal-width: 5.6rem;
+    display: block;
+    height: 2.05rem;
+    margin: 0 0 0.4rem;
+    overflow: visible;
+    padding-left: 0;
+    position: relative;
+  }
+
+  .cv-lang-arabic-group .cv-lang-subrow::before,
+  .cv-lang-philo-group .cv-lang-subrow::before {
+    background: rgba(245, 244, 240, 0.22);
+    content: "";
+    display: block;
+    height: 1px;
+    left: var(--cv-lang-row-connector-x);
+    position: absolute;
+    top: 50%;
+    width: var(--cv-lang-horizontal-width);
+    z-index: 2;
+  }
+
+  .cv-lang-arabic-group .cv-lang-subrow:not(:last-child)::after,
+  .cv-lang-philo-group .cv-lang-subrow:not(:last-child)::after {
+    background: rgba(245, 244, 240, 0.22);
+    content: "";
+    display: block;
+    height: calc(100% + 0.4rem);
+    left: var(--cv-lang-row-connector-x);
+    position: absolute;
+    top: 50%;
+    width: 1px;
+    z-index: 1;
+  }
+
+  .cv-lang-arabic-group .cv-lang-name,
+  .cv-lang-philo-group .cv-lang-name,
+  .cv-lang-philo .cv-lang-name {
+    left: calc(var(--cv-lang-row-connector-x) + var(--cv-lang-horizontal-width) + 0.72rem);
+    min-width: 0;
+    padding-left: 0 !important;
+    position: absolute;
+    text-align: left;
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+  }
+}
