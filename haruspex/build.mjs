@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = new URL('./', import.meta.url);
 const datasetPath = new URL('../outputs/haruspex-2026-09-09/haruspex-dataset.json', root);
-const [template, styles, app, dataset, severity, visuals, ontology, query, temporal, fieldLayout, cast, castView, research, quotations, collectionMethod] = await Promise.all([
+const [template, styles, app, dataset, severity, visuals, ontology, query, temporal, fieldLayout, cast, castView, research, quotations, collectionMethod, airiLogo] = await Promise.all([
   readFile(new URL('index.template.html', root), 'utf8'),
   readFile(new URL('style.css', root), 'utf8'),
   readFile(new URL('app.js', root), 'utf8'),
@@ -19,6 +19,7 @@ const [template, styles, app, dataset, severity, visuals, ontology, query, tempo
   readFile(new URL('research-expansion.json', root), 'utf8'),
   readFile(new URL('opening-quotations.json', root), 'utf8'),
   readFile(new URL('collection-method.json', root), 'utf8'),
+  readFile(new URL('assets/mit-airi-official.svg', root), 'utf8'),
 ]);
 const parsed = JSON.parse(dataset);
 const encodings = JSON.parse(visuals);
@@ -172,7 +173,14 @@ for (const [id, timing] of timeIndex) {
   const b = timing.latest_context_date_exclusive && Date.parse(timing.latest_context_date_exclusive);
   requireValid(a == null || b == null || a < b, `Invalid date bounds for ${id}.`);
 }
+const htmlText = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const heroQuote = openingQuotations.quotations.find(item => item.id === openingQuotations.recommendation.hero);
+requireValid(!!heroQuote, 'Opening quote must resolve.');
 const html = template
+  .replace('/* OPENING_QUOTE */', () => htmlText(heroQuote.quote))
+  .replace('/* OPENING_AUTHOR */', () => htmlText(heroQuote.author))
+  .replace('/* OPENING_URL */', () => htmlText(heroQuote.url))
+  .replace('/* AIRI_LOGO */', () => `data:image/svg+xml;base64,${Buffer.from(airiLogo).toString('base64')}`)
   .replace('/* STYLES */', () => styles)
   .replace('/* DATASET */', () => JSON.stringify(parsed).replace(/</g, '\\u003c'))
   .replace('/* SEVERITY */', () => JSON.stringify(assessments).replace(/</g, '\\u003c'))
@@ -187,5 +195,5 @@ const html = template
 const output = new URL('index.html', root);
 await writeFile(output, html);
 await writeFile(new URL('haruspex-dataset.json', root), dataset);
-await writeFile(new URL('haruspex-atlas-data-v9.json', root), JSON.stringify({ ...parsed, severity_assessments: assessments, visual_encodings: encodings, incident_ontology: incidentOntology, temporal_assessments: temporalAssessments, cast_analysis: castAnalysis, research_expansion: researchExpansion, opening_quotations: openingQuotations }, null, 2));
+await writeFile(new URL('haruspex-atlas-data-v10.json', root), JSON.stringify({ ...parsed, severity_assessments: assessments, visual_encodings: encodings, incident_ontology: incidentOntology, temporal_assessments: temporalAssessments, cast_analysis: castAnalysis, research_expansion: researchExpansion, opening_quotations: openingQuotations }, null, 2));
 console.log(JSON.stringify({ output: fileURLToPath(output), events: parsed.events.length, bytes: Buffer.byteLength(html) }));

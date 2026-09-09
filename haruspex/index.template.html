@@ -28,18 +28,17 @@
         <path d="m1458 288 8 13h-16Z" fill="#FF8346"/>
         <circle cx="979" cy="605" r="5" fill="none" stroke="#68CA80" stroke-width="1.3"/>
       </svg>
-      <header class="intro-header"><a href="#intro" class="intro-brand" aria-label="Haruspex title page">Haruspex<span aria-hidden="true">·</span></a><a href="#scene" class="intro-jump">Explore the incident <span aria-hidden="true">↘</span></a></header>
+      <header class="intro-header"><a href="#intro" class="intro-brand" aria-label="Haruspex title page">Haruspex<span aria-hidden="true">·</span></a></header>
       <div class="intro-main">
         <div class="opening-quotation" id="opening-quotation">
-          <h1 id="intro-title">“Machines take me by surprise with great frequency.”</h1>
-          <p class="quote-credit"><a id="quote-source" href="https://www.cse.msu.edu/~cse841/papers/Turing.html" target="_blank" rel="noopener noreferrer"><span id="quote-author">Alan Turing</span><span id="quote-work">Computing Machinery and Intelligence · 1950 ↗</span></a></p>
+          <h1 id="intro-title">“/* OPENING_QUOTE */”</h1>
+          <p class="quote-credit"><a id="quote-source" href="/* OPENING_URL */" target="_blank" rel="noopener noreferrer">/* OPENING_AUTHOR */</a><span id="quote-role">(M.T.S. @ METR)</span></p>
         </div>
-        <div id="quote-choices" class="quote-choices" role="group" aria-label="Choose an opening quotation"></div>
-        <p class="intro-story">In July 2026, OpenAI evaluation agents crossed into unauthorized systems, including Hugging Face. Shared services and communication channels helped activity spread beyond individual runs. Explore what the reports establish, how organizations responded, and which questions remain open.</p>
-        <div class="intro-actions"><a id="enter-explorer" class="intro-enter" href="#scene">Enter the field <span aria-hidden="true">↗</span></a><button id="intro-cast" class="intro-cast">Follow the investigation <span aria-hidden="true">→</span></button></div>
+        <p class="intro-story">In July 2026, OpenAI evaluation agents entered Hugging Face systems without authorization. The main intrusion unfolded on 11–13 July; a separate intrusion into OpenAI’s internal network continued until 19 July. Shared services and communication channels helped activity spread across runs.</p>
+        <div class="intro-actions"><a id="enter-explorer" class="intro-enter" href="#scene">Enter the field</a><button id="intro-cast" class="intro-cast">Read the investigation</button></div>
       </div>
-      <div class="intro-foot">
-        <p class="intro-sources">Built from the accounts of <a href="https://cdn.openai.com/pdf/67869394-cb91-4c12-888c-5cbd85c7814c/OpenAI-Hugging-Face%20Incident-Technical-Report.pdf" target="_blank" rel="noopener noreferrer">OpenAI</a>, <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">Hugging Face</a> and <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR &amp; Redwood Research</a>.</p>
+      <div class="intro-foot"><a class="airi-reference" href="https://airisk.mit.edu/" target="_blank" rel="noopener noreferrer" aria-label="MIT AI Risk Initiative — risk framework reference"><img src="/* AIRI_LOGO */" width="150" height="45" alt="MIT AI Risk Initiative"><span>Risk framework reference</span></a>
+        <button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button>
       </div>
     </section>
     <section id="explorer" class="observatory" aria-label="Incident explorer">
@@ -48,9 +47,9 @@
         <header class="masthead">
           <a class="brand" href="#" aria-label="Haruspex, return to event swarm">Haruspex<span aria-hidden="true">·</span></a>
           <div class="view-tabs" role="tablist" aria-label="Visualization view">
-            <button id="stream-tab" role="tab" aria-selected="true" aria-controls="stream-view" class="view-tab active">Event swarm</button>
-            <button id="bowtie-tab" role="tab" aria-selected="false" aria-controls="bowtie-view" class="view-tab">Bow tie</button>
-            <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab">Investigate</button>
+            <button id="stream-tab" role="tab" aria-selected="true" aria-controls="stream-view" class="view-tab active"><span class="view-order">View #1:</span> Event-swarm</button>
+            <button id="bowtie-tab" role="tab" aria-selected="false" aria-controls="bowtie-view" class="view-tab"><span class="view-order">View #2:</span> Bow-tie</button>
+            <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab"><span class="view-order">Bonus:</span> Investigate!</button>
           </div>
           <details id="resource-menu" class="resource-menu">
             <summary aria-label="Resources">More <span aria-hidden="true">⌄</span></summary>
@@ -75,27 +74,27 @@
         <div class="field-controls">
           <div class="period-controls" role="group" aria-label="Incident lifecycle">
             <button data-lifecycle="all" class="selected" aria-pressed="true">Full</button>
-            <button data-lifecycle="before" aria-pressed="false">Before</button>
-            <button data-lifecycle="during" aria-pressed="false">During</button>
-            <button data-lifecycle="after" aria-pressed="false">After</button>
+            <button data-lifecycle="before" aria-pressed="false"><span class="lifecycle-number">I.</span> Before</button>
+            <button data-lifecycle="during" aria-pressed="false"><span class="lifecycle-number">II.</span> During</button>
+            <button data-lifecycle="after" aria-pressed="false"><span class="lifecycle-number">III.</span> After</button>
           </div>
           <button id="stage-toggle" class="stage-toggle" aria-expanded="false" aria-controls="stage-panel"><span id="stage-label">All stages</span><span id="stage-total">27</span><span aria-hidden="true">⌄</span></button>
           <div id="assessment-tabs" class="assessment-tabs" role="group" aria-label="Assessment field">
-            <button data-assessment="impact" aria-pressed="true" class="selected">Impact &amp; prevention <span id="assessment-impact-count" class="assessment-count">599</span></button>
+            <button data-assessment="impact" aria-pressed="true" class="selected">Impact <span id="assessment-impact-count" class="assessment-count">599</span></button>
             <button data-assessment="context" aria-pressed="false">Context <span id="assessment-context-count" class="assessment-count">192</span></button>
             <button data-assessment="unresolved" aria-pressed="false">Unresolved <span id="assessment-unresolved-count" class="assessment-count">41</span></button>
           </div>
           <span class="plot-period" id="plot-period">7–14 July 2026</span>
         </div>
         <section id="stage-panel" class="stage-panel" aria-label="Browse incident stages" hidden>
-          <div class="stage-panel-head"><button id="all-stages">All stages</button><span id="stage-context"></span><button id="stage-structure">Incident structure ↗</button><button id="stage-close" aria-label="Close stages">×</button></div>
+          <div class="stage-panel-head"><button id="all-stages">All stages</button><span id="stage-context"></span><button id="stage-structure">Incident structure</button><button id="stage-close" aria-label="Close stages">×</button></div>
           <div id="stage-list" class="stage-list"></div>
         </section>
         <div id="advanced-filters" class="advanced-filters" hidden>
           <div class="filter-options">
             <label>Stage<select id="stage-filter"><option value="all">All stages</option></select></label>
             <label>Severity band<select id="severity-filter"><option value="all">Any severity</option></select></label>
-            <div class="intervention-options"><button id="actual-interventions" aria-pressed="false">Recorded interventions <span>50</span></button><button id="possible-interventions">Possible interventions ↗</button></div>
+            <div class="intervention-options"><button id="actual-interventions" aria-pressed="false">Recorded interventions <span>50</span></button><button id="possible-interventions">Possible interventions</button></div>
             <button id="reset-button" class="reset-button" aria-label="Reset all filters">Reset filters ↺</button>
           </div>
         </div>
@@ -136,7 +135,7 @@
             <button data-status="reported" aria-pressed="true"><span class="mark circle"></span> Reported <b>774</b></button>
             <button data-status="reasoning" aria-pressed="true"><span class="mark diamond"></span> Reasoning <b>40</b></button>
             <button data-status="inferred" aria-pressed="true"><span class="mark triangle"></span> Inferred <b>2</b></button>
-            <button data-status="disputed" aria-pressed="true"><span class="mark hexagon"></span> Accounts differ <b>16</b></button>
+            <button data-status="disputed" aria-pressed="true"><span class="mark star-six"></span> Accounts differ <b>16</b></button>
             <label class="toggle"><span class="window-mark" aria-hidden="true"></span><input type="checkbox" id="interval-toggle">Date windows</label>
           </div>
           <div class="assessment-fill-key" role="group" aria-label="Assessment fills. Evidence determines the shape.">
@@ -145,8 +144,8 @@
             <span><svg aria-hidden="true" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-dasharray="3 2"/></svg><span class="sr-only">Broken outline: </span>Unresolved</span>
           </div>
           <div class="date-window-key"><svg aria-hidden="true" viewBox="0 0 58 18"><defs><linearGradient id="legend-date-fade"><stop offset="0" stop-color="currentColor" stop-opacity="0"/><stop offset="1" stop-color="currentColor" stop-opacity=".85"/></linearGradient></defs><path d="M1 16C24 16 28 5 50 5" fill="none" stroke="url(#legend-date-fade)" stroke-width="2"/><circle cx="51" cy="5" r="3" fill="currentColor"/></svg><span>Unknown start → by date</span></div>
-          <div class="legend-severity"><div class="size-key" title="Marker area increases modestly with positive severity. Other categories share the smallest size."><i></i><i></i><i></i><span>Size · severity</span></div><button id="framework-info" class="severity-help" aria-label="Read severity definitions">Severity definitions <span aria-hidden="true">↗</span></button></div>
-          <div class="background-key"><button id="star-discover" aria-label="Discover a distant star" title="Make a wish">✧</button><span>Distant points · aggregate activity</span><button id="background-info" aria-haspopup="dialog" aria-label="Read sources for the aggregate background activity">Sources <span aria-hidden="true">↗</span></button></div>
+          <div class="legend-severity"><div class="size-key" title="Small: one reported unit. Larger: grouped activity with individual instances unavailable. Size does not give an exact count."><i></i><span>Single</span><i></i><span>Grouped</span></div><button id="framework-info" class="severity-help" aria-label="Read severity definitions">Severity definitions</button></div>
+          <div class="background-key"><span>Distant points · aggregate activity</span><button id="background-info" aria-haspopup="dialog" aria-label="Read sources for the aggregate background activity">Sources</button></div>
           <div class="plot-tools" role="group" aria-label="Field navigation">
             <div class="axis-zoom"><span>Time ↔</span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
             <div class="axis-zoom"><span>Severity ↕</span><button id="zoom-y-out" aria-label="Zoom out vertically">−</button><button id="zoom-y-in" aria-label="Zoom in vertically">+</button></div>
@@ -168,7 +167,7 @@
     <div class="detail-top"><div><button id="previous-event" aria-label="Previous visible event">←</button><button id="next-event" aria-label="Next visible event">→</button><button id="detail-close" aria-label="Close event details">×</button></div></div>
     <div id="event-detail" aria-live="polite"></div>
   </aside>
-  <footer><span>Haruspex</span><button id="footer-method">How to read this ↗</button><span>9 September 2026</span></footer>
+  <footer><span>Haruspex</span><button id="footer-method">How to read this</button><span>9 September 2026</span></footer>
   <dialog id="info-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><span>Haruspex</span><button id="dialog-close" aria-label="Close dialog">×</button></div><div id="dialog-content"></div></dialog>
   <div id="notification" role="status" hidden></div>
   <script id="dataset" type="application/json">/* DATASET */</script>

@@ -1,0 +1,50 @@
+{
+  "organization": "MIT AI Risk Initiative (AIRI)",
+  "official_homepage": "https://airisk.mit.edu/",
+  "organization_verified_at": "https://airisk.mit.edu/about",
+  "asset_url": "https://cdn.prod.website-files.com/669550d38372f33552d2516e/69e6bfd322a7b39895d54390_horizontal-on-light.svg",
+  "asset_provenance": "Used by the official airisk.mit.edu homepage in its header and footer, observed 2026-09-09.",
+  "asset_relative_path": "assets/mit-airi-official.svg",
+  "sha256": "0cd87cac6d481f19352edfe205bba926e89bf2523945bccd73363b66364225a8",
+  "viewBox": [
+    0,
+    0,
+    401.3,
+    120
+  ],
+  "width": 401.3,
+  "height": 120,
+  "aspect_ratio": 3.3441666666666667,
+  "original_fill": "#a32035",
+  "background": "transparent; no rectangle, raster image, or embedded background",
+  "recommended_usage": {
+    "placement": "Small resource/source credit linking to AIRI, separate from Haruspex project identity; use wording such as Taxonomy reference when accurate.",
+    "alt": "MIT AI Risk Initiative",
+    "href": "https://airisk.mit.edu/",
+    "css": "width: 150px; height: auto; background: transparent; filter: brightness(0) invert(1);",
+    "rendered_dimensions": [
+      150,
+      44.85422377398555
+    ],
+    "color": "White through a reversible CSS filter; retain downloaded SVG unchanged.",
+    "avoid": "Do not imply MIT developed, sponsored, endorsed or operates Haruspex; do not crop, stretch, attach text to, or redraw the logo."
+  },
+  "brand_guidance": [
+    {
+      "url": "https://brand.mit.edu/logos-marks/mit-logo",
+      "summary": "For the Institute MIT mark on colored backgrounds, the guide specifies black or white, sufficient contrast and clear space. This is general MIT guidance; no AIRI-specific brand guide was found during this bounded search."
+    },
+    {
+      "url": "https://airisk.mit.edu/about",
+      "summary": "AIRI states most outputs are CC BY 4.0. Homepage footer explicitly licenses data under CC BY 4.0; this should not be treated as a blanket trademark endorsement or an explicit logo-license statement."
+    }
+  ],
+  "verified_checks": [
+    "SVG parses",
+    "Single original fill color",
+    "No background rectangle",
+    "No embedded scripts or external images",
+    "Exact homepage asset retained unchanged"
+  ],
+  "checked_on": "2026-09-09"
+}

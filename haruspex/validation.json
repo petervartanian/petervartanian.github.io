@@ -1,7 +1,7 @@
 {
-  "application_version": "9.0.0",
+  "application_version": "10.0.0",
   "assessments_version": "3.0.1",
-  "visual_encodings_version": "5.1.0",
+  "visual_encodings_version": "6.0.0",
   "incident_ontology_version": "1.0.0",
   "temporal_assessments_version": "1.0.0",
   "verified_on": "2026-09-09",
@@ -94,18 +94,17 @@
     "after": 172
   },
   "verified": [
-    "Canonical 832 records with 45 fields remain byte-identical to the published v8 baseline.",
-    "Production build validates canonical IDs and counts, CAST endpoints and provenance, all question identities and unchanged outreach statuses, all research source/event/finding/question references and all32 collection-step artifacts/holders/methods/decision tests.",
-    "Both METR payloads were parsed without execution, original hashes matched the research ledger, and JSON round-trip payload equality was checked. Build validates downloadable artifact provenance.",
-    "Browser at1280x720: verified Turing opening, no showcase statistics, alternate quote controls, connected F06 finding, underlying-event navigation and query/facet filtering.",
-    "Browser: F06 trace filters swarm and bow tie to8 supporting records; return control restores the finding; clearing it restores599 Impact/prevention records. Context/Unresolved remain independent categories.",
-    "Browser: star discovery displays a number-only catalogue label with no event panel opened. Star hit testing uses a spatial grid and does not participate in event counts.",
-    "Browser: E0423 links into F06 and new research; switching to F01 clears the unrelated origin record and shows only relevant relationship paths.",
-    "Browser:23 research entries and16 questions with32 structured collection steps render. NE15 qualification is visible before expansion. Both collected data downloads are exposed.",
-    "Browser: E0748, newly connected by NE13, opens its additional evidence and analytical links. Source dependence is rendered using the actual research schema.",
-    "Browser at390x844: no horizontal page overflow, quotations and entry controls render, control paths fit, investigation tabs retain a full-screen scene, and tracing across bow tie/swarm preserves the finding context.",
-    "JavaScript syntax checks and39 existing structured-query assertions passed. Zero browser console errors captured during verification.",
-    "Independent review corrected stale event origins, overbroad path selection, hidden source dependence, research-only event links, stale background copy, section scroll anchoring and evidence qualification visibility."
+    "Canonical 832 records and 45 fields remain byte-identical. The strict build validates ontology, assessments, temporal bounds, CAST connections, research provenance, original question statuses and collection steps.",
+    "JavaScript syntax checks and the 39 existing structured-query assertions passed against the current website sources.",
+    "Desktop browser: one Cotra quotation, author-only transcript link, small role credit, no quotation switcher or publication-credit line; specific July windows and transparent official AIRI reference logo render.",
+    "Browser: exact view labels, I/II/III lifecycle roles and unnumbered Impact/Context/Unresolved controls render; no horizontal page overflow in desktop and 390px layouts.",
+    "Browser: hidden egg begins locked and reveals a number-only decorative catalogue. No event detail panel opens. The delayed reveal is guarded against switching into Investigate.",
+    "Independent review: marker radius uses only the two canonical source-granularity categories (624 single, 208 grouped); six-point canvas and SVG geometry are area-normalized; colored marks have dark separation outlines and selected marks render last.",
+    "Browser: the F06 trace retains 8 records through swarm and bow-tie; clearing it restores 599 Impact records. The bow geometry cache includes the available vertical field bounds.",
+    "Browser: the final Investigate opens a continuous paper with a CAST introduction, eight connected sections, a conceptual control/feedback figure, 11 source notes and closed research appendices. It has no question chooser or toolbar.",
+    "Browser: source-note navigation focuses the referenced note; the evidence appendix preserves all 23 entries; the Bonus tab returns to the main paper at its start.",
+    "Independent module checks: all 10 focused findings preserve their linked events/questions, all 16 question dialogs work, six research appendices remain reachable, and show(inquiry) restores the paper.",
+    "Browser console checks captured no errors during the v10 interaction review. No end-to-end FPS benchmark is claimed."
   ],
   "limits": [
     "This is a provisional, developing public-source CAST analysis, not a completed or exhaustive investigation. Search completeness and a maximal number of obtainable facts are not claimed.",
@@ -118,7 +117,7 @@
     "192 records are reviewed Context and41 reviewed Unresolved; these retain null scores rather than invented harm levels. Zero is Near-miss.",
     "The12 open-left training records still have no supported earliest date. Their heads mark the inferred exclusive14July boundary, labeled By13July, not occurrence times. Tail curvature and length are decorative, not duration or probability.",
     "Only18 temporal records were individually reviewed in the preceding date-research pass;814 existing windows were carried forward. This visual/investigation revision adds no exact dates.",
-    "Colors are supplemented by labels and workstream filters. Shape conveys evidence, outline treatment conveys assessment disposition, size gives modest ordinal emphasis without harm ratios.",
+    "Colors are supplemented by labels and workstream filters. Shape conveys evidence, outline treatment conveys assessment disposition, and size distinguishes single reported units from grouped activity without estimating an underlying count.",
     "Dense windows can overlap at wide zoom. Zoom and nearby-record selection expose individual records. The phone control graph uses horizontal scrolling.",
     "Reduced-motion handling was code-reviewed, without an emulated reduced-motion browser run. No end-to-end FPS benchmark was performed."
   ],
@@ -139,7 +138,7 @@
         "cached_projection_median": 0.025
       }
     },
-    "benchmark_limit": "Carried forward from v7: computation-only microbenchmark excluding canvas rasterization and DOM updates. Not rerun for v9; no end-to-end FPS claim."
+    "benchmark_limit": "Carried forward from v7: computation-only microbenchmark excluding canvas rasterization and DOM updates. Not rerun for v10; no end-to-end FPS claim."
   },
   "aggregate_background": {
     "semantics": "Illustrative density of source-reported aggregate activity not individually resolved in the detailed record; not one particle per event.",
@@ -155,11 +154,11 @@
       }
     ],
     "aggregation": "Different units can overlap. Do not add totals or subtract832 to invent an exact remainder.",
-    "catalogue": "Stable decorative mark numbers, revealed by hover/tap or the Legend star; never event IDs."
+    "catalogue": "Stable decorative numbers are locked until the small egg is activated. They are not historical event IDs and have no incident details."
   },
   "cast_analysis_version": "1.0.0",
   "assessment_fields": {
-    "impact_and_prevention": 599,
+    "impact": 599,
     "context": 192,
     "unresolved": 41
   },
@@ -215,5 +214,9 @@
     ],
     "new_method_resource": "NS13",
     "source_count_is_not_independent_witness_count": true
+  },
+  "marker_scope_counts": {
+    "single": 624,
+    "grouped": 208
   }
 }
