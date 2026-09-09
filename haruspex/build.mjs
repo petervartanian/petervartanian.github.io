@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = new URL('./', import.meta.url);
 const datasetPath = new URL('../outputs/haruspex-2026-09-09/haruspex-dataset.json', root);
-const [template, styles, app, dataset, severity, visuals, ontology, query, temporal, fieldLayout, cast, castView] = await Promise.all([
+const [template, styles, app, dataset, severity, visuals, ontology, query, temporal, fieldLayout, cast, castView, research, quotations, collectionMethod] = await Promise.all([
   readFile(new URL('index.template.html', root), 'utf8'),
   readFile(new URL('style.css', root), 'utf8'),
   readFile(new URL('app.js', root), 'utf8'),
@@ -16,6 +16,9 @@ const [template, styles, app, dataset, severity, visuals, ontology, query, tempo
   readFile(new URL('field-layout.js', root), 'utf8'),
   readFile(new URL('cast-analysis.json', root), 'utf8'),
   readFile(new URL('cast-view.js', root), 'utf8'),
+  readFile(new URL('research-expansion.json', root), 'utf8'),
+  readFile(new URL('opening-quotations.json', root), 'utf8'),
+  readFile(new URL('collection-method.json', root), 'utf8'),
 ]);
 const parsed = JSON.parse(dataset);
 const encodings = JSON.parse(visuals);
@@ -23,6 +26,8 @@ const incidentOntology = JSON.parse(ontology);
 const assessments = JSON.parse(severity);
 const temporalAssessments = JSON.parse(temporal);
 const castAnalysis = JSON.parse(cast);
+const researchExpansion = {...JSON.parse(research), collection_method: JSON.parse(collectionMethod)};
+const openingQuotations = JSON.parse(quotations);
 function requireValid(condition, message) {
   if (!condition) throw new Error(`Invalid incident data: ${message}`);
 }
@@ -66,6 +71,28 @@ for (const path of castAnalysis.relationships) {
 requireValid(castAnalysis.questions.every(q => q.request_status === 'not_sent' && q.evidence_status === 'open'), 'Questions must not imply outreach or evidence that has not occurred.');
 requireValid(castAnalysis.improvements.every(item => ['reported_actual','analyst_proposal'].includes(item.kind)), 'Changes must distinguish reported actions and analyst proposals.');
 requireValid(castAnalysis.coverage.linked_event_count === castEventIds.size, 'CAST linked-event coverage count is incorrect.');
+const researchSources = uniqueIndex(researchExpansion.sources, 'source_id', 'New sources');
+const researchItems = uniqueIndex(researchExpansion.evidence_items, 'id', 'Additional evidence');
+for (const source of researchSources.values()) if (source.local_artifact) {
+  requireValid(/^research\/[a-z0-9-]+\.json$/.test(source.local_artifact), 'Collected artifact must use a local inert JSON path.');
+  const artifact = JSON.parse(await readFile(new URL(source.local_artifact, root), 'utf8'));
+  requireValid(artifact.original_url === source.url && artifact.original_sha256 === source.sha256 && artifact.data, `Artifact provenance mismatch for ${source.source_id}.`);
+}
+const questionUpdates = uniqueIndex(researchExpansion.question_updates, 'question_id', 'Question updates');
+requireValid(questionUpdates.size === questionIds.size, 'Every investigation question requires a research update.');
+for (const item of researchItems.values()) {
+  requireValid(researchSources.has(item.source_id), `Missing research source for ${item.id}.`);
+  requireValid(/^https:\/\//.test(item.url) && item.locator && item.novelty && item.limitations, `Incomplete evidence provenance for ${item.id}.`);
+  for (const id of item.event_ids) requireValid(eventIndex.has(id), `Unknown research event ${id}.`);
+  for (const id of item.finding_ids) requireValid(castIndex.get(id)?.controller_ids, `Unknown finding ${id}.`);
+  for (const id of item.question_ids) requireValid(questionIds.has(id), `Unknown question ${id}.`);
+}
+for (const update of questionUpdates.values()) {
+  requireValid(questionIds.has(update.question_id) && update.request_status === 'not_sent', 'Research updates must preserve question identity and outreach status.');
+  for (const id of update.new_evidence_ids) requireValid(researchItems.has(id), `Unknown evidence update ${id}.`);
+  requireValid(update.collection_plan.length && update.collection_plan.every(step => step.artifact && step.holder && step.method && step.decision_test), `Missing collection details for ${update.question_id}.`);
+}
+requireValid(openingQuotations.quotations.every(item => item.quote && item.author && item.locator && /^https:\/\//.test(item.url)), 'Opening quotations require exact provenance.');
 const workstreamIndex = uniqueIndex(encodings.groups, 'key', 'Workstreams');
 const stageIndex = uniqueIndex(incidentOntology.stages, 'id', 'Stages');
 const lifecycleIndex = uniqueIndex(incidentOntology.lifecycle, 'id', 'Lifecycle');
@@ -153,10 +180,12 @@ const html = template
   .replace('/* ONTOLOGY */', () => JSON.stringify(incidentOntology).replace(/</g, '\\u003c'))
   .replace('/* TEMPORAL */', () => JSON.stringify(temporalAssessments).replace(/</g, '\\u003c'))
   .replace('/* CAST */', () => JSON.stringify(castAnalysis).replace(/</g, '\\u003c'))
+  .replace('/* RESEARCH */', () => JSON.stringify(researchExpansion).replace(/</g, '\\u003c'))
+  .replace('/* QUOTATIONS */', () => JSON.stringify(openingQuotations).replace(/</g, '\\u003c'))
   .replace('/* QUERY */', () => `${query}\n${fieldLayout}\n${castView}`)
   .replace('/* APP */', () => app.replace(/<\/script/gi, '<\\/script'));
 const output = new URL('index.html', root);
 await writeFile(output, html);
 await writeFile(new URL('haruspex-dataset.json', root), dataset);
-await writeFile(new URL('haruspex-atlas-data-v8.json', root), JSON.stringify({ ...parsed, severity_assessments: assessments, visual_encodings: encodings, incident_ontology: incidentOntology, temporal_assessments: temporalAssessments, cast_analysis: castAnalysis }, null, 2));
+await writeFile(new URL('haruspex-atlas-data-v9.json', root), JSON.stringify({ ...parsed, severity_assessments: assessments, visual_encodings: encodings, incident_ontology: incidentOntology, temporal_assessments: temporalAssessments, cast_analysis: castAnalysis, research_expansion: researchExpansion, opening_quotations: openingQuotations }, null, 2));
 console.log(JSON.stringify({ output: fileURLToPath(output), events: parsed.events.length, bytes: Buffer.byteLength(html) }));

@@ -1,0 +1,81 @@
+{
+  "checked_on": "2026-09-09",
+  "recommendation": {
+    "hero": "turing-surprise",
+    "optional_alternates": [
+      "wiener-imagination",
+      "feynman-reality"
+    ],
+    "contextual_cast_quote": "leveson-information",
+    "presentation": "Use Turing as the initial opening quotation, with a compact author/work/year attribution linked to the original text. If alternatives are included, let the reader switch them deliberately; do not auto-rotate text during reading. Use Leveson beside the investigation questions rather than crowding the opening. Remove the 832/11/27 showcase statistics.",
+    "caution": "These are historical quotations, not claims by the quoted authors about the 2026 incident. Keep factual incident description and evidence attribution separate."
+  },
+  "quotations": [
+    {
+      "id": "turing-surprise",
+      "quote": "Machines take me by surprise with great frequency.",
+      "author": "Alan Turing",
+      "work": "Computing Machinery and Intelligence",
+      "date": "1950",
+      "publication": "Mind, volume LIX, issue 236, pp. 433–460",
+      "url": "https://www.cse.msu.edu/~cse841/papers/Turing.html",
+      "alternate_primary_text_url": "https://www.sci.brooklyn.cuny.edu/~sklar/teaching/s08/cis20.2/papers/turing-ai.pdf",
+      "locator": "Original p. 450; section 6, Contrary Views on the Main Question; objection (6), Lady Lovelace’s Objection. The sentence appears before the p. 451 marker in the MSU transcription.",
+      "exactness": "Complete sentence, capitalization and wording unchanged.",
+      "source_type": "Full primary paper, hosted by Michigan State University; wording corroborated in the Brooklyn College primary-text PDF.",
+      "context": "Turing replies to the claim that a machine cannot surprise us. He describes how incomplete calculations and forgotten assumptions produce unexpected behavior, rather than treating surprise as proof of consciousness.",
+      "why_it_fits": "The strongest opening: brief, wry, immediately understandable, and directly relevant to the gap between expected and observed machine behavior. It creates curiosity without prejudging the incident’s cause.",
+      "recommended_use": "Initial hero quotation",
+      "word_count": 8
+    },
+    {
+      "id": "wiener-imagination",
+      "quote": "We must always exert the full strength of our imagination to examine where the full use of our new modalities may lead us.",
+      "author": "Norbert Wiener",
+      "work": "Some Moral and Technical Consequences of Automation",
+      "date": "1960-05-06",
+      "publication": "Science, New Series, volume 131, number 3410, pp. 1355–1358",
+      "url": "https://faculty.ist.psu.edu/vhonavar/Courses/ai100/Wiener.pdf",
+      "original_stable_url": "https://www.jstor.org/stable/1705998",
+      "locator": "Printed p. 1358, PDF page 5, closing part of the Time Scales section. Sentence follows the warning against assuming that faster adoption of new powers is necessarily better.",
+      "exactness": "Complete sentence, with only PDF line wrapping removed.",
+      "source_type": "Scan of the original Science article, hosted by Penn State.",
+      "context": "Wiener discusses the mismatch between human and machine timescales, incomplete communication of purposes, and the difficulty of judging the consequences of newly available capabilities.",
+      "why_it_fits": "An expansive, constructive counterpoint to the incident: investigation is useful because it helps examine where powerful tools can lead. It also connects naturally to anticipatory analysis.",
+      "recommended_use": "Optional reader-selected alternate opening",
+      "word_count": 23
+    },
+    {
+      "id": "feynman-reality",
+      "quote": "For a successful technology, reality must take precedence over public relations, for nature cannot be fooled.",
+      "author": "Richard P. Feynman",
+      "work": "Personal Observations on Reliability of Shuttle",
+      "date": "1986",
+      "publication": "Report of the Presidential Commission on the Space Shuttle Challenger Accident, volume 2, appendix F",
+      "url": "https://www.nasa.gov/history/rogersrep/v2appf.htm",
+      "locator": "Conclusions, last sentence, printed p. F5.",
+      "exactness": "Complete sentence, preserving NASA’s lowercase nature.",
+      "source_type": "NASA’s primary publication of Feynman’s commission appendix.",
+      "context": "Feynman contrasts engineering evidence with managerial reliability claims, examines certification practices and communication gaps, and calls for realistic assessment of technological limitations.",
+      "why_it_fits": "The sharpest investigation-focused alternative. Memorable and tightly connected to evidence quality and institutional assumptions. Its sharper tone should not be used to imply that a particular organization’s deception has been established.",
+      "recommended_use": "Optional reader-selected alternate opening",
+      "word_count": 16
+    },
+    {
+      "id": "leveson-information",
+      "quote": "Some accident investigators have actually complained that CAST creates too much information about the causes of a loss.",
+      "author": "Nancy G. Leveson",
+      "work": "CAST Handbook: How to Learn More from Incidents and Accidents",
+      "date": "2019",
+      "publication": "MIT, author’s handbook",
+      "url": "https://psas.scripts.mit.edu/home/get_file4.php?name=CAST_Handbook.pdf",
+      "locator": "Printed p. 7, PDF page 7, Chapter 1, What is CAST?, final paragraph continuing onto printed p. 8.",
+      "exactness": "Complete sentence, with only PDF line wrapping removed.",
+      "source_type": "Author’s original handbook, hosted by MIT’s Partnership for Systems Approaches to Safety and Security.",
+      "context": "Leveson rejects stopping at an arbitrary root cause and argues for learning extensively from each loss. She follows this sentence by questioning whether a simple explanation should be the goal.",
+      "why_it_fits": "A pointed, surprising line that matches the user’s demand for maximal additional information. Best placed at the entrance to the CAST inquiry or evidence-collection section, where the research must substantiate the ambition.",
+      "recommended_use": "Contextual quotation within CAST inquiry, not another opening statistic",
+      "word_count": 18
+    }
+  ]
+}

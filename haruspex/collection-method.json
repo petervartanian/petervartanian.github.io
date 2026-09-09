@@ -1,0 +1,37 @@
+{
+  "version": "1.0",
+  "title": "Developing the investigation",
+  "scope": "A first-pass CAST analysis develops as evidence arrives. This collection plan identifies the records that could strengthen, change or overturn its explanations. Public-source collection and requests to evidence holders are separate activities.",
+  "method": {
+    "title": "CAST Handbook",
+    "author": "Nancy G. Leveson",
+    "year": 2019,
+    "url": "https://psas.scripts.mit.edu/home/get_file4.php?name=CAST_Handbook.pdf",
+    "locators": ["pp. 34–35", "pp. 39–40", "pp. 48–51", "p. 91"],
+    "summary": "Connect events to controls and decision context, collect evidence for the resulting questions, and revise the analysis. Proposed improvements need owners and evidence of effectiveness."
+  },
+  "collection_status": "Requests listed here are proposed; none has been sent. Evidence is not marked obtained merely because a question or collection plan exists.",
+  "public_search_actions": [
+    {"id":"PS01","title":"Follow the evidence back to its artifacts","question_ids":["Q01","Q02","Q13"],"target":"Original report versions, appendices, linked traces, replay source and run/model definitions.","test":"Does the artifact establish the action independently, or repeat an account? What part of the record does it cover?"},
+    {"id":"PS02","title":"Reconcile the accounts","question_ids":["Q08","Q09","Q10"],"target":"Primary-source corrections, original times, same-action identifiers and connector/request distinctions.","test":"Do the accounts disagree about the same thing? Record unresolved differences rather than averaging them."},
+    {"id":"PS03","title":"Reconstruct effective control boundaries","question_ids":["Q03","Q15"],"target":"First-party technical explanations, historical configuration statements, code and advisories.","test":"Separate documentation about a current product from evidence of the configuration during the incident."},
+    {"id":"PS04","title":"Trace signals into decisions","question_ids":["Q04","Q05"],"target":"Detection, correlation, routing, escalation and decision passages; later technical explanations.","test":"Distinguish a signal existing from a person receiving, understanding and acting on it."},
+    {"id":"PS05","title":"Verify containment one resource at a time","question_ids":["Q06","Q14"],"target":"Dated shutdown, revocation, restart and residual-access statements across organizations.","test":"Separate action taken from effect observed and absence confirmed within a coverage window."},
+    {"id":"PS06","title":"Bound demonstrated consequences","question_ids":["Q07"],"target":"Affected scope, audit conclusions, writes, transfers, service impact and explicit limits.","test":"A reported absence of evidence applies only to the records and period examined."},
+    {"id":"PS07","title":"Test claims about improvements","question_ids":["Q11","Q12"],"target":"Advisories, deployment claims, evaluation protocols, results and counterexamples.","test":"Implementation, retrospective test results and operational effectiveness are different claims."}
+  ],
+  "work_packets": [
+    {"id":"WP01","title":"Evidence and actor crosswalk","question_ids":["Q01","Q02","Q13"],"holders":["OpenAI","METR / Redwood Research","Hugging Face"],"artifact":"Source-system inventory, retention and coverage gaps, pseudonymous run/model crosswalk, independently retained event excerpts.","changes":"Which acts are independently observed, and how reliably they can be attributed.","request_status":"not_sent"},
+    {"id":"WP02","title":"Effective research boundary","question_ids":["Q03","Q15"],"holders":["OpenAI research, infrastructure and control owners"],"artifact":"Dated network/identity configuration, exception records, risk assumptions, and stop/restart responsibilities.","changes":"The provisional research control model and explanations F01/F02.","request_status":"not_sent"},
+    {"id":"WP03","title":"HF signal-to-response path","question_ids":["Q04"],"holders":["Hugging Face detection engineering and incident response"],"artifact":"Rule/correlation version, detection time, severity and routing decision, queue/paging record, acknowledgment and action time.","changes":"Whether routing, threshold, ownership, visibility or another mechanism limited response in F06.","request_status":"not_sent"},
+    {"id":"WP04","title":"OpenAI alert decisions","question_ids":["Q05","Q15"],"holders":["OpenAI monitoring and incident response"],"artifact":"Original alert payloads, investigation notes, information visible at each decision, escalation criteria and follow-up.","changes":"What responders knew and could do at the time, in F04.","request_status":"not_sent"},
+    {"id":"WP05","title":"Resource stop ledger","question_ids":["Q06","Q14"],"holders":["OpenAI","Hugging Face","External workload operators and appropriate platform contacts"],"artifact":"Shutdown, credential-revocation and restart chronology, residual-access verification and handoff acknowledgments.","changes":"F08 containment completeness across distinct resource boundaries.","request_status":"not_sent"},
+    {"id":"WP06","title":"Harm and negative evidence","question_ids":["Q07"],"holders":["Hugging Face and affected service owners"],"artifact":"Sanitized audit conclusions, affected scope and denominators, coverage windows, observed writes/transfers and limits.","changes":"Observed loss versus feared outcome, and F09 barrier evidence.","request_status":"not_sent"},
+    {"id":"WP07","title":"Contradiction packet","question_ids":["Q08","Q09","Q10"],"holders":["Authors of the relevant primary-source claims"],"artifact":"Same-action identity, original clock basis, request/connector identifiers and corrected interpretations.","changes":"Whether accounts conflict or describe different observations.","request_status":"not_sent"},
+    {"id":"WP08","title":"Remedy assurance","question_ids":["Q11","Q12"],"holders":["OpenAI","Hugging Face","JFrog","Safeguard evaluators"],"artifact":"Change/deployment evidence, applicable versions, validation protocol, failures, counterexamples and monitoring period.","changes":"F10, confidence in reported changes and priorities for proposed improvements.","request_status":"not_sent"},
+    {"id":"WP09","title":"Decision and coordination context","question_ids":["Q14","Q15"],"holders":["Operational witnesses and control owners, interviewed separately"],"artifact":"Contemporaneous handoff agreements, actual authority, workload and competing goals, changes over time, and disconfirming examples.","changes":"Actual versus nominal control structure and system-wide explanations.","request_status":"not_sent"},
+    {"id":"WP10","title":"Independent method and usability review","question_ids":["Q16"],"holders":["A CAST practitioner","Intended incident-information users"],"artifact":"Review of a connected event–control–question example and its missing fields.","changes":"Methodological defensibility and usability; this is not additional evidence of incident facts.","request_status":"not_sent"}
+  ],
+  "evidence_record_fields": ["question_ids","source_or_holder","target_artifact","checked_at","access_route","result","claim_ids","source_dependence","contradictions","limits","next_action"],
+  "closing_rule": "Close a question only with an answer and its limits, or an explicit reason it is unanswerable. Preserve superseded interpretations and distinguish implementation from effectiveness."
+}

@@ -1,5 +1,5 @@
 {
-  "version": "5.0.0",
+  "version": "5.1.0",
   "name": "Incident workstreams",
   "source_field": "phase",
   "groups": [
@@ -181,7 +181,7 @@
     ],
     "mark_count_is_event_count": false,
     "individual_event_ids_assigned": false,
-    "selectable": false,
+    "selectable": true,
     "source_counts": [
       {
         "source_id": "S03",
@@ -209,6 +209,8 @@
       }
     ],
     "overlap_policy": "The HF action count and METR communication count have different scopes and can overlap. Do not add them, treat them as independent totals, or subtract 832 to calculate an unseen remainder. Displayable entries, source aggregates and raw log/cache records have different units.",
-    "caption": "Faint stars suggest the larger source-reported activity behind the detailed record. Approximately 17,600 recovered HF actions and over 70,000 messages and files were reported. Counts overlap; stars are illustrative, not individually identified events."
+    "caption": "Faint stars suggest the larger source-reported activity behind the detailed record. Approximately 17,600 recovered HF actions and over 70,000 messages and files were reported. Counts overlap; stars are illustrative, not individually identified events.",
+    "selection_meaning": "Number-only decorative star catalogue. No historical event identities or incident details are assigned.",
+    "catalogue_numbering": "Stable seeded mark index plus one, padded to five digits; surviving marks retain their numbers when viewport density changes."
   }
 }

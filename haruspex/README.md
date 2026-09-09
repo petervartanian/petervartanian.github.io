@@ -1,8 +1,8 @@
 # Haruspex
 
-Open `index.html` to explore the OpenAI–Hugging Face incident dataset. The application is self-contained and works offline; source links open their original publications. The local preview is at http://127.0.0.1:8788/ while the preview server is running.
+Open `index.html` to explore the OpenAI–Hugging Face incident dataset. The application is self-contained and works offline; source links open their original publications. The published application is at https://petervartanian.xyz/haruspex/. For local development, serve the repository and open /haruspex/.
 
-An opening title page introduces the incident and links its primary accounts. The Event swarm uses a full-viewport canvas beneath compact floating controls and stays pinned briefly while scrolling. The Legend flyout keeps color, shape and size keys at the periphery alongside zoom controls. Time runs horizontally. Impact & prevention uses one severity scale vertically; Context and Unresolved are separate unordered fields, with no implied place beneath Preventive. The three fields partition the same 832 records (599, 192 and 41). The optional Bow tie groups incident roles. CAST adds an evidence-linked systems investigation. Full, Before, During, and After views and 27 detailed stages explore the same event inventory. Each focused lifecycle, including During and After, uses one continuous field.
+An opening title page offers verified quotations from Turing, Wiener and Feynman, introduces the incident and links its primary accounts. There are no showcase statistics. The Event swarm uses a full-viewport canvas beneath compact floating controls and stays pinned briefly while scrolling. The Legend flyout keeps color, shape and size keys at the periphery alongside zoom controls. Time runs horizontally. Impact & prevention uses one severity scale vertically; Context and Unresolved are separate unordered fields, with no implied place beneath Preventive. The three fields partition the same 832 records (599, 192 and 41). The optional Bow tie groups incident roles. CAST adds an evidence-linked systems investigation. Full, Before, During, and After views and 27 detailed stages explore the same event inventory. Each focused lifecycle, including During and After, uses one continuous field.
 
 ## Severity
 
@@ -66,7 +66,7 @@ Gold, turquoise, lilac, orange, jade and blue identify the six workstreams again
 
 The faint background represents the scale of source-reported activity that cannot be resolved into individual records here. [Hugging Face reports approximately 17,600 recovered attacker actions grouped into about 6,280 clusters](https://huggingface.co/blog/agent-intrusion-technical-timeline); [METR reports more than 70,000 distinct messages and files](https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/). Their scopes overlap. The roughly 1.2 million message-board entries and 20 million cache entries are other representations or broader collections, not extra attacks to add to those counts. Nor can 832 be subtracted to calculate an exact unseen remainder.
 
-The renderer uses 5,000–22,000 tiny density marks according to the viewport. That number describes visual density, not events. The marks have no individual IDs, dates, severity or evidence status and cannot be selected. They do not contribute to the 832-record inventory or active filter counts. Their positions and opacity do not encode chronology, confidence, probability or causal relationships.
+The renderer uses 5,000–22,000 tiny density marks according to the viewport. That number describes visual density, not events. Hover near a distant point, tap it, or use the small star in the Legend to reveal its number. These are stable decorative catalogue numbers, not historical event IDs, and have no incident details, dates, severity or evidence status. A spatial index handles hit testing without thousands of DOM elements. They do not contribute to the 832-record inventory or active filter counts. Their positions and opacity do not encode chronology, confidence, probability or causal relationships.
 
 The workstreams group all 27 existing `phase` labels, assigning each label exactly once. They are navigation groups, not a causal sequence or an additional event assessment. Mixed phases remain intact: for example, `Internal database access and investigation` belongs to Intrusion, so that group can contain investigative activity. `Evaluation and coordination` belongs to Coordination. The original phase remains attached to each record. A workstream does not imply a successful intrusion, protective intent, or an effective response.
 
@@ -96,15 +96,17 @@ Each of the 27 stage filters corresponds exactly to one original `phase`, using 
 
 ## Investigation with CAST
 
-The CAST view follows the systems-question approach agreed for this explorer. It contains **14 role/mechanism components, 24 control or information paths, 10 provisional findings, six groups of reported changes, six analyst proposals, and 16 open evidence questions**. Its links cover 198 canonical records across 70 source episodes. Those links are a selection of supporting claims, not 198 independent observations or a complete causal model.
+Investigate opens a connected finding, not just the whole-system diagram. Each finding links its reported observation, relevant control/feedback paths, constraints, competing explanations, supporting events, newly collected public evidence and next evidence requests. The same finding can filter the swarm or bow tie; the return control preserves its identity. Event details link into findings and additional evidence, including records newly connected by this research pass.
 
-The [MIT-hosted CAST Handbook](https://psas.scripts.mit.edu/home/get_file4.php?name=CAST_handbook.pdf) informs questions about losses, required constraints, responsibilities, actions, feedback, context and improvement verification. The Scope view explains the adaptation. This is a preliminary public-source checklist, not a completed formal CAST investigation or MIT endorsement.
+The baseline contains 14 role/mechanism components, 24 paths, 10 provisional findings, six groups of reported changes, six analyst proposals and Q01–Q16. Its 198 canonical links span 70 source episodes, not 198 independent observations. The baseline file is preserved; the new evidence and question updates are a separate research layer.
 
-Solid control paths describe reported relationships. Fine solid lines carry feedback or coordination; dashes indicate reported omissions, unknown historical paths or proposals. Click a path or component for its evidence and limits. Findings separate observation, interpretation, alternative explanations and unknowns. Changes separate reported actions from proposed improvements, with responsible-role descriptions and verification needs. None assigns work or claims an intervention is optimal.
+`research-expansion.json` records 23 evidence updates from 16 source resources, with source dependence, precise locators, limitations, a search trail, updates for all 16 questions and 32 specific collection steps. It distinguishes new publications/artifacts from rechecked accounts, methodological evidence, commentary and an unverified assurance lead. No new incident events are manufactured from these resource counts.
 
-Q01–Q16 preserve the existing investigation register. All remain open and no requests have been sent. The interface exposes the evidence needed and related source records. The HF escalation example keeps one source passage as one evidence episode; it does not invent alert timestamps or establish how much additional harm an earlier page would have prevented. May activity is not automatically a cause of the July HF incident.
+Two collected METR artifacts are preserved as inert JSON: 1,206 agent summary rows and 1,772 hourly workstream rows. They retain the original payloads, source URLs and original SHA-256 hashes. These are derived data from the same investigation, not raw transcripts, independent corroboration or additions to the canonical event count.
 
-Private meeting excerpts and internal requirements notes are excluded from the application, combined export and downloadable bundle. Only public-source incident analysis is included.
+The CAST Handbook and case-study reading inform an iterative method: a question identifies an artifact and holder, obtaining it tests an explanation, and the answer can revise the analysis. `collection-method.json` preserves the public-safe collection framework. The original questions remain open, with new public findings alongside them. No messages were sent and no private operational logs or interviews were obtained. In particular, HF's paging mechanism and its measured loss contribution remain unresolved.
+
+This is a provisional public-source CAST analysis, not a completed investigation, exhaustive model, proof of causation or MIT endorsement. Private meeting excerpts, shared-folder identifiers and internal requirements notes are excluded from the application, combined export and archive.
 
 ## Searching the records
 
@@ -153,18 +155,22 @@ Every filtered record is reachable through the keyboard-accessible register. The
 - `severity-assessments.json`: version 3.0.1 assessments, individual review dispositions, source rationales, and separate whole-incident assessment; the 3.0.1 change standardizes Near-miss spelling without changing scores.
 - `temporal-assessments.json`: version 1.0.0 source-grounded temporal layer, review status, date bounds, evidence and limitations.
 - `temporal-research-notes.md`: targeted date-research findings and rejected anchors.
-- `visual-encodings.json`: version 5.0.0 workstream mappings, restored six-color palette, aggregate-density sources, assessment-outline conventions, open-left trail rules, and marker-area conventions.
+- `visual-encodings.json`: version 5.1.0 workstream mappings, six-color palette, decorative star catalogue and aggregate-density sources, assessment-outline conventions, open-left trail rules, and marker-area conventions.
 - `incident-ontology.json`: lifecycle, stages, event assignments, entity and relationship definitions, scope limits and provenance.
-- `haruspex-atlas-data-v8.json`: portable combined export of the canonical dataset and current assessment, temporal, visual, ontology and CAST layers.
+- `haruspex-atlas-data-v9.json`: portable combined export of the canonical dataset and current assessment, temporal, visual, ontology and CAST layers.
 - `cast-analysis.json`: public-source CAST-informed analysis, with constraints, role-level components, control paths, findings, changes and the existing Q01–Q16 register.
-- `cast-view.js`: interactive control map and analytical record views.
+- `cast-view.js`: connected findings, evidence ledger, collection plans and control map.
+- `research-expansion.json`: additional evidence, source dependence, searches and all question updates.
+- `research/metr-agent-timeline.json`, `research/metr-hourly-workstreams.json`: collected public data payloads with provenance.
+- `collection-method.json`: public-safe CAST collection framework.
+- `opening-quotations.json`: exact quotations, original sources, locators and context.
 - `research/cast-method-notes.md`: public methodological source checks and analytical limitations.
 - `query.js`: structured-query parsing and matching.
 - `field-layout.js`: shared field layout and coordinate calculations, included in the build and package.
 - `index.template.html`, `style.css`, `app.js`, `build.mjs`: source files; rebuild with `node build.mjs`.
 - `validation.json`: recorded data and interaction checks.
 
-This is application version 8.0.0. The v6 assessment scores and research findings are unchanged; the 3.0.1 assessment revision only standardizes Near-miss spelling. The canonical dataset remains unchanged; reviewed assessments, corrected current evidence display, temporal bounds, ontology and visual conventions live in separate versioned layers. Full original fields remain available on each event.
+This is application version 9.0.0. Severity scores and canonical records are unchanged; additional research is tracked separately; the 3.0.1 assessment revision only standardizes Near-miss spelling. The canonical dataset remains unchanged; reviewed assessments, corrected current evidence display, temporal bounds, ontology and visual conventions live in separate versioned layers. Full original fields remain available on each event.
 
 The 832 records are a working inventory drawn from 11 primary sources, including the three starter documents. Some records represent group actions. The inventory is not a proven maximum and does not reconstruct inaccessible logs. Four source comparisons remain explicit. Completed review means each pending record received a defensible disposition, not that every source claim or event is independently verified.
 

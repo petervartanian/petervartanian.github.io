@@ -30,12 +30,15 @@
       </svg>
       <header class="intro-header"><a href="#intro" class="intro-brand" aria-label="Haruspex title page">Haruspex<span aria-hidden="true">·</span></a><a href="#scene" class="intro-jump">Explore the incident <span aria-hidden="true">↘</span></a></header>
       <div class="intro-main">
-        <h1 id="intro-title">The evaluation that <br><em>escaped its boundaries.</em></h1>
+        <div class="opening-quotation" id="opening-quotation">
+          <h1 id="intro-title">“Machines take me by surprise with great frequency.”</h1>
+          <p class="quote-credit"><a id="quote-source" href="https://www.cse.msu.edu/~cse841/papers/Turing.html" target="_blank" rel="noopener noreferrer"><span id="quote-author">Alan Turing</span><span id="quote-work">Computing Machinery and Intelligence · 1950 ↗</span></a></p>
+        </div>
+        <div id="quote-choices" class="quote-choices" role="group" aria-label="Choose an opening quotation"></div>
         <p class="intro-story">In July 2026, OpenAI evaluation agents crossed into unauthorized systems, including Hugging Face. Shared services and communication channels helped activity spread beyond individual runs. Explore what the reports establish, how organizations responded, and which questions remain open.</p>
-        <div class="intro-actions"><a id="enter-explorer" class="intro-enter" href="#scene">Enter the field <span aria-hidden="true">↗</span></a><button id="intro-cast" class="intro-cast">Explore the control structure <span aria-hidden="true">→</span></button></div>
+        <div class="intro-actions"><a id="enter-explorer" class="intro-enter" href="#scene">Enter the field <span aria-hidden="true">↗</span></a><button id="intro-cast" class="intro-cast">Follow the investigation <span aria-hidden="true">→</span></button></div>
       </div>
       <div class="intro-foot">
-        <div class="intro-facts"><span><strong>832</strong> detailed entries</span><span><strong>11</strong> primary sources</span><span><strong>27</strong> incident stages</span></div>
         <p class="intro-sources">Built from the accounts of <a href="https://cdn.openai.com/pdf/67869394-cb91-4c12-888c-5cbd85c7814c/OpenAI-Hugging-Face%20Incident-Technical-Report.pdf" target="_blank" rel="noopener noreferrer">OpenAI</a>, <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">Hugging Face</a> and <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR &amp; Redwood Research</a>.</p>
       </div>
     </section>
@@ -47,18 +50,20 @@
           <div class="view-tabs" role="tablist" aria-label="Visualization view">
             <button id="stream-tab" role="tab" aria-selected="true" aria-controls="stream-view" class="view-tab active">Event swarm</button>
             <button id="bowtie-tab" role="tab" aria-selected="false" aria-controls="bowtie-view" class="view-tab">Bow tie</button>
-            <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab">CAST</button>
+            <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab">Investigate</button>
           </div>
           <details id="resource-menu" class="resource-menu">
             <summary aria-label="Resources">More <span aria-hidden="true">⌄</span></summary>
             <nav class="utility" aria-label="Resources">
               <button id="ontology-button" class="text-button">Structure</button>
               <button id="method-button" class="text-button">How to read this</button>
-              <button id="sources-button" class="text-button">Sources <span class="counter">11</span></button>
+              <button id="sources-button" class="text-button">Sources</button>
               <button id="export-button" class="export-button">Export <span aria-hidden="true">↓</span></button>
             </nav>
           </details>
         </header>
+        <div id="inquiry-context" class="inquiry-context" hidden><button id="return-inquiry"></button><button id="clear-inquiry" aria-label="Show all events">×</button></div>
+        <div id="star-number" class="star-number" hidden aria-live="off"></div>
         <div class="scene-heading">
           <h2 id="page-title" class="sr-only">OpenAI and Hugging Face incident explorer</h2>
           <div class="scene-actions">
@@ -141,7 +146,7 @@
           </div>
           <div class="date-window-key"><svg aria-hidden="true" viewBox="0 0 58 18"><defs><linearGradient id="legend-date-fade"><stop offset="0" stop-color="currentColor" stop-opacity="0"/><stop offset="1" stop-color="currentColor" stop-opacity=".85"/></linearGradient></defs><path d="M1 16C24 16 28 5 50 5" fill="none" stroke="url(#legend-date-fade)" stroke-width="2"/><circle cx="51" cy="5" r="3" fill="currentColor"/></svg><span>Unknown start → by date</span></div>
           <div class="legend-severity"><div class="size-key" title="Marker area increases modestly with positive severity. Other categories share the smallest size."><i></i><i></i><i></i><span>Size · severity</span></div><button id="framework-info" class="severity-help" aria-label="Read severity definitions">Severity definitions <span aria-hidden="true">↗</span></button></div>
-          <div class="background-key"><span>Distant points · aggregate activity</span><button id="background-info" aria-haspopup="dialog" aria-label="Read sources for the aggregate background activity">Sources <span aria-hidden="true">↗</span></button></div>
+          <div class="background-key"><button id="star-discover" aria-label="Discover a distant star" title="Make a wish">✧</button><span>Distant points · aggregate activity</span><button id="background-info" aria-haspopup="dialog" aria-label="Read sources for the aggregate background activity">Sources <span aria-hidden="true">↗</span></button></div>
           <div class="plot-tools" role="group" aria-label="Field navigation">
             <div class="axis-zoom"><span>Time ↔</span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
             <div class="axis-zoom"><span>Severity ↕</span><button id="zoom-y-out" aria-label="Zoom out vertically">−</button><button id="zoom-y-in" aria-label="Zoom in vertically">+</button></div>
@@ -172,6 +177,8 @@
   <script id="ontology-data" type="application/json">/* ONTOLOGY */</script>
   <script id="temporal-data" type="application/json">/* TEMPORAL */</script>
   <script id="cast-data" type="application/json">/* CAST */</script>
+  <script id="research-data" type="application/json">/* RESEARCH */</script>
+  <script id="quotation-data" type="application/json">/* QUOTATIONS */</script>
   <script>/* QUERY */</script>
   <script>/* APP */</script>
 </body>

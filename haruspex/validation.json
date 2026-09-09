@@ -1,7 +1,7 @@
 {
-  "application_version": "8.0.0",
+  "application_version": "9.0.0",
   "assessments_version": "3.0.1",
-  "visual_encodings_version": "5.0.0",
+  "visual_encodings_version": "5.1.0",
   "incident_ontology_version": "1.0.0",
   "temporal_assessments_version": "1.0.0",
   "verified_on": "2026-09-09",
@@ -94,33 +94,30 @@
     "after": 172
   },
   "verified": [
-    "All 832 canonical records with 45 original fields remain byte-identical. Canonical, severity, temporal and ontology files match preserved v7 files. Original v7 package is preserved in revisions/v7.",
-    "Production build validates unique identifiers, event and analysis links, all 24 control-map endpoints, 16 existing question IDs/statuses, provenance, assessment counts, phase/stage/lifecycle mapping and temporal bounds.",
-    "39 structured-query checks passed. Browser severity>=3 from Context switches to Impact and returns 95; id:E0742 switches to Context and returns one record.",
-    "600 geometry configurations passed across Impact599, Context192 and Unresolved41 at 1280x800 and391x844: correct membership, no omitted finite records, exact clocks, source-window containment and no input mutation.",
-    "Browser: Impact has seven bands (5 through0 and unnumbered Preventive); Context and Unresolved are separate unordered fields. Default Impact has590 finite points plus9 open-start tails; Context has189 plus3; Unresolved has41 finite points.",
-    "Browser: Context has hollow markers and curved in-field tails. Query E0742 gives one tail/head. Ending the viewport on30June removes its head but leaves one continuing tail; the inferred upper date remains unchanged.",
-    "Browser: canonical colors follow workstreams; restored palette spans gold, turquoise, lilac, orange, jade and blue. No severity or evidence value is assigned through color.",
-    "Browser: CAST renders14 role/mechanism components and24 paths. A finding modal exposes observation, interpretation, competing explanations, unknowns, linked records and primary-source pointers.",
-    "Browser: CT01 links to E0133; reveal switches to Context, clears incompatible search, adjusts the date range and updates category counts and selected state.",
-    "Browser: Questions P0 filter shows10 central questions and preserves keyboard focus. Q03 exposes all102 related-event links and the evidence requested.",
-    "Browser: title page story and entry controls fit at391x844, with no horizontal page overflow. Full-screen canvas measures391x844 on phone and1280x800 on desktop. Phone CAST map scrolls horizontally within its own readable850px graph.",
-    "Browser: phone wheel zoom in/out and drag/pan settled to idle. Rapid Bow tie/CAST/Event swarm changes settled with one visible view and no residual ghost or transition class.",
-    "Browser: zero console errors captured in the verification session. Source cards and linked event navigation checked.",
-    "Independent code review identified and fixed category count synchronization, numeric-query facet routing, truncated question links, replacement-button focus and nested-dialog return focus.",
-    "CAST question wording and statuses preserve Q01\u2013Q16. All requests remain not_sent, evidence remains open and answers remain null. Q16 has a documented privacy edit in its explanatory field only.",
-    "Public CAST JSON contains no private meeting quotations, private participant names or Drive/Docs links. The private requirements note is excluded from HTML, export and archive.",
-    "JavaScript syntax, strict production build, combined v8 export and archive integrity validated."
+    "Canonical 832 records with 45 fields remain byte-identical to the published v8 baseline.",
+    "Production build validates canonical IDs and counts, CAST endpoints and provenance, all question identities and unchanged outreach statuses, all research source/event/finding/question references and all32 collection-step artifacts/holders/methods/decision tests.",
+    "Both METR payloads were parsed without execution, original hashes matched the research ledger, and JSON round-trip payload equality was checked. Build validates downloadable artifact provenance.",
+    "Browser at1280x720: verified Turing opening, no showcase statistics, alternate quote controls, connected F06 finding, underlying-event navigation and query/facet filtering.",
+    "Browser: F06 trace filters swarm and bow tie to8 supporting records; return control restores the finding; clearing it restores599 Impact/prevention records. Context/Unresolved remain independent categories.",
+    "Browser: star discovery displays a number-only catalogue label with no event panel opened. Star hit testing uses a spatial grid and does not participate in event counts.",
+    "Browser: E0423 links into F06 and new research; switching to F01 clears the unrelated origin record and shows only relevant relationship paths.",
+    "Browser:23 research entries and16 questions with32 structured collection steps render. NE15 qualification is visible before expansion. Both collected data downloads are exposed.",
+    "Browser: E0748, newly connected by NE13, opens its additional evidence and analytical links. Source dependence is rendered using the actual research schema.",
+    "Browser at390x844: no horizontal page overflow, quotations and entry controls render, control paths fit, investigation tabs retain a full-screen scene, and tracing across bow tie/swarm preserves the finding context.",
+    "JavaScript syntax checks and39 existing structured-query assertions passed. Zero browser console errors captured during verification.",
+    "Independent review corrected stale event origins, overbroad path selection, hidden source dependence, research-only event links, stale background copy, section scroll anchoring and evidence qualification visibility."
   ],
   "limits": [
-    "The CAST layer is a preliminary public-source systems-question analysis. It is not a completed formal CAST investigation, proof of organizational causation, an exhaustive control model or an MIT endorsement.",
+    "This is a provisional, developing public-source CAST analysis, not a completed or exhaustive investigation. Search completeness and a maximal number of obtainable facts are not claimed.",
+    "All16 original question records remain open. The new layer records public evidence and remaining gaps; no external requests were sent and no private operational logs/interviews were obtained.",
+    "23 evidence updates include new artifacts/publications, rechecked accounts, methodology, commentary and an unverified assurance lead. They are not23 new independent historical events.",
+    "The two METR files contain derived agent summaries and hourly activity aggregates. Their1,206 and1,772 rows are not additions to the832-record inventory and share source lineage with the METR report.",
+    "Background density is illustrative. Hidden catalogue numbers identify decorative stars only, without historical event identities, dates or detailed incident records.",
     "198 linked records span70 source episodes. They are not198 independent observations; selected coverage does not imply that unlinked records are irrelevant.",
     "The six reported changes are grouped improvements; the six proposals are analyst recommendations, not historical events, assigned tasks, implemented changes or proven optimal interventions.",
-    "All16 evidence questions remain open; no messages or requests were sent and no private logs or interviews were obtained.",
     "192 records are reviewed Context and41 reviewed Unresolved; these retain null scores rather than invented harm levels. Zero is Near-miss.",
     "The12 open-left training records still have no supported earliest date. Their heads mark the inferred exclusive14July boundary, labeled By13July, not occurrence times. Tail curvature and length are decorative, not duration or probability.",
     "Only18 temporal records were individually reviewed in the preceding date-research pass;814 existing windows were carried forward. This visual/investigation revision adds no exact dates.",
-    "Aggregate background density is illustrative, with no individual identities, dates, severities or hit targets. The precise total of non-displayable events is not established.",
     "Colors are supplemented by labels and workstream filters. Shape conveys evidence, outline treatment conveys assessment disposition, size gives modest ordinal emphasis without harm ratios.",
     "Dense windows can overlap at wide zoom. Zoom and nearby-record selection expose individual records. The phone control graph uses horizontal scrolling.",
     "Reduced-motion handling was code-reviewed, without an emulated reduced-motion browser run. No end-to-end FPS benchmark was performed."
@@ -142,11 +139,11 @@
         "cached_projection_median": 0.025
       }
     },
-    "benchmark_limit": "Carried forward from v7: computation-only microbenchmark excluding canvas rasterization and DOM updates. Not rerun for v8; no end-to-end FPS claim."
+    "benchmark_limit": "Carried forward from v7: computation-only microbenchmark excluding canvas rasterization and DOM updates. Not rerun for v9; no end-to-end FPS claim."
   },
   "aggregate_background": {
     "semantics": "Illustrative density of source-reported aggregate activity not individually resolved in the detailed record; not one particle per event.",
-    "rendered_density_marks": "5000\u201322000, responsive illustrative sampling, not an event count",
+    "rendered_density_marks": "5000–22000, responsive illustrative sampling, not an event count",
     "sources": [
       {
         "label": "Approximately17,600 recovered attacker actions in6,280 clusters",
@@ -157,7 +154,8 @@
         "url": "https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/"
       }
     ],
-    "aggregation": "Different units can overlap. Do not add totals or subtract832 to invent an exact remainder."
+    "aggregation": "Different units can overlap. Do not add totals or subtract832 to invent an exact remainder.",
+    "catalogue": "Stable decorative mark numbers, revealed by hover/tap or the Legend star; never event IDs."
   },
   "cast_analysis_version": "1.0.0",
   "assessment_fields": {
@@ -177,6 +175,45 @@
     "analyst_proposals": 6,
     "open_questions": 16,
     "scope": "Selective supporting links from the 832-event corpus. Unlinked events remain in the Atlas; selection does not mark them irrelevant or causal.",
-    "completeness": "Not a completed or exhaustive CAST study. A richer control model requires answers and underlying evidence already identified in Q01\u2013Q16."
+    "completeness": "Not a completed or exhaustive CAST study. A richer control model requires answers and underlying evidence already identified in Q01–Q16."
+  },
+  "research_expansion_version": "1.0",
+  "research_coverage": {
+    "evidence_items": 23,
+    "questions_reviewed": 16,
+    "questions_with_new_public_evidence": [
+      "Q01",
+      "Q11",
+      "Q12"
+    ],
+    "questions_partially_addressed": [
+      "Q02",
+      "Q03",
+      "Q05",
+      "Q06",
+      "Q09",
+      "Q13",
+      "Q14",
+      "Q15"
+    ],
+    "questions_still_open": [
+      "Q04",
+      "Q07",
+      "Q08",
+      "Q10",
+      "Q16"
+    ],
+    "new_machine_readable_data_assets": [
+      "NS01",
+      "NS02"
+    ],
+    "new_primary_publications": [
+      "NS04",
+      "NS05",
+      "NS06",
+      "NS07"
+    ],
+    "new_method_resource": "NS13",
+    "source_count_is_not_independent_witness_count": true
   }
 }
