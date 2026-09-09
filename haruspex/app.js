@@ -128,7 +128,7 @@
       button.setAttribute('aria-pressed', String(state.assessment === key));
       button.classList.toggle('selected', state.assessment === key);
     }
-    $('#assessment-tabs').setAttribute('aria-label', 'Separate record categories. Context and Unresolved have no position on the severity scale.');
+    $('#assessment-tabs').setAttribute('aria-label', 'Separate event categories. Context and Unresolved have no position on the severity scale.');
   }
   function bandKey(event) {
     const assessment = severityMap.get(event.id);
@@ -163,7 +163,7 @@
     }));
   }
   function tooltipContent(event, nearby = 1) {
-    return `<div class="tooltip-meta">${event.id} · ${LABELS[event._status]}</div><strong>${escapeHtml(event.title)}</strong><div class="tooltip-encodings">${workstreamBadge(event)}${severityBadge(event)}</div><small>${escapeHtml(dateLabel(event))}${event._time.openStart ? ' · head marks the upper bound' : ''}${nearby > 1 ? ` · ${nearby} nearby records` : ''}</small>`;
+    return `<div class="tooltip-meta">${event.id} · ${LABELS[event._status]}</div><strong>${escapeHtml(event.title)}</strong><div class="tooltip-encodings">${workstreamBadge(event)}${severityBadge(event)}</div><small>${escapeHtml(dateLabel(event))}${event._time.openStart ? ' · head marks the upper bound' : ''}${nearby > 1 ? ` · ${nearby} nearby events` : ''}</small>`;
   }
   const distantStars = [];
   const starGrid = new Map();
@@ -337,7 +337,7 @@
       const label = lane.name;
       ctx.fillText(label, textX, y - 3);
       ctx.font = `${narrow ? 8 : 9}px "Helvetica Neue",Arial,sans-serif`; ctx.fillStyle = '#80909A';
-      ctx.fillText(state.assessment === 'impact' ? `${lane.count} ${lane.count === 1 ? 'entry' : 'entries'}` : 'No severity rank', textX, y + 11);
+      ctx.fillText(state.assessment === 'impact' ? `${lane.count} ${lane.count === 1 ? 'event' : 'events'}` : 'No severity rank', textX, y + 11);
     }
     const tickCount = narrow ? 4 : width < 900 ? 6 : 9;
     for (let i = 0; i < tickCount; i += 1) {
@@ -451,7 +451,7 @@
       const unplaced = visible.filter((event) => event._time.center === null).length;
       renderComets();
       $('#plot-period').textContent = `${shortDate(state.range[0])}–${shortDate(state.range[1] - 1, true)}`;
-      timeline.setAttribute('aria-label', `Event swarm: ${fieldCount} records in the field, including ${tailSegments.length} with fading unknown-start tails. ${unplaced} matching records have an upper date bound without a known start. Time in UTC runs horizontally. Vertical zoom ${Math.round(100 / (state.vertical[1] - state.vertical[0]))} percent. ${state.assessment === 'impact' ? 'Provisional severity' : 'Unordered assessment category'}: ${lanes.map((lane) => `${lane.label}: ${lane.count}`).join('; ')}. Color identifies workstream; shape identifies evidence. Size distinguishes a single reported unit from grouped activity, without counting underlying instances. Comet heads mark their source upper bounds, not event times. Tails have no known start or duration. Distant stars suggest aggregate activity not individually resolved in these ${events.length} detailed records.`);
+      timeline.setAttribute('aria-label', `Event swarm: ${fieldCount} events in the field, including ${tailSegments.length} with fading unknown-start tails. ${unplaced} matching events have an upper date bound without a known start. Time in UTC runs horizontally. Vertical zoom ${Math.round(100 / (state.vertical[1] - state.vertical[0]))} percent. ${state.assessment === 'impact' ? 'Provisional severity' : 'Unordered assessment category'}: ${lanes.map((lane) => `${lane.label}: ${lane.count}`).join('; ')}. Color identifies workstream; shape identifies evidence. Size distinguishes a single reported unit from grouped activity, without counting underlying instances. Comet heads mark their source upper bounds, not event times. Tails have no known start or duration. Distant stars suggest aggregate activity not individually resolved in these ${events.length} detailed events.`);
     }
     drawOverview(state.range, true);
   }
@@ -503,7 +503,7 @@
   function eventInvestigation(event) {
     const findings = castData.findings.filter(item => item.event_ids.includes(event.id));
     const additions = researchData.evidence_items.filter(item => item.event_ids?.includes(event.id));
-    return `<section class="event-investigation"><h3>Investigate this event</h3>${findings.length ? findings.map(item => `<button data-event-finding="${item.id}"><span>${escapeHtml(item.title)}</span></button>`).join('') : '<p>This record has no specific control finding mapped yet.</p><button id="event-inquiry-browse">Explore the open system questions →</button>'}${additions.length ? `<h3>Additional evidence</h3>${additions.map(item=>`<button data-event-evidence="${escapeHtml(item.id)}"><span>${escapeHtml(item.title)}</span><span>↗</span></button>`).join('')}` : ''}</section>`;
+    return `<section class="event-investigation"><h3>Investigate this event</h3>${findings.length ? findings.map(item => `<button data-event-finding="${item.id}"><span>${escapeHtml(item.title)}</span></button>`).join('') : '<p>This event has no specific control finding mapped yet.</p><button id="event-inquiry-browse">Explore the open system questions →</button>'}${additions.length ? `<h3>Additional evidence</h3>${additions.map(item=>`<button data-event-evidence="${escapeHtml(item.id)}"><span>${escapeHtml(item.title)}</span><span>↗</span></button>`).join('')}` : ''}</section>`;
   }
   function openInvestigation(id, eventId = null) {
     changeView('cast'); renderCast(); castUI.focusFinding(id, eventId);
@@ -511,7 +511,7 @@
   }
   function renderDetail() {
     const event = eventMap.get(state.selected);
-    if (!event) { $('#event-detail').innerHTML = '<p class="detail-empty">Select a point<br>to read its record.</p>'; return; }
+    if (!event) { $('#event-detail').innerHTML = '<p class="detail-empty">Select an event<br>to explore its details.</p>'; return; }
     const source = SOURCE_MAP.get(event.source_id);
     const conflicts = data.conflicts.filter((conflict) => conflict.event_ids.includes(event.id));
     const exact = event._time.kind === 'clock';
@@ -523,10 +523,10 @@
       <h2 class="detail-title">${escapeHtml(event.title)}</h2>
       <div class="event-kicker"><span class="event-id">${event.id}</span>${statusBadge(event)}</div>
       <div class="detail-date">${escapeHtml(dateLabel(event))}<small>${timingNote}</small><button class="date-evidence" id="date-evidence-button">Date evidence</button></div>
-      ${visible.some((entry) => entry.id === event.id) ? '' : '<p class="detail-context">Selected record is outside the current filters.</p>'}
+      ${visible.some((entry) => entry.id === event.id) ? '' : '<p class="detail-context">Selected event is outside the current filters.</p>'}
       <div class="event-placement"><button id="event-life">${escapeHtml(queryContext(event).lifecycle.label)}</button><span aria-hidden="true">/</span><button id="event-stage">${escapeHtml(queryContext(event).stage.label)}</button></div>
-      <div class="detail-facts">${fact('Severity', severity)}${fact('Workstream', workstreamBadge(event))}${fact('Record scope', event.source_granularity.startsWith('aggregate') ? 'Grouped activity' : 'Single reported unit')}${fact('Actor', escapeHtml(event.actor))}${fact('System', escapeHtml(event.system_scope))}</div>
-      ${event.outcome && event.outcome !== 'action or result reported' ? `<div class="detail-block"><h3>What the record says</h3><p>${escapeHtml(event.outcome)}</p></div>` : ''}
+      <div class="detail-facts">${fact('Severity', severity)}${fact('Workstream', workstreamBadge(event))}${fact('Event scope', event.source_granularity.startsWith('aggregate') ? 'Grouped activity' : 'Single reported unit')}${fact('Actor', escapeHtml(event.actor))}${fact('System', escapeHtml(event.system_scope))}</div>
+      ${event.outcome && event.outcome !== 'action or result reported' ? `<div class="detail-block"><h3>What is reported</h3><p>${escapeHtml(event.outcome)}</p></div>` : ''}
       ${event.intervention_status === 'actual intervention' ? `<div class="detail-block intervention-detail"><h3>Recorded intervention</h3><p>${escapeHtml(event.action)}.</p><p class="point-reading">Investigate the control path below to examine proposed alternatives and their evidence needs.</p></div>` : ''}
       ${eventInvestigation(event)}
       ${conflicts.map((conflict) => `<div class="discrepancy-note"><strong>Accounts differ · ${conflict.conflict_id}</strong><p>${escapeHtml(conflict.detail)}</p><button class="text-button compare-sources" data-conflict="${conflict.conflict_id}">Compare sources</button></div>`).join('')}
@@ -534,7 +534,7 @@
       <div class="detail-block"><h3>Primary source</h3><a class="source-link" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer"><span>${escapeHtml(source.publisher)}</span><span aria-hidden="true">↗</span></a><div class="source-locator">${escapeHtml(event.source_locator)}</div></div>
       <button class="detail-more" id="impact-record-button">Severity assessment & basis <span aria-hidden="true">↗</span></button>
       <button class="detail-more" id="full-record-button">All 45 fields & uncertainties <span aria-hidden="true">↗</span></button>
-      ${state.nearby.length > 1 ? `<div class="nearby-group"><span>${state.nearby.length} nearby records</span>${state.nearby.filter((entry) => entry.id !== event.id).map((entry) => `<button data-nearby="${entry.id}">${entry.id} · ${escapeHtml(entry.title)}</button>`).join('')}</div>` : ''}`;
+      ${state.nearby.length > 1 ? `<div class="nearby-group"><span>${state.nearby.length} nearby events</span>${state.nearby.filter((entry) => entry.id !== event.id).map((entry) => `<button data-nearby="${entry.id}">${entry.id} · ${escapeHtml(entry.title)}</button>`).join('')}</div>` : ''}`;
     $$('[data-event-finding]').forEach(button => button.addEventListener('click', () => openInvestigation(button.dataset.eventFinding, event.id)));
     $$('[data-event-evidence]').forEach(button => button.addEventListener('click', () => { changeView('cast'); renderCast(); castUI.focusEvidence(button.dataset.eventEvidence); }));
     $('#event-inquiry-browse')?.addEventListener('click', () => { changeView('cast'); castUI.show('questions'); });
@@ -574,9 +574,9 @@
   function renderList() {
     const focusedRecord = document.activeElement?.closest('[data-record]')?.dataset.record;
     const oldRows = new Map($$('#record-list [data-record]').map((node) => [node.dataset.record, node.getBoundingClientRect()]));
-    $('#record-count').textContent = `${visible.length} / ${events.length} entries`;
+    $('#record-count').textContent = `${visible.length} / ${events.length} events`;
     const entries = visible.slice(0, state.limit);
-    $('#record-list').innerHTML = entries.length ? entries.map((event) => `<button class="record-row ${event.id === state.selected ? 'selected' : ''}" data-record="${event.id}" aria-label="${escapeHtml(`${event.id}, ${event.title}, ${eventStyle(event).label}, ${LABELS[event._status]}, ${bandLabel(event)}, ${dateLabel(event, true)}`)}"><span class="row-id">${event.id}</span><span class="row-date">${escapeHtml(dateLabel(event, true))}</span><span class="row-title">${eventMark(event)}${escapeHtml(event.title)}</span><span class="row-severity">${severityBadge(event)}</span><span class="row-status"><span class="mark ${SHAPES[event._status]}"></span>${LABELS[event._status]}</span><span class="row-arrow" aria-hidden="true">↗</span></button>`).join('') : '<p class="list-empty">No records match this view.</p>';
+    $('#record-list').innerHTML = entries.length ? entries.map((event) => `<button class="record-row ${event.id === state.selected ? 'selected' : ''}" data-record="${event.id}" aria-label="${escapeHtml(`${event.id}, ${event.title}, ${eventStyle(event).label}, ${LABELS[event._status]}, ${bandLabel(event)}, ${dateLabel(event, true)}`)}"><span class="row-id">${event.id}</span><span class="row-date">${escapeHtml(dateLabel(event, true))}</span><span class="row-title">${eventMark(event)}${escapeHtml(event.title)}</span><span class="row-severity">${severityBadge(event)}</span><span class="row-status"><span class="mark ${SHAPES[event._status]}"></span>${LABELS[event._status]}</span><span class="row-arrow" aria-hidden="true">↗</span></button>`).join('') : '<p class="list-empty">No events match this view.</p>';
     $$('[data-record]').forEach((button) => button.addEventListener('click', () => { selectEvent(button.dataset.record); }));
     if (!reducedMotion.matches) $$('#record-list [data-record]').forEach((node) => {
       const rect = node.getBoundingClientRect(); const prior = oldRows.get(node.dataset.record);
@@ -703,7 +703,14 @@
     // Paint the exact departure state in this turn: never expose a blank frame.
     frame(started);
   }
-  reducedMotion.addEventListener('change', () => { if (reducedMotion.matches) stopMotion(); });
+  reducedMotion.addEventListener('change', () => {
+    if (!reducedMotion.matches) return;
+    stopMotion();
+    $$('.view-ghost').forEach(element => element.remove());
+    for (const view of ['stream', 'bowtie', 'cast']) {
+      $(`#${view}-view`).getAnimations({subtree:true}).forEach(animation => animation.cancel());
+    }
+  });
   function renderBowtie({ camera = false } = {}) {
     const { width, height } = fitCanvas(bowCanvas, bctx);
     const narrow = width < 560;
@@ -791,11 +798,11 @@
     if (!camera) $('#bowtie-map').innerHTML = clusters.map((cluster) => {
       const x = focused ? margin : width * [.16, .5, .84][cluster.index];
       const y = focused ? fieldTop - 14 : fieldBottom + 12;
-      return focused ? `<div class="bow-label focused-label" style="left:${x}px;top:${y}px"><span>${cluster.label}</span><small>${cluster.entries.length} entries</small></div>` : `<button class="bow-label" data-bow-group="${cluster.key}" style="left:${x}px;top:${y}px" aria-label="Focus ${cluster.label}, ${cluster.entries.length} entries"><span>${cluster.label}</span><small>${cluster.entries.length} entries <i aria-hidden="true">↗</i></small></button>`;
+      return focused ? `<div class="bow-label focused-label" style="left:${x}px;top:${y}px"><span>${cluster.label}</span><small>${cluster.entries.length} events</small></div>` : `<button class="bow-label" data-bow-group="${cluster.key}" style="left:${x}px;top:${y}px" aria-label="Focus ${cluster.label}, ${cluster.entries.length} events"><span>${cluster.label}</span><small>${cluster.entries.length} events <i aria-hidden="true">↗</i></small></button>`;
     }).join('');
     if (!camera) $$('[data-bow-group]').forEach((button) => button.addEventListener('click', () => focusBowtie(button.dataset.bowGroup || null)));
     if (!camera && selectedFocus !== undefined) $(`#bowtie-navigation [data-bow-group="${selectedFocus}"]`)?.focus({ preventScroll: true });
-    if (!camera) bowCanvas.setAttribute('aria-label', `${focused ? focused.label : 'Bow tie'}: ${bowPoints.length} records. ${clusters.map((cluster) => `${cluster.label}: ${cluster.entries.length}`).join('; ')}. Color identifies incident workstream; shape identifies evidence status. Severity uses boxed numbers and, in the swarm, vertical bands. Size distinguishes single reported units from grouped activity. Points can be selected. Curves are structural grouping, not proven causal links. There is no time axis in this view.`);
+    if (!camera) bowCanvas.setAttribute('aria-label', `${focused ? focused.label : 'Bow tie'}: ${bowPoints.length} events. ${clusters.map((cluster) => `${cluster.label}: ${cluster.entries.length}`).join('; ')}. Color identifies incident workstream; shape identifies evidence status. Severity uses boxed numbers and, in the swarm, vertical bands. Size distinguishes single reported units from grouped activity. Points can be selected. Curves are structural grouping, not proven causal links. There is no time axis in this view.`);
     $('#visible-count').textContent = visible.length;
     if (!camera) $('#plot-period').textContent = `${shortDate(state.range[0])}–${shortDate(state.range[1] - 1, true)}`;
     drawOverview(state.range, true);
@@ -853,7 +860,7 @@
     renderComets();
   }
   function queueCamera() {
-    if (!cameraPending) { stopMotion(); cameraPending = true; }
+    if (!cameraPending) { settleMotionForGesture(); cameraPending = true; }
     $('.visual-column').dataset.camera = 'moving';
     if (cameraFrame === null) cameraFrame = requestAnimationFrame(paintCamera);
     clearTimeout(cameraTimer);
@@ -1014,7 +1021,9 @@
         Object.assign(state, { investigation: { id: finding.id, title: finding.title, ids: new Set(finding.event_ids) }, search: '', stage: 'all', lifecycle: 'all', workstream: 'all', severity: 'all', interventions: false, temporal: 'all', vertical: [0,1], statuses: new Set(Object.keys(SHAPES)), range: [...fullRange] });
         state.assessment = finding.event_ids.some(id=>assessmentOf(eventMap.get(id))==='impact') ? 'impact' : assessmentOf(eventMap.get(finding.event_ids[0]));
         query = window.HaruspexQuery.compile(''); $('#event-search').value = '';
-        changeView(view); navigate(() => {}, {fit:true}); $('#scene').scrollIntoView({behavior:'instant'});
+        if (state.view === view) navigate(() => {}, {fit:true});
+        else { state.range = fitMatchingRange(); state.limit = 12; changeView(view); }
+        $('#scene').scrollIntoView({behavior:'instant'});
       },
       onEvent: (id) => { if ($('#info-dialog').open) $('#info-dialog').close(); changeView('stream'); selectEvent(id, { reveal: true }); $('#scene').scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth' }); },
       onDialog: openDialog,
@@ -1028,29 +1037,70 @@
     $$('.view-tab').forEach((button) => { const selected = button.id === `${view}-tab`; button.setAttribute('aria-selected', String(selected)); button.tabIndex = selected ? 0 : -1; button.classList.toggle('active', selected); });
     closeLegend(); closeStages(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false');
   }
+  function freezeVisibleView() {
+    const outgoing = $(`#${state.view}-view`);
+    const ghost = outgoing.cloneNode(true);
+    const originals = [outgoing, ...outgoing.querySelectorAll('*')];
+    const copies = [ghost, ...ghost.querySelectorAll('*')];
+    const animated = new Set(outgoing.getAnimations({subtree:true}).map(animation => animation.effect?.target));
+    const scrolls = [];
+    for (let i = 0; i < originals.length; i += 1) {
+      const original = originals[i]; const copy = copies[i];
+      // Removing IDs must not remove the displayed layout or retina canvas sizing.
+      if (original.id || original.tagName === 'CANVAS' || animated.has(original)) {
+        const computed = getComputedStyle(original);
+        copy.style.cssText = Array.from(computed, key => `${key}:${computed.getPropertyValue(key)};`).join('');
+        copy.style.setProperty('animation', 'none', 'important');
+        copy.style.setProperty('transition', 'none', 'important');
+      }
+      if (original.tagName === 'CANVAS') {
+        copy.width = original.width; copy.height = original.height;
+        copy.getContext('2d').drawImage(original, 0, 0);
+      }
+      if (original.scrollTop || original.scrollLeft) scrolls.push([copy, original.scrollTop, original.scrollLeft]);
+      copy.removeAttribute('id');
+    }
+    ghost.hidden = false; ghost.inert = true;
+    ghost.classList.add('view-ghost'); ghost.setAttribute('aria-hidden', 'true');
+    Object.assign(ghost.style, {position:'absolute', inset:'0', zIndex:'20', pointerEvents:'none'});
+    // A point morph is painted on a sibling canvas. Capture that visible frame,
+    // rather than exposing the still-hidden destination underneath it.
+    if (motionFrame !== null) {
+      const live = snapshotCanvas(transitionCanvas);
+      Object.assign(live.style, {position:'absolute',inset:'0',width:'100%',height:'100%',zIndex:'5'});
+      ghost.append(live);
+      if (transitionLabels) ghost.append(transitionLabels.cloneNode(true));
+    }
+    $('.visual-column').append(ghost);
+    for (const [copy, top, left] of scrolls) { copy.style.scrollBehavior='auto'; copy.scrollTop=top; copy.scrollLeft=left; }
+    return ghost;
+  }
+  function fadeFrozenView(ghost, duration = 330) {
+    if (!ghost) return;
+    const alpha = Number.parseFloat(ghost.style.opacity) || 0;
+    const leaving = ghost.animate([{opacity:alpha},{opacity:0}], {duration,easing:'cubic-bezier(.2,.65,.25,1)',fill:'forwards'});
+    leaving.finished.then(() => ghost.remove()).catch(() => ghost.remove());
+  }
+  function settleMotionForGesture() {
+    const ghost = motionFrame !== null && !reducedMotion.matches ? freezeVisibleView() : null;
+    stopMotion(); fadeFrozenView(ghost, 170);
+  }
   function changeView(view) {
     if (view === state.view) return;
     if (view !== 'cast' && state.view !== 'cast') { navigate(() => setView(view)); return; }
+    const ghost = !reducedMotion.matches ? freezeVisibleView() : null;
+    // Keep already-fading snapshots alive during rapid reversals. Each expires
+    // independently, so a partially visible view is never replaced at full opacity.
+    const outgoing = $(`#${state.view}-view`);
+    outgoing.getAnimations().forEach(animation => animation.cancel());
     finishCamera(); stopMotion(); cancelGestures();
-    $$('.view-ghost').forEach((element) => element.remove());
-    let ghost = null;
-    if (!reducedMotion.matches) {
-      const outgoing = $(`#${state.view}-view`);
-      ghost = outgoing.cloneNode(true); ghost.hidden = false; ghost.inert = true;
-      ghost.querySelectorAll('canvas').forEach((canvas,index) => { const original=outgoing.querySelectorAll('canvas')[index]; canvas.width=original.width;canvas.height=original.height;canvas.getContext('2d').drawImage(original,0,0); });
-      ghost.removeAttribute('id'); ghost.querySelectorAll('[id]').forEach(node=>node.removeAttribute('id'));
-      ghost.classList.add('view-ghost'); ghost.setAttribute('aria-hidden','true');
-      Object.assign(ghost.style,{position:'absolute',inset:'0',zIndex:'20',pointerEvents:'none'});
-      $('.visual-column').append(ghost);
-    }
     setView(view); refresh();
     const incoming = $(`#${view}-view`);
+    incoming.getAnimations().forEach(animation => animation.cancel());
     if (!reducedMotion.matches) {
-      incoming.getAnimations().forEach(animation=>animation.cancel());
-      incoming.animate([{opacity:0,transform:'translateY(12px) scale(.992)'},{opacity:1,transform:'none'}],{duration:530,easing:'cubic-bezier(.2,.75,.15,1)'});
-      const leaving=ghost?.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-10px) scale(1.006)'}],{duration:370,easing:'ease-out',fill:'forwards'});
-      leaving?.finished.then(()=>ghost.remove()).catch(()=>ghost.remove());
-    }
+      incoming.animate([{opacity:0},{opacity:1}], {duration:330,easing:'cubic-bezier(.2,.65,.25,1)'});
+      fadeFrozenView(ghost);
+    } else $$('.view-ghost').forEach(element => element.remove());
     syncNavigationIndicators();
   }
   function openDialog(title, content) {
@@ -1061,7 +1111,7 @@
   function openTemporalRecord(event) {
     const temporal = temporalMap.get(event.id);
     const reviewLabel = temporal.assessment_status === 'canonical_carried_forward_not_individually_researched' ? 'Original source window retained; not individually rechecked in this search.' : temporal.assessment_status === 'reviewed_contextual_upper_bound' ? 'Upper bound inferred; earliest date remains unresolved.' : 'Rechecked against the cited primary material.';
-    openDialog(`${event.id} · Date evidence`, `<p>${escapeHtml(event.title)}</p><h3>${escapeHtml(dateLabel(event))}</h3><p>${escapeHtml(temporal.rationale.replace('See research_groups.', '').trim())}</p><dl class="record-fields">${factForRecord('Date precision', temporal.time_precision)}${factForRecord('Basis', temporal.time_basis)}${factForRecord('Review', reviewLabel)}</dl><h3>Sources</h3>${temporal.source_evidence.map((source) => `<p><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.source_id || 'Primary cross-check')} · ${escapeHtml(source.locator)}</a></p>`).join('')}<p>The original date fields remain unchanged in the full record. Contextual bounds are not an individual event date.</p>`);
+    openDialog(`${event.id} · Date evidence`, `<p>${escapeHtml(event.title)}</p><h3>${escapeHtml(dateLabel(event))}</h3><p>${escapeHtml(temporal.rationale.replace('See research_groups.', '').trim())}</p><dl class="record-fields">${factForRecord('Date precision', temporal.time_precision)}${factForRecord('Basis', temporal.time_basis)}${factForRecord('Review', reviewLabel)}</dl><h3>Sources</h3>${temporal.source_evidence.map((source) => `<p><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.source_id || 'Primary cross-check')} · ${escapeHtml(source.locator)}</a></p>`).join('')}<p>The original date fields remain unchanged in the event details. Contextual bounds are not an individual event date.</p>`);
   }
   function openRecord(event) {
     const fields = data.codebook.map((definition) => {
@@ -1071,12 +1121,12 @@
       if (definition.field === 'source_url' && value) rendered = `<a href="${escapeHtml(value)}" target="_blank" rel="noopener noreferrer">Open primary source</a>`;
       return `<dt>${escapeHtml(definition.field.replaceAll('_', ' '))}</dt><dd class="${missing ? 'missing' : ''}">${rendered}</dd>`;
     }).join('');
-    openDialog(`${event.id} · Full record`, `<p>${escapeHtml(event.title)}</p><p>Current assessment: ${severityBadge(event)}.</p><p>The fields below preserve the original dataset. Its “observed severity” field contains earlier coding and may differ from the current assessment above.</p><dl class="record-fields">${fields}</dl>`);
+    openDialog(`${event.id} · Event details`, `<p>${escapeHtml(event.title)}</p><p>Current assessment: ${severityBadge(event)}.</p><p>The fields below preserve the original dataset. Its “observed severity” field contains earlier coding and may differ from the current assessment above.</p><dl class="record-fields">${fields}</dl>`);
   }
   function openConflict(id) {
     const conflict = data.conflicts.find((item) => item.conflict_id === id);
     if (!conflict) return;
-    openDialog(conflict.subject, `<p>${escapeHtml(conflict.detail)}</p><p>${escapeHtml(conflict.status)}.</p>${conflict.source_ids.map((sourceId) => sourceCard(SOURCE_MAP.get(sourceId))).join('')}<h3>Related entries</h3><p>${conflict.event_ids.map((eventId) => `${eventId}: ${escapeHtml(eventMap.get(eventId)?.title || '')}`).join('<br>')}</p>`);
+    openDialog(conflict.subject, `<p>${escapeHtml(conflict.detail)}</p><p>${escapeHtml(conflict.status)}.</p>${conflict.source_ids.map((sourceId) => sourceCard(SOURCE_MAP.get(sourceId))).join('')}<h3>Related events</h3><p>${conflict.event_ids.map((eventId) => `${eventId}: ${escapeHtml(eventMap.get(eventId)?.title || '')}`).join('<br>')}</p>`);
   }
   function sourceCard(source) { return `<div class="dialog-source"><span class="source-id">${source.source_id}</span><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.title)}</a><p>${escapeHtml(source.publisher)}${source.publication_date ? ` · ${shortDate(parseDay(source.publication_date), true)}` : ''}<br>${escapeHtml(source.source_notes)}</p></div>`; }
   function updateSeverityOptions() {
@@ -1085,24 +1135,24 @@
   function openFramework() {
     const incident = severityData.incident_assessment;
     const overall = incident ? `<section class="incident-assessment"><h3>The overall incident</h3><strong>${bandBadge(bandMap.get(String(incident.score)))}</strong><p>${escapeHtml(incident.rationale)}</p><small>${escapeHtml(incident.aggregation_policy || 'A separate assessment of the documented incident chain, not a sum of event scores.')}</small><p>${(incident.source_evidence || []).map((source) => `<a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.source_id)} · ${escapeHtml(source.locator)}</a>`).join('<br>')}</p></section>` : '';
-    openDialog('Severity', `<p>All five positive levels assess consequences for the affected systems and organization. 5 requires devastating organizational consequences; it does not require nationwide or societal harm. Severity appears as a boxed number and, in the Impact field, a vertical band. Context and Unresolved are separate unordered fields. Marker size distinguishes a single reported unit from grouped activity whose individual instances are unavailable. It does not encode severity or the number of underlying instances. Color identifies workstream.</p><p>Zero marks a near-miss within the assessed outcome. Preventive actions occupy an unnumbered band below zero, marked −.</p>${overall}<table class="framework-table"><tbody>${legendOrder.map((key) => bandMap.get(key)).map((band) => `<tr><th>${bandBadge(band)}</th><td>${escapeHtml(band.definition)}</td></tr>`).join('')}</tbody></table><p>All 549 previously unassessed records have now been reviewed. Context marks claims to which severity is inapplicable; Unresolved identifies missing effect evidence and names the gap. Neither is zero. The score belongs to the specific effect described by the record, not the entire incident. A failed step can be a near-miss even when other steps caused harm.</p><p>These are provisional Haruspex assessments. NIST’s organizational-impact definitions inform the scope, but its potential-impact categories are not converted into event scores. This is not an official NIST or MIT scale. Values are ordinal and should not be added, averaged or netted against protective actions. Administrator access and broad credential exposure can qualify as severe; catastrophic requires evidence of devastating consequences within the stated organizational scope.</p><p>${severityData.scale.institutional_context.map((source) => `<a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.name)}</a>`).join('<br>')}</p>`);
+    openDialog('Severity', `<p>All five positive levels assess consequences for the affected systems and organization. 5 requires devastating organizational consequences; it does not require nationwide or societal harm. Severity appears as a boxed number and, in the Impact field, a vertical band. Context and Unresolved are separate unordered fields. Marker size distinguishes a single reported unit from grouped activity whose individual instances are unavailable. It does not encode severity or the number of underlying instances. Color identifies workstream.</p><p>Zero marks a near-miss within the assessed outcome. Preventive actions occupy an unnumbered band below zero, marked −.</p>${overall}<table class="framework-table"><tbody>${legendOrder.map((key) => bandMap.get(key)).map((band) => `<tr><th>${bandBadge(band)}</th><td>${escapeHtml(band.definition)}</td></tr>`).join('')}</tbody></table><p>All 549 previously unassessed events have now been reviewed. Context marks claims to which severity is inapplicable; Unresolved identifies missing effect evidence and names the gap. Neither is zero. The score belongs to the specific effect described by the event, not the entire incident. A failed step can be a near-miss even when other steps caused harm.</p><p>These are provisional Haruspex assessments. NIST’s organizational-impact definitions inform the scope, but its potential-impact categories are not converted into event scores. This is not an official NIST or MIT scale. Values are ordinal and should not be added, averaged or netted against protective actions. Administrator access and broad credential exposure can qualify as severe; catastrophic requires evidence of devastating consequences within the stated organizational scope.</p><p>${severityData.scale.institutional_context.map((source) => `<a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.name)}</a>`).join('<br>')}</p>`);
   }
   function openImpactRecord(event) {
     const assessment = severityMap.get(event.id);
-    openDialog(`${event.id} · Severity assessment`, `<p>${escapeHtml(event.title)}</p><h3>${escapeHtml(bandLabel(event))}</h3><p>${escapeHtml(assessment.rationale)}</p><dl class="record-fields">${factForRecord('Assessed scope', assessment.scope)}${factForRecord('Basis', assessment.basis.replaceAll('_', ' '))}${factForRecord('Review status', (assessment.review_status || 'previously_assessed').replaceAll('_', ' '))}${factForRecord('Confidence', assessment.confidence.replaceAll('_', ' '))}${factForRecord('Confidence applies to', assessment.confidence_scope)}</dl><h3>Evidence</h3>${assessment.source_evidence.map((source) => `<p><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.source_id)} · ${escapeHtml(source.locator)}</a></p>`).join('')}<p>The original 45 dataset fields remain available unchanged in the full record.</p>`);
+    openDialog(`${event.id} · Severity assessment`, `<p>${escapeHtml(event.title)}</p><h3>${escapeHtml(bandLabel(event))}</h3><p>${escapeHtml(assessment.rationale)}</p><dl class="record-fields">${factForRecord('Assessed scope', assessment.scope)}${factForRecord('Basis', assessment.basis.replaceAll('_', ' '))}${factForRecord('Review status', (assessment.review_status || 'previously_assessed').replaceAll('_', ' '))}${factForRecord('Confidence', assessment.confidence.replaceAll('_', ' '))}${factForRecord('Confidence applies to', assessment.confidence_scope)}</dl><h3>Evidence</h3>${assessment.source_evidence.map((source) => `<p><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.source_id)} · ${escapeHtml(source.locator)}</a></p>`).join('')}<p>The original 45 dataset fields remain available unchanged in the event details.</p>`);
   }
   function factForRecord(label, value) { return `<dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd>`; }
   function openMethod() {
-    openDialog('Reading the field', `<p>Haruspex brings together 832 displayable entries across Impact, Context, and Unresolved from 11 primary sources. Each point is a reported action, result, communication, decision or investigative finding. Some entries describe a group action because individual records are unavailable.</p><h3>Color follows the workstream</h3><div class="method-workstreams">${visualData.groups.map((group) => `<span>${workstreamSwatch(group)}${escapeHtml(group.label)}</span>`).join('')}</div><p>Each color identifies one part of the incident: evaluation, access, coordination, intrusion, response or investigation. These group the source workstream labels already attached to the records. A record keeps its color across every view, whatever its severity or evidence status. All records retain their workstream color. Context has a hollow outline; Unresolved has a broken outline. Those treatments preserve the evidence shape and do not invent a numerical severity. Click a color key to filter that workstream; click it again to restore all workstreams.</p><h3>Shape tells you about evidence</h3><div class="method-key">${Object.keys(SHAPES).map((status) => `<span><i class="mark ${SHAPES[status]}"></i>${LABELS[status]}</span>`).join('')}</div><p>Reported means attested by the cited source, not independently established ground truth. Reasoning records preserve what an agent or person said or decided; they do not prove motivation or cause. Inferred entries reflect a source’s inference. Discrepancies preserve accounts that may describe different stages.</p><h3>Time has different resolutions</h3><p>55 entries have an individual clock time, 310 have a date only, and 467 have context intervals. Exact clock points keep their source time. Points without individual times are packed within the visible part of their source date windows for readability. Their horizontal position is not a known time or order, and placement adapts when the view changes. Select a point or enable Date windows to see its interval as a line. Color and shape identify workstream and evidence; size distinguishes a single reported unit from grouped activity; it does not count the underlying instances. None encodes date precision; dates and their limits are also shown in the tooltip and event details. The 12 records without a supported earliest date have tails that fade in from the left and end at their upper date bound, within their Impact or Context field. The head marks the latest contextual bound, not the event time. A tail has no known starting point, duration or probability distribution. If its bound lies outside the visible range, only the continuing tail appears; its head is never moved to the edge. Select a head or trail to open the record. All remain available in the register. Fresh primary-source checks did not establish their individual dates; their contextual upper bound is inferred and visible in Date evidence. They can appear in the bow tie, which does not assign a time coordinate.</p><h3>One severity scale</h3><p>Levels 1–5 describe consequences for the affected systems and organization, from a small local effect to devastating organizational loss. They use the same scope throughout. Zero identifies a documented near-miss with no realized harm in the specific assessed outcome. Preventive actions occupy a separate band below zero, with no numerical magnitude assigned. Context and Unresolved have their own unordered fields, reached through the category controls. They have no position below Preventive or elsewhere on the severity scale. Their reviews are complete, with no numeric score invented. Open Severity to read the criteria, or an event to inspect its rationale.</p><h3>The event swarm and the bow tie</h3><p>The name Event swarm is inspired by <a href="https://observablehq.github.io/plot/transforms/dodge" target="_blank" rel="noopener noreferrer">beeswarm plots</a>, which keep individual points visible. This adaptation accommodates source date windows.</p><p>Small vertical offsets separate points at the same severity; those offsets have no analytical meaning. The distant field suggests the much larger activity that cannot be individually resolved here: roughly 17,600 recovered attacker actions in Hugging Face’s account and more than 70,000 distinct messages and files in METR’s account. These source totals can overlap and use different units; they cannot be added or reduced by subtracting 832. Background stars suggest aggregate density. Their hidden numbers belong to a decorative catalogue, with no incident details, dates or severity attached. <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">HF source</a> · <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR source</a> Before, During and After group incident roles, independently of date. Choose any of the 27 stages to narrow the field. The bow tie uses the same membership and filters. Structure exposes the ontology, definitions and connected facets. Points retain their identity as they move between views. The motion explains a change of layout, not a path through time or a causal connection. Each focused lifecycle is a single continuous field. Shared event positions stay stable when filters change; interrupted movement resumes from the displayed position and velocity. Responses may happen while activity continues. Reduced-motion preferences are respected.</p><h3>What is missing stays visible</h3><p>Every record includes all 45 fields, including unavailable values. The dataset does not expand published totals into invented individual events, reconstruct inaccessible private logs, or invent optimal interventions. Its 832 entries are a working inventory, not a proven absolute maximum. The CAST view adds six analyst proposals alongside six groups of reported changes. Each retains evidence, unknowns and verification needs; none is claimed to be an optimal intervention. Its 16 open questions preserve the earlier investigation register. The investigation connects events to control paths, findings, additional public evidence and specific collection plans. It is a provisional CAST analysis; new evidence can revise it. The original question register stays intact, with new findings and remaining gaps recorded alongside it.</p><h3>Use the record</h3><p>Select a point, browse the event register, or search for an actor, system or event ID. Drag the field to move in either direction. Scroll to zoom both axes, hold Shift for time alone or Alt for vertical zoom alone; the separate Time and vertical buttons offer the same controls. When the field has keyboard focus, arrow keys pan and + / − zoom. Home fits the matching events. The field remains pinned briefly as you scroll, then gives way to the record. Navigation never changes a stored event time. Drag either handle on the overview to adjust that end of the date range. Drag its middle to move the whole window, or set the From and To dates. The end date is inclusive and all dates use UTC. The overview groups records by window midpoints as a navigation aid; its heights are not counts of verified events at those times. Keyboard users can reach every filtered record through the list; open a record to inspect all fields and its primary source. Export downloads the complete dataset, including field definitions and source comparisons.</p>`);
+    openDialog('Reading the field', `<p>Haruspex brings together 832 displayable events across Impact, Context, and Unresolved from 11 primary sources. Each point is a reported action, result, communication, decision or investigative finding. Some events describe grouped activity because details of the individual instances are unavailable.</p><h3>Color follows the workstream</h3><div class="method-workstreams">${visualData.groups.map((group) => `<span>${workstreamSwatch(group)}${escapeHtml(group.label)}</span>`).join('')}</div><p>Each color identifies one part of the incident: evaluation, access, coordination, intrusion, response or investigation. These group the source workstream labels already attached to the events. An event keeps its color across every view, whatever its severity or evidence status. All events retain their workstream color. Context has a hollow outline; Unresolved has a broken outline. Those treatments preserve the evidence shape and do not invent a numerical severity. Click a color key to filter that workstream; click it again to restore all workstreams.</p><h3>Shape tells you about evidence</h3><div class="method-key">${Object.keys(SHAPES).map((status) => `<span><i class="mark ${SHAPES[status]}"></i>${LABELS[status]}</span>`).join('')}</div><p>Reported means attested by the cited source, not independently established ground truth. Reasoning events preserve what an agent or person said or decided; they do not prove motivation or cause. Inferred events reflect a source’s inference. Discrepancies preserve accounts that may describe different stages.</p><h3>Time has different resolutions</h3><p>55 events have an individual clock time, 310 have a date only, and 467 have context intervals. Exact clock points keep their source time. Points without individual times are packed within the visible part of their source date windows for readability. Their horizontal position is not a known time or order, and placement adapts when the view changes. Select a point or enable Date windows to see its interval as a line. Color and shape identify workstream and evidence; size distinguishes a single reported unit from grouped activity; it does not count the underlying instances. None encodes date precision; dates and their limits are also shown in the tooltip and event details. The 12 events without a supported earliest date have tails that fade in from the left and end at their upper date bound, within their Impact or Context field. The head marks the latest contextual bound, not the event time. A tail has no known starting point, duration or probability distribution. If its bound lies outside the visible range, only the continuing tail appears; its head is never moved to the edge. Select a head or trail to open the event. All remain available in the register. Fresh primary-source checks did not establish their individual dates; their contextual upper bound is inferred and visible in Date evidence. They can appear in the bow tie, which does not assign a time coordinate.</p><h3>One severity scale</h3><p>Levels 1–5 describe consequences for the affected systems and organization, from a small local effect to devastating organizational loss. They use the same scope throughout. Zero identifies a documented near-miss with no realized harm in the specific assessed outcome. Preventive actions occupy a separate band below zero, with no numerical magnitude assigned. Context and Unresolved have their own unordered fields, reached through the category controls. They have no position below Preventive or elsewhere on the severity scale. Their reviews are complete, with no numeric score invented. Open Severity to read the criteria, or an event to inspect its rationale.</p><h3>The event swarm and the bow tie</h3><p>The name Event swarm is inspired by <a href="https://observablehq.github.io/plot/transforms/dodge" target="_blank" rel="noopener noreferrer">beeswarm plots</a>, which keep individual points visible. This adaptation accommodates source date windows.</p><p>Small vertical offsets separate points at the same severity; those offsets have no analytical meaning. The distant field suggests the much larger activity that cannot be individually resolved here: roughly 17,600 recovered attacker actions in Hugging Face’s account and more than 70,000 distinct messages and files in METR’s account. These source totals can overlap and use different units; they cannot be added or reduced by subtracting 832. Background stars suggest aggregate density. Their hidden numbers belong to a decorative catalogue, with no incident details, dates or severity attached. <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">HF source</a> · <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR source</a> Before, During and After group incident roles, independently of date. Choose any of the 27 stages to narrow the field. The bow tie uses the same membership and filters. Structure exposes the ontology, definitions and connected facets. Points retain their identity as they move between views. The motion explains a change of layout, not a path through time or a causal connection. Each focused lifecycle is a single continuous field. Shared event positions stay stable when filters change; interrupted movement resumes from the displayed position and velocity. Responses may happen while activity continues. Reduced-motion preferences are respected.</p><h3>What is missing stays visible</h3><p>Every event includes all 45 fields, including unavailable values. The dataset does not expand published totals into invented individual events, reconstruct inaccessible private logs, or invent optimal interventions. Its 832 events are a working inventory, not a proven absolute maximum. The CAST view adds six analyst proposals alongside six groups of reported changes. Each retains evidence, unknowns and verification needs; none is claimed to be an optimal intervention. Its 16 open questions preserve the earlier investigation register. The investigation connects events to control paths, findings, additional public evidence and specific collection plans. It is a provisional CAST analysis; new evidence can revise it. The original question register stays intact, with new findings and remaining gaps recorded alongside it.</p><h3>Explore the events</h3><p>Select a point, browse the event register, or search for an actor, system or event ID. Drag the field to move in either direction. Scroll to zoom both axes, hold Shift for time alone or Alt for vertical zoom alone; the separate Time and vertical buttons offer the same controls. When the field has keyboard focus, arrow keys pan and + / − zoom. Home fits the matching events. The field remains pinned briefly as you scroll, then gives way to the event list. Navigation never changes a stored event time. Drag either handle on the overview to adjust that end of the date range. Drag its middle to move the whole window, or set the From and To dates. The end date is inclusive and all dates use UTC. The overview groups events by window midpoints as a navigation aid; its heights are not counts of verified events at those times. Keyboard users can reach every filtered event through the list; open an event to inspect all fields and its primary source. Export downloads the complete dataset, including field definitions and source comparisons.</p>`);
   }
   function openOntology() {
-    openDialog('Incident structure', `<p>832 connected records, organized into 27 stages and six workstreams.</p><div class="ontology-lifecycle">${ontology.lifecycle.map((life) => `<button data-ontology-life="${life.id}"><strong>${escapeHtml(life.label)}</strong><span>${life.count} entries</span><small>${escapeHtml(life.definition)}</small></button>`).join('')}</div><p>These are roles within the incident. Response and investigation can overlap ongoing activity; dates remain an independent dimension.</p><h3>Explore a stage</h3><div class="ontology-stages">${visualData.groups.map((group) => `<section><h4>${workstreamSwatch(group)}${escapeHtml(group.label)}</h4>${ontology.stages.filter((stage) => stage.workstream_id === group.key).map((stage) => `<button data-ontology-stage="${stage.id}">${escapeHtml(stage.label)}<small>${stage.count}</small></button>`).join('')}</section>`).join('')}</div><h3>What each record connects</h3><div class="ontology-relations"><span>Actor</span><span>System</span><span>Stage</span><strong>Event</strong><span>Source</span><span>Assessment</span><span>Lifecycle</span></div><p>Every event retains its actor, system context, source, date window, stage and assessment. The connections describe the available evidence; they do not invent causal links.</p><details class="ontology-definitions"><summary>Ontology definitions and provenance</summary><dl>${ontology.entity_types.map((type) => `<dt>${escapeHtml(type.label)}</dt><dd>${escapeHtml(type.definition)}</dd>`).join('')}</dl><table class="framework-table"><tbody>${ontology.relation_types.map((relation) => `<tr><th>${escapeHtml(relation.label)}</th><td>${escapeHtml(relation.domain)} → ${escapeHtml(relation.range)}<br>${escapeHtml(relation.definition)}</td></tr>`).join('')}</tbody></table><p>The local model draws on graph and provenance concepts from STIX and CASE/UCO. It does not claim conformance to either standard. Its full definitions and event assignments are included in Export.</p>${ontology.sources.map((source) => `<p><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.name || source.title)}</a></p>`).join('')}</details>`);
+    openDialog('Incident structure', `<p>832 connected events, organized into 27 stages and six workstreams.</p><div class="ontology-lifecycle">${ontology.lifecycle.map((life) => `<button data-ontology-life="${life.id}"><strong>${escapeHtml(life.label)}</strong><span>${life.count} events</span><small>${escapeHtml(life.definition)}</small></button>`).join('')}</div><p>These are roles within the incident. Response and investigation can overlap ongoing activity; dates remain an independent dimension.</p><h3>Explore a stage</h3><div class="ontology-stages">${visualData.groups.map((group) => `<section><h4>${workstreamSwatch(group)}${escapeHtml(group.label)}</h4>${ontology.stages.filter((stage) => stage.workstream_id === group.key).map((stage) => `<button data-ontology-stage="${stage.id}">${escapeHtml(stage.label)}<small>${stage.count}</small></button>`).join('')}</section>`).join('')}</div><h3>What each event connects</h3><div class="ontology-relations"><span>Actor</span><span>System</span><span>Stage</span><strong>Event</strong><span>Source</span><span>Assessment</span><span>Lifecycle</span></div><p>Every event retains its actor, system context, source, date window, stage and assessment. The connections describe the available evidence; they do not invent causal links.</p><details class="ontology-definitions"><summary>Ontology definitions and provenance</summary><dl>${ontology.entity_types.map((type) => `<dt>${escapeHtml(type.label)}</dt><dd>${escapeHtml(type.definition)}</dd>`).join('')}</dl><table class="framework-table"><tbody>${ontology.relation_types.map((relation) => `<tr><th>${escapeHtml(relation.label)}</th><td>${escapeHtml(relation.domain)} → ${escapeHtml(relation.range)}<br>${escapeHtml(relation.definition)}</td></tr>`).join('')}</tbody></table><p>The local model draws on graph and provenance concepts from STIX and CASE/UCO. It does not claim conformance to either standard. Its full definitions and event assignments are included in Export.</p>${ontology.sources.map((source) => `<p><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.name || source.title)}</a></p>`).join('')}</details>`);
     $$('[data-ontology-life]').forEach((button) => button.addEventListener('click', () => { $('#info-dialog').close(); closeStages(); selectLifecycle(button.dataset.ontologyLife); }));
     $$('[data-ontology-stage]').forEach((button) => button.addEventListener('click', () => { $('#info-dialog').close(); selectStage(button.dataset.ontologyStage); }));
   }
   function openQueryHelp() {
     const examples = [['Substantial or worse', 'severity>=3'], ['Hugging Face systems', 'system:"Hugging Face"'], ['Agent coordination', 'stage:"Agent coordination"'], ['Reported near-misses', 'severity:0 evidence:reported'], ['OpenAI’s account', 'source:S01'], ['Incident precursors', 'lifecycle:before']];
-    openDialog('Search the incident', `<p>Search freely, or combine a few fields to ask a more precise question.</p><div class="query-examples">${examples.map(([label, value]) => `<button data-query="${escapeHtml(value)}"><span>${label}</span><code>${escapeHtml(value)}</code></button>`).join('')}</div><p>Combine terms with spaces. Put a phrase in quotation marks; add a minus before a term to exclude it.</p><p><code>severity>=3 system:"Hugging Face" -source:S02</code></p><p>Available fields: actor, system, stage, workstream, lifecycle, source, evidence, severity, outcome and id. Severity also accepts <code>preventive</code>, <code>context</code>, and <code>unresolved</code>.</p><p>Dates use <code>date:2026-07-11</code>, <code>before:2026-07-11</code> or <code>after:2026-07-11</code>. Date searches include compatible source windows, so a match does not establish an exact event time.</p><p>The lifecycle, stage and other active filters still apply. Fit reframes the matching records.</p>`);
+    openDialog('Search the incident', `<p>Search freely, or combine a few fields to ask a more precise question.</p><div class="query-examples">${examples.map(([label, value]) => `<button data-query="${escapeHtml(value)}"><span>${label}</span><code>${escapeHtml(value)}</code></button>`).join('')}</div><p>Combine terms with spaces. Put a phrase in quotation marks; add a minus before a term to exclude it.</p><p><code>severity>=3 system:"Hugging Face" -source:S02</code></p><p>Available fields: actor, system, stage, workstream, lifecycle, source, evidence, severity, outcome and id. Severity also accepts <code>preventive</code>, <code>context</code>, and <code>unresolved</code>.</p><p>Dates use <code>date:2026-07-11</code>, <code>before:2026-07-11</code> or <code>after:2026-07-11</code>. Date searches include compatible source windows, so a match does not establish an exact event time.</p><p>The lifecycle, stage and other active filters still apply. Fit reframes the matching events.</p>`);
     $$('[data-query]').forEach((button) => button.addEventListener('click', () => {
       $('#info-dialog').close(); clearTimeout(queryTimer);
       navigate(() => { state.search = button.dataset.query; query = window.HaruspexQuery.compile(state.search); alignAssessmentToSearch(); $('#event-search').value = state.search; }, { fit: true });
@@ -1152,7 +1202,7 @@
   timeline.addEventListener('pointerleave', () => { if (!drag) { $('#plot-tooltip').hidden = true; showStar(null); } });
   timeline.addEventListener('pointerdown', (event) => {
     if (event.button !== 0) return;
-    stopMotion(); const { x, y } = pointerCoordinates(event);
+    settleMotionForGesture(); const { x, y } = pointerCoordinates(event);
     drag = { id: event.pointerId, x, y, range: [...state.range], vertical: [...state.vertical], moved: false };
     timeline.setPointerCapture(event.pointerId); timeline.focus({ preventScroll: true });
   });
@@ -1207,7 +1257,7 @@
   }
   brush.addEventListener('pointerdown', (event) => {
     if (event.button !== 0) return;
-    event.preventDefault(); stopMotion(); cancelGestures();
+    event.preventDefault(); settleMotionForGesture(); cancelGestures();
     const time = brushTime(event.clientX); const edge = event.target.closest('[data-edge]')?.dataset.edge;
     if (!edge && (time < state.range[0] || time > state.range[1])) {
       const span = state.range[1] - state.range[0]; state.range = boundedRange(time - span / 2, time + span / 2); queueCamera();
@@ -1238,7 +1288,7 @@
     const input = $(`#range-${edge}`); input.min = '2026-04-19'; input.max = '2026-08-27';
     input.addEventListener('change', () => {
       const date = parseDay(input.value);
-      if (!Number.isFinite(date) || !input.validity.valid) { notify('Choose a date within the incident record.'); syncControls(); return; }
+      if (!Number.isFinite(date) || !input.validity.valid) { notify('Choose a date within the incident’s date bounds.'); syncControls(); return; }
       const value = edge === 'end' ? date + DAY : date;
       if ((edge === 'start' && value >= state.range[1]) || (edge === 'end' && value <= state.range[0])) { notify('The start must be earlier than the end.'); syncControls(); return; }
       navigate(() => setEndpoint(edge, value));
@@ -1287,7 +1337,7 @@
   $('#stage-structure').addEventListener('click', openOntology);
   $('#query-help').addEventListener('click', openQueryHelp);
   $('#framework-info').addEventListener('click', openFramework);
-  $('#background-info').addEventListener('click', () => openDialog('Beyond the detailed record', `<p>The distant points suggest the much larger activity described in aggregate, without enough individually published detail to become separate records here.</p><div class="dialog-source"><strong>≈17,600 recovered attacker actions</strong><p>Hugging Face grouped these into roughly 6,280 clusters. Its public timeline describes selected activity.</p><a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">Hugging Face technical timeline</a></div><div class="dialog-source"><strong>More than 70,000 messages and files</strong><p>METR describes communications across roughly 1,200 agents. Most underlying raw cache entries were fragments, rather than additional independent messages.</p><a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR investigation</a></div><p>These quantities use different units and can overlap. Adding them—or subtracting 832—would not give an exact total of undisplayable events. Background density is illustrative. The hidden numbers are a decorative star catalogue, not historical event IDs; they carry no incident details, dates or severity.</p>`));
+  $('#background-info').addEventListener('click', () => openDialog('Beyond the detailed events', `<p>The distant points suggest the much larger activity described in aggregate, without enough individually published detail to become separate events here.</p><div class="dialog-source"><strong>≈17,600 recovered attacker actions</strong><p>Hugging Face grouped these into roughly 6,280 clusters. Its public timeline describes selected activity.</p><a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">Hugging Face technical timeline</a></div><div class="dialog-source"><strong>More than 70,000 messages and files</strong><p>METR describes communications across roughly 1,200 agents. Most underlying raw cache entries were fragments, rather than additional independent messages.</p><a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR investigation</a></div><p>These quantities use different units and can overlap. Adding them—or subtracting 832—would not give an exact total of undisplayable events. Background density is illustrative. The hidden numbers are a decorative star catalogue, not historical event IDs; they carry no incident details, dates or severity.</p>`));
   $('#hidden-egg').addEventListener('click', () => {
     starsUnlocked = !starsUnlocked;
     $('#hidden-egg').setAttribute('aria-pressed', String(starsUnlocked));
@@ -1331,14 +1381,14 @@
   $('#possible-interventions').addEventListener('click', () => { changeView('cast'); renderCast(); castUI.show('changes'); });
   $('#active-filter').addEventListener('click', () => navigate(() => { state.stage = 'all'; state.temporal = 'all'; }));
   $('#unplaced-button').addEventListener('click', () => { state.temporal = 'open'; state.period = 'all'; state.range = [...periods.all]; state.limit = 24; syncControls(); refresh(); $('#event-list').scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
-  $('#sources-button').addEventListener('click', () => openDialog('The source record', `<p>Three supplied starter documents and additional primary sources. Select a title to open the original publication.</p>${data.sources.map(sourceCard).join('')}<h3>Additional investigation sources</h3>${researchData.sources.map(source => `<div class="dialog-source"><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.title || source.id)}</a><p>${escapeHtml((source.kind?.replaceAll('_',' ') || '') + ' · ' + (source.relation_to_existing_evidence || ''))}</p></div>`).join('')}<h3>Unresolved source comparisons</h3>${data.conflicts.map((conflict) => `<div class="dialog-source"><span class="source-id">${conflict.conflict_id}</span><strong>${escapeHtml(conflict.subject)}</strong><p>${escapeHtml(conflict.detail)}</p></div>`).join('')}`));
+  $('#sources-button').addEventListener('click', () => openDialog('Sources', `<p>Three supplied starter documents and additional primary sources. Select a title to open the original publication.</p>${data.sources.map(sourceCard).join('')}<h3>Additional investigation sources</h3>${researchData.sources.map(source => `<div class="dialog-source"><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.title || source.id)}</a><p>${escapeHtml((source.kind?.replaceAll('_',' ') || '') + ' · ' + (source.relation_to_existing_evidence || ''))}</p></div>`).join('')}<h3>Unresolved source comparisons</h3>${data.conflicts.map((conflict) => `<div class="dialog-source"><span class="source-id">${conflict.conflict_id}</span><strong>${escapeHtml(conflict.subject)}</strong><p>${escapeHtml(conflict.detail)}</p></div>`).join('')}`));
   $('#dialog-close').addEventListener('click', () => $('#info-dialog').close());
   $('#info-dialog').addEventListener('click', (event) => { if (event.target === $('#info-dialog')) { const rect = event.target.getBoundingClientRect(); if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) event.target.close(); } });
   $('#info-dialog').addEventListener('close', () => { if (dialogTrigger?.isConnected) dialogTrigger.focus({preventScroll:true}); });
   $('#export-button').addEventListener('click', () => {
     const exportData = { ...data, severity_assessments: severityData, visual_encodings: visualData, incident_ontology: ontology, temporal_assessments: temporalData, cast_analysis: castData, research_expansion: researchData, opening_quotations: quotationData };
     const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = url; link.download = 'haruspex-atlas-data-v10.json'; document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 60000); notify('Dataset download requested · records, reviews, dates and ontology.');
+    const url = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = url; link.download = 'haruspex-atlas-data-v10.json'; document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 60000); notify('Dataset download requested · events, reviews, dates and ontology.');
   });
   $('#load-more').addEventListener('click', () => { state.limit += 24; renderList(); });
   $('#list-toggle').addEventListener('click', () => { const collapsed = !$('#record-list-wrap').hidden; $('#record-list-wrap').hidden = collapsed; $('#list-toggle').setAttribute('aria-expanded', String(!collapsed)); $('#list-toggle').textContent = collapsed ? 'Expand +' : 'Collapse −'; });

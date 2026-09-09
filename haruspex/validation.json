@@ -1,5 +1,5 @@
 {
-  "application_version": "10.0.0",
+  "application_version": "10.1.0",
   "assessments_version": "3.0.1",
   "visual_encodings_version": "6.0.0",
   "incident_ontology_version": "1.0.0",
@@ -94,7 +94,7 @@
     "after": 172
   },
   "verified": [
-    "Canonical 832 records and 45 fields remain byte-identical. The strict build validates ontology, assessments, temporal bounds, CAST connections, research provenance, original question statuses and collection steps.",
+    "Canonical 832 events and 45 fields remain byte-identical. The strict build validates ontology, assessments, temporal bounds, CAST connections, research provenance, original question statuses and collection steps.",
     "JavaScript syntax checks and the 39 existing structured-query assertions passed against the current website sources.",
     "Desktop browser: one Cotra quotation, author-only transcript link, small role credit, no quotation switcher or publication-credit line; specific July windows and transparent official AIRI reference logo render.",
     "Browser: exact view labels, I/II/III lifecycle roles and unnumbered Impact/Context/Unresolved controls render; no horizontal page overflow in desktop and 390px layouts.",
@@ -104,7 +104,12 @@
     "Browser: the final Investigate opens a continuous paper with a CAST introduction, eight connected sections, a conceptual control/feedback figure, 11 source notes and closed research appendices. It has no question chooser or toolbar.",
     "Browser: source-note navigation focuses the referenced note; the evidence appendix preserves all 23 entries; the Bonus tab returns to the main paper at its start.",
     "Independent module checks: all 10 focused findings preserve their linked events/questions, all 16 question dialogs work, six research appendices remain reachable, and show(inquiry) restores the paper.",
-    "Browser console checks captured no errors during the v10 interaction review. No end-to-end FPS benchmark is claimed."
+    "Browser console checks captured no errors during the v10 interaction review. No end-to-end FPS benchmark is claimed.",
+    "v10.1 browser review: the shortened July introduction, Events heading, Search events accessible name and dynamic event counts render correctly.",
+    "v10.1 browser review: rapid swarm/bow-tie/paper reversals end with one selected view and no leftover snapshots. Outgoing paper snapshots preserve their 1628px reading position and have no duplicate IDs.",
+    "v10.1 browser review: lifecycle switching, keyboard zoom and the date handle remain responsive during movement. The paper detection/response link shows 8 related events in a fitted time window.",
+    "v10.1 independent review: active child opacity is included in outgoing snapshots; overview gestures use the short fade bridge; enabling reduced motion cancels view fades. Syntax and build checks pass.",
+    "v10.1 console review captured no errors. No end-to-end FPS benchmark is claimed."
   ],
   "limits": [
     "This is a provisional, developing public-source CAST analysis, not a completed or exhaustive investigation. Search completeness and a maximal number of obtainable facts are not claimed.",

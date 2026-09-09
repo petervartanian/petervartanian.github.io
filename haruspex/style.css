@@ -939,3 +939,6 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 .paper-appendix{max-width:1040px;margin:0 auto}
 .paper-appendix>.paper-back{margin:0 0 24px}
 @media(max-width:600px){.paper-title{margin-bottom:32px}.paper-title h2{font-size:39px;line-height:1.12;letter-spacing:-.9px;margin-bottom:21px}.paper-deck{font-size:15px}.paper-control-row{grid-template-columns:1fr;gap:16px}.paper-signal i{transform:rotate(90deg);font-size:27px;margin-top:8px}.paper-feedback{border-top:1px solid #799b9030;padding:17px 0 0;margin-top:19px;align-items:flex-start}.paper-control-row>strong{font-size:14px}}
+
+/* Reading resets are immediate; only explicit source-note navigation scrolls. */
+#cast-map{scroll-behavior:auto}

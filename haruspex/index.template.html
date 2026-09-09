@@ -9,7 +9,7 @@
   <style>/* STYLES */</style>
 </head>
 <body>
-  <a class="skip-link" href="#event-list">Skip to event records</a>
+  <a class="skip-link" href="#event-list">Skip to events</a>
   <div class="grain" aria-hidden="true"></div>
   <main>
     <section id="intro" class="intro" aria-labelledby="intro-title">
@@ -34,7 +34,7 @@
           <h1 id="intro-title">“/* OPENING_QUOTE */”</h1>
           <p class="quote-credit"><a id="quote-source" href="/* OPENING_URL */" target="_blank" rel="noopener noreferrer">/* OPENING_AUTHOR */</a><span id="quote-role">(M.T.S. @ METR)</span></p>
         </div>
-        <p class="intro-story">In July 2026, OpenAI evaluation agents entered Hugging Face systems without authorization. The main intrusion unfolded on 11–13 July; a separate intrusion into OpenAI’s internal network continued until 19 July. Shared services and communication channels helped activity spread across runs.</p>
+        <p class="intro-story">OpenAI’s evaluation agents broke into Hugging Face on 11 July 2026. Hugging Face cut off their access two days later. Attacks on OpenAI’s own systems continued until 19 July.</p>
         <div class="intro-actions"><a id="enter-explorer" class="intro-enter" href="#scene">Enter the field</a><button id="intro-cast" class="intro-cast">Read the investigation</button></div>
       </div>
       <div class="intro-foot"><a class="airi-reference" href="https://airisk.mit.edu/" target="_blank" rel="noopener noreferrer" aria-label="MIT AI Risk Initiative — risk framework reference"><img src="/* AIRI_LOGO */" width="150" height="45" alt="MIT AI Risk Initiative"><span>Risk framework reference</span></a>
@@ -66,7 +66,7 @@
         <div class="scene-heading">
           <h2 id="page-title" class="sr-only">OpenAI and Hugging Face incident explorer</h2>
           <div class="scene-actions">
-            <label class="search"><span aria-hidden="true">⌕</span><input type="search" id="event-search" placeholder="Search events, people, systems…" aria-describedby="query-feedback" aria-label="Search event records"><kbd>/</kbd></label><button id="query-help" class="query-help" aria-label="Search guide">?</button>
+            <label class="search"><span aria-hidden="true">⌕</span><input type="search" id="event-search" placeholder="Search events, people, systems…" aria-describedby="query-feedback" aria-label="Search events"><kbd>/</kbd></label><button id="query-help" class="query-help" aria-label="Search guide">?</button>
             <button id="filter-toggle" aria-expanded="false" aria-controls="advanced-filters">Filters <span id="filter-indicator"></span><span aria-hidden="true">⌄</span></button>
           </div>
           <p id="query-feedback" class="query-feedback" role="status" hidden></p>
@@ -108,24 +108,24 @@
           </div>
           <div id="bowtie-view" class="visual-view" role="tabpanel" aria-labelledby="bowtie-tab" hidden>
             <nav id="bowtie-navigation" class="bowtie-navigation" aria-label="Bow tie focus"></nav>
-            <canvas id="bowtie-canvas" data-color-encoding="workstream" data-fill-encoding="assessment-treatment" data-shape-encoding="evidence-status" role="img" aria-label="Bow tie grouping of incident records"></canvas>
+            <canvas id="bowtie-canvas" data-color-encoding="workstream" data-fill-encoding="assessment-treatment" data-shape-encoding="evidence-status" role="img" aria-label="Bow tie grouping of incident events"></canvas>
             <div id="bowtie-map" class="bowtie-map"></div>
             <div class="plot-tooltip" id="bowtie-tooltip" hidden role="tooltip"></div>
           </div>
           <div id="cast-view" class="visual-view cast-view" role="tabpanel" aria-labelledby="cast-tab" hidden><div id="cast-map" class="cast-map"></div></div>
           <canvas id="transition-canvas" aria-hidden="true" hidden></canvas>
           <div id="comet-layer" class="comet-layer" hidden>
-            <div id="undated-records" class="undated-records" role="group" aria-label="Event records with an unknown start and a by-date bound" hidden></div>
+            <div id="undated-records" class="undated-records" role="group" aria-label="Events with an unknown start and a by-date bound" hidden></div>
           </div>
         </div>
         <div class="field-foot">
           <button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button>
-          <div class="field-readout"><span><b id="visible-count">—</b> matching entries</span><span id="viewport-count"></span><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
+          <div class="field-readout"><span><b id="visible-count">—</b> matching events</span><span id="viewport-count"></span><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
           <div class="timeline-navigation">
             <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
             <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
             <label class="date-endpoint"><span>To</span><input type="date" id="range-end" aria-label="Timeline end date"></label>
-            <a id="browse-records" href="#event-list">Records <span aria-hidden="true">↓</span></a>
+            <a id="browse-records" href="#event-list">Events <span aria-hidden="true">↓</span></a>
           </div>
         </div>
         <section id="legend-panel" class="legend-panel" aria-labelledby="legend-title" hidden>
@@ -158,7 +158,7 @@
       </div>
     </section>
     <section class="record-section" id="event-list" aria-labelledby="record-heading">
-      <div class="section-heading"><div><h2 id="record-heading">Event records</h2></div><div class="record-controls"><span id="record-count"></span><button id="list-toggle" aria-expanded="true" aria-controls="record-list-wrap">Collapse −</button></div></div>
+      <div class="section-heading"><div><h2 id="record-heading">Events</h2></div><div class="record-controls"><span id="record-count"></span><button id="list-toggle" aria-expanded="true" aria-controls="record-list-wrap">Collapse −</button></div></div>
       <div class="milestone-strip" aria-label="Selected milestones"><div id="milestones"></div></div>
       <div id="record-list-wrap"><div id="record-list"></div><button id="load-more" class="load-more">Show more events <span>↓</span></button></div>
     </section>
