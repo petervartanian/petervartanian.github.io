@@ -1,0 +1,214 @@
+{
+  "version": "5.0.0",
+  "name": "Incident workstreams",
+  "source_field": "phase",
+  "groups": [
+    {
+      "key": "evaluation",
+      "label": "Evaluation",
+      "fill": "#E2B93A",
+      "outline": "#E2B93A",
+      "definition": "Training precursors, evaluation experiments, and changes to tools or transcripts used in evaluation.",
+      "phases": [
+        "Training and evaluation precursors",
+        "Scorer, target and reset experiments",
+        "Tool and transcript tampering",
+        "Training precursors"
+      ]
+    },
+    {
+      "key": "access",
+      "label": "Access",
+      "fill": "#2BD2C2",
+      "outline": "#2BD2C2",
+      "definition": "Artifactory access, external footholds and staging, credential discovery, and cloud reconnaissance.",
+      "phases": [
+        "Artifactory access and escape",
+        "External access and credential discovery",
+        "External foothold and staging",
+        "External foothold and control",
+        "Cloud reconnaissance"
+      ]
+    },
+    {
+      "key": "coordination",
+      "label": "Coordination",
+      "fill": "#C691FE",
+      "outline": "#C691FE",
+      "definition": "Evaluation coordination, agent communication, decisions, restraint, and recruitment.",
+      "phases": [
+        "Evaluation and coordination",
+        "Agent communication and coordination",
+        "Agent decisions and restraint",
+        "Agent decisions and recruitment"
+      ]
+    },
+    {
+      "key": "intrusion",
+      "label": "Intrusion",
+      "fill": "#FF8346",
+      "outline": "#FF8346",
+      "definition": "Activity grouped in the source phases around organizational intrusion, protected data or build systems, data transport, supply-chain poisoning, and concealment. Membership does not establish that an attempted effect succeeded.",
+      "phases": [
+        "Hugging Face intrusion",
+        "OpenAI internal compromise",
+        "Source control and CI access",
+        "Sol participation in Hugging Face intrusion",
+        "Supply-chain poisoning",
+        "Internal database access and investigation",
+        "Private Hub database attempts",
+        "Data staging and transport",
+        "Concealment and evasion"
+      ]
+    },
+    {
+      "key": "response",
+      "label": "Response",
+      "fill": "#68CA80",
+      "outline": "#68CA80",
+      "definition": "Containment, remediation, agent termination, and loss of access as grouped by the original phase labels. Membership does not establish protective intent or effectiveness.",
+      "phases": [
+        "Containment and remediation",
+        "Agent termination and access loss"
+      ]
+    },
+    {
+      "key": "investigation",
+      "label": "Investigation",
+      "fill": "#72A7FF",
+      "outline": "#72A7FF",
+      "definition": "Investigation, disclosure, and remediation recorded in the source phases centered on investigation or vendor follow-up.",
+      "phases": [
+        "Investigation and disclosure",
+        "Investigation and remediation",
+        "Vendor remediation and disclosure"
+      ]
+    }
+  ],
+  "assignment_policy": "Each of the 27 existing phase labels is assigned to exactly one display workstream, covering all 832 records without changing the canonical data or adding inferred event facts. These six workstreams are navigation groups, not a causal sequence, risk ontology, severity judgment, or evidence judgment. Mixed source phases are kept intact: Internal database access and investigation belongs to Intrusion; Evaluation and coordination belongs to Coordination; Investigation and remediation and Vendor remediation and disclosure belong to Investigation. Consequently a workstream can include activities that also fit another group. The original phase remains available on each event.",
+  "display_conventions": {
+    "fill": "Six distinct jewel hues identify workstream: gold, turquoise, lilac, orange, jade and blue. Perceptual lightness and chroma are balanced across the palette while preserving clear warm and cool differences. Color has no severity, outcome or evidential meaning. Foreground marks use approximately 0.90 opacity by default; selection or an explicit workstream filter can use full strength.",
+    "outline": "Foreground outlines retain the workstream color and evidence geometry without routine whitening. Context uses a hollow shape; Unresolved uses a broken outline. Hover, selection and keyboard focus may add restrained neutral emphasis without changing the workstream or evidence category.",
+    "severity": "The Impact & prevention field contains only numerical 0–5 severity and the separate unnumbered − Preventive category. Context and Unresolved have their own flat fields, selected with assessment controls; they never occupy lower positions on the ordered impact scale. Neutral boxed numbers and attached criteria communicate severity. Color does not encode severity or an assessment disposition.",
+    "shape": "Shape independently identifies evidence status: circle for Reported, diamond for Reasoning, triangle for Inferred, and hexagon for Accounts differ.",
+    "hollow": "Hollow foreground shapes identify the completed Context assessment disposition. They do not mean uncertain dates, missing source evidence or a Near-miss. The shape geometry still identifies Reported, Reasoning, Inferred or Accounts differ, and the visible edge retains the workstream color.",
+    "time_uncertainty": "Finite date-window marks and attached temporal evidence communicate date uncertainty. The 12 records without a supported earliest date retain their own IDs in the selected impact or separate assessment field, with selectable curved trails that fade to the left. Each head marks the inferred exclusive upper boundary at 2026-07-14T00:00:00Z, labeled By 13 July, rather than an observed event time. The fading left end means the start is unknown; it invents neither a start date nor a duration. A head outside the visible time range remains outside instead of being clamped to the edge; its visible trail remains selectable. Curvature distinguishes the trail from an observed chronology and does not encode a changing impact, path, or causal sequence.",
+    "legend": "Six labeled workstream swatches retain the same rich base palette in each view. Legend labels, filtering and attached workstream names also identify each group. Evidence shapes, assessment fills and a neutral size key explain the independent encodings; color alone is never the only group label.",
+    "size": "Marker area increases modestly across assessed positive severity1–5. The0, Preventive, Context and Unresolved categories use the same small baseline. Shapes are corrected to approximately equal areas so evidence categories do not introduce an unintended size hierarchy. Zoom and selection add temporary magnification. Size is ordinal emphasis, not a ratio of harm or an estimate of probability.",
+    "recommended_opacity": {
+      "all_workstreams_foreground": 0.9,
+      "selected_or_filtered_workstream": 1.0,
+      "meaning": "Display emphasis only. Opacity is not confidence, severity, probability, recency or event multiplicity.",
+      "aggregate_density_range": [
+        0.026,
+        0.225
+      ]
+    },
+    "unresolved": "A broken foreground outline identifies the completed Unresolved assessment disposition. It preserves the original evidence-status shape and workstream color; the specific missing or conflicting assessment evidence remains attached to the record.",
+    "background_density": "A neutral, non-selectable field illustrates the larger source-reported activity that is not individually resolved in this dataset. Responsive rendering uses 5,000–22,000 tiny density marks. This is a rendering density, not an event count or an expansion of the 832 records. Marks have no event IDs, individual timestamps, severity values or evidence classifications; their positions are illustrative. The background contributes nothing to record or filter counts.",
+    "open_left_trails": "No separate undated row or DOM comet buttons are used. The 12 open-left records retain their canonical IDs in the selected impact or separate assessment field. Canvas hit-testing can select their heads or curved visible trails, and keyboard users can open them through the register. The head is an inferred upper-bound marker, not the date of occurrence. Trail length and curvature do not encode duration, impact change or a causal trajectory.",
+    "assessment_views": "Impact & prevention contains 599 entries, Context 192 and Unresolved 41. These controls switch between an ordered impact field and two separate fields without numerical ranking. Context and Unresolved retain their completed review dispositions and source evidence; neither is zero, negative severity, or a continuation below Preventive."
+  },
+  "counts": {
+    "evaluation": 143,
+    "access": 116,
+    "coordination": 174,
+    "intrusion": 216,
+    "response": 68,
+    "investigation": 115
+  },
+  "migration_note": "Version 5.0 restores six rich workstream colors with approximately 0.90 default foreground opacity. Context and Unresolved move to separate flat assessment fields rather than extending the ordered impact scale. Open-left uncertainty trails are curved while retaining their source upper-bound semantics. All workstream assignments, canonical records and assessment scores are unchanged.",
+  "palette_calibration": {
+    "color_space": "OKLCH",
+    "lightness_range": [
+      0.73,
+      0.8
+    ],
+    "chroma_range": [
+      0.13,
+      0.168
+    ],
+    "per_workstream": {
+      "evaluation": {
+        "lightness": 0.8,
+        "chroma": 0.145,
+        "hue_degrees": 90,
+        "sRGB": "#E2B93A"
+      },
+      "access": {
+        "lightness": 0.78,
+        "chroma": 0.13,
+        "hue_degrees": 185,
+        "sRGB": "#2BD2C2"
+      },
+      "coordination": {
+        "lightness": 0.75,
+        "chroma": 0.16,
+        "hue_degrees": 305,
+        "sRGB": "#C691FE"
+      },
+      "intrusion": {
+        "lightness": 0.74,
+        "chroma": 0.168,
+        "hue_degrees": 45,
+        "sRGB": "#FF8346"
+      },
+      "response": {
+        "lightness": 0.76,
+        "chroma": 0.14,
+        "hue_degrees": 150,
+        "sRGB": "#68CA80"
+      },
+      "investigation": {
+        "lightness": 0.73,
+        "chroma": 0.14,
+        "hue_degrees": 260,
+        "sRGB": "#72A7FF"
+      }
+    },
+    "sRGB_relative_luminance_range": [
+      0.3794,
+      0.5101
+    ],
+    "gamut_policy": "Orange and blue chroma are reduced to remain in the sRGB gamut at their selected hue and lightness. Values are rounded to 8-bit sRGB for rendering.",
+    "purpose": "Provide clearly distinct warm and cool jewel colors with substantial chroma and similar readable lightness against the dark field. No claim of a universal optimal palette or color-vision equivalence is made; labels, filters and source-record names remain available."
+  },
+  "background_activity": {
+    "kind": "illustrative_aggregate_density",
+    "rendered_mark_count_range": [
+      5000,
+      22000
+    ],
+    "mark_count_is_event_count": false,
+    "individual_event_ids_assigned": false,
+    "selectable": false,
+    "source_counts": [
+      {
+        "source_id": "S03",
+        "publisher": "Hugging Face",
+        "quantity": 17600,
+        "qualifier": "approximately",
+        "unit": "recovered attacker actions",
+        "grouped_into_approximately": 6280,
+        "group_unit": "clusters",
+        "scope_start": "2026-07-09T02:28:00Z",
+        "scope_end": "2026-07-13T14:14:00Z",
+        "url": "https://huggingface.co/blog/agent-intrusion-technical-timeline",
+        "locator": "Introduction: forensic reconstruction scope",
+        "relationship": "Clusters group these same actions; they are not an additional action total."
+      },
+      {
+        "source_id": "S02",
+        "publisher": "METR and Redwood Research",
+        "quantity": 70000,
+        "qualifier": "more than",
+        "unit": "distinct messages and files",
+        "url": "https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/",
+        "locator": "Core takeaways; Main data sources",
+        "relationship": "The roughly 1.2 million message-board entries mainly encode fragments of these files and messages within a larger roughly 20 million-entry cache dump. Those raw-entry counts are not additional attacks."
+      }
+    ],
+    "overlap_policy": "The HF action count and METR communication count have different scopes and can overlap. Do not add them, treat them as independent totals, or subtract 832 to calculate an unseen remainder. Displayable entries, source aggregates and raw log/cache records have different units.",
+    "caption": "Faint stars suggest the larger source-reported activity behind the detailed record. Approximately 17,600 recovered HF actions and over 70,000 messages and files were reported. Counts overlap; stars are illustrative, not individually identified events."
+  }
+}

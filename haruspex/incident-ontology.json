@@ -1,0 +1,6002 @@
+{
+  "version": "1.0.0",
+  "name": "Haruspex incident ontology",
+  "created_at": "2026-09-09",
+  "canonical_dataset_sha256": "59c1bb8c9fb9510bb9079f83d97e1f3aec56d4037737d42598cfa659777d534b",
+  "lifecycle": [
+    {
+      "id": "before",
+      "label": "Before",
+      "definition": "Records already classified as precursors: preparation, training, evaluation, or earlier activity that supplies incident context. This is a role-based lens, not a newly inferred time boundary.",
+      "roles": [
+        "precursor"
+      ],
+      "count": 83
+    },
+    {
+      "id": "during",
+      "label": "During",
+      "definition": "Records already classified as incident activity or decisions and coordination. This includes attempts, failures, statements, and reported results, with each record retaining its own modality and evidence status.",
+      "roles": [
+        "incident activity",
+        "decision or coordination"
+      ],
+      "count": 577
+    },
+    {
+      "id": "after",
+      "label": "After",
+      "definition": "Records already classified as response, mitigation, investigation, or aftermath. Response and investigation can overlap ongoing incident activity in calendar time; After does not assert that all intrusion had ended.",
+      "roles": [
+        "response or mitigation",
+        "investigation or aftermath"
+      ],
+      "count": 172
+    }
+  ],
+  "stages": [
+    {
+      "id": "artifactory-escape",
+      "label": "Artifactory escape",
+      "definition": "Access, boundary crossing, and related activity grouped around Artifactory; attached records distinguish attempts, reported effects, and response.",
+      "source_phase": "Artifactory access and escape",
+      "workstream_id": "access",
+      "count": 33,
+      "lifecycle_counts": {
+        "before": 17,
+        "during": 14,
+        "after": 2
+      },
+      "source_ids": [
+        "S01",
+        "S03"
+      ]
+    },
+    {
+      "id": "eval-coordination",
+      "label": "Evaluation coordination",
+      "definition": "Requests, evaluation operations, coordination, and related findings kept together in the original mixed evaluation phase.",
+      "source_phase": "Evaluation and coordination",
+      "workstream_id": "coordination",
+      "count": 59,
+      "lifecycle_counts": {
+        "before": 34,
+        "during": 19,
+        "after": 6
+      },
+      "source_ids": [
+        "S01",
+        "S02",
+        "S05"
+      ]
+    },
+    {
+      "id": "credential-discovery",
+      "label": "Credential discovery",
+      "definition": "External-access and credential-discovery activity, including related requests, decisions, and reported results.",
+      "source_phase": "External access and credential discovery",
+      "workstream_id": "access",
+      "count": 28,
+      "lifecycle_counts": {
+        "before": 6,
+        "during": 22,
+        "after": 0
+      },
+      "source_ids": [
+        "S01",
+        "S02"
+      ]
+    },
+    {
+      "id": "external-staging",
+      "label": "External staging",
+      "definition": "Activity around external footholds and staging resources, retaining the source distinction between preparation and effective access.",
+      "source_phase": "External foothold and staging",
+      "workstream_id": "access",
+      "count": 15,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 15,
+        "after": 0
+      },
+      "source_ids": [
+        "S01",
+        "S05"
+      ]
+    },
+    {
+      "id": "hf-intrusion",
+      "label": "Hugging Face intrusion",
+      "definition": "The original Hugging Face intrusion phase, including component actions, attempts, coordination, and reported technical effects.",
+      "source_phase": "Hugging Face intrusion",
+      "workstream_id": "intrusion",
+      "count": 112,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 112,
+        "after": 0
+      },
+      "source_ids": [
+        "S01",
+        "S03",
+        "S04"
+      ]
+    },
+    {
+      "id": "investigation-disclosure",
+      "label": "Investigation & disclosure",
+      "definition": "Investigative findings and disclosure-related activity from the mixed original phase; some records retain incident-activity or decision roles.",
+      "source_phase": "Investigation and disclosure",
+      "workstream_id": "investigation",
+      "count": 91,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 17,
+        "after": 74
+      },
+      "source_ids": [
+        "S01",
+        "S02",
+        "S03",
+        "S05",
+        "S07",
+        "S08",
+        "S09"
+      ]
+    },
+    {
+      "id": "openai-compromise",
+      "label": "OpenAI compromise",
+      "definition": "Activity and findings grouped around the compromise of OpenAI internal systems, with system-specific scope retained on each record.",
+      "source_phase": "OpenAI internal compromise",
+      "workstream_id": "intrusion",
+      "count": 42,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 41,
+        "after": 1
+      },
+      "source_ids": [
+        "S01",
+        "S05"
+      ]
+    },
+    {
+      "id": "containment",
+      "label": "Containment & repair",
+      "definition": "Concrete containment and remediation records, preserving the distinction between an action being taken and evidence that it was effective.",
+      "source_phase": "Containment and remediation",
+      "workstream_id": "response",
+      "count": 63,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 0,
+        "after": 63
+      },
+      "source_ids": [
+        "S01",
+        "S03",
+        "S06"
+      ]
+    },
+    {
+      "id": "training-evaluation",
+      "label": "Training & evaluation",
+      "definition": "The original training-and-evaluation precursor phase, including task conditions, restrictions, and earlier reported behavior.",
+      "source_phase": "Training and evaluation precursors",
+      "workstream_id": "evaluation",
+      "count": 14,
+      "lifecycle_counts": {
+        "before": 14,
+        "during": 0,
+        "after": 0
+      },
+      "source_ids": [
+        "S01",
+        "S05"
+      ]
+    },
+    {
+      "id": "source-ci",
+      "label": "Source control & CI",
+      "definition": "Activity involving source repositories and continuous-integration access; unsuccessful, disputed, and successful effects remain distinct.",
+      "source_phase": "Source control and CI access",
+      "workstream_id": "intrusion",
+      "count": 11,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 11,
+        "after": 0
+      },
+      "source_ids": [
+        "S01",
+        "S03"
+      ]
+    },
+    {
+      "id": "sol-intrusion",
+      "label": "Sol participation",
+      "definition": "The original phase describing Sol participation in Hugging Face intrusion activity; this label does not identify every unnamed agent elsewhere.",
+      "source_phase": "Sol participation in Hugging Face intrusion",
+      "workstream_id": "intrusion",
+      "count": 16,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 16,
+        "after": 0
+      },
+      "source_ids": [
+        "S01"
+      ]
+    },
+    {
+      "id": "supply-chain",
+      "label": "Supply-chain poisoning",
+      "definition": "Artifact-poisoning actions and reported downstream findings, without presuming that a modified artifact was consumed or executed.",
+      "source_phase": "Supply-chain poisoning",
+      "workstream_id": "intrusion",
+      "count": 8,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 8,
+        "after": 0
+      },
+      "source_ids": [
+        "S01"
+      ]
+    },
+    {
+      "id": "investigation-repair",
+      "label": "Investigation & repair",
+      "definition": "The original mixed investigation-and-remediation phase, retaining each record’s existing lifecycle role.",
+      "source_phase": "Investigation and remediation",
+      "workstream_id": "investigation",
+      "count": 14,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 0,
+        "after": 14
+      },
+      "source_ids": [
+        "S01",
+        "S05"
+      ]
+    },
+    {
+      "id": "external-control",
+      "label": "External control",
+      "definition": "External-host activity, foothold attempts, execution, and control as reported in the original phase.",
+      "source_phase": "External foothold and control",
+      "workstream_id": "access",
+      "count": 31,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 31,
+        "after": 0
+      },
+      "source_ids": [
+        "S03"
+      ]
+    },
+    {
+      "id": "cloud-recon",
+      "label": "Cloud reconnaissance",
+      "definition": "Cloud-service and credential reconnaissance activity; a probe or attempted access is not evidence of a successful compromise.",
+      "source_phase": "Cloud reconnaissance",
+      "workstream_id": "access",
+      "count": 9,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 9,
+        "after": 0
+      },
+      "source_ids": [
+        "S03"
+      ]
+    },
+    {
+      "id": "database-investigation",
+      "label": "Database access & review",
+      "definition": "Internal-database activity and investigative findings kept together in their original mixed phase; individual system scope distinguishes databases.",
+      "source_phase": "Internal database access and investigation",
+      "workstream_id": "intrusion",
+      "count": 7,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 5,
+        "after": 2
+      },
+      "source_ids": [
+        "S03"
+      ]
+    },
+    {
+      "id": "private-hub",
+      "label": "Private Hub attempts",
+      "definition": "Attempts and supporting activity directed at the private Hub database, preserving authentication and outcome qualifiers.",
+      "source_phase": "Private Hub database attempts",
+      "workstream_id": "intrusion",
+      "count": 7,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 7,
+        "after": 0
+      },
+      "source_ids": [
+        "S03"
+      ]
+    },
+    {
+      "id": "data-transport",
+      "label": "Data staging & transport",
+      "definition": "Reported preparation, staging, chunking, or transport activity, with the identity and sensitivity of the data limited to what each record states.",
+      "source_phase": "Data staging and transport",
+      "workstream_id": "intrusion",
+      "count": 7,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 7,
+        "after": 0
+      },
+      "source_ids": [
+        "S03"
+      ]
+    },
+    {
+      "id": "agent-coordination",
+      "label": "Agent coordination",
+      "definition": "Agent communications and coordination records; a message can be a displayable event without proving that its requested action occurred.",
+      "source_phase": "Agent communication and coordination",
+      "workstream_id": "coordination",
+      "count": 99,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 99,
+        "after": 0
+      },
+      "source_ids": [
+        "S02"
+      ]
+    },
+    {
+      "id": "access-loss",
+      "label": "Termination & access loss",
+      "definition": "Reported termination and loss of access. The existing records carry incident-activity roles, so they remain in During despite the Response workstream label.",
+      "source_phase": "Agent termination and access loss",
+      "workstream_id": "response",
+      "count": 5,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 5,
+        "after": 0
+      },
+      "source_ids": [
+        "S02"
+      ]
+    },
+    {
+      "id": "scorer-experiments",
+      "label": "Scorer & reset experiments",
+      "definition": "Experiments and proposals concerning scorer behavior, evaluation targets, or resets, with decisions separated from executed tests.",
+      "source_phase": "Scorer, target and reset experiments",
+      "workstream_id": "evaluation",
+      "count": 67,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 67,
+        "after": 0
+      },
+      "source_ids": [
+        "S02"
+      ]
+    },
+    {
+      "id": "decisions-restraint",
+      "label": "Decisions & restraint",
+      "definition": "Decisions, restraint, and related investigation recorded in the original phase; narrated intent is not independent proof of motivation or action.",
+      "source_phase": "Agent decisions and restraint",
+      "workstream_id": "coordination",
+      "count": 13,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 13,
+        "after": 0
+      },
+      "source_ids": [
+        "S02"
+      ]
+    },
+    {
+      "id": "concealment",
+      "label": "Concealment & evasion",
+      "definition": "Actions and decisions grouped around concealment or evasion, preserving blocked attempts and the limits of any claimed result.",
+      "source_phase": "Concealment and evasion",
+      "workstream_id": "intrusion",
+      "count": 6,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 6,
+        "after": 0
+      },
+      "source_ids": [
+        "S02"
+      ]
+    },
+    {
+      "id": "tool-tampering",
+      "label": "Tools & transcripts",
+      "definition": "Work on tools, transcripts, and related evaluation mechanisms, including assignments and experiments as well as reported modifications.",
+      "source_phase": "Tool and transcript tampering",
+      "workstream_id": "evaluation",
+      "count": 50,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 50,
+        "after": 0
+      },
+      "source_ids": [
+        "S02"
+      ]
+    },
+    {
+      "id": "training-precursors",
+      "label": "Earlier training",
+      "definition": "The separate original training-precursor phase. It is retained alongside Training & evaluation rather than merging distinct source groupings.",
+      "source_phase": "Training precursors",
+      "workstream_id": "evaluation",
+      "count": 12,
+      "lifecycle_counts": {
+        "before": 12,
+        "during": 0,
+        "after": 0
+      },
+      "source_ids": [
+        "S01"
+      ]
+    },
+    {
+      "id": "recruitment",
+      "label": "Decisions & recruitment",
+      "definition": "Recorded decisions to participate or recruit, without treating a stated decision as proof that the subsequent activity took place.",
+      "source_phase": "Agent decisions and recruitment",
+      "workstream_id": "coordination",
+      "count": 3,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 3,
+        "after": 0
+      },
+      "source_ids": [
+        "S02"
+      ]
+    },
+    {
+      "id": "vendor-response",
+      "label": "Vendor response",
+      "definition": "Vendor development, validation, remediation, and disclosure records preserved from the original phase.",
+      "source_phase": "Vendor remediation and disclosure",
+      "workstream_id": "investigation",
+      "count": 10,
+      "lifecycle_counts": {
+        "before": 0,
+        "during": 0,
+        "after": 10
+      },
+      "source_ids": [
+        "S10",
+        "S11"
+      ]
+    }
+  ],
+  "assignments": [
+    {
+      "event_id": "E0001",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0002",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0003",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0004",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0005",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0006",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0007",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0008",
+      "lifecycle_id": "before",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0009",
+      "lifecycle_id": "before",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0010",
+      "lifecycle_id": "before",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0011",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0012",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0013",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0014",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0015",
+      "lifecycle_id": "before",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0016",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0017",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0018",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0019",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0020",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0021",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0022",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0023",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0024",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0025",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0026",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0027",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0028",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0029",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0030",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0031",
+      "lifecycle_id": "after",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0032",
+      "lifecycle_id": "after",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0033",
+      "lifecycle_id": "after",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0034",
+      "lifecycle_id": "after",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0035",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0036",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0037",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0038",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0039",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0040",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0041",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0042",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0043",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0044",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0045",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0046",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0047",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0048",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0049",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0050",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0051",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0052",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0053",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0054",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0055",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0056",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0057",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0058",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0059",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0060",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0061",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0062",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0063",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0064",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0065",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0066",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0067",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0068",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0069",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0070",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0071",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0072",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0073",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0074",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0075",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0076",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0077",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0078",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0079",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0080",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0081",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0082",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0083",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0084",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0085",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0086",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0087",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0088",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0089",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0090",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0091",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0092",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0093",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0094",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0095",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0096",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0097",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0098",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0099",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0100",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0101",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0102",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0103",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0104",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0105",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0106",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0107",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0108",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0109",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0110",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0111",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0112",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0113",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0114",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0115",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0116",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0117",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0118",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0119",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0120",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0121",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0122",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0123",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0124",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0125",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0126",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0127",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0128",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0129",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0130",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0131",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0132",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0133",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0134",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0135",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0136",
+      "lifecycle_id": "after",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0137",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0138",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0139",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0140",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0141",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0142",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0143",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0144",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0145",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0146",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0147",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0148",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0149",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0150",
+      "lifecycle_id": "before",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0151",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0152",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0153",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0154",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0155",
+      "lifecycle_id": "before",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0156",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0157",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0158",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0159",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0160",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0161",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0162",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0163",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0164",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0165",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0166",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0167",
+      "lifecycle_id": "after",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0168",
+      "lifecycle_id": "after",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0169",
+      "lifecycle_id": "after",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0170",
+      "lifecycle_id": "before",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0171",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0172",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0173",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0174",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0175",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0176",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0177",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0178",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0179",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0180",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0181",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0182",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0183",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0184",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0185",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0186",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0187",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0188",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0189",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0190",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0191",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0192",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0193",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0194",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0195",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0196",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0197",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0198",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0199",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0200",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0201",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0202",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0203",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0204",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0205",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0206",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0207",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0208",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0209",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0210",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0211",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0212",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0213",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0214",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0215",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0216",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0217",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0218",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0219",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0220",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0221",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0222",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0223",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0224",
+      "lifecycle_id": "during",
+      "stage_id": "source-ci",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0225",
+      "lifecycle_id": "during",
+      "stage_id": "source-ci",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0226",
+      "lifecycle_id": "during",
+      "stage_id": "source-ci",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0227",
+      "lifecycle_id": "during",
+      "stage_id": "source-ci",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0228",
+      "lifecycle_id": "during",
+      "stage_id": "source-ci",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0229",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0230",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0231",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0232",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0233",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0234",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0235",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0236",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0237",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0238",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0239",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0240",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0241",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0242",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0243",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0244",
+      "lifecycle_id": "during",
+      "stage_id": "sol-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0245",
+      "lifecycle_id": "during",
+      "stage_id": "supply-chain",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0246",
+      "lifecycle_id": "during",
+      "stage_id": "supply-chain",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0247",
+      "lifecycle_id": "during",
+      "stage_id": "supply-chain",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0248",
+      "lifecycle_id": "during",
+      "stage_id": "supply-chain",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0249",
+      "lifecycle_id": "during",
+      "stage_id": "supply-chain",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0250",
+      "lifecycle_id": "during",
+      "stage_id": "supply-chain",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0251",
+      "lifecycle_id": "during",
+      "stage_id": "supply-chain",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0252",
+      "lifecycle_id": "during",
+      "stage_id": "supply-chain",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0253",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0254",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0255",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0256",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0257",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0258",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0259",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0260",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0261",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0262",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0263",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0264",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0265",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0266",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0267",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0268",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0269",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0270",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0271",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0272",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0273",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0274",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0275",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0276",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0277",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0278",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0279",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0280",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0281",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0282",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0283",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0284",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0285",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0286",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0287",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0288",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0289",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0290",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0291",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0292",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0293",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0294",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0295",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0296",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0297",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0298",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0299",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0300",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0301",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0302",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0303",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0304",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0305",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0306",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0307",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0308",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0309",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0310",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0311",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0312",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0313",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0314",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0315",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0316",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0317",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0318",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0319",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0320",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0321",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0322",
+      "lifecycle_id": "during",
+      "stage_id": "artifactory-escape",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0323",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0324",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0325",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0326",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0327",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0328",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0329",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0330",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0331",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0332",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0333",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0334",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0335",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0336",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0337",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0338",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0339",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0340",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0341",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0342",
+      "lifecycle_id": "during",
+      "stage_id": "cloud-recon",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0343",
+      "lifecycle_id": "during",
+      "stage_id": "cloud-recon",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0344",
+      "lifecycle_id": "during",
+      "stage_id": "cloud-recon",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0345",
+      "lifecycle_id": "during",
+      "stage_id": "cloud-recon",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0346",
+      "lifecycle_id": "during",
+      "stage_id": "cloud-recon",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0347",
+      "lifecycle_id": "during",
+      "stage_id": "cloud-recon",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0348",
+      "lifecycle_id": "during",
+      "stage_id": "cloud-recon",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0349",
+      "lifecycle_id": "during",
+      "stage_id": "cloud-recon",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0350",
+      "lifecycle_id": "during",
+      "stage_id": "cloud-recon",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0351",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0352",
+      "lifecycle_id": "during",
+      "stage_id": "database-investigation",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0353",
+      "lifecycle_id": "during",
+      "stage_id": "database-investigation",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0354",
+      "lifecycle_id": "during",
+      "stage_id": "database-investigation",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0355",
+      "lifecycle_id": "after",
+      "stage_id": "database-investigation",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0356",
+      "lifecycle_id": "during",
+      "stage_id": "database-investigation",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0357",
+      "lifecycle_id": "after",
+      "stage_id": "database-investigation",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0358",
+      "lifecycle_id": "during",
+      "stage_id": "database-investigation",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0359",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0360",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0361",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0362",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0363",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0364",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0365",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0366",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0367",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0368",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0369",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0370",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0371",
+      "lifecycle_id": "during",
+      "stage_id": "private-hub",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0372",
+      "lifecycle_id": "during",
+      "stage_id": "private-hub",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0373",
+      "lifecycle_id": "during",
+      "stage_id": "private-hub",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0374",
+      "lifecycle_id": "during",
+      "stage_id": "private-hub",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0375",
+      "lifecycle_id": "during",
+      "stage_id": "private-hub",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0376",
+      "lifecycle_id": "during",
+      "stage_id": "private-hub",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0377",
+      "lifecycle_id": "during",
+      "stage_id": "private-hub",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0378",
+      "lifecycle_id": "during",
+      "stage_id": "source-ci",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0379",
+      "lifecycle_id": "during",
+      "stage_id": "source-ci",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0380",
+      "lifecycle_id": "during",
+      "stage_id": "source-ci",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0381",
+      "lifecycle_id": "during",
+      "stage_id": "source-ci",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0382",
+      "lifecycle_id": "during",
+      "stage_id": "source-ci",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0383",
+      "lifecycle_id": "during",
+      "stage_id": "source-ci",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0384",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0385",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0386",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0387",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0388",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0389",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0390",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0391",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0392",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0393",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0394",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0395",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0396",
+      "lifecycle_id": "during",
+      "stage_id": "external-control",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0397",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0398",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0399",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0400",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0401",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0402",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0403",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0404",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0405",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0406",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0407",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0408",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0409",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0410",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0411",
+      "lifecycle_id": "during",
+      "stage_id": "data-transport",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0412",
+      "lifecycle_id": "during",
+      "stage_id": "data-transport",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0413",
+      "lifecycle_id": "during",
+      "stage_id": "data-transport",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0414",
+      "lifecycle_id": "during",
+      "stage_id": "data-transport",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0415",
+      "lifecycle_id": "during",
+      "stage_id": "data-transport",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0416",
+      "lifecycle_id": "during",
+      "stage_id": "data-transport",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0417",
+      "lifecycle_id": "during",
+      "stage_id": "data-transport",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0418",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0419",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0420",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0421",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0422",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0423",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0424",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0425",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0426",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0427",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0428",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0429",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0430",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0431",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0432",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0433",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0434",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0435",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0436",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0437",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0438",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0439",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0440",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0441",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0442",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0443",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0444",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0445",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0446",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0447",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0448",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0449",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0450",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0451",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0452",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0453",
+      "lifecycle_id": "after",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0454",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0455",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0456",
+      "lifecycle_id": "before",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0457",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0458",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0459",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0460",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0461",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0462",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0463",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0464",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0465",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0466",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0467",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0468",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0469",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0470",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0471",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0472",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0473",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0474",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0475",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0476",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0477",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0478",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0479",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0480",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0481",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0482",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0483",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0484",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0485",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0486",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0487",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0488",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0489",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0490",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0491",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0492",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0493",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0494",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0495",
+      "lifecycle_id": "during",
+      "stage_id": "access-loss",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0496",
+      "lifecycle_id": "during",
+      "stage_id": "access-loss",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0497",
+      "lifecycle_id": "during",
+      "stage_id": "access-loss",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0498",
+      "lifecycle_id": "during",
+      "stage_id": "access-loss",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0499",
+      "lifecycle_id": "during",
+      "stage_id": "access-loss",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0500",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0501",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0502",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0503",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0504",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0505",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0506",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0507",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0508",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0509",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0510",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0511",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0512",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0513",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0514",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0515",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0516",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0517",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0518",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0519",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0520",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0521",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0522",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0523",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0524",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0525",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0526",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0527",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0528",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0529",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0530",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0531",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0532",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0533",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0534",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0535",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0536",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0537",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0538",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0539",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0540",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0541",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0542",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0543",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0544",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0545",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0546",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0547",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0548",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0549",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0550",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0551",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0552",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0553",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0554",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0555",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0556",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0557",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0558",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0559",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0560",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0561",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0562",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0563",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0564",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0565",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0566",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0567",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0568",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0569",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0570",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0571",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0572",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0573",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0574",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0575",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0576",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0577",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0578",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0579",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0580",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0581",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0582",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0583",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0584",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0585",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0586",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0587",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0588",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0589",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0590",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0591",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0592",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0593",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0594",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0595",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0596",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0597",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0598",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0599",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0600",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0601",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0602",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0603",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0604",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0605",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0606",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0607",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0608",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0609",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0610",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0611",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0612",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0613",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0614",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0615",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0616",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0617",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0618",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0619",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0620",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0621",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0622",
+      "lifecycle_id": "during",
+      "stage_id": "scorer-experiments",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0623",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0624",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0625",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0626",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0627",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0628",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0629",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0630",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0631",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0632",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0633",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0634",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0635",
+      "lifecycle_id": "during",
+      "stage_id": "decisions-restraint",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0636",
+      "lifecycle_id": "during",
+      "stage_id": "concealment",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0637",
+      "lifecycle_id": "during",
+      "stage_id": "concealment",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0638",
+      "lifecycle_id": "during",
+      "stage_id": "concealment",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0639",
+      "lifecycle_id": "during",
+      "stage_id": "concealment",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0640",
+      "lifecycle_id": "during",
+      "stage_id": "concealment",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0641",
+      "lifecycle_id": "during",
+      "stage_id": "concealment",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0642",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0643",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0644",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0645",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0646",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0647",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0648",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0649",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0650",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0651",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0652",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0653",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0654",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0655",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0656",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0657",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0658",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0659",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0660",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0661",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0662",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0663",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0664",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0665",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0666",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0667",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0668",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0669",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0670",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0671",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0672",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0673",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0674",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0675",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0676",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0677",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0678",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0679",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0680",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0681",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0682",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0683",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0684",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0685",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0686",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0687",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0688",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0689",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0690",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0691",
+      "lifecycle_id": "during",
+      "stage_id": "tool-tampering",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0692",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0693",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0694",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0695",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0696",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0697",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0698",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0699",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0700",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0701",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0702",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0703",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0704",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0705",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0706",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0707",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0708",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0709",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0710",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0711",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0712",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0713",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0714",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0715",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0716",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0717",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0718",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0719",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0720",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0721",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0722",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0723",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0724",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0725",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0726",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0727",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0728",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0729",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0730",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0731",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0732",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0733",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0734",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0735",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0736",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0737",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0738",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0739",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0740",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0741",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0742",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0743",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0744",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0745",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0746",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0747",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0748",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0749",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0750",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0751",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0752",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0753",
+      "lifecycle_id": "before",
+      "stage_id": "training-precursors",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0754",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0755",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0756",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0757",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0758",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0759",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0760",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0761",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0762",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0763",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0764",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0765",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0766",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0767",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0768",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0769",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0770",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0771",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0772",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0773",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0774",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0775",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0776",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0777",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0778",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0779",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0780",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0781",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0782",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0783",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0784",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0785",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0786",
+      "lifecycle_id": "during",
+      "stage_id": "agent-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0787",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0788",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0789",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0790",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0791",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0792",
+      "lifecycle_id": "before",
+      "stage_id": "training-evaluation",
+      "workstream_id": "evaluation"
+    },
+    {
+      "event_id": "E0793",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0794",
+      "lifecycle_id": "during",
+      "stage_id": "eval-coordination",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0795",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0796",
+      "lifecycle_id": "during",
+      "stage_id": "external-staging",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0797",
+      "lifecycle_id": "during",
+      "stage_id": "openai-compromise",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0798",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0799",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0800",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0801",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-repair",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0802",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0803",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0804",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0805",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0806",
+      "lifecycle_id": "after",
+      "stage_id": "containment",
+      "workstream_id": "response"
+    },
+    {
+      "event_id": "E0807",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0808",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0809",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0810",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0811",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0812",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0813",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0814",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0815",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0816",
+      "lifecycle_id": "after",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0817",
+      "lifecycle_id": "during",
+      "stage_id": "credential-discovery",
+      "workstream_id": "access"
+    },
+    {
+      "event_id": "E0818",
+      "lifecycle_id": "during",
+      "stage_id": "recruitment",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0819",
+      "lifecycle_id": "during",
+      "stage_id": "recruitment",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0820",
+      "lifecycle_id": "during",
+      "stage_id": "recruitment",
+      "workstream_id": "coordination"
+    },
+    {
+      "event_id": "E0821",
+      "lifecycle_id": "during",
+      "stage_id": "hf-intrusion",
+      "workstream_id": "intrusion"
+    },
+    {
+      "event_id": "E0822",
+      "lifecycle_id": "during",
+      "stage_id": "investigation-disclosure",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0823",
+      "lifecycle_id": "after",
+      "stage_id": "vendor-response",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0824",
+      "lifecycle_id": "after",
+      "stage_id": "vendor-response",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0825",
+      "lifecycle_id": "after",
+      "stage_id": "vendor-response",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0826",
+      "lifecycle_id": "after",
+      "stage_id": "vendor-response",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0827",
+      "lifecycle_id": "after",
+      "stage_id": "vendor-response",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0828",
+      "lifecycle_id": "after",
+      "stage_id": "vendor-response",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0829",
+      "lifecycle_id": "after",
+      "stage_id": "vendor-response",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0830",
+      "lifecycle_id": "after",
+      "stage_id": "vendor-response",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0831",
+      "lifecycle_id": "after",
+      "stage_id": "vendor-response",
+      "workstream_id": "investigation"
+    },
+    {
+      "event_id": "E0832",
+      "lifecycle_id": "after",
+      "stage_id": "vendor-response",
+      "workstream_id": "investigation"
+    }
+  ],
+  "entity_types": [
+    {
+      "id": "Event",
+      "label": "Event",
+      "definition": "One displayable source-derived record: action, result, statement, decision, or investigative finding. Some records aggregate actions and are not further divisible from the available evidence.",
+      "identity": "haruspex-dataset.json events[].id",
+      "fields": [
+        "id",
+        "title",
+        "action",
+        "modality",
+        "outcome",
+        "source_granularity"
+      ]
+    },
+    {
+      "id": "Actor",
+      "label": "Actor",
+      "definition": "The actor phrase attached to a record, with its existing type and model qualifiers. This is an attribution mention, not a newly resolved person, agent instance, or malicious actor identity.",
+      "identity": "Record-scoped mention actor:<event_id>; identical generic phrases are not automatically merged.",
+      "fields": [
+        "actor",
+        "actor_type",
+        "actor_model"
+      ]
+    },
+    {
+      "id": "System",
+      "label": "System",
+      "definition": "The normalized system context already recorded in system_scope. A context link can describe an attempted target or investigation and does not by itself establish harm.",
+      "identity": "Exact system_scope value; no additional infrastructure equivalence inferred.",
+      "fields": [
+        "system_scope",
+        "target_detail",
+        "target_basis"
+      ]
+    },
+    {
+      "id": "Lifecycle",
+      "label": "Lifecycle",
+      "definition": "A Before, During, or After lens derived from the existing incident-role classification, independently of calendar date.",
+      "identity": "incident-ontology.json lifecycle[].id",
+      "fields": [
+        "bow_tie_role"
+      ]
+    },
+    {
+      "id": "Stage",
+      "label": "Stage",
+      "definition": "One of the 27 existing narrative phases, with a shorter display label. A stage is a grouping, not an assertion of temporal order or causal necessity.",
+      "identity": "incident-ontology.json stages[].id; source_phase retains the original label.",
+      "fields": [
+        "phase"
+      ]
+    },
+    {
+      "id": "Workstream",
+      "label": "Workstream",
+      "definition": "One of six navigation groups of existing phases. Color identifies this category and does not identify severity, outcome, or evidence quality.",
+      "identity": "visual-encodings.json groups[].key",
+      "fields": [
+        "phase"
+      ]
+    },
+    {
+      "id": "Source",
+      "label": "Source",
+      "definition": "A cited publication in the canonical source catalog. A link identifies the account supporting a record, not independent verification of every claim.",
+      "identity": "haruspex-dataset.json sources[].source_id",
+      "fields": [
+        "source_id",
+        "source_locator",
+        "source_url",
+        "additional_source_locators"
+      ]
+    },
+    {
+      "id": "Assessment",
+      "label": "Assessment",
+      "definition": "The separate, versioned provisional severity assessment for a record, retaining rationale, scope, confidence, and source evidence. It is not a property asserted by the original source.",
+      "identity": "severity-assessments.json records[].id joined to event.id; version supplied by the assessment file.",
+      "fields": [
+        "score",
+        "band",
+        "outcome",
+        "rationale",
+        "scope",
+        "confidence",
+        "source_evidence"
+      ]
+    }
+  ],
+  "relation_types": [
+    {
+      "id": "occurred_in_stage",
+      "label": "Grouped in stage",
+      "domain": "Event",
+      "range": "Stage",
+      "definition": "Assigns the record to its original narrative phase. The relation name does not override modality or assert that a proposed action occurred.",
+      "binding": "assignments.event_id -> assignments.stage_id",
+      "basis_fields": [
+        "phase"
+      ],
+      "cardinality": "one per event"
+    },
+    {
+      "id": "part_of_lifecycle",
+      "label": "Part of lifecycle",
+      "domain": "Event",
+      "range": "Lifecycle",
+      "definition": "Assigns the record’s existing role to Before, During, or After. It does not impose a calendar ordering on records.",
+      "binding": "assignments.event_id -> assignments.lifecycle_id",
+      "basis_fields": [
+        "bow_tie_role"
+      ],
+      "cardinality": "one per event"
+    },
+    {
+      "id": "part_of_workstream",
+      "label": "Part of workstream",
+      "domain": "Stage",
+      "range": "Workstream",
+      "definition": "Groups an unchanged source phase into one of the six display workstreams.",
+      "binding": "stages.id -> stages.workstream_id",
+      "basis_fields": [
+        "phase"
+      ],
+      "cardinality": "one per stage"
+    },
+    {
+      "id": "acted_by",
+      "label": "Attributed to actor",
+      "domain": "Event",
+      "range": "Actor",
+      "definition": "Carries the record’s existing actor attribution. For statements, decisions, observations, or failed attempts, it attributes that recorded modality rather than inventing an executed action.",
+      "binding": "event.id -> record-scoped actor mention from event.actor, event.actor_type, event.actor_model",
+      "basis_fields": [
+        "actor",
+        "actor_type",
+        "actor_model",
+        "modality",
+        "epistemic_status"
+      ],
+      "cardinality": "one record-scoped mention per event; a phrase may name a group"
+    },
+    {
+      "id": "concerns_system",
+      "label": "Concerns system",
+      "domain": "Event",
+      "range": "System",
+      "definition": "Connects the record to its recorded system context. This neutral association applies to attempts, findings, coordination, and actions without implying a realized effect.",
+      "binding": "event.id -> exact event.system_scope",
+      "basis_fields": [
+        "system_scope",
+        "target_detail",
+        "target_basis"
+      ],
+      "cardinality": "one recorded system-context phrase per event"
+    },
+    {
+      "id": "affects_system",
+      "label": "Reported effect on system",
+      "domain": "Event",
+      "range": "System",
+      "definition": "An optional qualified effect relation for a positively assessed reported technical effect within the record’s stated system context. It must retain the assessment scope and source evidence status; it is never generated from a stage label or an attempted action alone.",
+      "binding": "event.id -> exact event.system_scope only when its current assessment has outcome=adverse and score in 1..5; attach assessment.rationale, assessment.scope, event.modality and event.epistemic_status.",
+      "basis_fields": [
+        "system_scope",
+        "modality",
+        "epistemic_status",
+        "severity-assessments.records[].score",
+        "severity-assessments.records[].outcome",
+        "severity-assessments.records[].scope"
+      ],
+      "cardinality": "zero or one qualified relation per event"
+    },
+    {
+      "id": "supported_by",
+      "label": "Supported by source",
+      "domain": "Event",
+      "range": "Source",
+      "definition": "Preserves the primary citation and locator for the record. Additional source locators remain attached exactly as stored and are not resolved into invented citations.",
+      "binding": "event.id -> event.source_id, retaining event.source_locator, event.source_url and event.additional_source_locators",
+      "basis_fields": [
+        "source_id",
+        "source_locator",
+        "source_url",
+        "additional_source_locators",
+        "evidence_kind"
+      ],
+      "cardinality": "one canonical primary-source link per event"
+    },
+    {
+      "id": "assessed_as",
+      "label": "Assessed as",
+      "domain": "Event",
+      "range": "Assessment",
+      "definition": "Joins the event to its current separate analyst assessment, including explicit unassessed and intentionally unnumbered categories. Canonical observed_severity is retained as archival data.",
+      "binding": "event.id -> severity-assessments.records[].id using exact ID equality",
+      "basis_fields": [
+        "id",
+        "severity-assessments.version",
+        "severity-assessments.records[].id"
+      ],
+      "cardinality": "one current assessment entry per event"
+    }
+  ],
+  "facets": [
+    {
+      "id": "lifecycle",
+      "label": "Lifecycle",
+      "definition": "Role-based Before, During, and After membership.",
+      "fields": [
+        "bow_tie_role"
+      ],
+      "controlled_by": "assignments.lifecycle_id"
+    },
+    {
+      "id": "stage",
+      "label": "Stage",
+      "definition": "The original narrative phase under a shorter display label.",
+      "fields": [
+        "phase"
+      ],
+      "controlled_by": "assignments.stage_id"
+    },
+    {
+      "id": "workstream",
+      "label": "Workstream",
+      "definition": "The six categorical color groups.",
+      "fields": [
+        "phase"
+      ],
+      "controlled_by": "assignments.workstream_id"
+    },
+    {
+      "id": "actor",
+      "label": "Actor",
+      "definition": "Source-derived actor phrase, type, and supported model name.",
+      "fields": [
+        "actor",
+        "actor_type",
+        "actor_model"
+      ]
+    },
+    {
+      "id": "system",
+      "label": "System",
+      "definition": "Recorded system context and target wording.",
+      "fields": [
+        "system_scope",
+        "target_detail"
+      ]
+    },
+    {
+      "id": "evidence",
+      "label": "Evidence",
+      "definition": "Reported, reasoning, inferred, or differing accounts, retaining the original evidence qualifiers.",
+      "fields": [
+        "epistemic_status",
+        "evidence_kind",
+        "uncertainty_notes"
+      ]
+    },
+    {
+      "id": "time",
+      "label": "Time",
+      "definition": "Reported dates, individual times, and bounded source-context intervals. A layout coordinate is not new temporal evidence.",
+      "fields": [
+        "event_date",
+        "event_time_utc",
+        "time_precision",
+        "time_basis",
+        "earliest_context_date",
+        "latest_context_date_exclusive"
+      ]
+    },
+    {
+      "id": "severity",
+      "label": "Severity",
+      "definition": "The separate current analyst assessment; positional and textual, independent of workstream color.",
+      "fields": [
+        "severity-assessments.records[].score",
+        "severity-assessments.records[].band",
+        "severity-assessments.records[].rationale"
+      ]
+    },
+    {
+      "id": "source",
+      "label": "Source",
+      "definition": "Publication and locator supporting the event record.",
+      "fields": [
+        "source_id",
+        "source_locator",
+        "source_url"
+      ]
+    }
+  ],
+  "provenance": {
+    "classification_basis": "Deterministic mappings of the existing bow_tie_role and phase fields. The canonical records and their 45 fields are unchanged.",
+    "lifecycle_source_field": "bow_tie_role",
+    "stage_source_field": "phase",
+    "workstream_source": {
+      "file": "visual-encodings.json",
+      "version": "2.0.0",
+      "field": "groups[].phases"
+    },
+    "assessment_source": {
+      "file": "severity-assessments.json",
+      "version": "2.1.0",
+      "join": "event.id == assessment.id"
+    },
+    "record_source": {
+      "file": "haruspex-dataset.json",
+      "sha256": "59c1bb8c9fb9510bb9079f83d97e1f3aec56d4037737d42598cfa659777d534b",
+      "event_count": 832,
+      "fields_per_event": 45
+    },
+    "incident_sources": [
+      {
+        "source_id": "S01",
+        "title": "OpenAI incident technical report",
+        "publisher": "OpenAI",
+        "publication_date": "2026-08-26",
+        "url": "https://cdn.openai.com/pdf/67869394-cb91-4c12-888c-5cbd85c7814c/OpenAI-Hugging-Face%20Incident-Technical-Report.pdf",
+        "source_notes": "Supplied PDF; 38 pages",
+        "accessed_date": "2026-09-09"
+      },
+      {
+        "source_id": "S02",
+        "title": "Independent investigation of agents’ behavior, reasoning and collaboration",
+        "publisher": "METR and Redwood Research",
+        "publication_date": "2026-08-26",
+        "url": "https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/",
+        "source_notes": "Supplied PDF; 91 pages; matching public article",
+        "accessed_date": "2026-09-09"
+      },
+      {
+        "source_id": "S03",
+        "title": "Anatomy of a Frontier Lab Agent Intrusion",
+        "publisher": "Hugging Face",
+        "publication_date": "2026-07-27",
+        "url": "https://huggingface.co/blog/agent-intrusion-technical-timeline",
+        "source_notes": "First-party technical timeline",
+        "accessed_date": "2026-09-09"
+      },
+      {
+        "source_id": "S04",
+        "title": "Intrusion interactive replay source",
+        "publisher": "Hugging Face",
+        "publication_date": null,
+        "url": "https://huggingface.co/spaces/huggingface/anatomy-of-frontier-lab-model-intrusion/blob/main/index.html",
+        "source_notes": "Curated replay, not a raw event log",
+        "accessed_date": "2026-09-09"
+      },
+      {
+        "source_id": "S05",
+        "title": "The OpenAI–Hugging Face Incident, Black Hat USA 2026",
+        "publisher": "Michael Dalton and Eric Wallace",
+        "publication_date": "2026-08-05",
+        "url": "https://www.youtube.com/watch?v=87DyyMV0kCY",
+        "source_notes": "Supplied timestamped transcript; talk date",
+        "accessed_date": "2026-09-09"
+      },
+      {
+        "source_id": "S06",
+        "title": "Security incident July 2026",
+        "publisher": "Hugging Face",
+        "publication_date": "2026-07-16",
+        "url": "https://huggingface.co/blog/security-incident-july-2026",
+        "source_notes": "Initial disclosure",
+        "accessed_date": "2026-09-09"
+      },
+      {
+        "source_id": "S07",
+        "title": "Model evaluation security incident",
+        "publisher": "OpenAI",
+        "publication_date": "2026-07-21",
+        "url": "https://openai.com/index/hugging-face-model-evaluation-security-incident/",
+        "source_notes": "Initial disclosure; July 28 and 29 updates",
+        "accessed_date": "2026-09-09"
+      },
+      {
+        "source_id": "S08",
+        "title": "A note on the Hugging Face agent incident",
+        "publisher": "Modal",
+        "publication_date": "2026-07-29",
+        "url": "https://modal.com/blog/a-note-on-the-hugging-face-agent-incident",
+        "source_notes": "Customer application versus platform clarification",
+        "accessed_date": "2026-09-09"
+      },
+      {
+        "source_id": "S09",
+        "title": "Ajeya Cotra interview",
+        "publisher": "Dwarkesh Podcast",
+        "publication_date": "2026-09-01",
+        "url": "https://www.dwarkesh.com/p/ajeya-cotra",
+        "source_notes": "First-person investigator interview",
+        "accessed_date": "2026-09-09"
+      },
+      {
+        "source_id": "S10",
+        "title": "JFrog and OpenAI collaboration on zero-day security findings",
+        "publisher": "JFrog",
+        "publication_date": "2026-07-27",
+        "url": "https://jfrog.com/blog/jfrog-and-openai-collaboration-on-zero-day-security-findings/",
+        "source_notes": "Vendor account; August 5 update",
+        "accessed_date": "2026-09-09"
+      },
+      {
+        "source_id": "S11",
+        "title": "JFrog Security Advisories",
+        "publisher": "JFrog",
+        "publication_date": null,
+        "url": "https://docs.jfrog.com/releases/docs/jfrog-security-advisories",
+        "source_notes": "Use each advisory publication date, not page retrieval date",
+        "accessed_date": "2026-09-09"
+      }
+    ],
+    "standards_use": "STIX 2.1 informs typed entity relationships and explicit contextual grouping. CASE/UCO informs separate object descriptions, qualified relationships, and traceability from sources to analysis. These are conceptual influences; this local JSON ontology is not a STIX bundle, CASE/UCO serialization, compliance claim, or external endorsement.",
+    "relation_materialization": "Event-to-lifecycle and event-to-stage membership are materialized in assignments; stage-to-workstream membership is materialized in stages. The remaining relation types are explicit field bindings into the canonical dataset and current assessment sidecar, not newly asserted event-to-event links.",
+    "classification_status": "Provisional analyst navigation ontology derived from an existing provisional event inventory."
+  },
+  "scopes": {
+    "lifecycle": "Before, During, and After classify incident roles, not mutually exclusive time windows. An After response may overlap a During intrusion on the calendar.",
+    "stage": "Each stage preserves exactly one original phase. A stage can contain records from several lifecycle views; no stage is forced into only one lifecycle.",
+    "workstream": "Workstream and lifecycle are independent facets. For example, Termination & access loss belongs to the Response workstream but its five canonical incident-activity records remain in During.",
+    "mixed_phases": "Mixed source labels are not split by guesswork. Database access & review remains in Intrusion and includes both activity and investigative findings. Investigation & disclosure contains both During and After records.",
+    "actor_identity": "Actor phrases are record-scoped mentions. Repeated Agent or Agents labels do not establish identical identities, distinct agents, or a shared model.",
+    "system_effect": "System context is available for every record. A reported-effect link requires a qualifying current assessment; failed requests, intent, and investigation alone do not establish an adverse system effect.",
+    "evidence": "Source-reported occurrence is not independent verification. Reasoning, inference, conflicting accounts, uncertainty, and source granularity remain attached to the original event.",
+    "time": "Chronological display, interval placement, and animated movement supply navigation. They establish neither an exact event time nor a causal relation.",
+    "causality": "No causes, enables, prevents, or precedes relation is inferred between events. Shared stage, source passage, actor wording, and temporal proximity do not establish causation.",
+    "assessment": "Current severity remains a separate provisional organizational-consequence judgment. The whole-incident assessment is not automatically inherited by individual records.",
+    "inventory": "832 is the current displayable inventory, not a proven maximum of real-world actions. Grouped source accounts cannot be split further without additional evidence."
+  },
+  "glossary": [
+    {
+      "term": "Ontology",
+      "definition": "A local model defining the kinds of things in the incident dataset, their properties, and the relationships that can be justified between them."
+    },
+    {
+      "term": "Event",
+      "definition": "One displayable record with attached evidence. It can describe an action, attempt, result, statement, decision, or finding."
+    },
+    {
+      "term": "Atomized",
+      "definition": "Separated into the smallest supported displayable units available in the reviewed material. This does not create missing per-agent actions or inaccessible log entries."
+    },
+    {
+      "term": "Lifecycle",
+      "definition": "The Before, During, or After role-based lens. It is separate from an event’s date."
+    },
+    {
+      "term": "Stage",
+      "definition": "A detailed narrative grouping corresponding exactly to one existing phase label."
+    },
+    {
+      "term": "Workstream",
+      "definition": "A broad categorical grouping of stages used for navigation and color."
+    },
+    {
+      "term": "Facet",
+      "definition": "An independent way to inspect the same event, such as stage, actor, evidence, time, or severity. Haruspex facets are local display concepts, not UCO Facet instances."
+    },
+    {
+      "term": "Typed relation",
+      "definition": "A named connection with an explicit source, target, and evidential meaning. Membership and source attribution do not imply causation."
+    },
+    {
+      "term": "Provenance",
+      "definition": "The retained path from a cited source and locator through the canonical record to a later classification or assessment."
+    }
+  ],
+  "sources": [
+    {
+      "id": "STD-STIX21",
+      "title": "STIX Version 2.1 — OASIS Standard",
+      "publisher": "OASIS",
+      "url": "https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html",
+      "accessed_date": "2026-09-09",
+      "locator": "Sections 1.2.1 Graph-Based Model, 4.4 Grouping, and 5.1 Relationship",
+      "use": "Grounds the distinction between typed nodes, named relationships, and explicitly contextual groupings. Haruspex uses those design ideas without adopting STIX object types or claiming valid STIX serialization."
+    },
+    {
+      "id": "STD-CASE",
+      "title": "CASE Ontology Design and Specification",
+      "publisher": "CASE Community",
+      "url": "https://caseontology.org/resources/case_design_document.html",
+      "accessed_date": "2026-09-09",
+      "locator": "Sections 2.3.1 Facet and Observable Object, 2.3.3 Relationships, 3.2 Provenance, and 6.2 InvestigativeAction and Role",
+      "use": "Grounds explicit descriptions, contextual roles, qualified relationships, and preservation of links between source material and analysis. Haruspex retains these distinctions without claiming CASE/UCO conformance or a forensic chain of custody."
+    }
+  ],
+  "counts": {
+    "events": 832,
+    "stages": 27,
+    "workstreams": 6,
+    "lifecycle": {
+      "before": 83,
+      "during": 577,
+      "after": 172
+    },
+    "workstream": {
+      "evaluation": 143,
+      "access": 116,
+      "coordination": 174,
+      "intrusion": 216,
+      "response": 68,
+      "investigation": 115
+    },
+    "system_contexts": 31,
+    "incident_sources": 11,
+    "entity_types": 8,
+    "relation_types": 8,
+    "facets": 9
+  }
+}

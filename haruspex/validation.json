@@ -1,0 +1,182 @@
+{
+  "application_version": "8.0.0",
+  "assessments_version": "3.0.1",
+  "visual_encodings_version": "5.0.0",
+  "incident_ontology_version": "1.0.0",
+  "temporal_assessments_version": "1.0.0",
+  "verified_on": "2026-09-09",
+  "canonical_records": 832,
+  "canonical_sha256": "59c1bb8c9fb9510bb9079f83d97e1f3aec56d4037737d42598cfa659777d534b",
+  "canonical_unchanged": true,
+  "severity_counts": {
+    "5": 0,
+    "4": 17,
+    "3": 78,
+    "2": 138,
+    "1": 155,
+    "0": 33,
+    "preventive": 178,
+    "context": 192,
+    "unresolved": 41
+  },
+  "review_completion": {
+    "previously_unassessed": 549,
+    "individually_reviewed": 549,
+    "remaining_unreviewed": 0,
+    "context": 192,
+    "unresolved": 41,
+    "existing_assessments_corrected": [
+      "E0026",
+      "E0028"
+    ],
+    "evidence_status_corrected": [
+      "E0076"
+    ],
+    "source_reviews": [
+      "review-severity-first.json",
+      "review-severity-second.json"
+    ],
+    "limits": "All records have a review disposition. Context and Unresolved do not become invented numerical severities."
+  },
+  "temporal_counts": {
+    "events": 832,
+    "with_event_date": 365,
+    "with_event_time_utc": 55,
+    "finite_context_windows": 820,
+    "open_left_context_windows": 12,
+    "open_right_context_windows": 0,
+    "targeted_records_reviewed": 18,
+    "canonical_records_carried_forward_without_individual_review": 814,
+    "records_with_changed_temporal_fields": 12,
+    "new_exact_dates": 0,
+    "new_clock_times": 0,
+    "assessment_status": {
+      "canonical_carried_forward_not_individually_researched": 814,
+      "confirmed_explicit_date_and_time": 1,
+      "confirmed_explicit_date": 1,
+      "reviewed_existing_context_window": 2,
+      "reviewed_contextual_upper_bound": 12,
+      "confirmed_supplied_primary_transcript_date": 2
+    },
+    "time_precision": {
+      "minute": 36,
+      "day": 310,
+      "context interval": 455,
+      "source estimated milliseconds": 19,
+      "open-left context interval": 12
+    }
+  },
+  "current_evidence_counts": {
+    "reported": 775,
+    "reasoning": 39,
+    "inferred": 2,
+    "disputed": 16
+  },
+  "existing_score_corrections": {
+    "E0026": [
+      2,
+      4
+    ],
+    "E0028": [
+      3,
+      4
+    ]
+  },
+  "overall_incident": {
+    "score": 4,
+    "label": "Severe",
+    "status": "Carried forward; separate qualitative organizational assessment"
+  },
+  "stages": 27,
+  "lifecycle_counts": {
+    "before": 83,
+    "during": 577,
+    "after": 172
+  },
+  "verified": [
+    "All 832 canonical records with 45 original fields remain byte-identical. Canonical, severity, temporal and ontology files match preserved v7 files. Original v7 package is preserved in revisions/v7.",
+    "Production build validates unique identifiers, event and analysis links, all 24 control-map endpoints, 16 existing question IDs/statuses, provenance, assessment counts, phase/stage/lifecycle mapping and temporal bounds.",
+    "39 structured-query checks passed. Browser severity>=3 from Context switches to Impact and returns 95; id:E0742 switches to Context and returns one record.",
+    "600 geometry configurations passed across Impact599, Context192 and Unresolved41 at 1280x800 and391x844: correct membership, no omitted finite records, exact clocks, source-window containment and no input mutation.",
+    "Browser: Impact has seven bands (5 through0 and unnumbered Preventive); Context and Unresolved are separate unordered fields. Default Impact has590 finite points plus9 open-start tails; Context has189 plus3; Unresolved has41 finite points.",
+    "Browser: Context has hollow markers and curved in-field tails. Query E0742 gives one tail/head. Ending the viewport on30June removes its head but leaves one continuing tail; the inferred upper date remains unchanged.",
+    "Browser: canonical colors follow workstreams; restored palette spans gold, turquoise, lilac, orange, jade and blue. No severity or evidence value is assigned through color.",
+    "Browser: CAST renders14 role/mechanism components and24 paths. A finding modal exposes observation, interpretation, competing explanations, unknowns, linked records and primary-source pointers.",
+    "Browser: CT01 links to E0133; reveal switches to Context, clears incompatible search, adjusts the date range and updates category counts and selected state.",
+    "Browser: Questions P0 filter shows10 central questions and preserves keyboard focus. Q03 exposes all102 related-event links and the evidence requested.",
+    "Browser: title page story and entry controls fit at391x844, with no horizontal page overflow. Full-screen canvas measures391x844 on phone and1280x800 on desktop. Phone CAST map scrolls horizontally within its own readable850px graph.",
+    "Browser: phone wheel zoom in/out and drag/pan settled to idle. Rapid Bow tie/CAST/Event swarm changes settled with one visible view and no residual ghost or transition class.",
+    "Browser: zero console errors captured in the verification session. Source cards and linked event navigation checked.",
+    "Independent code review identified and fixed category count synchronization, numeric-query facet routing, truncated question links, replacement-button focus and nested-dialog return focus.",
+    "CAST question wording and statuses preserve Q01\u2013Q16. All requests remain not_sent, evidence remains open and answers remain null. Q16 has a documented privacy edit in its explanatory field only.",
+    "Public CAST JSON contains no private meeting quotations, private participant names or Drive/Docs links. The private requirements note is excluded from HTML, export and archive.",
+    "JavaScript syntax, strict production build, combined v8 export and archive integrity validated."
+  ],
+  "limits": [
+    "The CAST layer is a preliminary public-source systems-question analysis. It is not a completed formal CAST investigation, proof of organizational causation, an exhaustive control model or an MIT endorsement.",
+    "198 linked records span70 source episodes. They are not198 independent observations; selected coverage does not imply that unlinked records are irrelevant.",
+    "The six reported changes are grouped improvements; the six proposals are analyst recommendations, not historical events, assigned tasks, implemented changes or proven optimal interventions.",
+    "All16 evidence questions remain open; no messages or requests were sent and no private logs or interviews were obtained.",
+    "192 records are reviewed Context and41 reviewed Unresolved; these retain null scores rather than invented harm levels. Zero is Near-miss.",
+    "The12 open-left training records still have no supported earliest date. Their heads mark the inferred exclusive14July boundary, labeled By13July, not occurrence times. Tail curvature and length are decorative, not duration or probability.",
+    "Only18 temporal records were individually reviewed in the preceding date-research pass;814 existing windows were carried forward. This visual/investigation revision adds no exact dates.",
+    "Aggregate background density is illustrative, with no individual identities, dates, severities or hit targets. The precise total of non-displayable events is not established.",
+    "Colors are supplemented by labels and workstream filters. Shape conveys evidence, outline treatment conveys assessment disposition, size gives modest ordinal emphasis without harm ratios.",
+    "Dense windows can overlap at wide zoom. Zoom and nearby-record selection expose individual records. The phone control graph uses horizontal scrolling.",
+    "Reduced-motion handling was code-reviewed, without an emulated reduced-motion browser run. No end-to-end FPS benchmark was performed."
+  ],
+  "geometry_module_version": "1.0.0",
+  "performance": {
+    "architecture": "Stable cached packing; O(n) camera projection; pointer/wheel work coalesced once per animation frame; detail/register refresh after gestures settle; pixel buffers resize only when dimensions change; bow packing cached by size/lifecycle.",
+    "kernel_benchmark_ms": {
+      "desktop": {
+        "old_packing_median": 7.86,
+        "cached_projection_median": 0.034
+      },
+      "compact": {
+        "old_packing_median": 14.92,
+        "cached_projection_median": 0.052
+      },
+      "phone": {
+        "old_packing_median": 16.01,
+        "cached_projection_median": 0.025
+      }
+    },
+    "benchmark_limit": "Carried forward from v7: computation-only microbenchmark excluding canvas rasterization and DOM updates. Not rerun for v8; no end-to-end FPS claim."
+  },
+  "aggregate_background": {
+    "semantics": "Illustrative density of source-reported aggregate activity not individually resolved in the detailed record; not one particle per event.",
+    "rendered_density_marks": "5000\u201322000, responsive illustrative sampling, not an event count",
+    "sources": [
+      {
+        "label": "Approximately17,600 recovered attacker actions in6,280 clusters",
+        "url": "https://huggingface.co/blog/agent-intrusion-technical-timeline"
+      },
+      {
+        "label": "More than70,000 distinct messages and files",
+        "url": "https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/"
+      }
+    ],
+    "aggregation": "Different units can overlap. Do not add totals or subtract832 to invent an exact remainder."
+  },
+  "cast_analysis_version": "1.0.0",
+  "assessment_fields": {
+    "impact_and_prevention": 599,
+    "context": 192,
+    "unresolved": 41
+  },
+  "cast_coverage": {
+    "canonical_event_count": 832,
+    "linked_event_count": 198,
+    "unlinked_event_count": 634,
+    "linked_source_episode_count": 70,
+    "control_components": 14,
+    "relationships": 24,
+    "findings": 10,
+    "reported_actual_improvements": 6,
+    "analyst_proposals": 6,
+    "open_questions": 16,
+    "scope": "Selective supporting links from the 832-event corpus. Unlinked events remain in the Atlas; selection does not mark them irrelevant or causal.",
+    "completeness": "Not a completed or exhaustive CAST study. A richer control model requires answers and underlying evidence already identified in Q01\u2013Q16."
+  }
+}
