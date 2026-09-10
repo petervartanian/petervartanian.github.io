@@ -1550,7 +1550,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
     if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;$('.field-readout').classList.remove('egg-revealed');return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found it!</strong> Beyond these ${events.length} events, there are more than 70,000 messages and files, encoded as 1.2 million entries in a cache of 20 million files and directories. (Note: Without fuller disclosure from OpenAI, Hugging Face and METR/Redwood, this investigation can go no further.)</span>`;message.hidden=false;fitEggMessage(message);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found it!</strong> Beyond these ${events.length} events, there are more than 70,000 messages and files, encoded as 1.2 million entries in a cache's 20 million. Without fuller disclosure from OpenAI, Hugging Face and METR/Redwood, this investigation can go no further.</span>`;message.hidden=false;fitEggMessage(message);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
