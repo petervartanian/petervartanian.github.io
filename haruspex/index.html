@@ -1053,8 +1053,8 @@ body:has(#scene[data-view="cast"]) #egg-message{display:none}
 body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#focus-origin{display:none}
 @media(min-width:561px) and (max-width:1000px){#milestones{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
-/* Desktop: the revealed egg message wraps onto a second line instead of scrolling; the bottom-anchored readout grows upward. */
-@media(min-width:601px){.field-readout.egg-revealed> :not(#egg-message){display:none}.field-readout #egg-message{position:static;inset:auto;height:auto;min-height:26px;width:100%;white-space:normal;overflow:visible;padding:5px 10px;line-height:1.35}}
+/* The revealed egg message stays on one line; it scrolls sideways only when the strip is narrower than the sentence. */
+.field-readout #egg-message{font-size:10px}
 </style>
 </head>
 <body>
@@ -3341,7 +3341,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
     if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;$('.field-readout').classList.remove('egg-revealed');return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.textContent=`You found it! Beyond these ${events.length} explorable events, there are more than 70,000 messages and files, encoded as 1.2 million board entries, mostly file fragments, inside a cache of 20 million. The total remains unknown without fuller disclosure from OpenAI, Hugging Face and METR/Redwood.`;message.hidden=false;if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.textContent=`You found it! Beyond these ${events.length} events: over 70,000 messages and files, encoded as 1.2 million entries, mostly fragments, in a cache of 20 million. The full count needs fuller disclosure from OpenAI, Hugging Face and METR/Redwood.`;message.hidden=false;if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
