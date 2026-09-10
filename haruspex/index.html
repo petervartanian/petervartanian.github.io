@@ -1051,18 +1051,28 @@ body:has(#scene[data-view="cast"]) #egg-message{display:none}
 @media(max-width:600px){.field-readout #egg-message{font-size:10px}}
 
 body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#focus-origin{display:none}
-@media(min-width:561px) and (max-width:1000px){#milestones{grid-template-columns:repeat(3,minmax(0,1fr))}}
+#milestones{grid-template-columns:repeat(4,minmax(0,1fr))}.milestone em{display:block;font:9px var(--mono);font-style:normal;color:var(--dim);margin-top:7px;letter-spacing:.02em}
+@media(min-width:561px) and (max-width:1000px){#milestones{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){#milestones{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* The egg reveal: one full line beside the egg, sized to fit the row, on a translucent starfield strip. Below 9px it wraps instead. */
-.field-foot:has(.field-readout.egg-revealed) .legend-toggle{display:none}
-.field-readout.egg-revealed{left:calc(var(--scene-edge) + 44px);min-height:30px}
+/* The egg reveal: one line to the right of the egg, spanning the rest of the readout row. Type is sized to fit; below 9px it wraps. The ground is a feathered wash of the workstream colours, not a box. */
+.field-readout.egg-revealed{min-height:30px}
 .field-readout.egg-revealed> :not(#egg-message){display:none}
-.field-readout #egg-message{font-size:12px;line-height:1.3;padding:0 12px;color:#8ee0b3;overflow:hidden;border-radius:3px;background:radial-gradient(60% 150% at 6% 50%,#e2b93a22,transparent 62%),radial-gradient(45% 150% at 28% 50%,#2bd2c21f,transparent 62%),radial-gradient(45% 150% at 50% 50%,#c691fe1f,transparent 62%),radial-gradient(45% 150% at 72% 50%,#ff834620,transparent 62%),radial-gradient(45% 150% at 94% 50%,#72a7ff22,transparent 62%),radial-gradient(1px 1px at 11% 28%,#ffffff55,transparent 100%),radial-gradient(1px 1px at 37% 72%,#ffffff44,transparent 100%),radial-gradient(1px 1px at 63% 22%,#ffffff44,transparent 100%),radial-gradient(1px 1px at 86% 66%,#ffffff55,transparent 100%),#0a1320e8;box-shadow:inset 0 0 0 1px #ffffff12,0 0 22px #2bd2c216,0 0 48px #c691fe10;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.field-readout #egg-message{font-size:12px;line-height:1.3;padding:0 18px;color:#8ee0b3;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;text-shadow:0 0 14px #0b0f10,0 0 3px #0b0f10}
+.field-readout #egg-message::before{content:"";position:absolute;inset:-8px -6px;z-index:-1;pointer-events:none;background:radial-gradient(50% 130% at 4% 50%,#e2b93a2a,transparent 65%),radial-gradient(40% 140% at 27% 50%,#2bd2c226,transparent 65%),radial-gradient(40% 140% at 50% 50%,#c691fe26,transparent 65%),radial-gradient(40% 140% at 73% 50%,#ff834626,transparent 65%),radial-gradient(40% 140% at 96% 50%,#72a7ff2a,transparent 65%),radial-gradient(1px 1px at 12% 26%,#ffffff66,transparent 100%),radial-gradient(1px 1px at 38% 74%,#ffffff55,transparent 100%),radial-gradient(1px 1px at 64% 20%,#ffffff55,transparent 100%),radial-gradient(1px 1px at 87% 68%,#ffffff66,transparent 100%),#070d14d9;-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
 .field-readout #egg-message>span{display:inline-block;white-space:nowrap}
-.field-readout #egg-message strong{font-weight:700;color:#b9f1d2;text-decoration:none;text-shadow:0 0 8px #8ee0b34d}
-.field-readout #egg-message.wrapped{position:static;inset:auto;height:auto;white-space:normal;padding:6px 12px}
+.field-readout #egg-message strong{font-weight:700;color:#b9f1d2;text-decoration:none}
+.field-readout #egg-message.wrapped{position:static;inset:auto;height:auto;white-space:normal;padding:6px 18px}
 .field-readout #egg-message.wrapped>span{white-space:normal;display:inline}
-@media(max-width:600px){.field-readout.egg-revealed{left:calc(var(--scene-edge) + 36px)}}
+
+/* The Legend flyout: one section per key, contents centred both ways. */
+#legend-panel> :not(.legend-panel-head){display:flex;flex-wrap:wrap;justify-content:center;align-items:center;align-content:center;text-align:center;gap:10px 24px;margin:0;padding:14px 18px;min-height:58px;border-top:1px solid var(--line)}
+#legend-panel .legend-panel-head{padding-bottom:10px}
+#legend-panel .plot-tools{position:static;right:auto;top:auto;gap:12px}
+#legend-panel .severity-help,#legend-panel .background-key button,#legend-panel .legend .toggle{margin-left:0}
+#legend-panel .workstream-legend button,#legend-panel .legend button{text-align:center}
+#legend-panel .assessment-fill-key>span,#legend-panel .size-key{display:inline-flex;align-items:center;gap:6px}
+#legend-panel .reading-note{max-width:none;color:#9aa9ae;line-height:1.5}
 
 /* The incident globe pops on a click; the page no longer holds the scene to scrub it by scroll. */
 .observatory{height:auto;min-height:0}
@@ -1204,14 +1214,14 @@ body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#fo
             <button id="zoom-fit" class="fit-field" aria-label="Fit matching events on both axes">Fit</button>
             <button id="move-up" class="pan-y" aria-label="Pan severity up">↑</button><button id="move-down" class="pan-y" aria-label="Pan severity down">↓</button>
           </div>
-          <p class="reading-note">Drag to move. Scroll to zoom.</p>
+          <p class="reading-note">Drag to move, and scroll to zoom. Click an event to open it. Hold Shift for time only, Alt for severity only.</p>
         </section>
         <div class="scroll-progress" aria-hidden="true"><span></span></div>
       </div>
     </section>
     <section class="record-section" id="event-list" aria-labelledby="record-heading">
       <div class="section-heading"><div><h2 id="record-heading">Events</h2></div><div class="record-controls"><span id="record-count"></span><button id="list-toggle" aria-expanded="true" aria-controls="record-list-wrap">Collapse −</button></div></div>
-      <div class="milestone-strip" aria-label="Five editorial waypoints"><p class="waypoint-note">Five waypoints through the account <button id="waypoint-info" aria-label="Why these five waypoints?">?</button></p><div id="milestones"></div></div>
+      <div class="milestone-strip" aria-label="Turning points marked by the sources"><div id="milestones"></div></div>
       <div id="record-list-wrap"><div id="record-list"></div><button id="load-more" class="load-more">Show more events <span>↓</span></button></div>
     </section>
   </main>
@@ -1757,7 +1767,7 @@ body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#fo
     paint();new ResizeObserver(paint).observe(canvas);
   }
   function mountGateway({scene,getPoints,paintPoint,isReading}){
-    // A solid globe: the plotted event marks on its surface over a dense filling of the four legend geometries in the workstream colours, turning slowly; a click (or scrolling on past it) pops it into the swarm.
+    // A lit, slightly uneven ball: the plotted event marks on its surface over a dense filling of the four legend geometries in the workstream colours, turning slowly. Only a click pops it; the filling dissolves where it stands while the events fly to their places.
     const host=document.getElementById('incident-gateway'),canvas=document.getElementById('gateway-surface'),button=document.getElementById('sphere-enter');
     const reduced=matchMedia('(prefers-reduced-motion: reduce)'),inertStates=new Map();
     const TAU=Math.PI*2,TILT=.46,SPIN_MS=56000,POP_MS=1800,DUST=6500;
@@ -1767,17 +1777,18 @@ body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#fo
     function dustSprite(color,geometry){const key=color*4+geometry;let sprite=dustSprites.get(key);if(sprite)return sprite;const R=3,pad=2,S=(R+pad)*4;sprite=document.createElement('canvas');sprite.width=sprite.height=S;const c=sprite.getContext('2d');c.scale(2,2);c.translate(R+pad,R+pad);c.fillStyle=dustColors[color];c.beginPath();if(geometry===0)c.arc(0,0,R,0,TAU);else if(geometry===1){c.moveTo(0,-R*1.15);c.lineTo(R*1.15,0);c.lineTo(0,R*1.15);c.lineTo(-R*1.15,0);c.closePath();}else if(geometry===2){c.moveTo(0,-R*1.2);c.lineTo(R*1.1,R*.8);c.lineTo(-R*1.1,R*.8);c.closePath();}else{for(let i=0;i<12;i++){const a=i*Math.PI/6-Math.PI/2,rr=i%2?R*.55:R*1.3;c.lineTo(Math.cos(a)*rr,Math.sin(a)*rr);}c.closePath();}c.fill();dustSprites.set(key,sprite);return sprite;}
     function bounds(){const top=scene.parentElement.getBoundingClientRect().top+scrollY,h=scene.getBoundingClientRect().height;return{top,h};}
     function lock(value){if(value===locked)return;locked=value;if(value){for(const child of scene.children){if(child===host)continue;inertStates.set(child,child.inert);child.inert=true;}}else{for(const[child,v]of inertStates)child.inert=v;inertStates.clear();}}
+    function bump(u){return 1+.07*Math.sin(4.3*u[0]+1.7*u[2])*Math.cos(3.1*u[1]-.6*u[0])+.05*Math.sin(6.2*u[1]+2.4*u[2]);}
     function unit(i,n){const k=i+.5,phi=Math.acos(1-2*k/n),theta=Math.PI*(1+Math.sqrt(5))*k;return[Math.cos(theta)*Math.sin(phi),Math.sin(theta)*Math.sin(phi),Math.cos(phi)];}
     function prepare(){
       size=sizeCanvas(canvas);const source=getPoints();backdrop=source.backdrop;center={x:size.width/2,y:size.height/2};radius=Math.min(330,size.width*.36,size.height*.4);
       dustColors=colors.slice();
       hull=document.createElement('canvas');hull.width=size.width;hull.height=size.height;const hc=hull.getContext('2d');
       const glow=hc.createRadialGradient(center.x,center.y,radius*.2,center.x,center.y,radius*1.4);glow.addColorStop(0,'#7cdbcf16');glow.addColorStop(.55,'#c28abb0d');glow.addColorStop(1,'#0b0f1000');hc.fillStyle=glow;hc.fillRect(0,0,size.width,size.height);
-      const shade=hc.createRadialGradient(center.x-radius*.3,center.y-radius*.35,radius*.1,center.x,center.y,radius);shade.addColorStop(0,'#1c3042e6');shade.addColorStop(.75,'#0e1c28e0');shade.addColorStop(1,'#0b0f1000');hc.fillStyle=shade;hc.beginPath();hc.arc(center.x,center.y,radius*1.01,0,TAU);hc.fill();
+      const shade=hc.createRadialGradient(center.x-radius*.38,center.y-radius*.42,radius*.05,center.x,center.y,radius*1.02);shade.addColorStop(0,'#2c4a62f4');shade.addColorStop(.45,'#16283af0');shade.addColorStop(.85,'#0c161ff2');shade.addColorStop(1,'#0b0f1000');hc.fillStyle=shade;hc.beginPath();hc.arc(center.x,center.y,radius*.97,0,TAU);hc.fill();
       const n=Math.max(1,source.length),order=source.map((_,i)=>i).sort((a,b)=>hash(a*17+3)-hash(b*17+3)),slot=new Array(n);order.forEach((index,k)=>{slot[index]=k;});
-      endpoints=source.map((p,i)=>({...p,unit:unit(slot[i],n),shell:1.01+hash(i*11+5)*.04,delay:hash(i+399)*.22,bend:(hash(i*13+7)-.5)*radius*.55,origin:null}));
+      endpoints=source.map((p,i)=>{const u=unit(slot[i],n);return{...p,unit:u,shell:bump(u)*(1.01+hash(i*11+5)*.03),delay:hash(i+399)*.25,bend:(hash(i*13+7)-.5)*radius*.28,origin:null};});
       dustSprites.clear();
-      dust=Array.from({length:DUST},(_,i)=>{const z=1-2*hash(i*7+31),a=hash(i*7+32)*TAU,r=Math.sqrt(Math.max(0,1-z*z));return{unit:[r*Math.cos(a),r*Math.sin(a),z],shell:Math.cbrt(hash(i*7+33)),r:2.3+hash(i*7+34)*2.1,color:Math.floor(hash(i*7+35)*(dustColors.length-.001)),geometry:i%4,speed:hash(i*7+36),origin:null};});
+      dust=Array.from({length:DUST},(_,i)=>{const z=1-2*hash(i*7+31),a=hash(i*7+32)*TAU,r=Math.sqrt(Math.max(0,1-z*z)),u=[r*Math.cos(a),r*Math.sin(a),z],surface=hash(i*7+37)<.68;return{unit:u,shell:bump(u)*(surface?.93+.07*hash(i*7+33):Math.cbrt(hash(i*7+33))*.9),r:2.3+hash(i*7+34)*2.1,color:Math.floor(hash(i*7+35)*(dustColors.length-.001)),geometry:i%4,delay:hash(i*7+36),origin:null};});
       button.style.width=button.style.height=`${radius*2.15}px`;
       Object.assign(canvas.dataset,{motion:'glyph-globe',eventCount:String(source.length),particleCount:String(DUST),surfaceRadius:String(radius)});dirty=false;
     }
@@ -1785,7 +1796,7 @@ body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#fo
       const ca=Math.cos(angle),sa=Math.sin(angle),ct=Math.cos(TILT),st=Math.sin(TILT);
       const x1=u[0]*ca+u[2]*sa,z1=-u[0]*sa+u[2]*ca,y2=u[1]*ct-z1*st,z2=u[1]*st+z1*ct;
       const R=radius*shell,f=radius*2.7,s=f/(f+z2*R);
-      return{x:center.x+x1*R*s,y:center.y+y2*R*s,s,depth:(1-z2)/2};
+      return{x:center.x+x1*R*s,y:center.y+y2*R*s,s,depth:(1-z2)/2,light:Math.max(0,-(x1*.45+y2*.55+z2*.7))};
     }
     function paintGlobe(now){
       const{ctx,width,height}=size;ctx.clearRect(0,0,width,height);
@@ -1796,17 +1807,16 @@ body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#fo
       for(const g of endpoints){const p=project(g.unit,g.shell,angle);items.push({z:p.depth,g,p});}
       items.sort((a,b)=>a.z-b.z);
       for(const it of items){
-        if(it.d){ctx.globalAlpha=Math.min(1,(.28+.72*it.z)*lift);const w=it.d.r*it.p.s*10/3;ctx.drawImage(dustSprite(it.d.color,it.d.geometry),it.p.x-w/2,it.p.y-w/2,w,w);}
-        else{const r=Math.max(1.5,it.g.radius*(.7+.6*it.z)*it.p.s*lift);paintPoint(ctx,{...it.g,radius:r},it.p.x,it.p.y,Math.min(1,(.35+.65*it.z)*lift));}
+        if(it.d){ctx.globalAlpha=Math.min(1,(.1+.9*Math.pow(it.p.light,.85))*(.55+.45*it.z)*lift);const w=it.d.r*it.p.s*10/3;ctx.drawImage(dustSprite(it.d.color,it.d.geometry),it.p.x-w/2,it.p.y-w/2,w,w);}
+        else{const r=Math.max(1.5,it.g.radius*(.7+.6*it.z)*it.p.s*lift);paintPoint(ctx,{...it.g,radius:r},it.p.x,it.p.y,Math.min(1,(.25+.75*Math.pow(it.p.light,.8))*(.6+.4*it.z)*lift));}
       }
       ctx.globalAlpha=1;canvas.dataset.progress='0';
     }
     function paintPop(progress){
       const{ctx,width,height}=size;ctx.clearRect(0,0,width,height);
       if(backdrop){ctx.globalAlpha=ease((progress-.6)/.4);ctx.drawImage(backdrop,0,0,width,height);ctx.globalAlpha=1;}
-      ctx.globalAlpha=(1-ease(progress/.45))*.8;ctx.drawImage(hull,0,0,width,height);
-      const burst=ease(progress/.7),fade=1-ease((progress-.12)/.62);
-      for(const d of dust){const o=d.origin,dx=o.x-center.x,dy=o.y-center.y,len=Math.hypot(dx,dy)||1,dist=(.6+d.speed)*radius*1.8*burst,x=o.x+dx/len*dist,y=o.y+dy/len*dist;ctx.globalAlpha=.6*fade;const w=d.r*(1-burst*.4)*10/3;ctx.drawImage(dustSprite(d.color,d.geometry),x-w/2,y-w/2,w,w);}
+      ctx.globalAlpha=(1-ease(progress/.6))*.85;ctx.drawImage(hull,0,0,width,height);
+      for(const d of dust){const o=d.origin,gone=ease((progress-d.delay*.4)/.5);if(gone>=1)continue;ctx.globalAlpha=o.a*(1-gone);const w=d.r*o.s*(1-.45*gone)*10/3;ctx.drawImage(dustSprite(d.color,d.geometry),o.x-w/2,o.y-w/2,w,w);}
       ctx.globalAlpha=1;
       for(const g of endpoints){const t=ease((progress-g.delay)/(1-g.delay)),o=g.origin,bend=Math.sin(t*Math.PI)*g.bend,x=mix(o.x,g.x,t)+bend,y=mix(o.y,g.y,t)-bend*.42;paintPoint(ctx,{...g,radius:mix(o.r,g.radius,t)},x,y,.85+.15*t);}
       canvas.dataset.progress=progress.toFixed(3);
@@ -1818,7 +1828,7 @@ body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#fo
       if(instant||reduced.matches){settle();return;}
       const angle=((performance.now()-rotationAt)/SPIN_MS)*TAU;
       for(const g of endpoints){const p=project(g.unit,g.shell,angle);g.origin={x:p.x,y:p.y,r:Math.max(1.5,g.radius*(.7+.6*p.depth)*p.s)};}
-      for(const d of dust){const p=project(d.unit,d.shell,angle);d.origin={x:p.x,y:p.y};}
+      for(const d of dust){const p=project(d.unit,d.shell,angle);d.origin={x:p.x,y:p.y,s:p.s,a:Math.min(1,(.1+.9*Math.pow(p.light,.85))*(.55+.45*p.depth))};}
       button.disabled=true;scene.dataset.gateway='disintegrating';popping={start:performance.now()};start();
     }
     function tick(now){
@@ -1837,7 +1847,7 @@ body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#fo
       if(popped)return;
       if(isReading()){pop({instant:true});return;}
       host.hidden=false;
-      if(!popping){scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);const b=bounds();if(scrollY>b.top+b.h*.3)pop();}
+      if(!popping){scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);}
       start();
     }
     function enter({behavior='smooth'}={}){window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});if(!popped)pop({instant:isReading()});}
@@ -2929,7 +2939,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     element.hidden = true;
   }
   function syncControls() {
-    $('.reading-note').textContent = state.view === 'stream' ? 'Drag to move. Scroll to zoom.' : 'Select an event to inspect its evidence.';
+    $('.reading-note').textContent = state.view === 'stream' ? 'Drag to move, and scroll to zoom. Click an event to open it. Hold Shift for time only, Alt for severity only.' : 'Select an event to inspect its evidence.';
     $('.legend .toggle').hidden = false;
     $('.legend .toggle').style.visibility = state.view === 'stream' ? '' : 'hidden';
     $('.legend .toggle').inert = state.view !== 'stream';
@@ -3403,7 +3413,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
     if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;$('.field-readout').classList.remove('egg-revealed');return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found it!</strong> Beyond these ${events.length} events, there are more than 70,000 messages and files, encoded as 1.2 million entries — mostly fragments — in a cache of 20 million files and directories. Yet, without fuller disclosure from OpenAI, Hugging Face and METR/Redwood, this investigation can go no further.</span>`;message.hidden=false;fitEggMessage(message);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found it!</strong> Beyond these ${events.length} events, there are more than 70,000 messages and files, encoded as 1.2 million entries in a cache of 20 million files and directories. (Note: Without fuller disclosure from OpenAI, Hugging Face and METR/Redwood, this investigation can go no further.)</span>`;message.hidden=false;fitEggMessage(message);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
@@ -3500,11 +3510,18 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('.brand').addEventListener('click', (event) => { event.preventDefault(); changeView('stream'); reset(); closeDetails(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false'); window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
   document.addEventListener('keydown', (event) => { if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) && !$('#info-dialog').open) { event.preventDefault(); $('#event-search').focus(); } });
   ontology.stages.forEach((stage) => { const option = document.createElement('option'); option.value = stage.id; option.textContent = stage.label; $('#stage-filter').append(option); });
+  // Turning points as the sources mark them, each card naming who marks it.
   const milestones = [
-    ['E0001', '20 APR', 'An arbitrary file write'], ['E0024', '26 JUN', 'Administrator authority'], ['E0065', '11 JUL', 'Inside the worker'], ['E0112', '19 JUL', 'The internal escalation'], ['E0734', '26 AUG', 'The public investigation'],
+    ['E0002', '12 MAY', 'The first board', 'Simon Institute · Cotra · OpenAI'],
+    ['E0453', '6 JUL', 'The board wiped', 'OpenAI at Black Hat · METR'],
+    ['E0462', '8 JUL', 'The board re-founded', 'METR · Simon Institute'],
+    ['E0065', '11 JUL', 'The turn on Hugging Face', 'METR · Hugging Face'],
+    ['E0396', '13 JUL', 'Containment', 'Hugging Face · METR'],
+    ['E0112', '19 JUL', 'The turn on OpenAI itself', 'OpenAI · Simon Institute'],
+    ['E0807', '21 JUL', 'Public attribution', 'OpenAI · Hugging Face'],
+    ['E0734', '26 AUG', 'The independent investigation', 'METR · Redwood'],
   ];
-  $('#waypoint-info').addEventListener('click',()=>openDialog('Why these five?', '<p>These are editorial waypoints: an early boundary crossing, administrator access, entry into Hugging Face, the later OpenAI escalation, and public disclosure. They provide places to enter the account. They are not an exhaustive chronology, five proven causal breaks, or the incident’s only important events.</p>'));
-  $('#milestones').innerHTML = milestones.map(([id, date, label]) => `<button class="milestone ${state.selected === id ? 'active' : ''}" data-event="${id}">${eventMark(eventMap.get(id))}<small>${date} 2026</small><span>${label}</span></button>`).join('');
+  $('#milestones').innerHTML = milestones.map(([id, date, label, sources]) => `<button class="milestone ${state.selected === id ? 'active' : ''}" data-event="${id}">${eventMark(eventMap.get(id))}<small>${date} 2026</small><span>${label}</span><em>${sources}</em></button>`).join('');
   $$('[data-event]').forEach((button) => button.addEventListener('click', () => { if (state.view !== 'stream') changeView('stream'); selectEvent(button.dataset.event, { reveal: true, trigger: button }); }));
   // Small inspection surface for local verification; no private data or network.
   window.haruspex = { getState: () => ({ ...state, statuses: [...state.statuses], visibleCount: visible.length, plottedCount: points.length }), getPoints: () => points.map(({ event, x, y }) => ({ id: event.id, x, y, timeKind: event._time.kind, severity: severityMap.get(event.id)?.score })), getTimeExtent: (id) => ({ ...eventMap.get(id)?._time }), getCounts: () => ({ all: events.length, ...Object.fromEntries(groups.map((group) => [group.key, events.filter((event) => group.roles.includes(event.bow_tie_role)).length])) }) };

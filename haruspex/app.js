@@ -1076,7 +1076,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     element.hidden = true;
   }
   function syncControls() {
-    $('.reading-note').textContent = state.view === 'stream' ? 'Drag to move. Scroll to zoom.' : 'Select an event to inspect its evidence.';
+    $('.reading-note').textContent = state.view === 'stream' ? 'Drag to move, and scroll to zoom. Click an event to open it. Hold Shift for time only, Alt for severity only.' : 'Select an event to inspect its evidence.';
     $('.legend .toggle').hidden = false;
     $('.legend .toggle').style.visibility = state.view === 'stream' ? '' : 'hidden';
     $('.legend .toggle').inert = state.view !== 'stream';
@@ -1550,7 +1550,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
     if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;$('.field-readout').classList.remove('egg-revealed');return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found it!</strong> Beyond these ${events.length} events, there are more than 70,000 messages and files, encoded as 1.2 million entries — mostly fragments — in a cache of 20 million files and directories. Yet, without fuller disclosure from OpenAI, Hugging Face and METR/Redwood, this investigation can go no further.</span>`;message.hidden=false;fitEggMessage(message);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found it!</strong> Beyond these ${events.length} events, there are more than 70,000 messages and files, encoded as 1.2 million entries in a cache of 20 million files and directories. (Note: Without fuller disclosure from OpenAI, Hugging Face and METR/Redwood, this investigation can go no further.)</span>`;message.hidden=false;fitEggMessage(message);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
@@ -1647,11 +1647,18 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('.brand').addEventListener('click', (event) => { event.preventDefault(); changeView('stream'); reset(); closeDetails(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false'); window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
   document.addEventListener('keydown', (event) => { if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) && !$('#info-dialog').open) { event.preventDefault(); $('#event-search').focus(); } });
   ontology.stages.forEach((stage) => { const option = document.createElement('option'); option.value = stage.id; option.textContent = stage.label; $('#stage-filter').append(option); });
+  // Turning points as the sources mark them, each card naming who marks it.
   const milestones = [
-    ['E0001', '20 APR', 'An arbitrary file write'], ['E0024', '26 JUN', 'Administrator authority'], ['E0065', '11 JUL', 'Inside the worker'], ['E0112', '19 JUL', 'The internal escalation'], ['E0734', '26 AUG', 'The public investigation'],
+    ['E0002', '12 MAY', 'The first board', 'Simon Institute · Cotra · OpenAI'],
+    ['E0453', '6 JUL', 'The board wiped', 'OpenAI at Black Hat · METR'],
+    ['E0462', '8 JUL', 'The board re-founded', 'METR · Simon Institute'],
+    ['E0065', '11 JUL', 'The turn on Hugging Face', 'METR · Hugging Face'],
+    ['E0396', '13 JUL', 'Containment', 'Hugging Face · METR'],
+    ['E0112', '19 JUL', 'The turn on OpenAI itself', 'OpenAI · Simon Institute'],
+    ['E0807', '21 JUL', 'Public attribution', 'OpenAI · Hugging Face'],
+    ['E0734', '26 AUG', 'The independent investigation', 'METR · Redwood'],
   ];
-  $('#waypoint-info').addEventListener('click',()=>openDialog('Why these five?', '<p>These are editorial waypoints: an early boundary crossing, administrator access, entry into Hugging Face, the later OpenAI escalation, and public disclosure. They provide places to enter the account. They are not an exhaustive chronology, five proven causal breaks, or the incident’s only important events.</p>'));
-  $('#milestones').innerHTML = milestones.map(([id, date, label]) => `<button class="milestone ${state.selected === id ? 'active' : ''}" data-event="${id}">${eventMark(eventMap.get(id))}<small>${date} 2026</small><span>${label}</span></button>`).join('');
+  $('#milestones').innerHTML = milestones.map(([id, date, label, sources]) => `<button class="milestone ${state.selected === id ? 'active' : ''}" data-event="${id}">${eventMark(eventMap.get(id))}<small>${date} 2026</small><span>${label}</span><em>${sources}</em></button>`).join('');
   $$('[data-event]').forEach((button) => button.addEventListener('click', () => { if (state.view !== 'stream') changeView('stream'); selectEvent(button.dataset.event, { reveal: true, trigger: button }); }));
   // Small inspection surface for local verification; no private data or network.
   window.haruspex = { getState: () => ({ ...state, statuses: [...state.statuses], visibleCount: visible.length, plottedCount: points.length }), getPoints: () => points.map(({ event, x, y }) => ({ id: event.id, x, y, timeKind: event._time.kind, severity: severityMap.get(event.id)?.score })), getTimeExtent: (id) => ({ ...eventMap.get(id)?._time }), getCounts: () => ({ all: events.length, ...Object.fromEntries(groups.map((group) => [group.key, events.filter((event) => group.roles.includes(event.bow_tie_role)).length])) }) };
