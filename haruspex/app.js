@@ -650,9 +650,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#previous-event').disabled = !visible.length || index === 0;
     $('#next-event').disabled = !visible.length || index === visible.length - 1;
   }
-  function selectEvent(id, { reveal = false, nearby = null } = {}) {
+  function selectEvent(id, { reveal = false, nearby = null, trigger = null } = {}) {
     const event = eventMap.get(id); if (!event) return;
-    detailTrigger = document.activeElement;
+    detailTrigger = trigger || document.activeElement;
     selectedSourceAnchor=null;
     const sourceButton=detailTrigger?.closest?.('.milestone,.record-row');
     if(sourceButton){const marker=sourceButton.querySelector('.event-mark')||sourceButton,r=marker.getBoundingClientRect(),hoist=sourceButton.getBoundingClientRect();selectedSourceAnchor={x:r.left+(marker===sourceButton?12:r.width/2),y:r.top+(marker===sourceButton?8:r.height/2),documentX:hoist.left+scrollX,documentY:hoist.top+scrollY,lineLength:sourceButton.classList.contains('milestone')?hoist.width:0};}
@@ -682,7 +682,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#record-count').textContent = `${visible.length} / ${events.length} events`;
     const entries = visible.slice(0, state.limit);
     $('#record-list').innerHTML = entries.length ? entries.map((event) => `<button class="record-row ${event.id === state.selected ? 'selected' : ''}" data-record="${event.id}" aria-label="${escapeHtml(`${event.id}, ${event.title}, ${eventStyle(event).label}, ${LABELS[event._status]}, ${bandLabel(event)}, ${dateLabel(event, true)}`)}"><span class="row-id">${event.id}</span><span class="row-date">${escapeHtml(dateLabel(event, true))}</span><span class="row-title">${eventMark(event)}${escapeHtml(event.title)}</span><span class="row-severity">${severityBadge(event)}</span><span class="row-status"><span class="mark ${SHAPES[event._status]}"></span>${LABELS[event._status]}</span><span class="row-arrow" aria-hidden="true">↗</span></button>`).join('') : '<p class="list-empty">No events match this view.</p>';
-    $$('[data-record]').forEach((button) => button.addEventListener('click', () => { selectEvent(button.dataset.record); }));
+    $$('[data-record]').forEach((button) => button.addEventListener('click', () => { selectEvent(button.dataset.record, { trigger: button }); }));
     if (!reducedMotion.matches) $$('#record-list [data-record]').forEach((node) => {
       const rect = node.getBoundingClientRect(); const prior = oldRows.get(node.dataset.record);
       if (rect.bottom < 0 || rect.top > innerHeight || (prior && Math.abs(prior.top - rect.top) < 1)) return;
@@ -1549,7 +1549,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
     if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;$('.field-readout').classList.remove('egg-revealed');return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.textContent=`You found it! Beyond these ${events.length} explorable events lie 70,000+ messages and files. Full count awaits fuller disclosure from OpenAI, Hugging Face and METR/Redwood.`;message.hidden=false;if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.textContent=`You found it! Beyond these ${events.length} explorable events, there are more than 70,000 messages and files. The total remains unknown without fuller disclosure from OpenAI, Hugging Face and METR/Redwood.`;message.hidden=false;if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
@@ -1574,7 +1574,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if(detailPanel.hidden||!focusAnchor)return;
     const event=eventMap.get(state.selected),w=innerWidth,h=innerHeight;
     const hoisted=!!focusAnchor.lineLength;
-    const x=hoisted?focusAnchor.documentX-scrollX:focusAnchor.x,y=hoisted?focusAnchor.documentY-scrollY:focusAnchor.y;
+    const x=hoisted?focusAnchor.documentX-scrollX:Math.max(18,Math.min(w-18,focusAnchor.x)),y=hoisted?focusAnchor.documentY-scrollY:Math.max(70,Math.min(h-45,focusAnchor.y));
     const narrow=true,right=true;
     const flip=!hoisted&&y>=h-230;
     const width=hoisted?focusAnchor.lineLength:Math.min(340,w-32),top=hoisted?focusAnchor.documentY:flip?Math.max(70,y-12-480):y+12,height=hoisted?640:flip?y-12-top:Math.max(180,h-top-20),left=hoisted?focusAnchor.documentX:Math.max(16,Math.min(w-width-16,x));
@@ -1651,7 +1651,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   ];
   $('#waypoint-info').addEventListener('click',()=>openDialog('Why these five?', '<p>These are editorial waypoints: an early boundary crossing, administrator access, entry into Hugging Face, the later OpenAI escalation, and public disclosure. They provide places to enter the account. They are not an exhaustive chronology, five proven causal breaks, or the incident’s only important events.</p>'));
   $('#milestones').innerHTML = milestones.map(([id, date, label]) => `<button class="milestone ${state.selected === id ? 'active' : ''}" data-event="${id}">${eventMark(eventMap.get(id))}<small>${date} 2026</small><span>${label}</span></button>`).join('');
-  $$('[data-event]').forEach((button) => button.addEventListener('click', () => { if (state.view !== 'stream') changeView('stream'); selectEvent(button.dataset.event, { reveal: true }); }));
+  $$('[data-event]').forEach((button) => button.addEventListener('click', () => { if (state.view !== 'stream') changeView('stream'); selectEvent(button.dataset.event, { reveal: true, trigger: button }); }));
   // Small inspection surface for local verification; no private data or network.
   window.haruspex = { getState: () => ({ ...state, statuses: [...state.statuses], visibleCount: visible.length, plottedCount: points.length }), getPoints: () => points.map(({ event, x, y }) => ({ id: event.id, x, y, timeKind: event._time.kind, severity: severityMap.get(event.id)?.score })), getTimeExtent: (id) => ({ ...eventMap.get(id)?._time }), getCounts: () => ({ all: events.length, ...Object.fromEntries(groups.map((group) => [group.key, events.filter((event) => group.roles.includes(event.bow_tie_role)).length])) }) };
   let lastFieldSize = '';
