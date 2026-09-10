@@ -20,10 +20,10 @@
     paint();new ResizeObserver(paint).observe(canvas);
   }
   function mountGateway({scene,getPoints,paintPoint,isReading}){
-    // A globe made of the event marks themselves, with a dust of the four legend geometries between them, turning slowly; a click (or scrolling on past it) pops it into the swarm.
+    // A solid globe: the plotted event marks on its surface over a dense filling of the four legend geometries in the workstream colours, turning slowly; a click (or scrolling on past it) pops it into the swarm.
     const host=document.getElementById('incident-gateway'),canvas=document.getElementById('gateway-surface'),button=document.getElementById('sphere-enter');
     const reduced=matchMedia('(prefers-reduced-motion: reduce)'),inertStates=new Map();
-    const TAU=Math.PI*2,TILT=.46,SPIN_MS=52000,POP_MS=1500,DUST=1800;
+    const TAU=Math.PI*2,TILT=.46,SPIN_MS=56000,POP_MS=1800,DUST=6500;
     let size,center,radius,hull,backdrop,endpoints=[],dust=[],dustColors=[];
     let dirty=true,popped=false,popping=null,hover=false,frame=null,sizeKey='',locked=false,rotationAt=performance.now();
     const dustSprites=new Map();
@@ -33,14 +33,14 @@
     function unit(i,n){const k=i+.5,phi=Math.acos(1-2*k/n),theta=Math.PI*(1+Math.sqrt(5))*k;return[Math.cos(theta)*Math.sin(phi),Math.sin(theta)*Math.sin(phi),Math.cos(phi)];}
     function prepare(){
       size=sizeCanvas(canvas);const source=getPoints();backdrop=source.backdrop;center={x:size.width/2,y:size.height/2};radius=Math.min(330,size.width*.36,size.height*.4);
-      dustColors=Array.from({length:48},(_,i)=>{const t=i/47*(colors.length-1),a=colors[Math.floor(t)],b=colors[Math.min(colors.length-1,Math.floor(t)+1)],f=t%1;return '#'+[1,3,5].map(k=>Math.round(mix(parseInt(a.slice(k,k+2),16),parseInt(b.slice(k,k+2),16),f)).toString(16).padStart(2,'0')).join('');});
+      dustColors=colors.slice();
       hull=document.createElement('canvas');hull.width=size.width;hull.height=size.height;const hc=hull.getContext('2d');
       const glow=hc.createRadialGradient(center.x,center.y,radius*.2,center.x,center.y,radius*1.4);glow.addColorStop(0,'#7cdbcf16');glow.addColorStop(.55,'#c28abb0d');glow.addColorStop(1,'#0b0f1000');hc.fillStyle=glow;hc.fillRect(0,0,size.width,size.height);
-      const shade=hc.createRadialGradient(center.x-radius*.3,center.y-radius*.35,radius*.1,center.x,center.y,radius);shade.addColorStop(0,'#1a2b3a70');shade.addColorStop(.7,'#0d1a2458');shade.addColorStop(1,'#0b0f1000');hc.fillStyle=shade;hc.beginPath();hc.arc(center.x,center.y,radius,0,TAU);hc.fill();
+      const shade=hc.createRadialGradient(center.x-radius*.3,center.y-radius*.35,radius*.1,center.x,center.y,radius);shade.addColorStop(0,'#1c3042e6');shade.addColorStop(.75,'#0e1c28e0');shade.addColorStop(1,'#0b0f1000');hc.fillStyle=shade;hc.beginPath();hc.arc(center.x,center.y,radius*1.01,0,TAU);hc.fill();
       const n=Math.max(1,source.length),order=source.map((_,i)=>i).sort((a,b)=>hash(a*17+3)-hash(b*17+3)),slot=new Array(n);order.forEach((index,k)=>{slot[index]=k;});
-      endpoints=source.map((p,i)=>({...p,unit:unit(slot[i],n),shell:.97+hash(i*11+5)*.06,delay:hash(i+399)*.22,bend:(hash(i*13+7)-.5)*radius*.55,origin:null}));
+      endpoints=source.map((p,i)=>({...p,unit:unit(slot[i],n),shell:1.01+hash(i*11+5)*.04,delay:hash(i+399)*.22,bend:(hash(i*13+7)-.5)*radius*.55,origin:null}));
       dustSprites.clear();
-      dust=Array.from({length:DUST},(_,i)=>{const z=1-2*hash(i*7+31),a=hash(i*7+32)*TAU,r=Math.sqrt(Math.max(0,1-z*z));return{unit:[r*Math.cos(a),r*Math.sin(a),z],shell:.86+hash(i*7+33)*.2,r:.8+hash(i*7+34)*1.4,color:Math.floor(hash(i*7+35)*47.999),geometry:i%4,speed:hash(i*7+36),origin:null};});
+      dust=Array.from({length:DUST},(_,i)=>{const z=1-2*hash(i*7+31),a=hash(i*7+32)*TAU,r=Math.sqrt(Math.max(0,1-z*z));return{unit:[r*Math.cos(a),r*Math.sin(a),z],shell:Math.cbrt(hash(i*7+33)),r:2.3+hash(i*7+34)*2.1,color:Math.floor(hash(i*7+35)*(dustColors.length-.001)),geometry:i%4,speed:hash(i*7+36),origin:null};});
       button.style.width=button.style.height=`${radius*2.15}px`;
       Object.assign(canvas.dataset,{motion:'glyph-globe',eventCount:String(source.length),particleCount:String(DUST),surfaceRadius:String(radius)});dirty=false;
     }
@@ -59,8 +59,8 @@
       for(const g of endpoints){const p=project(g.unit,g.shell,angle);items.push({z:p.depth,g,p});}
       items.sort((a,b)=>a.z-b.z);
       for(const it of items){
-        if(it.d){ctx.globalAlpha=Math.min(1,(.14+.56*it.z)*lift);const w=it.d.r*it.p.s*10/3;ctx.drawImage(dustSprite(it.d.color,it.d.geometry),it.p.x-w/2,it.p.y-w/2,w,w);}
-        else{const r=Math.max(1.5,it.g.radius*(.5+.6*it.z)*it.p.s*lift);paintPoint(ctx,{...it.g,radius:r},it.p.x,it.p.y,Math.min(1,(.3+.7*it.z)*lift));}
+        if(it.d){ctx.globalAlpha=Math.min(1,(.28+.72*it.z)*lift);const w=it.d.r*it.p.s*10/3;ctx.drawImage(dustSprite(it.d.color,it.d.geometry),it.p.x-w/2,it.p.y-w/2,w,w);}
+        else{const r=Math.max(1.5,it.g.radius*(.7+.6*it.z)*it.p.s*lift);paintPoint(ctx,{...it.g,radius:r},it.p.x,it.p.y,Math.min(1,(.35+.65*it.z)*lift));}
       }
       ctx.globalAlpha=1;canvas.dataset.progress='0';
     }
@@ -68,7 +68,7 @@
       const{ctx,width,height}=size;ctx.clearRect(0,0,width,height);
       if(backdrop){ctx.globalAlpha=ease((progress-.6)/.4);ctx.drawImage(backdrop,0,0,width,height);ctx.globalAlpha=1;}
       ctx.globalAlpha=(1-ease(progress/.45))*.8;ctx.drawImage(hull,0,0,width,height);
-      const burst=ease(progress/.6),fade=1-ease((progress-.1)/.55);
+      const burst=ease(progress/.7),fade=1-ease((progress-.12)/.62);
       for(const d of dust){const o=d.origin,dx=o.x-center.x,dy=o.y-center.y,len=Math.hypot(dx,dy)||1,dist=(.6+d.speed)*radius*1.8*burst,x=o.x+dx/len*dist,y=o.y+dy/len*dist;ctx.globalAlpha=.6*fade;const w=d.r*(1-burst*.4)*10/3;ctx.drawImage(dustSprite(d.color,d.geometry),x-w/2,y-w/2,w,w);}
       ctx.globalAlpha=1;
       for(const g of endpoints){const t=ease((progress-g.delay)/(1-g.delay)),o=g.origin,bend=Math.sin(t*Math.PI)*g.bend,x=mix(o.x,g.x,t)+bend,y=mix(o.y,g.y,t)-bend*.42;paintPoint(ctx,{...g,radius:mix(o.r,g.radius,t)},x,y,.85+.15*t);}
@@ -80,7 +80,7 @@
       if(dirty)prepare();
       if(instant||reduced.matches){settle();return;}
       const angle=((performance.now()-rotationAt)/SPIN_MS)*TAU;
-      for(const g of endpoints){const p=project(g.unit,g.shell,angle);g.origin={x:p.x,y:p.y,r:Math.max(1.5,g.radius*(.5+.6*p.depth)*p.s)};}
+      for(const g of endpoints){const p=project(g.unit,g.shell,angle);g.origin={x:p.x,y:p.y,r:Math.max(1.5,g.radius*(.7+.6*p.depth)*p.s)};}
       for(const d of dust){const p=project(d.unit,d.shell,angle);d.origin={x:p.x,y:p.y};}
       button.disabled=true;scene.dataset.gateway='disintegrating';popping={start:performance.now()};start();
     }

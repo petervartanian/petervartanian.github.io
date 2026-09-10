@@ -235,7 +235,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
       const alpha = Math.max(.018,(.065 + hash(i * 5 + 71774) * .18) * atmosphere * edge * density);
       context.fillStyle = `rgba(173,192,211,${alpha})`;
       context.fillRect(x, y, size, size);
-      if (i % 1601 === 0) {
+      if (hash(i * 5 + 71775) < .00065) {
         context.strokeStyle = '#CBECFF36'; context.lineWidth = .5; context.beginPath();
         context.moveTo(x - 3, y); context.lineTo(x + 3, y); context.moveTo(x, y - 3); context.lineTo(x, y + 3); context.stroke();
       }
@@ -1542,7 +1542,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   function openCoverage(){openDialog('How much happened?',coverageContent());}
   $('#background-info').addEventListener('click',openCoverage);
   $('#coverage-info').addEventListener('click',openCoverage);
-  function driftEggMessage(message){const span=message.firstElementChild;if(!span)return;message.classList.remove('drifting');const overflow=span.scrollWidth-message.clientWidth+24;if(overflow>0&&!reducedMotion.matches){message.style.setProperty('--egg-drift',`${overflow}px`);message.style.setProperty('--egg-drift-duration',`${Math.max(7,overflow/40).toFixed(1)}s`);message.classList.add('drifting');}}
+  function fitEggMessage(message){const span=message.firstElementChild;if(!span)return;message.classList.remove('wrapped');message.style.fontSize='14px';const room=()=>message.clientWidth-24;let size=Math.min(14,14*room()/Math.max(1,span.scrollWidth));for(let i=0;i<12;i++){message.style.fontSize=`${Math.floor(size*10)/10}px`;if(span.scrollWidth<=room()||size<=9)break;size-=.2;}if(size<9||span.scrollWidth>room()){message.style.fontSize='9px';message.classList.add('wrapped');}}
   $('#hidden-egg').addEventListener('click', () => {
     starsUnlocked = !starsUnlocked;
     $('#hidden-egg').setAttribute('aria-pressed', String(starsUnlocked));
@@ -1550,7 +1550,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
     if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;$('.field-readout').classList.remove('egg-revealed');return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found it!</strong> Beyond these ${events.length} events, there are more than 70,000 messages and files, encoded as 1.2 million entries — mostly fragments — in a cache of 20 million files and directories. Yet, without fuller disclosure from OpenAI, Hugging Face and METR/Redwood, this investigation can go no further.</span>`;message.hidden=false;driftEggMessage(message);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found it!</strong> Beyond these ${events.length} events, there are more than 70,000 messages and files, encoded as 1.2 million entries — mostly fragments — in a cache of 20 million files and directories. Yet, without fuller disclosure from OpenAI, Hugging Face and METR/Redwood, this investigation can go no further.</span>`;message.hidden=false;fitEggMessage(message);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
@@ -1606,7 +1606,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   let veilPressed=false;
   $('#event-focus .focus-veil').addEventListener('pointerdown',()=>{veilPressed=true;});
   $('#event-focus .focus-veil').addEventListener('click',()=>{if(veilPressed)closeDetails();veilPressed=false;});
-  window.addEventListener('resize',()=>{if(!$('#egg-message').hidden)driftEggMessage($('#egg-message'));if(focusAnchor?.lineLength){const hoist=document.querySelector(`.milestone[data-event="${state.selected}"]`);if(hoist){const r=hoist.getBoundingClientRect();focusAnchor.documentX=r.left+scrollX;focusAnchor.documentY=r.top+scrollY;focusAnchor.lineLength=r.width;}}positionBanner();});
+  window.addEventListener('resize',()=>{if(!$('#egg-message').hidden)fitEggMessage($('#egg-message'));if(focusAnchor?.lineLength){const hoist=document.querySelector(`.milestone[data-event="${state.selected}"]`);if(hoist){const r=hoist.getBoundingClientRect();focusAnchor.documentX=r.left+scrollX;focusAnchor.documentY=r.top+scrollY;focusAnchor.lineLength=r.width;}}positionBanner();});
   document.addEventListener('keydown',event=>{
     if(event.key!=='Tab'||detailPanel.hidden||$('#info-dialog').open)return;
     const controls=[...detailPanel.querySelectorAll('button:not(:disabled),a[href],summary,[tabindex="0"]')].filter(el=>el.getClientRects().length);

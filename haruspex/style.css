@@ -1045,16 +1045,16 @@ body:has(#scene[data-view="cast"]) #egg-message{display:none}
 body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#focus-origin{display:none}
 @media(min-width:561px) and (max-width:1000px){#milestones{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
-/* The egg reveal: one line of starlight across the readout. It drifts when wider than the strip, pauses under the pointer, and wraps only for readers who prefer reduced motion. */
-.field-readout.egg-revealed{min-height:30px}
-.field-readout #egg-message{font-size:12px;line-height:1.3;padding:0 12px;color:#e6edf3;overflow:hidden;border-radius:3px;background:radial-gradient(60% 150% at 6% 50%,#e2b93a24,transparent 62%),radial-gradient(45% 150% at 28% 50%,#2bd2c220,transparent 62%),radial-gradient(45% 150% at 50% 50%,#c691fe20,transparent 62%),radial-gradient(45% 150% at 72% 50%,#ff834622,transparent 62%),radial-gradient(45% 150% at 94% 50%,#72a7ff24,transparent 62%),radial-gradient(1px 1px at 11% 28%,#ffffff66,transparent 100%),radial-gradient(1px 1px at 37% 72%,#ffffff55,transparent 100%),radial-gradient(1px 1px at 63% 22%,#ffffff55,transparent 100%),radial-gradient(1px 1px at 86% 66%,#ffffff66,transparent 100%),#0a1320e8;box-shadow:inset 0 0 0 1px #ffffff14,0 0 22px #2bd2c218,0 0 48px #c691fe12;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+/* The egg reveal: one full line beside the egg, sized to fit the row, on a translucent starfield strip. Below 9px it wraps instead. */
+.field-foot:has(.field-readout.egg-revealed) .legend-toggle{display:none}
+.field-readout.egg-revealed{left:calc(var(--scene-edge) + 44px);min-height:30px}
+.field-readout.egg-revealed> :not(#egg-message){display:none}
+.field-readout #egg-message{font-size:12px;line-height:1.3;padding:0 12px;color:#8ee0b3;overflow:hidden;border-radius:3px;background:radial-gradient(60% 150% at 6% 50%,#e2b93a22,transparent 62%),radial-gradient(45% 150% at 28% 50%,#2bd2c21f,transparent 62%),radial-gradient(45% 150% at 50% 50%,#c691fe1f,transparent 62%),radial-gradient(45% 150% at 72% 50%,#ff834620,transparent 62%),radial-gradient(45% 150% at 94% 50%,#72a7ff22,transparent 62%),radial-gradient(1px 1px at 11% 28%,#ffffff55,transparent 100%),radial-gradient(1px 1px at 37% 72%,#ffffff44,transparent 100%),radial-gradient(1px 1px at 63% 22%,#ffffff44,transparent 100%),radial-gradient(1px 1px at 86% 66%,#ffffff55,transparent 100%),#0a1320e8;box-shadow:inset 0 0 0 1px #ffffff12,0 0 22px #2bd2c216,0 0 48px #c691fe10;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .field-readout #egg-message>span{display:inline-block;white-space:nowrap}
-.field-readout #egg-message strong{font-weight:700;color:#e1df70;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;text-shadow:0 0 8px #e1df7055}
-.field-readout #egg-message.drifting>span{animation:egg-drift var(--egg-drift-duration,12s) ease-in-out 1.8s infinite alternate}
-.field-readout #egg-message:hover>span,.field-readout #egg-message:focus>span,.field-readout #egg-message:focus-within>span{animation-play-state:paused}
-@keyframes egg-drift{from{transform:translateX(0)}to{transform:translateX(calc(-1 * var(--egg-drift,0px)))}}
-@media(max-width:600px){.field-readout #egg-message{font-size:11px}}
-@media(prefers-reduced-motion:reduce){.field-readout.egg-revealed> :not(#egg-message){display:none}.field-readout #egg-message{position:static;inset:auto;height:auto;white-space:normal;padding:6px 12px}.field-readout #egg-message>span{white-space:normal;display:inline}.field-readout #egg-message.drifting>span{animation:none}}
+.field-readout #egg-message strong{font-weight:700;color:#b9f1d2;text-decoration:none;text-shadow:0 0 8px #8ee0b34d}
+.field-readout #egg-message.wrapped{position:static;inset:auto;height:auto;white-space:normal;padding:6px 12px}
+.field-readout #egg-message.wrapped>span{white-space:normal;display:inline}
+@media(max-width:600px){.field-readout.egg-revealed{left:calc(var(--scene-edge) + 36px)}}
 
 /* The incident globe pops on a click; the page no longer holds the scene to scrub it by scroll. */
 .observatory{height:auto;min-height:0}
