@@ -3,6 +3,7 @@
   const data = JSON.parse(document.getElementById('dataset').textContent);
   const castData = JSON.parse(document.getElementById('cast-data').textContent);
   let castUI = null;
+  let scrollGateway = null;
   const researchData = JSON.parse(document.getElementById('research-data').textContent);
   const quotationData = JSON.parse(document.getElementById('quotation-data').textContent);
   const severityData = JSON.parse(document.getElementById('severity-data').textContent);
@@ -573,7 +574,7 @@
   }
   function openInvestigation(id, eventId = null) {
     changeView('cast'); renderCast(); castUI.focusFinding(id, eventId);
-    $('#scene').scrollIntoView({behavior:reducedMotion.matches?'auto':'smooth'});
+    scrollToField({behavior:reducedMotion.matches?'auto':'smooth'});
   }
   function renderDetail() {
     const event = eventMap.get(state.selected);
@@ -1075,6 +1076,7 @@
     drawTimeline(); renderList(); if (!detailPanel.hidden) renderDetail();
     if (state.view === 'bowtie') renderBowtie();
     if (state.view === 'cast') renderCast();
+    scrollGateway?.invalidate();
   }
   function reset() {
     clearTimeout(queryTimer);
@@ -1085,7 +1087,7 @@
   }
   function renderCast() {
     if (!castUI) castUI = window.HaruspexCast.mount({ element: $('#cast-map'), data: castData, research: researchData, quotations: quotationData, events,
-      onNavigate: () => $('#scene').scrollIntoView({behavior:'instant'}),
+      onNavigate: () => scrollToField({behavior:'instant'}),
       onTrace: (finding, view) => {
         if ($('#info-dialog').open) $('#info-dialog').close();
         clearTimeout(queryTimer);
@@ -1094,9 +1096,9 @@
         query = window.HaruspexQuery.compile(''); $('#event-search').value = '';
         if (state.view === view) navigate(() => {}, {fit:true});
         else { state.range = fitMatchingRange(); state.limit = 12; changeView(view); }
-        $('#scene').scrollIntoView({behavior:'instant'});
+        scrollToField({behavior:'instant'});
       },
-      onEvent: (id) => { if ($('#info-dialog').open) $('#info-dialog').close(); changeView('stream'); selectEvent(id, { reveal: true }); $('#scene').scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth' }); },
+      onEvent: (id) => { if ($('#info-dialog').open) $('#info-dialog').close(); changeView('stream'); selectEvent(id, { reveal: true }); scrollToField({ behavior: reducedMotion.matches ? 'auto' : 'smooth' }); },
       onDialog: openDialog,
     });
   }
@@ -1185,16 +1187,14 @@
     } else $$('.view-ghost').forEach(element => element.remove());
     syncNavigationIndicators();
   }
+  function scrollToField(options={}) {
+    if(scrollGateway)scrollGateway.enter(options);
+    else $('#scene').scrollIntoView(options);
+  }
   function enterField() {
-    changeView('stream'); finishCamera(); stopMotion();
-    $('#scene').scrollIntoView({behavior:'instant'});
-    if (reducedMotion.matches) return;
-    const destination = currentPositions();
-    if (!destination.length) return;
-    const rect = $('.visual-column').getBoundingClientRect();
-    const center = {x:rect.width * .52, y:rect.height * .51};
-    timeline.style.opacity = '0';
-    window.HaruspexArrival?.bloom($('.visual-column'), center, {points:destination,paintPoint:(ctx,point,x,y,alpha)=>shape(ctx,point.event,x,y,point.radius,alpha),onFinish:()=>{timeline.style.opacity='';}});
+    changeView('stream');finishCamera();stopMotion();
+    if(scrollGateway)scrollGateway.show();
+    else $('#scene').scrollIntoView({behavior:'instant'});
   }
   function openDialog(title, content) {
     if (!$('#info-dialog').open) dialogTrigger = document.activeElement;
@@ -1463,13 +1463,13 @@
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !$('#info-dialog').open) { closeLegend(true); closeStages(); closeDetails(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false'); } });
   $('#interval-toggle').addEventListener('change', (event) => { state.intervals = event.target.checked; drawTimeline(); });
   $('#reset-button').addEventListener('click', reset); $('#empty-reset').addEventListener('click', reset);
-  ['stream','bowtie','cast'].forEach(view => $(`#${view}-tab`).addEventListener('click', () => { changeView(view); if (view === 'cast') { renderCast(); castUI.show('inquiry'); } $('#scene').scrollIntoView({behavior:'instant'}); }));
-  $$('.view-tab').forEach((button) => button.addEventListener('keydown', (event) => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) { event.preventDefault(); const views=['stream','bowtie','cast']; const view=event.key==='Home'?views[0]:event.key==='End'?views[2]:views[(views.indexOf(state.view)+(event.key==='ArrowLeft'?2:1))%3]; changeView(view); $(`#${view}-tab`).focus({preventScroll:true}); $('#scene').scrollIntoView({behavior:'instant'}); } }));
+  ['stream','bowtie','cast'].forEach(view => $(`#${view}-tab`).addEventListener('click', () => { changeView(view); if (view === 'cast') { renderCast(); castUI.show('inquiry'); } scrollToField({behavior:'instant'}); }));
+  $$('.view-tab').forEach((button) => button.addEventListener('keydown', (event) => { if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) { event.preventDefault(); const views=['stream','bowtie','cast']; const view=event.key==='Home'?views[0]:event.key==='End'?views[2]:views[(views.indexOf(state.view)+(event.key==='ArrowLeft'?2:1))%3]; changeView(view); $(`#${view}-tab`).focus({preventScroll:true}); scrollToField({behavior:'instant'}); } }));
   $('#previous-event').addEventListener('click', () => { const i = visible.findIndex((event) => event.id === state.selected); if (visible.length) selectEvent(visible[Math.max(0, i - 1)].id); });
   $('#next-event').addEventListener('click', () => { const i = visible.findIndex((event) => event.id === state.selected); if (visible.length) selectEvent(visible[Math.min(visible.length - 1, i + 1)].id); });
   $('#method-button').addEventListener('click', openMethod);
   $('#enter-explorer').addEventListener('click', (event) => { event.preventDefault(); enterField(); });
-  $('#intro-cast').addEventListener('click', () => { changeView('cast'); renderCast(); castUI.show('inquiry'); $('#scene').scrollIntoView({behavior:reducedMotion.matches?'auto':'smooth'}); });
+  $('#intro-cast').addEventListener('click', () => { changeView('cast'); renderCast(); castUI.show('inquiry'); scrollToField({behavior:reducedMotion.matches?'auto':'smooth'}); });
   $('#footer-method').addEventListener('click', openMethod);
   $('#actual-interventions').addEventListener('click', () => {
     navigate(() => { state.interventions = !state.interventions; state.lifecycle = 'all'; state.temporal = 'all'; }, { fit: true });
@@ -1510,6 +1510,7 @@
     if (state.view === 'bowtie') renderBowtie();
     syncNavigationIndicators();
     if (from) animateLayout(from, { camera: true });
+    scrollGateway?.invalidate();
   }); observer.observe($('.visual-column')); observer.observe($('.masthead'));
   let scrollFrame = null;
   const syncScroll = () => {
@@ -1518,9 +1519,11 @@
     const distance = Math.max(1, rect.height - $('#scene').getBoundingClientRect().height);
     const progress = Math.max(0, Math.min(1, -rect.top / distance));
     $('#scene').style.setProperty('--scroll-progress', String(progress));
+    scrollGateway?.sync();
   };
   window.addEventListener('scroll', () => { if (scrollFrame === null) scrollFrame = requestAnimationFrame(syncScroll); }, { passive: true });
   $$('[data-status]').forEach((button) => { const count = events.filter((event) => event._status === button.dataset.status).length; button.querySelector('b').textContent = count; });
   window.HaruspexArrival?.init({events, palette:visualData.groups.map(group => group.fill), colorOf:event => eventStyle(event).fill});
   updateSeverityOptions(); renderWorkstreamLegend(); syncControls(); drawCosmos(); refresh(); syncScroll(); $('#bowtie-tab').tabIndex = -1; $('#cast-tab').tabIndex = -1; $('#scene').dataset.view = 'stream';
+  scrollGateway=window.HaruspexArrival?.mountGateway({scene:$('#scene'),getPoints:currentPositions,paintPoint:(ctx,point,x,y,alpha)=>shape(ctx,point.event,x,y,point.radius,alpha),isReading:()=>state.view==='cast'});
 })();

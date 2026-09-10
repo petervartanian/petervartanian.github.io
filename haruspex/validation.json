@@ -1,5 +1,5 @@
 {
-  "application_version": "12.0.0",
+  "application_version": "13.0.0",
   "assessments_version": "3.0.1",
   "visual_encodings_version": "6.2.0",
   "incident_ontology_version": "1.0.0",
@@ -110,14 +110,11 @@
     "v10.1 browser review: lifecycle switching, keyboard zoom and the date handle remain responsive during movement. The paper detection/response link shows 8 related events in a fitted time window.",
     "v10.1 independent review: active child opacity is included in outgoing snapshots; overview gestures use the short fade bridge; enabling reduced motion cancels view fades. Syntax and build checks pass.",
     "v10.1 console review captured no errors. No end-to-end FPS benchmark is claimed.",
-    "v12: Exact intro text checked against the user paragraph with only the bracketed passages revised. Creator credit reads Peter H. Vartanian, 2026. Both stacked attribution SVG lines have a 152px width and matching textLength.",
-    "v12 browser review: A continuous, larger orb was captured before separation, and again with 554 of 864 fragments detached. Field entrance uses the same tessellation and hands off to the actual event glyphs.",
-    "v12 browser review: Interrupting entry with Bow-tie left no live fragments, view ghosts or hidden destination canvas after settling. Stream, assessment, lifecycle and CAST switches completed without captured console errors.",
-    "v12 browser review: Full-range fields report all 599 Impact, 192 Context and 41 Unresolved events, including the 12 bounded tails across the first two fields. The canonical inventory and severity scores were not changed.",
-    "v12 browser review: 70,000 unique background catalogue indices are drawn at desktop and 390px phone widths. The phone legend fits the viewport, with no horizontal page overflow. A star reveal showed only its number and magnifying light, without opening event details.",
-    "v12 browser review: The egg is beside the main Legend. The coverage dialog separates event totals from messages, files, transcripts and fragments, and identifies proposed evidence holders. Horizontal zoom settled with updated date endpoints and idle camera state.",
-    "v12 browser review: CAST is explicit on entry and in the paper deck. Four intervention hypotheses, thirteen source notes and the expanded research catalogue render. Public research remains separate from unsent evidence requests.",
-    "v12: JavaScript syntax and strict build checks pass. The package is checked file-for-file against the source tree, with canonical checksum and private-path exclusions enforced."
+    "v13 browser review: The introduction appears before the sphere. The sphere has 864 textured fragments and its curved title shares the surface texture. Forward page scrolling separates the surface; reverse page scrolling reassembles it.",
+    "v13 browser review: The sphere has a nominal radius of 295.2px at 1280x720 and 167.7px at 390x844. Phone review found no horizontal overflow. The completed phone field reports all 599 Impact events and no inert controls.",
+    "v13 browser review: Clicking the sphere and keyboard activation reach the event field. Native Bow-tie selection and arrow-key navigation into CAST complete without restarting the sphere passage or captured console errors.",
+    "v13: JavaScript syntax and strict build checks pass. The package is checked file-for-file against the source tree, with canonical checksum and private-path exclusions enforced. The 832 canonical events and all severity assignments are unchanged.",
+    "Retained v12 review: All three full-range assessment fields account for the complete 832-event inventory. The 70,000 decorative stars, egg reveal, coverage note, creator credit, stacked quote attribution and expanded CAST paper were reviewed at desktop and phone widths."
   ],
   "limits": [
     "This is a provisional, developing public-source CAST analysis, not a completed or exhaustive investigation. Search completeness and a maximal number of obtainable facts are not claimed.",
@@ -152,7 +149,7 @@
         "cached_projection_median": 0.025
       }
     },
-    "benchmark_limit": "Historical computation-only microbenchmark excludes canvas and DOM work. Not rerun for v12. Browser interactions were reviewed at desktop and phone widths; no end-to-end FPS claim."
+    "benchmark_limit": "Historical computation-only microbenchmark excludes canvas and DOM work. Not rerun for v13. Browser interactions were reviewed at desktop and phone widths; no end-to-end FPS claim."
   },
   "aggregate_background": {
     "semantics": "Illustrative density of source-reported aggregate activity not individually resolved in the detailed record; not one particle per event.",

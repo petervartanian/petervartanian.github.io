@@ -33,6 +33,45 @@
     const x = hash(i * 7 + 85);
     return {x:width * (.025 + x * .95), y:height * (.76 - .1 * Math.sin(x * 3.7) + (hash(i * 7 + 86) - .5) * .3)};
   }
+  function inscribeSurface(brush, radius) {
+    const pitch = .16;
+    const project = (longitude, latitude) => ({
+      x: radius * Math.cos(latitude) * Math.sin(longitude),
+      y: radius * (Math.sin(latitude) * Math.cos(pitch) - Math.cos(latitude) * Math.cos(longitude) * Math.sin(pitch)),
+    });
+    const lines = [
+      {text:'OpenAI–Hugging Face',fontSize:radius*.175,latitude:.055},
+      {text:'incident',fontSize:radius*.19,latitude:.31},
+    ];
+    for (const line of lines) {
+      const ink = document.createElement('canvas');
+      const pen = ink.getContext('2d');
+      const font = `600 ${line.fontSize}px Georgia, serif`;
+      pen.font = font;
+      ink.width = Math.ceil(pen.measureText(line.text).width + line.fontSize*.2);
+      ink.height = Math.ceil(line.fontSize*1.55);
+      pen.font = font;pen.textAlign='center';pen.textBaseline='middle';
+      // Light at the upper edge reads as an incision in the colored material.
+      pen.fillStyle='#effaff42';pen.fillText(line.text,ink.width/2,ink.height/2-1);
+      pen.fillStyle='#071220f0';pen.fillText(line.text,ink.width/2,ink.height/2);
+      const arc = Math.min(2.16, ink.width/radius);
+      const longitudePerPixel = arc/ink.width;
+      const latitudePerPixel = 1/radius;
+      for (let column=0;column<ink.width;column++) {
+        const longitude=(column+.5-ink.width/2)*longitudePerPixel;
+        const p=project(longitude,line.latitude);
+        const horizontal=project(longitude+longitudePerPixel,line.latitude);
+        const vertical=project(longitude,line.latitude+latitudePerPixel);
+        brush.save();
+        brush.transform(horizontal.x-p.x,horizontal.y-p.y,vertical.x-p.x,vertical.y-p.y,p.x,p.y);
+        brush.drawImage(ink,column,0,1,ink.height,-.5,-ink.height/2,1.05,ink.height);
+        brush.restore();
+      }
+    }
+  }
+  function surfaceRadius(width, height) {
+    return Math.min(390, width*.43, height*.41);
+  }
   function mesh(radius, palette) {
     const extent = Math.ceil(radius * 1.16), ratio = 2;
     const texture = document.createElement('canvas'); texture.width = texture.height = extent * 2 * ratio;
@@ -40,6 +79,7 @@
     const spectrum = brush.createConicGradient(-Math.PI * .72, 0, 0);
     [...palette, palette[0]].forEach((color, i) => spectrum.addColorStop(i / palette.length, color));
     brush.fillStyle = spectrum; brush.fillRect(-extent, -extent, extent * 2, extent * 2);
+    inscribeSurface(brush,radius);
     const shade = brush.createRadialGradient(-radius * .3, -radius * .38, 0, radius * .16, radius * .3, radius * 1.25);
     shade.addColorStop(0, '#f1faff24'); shade.addColorStop(.37, '#0b172b00'); shade.addColorStop(.76, '#0b142540'); shade.addColorStop(1, '#061020ba');
     brush.fillStyle = shade; brush.fillRect(-extent, -extent, extent * 2, extent * 2);
@@ -76,10 +116,11 @@
       return {tile,x,y,w,h,ox:x0-x,oy:y0-y,turn:(hash(i*9+8)-.5)*3.8,bend:(hash(i*9+9)-.5),delay:clamp((x/radius+1)*.065+hash(i*9+10)*.15)};
     });
   }
-  function paintFragments(screen, fragments, center, elapsed, {hold, duration, endpoints, finalAlpha = .34, paintPoint}) {
+  function paintFragments(screen, fragments, center, elapsed, {hold, duration, endpoints, finalAlpha = .34, paintPoint, backdrop}) {
     const {ctx,width,height} = screen;
     ctx.clearRect(0,0,width,height);
     const progress = clamp((elapsed-hold)/duration);
+    if(backdrop){ctx.save();ctx.globalAlpha=ease((progress-.22)/.74);ctx.drawImage(backdrop,0,0,width,height);ctx.restore();}
     let moved = 0; const positions = [];
     fragments.forEach((p,i)=>{
       const local = clamp((progress-p.delay)/(1-p.delay));
@@ -108,7 +149,7 @@
     const screen = sizeCanvas(canvas);
     const fragments = mesh(options.radius, colors);
     const start = performance.now(); let raf = null, done = false;
-    canvas.dataset.fragmentCount=String(fragments.length);canvas.dataset.motion='surface';
+    canvas.dataset.fragmentCount=String(fragments.length);canvas.dataset.motion='surface';canvas.dataset.surfaceText='OpenAI–Hugging Face incident';canvas.dataset.surfaceRadius=String(options.radius);
     const finish = () => { if(done)return;done=true;cancelAnimationFrame(raf);options.finish?.(); };
     const tick = now => {
       if(done)return;
@@ -137,25 +178,82 @@
       ctx.globalAlpha=1;
     }
     paintIntro();new ResizeObserver(paintIntro).observe(canvas);
-    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-    if(reduced.matches||location.hash||scrollY>40)return;
-    const veil=document.createElement('div');veil.className='incident-arrival';veil.setAttribute('aria-hidden','true');
-    veil.innerHTML='<canvas class="arrival-particles"></canvas>';document.body.append(veil);
-    const rect=veil.getBoundingClientRect();const cancelEvents=['pointerdown','keydown','wheel','touchstart'];let cancel=()=>{};
-    function finish(){cancel();veil.remove();cancelEvents.forEach(name=>window.removeEventListener(name,finish,true));document.removeEventListener('visibilitychange',onVisibility);reduced.removeEventListener('change',onReduced);window.removeEventListener('resize',finish);document.documentElement.dataset.arrival='complete';}
-    function onVisibility(){if(document.hidden)finish();}function onReduced(){if(reduced.matches)finish();}
-    cancelEvents.forEach(name=>window.addEventListener(name,finish,{capture:true,passive:true}));document.addEventListener('visibilitychange',onVisibility);reduced.addEventListener('change',onReduced);window.addEventListener('resize',finish,{once:true});
-    document.documentElement.dataset.arrival='forming';
-    cancel=animateFracture(veil.querySelector('canvas'),{radius:Math.min(260,rect.width*.34,rect.height*.32),center:{x:rect.width/2,y:rect.height/2},hold:750,duration:2650,endpoints:events.map((_,i)=>target(i,introSize.width,introSize.height)),finalAlpha:.24,
-      frame:(progress)=>{document.documentElement.dataset.arrival=progress>0?'resolving':'forming';veil.style.backgroundColor=`rgba(6,11,18,${1-ease((progress-.25)/.65)})`;},finish});
   }
+  function mountGateway({scene,getPoints,paintPoint,isReading}) {
+    const element=document.getElementById('incident-gateway');
+    const canvas=document.getElementById('gateway-surface');
+    const button=document.getElementById('sphere-enter');
+    const observatory=scene.parentElement;
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    const originalInert=new Map();
+    let screen,fragments,endpoints,backdrop,center,radius;
+    let sizeKey='',dirty=true,lastProgress=-1,locked=false;
+    function range(){
+      const top=observatory.getBoundingClientRect().top+scrollY;
+      const height=scene.getBoundingClientRect().height;
+      return {top,start:top+height*.12,end:top+height*1.07};
+    }
+    function lock(value){
+      if(value===locked)return;
+      locked=value;
+      if(value){
+        for(const child of scene.children){if(child===element)continue;originalInert.set(child,child.inert);child.inert=true;}
+      }else{for(const [child,inert] of originalInert)child.inert=inert;originalInert.clear();}
+    }
+    function prepare(){
+      const rect=scene.getBoundingClientRect();
+      const key=`${rect.width},${rect.height}`;
+      if(key!==sizeKey){
+        sizeKey=key;screen=sizeCanvas(canvas);radius=surfaceRadius(rect.width,rect.height);
+        center={x:rect.width/2,y:rect.height/2};fragments=mesh(radius,colors);
+        button.style.width=button.style.height=`${radius*2.07}px`;
+        canvas.dataset.surfaceRadius=String(radius);canvas.dataset.fragmentCount=String(fragments.length);
+        canvas.dataset.surfaceText='OpenAI–Hugging Face incident';
+      }
+      endpoints=getPoints();backdrop=endpoints.backdrop;
+      if(!endpoints.length)endpoints=[{x:center.x,y:center.y,radius:1}];
+      dirty=false;
+    }
+    function sync(){
+      const bounds=range();
+      const raw=clamp((scrollY-bounds.start)/(bounds.end-bounds.start));
+      const progress=isReading()?1:reduced.matches?(raw<.55?0:1):raw;
+      if(!dirty&&progress===lastProgress)return;
+      lastProgress=progress;
+      if(progress>=1){
+        element.hidden=true;scene.dataset.gateway='events';scene.style.setProperty('--gateway-reveal','1');lock(false);dirty=true;
+        return;
+      }
+      element.hidden=false;
+      if(dirty)prepare();
+      lock(true);
+      scene.dataset.gateway=progress>0?'disintegrating':'sphere';
+      scene.style.setProperty('--gateway-reveal',String(ease((progress-.47)/.5)));
+      button.disabled=progress>.23;
+      const status=paintFragments(screen,fragments,center,progress,{hold:0,duration:1,endpoints,backdrop,finalAlpha:1,paintPoint:(ctx,point,x,y,alpha)=>{if(point.event)paintPoint(ctx,point,x,y,alpha);}});
+      canvas.dataset.detachedFragments=String(status.moved);
+      canvas.dataset.progress=String(Math.round(progress*1000)/1000);
+    }
+    function enter({behavior='smooth'}={}){
+      window.scrollTo({top:range().end+1,behavior:reduced.matches?'instant':behavior});
+      sync();
+    }
+    function show({behavior='smooth'}={}){
+      dirty=true;window.scrollTo({top:range().top,behavior:reduced.matches?'instant':behavior});sync();
+    }
+    button.addEventListener('click',()=>enter());
+    reduced.addEventListener('change',()=>{dirty=true;sync();});
+    sync();
+    return {sync,enter,show,invalidate:()=>{dirty=true;sync();}};
+  }
+
   function bloom(parent,center,{points,onFinish,paintPoint}) {
     const canvas=document.createElement('canvas');canvas.className='field-origin';canvas.setAttribute('aria-hidden','true');parent.append(canvas);
     const rect=parent.getBoundingClientRect();const reduced=matchMedia('(prefers-reduced-motion: reduce)');let cancel=()=>{},cleaned=false;
     function cleanup(){if(cleaned)return;cleaned=true;cancel();canvas.remove();reduced.removeEventListener('change',cleanup);onFinish?.();}
     canvas.haruspexCancel=cleanup;
-    cancel=animateFracture(canvas,{radius:Math.min(205,rect.width*.31,rect.height*.39),center,hold:180,duration:1550,endpoints:points,finalAlpha:.85,paintPoint,finish:cleanup});
+    cancel=animateFracture(canvas,{radius:Math.min(350,rect.width*.43,rect.height*.39),center,hold:180,duration:1550,endpoints:points,finalAlpha:.85,paintPoint,finish:cleanup});
     reduced.addEventListener('change',cleanup);return canvas;
   }
-  window.HaruspexArrival={init,atmosphere,bloom};
+  window.HaruspexArrival={init,atmosphere,bloom,mountGateway};
 })();

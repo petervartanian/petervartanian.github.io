@@ -175,7 +175,7 @@ Every filtered record is reachable through the keyboard-accessible register. The
 - `index.template.html`, `style.css`, `app.js`, `build.mjs`: source files; rebuild with `node build.mjs`.
 - `validation.json`: recorded data and interaction checks.
 
-This is application version 12.0.0. Severity scores and canonical records are unchanged; additional research is tracked separately; the 3.0.1 assessment revision only standardizes Near-miss spelling. The canonical dataset remains unchanged; reviewed assessments, corrected current evidence display, temporal bounds, ontology and visual conventions live in separate versioned layers. Full original fields remain available on each event.
+This is application version 13.0.0. Severity scores and canonical records are unchanged; additional research is tracked separately; the 3.0.1 assessment revision only standardizes Near-miss spelling. The canonical dataset remains unchanged; reviewed assessments, corrected current evidence display, temporal bounds, ontology and visual conventions live in separate versioned layers. Full original fields remain available on each event.
 
 The 832 records are a working inventory drawn from 11 primary sources, including the three starter documents. Some records represent group actions. The inventory is not a proven maximum and does not reconstruct inaccessible logs. Four source comparisons remain explicit. Completed review means each pending record received a defensible disposition, not that every source claim or event is independently verified.
 
@@ -184,7 +184,9 @@ The Event-swarm name is inspired by [beeswarm plots](https://observablehq.github
 Version 10.1 shortens the introduction and uses Events in navigation. View snapshots preserve computed layout, scroll positions and canvas sizing; interrupted fades retain their displayed opacity. Investigation traces fit before their single view transition. Camera gestures briefly dissolve the current animated frame, and paper resets do not animate scroll position.
 
 
-Version 11 presents the approved July introduction, with quiet links on the valuation, collaborating agents and later internal intrusions. The official AIRI mark has no caption. A short, skippable iridescent opening resolves one incident into its constituent activity. Entering the field repeats the one-to-many idea using the actual currently plotted events. Context and Unresolved remain independent assessment fields.
+The introduction retains quiet links on the valuation, collaborating agents and later internal intrusions. The official AIRI mark has no caption. Context and Unresolved remain independent assessment fields.
+
+Version 13 follows **introduction → sphere → event-swarm**. The introduction appears immediately. Scrolling beyond it brings a larger sphere into view, with “OpenAI–Hugging Face incident” projected onto its curved surface. The letters share the surface shading and grain, and break apart with its 864 textured fragments. Continuing to scroll carries those fragments into the actual plotted events. Reverse page scrolling reassembles the surface. Clicking the sphere or activating its keyboard-accessible button advances to the field. Existing view navigation goes directly to the destination view. Reduced motion uses the static surface followed by the completed field. At 1280 × 720 the sphere has a nominal diameter of 590px; at a 390px phone width it is 335px, with no horizontal page overflow.
 
 The six workstream colors remain consistent. Marker halos and white sheen are reduced, with atmospheric depth coming mainly from faint dust and distant points. Source scope retains distinct sizes: one event (2.3px radius) and grouped activity (4.4px radius), with responsive and zoom adjustments. Context remains hollow and Unresolved keeps a broken outline. Colors do not encode severity or evidentiality.
 
