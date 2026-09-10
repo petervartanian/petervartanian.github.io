@@ -1,4 +1,4 @@
-/* One incident opens through rounded cell divisions into its plotted events. */
+/* An irregular incident cloud dissolves into the actual event points. */
 (() => {
   'use strict';
   const clamp=v=>Math.max(0,Math.min(1,v));
@@ -22,59 +22,41 @@
   function mountGateway({scene,getPoints,paintPoint,isReading}){
     const host=document.getElementById('incident-gateway'),canvas=document.getElementById('gateway-surface'),button=document.getElementById('sphere-enter');
     const reduced=matchMedia('(prefers-reduced-motion: reduce)'),inertStates=new Map();
-    let size,tree,backdrop,dirty=true,last=-1,locked=false,maxDepth=1;
-    function bounds(){const top=scene.parentElement.getBoundingClientRect().top+scrollY,h=scene.getBoundingClientRect().height;return{top,start:top+h*.12,end:top+h*1.15};}
+    let hull,dustBuckets=[],dustColors=[],size,particles=[],endpoints=[],backdrop,dirty=true,last=-1,locked=false,center,radius;
+    function bounds(){const top=scene.parentElement.getBoundingClientRect().top+scrollY,h=scene.getBoundingClientRect().height;return{top,start:top+h*.08,end:top+h*.95};}
     function lock(value){if(value===locked)return;locked=value;if(value){for(const child of scene.children){if(child===host)continue;inertStates.set(child,child.inert);child.inert=true;}}else{for(const[child,v]of inertStates)child.inert=v;inertStates.clear();}}
+    function seed(i){
+      const a=hash(i*7+31)*Math.PI*2,depth=Math.sqrt(hash(i*7+32)),edge=1+.11*Math.sin(a*3+.4)+.075*Math.cos(a*5-1);
+      return{x:center.x+Math.cos(a)*radius*depth*edge,y:center.y+Math.sin(a)*radius*depth*edge*.86,r:.8+hash(i*7+33)*2,color:Math.floor(clamp((Math.cos(a)*depth+1)/2)* (48-.001)),bend:(hash(i*7+34)-.5)*radius*.65};
+    }
     function prepare(){
-      size=sizeCanvas(canvas);const endpoints=getPoints();backdrop=endpoints.backdrop;
-      const radius=Math.min(390,size.width*.42,size.height*.43),center={x:size.width/2,y:size.height/2};
-      maxDepth=Math.max(1,Math.ceil(Math.log2(Math.max(1,endpoints.length))));
-      function node(items,depth,virtual,r){
-        const mean=items.length?{x:items.reduce((s,p)=>s+p.x,0)/items.length,y:items.reduce((s,p)=>s+p.y,0)/items.length}:center;
-        const t=Math.pow(depth/maxDepth,1.35),position={x:mix(virtual.x,mean.x,t),y:mix(virtual.y,mean.y,t)};
-        if(items.length<=1)return{...position,r:depth===0?r:items[0]?.radius||1.5,depth,point:items[0]};
-        const horizontal=depth%2===0,sorted=[...items].sort((a,b)=>horizontal?a.x-b.x:a.y-b.y),half=Math.ceil(sorted.length/2);
-        const children=[sorted.slice(0,half),sorted.slice(half)].filter(x=>x.length).map((group,i)=>node(group,depth+1,{x:virtual.x+Math.cos(depth*2.399+.3+hash(items.length+depth*19)*.6)*(i?1:-1)*r*.62,y:virtual.y+Math.sin(depth*2.399+.3+hash(items.length+depth*19)*.6)*(i?1:-1)*r*.62},r*.64));
-        return{...position,r,depth,children};
-      }
-      tree=node(endpoints,0,center,radius);button.style.width=button.style.height=`${radius*2.05}px`;canvas.dataset.motion='cell-division';canvas.dataset.surfaceText='';canvas.dataset.eventCount=String(endpoints.length);canvas.dataset.surfaceRadius=String(radius);dirty=false;
-    }
-    function paintSurface(ctx,x,y,r,alpha=1){
-      if(r<=0||alpha<=0)return;ctx.save();ctx.globalAlpha=alpha;
-      ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.clip();ctx.fillStyle=colors[0];ctx.fillRect(x-r,y-r,r*2,r*2);for(let i=1;i<colors.length;i++){const angle=i/colors.length*Math.PI*2-.7,cx=x+Math.cos(angle)*r*.64,cy=y+Math.sin(angle)*r*.64,g=ctx.createRadialGradient(cx,cy,0,cx,cy,r*1.42);g.addColorStop(0,colors[i]);g.addColorStop(1,colors[i]+'00');ctx.fillStyle=g;ctx.fillRect(x-r,y-r,r*2,r*2);}ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
-      const shade=ctx.createRadialGradient(x-r*.28,y-r*.35,0,x+r*.12,y+r*.25,r*1.3);shade.addColorStop(0,'#effaff25');shade.addColorStop(.5,'#09121c08');shade.addColorStop(1,'#06101bbb');ctx.fillStyle=shade;ctx.fill();ctx.restore();
-    }
-    let cellTexture=null;
-    function surface(ctx,x,y,r,alpha=1){
-      if(r<=0||alpha<=0)return;
-      if(!cellTexture){cellTexture=document.createElement('canvas');cellTexture.width=cellTexture.height=768;paintSurface(cellTexture.getContext('2d'),384,384,383);}
-      ctx.save();ctx.globalAlpha=alpha;ctx.drawImage(cellTexture,x-r,y-r,r*2,r*2);ctx.restore();
+      size=sizeCanvas(canvas);endpoints=getPoints();backdrop=endpoints.backdrop;center={x:size.width/2,y:size.height/2};radius=Math.min(360,size.width*.39,size.height*.43);
+      dustColors=Array.from({length:48},(_,i)=>{const t=i/47*(colors.length-1),a=colors[Math.floor(t)],b=colors[Math.min(colors.length-1,Math.floor(t)+1)],f=t%1;return '#'+[1,3,5].map(k=>Math.round(mix(parseInt(a.slice(k,k+2),16),parseInt(b.slice(k,k+2),16),f)).toString(16).padStart(2,'0')).join('');});
+      hull=document.createElement('canvas');hull.width=size.width;hull.height=size.height;const hc=hull.getContext('2d');hc.beginPath();for(let i=0;i<=120;i++){const a=i/120*Math.PI*2,edge=1+.11*Math.sin(a*3+.4)+.075*Math.cos(a*5-1),x=center.x+Math.cos(a)*radius*edge,y=center.y+Math.sin(a)*radius*edge*.86;if(i)hc.lineTo(x,y);else hc.moveTo(x,y);}hc.closePath();hc.clip();const glow=hc.createLinearGradient(center.x-radius,0,center.x+radius,0);colors.forEach((c,i)=>glow.addColorStop(i/(colors.length-1),c+'58'));hc.fillStyle=glow;hc.fillRect(0,0,size.width,size.height);const shade=hc.createRadialGradient(center.x-radius*.25,center.y-radius*.3,0,center.x,center.y,radius);shade.addColorStop(0,'#ffffff08');shade.addColorStop(.6,'#05111a40');shade.addColorStop(1,'#05111af0');hc.fillStyle=shade;hc.fillRect(0,0,size.width,size.height);
+      particles=Array.from({length:4800},(_,i)=>{const p=seed(i);const target=endpoints[i%Math.max(1,endpoints.length)];return{...p,tx:target?.x??center.x,ty:target?.y??center.y,delay:hash(i+399)*.2};});
+      dustBuckets=Array.from({length:48},()=>[]);for(const particle of particles)dustBuckets[particle.color].push(particle);
+      endpoints=endpoints.map((p,i)=>({...p,origin:seed(i+6000)}));
+      button.style.width=button.style.height=`${radius*2.15}px`;Object.assign(canvas.dataset,{motion:'particle-dissolution',surfaceText:'',eventCount:String(endpoints.length),particleCount:String(particles.length),surfaceRadius:String(radius)});dirty=false;
     }
     function paint(progress){
-      const{ctx,width,height}=size;ctx.clearRect(0,0,width,height);
-      if(backdrop){ctx.globalAlpha=ease((progress-.6)/.4);ctx.drawImage(backdrop,0,0,width,height);ctx.globalAlpha=1;}
-      let cells=0;
-      function draw(n){
-        const t=ease(progress*(maxDepth+1)-n.depth);
-        if(!n.children){
-          const finish=ease((progress-.84)/.16),single=n.depth===0,px=single&&n.point?mix(n.x,n.point.x,ease(progress)):n.x,py=single&&n.point?mix(n.y,n.point.y,ease(progress)):n.y,pr=single?mix(n.r,n.point?.radius||0,ease(progress)):mix(Math.max(n.r,3),n.r,finish);surface(ctx,px,py,pr,1-finish);if(n.point)paintPoint(ctx,n.point,px,py,finish);cells++;return;
-        }
-        if(t>=1){n.children.forEach(draw);return;}
-        if(t<=0){surface(ctx,n.x,n.y,n.r);cells++;return;}
-        const daughters=n.children.map(c=>({x:mix(n.x,c.x,t),y:mix(n.y,c.y,t),r:mix(n.r,c.r,t)}));
-        if(daughters.length===2){
-          const[a,b]=daughters,dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy)||1,nx=-dy/d,ny=dx/d,neck=Math.min(a.r,b.r)*Math.pow(1-t,1.4)*.55;
-          if(d>1&&neck>.5){ctx.fillStyle=colors[n.depth%colors.length];ctx.beginPath();ctx.moveTo(a.x+nx*neck,a.y+ny*neck);ctx.quadraticCurveTo((a.x+b.x)/2,(a.y+b.y)/2,b.x+nx*neck,b.y+ny*neck);ctx.lineTo(b.x-nx*neck,b.y-ny*neck);ctx.quadraticCurveTo((a.x+b.x)/2,(a.y+b.y)/2,a.x-nx*neck,a.y-ny*neck);ctx.closePath();ctx.fill();}
-        }
-        daughters.forEach(c=>surface(ctx,c.x,c.y,c.r));cells+=daughters.length;
+      const started=performance.now(),{ctx,width,height}=size;ctx.clearRect(0,0,width,height);
+      if(backdrop){ctx.globalAlpha=ease((progress-.65)/.35);ctx.drawImage(backdrop,0,0,width,height);ctx.globalAlpha=1;}
+      ctx.globalAlpha=1-ease(progress/.6);ctx.drawImage(hull,0,0,width,height);ctx.globalAlpha=1;
+      const dustAlpha=1-ease((progress-.55)/.4);
+      for(let color=0;color<dustColors.length;color++){
+        ctx.fillStyle=dustColors[color];ctx.globalAlpha=.58*dustAlpha;ctx.beginPath();
+        for(const p of dustBuckets[color]){const t=ease((progress-p.delay)/(1-p.delay)),bend=Math.sin(t*Math.PI)*p.bend,x=mix(p.x,p.tx,t)+bend,y=mix(p.y,p.ty,t)-bend*.42,r=p.r*(1-t*.8);ctx.moveTo(x+r,y);ctx.arc(x,y,r,0,Math.PI*2);}
+        ctx.fill();
       }
-      draw(tree);canvas.dataset.cells=String(cells);canvas.dataset.progress=progress.toFixed(3);
+      ctx.globalAlpha=1;
+      for(const p of endpoints){const t=ease(progress),bend=Math.sin(t*Math.PI)*p.origin.bend,x=mix(p.origin.x,p.x,t)+bend,y=mix(p.origin.y,p.y,t)-bend*.42;paintPoint(ctx,{...p,radius:mix(p.origin.r,p.radius,t)},x,y,.8+.2*t);}
+      Object.assign(canvas.dataset,{progress:progress.toFixed(3),paintMs:(performance.now()-started).toFixed(2)});
     }
     function sync(){
-      const b=bounds(),raw=clamp((scrollY-b.start)/(b.end-b.start));const progress=isReading()?1:reduced.matches?(raw<.5?0:1):raw;
+      const b=bounds(),raw=clamp((scrollY-b.start)/(b.end-b.start)),progress=isReading()?1:reduced.matches?(raw<.5?0:1):raw;
       if(!dirty&&progress===last)return;last=progress;
-      if(progress>=1){host.hidden=true;scene.dataset.gateway='events';scene.style.setProperty('--gateway-reveal','1');lock(false);dirty=true;return;}
-      host.hidden=false;if(dirty)prepare();lock(true);scene.dataset.gateway=progress?'disintegrating':'sphere';scene.style.setProperty('--gateway-reveal',String(ease((progress-.7)/.3)));button.disabled=progress>.2;paint(progress);
+      if(progress>=1){if(!host.hidden){host.hidden=true;scene.dataset.gateway='events';scene.style.setProperty('--gateway-reveal','1');lock(false);}return;}
+      host.hidden=false;if(dirty)prepare();lock(true);scene.dataset.gateway=progress?'disintegrating':'sphere';scene.style.setProperty('--gateway-reveal',String(ease((progress-.65)/.35)));button.disabled=progress>.2;paint(progress);
     }
     function enter({behavior='smooth'}={}){window.scrollTo({top:bounds().end+1,behavior:reduced.matches?'instant':behavior});sync();}
     function show({behavior='smooth'}={}){dirty=true;window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});sync();}

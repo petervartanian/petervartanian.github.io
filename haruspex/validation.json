@@ -1,5 +1,5 @@
 {
-  "application_version": "14.0.0",
+  "application_version": "15.0.0",
   "assessments_version": "3.0.1",
   "visual_encodings_version": "6.2.0",
   "incident_ontology_version": "1.0.0",
@@ -117,7 +117,13 @@
     "v14: Browser review confirmed an unlabelled sphere, rounded intermediate daughter cells, completed event field and restoration of controls. No triangle mesh remains. Cached texture drawing replaces per-cell gradient construction.",
     "v14: Event banner retains the selected marker and curved connector while dimming and blurring the field. Native click and Tab navigation preserve the open banner. A 390x844 review found a 358px-wide banner entirely within the viewport and no horizontal overflow.",
     "v14: Bow-tie selection and keyboard navigation to Investigate complete. The investigation expands CAST in its introduction and uses superscript Roman references with matching endnotes. Introduction ellipses belong to the two choices.",
-    "v14: All application JavaScript syntax checks and strict build validations pass. Combined dataset has matching date and stage metadata for the supplemental events; timeline inputs now allow dates through 4 September."
+    "v14: All application JavaScript syntax checks and strict build validations pass. Combined dataset has matching date and stage metadata for the supplemental events; timeline inputs now allow dates through 4 September.",
+    "v15: Ordinary introduction and primary-source links remain direct links. Only marked source-note clusters are converted automatically to Roman endnotes; the existing investigation bibliography is retained.",
+    "v15: Browser review confirmed the egg displays a compact green message without opening a dialog, and the centered native legend dims and blurs the surrounding field. Assessment key reads 1–5 / 0 / − and the reference button reads Assessment criteria.",
+    "v15: An irregular cloud dissolves into actual event points. There is no cell-division tree. Decorative particles are precomputed in color buckets, and surface shading is cached. One observed pre-bucketing paint took 7.90ms; this is a single canvas measurement, not an FPS benchmark.",
+    "v15: The default Bow-tie reports 9 short unknown-start tails, with no duration or time-axis claim. The long date-bound tails remain in the timeline.",
+    "v15: Rapid Event-swarm/Bow-tie/Investigate reversals and Before/During/After/Full changes restored all 599 Impact events without captured console errors. The transition status settled to idle.",
+    "v15: A waypoint banner preserves its actual star and horizontal callout line and unfolds vertically. At 390x844 it measured 340px wide and 692.6px high, fully within the viewport; no horizontal overflow. The five waypoints have an explicit editorial-selection explanation."
   ],
   "limits": [
     "This is a provisional, developing public-source CAST analysis, not a completed or exhaustive investigation. Search completeness and a maximal number of obtainable facts are not claimed.",
@@ -152,7 +158,7 @@
         "cached_projection_median": 0.025
       }
     },
-    "benchmark_limit": "No new end-to-end frame-rate benchmark. Browser interactions were checked at desktop and phone sizes. Sphere texture caching reduces repeated gradient construction."
+    "benchmark_limit": "No exhaustive hardware or end-to-end FPS benchmark. Main view and lifecycle reversals were checked in the browser. Particle origins and color buckets are precomputed; no per-particle gradient texture is drawn during dissolution."
   },
   "aggregate_background": {
     "semantics": "Illustrative density of source-reported aggregate activity not individually resolved in the detailed record; not one particle per event.",
@@ -168,7 +174,7 @@
       }
     ],
     "aggregation": "Different units can overlap. Do not add totals or subtract832 to invent an exact remainder.",
-    "catalogue": "70000 unique decorative numbers are deterministically shuffled in space. The egg explains source totals and disclosure gaps before enabling number discovery."
+    "catalogue": "70000 shuffled unique decorative identifiers. The egg reveals a compact green message; fuller coverage details remain available from the existing coverage control."
   },
   "cast_analysis_version": "1.0.0",
   "assessment_fields": {
