@@ -170,10 +170,20 @@
   let starTimer;
   let starsUnlocked = false;
   function drawCosmos() {
+    if(state.view==='cast')return;
     const canvas = $('#cosmos');
     const context = canvas.getContext('2d');
     const { width, height } = fitCanvas(canvas, context);
-    const count = Math.max(5000, Math.min(22000, Math.round(width * height / 54)));
+    const count = 70000;
+    const sceneRect = canvas.getBoundingClientRect();
+    const controlsRect = $('.field-controls').getBoundingClientRect();
+    const footerRect = $('.field-foot').getBoundingClientRect();
+    const left = width < 600 ? 98 : 156;
+    const top = Math.max(120, controlsRect.bottom-sceneRect.top+28);
+    const bottom = Math.max(top+60, footerRect.top-sceneRect.top-21);
+    const field = {left,top,width:Math.max(50,width-left-20),height:Math.max(50,bottom-top)};
+    const columns = Math.ceil(Math.sqrt(count*field.width/field.height));
+    const rows = Math.ceil(count/columns);
     const hash = (value) => {
       let n = Math.imul(value ^ (value >>> 16), 0x21f0aaad);
       n = Math.imul(n ^ (n >>> 15), 0x735a2d97);
@@ -182,16 +192,20 @@
     window.HaruspexArrival?.atmosphere(context, width, height, visualData.groups.map(group => group.fill), .72);
     // Stable decorative catalogue numbers identify drawn stars, never historical events.
     distantStars.length = 0; starGrid.clear();
-    $('#star-number').hidden = true;
+    $('#star-number').hidden = true; $('#star-lens').hidden = true;
     for (let i = 0; i < count; i += 1) {
-      const x = hash(i * 5 + 71771) * width;
-      const y = hash(i * 5 + 71772) * height;
-      const size = .45 + Math.pow(hash(i * 5 + 71773), 3) * .95;
+      // One unique cell per star: all 70,000 are painted inside the accessible field.
+      const x = field.left + ((i % columns) + .06 + hash(i*5+71771)*.88) * field.width / columns;
+      const y = field.top + (Math.floor(i/columns) + .06 + hash(i*5+71772)*.88) * field.height / rows;
+      const size = .38 + Math.pow(hash(i * 5 + 71773), 4) * .58;
       const atmosphere = .4 + .6 * Math.exp(-Math.pow((y / height - .52) / .32, 2));
-      const alpha = (.045 + hash(i * 5 + 71774) * .17) * atmosphere;
+      const u=(x-field.left)/field.width,v=(y-field.top)/field.height;
+      const edge=.09+.91*Math.pow(Math.max(0,Math.sin(Math.PI*u)*Math.sin(Math.PI*v)),.48);
+      const density=Math.min(1,Math.max(.32,field.width*field.height/600000));
+      const alpha = Math.max(.018,(.065 + hash(i * 5 + 71774) * .18) * atmosphere * edge * density);
       context.fillStyle = `rgba(173,192,211,${alpha})`;
       context.fillRect(x, y, size, size);
-      if (i % 317 === 0) {
+      if (i % 1601 === 0) {
         context.strokeStyle = '#CBECFF36'; context.lineWidth = .5; context.beginPath();
         context.moveTo(x - 3, y); context.lineTo(x + 3, y); context.moveTo(x, y - 3); context.lineTo(x, y + 3); context.stroke();
       }
@@ -202,18 +216,36 @@
       starGrid.get(cell).push(star);
     }
     canvas.dataset.densityMarks = String(count);
-    canvas.dataset.meaning = 'Illustrative background for aggregate activity: approximately 17,600 recovered HF actions and more than 70,000 messages/files. Counts can overlap; marks are not individual events.';
+    canvas.dataset.uniqueStars = String(new Set(distantStars.map(star=>star.number)).size);
+    canvas.dataset.fieldBounds = JSON.stringify(field);
+    canvas.dataset.meaning = '70,000 decorative stars evoke the published lower bound of messages and files. They have no historical one-to-one mapping. The total number of events is unknown.';
   }
   function showStar(star, linger = false) {
     clearTimeout(starTimer);
     const label = $('#star-number');
-    if (!starsUnlocked || !star) { label.hidden = true; return; }
+    if (!starsUnlocked || !star) { label.hidden = true; $('#star-lens').hidden=true; return; }
+    paintStarLens(star);
     label.textContent = String(star.number).padStart(5, '0');
     label.setAttribute('aria-label', `Decorative star ${star.number}`);
     label.style.left = `${Math.max(40, Math.min(star.x, $('#scene').clientWidth - 55))}px`;
     label.style.top = `${Math.max(30, star.y)}px`;
     label.hidden = false;
-    if (linger) starTimer = setTimeout(() => { label.hidden = true; }, 2800);
+    if (linger) starTimer = setTimeout(() => { label.hidden = true; $('#star-lens').hidden=true; }, 2800);
+  }
+  function paintStarLens(star) {
+    const lens=$('#star-lens'), size=156, ratio=Math.min(devicePixelRatio||1,2);
+    if(lens.width!==size*ratio){lens.width=size*ratio;lens.height=size*ratio;}
+    const ctx=lens.getContext('2d');ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,size,size);
+    lens.style.left=`${star.x-size/2}px`;lens.style.top=`${star.y-size/2}px`;lens.hidden=false;
+    const mist=ctx.createRadialGradient(78,78,3,78,78,75);mist.addColorStop(0,'#b7d8e519');mist.addColorStop(.25,'#73b7d20C');mist.addColorStop(1,'#73b7d200');ctx.fillStyle=mist;ctx.fillRect(0,0,size,size);
+    const cx=Math.floor(star.x/32),cy=Math.floor(star.y/32);
+    for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)for(const nearby of starGrid.get(`${cx+dx},${cy+dy}`)||[]){
+      const nx=nearby.x-star.x,ny=nearby.y-star.y,d=Math.hypot(nx,ny);if(d>18)continue;
+      const magnify=1+2.8*Math.pow(1-d/18,2),x=78+nx*magnify,y=78+ny*magnify;
+      ctx.globalAlpha=(1-d/18)*.75;ctx.fillStyle='#d5e6f0';ctx.fillRect(x,y,nearby.number===star.number?2:.7,nearby.number===star.number?2:.7);
+    }
+    ctx.globalAlpha=1;ctx.strokeStyle='#c9e9f280';ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(71,78);ctx.quadraticCurveTo(78,78,78,68);ctx.quadraticCurveTo(78,78,85,78);ctx.quadraticCurveTo(78,78,78,88);ctx.quadraticCurveTo(78,78,71,78);ctx.stroke();
+    lens.dataset.star=String(star.number);
   }
   function discoverStar(event, linger = false) {
     if (!starsUnlocked || state.view === 'cast') return;
@@ -296,9 +328,9 @@
       const brush = canvas.getContext('2d');
       brush.scale(ratio, ratio); brush.translate(extent, extent);
       const light = brush.createRadialGradient(0, 0, r * .35, 0, 0, extent);
-      light.addColorStop(0, `${band.fill}48`);
-      light.addColorStop(.22, `${band.fill}2C`);
-      light.addColorStop(.48, `${band.fill}12`);
+      light.addColorStop(0, `${band.fill}09`);
+      light.addColorStop(.22, `${band.fill}04`);
+      light.addColorStop(.48, `${band.fill}04`);
       light.addColorStop(1, `${band.fill}00`);
       brush.fillStyle = light; brush.fillRect(-extent, -extent, extent * 2, extent * 2);
       brush.beginPath();
@@ -327,7 +359,7 @@
       if (!hollow) {
         brush.save(); brush.clip(); brush.setLineDash([]);
         const sheen = brush.createRadialGradient(-r * .3, -r * .4, 0, -r * .3, -r * .4, r * 1.4);
-        sheen.addColorStop(0, '#EDFFFF60'); sheen.addColorStop(.4, '#EDFFFF18'); sheen.addColorStop(1, '#EDFFFF00');
+        sheen.addColorStop(0, '#EDFFFF1C'); sheen.addColorStop(.4, '#EDFFFF06'); sheen.addColorStop(1, '#EDFFFF00');
         brush.fillStyle = sheen; brush.fillRect(-r * 1.6, -r * 1.6, r * 3.2, r * 3.2); brush.restore();
       }
       sprite = {canvas, extent};
@@ -634,7 +666,7 @@
   let transitionLabels = null;
   function stopMotion() {
     $$('.visual-column > .field-origin').forEach(node => {
-      node.getAnimations().forEach(animation => animation.cancel()); node.remove();
+      node.haruspexCancel?.(); node.getAnimations().forEach(animation => animation.cancel()); node.remove();
     });
     if (motionFrame !== null) cancelAnimationFrame(motionFrame);
     motionFrame = null; movingPoints = null; movingBackdrop = null;
@@ -649,7 +681,8 @@
     const canvas = state.view === 'stream' ? timeline : bowCanvas;
     const field = $('.visual-column').getBoundingClientRect();
     const rect = canvas.getBoundingClientRect();
-    const snapshot = movingPoints ? movingPoints.map((point) => ({ ...point }))
+    const originPoints=$('.visual-column > .field-origin')?.haruspexPoints;
+    const snapshot = originPoints ? originPoints.map(point=>({...point})) : movingPoints ? movingPoints.map((point) => ({ ...point }))
       : (state.view === 'stream' ? points : bowPoints).map((point) => ({
         ...point, x: point.x + rect.left - field.left, y: point.y + rect.top - field.top,
         radius: point.event.id === state.selected && !$('#detail-panel').hidden ? Math.max(6, point.radius) : point.radius,
@@ -834,7 +867,7 @@
     });
     if (!camera) $('#bowtie-map').innerHTML = clusters.map((cluster) => {
       const x = focused ? margin : width * [.16, .5, .84][cluster.index];
-      const y = focused ? fieldTop - 14 : fieldBottom + 12;
+      const y = focused ? fieldTop - 14 : Math.min(fieldBottom + 12, height - (narrow ? 205 : 190));
       return focused ? `<div class="bow-label focused-label" style="left:${x}px;top:${y}px"><span>${cluster.label}</span><small>${cluster.entries.length} events</small></div>` : `<button class="bow-label" data-bow-group="${cluster.key}" style="left:${x}px;top:${y}px" aria-label="Focus ${cluster.label}, ${cluster.entries.length} events"><span>${cluster.label}</span><small>${cluster.entries.length} events <i aria-hidden="true">↗</i></small></button>`;
     }).join('');
     if (!camera) $$('[data-bow-group]').forEach((button) => button.addEventListener('click', () => focusBowtie(button.dataset.bowGroup || null)));
@@ -916,9 +949,10 @@
   function navigate(change, { fit = false, camera = false } = {}) {
     if (state.view === 'cast') { change(); refresh(); return; }
     finishCamera();
+    const ghost=$('.visual-column > .field-origin')&&!reducedMotion.matches?freezeVisibleView():null;
     const from = currentPositions(); stopMotion(); cancelGestures(); change();
     if (fit) { state.range = fitMatchingRange(); state.vertical = [0, 1]; }
-    state.limit = 12; refresh(); animateLayout(from, { camera });
+    state.limit = 12; refresh(); animateLayout(from, { camera });fadeFrozenView(ghost,220);
   }
   function selectLifecycle(id) {
     if (id === state.lifecycle) return;
@@ -1073,6 +1107,7 @@
     for (const key of ['stream', 'bowtie', 'cast']) $(`#${key}-view`).hidden = key !== view;
     $$('.view-tab').forEach((button) => { const selected = button.id === `${view}-tab`; button.setAttribute('aria-selected', String(selected)); button.tabIndex = selected ? 0 : -1; button.classList.toggle('active', selected); });
     closeLegend(); closeStages(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false');
+    if(view!=='cast')drawCosmos();
   }
   function freezeVisibleView() {
     const outgoing = $(`#${state.view}-view`);
@@ -1111,6 +1146,7 @@
     const origin = $('.visual-column > .field-origin');
     if (origin) {
       const copy = origin.cloneNode(true);
+      if (origin.tagName === 'CANVAS') { copy.width=origin.width;copy.height=origin.height;copy.getContext('2d').drawImage(origin,0,0); }
       const computed = getComputedStyle(origin);
       copy.style.cssText = Array.from(computed, key => `${key}:${computed.getPropertyValue(key)};`).join('');
       copy.style.setProperty('animation', 'none', 'important');
@@ -1128,7 +1164,7 @@
     leaving.finished.then(() => ghost.remove()).catch(() => ghost.remove());
   }
   function settleMotionForGesture() {
-    const ghost = motionFrame !== null && !reducedMotion.matches ? freezeVisibleView() : null;
+    const ghost = (motionFrame !== null || $('.visual-column > .field-origin')) && !reducedMotion.matches ? freezeVisibleView() : null;
     stopMotion(); fadeFrozenView(ghost, 170);
   }
   function changeView(view) {
@@ -1157,15 +1193,8 @@
     if (!destination.length) return;
     const rect = $('.visual-column').getBoundingClientRect();
     const center = {x:rect.width * .52, y:rect.height * .51};
-    const seed = random(832);
-    const source = destination.map(point => {
-      const angle = seed() * Math.PI * 2;
-      const distance = Math.sqrt(seed()) * Math.min(58, rect.width * .09);
-      return {...point, x:center.x + Math.cos(angle) * distance, y:center.y + Math.sin(angle) * distance * .9, radius:1.3, alpha:.9, vx:0, vy:0};
-    });
-    source.range = destination.range; source.backdrop = null; source.labels = ''; source.labelOpacity = 0;
-    animateLayout(source);
-    window.HaruspexArrival?.bloom($('.visual-column'), center);
+    timeline.style.opacity = '0';
+    window.HaruspexArrival?.bloom($('.visual-column'), center, {points:destination,paintPoint:(ctx,point,x,y,alpha)=>shape(ctx,point.event,x,y,point.radius,alpha),onFinish:()=>{timeline.style.opacity='';}});
   }
   function openDialog(title, content) {
     if (!$('#info-dialog').open) dialogTrigger = document.activeElement;
@@ -1401,20 +1430,24 @@
   $('#stage-structure').addEventListener('click', openOntology);
   $('#query-help').addEventListener('click', openQueryHelp);
   $('#framework-info').addEventListener('click', openFramework);
-  $('#background-info').addEventListener('click', () => openDialog('Beyond the detailed events', `<p>The distant points suggest the much larger activity described in aggregate, without enough individually published detail to become separate events here.</p><div class="dialog-source"><strong>≈17,600 recovered attacker actions</strong><p>Hugging Face grouped these into roughly 6,280 clusters. Its public timeline describes selected activity.</p><a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">Hugging Face technical timeline</a></div><div class="dialog-source"><strong>More than 70,000 messages and files</strong><p>METR describes communications across roughly 1,200 agents. Most underlying raw cache entries were fragments, rather than additional independent messages.</p><a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR investigation</a></div><p>These quantities use different units and can overlap. Adding them—or subtracting 832—would not give an exact total of undisplayable events. Background density is illustrative. The hidden numbers are a decorative star catalogue, not historical event IDs; they carry no incident details, dates or severity.</p>`));
+  function openCoverage() {
+    openDialog('How much happened?', `<p><strong>832 events mapped. The full total is unknown.</strong> All 832 are available across Impact (599), Context (192) and Unresolved (41). The current date range and filters determine which appear.</p><div class="coverage-scale"><div><strong>≈17,600</strong><span>recovered attacker actions in Hugging Face’s forensic account</span></div><div><strong>&gt;70,000</strong><span>messages and files examined by METR and Redwood</span></div><div><strong>≈1,300</strong><span>agent transcripts made available by OpenAI</span></div></div><p>These are different, overlapping units. A transcript contains many actions. A message need not describe a new event. Most of the 1.2 million raw cache entries were file fragments.</p><h3>What would establish the total?</h3><p>OpenAI would need to provide a fuller, time-indexed activity corpus and its coverage limits, including the later internal intrusions. Hugging Face would need to provide its corresponding forensic timeline. METR and Redwood could supply the mappings and counting methods used in their analysis. A shared definition of an event and deduplication across those sources would still be necessary. Disclosure alone cannot recover activity that was never logged.</p><h3>The distant field</h3><p>Every one of the 70,000 background stars is drawn. They evoke the published scale of communication. Their positions and hidden numbers are decorative, with no invented event details. They are not 70,000 additional verified events.</p><div class="dialog-source"><a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR and Redwood investigation</a> · <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">Hugging Face forensic timeline</a></div>`);
+  }
+  $('#background-info').addEventListener('click',openCoverage);
+  $('#coverage-info').addEventListener('click',openCoverage);
   $('#hidden-egg').addEventListener('click', () => {
     starsUnlocked = !starsUnlocked;
     $('#hidden-egg').setAttribute('aria-pressed', String(starsUnlocked));
     $('#hidden-egg span').textContent = starsUnlocked ? '🐣' : '🥚';
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
     if (!starsUnlocked) { showStar(null); return; }
-    changeView('stream'); $('#scene').scrollIntoView({behavior:reducedMotion.matches?'auto':'smooth'});
-    notify('You found it. The distant stars have numbers.');
+    if(state.view==='cast')changeView('stream');
+    notify('You found it. Hover among the distant stars.');
     setTimeout(() => {
       if (!starsUnlocked || state.view === 'cast') return;
       const candidates = distantStars.filter(star => star.x > innerWidth*.3 && star.x < innerWidth*.8 && star.y > innerHeight*.35 && star.y < innerHeight*.75);
       showStar(candidates[Math.floor(Math.random()*candidates.length)], true);
-    }, reducedMotion.matches ? 0 : 750);
+    }, reducedMotion.matches ? 0 : 180);
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
   $('#clear-inquiry').addEventListener('click', () => navigate(() => { state.investigation=null; }, {fit:true}));

@@ -18,13 +18,13 @@
       <div class="intro-main">
         <div class="opening-quotation" id="opening-quotation">
           <h1 id="intro-title">“/* OPENING_QUOTE */”</h1>
-          <p class="quote-credit"><a id="quote-source" href="/* OPENING_URL */" target="_blank" rel="noopener noreferrer">/* OPENING_AUTHOR */</a><span id="quote-role">(M.T.S. @ METR)</span></p>
+          <p class="quote-credit"><a id="quote-source" href="/* OPENING_URL */" target="_blank" rel="noopener noreferrer" aria-label="Ajeya Cotra"><svg viewBox="0 0 152 24" aria-hidden="true"><text x="0" y="19" textLength="152" lengthAdjust="spacing">/* OPENING_AUTHOR */</text></svg></a><span id="quote-role"><svg viewBox="0 0 152 20" role="img" aria-label="M.T.S. @ METR"><text x="0" y="14" textLength="152" lengthAdjust="spacing">M.T.S. @ METR</text></svg></span></p>
         </div>
-        <p class="intro-story">In July 2026, esp. July 11–13 but continuing until July 19, AI agents under evaluation at OpenAI broke into Hugging Face, a ~<a href="https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/" target="_blank" rel="noopener noreferrer" title="NVIDIA’s September 2026 acquisition announcement">$13B</a> hub for AI models and datasets. Roughly <a href="https://www.planned-obsolescence.org/p/the-hugging-face-attack-surprised" target="_blank" rel="noopener noreferrer">700 agents</a> collaborated in the attack. The <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noopener noreferrer">later intrusions</a> targeted OpenAI itself. AI systems had organized a sustained attack no human had ordered. Preventing a worse recurrence requires reconstructing, event by event, how control failed, who could have intervened, and whether the protections that held would withstand more capable agents.</p>
-        <div class="intro-actions"><a id="enter-explorer" class="intro-enter" href="#scene">Enter the field</a><button id="intro-cast" class="intro-cast">Read the investigation</button></div>
+        <p class="intro-story">In mid-July 2026, AI agents under evaluation at OpenAI broke into Hugging Face, a ~<a href="https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/" target="_blank" rel="noopener noreferrer" title="NVIDIA’s September 2026 acquisition announcement">$13B</a> hub for AI models and datasets. Roughly <a href="https://www.planned-obsolescence.org/p/the-hugging-face-attack-surprised" target="_blank" rel="noopener noreferrer">700 agents</a> collaborated in the attack, with the <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noopener noreferrer">later intrusions</a> targeting OpenAI itself. Evidently, AI systems are now capable of organizing sustained attacks that no human had ordered. Preventing a worse recurrence of this incident requires reconstructing - event by event - (i) how control failed, (ii) which interventions could have prevented or curtailed the attacks, and (iii) whether the protections that limited the damage would withstand more capable agents.</p>
+        <div class="intro-actions"><a id="enter-explorer" class="intro-enter" href="#scene">Enter the field</a><button id="intro-cast" class="intro-cast">Read the CAST analysis</button></div>
       </div>
       <div class="intro-foot"><a class="airi-reference" href="https://airisk.mit.edu/" target="_blank" rel="noopener noreferrer" aria-label="MIT AI Risk Initiative"><img src="/* AIRI_LOGO */" width="150" height="45" alt="MIT AI Risk Initiative"></a>
-        <button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button>
+
       </div>
     </section>
     <section id="explorer" class="observatory" aria-label="Incident explorer">
@@ -48,7 +48,7 @@
           </details>
         </header>
         <div id="inquiry-context" class="inquiry-context" hidden><button id="return-inquiry"></button><button id="clear-inquiry" aria-label="Show all events">×</button></div>
-        <div id="star-number" class="star-number" hidden aria-live="off"></div>
+        <canvas id="star-lens" aria-hidden="true" hidden></canvas><div id="star-number" class="star-number" hidden aria-live="off"></div>
         <div class="scene-heading">
           <h2 id="page-title" class="sr-only">OpenAI and Hugging Face incident explorer</h2>
           <div class="scene-actions">
@@ -105,8 +105,8 @@
           </div>
         </div>
         <div class="field-foot">
-          <button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button>
-          <div class="field-readout"><span><b id="visible-count">—</b> matching events</span><span id="viewport-count"></span><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
+          <div class="field-discoveries"><button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button><button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button></div>
+          <div class="field-readout"><span><b id="visible-count">—</b> of 832 events</span><span id="viewport-count"></span><button id="coverage-info" aria-haspopup="dialog">Full total unknown</button><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
           <div class="timeline-navigation">
             <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
             <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
@@ -153,7 +153,7 @@
     <div class="detail-top"><div><button id="previous-event" aria-label="Previous visible event">←</button><button id="next-event" aria-label="Next visible event">→</button><button id="detail-close" aria-label="Close event details">×</button></div></div>
     <div id="event-detail" aria-live="polite"></div>
   </aside>
-  <footer><span>Haruspex</span><button id="footer-method">How to read this</button><span>9 September 2026</span></footer>
+  <footer><span>Created by Peter H. Vartanian · 2026</span><button id="footer-method">How to read this</button><span>Haruspex</span></footer>
   <dialog id="info-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><span>Haruspex</span><button id="dialog-close" aria-label="Close dialog">×</button></div><div id="dialog-content"></div></dialog>
   <div id="notification" role="status" hidden></div>
   <script id="dataset" type="application/json">/* DATASET */</script>

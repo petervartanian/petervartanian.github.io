@@ -1,5 +1,5 @@
 {
-  "version": "6.1.0",
+  "version": "6.2.0",
   "name": "Incident workstreams",
   "source_field": "phase",
   "groups": [
@@ -180,8 +180,8 @@
   "background_activity": {
     "kind": "illustrative_aggregate_density",
     "rendered_mark_count_range": [
-      5000,
-      22000
+      70000,
+      70000
     ],
     "mark_count_is_event_count": false,
     "individual_event_ids_assigned": false,
@@ -214,10 +214,10 @@
     ],
     "overlap_policy": "The HF action count and METR communication count have different scopes and can overlap. Do not add them, treat them as independent totals, or subtract 832 to calculate an unseen remainder. Displayable entries, source aggregates and raw log/cache records have different units.",
     "caption": "Faint stars suggest the larger source-reported activity behind the detailed record. Approximately 17,600 recovered HF actions and over 70,000 messages and files were reported. Counts overlap; stars are illustrative, not individually identified events.",
-    "selection_meaning": "Hidden until the title-page egg is activated; then hover or tap exposes only a decorative star catalogue number. No historical event identities or incident details are assigned.",
-    "catalogue_numbering": "Stable seeded mark index plus one, padded to five digits; surviving marks retain their numbers when viewport density changes.",
+    "selection_meaning": "The egg beside the main field Legend unlocks a decorative star number and local magnifying shimmer. No historical event identity or incident details are assigned.",
+    "catalogue_numbering": "Stable indices 1–70000, padded to five digits. Every index is drawn once at every viewport size. Each has a distinct placement cell, with a soft edge and density calibration.",
     "default_selectable": false,
-    "unlock_control": "Tiny egg in title-page footer",
+    "unlock_control": "Small egg beside the peripheral Legend on the event screen",
     "selectable_after_unlock": true
   }
 }

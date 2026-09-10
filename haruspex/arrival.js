@@ -1,4 +1,4 @@
-/* The incident as one form, then its constituent events. Positions here are illustrative. */
+/* A continuous surface tessellates into moving fragments. Its introductory positions are illustrative. */
 (() => {
   'use strict';
   const TAU = Math.PI * 2;
@@ -9,32 +9,16 @@
     n = Math.imul(n ^ (n >>> 15), 0x735a2d97);
     return ((n ^ (n >>> 15)) >>> 0) / 4294967296;
   };
+  let colors = [];
   function atmosphere(ctx, width, height, palette, strength = 1) {
     ctx.save();
-    for (let i = 0; i < palette.length; i += 1) {
-      const x = width * (.08 + i * .17);
-      const y = height * (.61 + Math.sin(i * .9) * .06);
-      ctx.save(); ctx.translate(x, y); ctx.scale(2.1, .48);
-      const radius = Math.max(width * .23, 190);
+    // Broad, irregular dust clouds give depth; they do not trace a literal galaxy.
+    for (let i = 0; i < palette.length; i++) {
+      const radius = Math.max(width * .22, 170);
+      ctx.save(); ctx.translate(width * (.06 + i * .175), height * (.59 + Math.sin(i * 1.3) * .07)); ctx.scale(2.1, .43);
       const mist = ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
-      mist.addColorStop(0, `${palette[i]}19`);
-      mist.addColorStop(.35, `${palette[i]}0B`);
-      mist.addColorStop(1, `${palette[i]}00`);
-      ctx.globalAlpha = strength; ctx.fillStyle = mist;
-      ctx.fillRect(-radius, -radius, radius * 2, radius * 2); ctx.restore();
-    }
-    // Long, quiet strands give the field depth without boxing it into a galaxy.
-    for (let strand = 0; strand < 12; strand += 1) {
-      const gradient = ctx.createLinearGradient(0, 0, width, 0);
-      palette.forEach((color, i) => gradient.addColorStop(i / (palette.length - 1), `${color}${strand % 3 ? '0B' : '18'}`));
-      ctx.strokeStyle = gradient; ctx.lineWidth = strand % 3 ? .45 : .65; ctx.globalAlpha = strength;
-      ctx.beginPath();
-      for (let step = 0; step <= 90; step += 1) {
-        const x = width * step / 90;
-        const y = height * (.64 + Math.sin(step / 90 * 4 - .6) * .042) + (strand - 6) * 3.1;
-        if (!step) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-      }
-      ctx.stroke();
+      mist.addColorStop(0, `${palette[i]}12`); mist.addColorStop(.37, `${palette[i]}06`); mist.addColorStop(1, `${palette[i]}00`);
+      ctx.globalAlpha = strength; ctx.fillStyle = mist; ctx.fillRect(-radius, -radius, radius * 2, radius * 2); ctx.restore();
     }
     ctx.restore();
   }
@@ -45,111 +29,133 @@
     const ctx = canvas.getContext('2d'); ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     return {ctx, width:rect.width, height:rect.height};
   }
-  function lightSprite(color) {
-    const canvas = document.createElement('canvas'); canvas.width = canvas.height = 48;
-    const ctx = canvas.getContext('2d');
-    const light = ctx.createRadialGradient(24, 24, 0, 24, 24, 24);
-    light.addColorStop(0, '#F5FFFF'); light.addColorStop(.05, color);
-    light.addColorStop(.12, `${color}AE`); light.addColorStop(.3, `${color}36`); light.addColorStop(1, `${color}00`);
-    ctx.fillStyle = light; ctx.fillRect(0, 0, 48, 48); return canvas;
+  function target(i, width, height) {
+    const x = hash(i * 7 + 85);
+    return {x:width * (.025 + x * .95), y:height * (.76 - .1 * Math.sin(x * 3.7) + (hash(i * 7 + 86) - .5) * .3)};
   }
-  function init({events, palette, colorOf}) {
-    document.documentElement.style.setProperty('--incident-spectrum', `conic-gradient(from -40deg, ${[...palette, palette[0]].join(', ')})`);
-    const canvas = document.getElementById('intro-field');
-    const sprites = new Map(palette.map(color => [color, lightSprite(color)]));
+  function mesh(radius, palette) {
+    const extent = Math.ceil(radius * 1.16), ratio = 2;
+    const texture = document.createElement('canvas'); texture.width = texture.height = extent * 2 * ratio;
+    const brush = texture.getContext('2d'); brush.scale(ratio, ratio); brush.translate(extent, extent);
+    const spectrum = brush.createConicGradient(-Math.PI * .72, 0, 0);
+    [...palette, palette[0]].forEach((color, i) => spectrum.addColorStop(i / palette.length, color));
+    brush.fillStyle = spectrum; brush.fillRect(-extent, -extent, extent * 2, extent * 2);
+    const shade = brush.createRadialGradient(-radius * .3, -radius * .38, 0, radius * .16, radius * .3, radius * 1.25);
+    shade.addColorStop(0, '#f1faff24'); shade.addColorStop(.37, '#0b172b00'); shade.addColorStop(.76, '#0b142540'); shade.addColorStop(1, '#061020ba');
+    brush.fillStyle = shade; brush.fillRect(-extent, -extent, extent * 2, extent * 2);
+    // Fine mineral-like grain, not a glossy coating.
+    for (let i = 0; i < 9000; i++) {
+      const x = (hash(i * 3 + 12) - .5) * radius * 2.2, y = (hash(i * 3 + 13) - .5) * radius * 2.2;
+      brush.fillStyle = i % 3 ? '#07152815' : '#ecffff24'; brush.fillRect(x, y, .6, .6);
+    }
+    const sectors = 32, rings = 14;
+    const vertex = (ring, sector) => {
+      if (!ring) return {x:0,y:0};
+      const index = ((sector % sectors) + sectors) % sectors;
+      const angle = index * TAU / sectors + Math.sin(ring * .45) * .07;
+      const organic = 1 + .04 * Math.sin(angle * 3 + .4) + .025 * Math.cos(angle * 5);
+      const jitter = ring === rings ? 0 : (hash(ring * 93 + index) - .5) * .032;
+      const r = radius * (ring / rings + jitter) * organic;
+      return {x:Math.cos(angle) * r, y:Math.sin(angle) * r * .96};
+    };
+    const triangles = [];
+    for (let ring = 1; ring <= rings; ring++) for (let sector = 0; sector < sectors; sector++) {
+      const a = vertex(ring - 1, sector), b = vertex(ring, sector), c = vertex(ring, sector + 1), d = vertex(ring - 1, sector + 1);
+      triangles.push([a,b,c]); if (ring > 1) triangles.push([a,c,d]);
+    }
+    return triangles.map((vertices, i) => {
+      const x = vertices.reduce((sum,p)=>sum+p.x,0)/3, y = vertices.reduce((sum,p)=>sum+p.y,0)/3;
+      const x0 = Math.floor(Math.min(...vertices.map(p=>p.x))) - 1, y0 = Math.floor(Math.min(...vertices.map(p=>p.y))) - 1;
+      const w = Math.ceil(Math.max(...vertices.map(p=>p.x))) - x0 + 2, h = Math.ceil(Math.max(...vertices.map(p=>p.y))) - y0 + 2;
+      const tile = document.createElement('canvas'); tile.width = w * ratio; tile.height = h * ratio;
+      const ctx = tile.getContext('2d'); ctx.scale(ratio, ratio); ctx.translate(-x0,-y0); ctx.beginPath();
+      // Half-pixel overlap prevents hairline seams in the unbroken surface.
+      vertices.forEach((p,j)=>{ const dx=p.x-x,dy=p.y-y,l=Math.hypot(dx,dy)||1; const px=p.x+dx/l*.48,py=p.y+dy/l*.48; if(j)ctx.lineTo(px,py);else ctx.moveTo(px,py); });
+      ctx.closePath(); ctx.clip();
+      ctx.drawImage(texture,(x0+extent)*ratio,(y0+extent)*ratio,w*ratio,h*ratio,x0,y0,w,h);
+      return {tile,x,y,w,h,ox:x0-x,oy:y0-y,turn:(hash(i*9+8)-.5)*3.8,bend:(hash(i*9+9)-.5),delay:clamp((x/radius+1)*.065+hash(i*9+10)*.15)};
+    });
+  }
+  function paintFragments(screen, fragments, center, elapsed, {hold, duration, endpoints, finalAlpha = .34, paintPoint}) {
+    const {ctx,width,height} = screen;
+    ctx.clearRect(0,0,width,height);
+    const progress = clamp((elapsed-hold)/duration);
+    let moved = 0; const positions = [];
+    fragments.forEach((p,i)=>{
+      const local = clamp((progress-p.delay)/(1-p.delay));
+      const t = ease(local), end = endpoints[i % endpoints.length];
+      const arc = Math.sin(Math.PI*t);
+      const x = center.x+p.x+(end.x-center.x-p.x)*t + arc*p.bend*width*.18;
+      const y = center.y+p.y+(end.y-center.y-p.y)*t - arc*(.06+Math.abs(p.bend)*.22)*height;
+      const endSize = end.radius ? Math.max(.07, Math.min(.34,end.radius*1.55/Math.sqrt(p.w*p.h))) : .075;
+      const scale = 1+(endSize-1)*ease(local*.98);
+      // Fragments keep their substance: only the last handoff matches the quiet field.
+      const handoff=ease((local-.72)/.28);
+      ctx.globalAlpha = 1-(1-finalAlpha)*ease((local-.82)/.18);
+      if(paintPoint)ctx.globalAlpha*=1-handoff;
+      ctx.save(); ctx.translate(x,y);ctx.rotate(p.turn*arc + p.turn*.2*t);ctx.scale(scale,scale);
+      ctx.drawImage(p.tile,p.ox,p.oy,p.w,p.h);ctx.restore();
+      if(i<endpoints.length){
+        positions.push({...end,x,y,radius:end.radius||1.5,alpha:1,vx:0,vy:0});
+        if(paintPoint&&handoff>0)paintPoint(ctx,end,x,y,handoff);
+      }
+      if(local>0)moved++;
+    });
+    ctx.globalAlpha=1;
+    return {progress,moved,positions};
+  }
+  function animateFracture(canvas, options) {
+    const screen = sizeCanvas(canvas);
+    const fragments = mesh(options.radius, colors);
+    const start = performance.now(); let raf = null, done = false;
+    canvas.dataset.fragmentCount=String(fragments.length);canvas.dataset.motion='surface';
+    const finish = () => { if(done)return;done=true;cancelAnimationFrame(raf);options.finish?.(); };
+    const tick = now => {
+      if(done)return;
+      const elapsed=now-start;
+      const status=paintFragments(screen,fragments,options.center,elapsed,options);
+      canvas.dataset.motion=status.moved?'disintegrating':'surface';
+      canvas.dataset.detachedFragments=String(status.moved);
+      canvas.haruspexPoints=status.positions;
+      options.frame?.(status.progress, elapsed);
+      if(elapsed<options.hold+options.duration)raf=requestAnimationFrame(tick);else finish();
+    };
+    raf=requestAnimationFrame(tick);return finish;
+  }
+  function init({events,palette,colorOf}) {
+    colors=palette;
+    const canvas=document.getElementById('intro-field');
     let introSize;
-    const particles = events.map((event, i) => ({
-      color:colorOf(event), angle:hash(i * 7 + 83) * TAU, depth:Math.sqrt(hash(i * 7 + 84)),
-      x:hash(i * 7 + 85), jitter:hash(i * 7 + 86) - .5,
-      size:1.8 + hash(i * 7 + 87) * 3.2, bend:hash(i * 7 + 88) - .5,
-    }));
-    function target(p, width, height) {
-      return {x:width * (-.06 + p.x * 1.12), y:height * (.76 - .1 * Math.sin(p.x * 3.7) + p.jitter * .31)};
-    }
     function paintIntro() {
-      introSize = sizeCanvas(canvas);
-      const {ctx, width, height} = introSize;
-      atmosphere(ctx, width, height, palette, .7);
-      for (let i = 0; i < 2300; i += 1) {
-        ctx.fillStyle = `rgba(185,213,227,${.025 + hash(i * 3 + 3) * .14})`;
-        ctx.fillRect(hash(i * 3 + 1) * width, hash(i * 3 + 2) * height, .7, .7);
+      introSize=sizeCanvas(canvas);const {ctx,width,height}=introSize;
+      atmosphere(ctx,width,height,palette,.8);
+      for(let i=0;i<3600;i++) {
+        const x=hash(i*3+1)*width,y=hash(i*3+2)*height;
+        ctx.fillStyle=`rgba(185,213,227,${.03+hash(i*3+3)*.18})`;ctx.fillRect(x,y,.65,.65);
       }
-      for (const p of particles) {
-        const end = target(p, width, height);
-        const size = p.size * 3;
-        ctx.globalAlpha = .09 + p.depth * .22;
-        ctx.drawImage(sprites.get(p.color), end.x - size / 2, end.y - size / 2, size, size);
-      }
-      ctx.globalAlpha = 1;
+      events.forEach((event,i)=>{const p=target(i,width,height);ctx.globalAlpha=.13+hash(i+98)*.18;ctx.fillStyle=colorOf(event);ctx.fillRect(p.x,p.y,.8+hash(i+46),.8+hash(i+46));});
+      ctx.globalAlpha=1;
     }
-    paintIntro();
-    const resize = new ResizeObserver(paintIntro); resize.observe(canvas);
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-    if (reduced.matches || location.hash || scrollY > 40) return;
-    const veil = document.createElement('div');
-    veil.className = 'incident-arrival'; veil.setAttribute('aria-hidden', 'true');
-    veil.innerHTML = '<canvas class="arrival-particles"></canvas><div class="incident-form"><i></i></div>';
-    document.body.append(veil);
-    const layer = veil.querySelector('canvas');
-    const form = veil.querySelector('.incident-form');
-    const screen = sizeCanvas(layer);
-    const center = {x:screen.width / 2, y:screen.height / 2};
-    const radius = Math.min(100, screen.width * .2);
-    let frameId = null, finished = false;
-    const started = performance.now();
-    const cancelEvents = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
-    function finish() {
-      if (finished) return;
-      finished = true; cancelAnimationFrame(frameId); veil.remove();
-      cancelEvents.forEach(name => window.removeEventListener(name, finish, true));
-      document.removeEventListener('visibilitychange', onVisibility);
-      reduced.removeEventListener('change', onReduced);
-      window.removeEventListener('resize', finish);
-      document.documentElement.dataset.arrival = 'complete';
-    }
-    function onVisibility() { if (document.hidden) finish(); }
-    function onReduced() { if (reduced.matches) finish(); }
-    cancelEvents.forEach(name => window.addEventListener(name, finish, {capture:true,passive:true}));
-    document.addEventListener('visibilitychange', onVisibility);
-    reduced.addEventListener('change', onReduced);
-    window.addEventListener('resize', finish, {once:true});
-    document.documentElement.dataset.arrival = 'forming';
-    function frame(now) {
-      if (finished) return;
-      const elapsed = now - started;
-      const spread = ease((elapsed - 690) / 1500);
-      const fade = ease((elapsed - 1200) / 1050);
-      document.documentElement.dataset.arrival = spread > 0 ? 'resolving' : 'forming';
-      veil.style.backgroundColor = `rgba(6,11,18,${1 - fade})`;
-      form.style.opacity = String(1 - ease((elapsed - 660) / 710));
-      form.style.transform = `translate(-50%,-50%) rotate(${elapsed * .004}deg) scale(${1 + spread * .3})`;
-      screen.ctx.clearRect(0, 0, screen.width, screen.height);
-      if (spread > 0) {
-        for (const p of particles) {
-          const uneven = 1 + .09 * Math.sin(p.angle * 3) + .055 * Math.cos(p.angle * 5);
-          const start = {x:center.x + Math.cos(p.angle) * p.depth * radius * uneven, y:center.y + Math.sin(p.angle) * p.depth * radius * .95 * uneven};
-          const end = target(p, introSize.width, introSize.height);
-          const curl = Math.sin(Math.PI * spread) * p.bend;
-          const x = start.x + (end.x - start.x) * spread + curl * screen.width * .16;
-          const y = start.y + (end.y - start.y) * spread - curl * screen.height * .25;
-          const size = p.size * (1.2 + spread * 1.8);
-          screen.ctx.globalAlpha = (.55 + p.depth * .4) * (1 - fade * .75);
-          screen.ctx.drawImage(sprites.get(p.color), x - size / 2, y - size / 2, size, size);
-        }
-      }
-      screen.ctx.globalAlpha = 1;
-      if (elapsed < 2300) frameId = requestAnimationFrame(frame); else finish();
-    }
-    frameId = requestAnimationFrame(frame);
+    paintIntro();new ResizeObserver(paintIntro).observe(canvas);
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    if(reduced.matches||location.hash||scrollY>40)return;
+    const veil=document.createElement('div');veil.className='incident-arrival';veil.setAttribute('aria-hidden','true');
+    veil.innerHTML='<canvas class="arrival-particles"></canvas>';document.body.append(veil);
+    const rect=veil.getBoundingClientRect();const cancelEvents=['pointerdown','keydown','wheel','touchstart'];let cancel=()=>{};
+    function finish(){cancel();veil.remove();cancelEvents.forEach(name=>window.removeEventListener(name,finish,true));document.removeEventListener('visibilitychange',onVisibility);reduced.removeEventListener('change',onReduced);window.removeEventListener('resize',finish);document.documentElement.dataset.arrival='complete';}
+    function onVisibility(){if(document.hidden)finish();}function onReduced(){if(reduced.matches)finish();}
+    cancelEvents.forEach(name=>window.addEventListener(name,finish,{capture:true,passive:true}));document.addEventListener('visibilitychange',onVisibility);reduced.addEventListener('change',onReduced);window.addEventListener('resize',finish,{once:true});
+    document.documentElement.dataset.arrival='forming';
+    cancel=animateFracture(veil.querySelector('canvas'),{radius:Math.min(260,rect.width*.34,rect.height*.32),center:{x:rect.width/2,y:rect.height/2},hold:750,duration:2650,endpoints:events.map((_,i)=>target(i,introSize.width,introSize.height)),finalAlpha:.24,
+      frame:(progress)=>{document.documentElement.dataset.arrival=progress>0?'resolving':'forming';veil.style.backgroundColor=`rgba(6,11,18,${1-ease((progress-.25)/.65)})`;},finish});
   }
-  function bloom(parent, center) {
-    const form = document.createElement('div'); form.className = 'incident-form field-origin';
-    form.setAttribute('aria-hidden','true'); form.innerHTML = '<i></i>';
-    form.style.left = `${center.x}px`; form.style.top = `${center.y}px`; parent.append(form);
-    const fade = form.animate([{opacity:.9,transform:'translate(-50%,-50%) scale(1)'},{opacity:0,transform:'translate(-50%,-50%) scale(1.5)'}],{duration:750,easing:'cubic-bezier(.2,.65,.25,1)'});
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-    const cleanup = () => { form.remove(); reduced.removeEventListener('change', cleanup); };
-    fade.finished.then(cleanup).catch(cleanup); reduced.addEventListener('change',cleanup);
+  function bloom(parent,center,{points,onFinish,paintPoint}) {
+    const canvas=document.createElement('canvas');canvas.className='field-origin';canvas.setAttribute('aria-hidden','true');parent.append(canvas);
+    const rect=parent.getBoundingClientRect();const reduced=matchMedia('(prefers-reduced-motion: reduce)');let cancel=()=>{},cleaned=false;
+    function cleanup(){if(cleaned)return;cleaned=true;cancel();canvas.remove();reduced.removeEventListener('change',cleanup);onFinish?.();}
+    canvas.haruspexCancel=cleanup;
+    cancel=animateFracture(canvas,{radius:Math.min(205,rect.width*.31,rect.height*.39),center,hold:180,duration:1550,endpoints:points,finalAlpha:.85,paintPoint,finish:cleanup});
+    reduced.addEventListener('change',cleanup);return canvas;
   }
-  window.HaruspexArrival = {init, atmosphere, bloom};
+  window.HaruspexArrival={init,atmosphere,bloom};
 })();

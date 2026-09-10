@@ -1,7 +1,7 @@
 {
-  "application_version": "11.0.0",
+  "application_version": "12.0.0",
   "assessments_version": "3.0.1",
-  "visual_encodings_version": "6.1.0",
+  "visual_encodings_version": "6.2.0",
   "incident_ontology_version": "1.0.0",
   "temporal_assessments_version": "1.0.0",
   "verified_on": "2026-09-09",
@@ -110,16 +110,19 @@
     "v10.1 browser review: lifecycle switching, keyboard zoom and the date handle remain responsive during movement. The paper detection/response link shows 8 related events in a fitted time window.",
     "v10.1 independent review: active child opacity is included in outgoing snapshots; overview gestures use the short fade bridge; enabling reduced motion cancels view fades. Syntax and build checks pass.",
     "v10.1 console review captured no errors. No end-to-end FPS benchmark is claimed.",
-    "v11 browser review: the approved paragraph renders verbatim in text content, with quiet source links. The AIRI caption is absent. The initial view shows a single six-color form, then clears it to reveal the introduction.",
-    "v11 browser review: entering the field unfolds a compact form into the existing 599 Impact events. Switching to Investigate before the unfolding finishes leaves no live form or retained view snapshot.",
-    "v11 browser review: Context remains hollow, existing view switches preserve the selected 192 events, and no horizontal overflow appears at 664px or 390px widths. The mobile legend fits the viewport and displays 6px/13px size examples.",
-    "v11 browser review: the egg at the title-page bottom-right toggles the decorative catalogue. Its reveal is a five-digit number and opens no event details. The 390px field contains 6096 illustrative background points.",
-    "v11: canonical SHA-256 remains unchanged; syntax and strict build checks pass. Browser console review captured no errors. Marker glow uses a bounded sprite cache; no end-to-end FPS benchmark is claimed."
+    "v12: Exact intro text checked against the user paragraph with only the bracketed passages revised. Creator credit reads Peter H. Vartanian, 2026. Both stacked attribution SVG lines have a 152px width and matching textLength.",
+    "v12 browser review: A continuous, larger orb was captured before separation, and again with 554 of 864 fragments detached. Field entrance uses the same tessellation and hands off to the actual event glyphs.",
+    "v12 browser review: Interrupting entry with Bow-tie left no live fragments, view ghosts or hidden destination canvas after settling. Stream, assessment, lifecycle and CAST switches completed without captured console errors.",
+    "v12 browser review: Full-range fields report all 599 Impact, 192 Context and 41 Unresolved events, including the 12 bounded tails across the first two fields. The canonical inventory and severity scores were not changed.",
+    "v12 browser review: 70,000 unique background catalogue indices are drawn at desktop and 390px phone widths. The phone legend fits the viewport, with no horizontal page overflow. A star reveal showed only its number and magnifying light, without opening event details.",
+    "v12 browser review: The egg is beside the main Legend. The coverage dialog separates event totals from messages, files, transcripts and fragments, and identifies proposed evidence holders. Horizontal zoom settled with updated date endpoints and idle camera state.",
+    "v12 browser review: CAST is explicit on entry and in the paper deck. Four intervention hypotheses, thirteen source notes and the expanded research catalogue render. Public research remains separate from unsent evidence requests.",
+    "v12: JavaScript syntax and strict build checks pass. The package is checked file-for-file against the source tree, with canonical checksum and private-path exclusions enforced."
   ],
   "limits": [
     "This is a provisional, developing public-source CAST analysis, not a completed or exhaustive investigation. Search completeness and a maximal number of obtainable facts are not claimed.",
     "All16 original question records remain open. The new layer records public evidence and remaining gaps; no external requests were sent and no private operational logs/interviews were obtained.",
-    "23 evidence updates include new artifacts/publications, rechecked accounts, methodology, commentary and an unverified assurance lead. They are not23 new independent historical events.",
+    "27 evidence updates include new artifacts/publications, rechecked accounts, methodology, commentary and an unverified assurance lead. They are not27 new independent historical events.",
     "The two METR files contain derived agent summaries and hourly activity aggregates. Their1,206 and1,772 rows are not additions to the832-record inventory and share source lineage with the METR report.",
     "Background density is illustrative. Hidden catalogue numbers identify decorative stars only, without historical event identities, dates or detailed incident records.",
     "198 linked records span70 source episodes. They are not198 independent observations; selected coverage does not imply that unlinked records are irrelevant.",
@@ -129,7 +132,8 @@
     "Only18 temporal records were individually reviewed in the preceding date-research pass;814 existing windows were carried forward. This visual/investigation revision adds no exact dates.",
     "Colors are supplemented by labels and workstream filters. Shape conveys evidence, outline treatment conveys assessment disposition, and size distinguishes single reported units from grouped activity without estimating an underlying count.",
     "Dense windows can overlap at wide zoom. Zoom and nearby-record selection expose individual records. The phone control graph uses horizontal scrolling.",
-    "Reduced-motion handling was code-reviewed, without an emulated reduced-motion browser run. No end-to-end FPS benchmark was performed."
+    "Reduced-motion handling was code-reviewed, without an emulated reduced-motion browser run. No end-to-end FPS benchmark was performed.",
+    "The wiki report and export catalogue were reviewed, but its raw exports were not acquired. A manifest download failed. Counts and hashes from that catalogue have not been independently checked against the files."
   ],
   "geometry_module_version": "1.0.0",
   "performance": {
@@ -148,11 +152,11 @@
         "cached_projection_median": 0.025
       }
     },
-    "benchmark_limit": "Historical computation-only microbenchmark excludes canvas rasterization and DOM updates. Not rerun for v11. Browser interactions were reviewed; no end-to-end FPS claim."
+    "benchmark_limit": "Historical computation-only microbenchmark excludes canvas and DOM work. Not rerun for v12. Browser interactions were reviewed at desktop and phone widths; no end-to-end FPS claim."
   },
   "aggregate_background": {
     "semantics": "Illustrative density of source-reported aggregate activity not individually resolved in the detailed record; not one particle per event.",
-    "rendered_density_marks": "5000–22000, responsive illustrative sampling, not an event count",
+    "rendered_density_marks": "70000 unique decorative catalogue points at every viewport size; not a total of historical events",
     "sources": [
       {
         "label": "Approximately17,600 recovered attacker actions in6,280 clusters",
@@ -164,7 +168,7 @@
       }
     ],
     "aggregation": "Different units can overlap. Do not add totals or subtract832 to invent an exact remainder.",
-    "catalogue": "Stable decorative numbers are locked until the small egg is activated. They are not historical event IDs and have no incident details."
+    "catalogue": "Egg beside the main field Legend unlocks five-digit decorative numbers and a local magnifying shimmer. No historical event details are assigned."
   },
   "cast_analysis_version": "1.0.0",
   "assessment_fields": {
@@ -186,9 +190,9 @@
     "scope": "Selective supporting links from the 832-event corpus. Unlinked events remain in the Atlas; selection does not mark them irrelevant or causal.",
     "completeness": "Not a completed or exhaustive CAST study. A richer control model requires answers and underlying evidence already identified in Q01–Q16."
   },
-  "research_expansion_version": "1.0",
+  "research_expansion_version": "1.1",
   "research_coverage": {
-    "evidence_items": 23,
+    "evidence_items": 27,
     "questions_reviewed": 16,
     "questions_with_new_public_evidence": [
       "Q01",
@@ -220,10 +224,15 @@
       "NS04",
       "NS05",
       "NS06",
-      "NS07"
+      "NS07",
+      "NS18"
     ],
     "new_method_resource": "NS13",
-    "source_count_is_not_independent_witness_count": true
+    "source_count_is_not_independent_witness_count": true,
+    "comparative_case_sources": [
+      "NS18",
+      "NS19"
+    ]
   },
   "marker_scope_counts": {
     "single": 624,

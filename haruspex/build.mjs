@@ -80,6 +80,7 @@ for (const source of researchSources.values()) if (source.local_artifact) {
   const artifact = JSON.parse(await readFile(new URL(source.local_artifact, root), 'utf8'));
   requireValid(artifact.original_url === source.url && artifact.original_sha256 === source.sha256 && artifact.data, `Artifact provenance mismatch for ${source.source_id}.`);
 }
+requireValid(researchExpansion.coverage.evidence_items === researchItems.size, 'Additional-evidence coverage count is incorrect.');
 const questionUpdates = uniqueIndex(researchExpansion.question_updates, 'question_id', 'Question updates');
 requireValid(questionUpdates.size === questionIds.size, 'Every investigation question requires a research update.');
 for (const item of researchItems.values()) {

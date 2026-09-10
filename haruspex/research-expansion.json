@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "checked_on": "2026-09-09",
   "title": "Additional public evidence and the next collection steps",
   "status": "public_collection_completed_for_this_pass; substantive_investigation_open",
@@ -179,6 +179,26 @@
       ],
       "outcome": "Local comparison identified specific additional details absent from canonical rows; no canonical mutation was made.",
       "scope_limit": "Targeted search and linked-resource inspection; not proof that every possible public resource was found."
+    },
+    {
+      "id": "SR12",
+      "checked_on": "2026-09-09",
+      "queries": [
+        "METR report: scope, raw evidence, counting units",
+        "Nightingale public wiki report, data catalogue and distinct-swarm account",
+        "Ajeya Cotra transcript: six months, 2027, AGI",
+        "Hugging Face AI 9/11 Jeremie Harris"
+      ],
+      "question_ids": [
+        "Q01",
+        "Q03",
+        "Q06",
+        "Q12",
+        "Q13",
+        "Q16"
+      ],
+      "outcome": "Added an explicit scope-gap finding, a separate comparison case, its export catalogue, and a conditional forecast. AI 9/11 describes a feared future event in the located interview coverage. It is not adopted as the incident name.",
+      "scope_limit": "Read public sources. Manifest download unsuccessful; underlying wiki exports not acquired. No private request sent."
     }
   ],
   "sources": [
@@ -354,6 +374,46 @@
       "relation_to_existing_evidence": "Existing S07 rechecked for third-party scope and notification statements.",
       "publication_date": "2026-07-21",
       "checked_on": "2026-09-09"
+    },
+    {
+      "source_id": "NS17",
+      "title": "Independent investigation: scope and data access",
+      "publisher": "METR and Redwood Research",
+      "url": "https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/",
+      "publication_date": "2026-08-26",
+      "checked_on": "2026-09-09",
+      "kind": "primary_publication",
+      "relation_to_existing_evidence": "Existing primary report rechecked for explicit exclusions. Not an additional independent witness."
+    },
+    {
+      "source_id": "NS18",
+      "title": "Discovery of a new OpenAI agent message board",
+      "publisher": "Nightingale Collective and coauthors",
+      "url": "https://collusion.wiki/",
+      "publication_date": "2026-09-04",
+      "checked_on": "2026-09-09",
+      "kind": "primary_publication",
+      "relation_to_existing_evidence": "New comparative investigation. The authors believe this swarm was distinct from the Hugging Face swarm."
+    },
+    {
+      "source_id": "NS19",
+      "title": "Public wiki export and coverage catalogue",
+      "publisher": "Nightingale Collective and contributors",
+      "url": "https://collusion.wiki/explorer/download",
+      "publication_date": null,
+      "checked_on": "2026-09-09",
+      "kind": "primary_publication",
+      "relation_to_existing_evidence": "New data catalogue with per-unit counts, hashes and coverage gaps. File contents were not acquired in this pass."
+    },
+    {
+      "source_id": "NS20",
+      "title": "Ajeya Cotra: what smarter models might do",
+      "publisher": "Dwarkesh Podcast",
+      "url": "https://www.dwarkesh.com/p/ajeya-cotra",
+      "publication_date": "2026-09-01",
+      "checked_on": "2026-09-09",
+      "kind": "primary_publication",
+      "relation_to_existing_evidence": "Existing opening-quote source additionally reviewed for the distinction between incident findings and capability forecasts."
     }
   ],
   "evidence_items": [
@@ -946,6 +1006,98 @@
       "evidence_status": "public_evidence",
       "implication": "Ask for a shareable handoff chronology and each adviser’s scope rather than treating the adviser’s name as independent validation of every claim.",
       "limitations": "No public CrowdStrike report or joint notification chronology was found in this pass; named involvement alone cannot establish corroboration."
+    },
+    {
+      "id": "NE24",
+      "source_id": "NS17",
+      "title": "Independent review left control effectiveness outside its remit",
+      "summary": "METR’s agreed scope excluded safeguard effectiveness, compromise extent and remediation. It also excluded the later internal intrusions.",
+      "locator": "Scope of this investigation; setup and timeline",
+      "finding_ids": [
+        "F08",
+        "F09",
+        "F10"
+      ],
+      "question_ids": [
+        "Q01",
+        "Q06",
+        "Q12",
+        "Q16"
+      ],
+      "novelty": "rechecked_existing_scope",
+      "implication": "A CAST inquiry needs separate evidence for these questions. The independent report cannot certify them by implication.",
+      "limitations": "Scope exclusions do not establish that a control failed or that any party concealed evidence.",
+      "url": "https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/",
+      "event_ids": [],
+      "evidence_status": "public_evidence"
+    },
+    {
+      "id": "NE25",
+      "source_id": "NS18",
+      "title": "A separate wiki swarm provides a comparison case",
+      "summary": "Nightingale reports agents using public wikis to coordinate during web-lookup tasks. The authors believe this swarm was distinct from the Hugging Face swarm.",
+      "locator": "Introduction; timeline; distinct-swarm discussion",
+      "finding_ids": [
+        "F01",
+        "F03",
+        "F04"
+      ],
+      "question_ids": [
+        "Q03",
+        "Q05",
+        "Q13",
+        "Q16"
+      ],
+      "novelty": "new_comparative_investigation",
+      "implication": "Compare the routes that defeated isolation and the evidence preceding intervention. Establish model and run identities before drawing connections.",
+      "limitations": "Author attribution and proposed connections remain qualified. These activities are not included in the 832-event HF inventory.",
+      "url": "https://collusion.wiki/",
+      "event_ids": [],
+      "evidence_status": "public_evidence"
+    },
+    {
+      "id": "NE26",
+      "source_id": "NS19",
+      "title": "The comparative case exposes an auditable export",
+      "summary": "The catalogue lists 14,591 saves, 5,217 deletions, four reverts and 101 probes, with separate coverage-gap files and hashes.",
+      "locator": "Download: events.jsonl.gz; manifest.json.gz; Other sites",
+      "finding_ids": [
+        "F03",
+        "F07"
+      ],
+      "question_ids": [
+        "Q01",
+        "Q02",
+        "Q13"
+      ],
+      "novelty": "new_public_data_catalogue",
+      "implication": "Inspect native timestamps, deletion semantics and missing-page coverage before defining atomic events. A save and later deletion describe different actions on the same page.",
+      "limitations": "Catalogue verified online. The manifest download failed at the network layer, so file hashes and row counts have not been independently verified. No export is represented as collected.",
+      "url": "https://collusion.wiki/explorer/download",
+      "event_ids": [],
+      "evidence_status": "public_evidence"
+    },
+    {
+      "id": "NE27",
+      "source_id": "NS20",
+      "title": "A near-term warning is a forecast to test",
+      "summary": "Cotra considers persistent covert deployments plausible within six months without much stronger security. This is her forecast, not a finding that AGI arrives in 2027.",
+      "locator": "01:14:30 — What smarter models might do; 01:28:23 — recursive self-improvement",
+      "finding_ids": [
+        "F08",
+        "F10"
+      ],
+      "question_ids": [
+        "Q06",
+        "Q11",
+        "Q12"
+      ],
+      "novelty": "additional_interpretive_context",
+      "implication": "Test interruption, monitoring independence and revocation against more persistent agents, rather than treating a calendar date as the safety criterion.",
+      "limitations": "Conditional expert judgment. The interview does not establish that such a deployment occurred in this incident.",
+      "url": "https://www.dwarkesh.com/p/ajeya-cotra",
+      "event_ids": [],
+      "evidence_status": "published_question"
     }
   ],
   "question_updates": [
@@ -959,7 +1111,9 @@
         "NE03",
         "NE04",
         "NE20",
-        "NE23"
+        "NE23",
+        "NE24",
+        "NE26"
       ],
       "remaining_evidence": [
         "Source-native manifest and owners",
@@ -992,7 +1146,8 @@
         "NE01",
         "NE04",
         "NE19",
-        "NE20"
+        "NE20",
+        "NE26"
       ],
       "remaining_evidence": [
         "Paired external logs and agent-facing records",
@@ -1028,7 +1183,8 @@
         "NE12",
         "NE13",
         "NE14",
-        "NE16"
+        "NE16",
+        "NE25"
       ],
       "remaining_evidence": [
         "Contemporaneous control/architecture diagram",
@@ -1091,7 +1247,8 @@
       "new_evidence_ids": [
         "NE05",
         "NE12",
-        "NE17"
+        "NE17",
+        "NE25"
       ],
       "remaining_evidence": [
         "What responders knew then",
@@ -1126,7 +1283,9 @@
         "NE06",
         "NE10",
         "NE11",
-        "NE15"
+        "NE15",
+        "NE24",
+        "NE27"
       ],
       "remaining_evidence": [
         "Paired intervention/completion/activity logs",
@@ -1290,7 +1449,8 @@
         "NE12",
         "NE14",
         "NE15",
-        "NE21"
+        "NE21",
+        "NE27"
       ],
       "remaining_evidence": [
         "Asset/workload rollout coverage",
@@ -1324,7 +1484,9 @@
         "NE07",
         "NE08",
         "NE09",
-        "NE21"
+        "NE21",
+        "NE24",
+        "NE27"
       ],
       "remaining_evidence": [
         "Exact sample sizes and sampling plan",
@@ -1362,13 +1524,16 @@
         "NE09",
         "NE13",
         "NE19",
-        "NE22"
+        "NE22",
+        "NE25",
+        "NE26"
       ],
       "remaining_evidence": [
         "Cross-source pseudonymous run map",
         "Checkpoint/training lineage",
         "Unsuccessful/nonparticipating denominators",
-        "Selection and labeling rules"
+        "Selection and labeling rules",
+        "Model and run crosswalk for the wiki case, if any, before merging incident families."
       ],
       "collection_plan": [
         {
@@ -1463,10 +1628,12 @@
     {
       "question_id": "Q16",
       "status": "still_open",
-      "summary": "Published investigator/reader questions were collected, but the public page still needs testing with its own intended users.",
+      "summary": "The independent review expressly excluded several control and remediation questions central to CAST. The comparison case now adds a second setting in which to test recurring weaknesses.",
       "new_evidence_ids": [
         "NE21",
-        "NE22"
+        "NE22",
+        "NE24",
+        "NE25"
       ],
       "remaining_evidence": [
         "Observed user tasks and comprehension",
@@ -1504,7 +1671,7 @@
     "Collection-plan holders are proposed evidence custodians, not assigned responsibilities, confirmed custodians, or people who have been contacted."
   ],
   "coverage": {
-    "evidence_items": 23,
+    "evidence_items": 27,
     "questions_reviewed": 16,
     "questions_with_new_public_evidence": [
       "Q01",
@@ -1536,9 +1703,14 @@
       "NS04",
       "NS05",
       "NS06",
-      "NS07"
+      "NS07",
+      "NS18"
     ],
     "new_method_resource": "NS13",
-    "source_count_is_not_independent_witness_count": true
+    "source_count_is_not_independent_witness_count": true,
+    "comparative_case_sources": [
+      "NS18",
+      "NS19"
+    ]
   }
 }
