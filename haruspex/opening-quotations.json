@@ -3,7 +3,7 @@
   "recommendation": {
     "hero": "cotra-warning-shot",
     "optional_alternates": [],
-    "presentation": "Display only Cotra. Link the author name directly to the primary transcript and show the user-specified role credit (M.T.S. @ METR) in smaller type. Exact excerpt context and publication details remain in this provenance file, rather than the title page.",
+    "presentation": "Display only Cotra. Link the author name directly to the primary transcript and show the role credit (M.T.S. @ METR) in smaller type. Exact excerpt context and publication details remain in this provenance file, rather than the title page.",
     "caution": "These are contemporaneous reactions to the incident. They are observers' interpretations, not categorical findings that this was a catastrophe. Do not replace might with is or present any 9/11 comparison as verified."
   },
   "quotations": [
@@ -28,13 +28,13 @@
       "recommended_use": "Initial hero quotation",
       "word_count": 10,
       "display_role": "M.T.S. @ METR",
-      "display_role_basis": "Credit wording supplied by the site owner."
+      "display_role_basis": "Credit wording chosen for display; it is not quoted from the source."
     }
   ],
   "analogy_check": {
-    "requested_analogy": "AI 9/11",
+    "candidate_analogy": "AI 9/11",
     "status": "not_verified",
-    "summary": "No attributable primary quotation from a recognized researcher calling the OpenAI–Hugging Face incident ‘AI 9/11’ was located. Search results included proposals for a 9/11-Commission-style investigation and an essay comparing engineering mindsets; neither establishes an equivalence of harm or supplies the requested luminary quote.",
+    "summary": "No attributable primary quotation from a recognized researcher calling the OpenAI–Hugging Face incident ‘AI 9/11’ was located. Search results included proposals for a 9/11-Commission-style investigation and an essay comparing engineering mindsets; neither establishes an equivalence of harm or supplies an attributable quotation from a recognized researcher.",
     "queries": [
       "\"OpenAI\" \"Hugging Face\" \"9/11\" 2026",
       "\"Hugging Face\" \"9/11\" -site:reddit.com",
