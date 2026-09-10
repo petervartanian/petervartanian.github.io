@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = new URL('./', import.meta.url);
 const datasetPath = new URL('../outputs/haruspex-2026-09-09/haruspex-dataset.json', root);
-const [template, styles, app, dataset, severity, visuals, ontology, query, temporal, fieldLayout, cast, castView, research, quotations, collectionMethod, airiLogo] = await Promise.all([
+const [template, styles, app, dataset, severity, visuals, ontology, query, temporal, fieldLayout, cast, castView, research, quotations, collectionMethod, airiLogo, arrival] = await Promise.all([
   readFile(new URL('index.template.html', root), 'utf8'),
   readFile(new URL('style.css', root), 'utf8'),
   readFile(new URL('app.js', root), 'utf8'),
@@ -20,6 +20,7 @@ const [template, styles, app, dataset, severity, visuals, ontology, query, tempo
   readFile(new URL('opening-quotations.json', root), 'utf8'),
   readFile(new URL('collection-method.json', root), 'utf8'),
   readFile(new URL('assets/mit-airi-official.svg', root), 'utf8'),
+  readFile(new URL('arrival.js', root), 'utf8'),
 ]);
 const parsed = JSON.parse(dataset);
 const encodings = JSON.parse(visuals);
@@ -190,7 +191,7 @@ const html = template
   .replace('/* CAST */', () => JSON.stringify(castAnalysis).replace(/</g, '\\u003c'))
   .replace('/* RESEARCH */', () => JSON.stringify(researchExpansion).replace(/</g, '\\u003c'))
   .replace('/* QUOTATIONS */', () => JSON.stringify(openingQuotations).replace(/</g, '\\u003c'))
-  .replace('/* QUERY */', () => `${query}\n${fieldLayout}\n${castView}`)
+  .replace('/* QUERY */', () => `${query}\n${fieldLayout}\n${castView}\n${arrival}`)
   .replace('/* APP */', () => app.replace(/<\/script/gi, '<\\/script'));
 const output = new URL('index.html', root);
 await writeFile(output, html);

@@ -175,10 +175,17 @@ Every filtered record is reachable through the keyboard-accessible register. The
 - `index.template.html`, `style.css`, `app.js`, `build.mjs`: source files; rebuild with `node build.mjs`.
 - `validation.json`: recorded data and interaction checks.
 
-This is application version 10.1.0. Severity scores and canonical records are unchanged; additional research is tracked separately; the 3.0.1 assessment revision only standardizes Near-miss spelling. The canonical dataset remains unchanged; reviewed assessments, corrected current evidence display, temporal bounds, ontology and visual conventions live in separate versioned layers. Full original fields remain available on each event.
+This is application version 11.0.0. Severity scores and canonical records are unchanged; additional research is tracked separately; the 3.0.1 assessment revision only standardizes Near-miss spelling. The canonical dataset remains unchanged; reviewed assessments, corrected current evidence display, temporal bounds, ontology and visual conventions live in separate versioned layers. Full original fields remain available on each event.
 
 The 832 records are a working inventory drawn from 11 primary sources, including the three starter documents. Some records represent group actions. The inventory is not a proven maximum and does not reconstruct inaccessible logs. Four source comparisons remain explicit. Completed review means each pending record received a defensible disposition, not that every source claim or event is independently verified.
 
 The Event-swarm name is inspired by [beeswarm plots](https://observablehq.github.io/plot/transforms/dodge), which preserve individual data points. Its use with uncertain time intervals is a Haruspex adaptation.
 
 Version 10.1 shortens the introduction and uses Events in navigation. View snapshots preserve computed layout, scroll positions and canvas sizing; interrupted fades retain their displayed opacity. Investigation traces fit before their single view transition. Camera gestures briefly dissolve the current animated frame, and paper resets do not animate scroll position.
+
+
+Version 11 presents the approved July introduction, with quiet links on the valuation, collaborating agents and later internal intrusions. The official AIRI mark has no caption. A short, skippable iridescent opening resolves one incident into its constituent activity. Entering the field repeats the one-to-many idea using the actual currently plotted events. Context and Unresolved remain independent assessment fields.
+
+The six palette values are unchanged. Markers now use cached glow sprites and a narrow separating edge. Source scope uses clearly distinct sizes: one event (2.3px radius) and grouped activity (4.4px radius), with the usual responsive/zoom adjustments. Background density retains its illustrative status. The tiny egg remains at the bottom-right of the title page and unlocks only decorative catalogue numbers.
+
+Terminology: [Wikipedia’s 2026 OpenAI agent cyberattacks article](https://en.wikipedia.org/wiki/2026_OpenAI_agent_cyberattacks) was checked on 9 September 2026. It uses plural attacks for activities grouped under the wider incident. Its scope also includes a DseWiki report; this visual revision does not add or claim to cover that separate corpus. The opening form represents the existing collection, not a new historical event or a verified causal aggregate.

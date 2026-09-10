@@ -13,31 +13,17 @@
   <div class="grain" aria-hidden="true"></div>
   <main>
     <section id="intro" class="intro" aria-labelledby="intro-title">
-      <svg class="intro-art" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs><linearGradient id="intro-stream-color" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#2BD2C2" stop-opacity="0"/><stop offset=".46" stop-color="#2BD2C2" stop-opacity=".55"/><stop offset=".75" stop-color="#C691FE" stop-opacity=".5"/><stop offset="1" stop-color="#E2B93A" stop-opacity="0"/></linearGradient></defs>
-        <g fill="none" stroke="url(#intro-stream-color)">
-          <path d="M-90 970C380 940 537 785 790 701S1180 503 1680 195" stroke-width="1.3"/>
-          <path d="M-80 978C405 956 558 803 807 719S1212 518 1690 214" stroke-width=".6"/>
-          <path d="M-40 987C398 965 582 823 829 741S1274 518 1710 244" stroke-width=".8"/>
-          <path d="M-60 959C363 918 514 770 770 680S1170 461 1670 154" stroke-width=".6"/>
-          <path d="M-100 947C382 885 508 733 774 658S1122 427 1650 114" stroke-width=".7"/>
-        </g>
-        <g fill="#2BD2C2"><circle cx="852" cy="677" r="4"/><circle cx="894" cy="653" r="2"/><circle cx="802" cy="701" r="1.7"/><circle cx="1180" cy="488" r="2.3"/><circle cx="1014" cy="579" r="1.3"/></g>
-        <g fill="#E2B93A"><circle cx="1201" cy="468" r="6"/><circle cx="1329" cy="398" r="1.7"/></g>
-        <path d="m1099 543 5-8 5 8-5 8Z" fill="#C691FE"/>
-        <path d="m1458 288 8 13h-16Z" fill="#FF8346"/>
-        <circle cx="979" cy="605" r="5" fill="none" stroke="#68CA80" stroke-width="1.3"/>
-      </svg>
+      <canvas id="intro-field" class="intro-art" aria-hidden="true"></canvas>
       <header class="intro-header"><a href="#intro" class="intro-brand" aria-label="Haruspex title page">Haruspex<span aria-hidden="true">·</span></a></header>
       <div class="intro-main">
         <div class="opening-quotation" id="opening-quotation">
           <h1 id="intro-title">“/* OPENING_QUOTE */”</h1>
           <p class="quote-credit"><a id="quote-source" href="/* OPENING_URL */" target="_blank" rel="noopener noreferrer">/* OPENING_AUTHOR */</a><span id="quote-role">(M.T.S. @ METR)</span></p>
         </div>
-        <p class="intro-story">OpenAI’s evaluation agents broke into Hugging Face on 11 July 2026. Hugging Face cut off their access two days later. Attacks on OpenAI’s own systems continued until 19 July.</p>
+        <p class="intro-story">In July 2026, esp. July 11–13 but continuing until July 19, AI agents under evaluation at OpenAI broke into Hugging Face, a ~<a href="https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/" target="_blank" rel="noopener noreferrer" title="NVIDIA’s September 2026 acquisition announcement">$13B</a> hub for AI models and datasets. Roughly <a href="https://www.planned-obsolescence.org/p/the-hugging-face-attack-surprised" target="_blank" rel="noopener noreferrer">700 agents</a> collaborated in the attack. The <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noopener noreferrer">later intrusions</a> targeted OpenAI itself. AI systems had organized a sustained attack no human had ordered. Preventing a worse recurrence requires reconstructing, event by event, how control failed, who could have intervened, and whether the protections that held would withstand more capable agents.</p>
         <div class="intro-actions"><a id="enter-explorer" class="intro-enter" href="#scene">Enter the field</a><button id="intro-cast" class="intro-cast">Read the investigation</button></div>
       </div>
-      <div class="intro-foot"><a class="airi-reference" href="https://airisk.mit.edu/" target="_blank" rel="noopener noreferrer" aria-label="MIT AI Risk Initiative — risk framework reference"><img src="/* AIRI_LOGO */" width="150" height="45" alt="MIT AI Risk Initiative"><span>Risk framework reference</span></a>
+      <div class="intro-foot"><a class="airi-reference" href="https://airisk.mit.edu/" target="_blank" rel="noopener noreferrer" aria-label="MIT AI Risk Initiative"><img src="/* AIRI_LOGO */" width="150" height="45" alt="MIT AI Risk Initiative"></a>
         <button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button>
       </div>
     </section>
@@ -144,7 +130,7 @@
             <span><svg aria-hidden="true" viewBox="0 0 14 14"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-dasharray="3 2"/></svg><span class="sr-only">Broken outline: </span>Unresolved</span>
           </div>
           <div class="date-window-key"><svg aria-hidden="true" viewBox="0 0 58 18"><defs><linearGradient id="legend-date-fade"><stop offset="0" stop-color="currentColor" stop-opacity="0"/><stop offset="1" stop-color="currentColor" stop-opacity=".85"/></linearGradient></defs><path d="M1 16C24 16 28 5 50 5" fill="none" stroke="url(#legend-date-fade)" stroke-width="2"/><circle cx="51" cy="5" r="3" fill="currentColor"/></svg><span>Unknown start → by date</span></div>
-          <div class="legend-severity"><div class="size-key" title="Small: one reported unit. Larger: grouped activity with individual instances unavailable. Size does not give an exact count."><i></i><span>Single</span><i></i><span>Grouped</span></div><button id="framework-info" class="severity-help" aria-label="Read severity definitions">Severity definitions</button></div>
+          <div class="legend-severity"><div class="size-key" title="Small: one event. Large: actions the source groups together without describing each individually."><i></i><span>One event</span><i></i><span>Grouped activity</span></div><button id="framework-info" class="severity-help" aria-label="Read severity definitions">Severity definitions</button></div>
           <div class="background-key"><span>Distant points · aggregate activity</span><button id="background-info" aria-haspopup="dialog" aria-label="Read sources for the aggregate background activity">Sources</button></div>
           <div class="plot-tools" role="group" aria-label="Field navigation">
             <div class="axis-zoom"><span>Time ↔</span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
@@ -152,7 +138,7 @@
             <button id="zoom-fit" class="fit-field" aria-label="Fit matching events on both axes">Fit</button>
             <button id="move-up" class="pan-y" aria-label="Pan severity up">↑</button><button id="move-down" class="pan-y" aria-label="Pan severity down">↓</button>
           </div>
-          <p class="reading-note">Color identifies the workstream; shape shows evidence. Context keeps that shape hollow, and Unresolved uses a broken outline. Height follows severity.</p>
+          <p class="reading-note">Drag to move. Scroll to zoom.</p>
         </section>
         <div class="scroll-progress" aria-hidden="true"><span></span></div>
       </div>

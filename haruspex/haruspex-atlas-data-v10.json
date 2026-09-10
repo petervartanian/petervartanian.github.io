@@ -71498,7 +71498,7 @@
     }
   },
   "visual_encodings": {
-    "version": "6.0.0",
+    "version": "6.1.0",
     "name": "Incident workstreams",
     "source_field": "phase",
     "groups": [
@@ -71593,7 +71593,7 @@
       "hollow": "Hollow foreground shapes identify the completed Context assessment disposition. They do not mean uncertain dates, missing source evidence or a Near-miss. The shape geometry still identifies Reported, Reasoning, Inferred or Accounts differ, and the visible edge retains the workstream color.",
       "time_uncertainty": "Finite date-window marks and attached temporal evidence communicate date uncertainty. The 12 records without a supported earliest date retain their own IDs in the selected impact or separate assessment field, with selectable curved trails that fade to the left. Each head marks the inferred exclusive upper boundary at 2026-07-14T00:00:00Z, labeled By 13 July, rather than an observed event time. The fading left end means the start is unknown; it invents neither a start date nor a duration. A head outside the visible time range remains outside instead of being clamped to the edge; its visible trail remains selectable. Curvature distinguishes the trail from an observed chronology and does not encode a changing impact, path, or causal sequence.",
       "legend": "Six labeled workstream swatches retain the same rich base palette in each view. Legend labels, filtering and attached workstream names also identify each group. Evidence shapes, assessment fills and a neutral size key explain the independent encodings; color alone is never the only group label.",
-      "size": "Drawn marker size identifies record scope with two categories. Single reported units use the smaller size; grouped activity uses the larger size when the canonical source_granularity value begins with aggregate. This is a binary classification, not a proportional count of underlying instances, an importance or confidence score, or a severity cue. Evidence shapes are corrected to approximately equal areas within each class. Zoom and selection add temporary magnification. The established packing scaffold is retained; the size reinterpretation does not arbitrarily separate records.",
+      "size": "Two visibly distinct sizes identify source scope: radius 2.3 CSS pixels for a single event and 4.4 for grouped activity at the base desktop scale. Grouped means the source combines actions without describing each individually. This is a binary category, not a proportional count, severity, confidence or importance. Equal-area evidence geometry and temporary zoom/selection magnification remain. Existing positions are retained.",
       "recommended_opacity": {
         "all_workstreams_foreground": 1,
         "selected_or_filtered_workstream": 1,
@@ -71608,7 +71608,9 @@
       "open_left_trails": "No separate undated row or DOM comet buttons are used. The 12 open-left records retain their canonical IDs in the selected impact or separate assessment field. Canvas hit-testing can select their heads or curved visible trails, and keyboard users can open them through the register. The head is an inferred upper-bound marker, not the date of occurrence. Trail length and curvature do not encode duration, impact change or a causal trajectory.",
       "assessment_views": "Impact contains 599 entries, Context 192 and Unresolved 41. Impact includes adverse effects, Near-misses and Preventive actions. These unnumbered controls switch between an ordered impact field and two separate fields without numerical ranking. Context and Unresolved retain their completed review dispositions and source evidence; neither is zero, negative severity, or a continuation below Preventive.",
       "view_navigation": "The primary view labels are View #1: Event-swarm and View #2: Bow-tie; the optional systems inquiry is Bonus: Investigate!. View numbers distinguish layouts, not assessment values.",
-      "lifecycle_navigation": "Full, I. Before, II. During and III. After group existing incident roles. Roman numerals identify lifecycle sections, not exact non-overlapping date windows. Impact, Context and Unresolved remain unnumbered alternatives, not additional lifecycle steps or a severity ranking."
+      "lifecycle_navigation": "Full, I. Before, II. During and III. After group existing incident roles. Roman numerals identify lifecycle sections, not exact non-overlapping date windows. Impact, Context and Unresolved remain unnumbered alternatives, not additional lifecycle steps or a severity ranking.",
+      "light": "The six existing workstream colors are unchanged. Cached high-resolution marker sprites add low-opacity colored halos and a restrained surface highlight. A narrow dark edge separates overlapping silhouettes. The background retains thousands of neutral illustrative density marks, with a faint decorative ribbon using the same six hues. Light and atmospheric color encode no additional variable.",
+      "incident_overview": "A single iridescent form represents the incident as a collection of connected attacks, decisions, responses and findings. At the top-level page opening it dissolves into 832 illustrative particles and reveals the introduction. Entering the event field resolves the compact form into the currently plotted events. The opening is decorative, not an additional event, a severity assessment, chronology or claim that every event is causally connected. Reduced motion and deep links skip the entrance animation. Pointer, keyboard, scroll, resize or backgrounding dismiss the short opening immediately."
     },
     "counts": {
       "evaluation": 143,
@@ -71618,7 +71620,7 @@
       "response": 68,
       "investigation": 115
     },
-    "migration_note": "Version 6.0 retains the six categorical workstream colors and adds dark neutral keylines to separate overlap without moving event coordinates. Drawn size now distinguishes single reported units from grouped activity instead of duplicating severity. Accounts differ uses a six-point polygonal star. Decorative star numbers remain hidden until the title-page egg is found. Impact replaces the longer field label; lifecycle labels gain Roman numerals and view labels explicitly distinguish the two visualizations and bonus inquiry. All workstream assignments, canonical records, assessment scores and temporal semantics are unchanged.",
+    "migration_note": "Version 6.1 restores luminous rendering of the existing six workstream colors, makes single/grouped sizes visibly distinct, and adds a one-to-many opening form. All event assignments, dates, severity assessments and canonical fields remain unchanged.",
     "palette_calibration": {
       "color_space": "OKLCH",
       "lightness_range": [

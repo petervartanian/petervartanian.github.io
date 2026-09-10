@@ -1,7 +1,7 @@
 {
-  "application_version": "10.1.0",
+  "application_version": "11.0.0",
   "assessments_version": "3.0.1",
-  "visual_encodings_version": "6.0.0",
+  "visual_encodings_version": "6.1.0",
   "incident_ontology_version": "1.0.0",
   "temporal_assessments_version": "1.0.0",
   "verified_on": "2026-09-09",
@@ -109,7 +109,12 @@
     "v10.1 browser review: rapid swarm/bow-tie/paper reversals end with one selected view and no leftover snapshots. Outgoing paper snapshots preserve their 1628px reading position and have no duplicate IDs.",
     "v10.1 browser review: lifecycle switching, keyboard zoom and the date handle remain responsive during movement. The paper detection/response link shows 8 related events in a fitted time window.",
     "v10.1 independent review: active child opacity is included in outgoing snapshots; overview gestures use the short fade bridge; enabling reduced motion cancels view fades. Syntax and build checks pass.",
-    "v10.1 console review captured no errors. No end-to-end FPS benchmark is claimed."
+    "v10.1 console review captured no errors. No end-to-end FPS benchmark is claimed.",
+    "v11 browser review: the approved paragraph renders verbatim in text content, with quiet source links. The AIRI caption is absent. The initial view shows a single six-color form, then clears it to reveal the introduction.",
+    "v11 browser review: entering the field unfolds a compact form into the existing 599 Impact events. Switching to Investigate before the unfolding finishes leaves no live form or retained view snapshot.",
+    "v11 browser review: Context remains hollow, existing view switches preserve the selected 192 events, and no horizontal overflow appears at 664px or 390px widths. The mobile legend fits the viewport and displays 6px/13px size examples.",
+    "v11 browser review: the egg at the title-page bottom-right toggles the decorative catalogue. Its reveal is a five-digit number and opens no event details. The 390px field contains 6096 illustrative background points.",
+    "v11: canonical SHA-256 remains unchanged; syntax and strict build checks pass. Browser console review captured no errors. Marker glow uses a bounded sprite cache; no end-to-end FPS benchmark is claimed."
   ],
   "limits": [
     "This is a provisional, developing public-source CAST analysis, not a completed or exhaustive investigation. Search completeness and a maximal number of obtainable facts are not claimed.",
@@ -143,7 +148,7 @@
         "cached_projection_median": 0.025
       }
     },
-    "benchmark_limit": "Carried forward from v7: computation-only microbenchmark excluding canvas rasterization and DOM updates. Not rerun for v10; no end-to-end FPS claim."
+    "benchmark_limit": "Historical computation-only microbenchmark excludes canvas rasterization and DOM updates. Not rerun for v11. Browser interactions were reviewed; no end-to-end FPS claim."
   },
   "aggregate_background": {
     "semantics": "Illustrative density of source-reported aggregate activity not individually resolved in the detailed record; not one particle per event.",

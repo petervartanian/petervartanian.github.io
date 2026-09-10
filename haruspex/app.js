@@ -179,17 +179,22 @@
       n = Math.imul(n ^ (n >>> 15), 0x735a2d97);
       return ((n ^ (n >>> 15)) >>> 0) / 4294967296;
     };
+    window.HaruspexArrival?.atmosphere(context, width, height, visualData.groups.map(group => group.fill), .72);
     // Stable decorative catalogue numbers identify drawn stars, never historical events.
     distantStars.length = 0; starGrid.clear();
     $('#star-number').hidden = true;
     for (let i = 0; i < count; i += 1) {
       const x = hash(i * 5 + 71771) * width;
       const y = hash(i * 5 + 71772) * height;
-      const size = .65 + Math.pow(hash(i * 5 + 71773), 2) * .7;
+      const size = .45 + Math.pow(hash(i * 5 + 71773), 3) * .95;
       const atmosphere = .4 + .6 * Math.exp(-Math.pow((y / height - .52) / .32, 2));
-      const alpha = (.065 + hash(i * 5 + 71774) * .16) * atmosphere;
+      const alpha = (.045 + hash(i * 5 + 71774) * .17) * atmosphere;
       context.fillStyle = `rgba(173,192,211,${alpha})`;
       context.fillRect(x, y, size, size);
+      if (i % 317 === 0) {
+        context.strokeStyle = '#CBECFF36'; context.lineWidth = .5; context.beginPath();
+        context.moveTo(x - 3, y); context.lineTo(x + 3, y); context.moveTo(x, y - 3); context.lineTo(x, y + 3); context.stroke();
+      }
       const star = { number: i + 1, x: x + size / 2, y: y + size / 2 };
       distantStars.push(star);
       const cell = `${Math.floor(x / 32)},${Math.floor(y / 32)}`;
@@ -265,7 +270,7 @@
   }
   function markerRadius(event, narrow = false) {
     // Two categories, not a numerical estimate of the hidden instances.
-    return (event.source_granularity.startsWith('aggregate') ? 3.25 : 2.35) * (narrow ? .94 : 1);
+    return (event.source_granularity.startsWith('aggregate') ? 4.4 : 2.3) * (narrow ? .94 : 1);
   }
   function snapshotCanvas(canvas) {
     if (!canvas) return null;
@@ -274,34 +279,63 @@
     snapshot.getContext('2d').drawImage(canvas, 0, 0);
     return snapshot;
   }
+  const markerSprites = new Map();
   function shape(context, event, x, y, radius, alpha = 1) {
+    if (alpha <= .002 || radius <= 0) return;
     const band = eventStyle(event);
-    const status = event._status;
-    context.save(); context.globalAlpha = alpha;
     const treatment = bandKey(event);
     const hollow = treatment === 'context' || treatment === 'unresolved';
-    context.beginPath();
-    if (status === 'reported') context.arc(x, y, radius, 0, Math.PI * 2);
-    else {
-      const star = status === 'disputed';
-      const count = star ? 12 : status === 'reasoning' ? 4 : 3;
-      const equalArea = star ? Math.sqrt(Math.PI / (6 * .48 * Math.sin(Math.PI / 6))) : Math.sqrt((2 * Math.PI) / (count * Math.sin(2 * Math.PI / count)));
-      for (let i = 0; i < count; i += 1) {
-        const angle = -Math.PI / 2 + (Math.PI * 2 * i) / count;
-        const r = radius * equalArea * (star && i % 2 ? .48 : 1);
-        const px = x + Math.cos(angle) * r, py = y + Math.sin(angle) * r;
-        if (i === 0) context.moveTo(px, py); else context.lineTo(px, py);
+    const r = Math.max(.5, Math.round(radius * 4) / 4);
+    const key = `${band.key}:${event._status}:${hollow ? treatment : 'solid'}:${r}`;
+    let sprite = markerSprites.get(key);
+    if (!sprite) {
+      const ratio = 2;
+      const extent = Math.ceil(r * 4 + 7);
+      const canvas = document.createElement('canvas');
+      canvas.width = canvas.height = extent * 2 * ratio;
+      const brush = canvas.getContext('2d');
+      brush.scale(ratio, ratio); brush.translate(extent, extent);
+      const light = brush.createRadialGradient(0, 0, r * .35, 0, 0, extent);
+      light.addColorStop(0, `${band.fill}48`);
+      light.addColorStop(.22, `${band.fill}2C`);
+      light.addColorStop(.48, `${band.fill}12`);
+      light.addColorStop(1, `${band.fill}00`);
+      brush.fillStyle = light; brush.fillRect(-extent, -extent, extent * 2, extent * 2);
+      brush.beginPath();
+      if (event._status === 'reported') brush.arc(0, 0, r, 0, Math.PI * 2);
+      else {
+        const star = event._status === 'disputed';
+        const count = star ? 12 : event._status === 'reasoning' ? 4 : 3;
+        const equalArea = star ? Math.sqrt(Math.PI / (6 * .48 * Math.sin(Math.PI / 6))) : Math.sqrt((2 * Math.PI) / (count * Math.sin(2 * Math.PI / count)));
+        for (let i = 0; i < count; i += 1) {
+          const angle = -Math.PI / 2 + Math.PI * 2 * i / count;
+          const length = r * equalArea * (star && i % 2 ? .48 : 1);
+          const px = Math.cos(angle) * length, py = Math.sin(angle) * length;
+          if (!i) brush.moveTo(px, py); else brush.lineTo(px, py);
+        }
+        brush.closePath();
       }
-      context.closePath();
+      // A narrow dark edge preserves each silhouette without extinguishing its light.
+      brush.fillStyle = '#091119'; brush.strokeStyle = '#091119'; brush.lineWidth = 1.35;
+      brush.fill(); brush.stroke();
+      const surface = brush.createLinearGradient(-r, -r, r, r);
+      surface.addColorStop(0, band.fill); surface.addColorStop(.52, band.fill); surface.addColorStop(1, `${band.fill}CF`);
+      brush.fillStyle = surface; brush.strokeStyle = band.outline; brush.lineWidth = hollow ? 1.15 : .65;
+      if (treatment === 'unresolved') brush.setLineDash([2, 1.7]);
+      if (!hollow) brush.fill();
+      brush.stroke();
+      if (!hollow) {
+        brush.save(); brush.clip(); brush.setLineDash([]);
+        const sheen = brush.createRadialGradient(-r * .3, -r * .4, 0, -r * .3, -r * .4, r * 1.4);
+        sheen.addColorStop(0, '#EDFFFF60'); sheen.addColorStop(.4, '#EDFFFF18'); sheen.addColorStop(1, '#EDFFFF00');
+        brush.fillStyle = sheen; brush.fillRect(-r * 1.6, -r * 1.6, r * 3.2, r * 3.2); brush.restore();
+      }
+      sprite = {canvas, extent};
+      if (markerSprites.size >= 512) markerSprites.delete(markerSprites.keys().next().value);
+      markerSprites.set(key, sprite);
     }
-    // Opaque dark keylines separate overlapping colors at their existing coordinates.
-    // Open interiors remain legibly hollow even when another marker sits behind them.
-    context.setLineDash([]); context.fillStyle = '#0b1117'; context.strokeStyle = '#0b1117'; context.lineWidth = 2.3;
-    context.fill(); context.stroke();
-    context.fillStyle = band.fill; context.strokeStyle = band.outline; context.lineWidth = hollow ? 1 : .55;
-    if (treatment === 'unresolved') context.setLineDash([1.5, 1.3]);
-    if (!hollow) context.fill();
-    context.stroke();
+    context.save(); context.globalAlpha = alpha;
+    context.drawImage(sprite.canvas, x - sprite.extent, y - sprite.extent, sprite.extent * 2, sprite.extent * 2);
     context.restore();
   }
   function drawBackdrop(width, height, lanes, left, right) {
@@ -599,6 +633,9 @@
   let movingBackdrop = null;
   let transitionLabels = null;
   function stopMotion() {
+    $$('.visual-column > .field-origin').forEach(node => {
+      node.getAnimations().forEach(animation => animation.cancel()); node.remove();
+    });
     if (motionFrame !== null) cancelAnimationFrame(motionFrame);
     motionFrame = null; movingPoints = null; movingBackdrop = null;
     transitionLabels?.remove(); transitionLabels = null;
@@ -958,7 +995,7 @@
     element.hidden = true;
   }
   function syncControls() {
-    $('.reading-note').textContent = state.view === 'stream' ? 'Drag to pan · Scroll to zoom · Shift: time · Alt: vertical. Context and Unresolved open separate unordered fields; their height is not severity.' : 'Before, during and after describe incident roles. Select a stage or event to explore its connections.';
+    $('.reading-note').textContent = state.view === 'stream' ? 'Drag to move. Scroll to zoom.' : 'Select an event to inspect its evidence.';
     $('.legend .toggle').hidden = false;
     $('.legend .toggle').style.visibility = state.view === 'stream' ? '' : 'hidden';
     $('.legend .toggle').inert = state.view !== 'stream';
@@ -1071,6 +1108,15 @@
       ghost.append(live);
       if (transitionLabels) ghost.append(transitionLabels.cloneNode(true));
     }
+    const origin = $('.visual-column > .field-origin');
+    if (origin) {
+      const copy = origin.cloneNode(true);
+      const computed = getComputedStyle(origin);
+      copy.style.cssText = Array.from(computed, key => `${key}:${computed.getPropertyValue(key)};`).join('');
+      copy.style.setProperty('animation', 'none', 'important');
+      copy.style.setProperty('transition', 'none', 'important');
+      ghost.append(copy);
+    }
     $('.visual-column').append(ghost);
     for (const [copy, top, left] of scrolls) { copy.style.scrollBehavior='auto'; copy.scrollTop=top; copy.scrollLeft=left; }
     return ghost;
@@ -1102,6 +1148,24 @@
       fadeFrozenView(ghost);
     } else $$('.view-ghost').forEach(element => element.remove());
     syncNavigationIndicators();
+  }
+  function enterField() {
+    changeView('stream'); finishCamera(); stopMotion();
+    $('#scene').scrollIntoView({behavior:'instant'});
+    if (reducedMotion.matches) return;
+    const destination = currentPositions();
+    if (!destination.length) return;
+    const rect = $('.visual-column').getBoundingClientRect();
+    const center = {x:rect.width * .52, y:rect.height * .51};
+    const seed = random(832);
+    const source = destination.map(point => {
+      const angle = seed() * Math.PI * 2;
+      const distance = Math.sqrt(seed()) * Math.min(58, rect.width * .09);
+      return {...point, x:center.x + Math.cos(angle) * distance, y:center.y + Math.sin(angle) * distance * .9, radius:1.3, alpha:.9, vx:0, vy:0};
+    });
+    source.range = destination.range; source.backdrop = null; source.labels = ''; source.labelOpacity = 0;
+    animateLayout(source);
+    window.HaruspexArrival?.bloom($('.visual-column'), center);
   }
   function openDialog(title, content) {
     if (!$('#info-dialog').open) dialogTrigger = document.activeElement;
@@ -1371,7 +1435,7 @@
   $('#previous-event').addEventListener('click', () => { const i = visible.findIndex((event) => event.id === state.selected); if (visible.length) selectEvent(visible[Math.max(0, i - 1)].id); });
   $('#next-event').addEventListener('click', () => { const i = visible.findIndex((event) => event.id === state.selected); if (visible.length) selectEvent(visible[Math.min(visible.length - 1, i + 1)].id); });
   $('#method-button').addEventListener('click', openMethod);
-  $('#enter-explorer').addEventListener('click', (event) => { event.preventDefault(); changeView('stream'); $('#scene').scrollIntoView({behavior:reducedMotion.matches?'auto':'smooth'}); });
+  $('#enter-explorer').addEventListener('click', (event) => { event.preventDefault(); enterField(); });
   $('#intro-cast').addEventListener('click', () => { changeView('cast'); renderCast(); castUI.show('inquiry'); $('#scene').scrollIntoView({behavior:reducedMotion.matches?'auto':'smooth'}); });
   $('#footer-method').addEventListener('click', openMethod);
   $('#actual-interventions').addEventListener('click', () => {
@@ -1424,5 +1488,6 @@
   };
   window.addEventListener('scroll', () => { if (scrollFrame === null) scrollFrame = requestAnimationFrame(syncScroll); }, { passive: true });
   $$('[data-status]').forEach((button) => { const count = events.filter((event) => event._status === button.dataset.status).length; button.querySelector('b').textContent = count; });
+  window.HaruspexArrival?.init({events, palette:visualData.groups.map(group => group.fill), colorOf:event => eventStyle(event).fill});
   updateSeverityOptions(); renderWorkstreamLegend(); syncControls(); drawCosmos(); refresh(); syncScroll(); $('#bowtie-tab').tabIndex = -1; $('#cast-tab').tabIndex = -1; $('#scene').dataset.view = 'stream';
 })();
