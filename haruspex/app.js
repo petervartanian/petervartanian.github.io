@@ -1549,7 +1549,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
     if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;$('.field-readout').classList.remove('egg-revealed');return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.textContent=`You found it! Beyond these ${events.length} explorable events, there are more than 70,000 messages and files, encoded as 1.2 million board entries inside a cache of 20 million.`;message.hidden=false;if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.textContent=`You found it! Beyond these ${events.length} explorable events, there are more than 70,000 messages and files, encoded as 1.2 million board entries, mostly file fragments, inside a cache of 20 million. The total remains unknown without fuller disclosure from OpenAI, Hugging Face and METR/Redwood.`;message.hidden=false;if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));

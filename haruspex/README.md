@@ -192,7 +192,7 @@ The five editorial waypoints mark the early file write, administrator access, en
 
 The legend opens centrally in a native modal over a faint, blurred field. Its assessment key reads **1–5 / 0 / −**, and **Assessment criteria** explains the categories. Short fading tails in Bow-tie preserve unknown-start identity without implying duration. Long, date-bounded tails remain specific to the timeline.
 
-The egg beside Legend displays a small green message beginning “You found it! Beyond these 852 explorable events…” and sets the three corpus figures in their nesting: more than 70,000 messages and files, encoded as 1.2 million board entries inside a cache of 20 million. It does not open a dialog. The 70,000 unique background numbers remain shuffled decorative identifiers. Detailed source-unit distinctions stay behind the existing coverage information control.
+The egg beside Legend displays a small green message beginning “You found it! Beyond these 852 explorable events…” and sets the three corpus figures in their nesting: more than 70,000 messages and files, encoded as 1.2 million board entries, mostly file fragments, inside a cache of 20 million. It then names the disclosure gap. On desktop widths the message wraps to a second line; on phones it scrolls sideways. It does not open a dialog. The 70,000 unique background numbers remain shuffled decorative identifiers. Detailed source-unit distinctions stay behind the existing coverage information control.
 
 Ordinary prose and primary-source links remain direct links. Roman endnotes are retained for source-note clusters and the investigation’s existing bibliography. There is no blanket conversion of links to endnotes.
 
