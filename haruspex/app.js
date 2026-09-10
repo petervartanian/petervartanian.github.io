@@ -655,7 +655,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     detailTrigger = document.activeElement;
     selectedSourceAnchor=null;
     const sourceButton=detailTrigger?.closest?.('.milestone,.record-row');
-    if(sourceButton){const marker=sourceButton.querySelector('.event-mark')||sourceButton;let r=marker.getBoundingClientRect();if(r.top>innerHeight*.3||r.top<70){window.scrollBy({top:r.top-100,behavior:'instant'});r=marker.getBoundingClientRect();}selectedSourceAnchor={x:r.left+(marker===sourceButton?12:r.width/2),y:r.top+(marker===sourceButton?8:r.height/2),lineLength:sourceButton.classList.contains('milestone')?sourceButton.getBoundingClientRect().width:0};}
+    if(sourceButton){const marker=sourceButton.querySelector('.event-mark')||sourceButton,r=marker.getBoundingClientRect(),hoist=sourceButton.getBoundingClientRect();selectedSourceAnchor={x:r.left+(marker===sourceButton?12:r.width/2),y:r.top+(marker===sourceButton?8:r.height/2),documentX:hoist.left+scrollX,documentY:hoist.top+scrollY,lineLength:sourceButton.classList.contains('milestone')?hoist.width:0};}
 
     const opening = $('#detail-panel').hidden;
     $('#detail-panel').hidden = false;
@@ -1547,9 +1547,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#hidden-egg').setAttribute('aria-pressed', String(starsUnlocked));
     $('#hidden-egg span').textContent = starsUnlocked ? '🐣' : '🥚';
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
-    if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;return; }
+    if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;$('.field-readout').classList.remove('egg-revealed');return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');message.textContent=`You found it! Beyond these ${events.length} explorable events, there are more than 70,000 messages and files. The total remains unknown without fuller disclosure from OpenAI, Hugging Face and METR/Redwood.`;message.hidden=false;if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.textContent=`You found it! Beyond these ${events.length} explorable events lie 70,000+ messages and files. Full count awaits fuller disclosure from OpenAI, Hugging Face and METR/Redwood.`;message.hidden=false;if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
@@ -1573,10 +1573,13 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   function positionBanner(animate=false){
     if(detailPanel.hidden||!focusAnchor)return;
     const event=eventMap.get(state.selected),w=innerWidth,h=innerHeight;
-    const x=Math.max(18,Math.min(w-18,focusAnchor.x)),y=Math.max(70,Math.min(h-45,focusAnchor.y));
+    const hoisted=!!focusAnchor.lineLength;
+    const x=hoisted?focusAnchor.documentX-scrollX:focusAnchor.x,y=hoisted?focusAnchor.documentY-scrollY:focusAnchor.y;
     const narrow=true,right=true;
-    const width=Math.min(340,w-32),top=y<h-230?y+26:Math.max(70,y-480),height=y<h-230?h-top-20:y-top-26,left=Math.max(16,Math.min(w-width-16,x-16));
-    Object.assign(detailPanel.style,{left:`${left}px`,top:`${top}px`,width:`${width}px`,height:`${height}px`,right:'auto',bottom:'auto',maxHeight:'none'});
+    const flip=!hoisted&&y>=h-230;
+    const width=hoisted?focusAnchor.lineLength:Math.min(340,w-32),top=hoisted?focusAnchor.documentY:flip?Math.max(70,y-12-480):y+12,height=hoisted?640:flip?y-12-top:Math.max(180,h-top-20),left=hoisted?focusAnchor.documentX:Math.max(16,Math.min(w-width-16,x));
+    detailPanel.dataset.hoisted=String(hoisted);
+    Object.assign(detailPanel.style,{position:hoisted?'absolute':'fixed',left:`${left}px`,top:`${top}px`,width:`${width}px`,height:`${height}px`,right:'auto',bottom:'auto',maxHeight:'none'});
     const layer=$('#event-focus');layer.hidden=false;layer.dataset.event=event.id;
     const canvas=$('#focus-origin'),ratio=Math.min(devicePixelRatio||1,2);canvas.width=w*ratio;canvas.height=h*ratio;
     const brush=canvas.getContext('2d');brush.setTransform(ratio,0,0,ratio,0,0);
@@ -1584,10 +1587,10 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const color=eventStyle(event).fill;if(focusAnchor.lineLength){brush.strokeStyle=color;brush.globalAlpha=.5;brush.lineWidth=1;brush.beginPath();brush.moveTo(x,y);brush.lineTo(Math.min(w-18,x+focusAnchor.lineLength),y);brush.stroke();brush.globalAlpha=1;}brush.strokeStyle=color;brush.globalAlpha=.2;brush.lineWidth=1;brush.beginPath();brush.arc(x,y,17,0,Math.PI*2);brush.stroke();
     const endX=narrow?Math.max(left+24,Math.min(left+width-24,x)):right?left:left+width;
     const endY=narrow?(top>y?top:top+height):Math.max(top+35,Math.min(top+height-35,y));
-    const path=$('#focus-thread path');path.setAttribute('d',`M${x},${y} C${mixNumber(x,endX,.45)},${y} ${mixNumber(x,endX,.6)},${endY} ${endX},${endY}`);path.setAttribute('stroke',color);
+    const path=$('#focus-thread path');path.setAttribute('d',hoisted?'':`M${x},${y} L${x},${endY}`);path.setAttribute('stroke',color);
     detailPanel.style.setProperty('--event-color',color);
     if(animate&&!reducedMotion.matches){
-      const clipped=narrow?(top>y?'inset(0 0 100% 0)':'inset(100% 0 0 0)'):right?'inset(0 100% 0 0)':'inset(0 0 0 100%)';
+      const clipped=top>y?'inset(0 0 100% 0)':'inset(100% 0 0 0)';
       detailPanel.animate([{clipPath:clipped,opacity:.6},{clipPath:'inset(0 0 0 0)',opacity:1}],{duration:480,easing:'cubic-bezier(.18,.75,.2,1)'});
       path.animate([{strokeDasharray:'1 1400'},{strokeDasharray:'1400 0'}],{duration:450,easing:'ease-out'});
     }
@@ -1598,10 +1601,11 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     else{const selected=(state.view==='bowtie'?bowPoints:points).find(point=>point.event.id===state.selected),rect=(state.view==='bowtie'?bowCanvas:timeline).getBoundingClientRect();focusAnchor=selected?{x:rect.left+selected.x,y:rect.top+selected.y}:{x:innerWidth/2,y:100};}
     focusBackground(true);positionBanner(animate);$('#detail-close').focus({preventScroll:true});
   }
+  document.body.append($('#focus-origin'));
   let veilPressed=false;
   $('#event-focus .focus-veil').addEventListener('pointerdown',()=>{veilPressed=true;});
   $('#event-focus .focus-veil').addEventListener('click',()=>{if(veilPressed)closeDetails();veilPressed=false;});
-  window.addEventListener('resize',()=>positionBanner());
+  window.addEventListener('resize',()=>{if(focusAnchor?.lineLength){const hoist=document.querySelector(`.milestone[data-event="${state.selected}"]`);if(hoist){const r=hoist.getBoundingClientRect();focusAnchor.documentX=r.left+scrollX;focusAnchor.documentY=r.top+scrollY;focusAnchor.lineLength=r.width;}}positionBanner();});
   document.addEventListener('keydown',event=>{
     if(event.key!=='Tab'||detailPanel.hidden||$('#info-dialog').open)return;
     const controls=[...detailPanel.querySelectorAll('button:not(:disabled),a[href],summary,[tabindex="0"]')].filter(el=>el.getClientRects().length);
@@ -1671,7 +1675,8 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const progress = Math.max(0, Math.min(1, -rect.top / distance));
     $('#scene').style.setProperty('--scroll-progress', String(progress));
     scrollGateway?.sync();
-    if(starsUnlocked)$('#egg-message').hidden=state.view==='cast'||rect.top>0||rect.bottom<120;
+    if(!detailPanel.hidden&&focusAnchor?.lineLength)positionBanner();
+
   };
   window.addEventListener('scroll', () => { if (scrollFrame === null) scrollFrame = requestAnimationFrame(syncScroll); }, { passive: true });
   $$('[data-status]').forEach((button) => { const count = events.filter((event) => event._status === button.dataset.status).length; button.querySelector('b').textContent = count; });

@@ -111,7 +111,7 @@
         </div>
         <div class="field-foot">
           <div class="field-discoveries"><button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button><button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button></div>
-          <div class="field-readout"><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="coverage-info" aria-haspopup="dialog">Full total unknown</button><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
+          <div class="field-readout"><span id="egg-message" role="status" tabindex="0" hidden></span><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="coverage-info" aria-haspopup="dialog">Full total unknown</button><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
           <div class="timeline-navigation">
             <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
             <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
@@ -154,7 +154,7 @@
       <div id="record-list-wrap"><div id="record-list"></div><button id="load-more" class="load-more">Show more events <span>↓</span></button></div>
     </section>
   </main>
-  <dialog id="legend-modal" aria-label="Legend"></dialog><p id="egg-message" role="status" hidden></p>
+  <dialog id="legend-modal" aria-label="Legend"></dialog>
   <div id="event-focus" hidden><div class="focus-veil"></div><canvas id="focus-origin" aria-hidden="true"></canvas><svg id="focus-thread" aria-hidden="true"><path/></svg></div>
   <aside class="detail-panel" id="detail-panel" aria-labelledby="event-banner-title" role="dialog" aria-modal="true" tabindex="-1" hidden>
     <div class="detail-top"><div><button id="previous-event" aria-label="Previous visible event">←</button><button id="next-event" aria-label="Next visible event">→</button><button id="detail-close" aria-label="Close event details">×</button></div></div>

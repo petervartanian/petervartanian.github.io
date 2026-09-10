@@ -1032,3 +1032,15 @@ footer>span:first-child{letter-spacing:0;text-transform:none}
 #detail-panel .detail-title{font-size:27px;line-height:1.16}#detail-panel .detail-facts{grid-template-columns:1fr}#detail-panel .detail-top{padding:0 0 12px}.waypoint-note{font-size:11px;color:#8d9ca5;margin-bottom:25px}.waypoint-note button{border:1px solid #83979b66;border-radius:50%;width:20px;height:20px;margin-left:6px}#milestones{gap:28px}.milestone{min-height:78px}.milestone small{margin-top:8px}
 
 body:has(#scene[data-view="cast"]) #egg-message{display:none}
+
+/* The unchanged hoist sets both the banner origin and its width. */
+#detail-panel[data-hoisted="true"]{max-width:none;border-radius:0 0 3px 3px!important;padding:18px 16px 24px;border-top:1px solid var(--event-color);border-left:1px solid #7996a52f;box-shadow:0 18px 45px #0005}
+#detail-panel[data-hoisted="true"] .detail-title{font-size:23px}#detail-panel[data-hoisted="true"] .detail-top{top:-18px;gap:4px}#detail-panel[data-hoisted="true"] .detail-top button{min-width:25px}
+.milestone:last-child{grid-column:auto}
+.field-readout.egg-revealed> :not(#egg-message){visibility:hidden;pointer-events:none}
+.field-readout #egg-message{position:absolute;inset:0;z-index:1;max-width:none;width:100%;height:100%;margin:0;padding:0 10px;box-sizing:border-box;display:flex;align-items:center;white-space:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;border:0;border-radius:2px;background:#103629;color:#8ee0b3;font:11px/1.3 var(--sans,Arial,sans-serif);box-shadow:none;pointer-events:auto}
+.field-readout #egg-message[hidden]{display:none}
+@media(max-width:600px){.field-readout #egg-message{font-size:10px}}
+
+body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#focus-origin{display:none}
+@media(min-width:561px) and (max-width:1000px){#milestones{grid-template-columns:repeat(3,minmax(0,1fr))}}

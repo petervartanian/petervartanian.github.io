@@ -1040,6 +1040,18 @@ footer>span:first-child{letter-spacing:0;text-transform:none}
 #detail-panel .detail-title{font-size:27px;line-height:1.16}#detail-panel .detail-facts{grid-template-columns:1fr}#detail-panel .detail-top{padding:0 0 12px}.waypoint-note{font-size:11px;color:#8d9ca5;margin-bottom:25px}.waypoint-note button{border:1px solid #83979b66;border-radius:50%;width:20px;height:20px;margin-left:6px}#milestones{gap:28px}.milestone{min-height:78px}.milestone small{margin-top:8px}
 
 body:has(#scene[data-view="cast"]) #egg-message{display:none}
+
+/* The unchanged hoist sets both the banner origin and its width. */
+#detail-panel[data-hoisted="true"]{max-width:none;border-radius:0 0 3px 3px!important;padding:18px 16px 24px;border-top:1px solid var(--event-color);border-left:1px solid #7996a52f;box-shadow:0 18px 45px #0005}
+#detail-panel[data-hoisted="true"] .detail-title{font-size:23px}#detail-panel[data-hoisted="true"] .detail-top{top:-18px;gap:4px}#detail-panel[data-hoisted="true"] .detail-top button{min-width:25px}
+.milestone:last-child{grid-column:auto}
+.field-readout.egg-revealed> :not(#egg-message){visibility:hidden;pointer-events:none}
+.field-readout #egg-message{position:absolute;inset:0;z-index:1;max-width:none;width:100%;height:100%;margin:0;padding:0 10px;box-sizing:border-box;display:flex;align-items:center;white-space:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;border:0;border-radius:2px;background:#103629;color:#8ee0b3;font:11px/1.3 var(--sans,Arial,sans-serif);box-shadow:none;pointer-events:auto}
+.field-readout #egg-message[hidden]{display:none}
+@media(max-width:600px){.field-readout #egg-message{font-size:10px}}
+
+body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#focus-origin{display:none}
+@media(min-width:561px) and (max-width:1000px){#milestones{grid-template-columns:repeat(3,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -1145,7 +1157,7 @@ body:has(#scene[data-view="cast"]) #egg-message{display:none}
         </div>
         <div class="field-foot">
           <div class="field-discoveries"><button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button><button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button></div>
-          <div class="field-readout"><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="coverage-info" aria-haspopup="dialog">Full total unknown</button><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
+          <div class="field-readout"><span id="egg-message" role="status" tabindex="0" hidden></span><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="coverage-info" aria-haspopup="dialog">Full total unknown</button><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
           <div class="timeline-navigation">
             <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
             <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
@@ -1188,7 +1200,7 @@ body:has(#scene[data-view="cast"]) #egg-message{display:none}
       <div id="record-list-wrap"><div id="record-list"></div><button id="load-more" class="load-more">Show more events <span>↓</span></button></div>
     </section>
   </main>
-  <dialog id="legend-modal" aria-label="Legend"></dialog><p id="egg-message" role="status" hidden></p>
+  <dialog id="legend-modal" aria-label="Legend"></dialog>
   <div id="event-focus" hidden><div class="focus-veil"></div><canvas id="focus-origin" aria-hidden="true"></canvas><svg id="focus-thread" aria-hidden="true"><path/></svg></div>
   <aside class="detail-panel" id="detail-panel" aria-labelledby="event-banner-title" role="dialog" aria-modal="true" tabindex="-1" hidden>
     <div class="detail-top"><div><button id="previous-event" aria-label="Previous visible event">←</button><button id="next-event" aria-label="Next visible event">→</button><button id="detail-close" aria-label="Close event details">×</button></div></div>
@@ -2432,7 +2444,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     detailTrigger = document.activeElement;
     selectedSourceAnchor=null;
     const sourceButton=detailTrigger?.closest?.('.milestone,.record-row');
-    if(sourceButton){const marker=sourceButton.querySelector('.event-mark')||sourceButton;let r=marker.getBoundingClientRect();if(r.top>innerHeight*.3||r.top<70){window.scrollBy({top:r.top-100,behavior:'instant'});r=marker.getBoundingClientRect();}selectedSourceAnchor={x:r.left+(marker===sourceButton?12:r.width/2),y:r.top+(marker===sourceButton?8:r.height/2),lineLength:sourceButton.classList.contains('milestone')?sourceButton.getBoundingClientRect().width:0};}
+    if(sourceButton){const marker=sourceButton.querySelector('.event-mark')||sourceButton,r=marker.getBoundingClientRect(),hoist=sourceButton.getBoundingClientRect();selectedSourceAnchor={x:r.left+(marker===sourceButton?12:r.width/2),y:r.top+(marker===sourceButton?8:r.height/2),documentX:hoist.left+scrollX,documentY:hoist.top+scrollY,lineLength:sourceButton.classList.contains('milestone')?hoist.width:0};}
 
     const opening = $('#detail-panel').hidden;
     $('#detail-panel').hidden = false;
@@ -3324,9 +3336,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#hidden-egg').setAttribute('aria-pressed', String(starsUnlocked));
     $('#hidden-egg span').textContent = starsUnlocked ? '🐣' : '🥚';
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
-    if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;return; }
+    if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;$('.field-readout').classList.remove('egg-revealed');return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');message.textContent=`You found it! Beyond these ${events.length} explorable events, there are more than 70,000 messages and files. The total remains unknown without fuller disclosure from OpenAI, Hugging Face and METR/Redwood.`;message.hidden=false;if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.textContent=`You found it! Beyond these ${events.length} explorable events lie 70,000+ messages and files. Full count awaits fuller disclosure from OpenAI, Hugging Face and METR/Redwood.`;message.hidden=false;if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
@@ -3350,10 +3362,13 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   function positionBanner(animate=false){
     if(detailPanel.hidden||!focusAnchor)return;
     const event=eventMap.get(state.selected),w=innerWidth,h=innerHeight;
-    const x=Math.max(18,Math.min(w-18,focusAnchor.x)),y=Math.max(70,Math.min(h-45,focusAnchor.y));
+    const hoisted=!!focusAnchor.lineLength;
+    const x=hoisted?focusAnchor.documentX-scrollX:focusAnchor.x,y=hoisted?focusAnchor.documentY-scrollY:focusAnchor.y;
     const narrow=true,right=true;
-    const width=Math.min(340,w-32),top=y<h-230?y+26:Math.max(70,y-480),height=y<h-230?h-top-20:y-top-26,left=Math.max(16,Math.min(w-width-16,x-16));
-    Object.assign(detailPanel.style,{left:`${left}px`,top:`${top}px`,width:`${width}px`,height:`${height}px`,right:'auto',bottom:'auto',maxHeight:'none'});
+    const flip=!hoisted&&y>=h-230;
+    const width=hoisted?focusAnchor.lineLength:Math.min(340,w-32),top=hoisted?focusAnchor.documentY:flip?Math.max(70,y-12-480):y+12,height=hoisted?640:flip?y-12-top:Math.max(180,h-top-20),left=hoisted?focusAnchor.documentX:Math.max(16,Math.min(w-width-16,x));
+    detailPanel.dataset.hoisted=String(hoisted);
+    Object.assign(detailPanel.style,{position:hoisted?'absolute':'fixed',left:`${left}px`,top:`${top}px`,width:`${width}px`,height:`${height}px`,right:'auto',bottom:'auto',maxHeight:'none'});
     const layer=$('#event-focus');layer.hidden=false;layer.dataset.event=event.id;
     const canvas=$('#focus-origin'),ratio=Math.min(devicePixelRatio||1,2);canvas.width=w*ratio;canvas.height=h*ratio;
     const brush=canvas.getContext('2d');brush.setTransform(ratio,0,0,ratio,0,0);
@@ -3361,10 +3376,10 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const color=eventStyle(event).fill;if(focusAnchor.lineLength){brush.strokeStyle=color;brush.globalAlpha=.5;brush.lineWidth=1;brush.beginPath();brush.moveTo(x,y);brush.lineTo(Math.min(w-18,x+focusAnchor.lineLength),y);brush.stroke();brush.globalAlpha=1;}brush.strokeStyle=color;brush.globalAlpha=.2;brush.lineWidth=1;brush.beginPath();brush.arc(x,y,17,0,Math.PI*2);brush.stroke();
     const endX=narrow?Math.max(left+24,Math.min(left+width-24,x)):right?left:left+width;
     const endY=narrow?(top>y?top:top+height):Math.max(top+35,Math.min(top+height-35,y));
-    const path=$('#focus-thread path');path.setAttribute('d',`M${x},${y} C${mixNumber(x,endX,.45)},${y} ${mixNumber(x,endX,.6)},${endY} ${endX},${endY}`);path.setAttribute('stroke',color);
+    const path=$('#focus-thread path');path.setAttribute('d',hoisted?'':`M${x},${y} L${x},${endY}`);path.setAttribute('stroke',color);
     detailPanel.style.setProperty('--event-color',color);
     if(animate&&!reducedMotion.matches){
-      const clipped=narrow?(top>y?'inset(0 0 100% 0)':'inset(100% 0 0 0)'):right?'inset(0 100% 0 0)':'inset(0 0 0 100%)';
+      const clipped=top>y?'inset(0 0 100% 0)':'inset(100% 0 0 0)';
       detailPanel.animate([{clipPath:clipped,opacity:.6},{clipPath:'inset(0 0 0 0)',opacity:1}],{duration:480,easing:'cubic-bezier(.18,.75,.2,1)'});
       path.animate([{strokeDasharray:'1 1400'},{strokeDasharray:'1400 0'}],{duration:450,easing:'ease-out'});
     }
@@ -3375,10 +3390,11 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     else{const selected=(state.view==='bowtie'?bowPoints:points).find(point=>point.event.id===state.selected),rect=(state.view==='bowtie'?bowCanvas:timeline).getBoundingClientRect();focusAnchor=selected?{x:rect.left+selected.x,y:rect.top+selected.y}:{x:innerWidth/2,y:100};}
     focusBackground(true);positionBanner(animate);$('#detail-close').focus({preventScroll:true});
   }
+  document.body.append($('#focus-origin'));
   let veilPressed=false;
   $('#event-focus .focus-veil').addEventListener('pointerdown',()=>{veilPressed=true;});
   $('#event-focus .focus-veil').addEventListener('click',()=>{if(veilPressed)closeDetails();veilPressed=false;});
-  window.addEventListener('resize',()=>positionBanner());
+  window.addEventListener('resize',()=>{if(focusAnchor?.lineLength){const hoist=document.querySelector(`.milestone[data-event="${state.selected}"]`);if(hoist){const r=hoist.getBoundingClientRect();focusAnchor.documentX=r.left+scrollX;focusAnchor.documentY=r.top+scrollY;focusAnchor.lineLength=r.width;}}positionBanner();});
   document.addEventListener('keydown',event=>{
     if(event.key!=='Tab'||detailPanel.hidden||$('#info-dialog').open)return;
     const controls=[...detailPanel.querySelectorAll('button:not(:disabled),a[href],summary,[tabindex="0"]')].filter(el=>el.getClientRects().length);
@@ -3448,7 +3464,8 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const progress = Math.max(0, Math.min(1, -rect.top / distance));
     $('#scene').style.setProperty('--scroll-progress', String(progress));
     scrollGateway?.sync();
-    if(starsUnlocked)$('#egg-message').hidden=state.view==='cast'||rect.top>0||rect.bottom<120;
+    if(!detailPanel.hidden&&focusAnchor?.lineLength)positionBanner();
+
   };
   window.addEventListener('scroll', () => { if (scrollFrame === null) scrollFrame = requestAnimationFrame(syncScroll); }, { passive: true });
   $$('[data-status]').forEach((button) => { const count = events.filter((event) => event._status === button.dataset.status).length; button.querySelector('b').textContent = count; });
