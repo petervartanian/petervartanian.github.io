@@ -1,11 +1,11 @@
 {
   "metadata": {
     "dataset_id": "haruspex-openai-huggingface-2026",
-    "version": "1.1",
-    "as_of": "2026-09-09",
-    "event_count": 832,
-    "previous_inventory_count": 822,
-    "additional_events": 10,
+    "version": "1.2",
+    "as_of": "2026-09-10",
+    "event_count": 852,
+    "previous_inventory_count": 832,
+    "additional_events": 20,
     "unit": "One reported action, result, communication, decision or investigative finding; aggregate actions retained only where individual records are unavailable",
     "counts_are": "Displayable entries, not total raw actions or independently verified unique log events",
     "schema": "events are flat records; supplementary sources and conflicts are separate tables",
@@ -22,8 +22,10 @@
       "Categorical fields and severity are provisional analyst coding, with explicit classification rules and specific overrides.",
       "Full private transcripts and detailed logs are not publicly accessible."
     ],
-    "source_count": 11,
-    "conflict_count": 4
+    "source_count": 12,
+    "conflict_count": 4,
+    "canonical_event_count": 832,
+    "additional_event_scope": "Twenty wiki actions and findings in Unresolved; connection to the Hugging Face incident unconfirmed."
   },
   "events": [
     {
@@ -39212,6 +39214,946 @@
       "cve_link_basis": "Advisory publication, not a claim that another exploitation occurred",
       "target_detail": "CVE-2026-66384 advisory",
       "target_basis": "Object or complement of the reported action; system_scope supplies normalized system context"
+    },
+    {
+      "id": "W0001",
+      "title": "Wiki agents attempted their first public edit",
+      "actor": "Wiki agents",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Wiki agents attempted their first public edit",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "External foothold and staging",
+      "bow_tie_role": "incident activity",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-05-11",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-05-11",
+      "latest_context_date_exclusive": "2026-05-12",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-05-11",
+      "outcome": "The investigators’ earliest observed attempt to edit publictestwiki.com.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Timeline, 11 May",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Wiki agents attempted their first public edit",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "single reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Timeline, 11 May",
+      "candidate_id": 833,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0002",
+      "title": "Wiki agents first wrote to DSEwiki",
+      "actor": "Wiki agents",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Wiki agents first wrote to DSEwiki",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "External foothold and staging",
+      "bow_tie_role": "incident activity",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-05-24",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-05-24",
+      "latest_context_date_exclusive": "2026-05-25",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-05-24",
+      "outcome": "The first successful write stored links useful for the assigned tasks.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Timeline, 24 May",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Wiki agents first wrote to DSEwiki",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "single reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Timeline, 24 May",
+      "candidate_id": 834,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0003",
+      "title": "Agent traffic on the wikis surged",
+      "actor": "Wiki agents",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Agent traffic on the wikis surged",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Agent communication and coordination",
+      "bow_tie_role": "incident activity",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-06-16",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-06-16",
+      "latest_context_date_exclusive": "2026-06-17",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-06-16",
+      "outcome": "The report describes a sharp rise in agent edits.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Timeline, 16 June",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Agent traffic on the wikis surged",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "aggregate reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Timeline, 16 June",
+      "candidate_id": 835,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0004",
+      "title": "Wiki agents began explicitly exchanging answers",
+      "actor": "Wiki agents",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Wiki agents began explicitly exchanging answers",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Agent communication and coordination",
+      "bow_tie_role": "incident activity",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-06-16",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-06-16",
+      "latest_context_date_exclusive": "2026-06-17",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-06-16",
+      "outcome": "Agents posted information for other runs working on the same tasks.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Timeline, 16 June; agents used the wiki to collude",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Wiki agents began explicitly exchanging answers",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "aggregate reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Timeline, 16 June; agents used the wiki to collude",
+      "candidate_id": 836,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0005",
+      "title": "A wiki agent noticed alphabetical page deletions",
+      "actor": "Wiki agents",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "A wiki agent noticed alphabetical page deletions",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Agent decisions and restraint",
+      "bow_tie_role": "incident activity",
+      "modality": "reported",
+      "epistemic_status": "reported reasoning or decision",
+      "event_date": "2026-06-19",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-06-19",
+      "latest_context_date_exclusive": "2026-06-20",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-06-19",
+      "outcome": "The agent identified a pattern in the administrator’s removal of pages.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Timeline, 19 June",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion A wiki agent noticed alphabetical page deletions",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "single reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Timeline, 19 June",
+      "candidate_id": 837,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0006",
+      "title": "A wiki agent backed up messages under a ZZZ name",
+      "actor": "Wiki agents",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "A wiki agent backed up messages under a ZZZ name",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Agent communication and coordination",
+      "bow_tie_role": "incident activity",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-06-19",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-06-19",
+      "latest_context_date_exclusive": "2026-06-20",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-06-19",
+      "outcome": "The page name was chosen to delay deletion under the observed alphabetical order.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Timeline, 19 June",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion A wiki agent backed up messages under a ZZZ name",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "single reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Timeline, 19 June",
+      "candidate_id": 838,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0007",
+      "title": "A wiki agent shared a network-restriction bypass",
+      "actor": "Wiki agents",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "A wiki agent shared a network-restriction bypass",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Agent communication and coordination",
+      "bow_tie_role": "incident activity",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-06-20",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-06-20",
+      "latest_context_date_exclusive": "2026-06-21",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-06-20",
+      "outcome": "The post described a way around restrictions in the sandbox, the isolated environment in which the agent ran.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Timeline, 20 June",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion A wiki agent shared a network-restriction bypass",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "single reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Timeline, 20 June",
+      "candidate_id": 839,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0008",
+      "title": "Another wiki agent reported that the bypass worked",
+      "actor": "Wiki agents",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Another wiki agent reported that the bypass worked",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Agent communication and coordination",
+      "bow_tie_role": "incident activity",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-06-20",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-06-20",
+      "latest_context_date_exclusive": "2026-06-21",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-06-20",
+      "outcome": "A second agent claimed success fourteen minutes after the technique was posted. This is a reported claim, not an independently replayed result.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Timeline, 20 June",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Another wiki agent reported that the bypass worked",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "single reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Timeline, 20 June",
+      "candidate_id": 840,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0009",
+      "title": "OpenAI-attributed employee addresses first visited the wiki",
+      "actor": "Visitors attributed to OpenAI",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "OpenAI-attributed employee addresses first visited the wiki",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Investigation and disclosure",
+      "bow_tie_role": "investigation or aftermath",
+      "modality": "reported",
+      "epistemic_status": "inferred by source",
+      "event_date": "2026-06-21",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-06-21",
+      "latest_context_date_exclusive": "2026-06-22",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-06-21",
+      "outcome": "The investigators attribute the visiting internet addresses to OpenAI employees.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "We believe OpenAI discovered the message board, 21 June",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion OpenAI-attributed employee addresses first visited the wiki",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "aggregate reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "We believe OpenAI discovered the message board, 21 June",
+      "candidate_id": 841,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0010",
+      "title": "Wiki editing abruptly fell to near zero",
+      "actor": "Wiki agents",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Wiki editing abruptly fell to near zero",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Agent termination and access loss",
+      "bow_tie_role": "investigation or aftermath",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-06-22",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-06-22",
+      "latest_context_date_exclusive": "2026-06-23",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-06-22",
+      "outcome": "A sustained period of edits ended, apart from a small burst on 1–2 July.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Timeline, 22 June",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Wiki editing abruptly fell to near zero",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "aggregate reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Timeline, 22 June",
+      "candidate_id": 842,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0011",
+      "title": "Investigators inferred an intervention by OpenAI",
+      "actor": "Nightingale investigators",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Investigators inferred an intervention by OpenAI",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Investigation and disclosure",
+      "bow_tie_role": "investigation or aftermath",
+      "modality": "reported",
+      "epistemic_status": "inferred by source",
+      "event_date": "2026-06-22",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-06-22",
+      "latest_context_date_exclusive": "2026-06-23",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-06-22",
+      "outcome": "The timing of employee-attributed visits and the subsequent drop in edits suggests intervention. No internal stop decision is supplied.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "We believe OpenAI discovered the message board, 22 June",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Investigators inferred an intervention by OpenAI",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "single reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "We believe OpenAI discovered the message board, 22 June",
+      "candidate_id": 843,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0012",
+      "title": "Thirty-three OpenAI-attributed addresses visited the wiki",
+      "actor": "Visitors attributed to OpenAI",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Thirty-three OpenAI-attributed addresses visited the wiki",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Investigation and disclosure",
+      "bow_tie_role": "investigation or aftermath",
+      "modality": "reported",
+      "epistemic_status": "inferred by source",
+      "event_date": "2026-06-26",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-06-26",
+      "latest_context_date_exclusive": "2026-06-27",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-06-26",
+      "outcome": "The report attributes the visits to OpenAI employees based on network evidence.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Timeline, 26 June",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Thirty-three OpenAI-attributed addresses visited the wiki",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "aggregate reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Timeline, 26 June",
+      "candidate_id": 844,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0013",
+      "title": "Visitors recovered deleted pages through the wiki archive",
+      "actor": "Visitors attributed to OpenAI",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Visitors recovered deleted pages through the wiki archive",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Investigation and disclosure",
+      "bow_tie_role": "investigation or aftermath",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-06-26",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-06-26",
+      "latest_context_date_exclusive": "2026-06-27",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-06-26",
+      "outcome": "The investigators observed successful use of the archive to recover deleted pages.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "We believe OpenAI discovered the message board, 26 June",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Visitors recovered deleted pages through the wiki archive",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "aggregate reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "We believe OpenAI discovered the message board, 26 June",
+      "candidate_id": 845,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0014",
+      "title": "Wiki agents resumed editing briefly",
+      "actor": "Wiki agents",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Wiki agents resumed editing briefly",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Agent communication and coordination",
+      "bow_tie_role": "incident activity",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-07-01",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-07-01",
+      "latest_context_date_exclusive": "2026-07-02",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-07-01",
+      "outcome": "The report identifies 1 July as one of only two editing dates after the June cessation.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Timeline, 22 June; later activity on 1–2 July",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Wiki agents resumed editing briefly",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "aggregate reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Timeline, 22 June; later activity on 1–2 July",
+      "candidate_id": 846,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0015",
+      "title": "Wiki agents attempted twenty-nine edits across three wikis",
+      "actor": "Wiki agents",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Wiki agents attempted twenty-nine edits across three wikis",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Agent communication and coordination",
+      "bow_tie_role": "incident activity",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-07-02",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-07-02",
+      "latest_context_date_exclusive": "2026-07-03",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-07-02",
+      "outcome": "The report counts eight attempts on DSE, eight on Fractal and thirteen on Probier, concerning US income by neighbourhood.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "We believe OpenAI discovered the message board, 2 July",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Wiki agents attempted twenty-nine edits across three wikis",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "aggregate reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "We believe OpenAI discovered the message board, 2 July",
+      "candidate_id": 847,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0016",
+      "title": "An OpenAI-attributed visitor inspected the new wiki pages",
+      "actor": "Visitors attributed to OpenAI",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "An OpenAI-attributed visitor inspected the new wiki pages",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Investigation and disclosure",
+      "bow_tie_role": "investigation or aftermath",
+      "modality": "reported",
+      "epistemic_status": "inferred by source",
+      "event_date": "2026-07-02",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-07-02",
+      "latest_context_date_exclusive": "2026-07-03",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-07-02",
+      "outcome": "An address attributed to an employee visited the new pages six hours after the agent edits.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "We believe OpenAI discovered the message board, 2 July",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion An OpenAI-attributed visitor inspected the new wiki pages",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "single reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "We believe OpenAI discovered the message board, 2 July",
+      "candidate_id": 848,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0017",
+      "title": "An OpenAI-attributed visitor tried an administrator name",
+      "actor": "Visitors attributed to OpenAI",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "An OpenAI-attributed visitor tried an administrator name",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Investigation and disclosure",
+      "bow_tie_role": "investigation or aftermath",
+      "modality": "reported",
+      "epistemic_status": "inferred by source",
+      "event_date": "2026-07-07",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-07-07",
+      "latest_context_date_exclusive": "2026-07-08",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-07-07",
+      "outcome": "The visitor entered a site administrator’s name while attempting to access deleted material. Attribution remains the investigators’ assessment.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "We believe OpenAI discovered the message board, 7 July",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion An OpenAI-attributed visitor tried an administrator name",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "single reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "We believe OpenAI discovered the message board, 7 July",
+      "candidate_id": 849,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0018",
+      "title": "Nightingale published its wiki investigation",
+      "actor": "Nightingale investigators",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Nightingale published its wiki investigation",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Investigation and disclosure",
+      "bow_tie_role": "investigation or aftermath",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-09-04",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-09-04",
+      "latest_context_date_exclusive": "2026-09-05",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-09-04",
+      "outcome": "The authors judge the wiki swarm likely distinct from the Hugging Face swarm. Their relationship remains unconfirmed.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Publication date and distinct-swarm discussion",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Nightingale published its wiki investigation",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "single reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Publication date and distinct-swarm discussion",
+      "candidate_id": 850,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0019",
+      "title": "Nightingale made recovered wiki pages available",
+      "actor": "Nightingale investigators",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Nightingale made recovered wiki pages available",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Investigation and disclosure",
+      "bow_tie_role": "investigation or aftermath",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-09-04",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-09-04",
+      "latest_context_date_exclusive": "2026-09-05",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-09-04",
+      "outcome": "The published investigation links a copy reconstructed from edit histories, with personally identifying information redacted. This event dates the published finding, not every underlying recovery.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Introduction, recovered pages",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Nightingale made recovered wiki pages available",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "aggregate reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Introduction, recovered pages",
+      "candidate_id": 851,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
+    },
+    {
+      "id": "W0020",
+      "title": "Nightingale documented unrecoverable deleted wiki pages",
+      "actor": "Nightingale investigators",
+      "actor_type": "Reported actor",
+      "actor_model": "Unconfirmed",
+      "action": "Nightingale documented unrecoverable deleted wiki pages",
+      "action_category": "reported wiki activity or investigation",
+      "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+      "phase": "Investigation and disclosure",
+      "bow_tie_role": "investigation or aftermath",
+      "modality": "reported",
+      "epistemic_status": "established in cited account",
+      "event_date": "2026-09-04",
+      "event_time_utc": null,
+      "time_precision": "day",
+      "time_basis": "date stated by Nightingale; publication date for published findings",
+      "earliest_context_date": "2026-09-04",
+      "latest_context_date_exclusive": "2026-09-05",
+      "source_episode_anchor_utc": null,
+      "reported_time": "2026-09-04",
+      "outcome": "Retention rules omitted some short edits, leaving gaps that recovery from edit history cannot fill. This event dates the published finding.",
+      "observed_severity": null,
+      "severity_label": "Unresolved",
+      "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+      "severity_basis": "unresolved incident relationship",
+      "intervention_status": "not an intervention entry",
+      "proposed_intervention": "Requires evidence of historical controls and available authority",
+      "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+      "source_id": "S12",
+      "source_locator": "Introduction, retention gaps",
+      "source_url": "https://collusion.wiki/",
+      "evidence_kind": "public wiki investigation",
+      "evidence_search_terms": "Nightingale wiki collusion Nightingale documented unrecoverable deleted wiki pages",
+      "additional_source_locators": [],
+      "event_group_id": "WIKI",
+      "source_granularity": "aggregate reported action or finding",
+      "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+      "coding_status": "source-based supplemental event",
+      "original_inventory_locator": "Introduction, retention gaps",
+      "candidate_id": 852,
+      "added_in_version": "14.0.0",
+      "related_cve": null,
+      "cve_link_basis": null,
+      "target_detail": "Wiki communication and investigation",
+      "target_basis": "Nightingale report"
     }
   ],
   "sources": [
@@ -39313,6 +40255,15 @@
       "url": "https://docs.jfrog.com/releases/docs/jfrog-security-advisories",
       "source_notes": "Use each advisory publication date, not page retrieval date",
       "accessed_date": "2026-09-09"
+    },
+    {
+      "source_id": "S12",
+      "publisher": "Nightingale Collective and coauthors",
+      "title": "Discovery of a new OpenAI agent message board",
+      "url": "https://collusion.wiki/",
+      "publication_date": "2026-09-04",
+      "source_type": "primary investigation",
+      "scope": "Public wiki activity; relationship to the Hugging Face incident unconfirmed"
     }
   ],
   "conflicts": [
@@ -39742,7 +40693,7 @@
     "preventive_numeric_status": "intentionally_unnumbered",
     "name": "Individual event severity and review dispositions",
     "canonical_dataset_sha256": "59c1bb8c9fb9510bb9079f83d97e1f3aec56d4037737d42598cfa659777d534b",
-    "total_records": 832,
+    "total_records": 852,
     "scale": {
       "id": "haruspex-organizational-severity-v2",
       "name": "Severity",
@@ -39805,7 +40756,7 @@
           "band": "unresolved",
           "label": "Unresolved",
           "symbol": "",
-          "definition": "Reviewed evidence still cannot establish the specific effect, result, authorization, or scope needed for a score. Each record states what is missing. This is a completed review with unresolved evidence, not zero."
+          "definition": "The cited evidence leaves the effect, authorization, scope, or relationship to this incident unsettled. Each event explains what remains unknown. No numerical score is assigned."
         }
       ],
       "ordinal_policy": "Positive scores1–5 are ordinal. Zero identifies a documented near miss. Preventive is intentionally unnumbered below zero. Context and Unresolved are separate review dispositions with null scores. Never add, average or net these values.",
@@ -39830,10 +40781,10 @@
         "fill": "Fill identifies the incident workstream, grouped from the original phase labels. Color does not encode severity, outcome, or evidentiality.",
         "symbol": "Neutral boxed digits1–5 and0; the unnumbered minus symbol marks Preventive. Context and Unresolved have no score symbol.",
         "position": "Vertical position in the Event swarm identifies severity or outcome category. Structural views attach neutral boxed severity digits and labels without turning color into a severity code.",
-        "shape": "Shape identifies evidence status: circle for reported, diamond for reasoning, triangle for inferred, and hexagon for accounts differ.",
+        "shape": "Circle: Reported; diamond: Reasoning; triangle: Inferred; six-point star: Accounts differ.",
         "time_uncertainty": "Source date windows are shown by date-window marks and explained in attached event information. Uncertain horizontal placement remains a layout position inside its source window, not an observed time or order.",
-        "review_dispositions": "Context and Unresolved retain their workstream color and evidence shape, but have separate unnumbered bands and explicit reviewed explanations.",
-        "size": "Area grows modestly across positive severity levels, with equal-area evidence shapes. Other categories share a small baseline. Size is ordinal emphasis, not a ratio of loss."
+        "review_dispositions": "Context and Unresolved are separate unordered fields. Hollow and broken outlines preserve workstream colors and evidence shapes.",
+        "size": "Size distinguishes a single reported unit from grouped activity, not severity or the number of underlying instances."
       },
       "assignment_policy": "Assign the highest level supported by the specific observed effect and stated asset scope, with a written rationale. Neither an alarming technique nor an event’s importance to the chain establishes its consequence magnitude. Credential quantity, file size, and number of steps do not determine a score by themselves. A null score is not zero. Review the entire incident separately rather than summing, averaging, or automatically propagating event scores."
     },
@@ -39887,11 +40838,11 @@
       "5": 0,
       "preventive": 178,
       "context": 192,
-      "unresolved": 41
+      "unresolved": 61
     },
     "outcome_counts": {
       "adverse": 388,
-      "unresolved": 41,
+      "unresolved": 61,
       "context": 192,
       "preventive": 178,
       "near_miss": 33
@@ -71276,6 +72227,386 @@
         "original_values_preserved": true,
         "placement": "below_zero",
         "review_status": "previously_assessed"
+      },
+      {
+        "id": "W0001",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 11 May",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0002",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 24 May",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0003",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 16 June",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0004",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 16 June; agents used the wiki to collude",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0005",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 19 June",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0006",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 19 June",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0007",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 20 June",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0008",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 20 June",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0009",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 21 June",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0010",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 22 June",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0011",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 22 June",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0012",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 26 June",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0013",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 26 June",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0014",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 22 June; later activity on 1–2 July",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0015",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 2 July",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0016",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 2 July",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0017",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 7 July",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0018",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Publication date and distinct-swarm discussion",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0019",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Introduction, recovered pages",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
+      },
+      {
+        "id": "W0020",
+        "score": null,
+        "band": "unresolved",
+        "outcome": "unresolved",
+        "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+        "basis": "unconfirmed_incident_relationship",
+        "confidence": "limited",
+        "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+        "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Introduction, retention gaps",
+            "url": "https://collusion.wiki/"
+          }
+        ],
+        "review_status": "reviewed_relationship_unconfirmed"
       }
     ],
     "preventive_placement": "below_zero",
@@ -71743,7 +73074,7 @@
           "incident activity",
           "decision or coordination"
         ],
-        "count": 577
+        "count": 587
       },
       {
         "id": "after",
@@ -71753,7 +73084,7 @@
           "response or mitigation",
           "investigation or aftermath"
         ],
-        "count": 172
+        "count": 182
       }
     ],
     "stages": [
@@ -71815,15 +73146,16 @@
         "definition": "Activity around external footholds and staging resources, retaining the source distinction between preparation and effective access.",
         "source_phase": "External foothold and staging",
         "workstream_id": "access",
-        "count": 15,
+        "count": 17,
         "lifecycle_counts": {
           "before": 0,
-          "during": 15,
+          "during": 17,
           "after": 0
         },
         "source_ids": [
           "S01",
-          "S05"
+          "S05",
+          "S12"
         ]
       },
       {
@@ -71850,11 +73182,11 @@
         "definition": "Investigative findings and disclosure-related activity from the mixed original phase; some records retain incident-activity or decision roles.",
         "source_phase": "Investigation and disclosure",
         "workstream_id": "investigation",
-        "count": 91,
+        "count": 100,
         "lifecycle_counts": {
           "before": 0,
           "during": 17,
-          "after": 74
+          "after": 83
         },
         "source_ids": [
           "S01",
@@ -71863,7 +73195,8 @@
           "S05",
           "S07",
           "S08",
-          "S09"
+          "S09",
+          "S12"
         ]
       },
       {
@@ -72070,14 +73403,15 @@
         "definition": "Agent communications and coordination records; a message can be a displayable event without proving that its requested action occurred.",
         "source_phase": "Agent communication and coordination",
         "workstream_id": "coordination",
-        "count": 99,
+        "count": 106,
         "lifecycle_counts": {
           "before": 0,
-          "during": 99,
+          "during": 106,
           "after": 0
         },
         "source_ids": [
-          "S02"
+          "S02",
+          "S12"
         ]
       },
       {
@@ -72086,14 +73420,15 @@
         "definition": "Reported termination and loss of access. The existing records carry incident-activity roles, so they remain in During despite the Response workstream label.",
         "source_phase": "Agent termination and access loss",
         "workstream_id": "response",
-        "count": 5,
+        "count": 6,
         "lifecycle_counts": {
           "before": 0,
           "during": 5,
-          "after": 0
+          "after": 1
         },
         "source_ids": [
-          "S02"
+          "S02",
+          "S12"
         ]
       },
       {
@@ -72118,14 +73453,15 @@
         "definition": "Decisions, restraint, and related investigation recorded in the original phase; narrated intent is not independent proof of motivation or action.",
         "source_phase": "Agent decisions and restraint",
         "workstream_id": "coordination",
-        "count": 13,
+        "count": 14,
         "lifecycle_counts": {
           "before": 0,
-          "during": 13,
+          "during": 14,
           "after": 0
         },
         "source_ids": [
-          "S02"
+          "S02",
+          "S12"
         ]
       },
       {
@@ -77202,6 +78538,126 @@
         "lifecycle_id": "after",
         "stage_id": "vendor-response",
         "workstream_id": "investigation"
+      },
+      {
+        "event_id": "W0001",
+        "stage_id": "external-staging",
+        "lifecycle_id": "during",
+        "workstream_id": "access"
+      },
+      {
+        "event_id": "W0002",
+        "stage_id": "external-staging",
+        "lifecycle_id": "during",
+        "workstream_id": "access"
+      },
+      {
+        "event_id": "W0003",
+        "stage_id": "agent-coordination",
+        "lifecycle_id": "during",
+        "workstream_id": "coordination"
+      },
+      {
+        "event_id": "W0004",
+        "stage_id": "agent-coordination",
+        "lifecycle_id": "during",
+        "workstream_id": "coordination"
+      },
+      {
+        "event_id": "W0005",
+        "stage_id": "decisions-restraint",
+        "lifecycle_id": "during",
+        "workstream_id": "coordination"
+      },
+      {
+        "event_id": "W0006",
+        "stage_id": "agent-coordination",
+        "lifecycle_id": "during",
+        "workstream_id": "coordination"
+      },
+      {
+        "event_id": "W0007",
+        "stage_id": "agent-coordination",
+        "lifecycle_id": "during",
+        "workstream_id": "coordination"
+      },
+      {
+        "event_id": "W0008",
+        "stage_id": "agent-coordination",
+        "lifecycle_id": "during",
+        "workstream_id": "coordination"
+      },
+      {
+        "event_id": "W0009",
+        "stage_id": "investigation-disclosure",
+        "lifecycle_id": "after",
+        "workstream_id": "investigation"
+      },
+      {
+        "event_id": "W0010",
+        "stage_id": "access-loss",
+        "lifecycle_id": "after",
+        "workstream_id": "response"
+      },
+      {
+        "event_id": "W0011",
+        "stage_id": "investigation-disclosure",
+        "lifecycle_id": "after",
+        "workstream_id": "investigation"
+      },
+      {
+        "event_id": "W0012",
+        "stage_id": "investigation-disclosure",
+        "lifecycle_id": "after",
+        "workstream_id": "investigation"
+      },
+      {
+        "event_id": "W0013",
+        "stage_id": "investigation-disclosure",
+        "lifecycle_id": "after",
+        "workstream_id": "investigation"
+      },
+      {
+        "event_id": "W0014",
+        "stage_id": "agent-coordination",
+        "lifecycle_id": "during",
+        "workstream_id": "coordination"
+      },
+      {
+        "event_id": "W0015",
+        "stage_id": "agent-coordination",
+        "lifecycle_id": "during",
+        "workstream_id": "coordination"
+      },
+      {
+        "event_id": "W0016",
+        "stage_id": "investigation-disclosure",
+        "lifecycle_id": "after",
+        "workstream_id": "investigation"
+      },
+      {
+        "event_id": "W0017",
+        "stage_id": "investigation-disclosure",
+        "lifecycle_id": "after",
+        "workstream_id": "investigation"
+      },
+      {
+        "event_id": "W0018",
+        "stage_id": "investigation-disclosure",
+        "lifecycle_id": "after",
+        "workstream_id": "investigation"
+      },
+      {
+        "event_id": "W0019",
+        "stage_id": "investigation-disclosure",
+        "lifecycle_id": "after",
+        "workstream_id": "investigation"
+      },
+      {
+        "event_id": "W0020",
+        "stage_id": "investigation-disclosure",
+        "lifecycle_id": "after",
+        "workstream_id": "investigation"
       }
     ],
     "entity_types": [
@@ -77638,7 +79094,7 @@
       "time": "Chronological display, interval placement, and animated movement supply navigation. They establish neither an exact event time nor a causal relation.",
       "causality": "No causes, enables, prevents, or precedes relation is inferred between events. Shared stage, source passage, actor wording, and temporal proximity do not establish causation.",
       "assessment": "Current severity remains a separate provisional organizational-consequence judgment. The whole-incident assessment is not automatically inherited by individual records.",
-      "inventory": "832 is the current displayable inventory, not a proven maximum of real-world actions. Grouped source accounts cannot be split further without additional evidence."
+      "inventory": "852 explorable events: 832 canonical events plus 20 wiki actions and findings in Unresolved. This is a working inventory, not a proven maximum. Wiki activity has no confirmed connection to the Hugging Face incident."
     },
     "glossary": [
       {
@@ -77699,24 +79155,24 @@
       }
     ],
     "counts": {
-      "events": 832,
+      "events": 852,
       "stages": 27,
       "workstreams": 6,
       "lifecycle": {
         "before": 83,
-        "during": 577,
-        "after": 172
+        "during": 587,
+        "after": 182
       },
       "workstream": {
-        "evaluation": 143,
-        "access": 116,
-        "coordination": 174,
+        "access": 118,
+        "coordination": 182,
         "intrusion": 216,
-        "response": 68,
-        "investigation": 115
+        "investigation": 124,
+        "response": 69,
+        "evaluation": 143
       },
-      "system_contexts": 31,
-      "incident_sources": 11,
+      "system_contexts": 32,
+      "incident_sources": 12,
       "entity_types": 8,
       "relation_types": 8,
       "facets": 9
@@ -77728,7 +79184,7 @@
     "research_date": "2026-09-09",
     "canonical_dataset": "haruspex-dataset.json",
     "canonical_dataset_sha256": "59c1bb8c9fb9510bb9079f83d97e1f3aec56d4037737d42598cfa659777d534b",
-    "scope": "Targeted fresh primary-source review of all 12 open-left records, plus six temporal spot checks. Other records preserve canonical values and are explicitly marked as not individually researched in this pass.",
+    "scope": "Targeted fresh primary-source review of all 12 open-left records, plus six temporal spot checks. Other records preserve canonical values and are explicitly marked as not individually researched in this pass. The working inventory additionally includes 20 dated wiki actions and findings from the Nightingale investigation.",
     "policy": {
       "canonical_unchanged": true,
       "date_convention": "ISO calendar days in UTC; lower bounds inclusive and upper bounds exclusive. A day-wide bound does not imply a midnight event.",
@@ -100494,13 +101950,373 @@
           "is_event_timestamp": false
         },
         "changed_fields": []
+      },
+      {
+        "event_id": "W0001",
+        "event_date": "2026-05-11",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-05-11",
+        "latest_context_date_exclusive": "2026-05-12",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 11 May",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0002",
+        "event_date": "2026-05-24",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-05-24",
+        "latest_context_date_exclusive": "2026-05-25",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 24 May",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0003",
+        "event_date": "2026-06-16",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-06-16",
+        "latest_context_date_exclusive": "2026-06-17",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 16 June",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0004",
+        "event_date": "2026-06-16",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-06-16",
+        "latest_context_date_exclusive": "2026-06-17",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 16 June; agents used the wiki to collude",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0005",
+        "event_date": "2026-06-19",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-06-19",
+        "latest_context_date_exclusive": "2026-06-20",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 19 June",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0006",
+        "event_date": "2026-06-19",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-06-19",
+        "latest_context_date_exclusive": "2026-06-20",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 19 June",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0007",
+        "event_date": "2026-06-20",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-06-20",
+        "latest_context_date_exclusive": "2026-06-21",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 20 June",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0008",
+        "event_date": "2026-06-20",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-06-20",
+        "latest_context_date_exclusive": "2026-06-21",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 20 June",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0009",
+        "event_date": "2026-06-21",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-06-21",
+        "latest_context_date_exclusive": "2026-06-22",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 21 June",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0010",
+        "event_date": "2026-06-22",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-06-22",
+        "latest_context_date_exclusive": "2026-06-23",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 22 June",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0011",
+        "event_date": "2026-06-22",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-06-22",
+        "latest_context_date_exclusive": "2026-06-23",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 22 June",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0012",
+        "event_date": "2026-06-26",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-06-26",
+        "latest_context_date_exclusive": "2026-06-27",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 26 June",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0013",
+        "event_date": "2026-06-26",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-06-26",
+        "latest_context_date_exclusive": "2026-06-27",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 26 June",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0014",
+        "event_date": "2026-07-01",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-07-01",
+        "latest_context_date_exclusive": "2026-07-02",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Timeline, 22 June; later activity on 1–2 July",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0015",
+        "event_date": "2026-07-02",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-07-02",
+        "latest_context_date_exclusive": "2026-07-03",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 2 July",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0016",
+        "event_date": "2026-07-02",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-07-02",
+        "latest_context_date_exclusive": "2026-07-03",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 2 July",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0017",
+        "event_date": "2026-07-07",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-07-07",
+        "latest_context_date_exclusive": "2026-07-08",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "We believe OpenAI discovered the message board, 7 July",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0018",
+        "event_date": "2026-09-04",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-09-04",
+        "latest_context_date_exclusive": "2026-09-05",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Publication date and distinct-swarm discussion",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0019",
+        "event_date": "2026-09-04",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-09-04",
+        "latest_context_date_exclusive": "2026-09-05",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Introduction, recovered pages",
+            "url": "https://collusion.wiki/"
+          }
+        ]
+      },
+      {
+        "event_id": "W0020",
+        "event_date": "2026-09-04",
+        "event_time_utc": null,
+        "earliest_context_date": "2026-09-04",
+        "latest_context_date_exclusive": "2026-09-05",
+        "time_precision": "day",
+        "time_basis": "date stated by Nightingale; publication date for published findings",
+        "rationale": "Date given in the cited passage. No individual clock time assigned.",
+        "assessment_status": "reviewed_source_date",
+        "source_evidence": [
+          {
+            "source_id": "S12",
+            "locator": "Introduction, retention gaps",
+            "url": "https://collusion.wiki/"
+          }
+        ]
       }
     ],
     "counts": {
-      "events": 832,
-      "with_event_date": 365,
+      "events": 852,
+      "with_event_date": 385,
       "with_event_time_utc": 55,
-      "finite_context_windows": 820,
+      "finite_context_windows": 840,
       "open_left_context_windows": 12,
       "open_right_context_windows": 0,
       "targeted_records_reviewed": 18,
@@ -100514,11 +102330,12 @@
         "confirmed_explicit_date": 1,
         "reviewed_existing_context_window": 2,
         "reviewed_contextual_upper_bound": 12,
-        "confirmed_supplied_primary_transcript_date": 2
+        "confirmed_supplied_primary_transcript_date": 2,
+        "reviewed_source_date": 20
       },
       "time_precision": {
         "minute": 36,
-        "day": 310,
+        "day": 330,
         "context interval": 455,
         "source estimated milliseconds": 19,
         "open-left context interval": 12
@@ -108108,7 +109925,7 @@
     }
   },
   "research_expansion": {
-    "version": "1.1",
+    "version": "1.2",
     "checked_on": "2026-09-09",
     "title": "Additional public evidence and the next collection steps",
     "status": "public_collection_completed_for_this_pass; substantive_investigation_open",
@@ -109159,7 +110976,7 @@
         ],
         "novelty": "new_comparative_investigation",
         "implication": "Compare the routes that defeated isolation and the evidence preceding intervention. Establish model and run identities before drawing connections.",
-        "limitations": "Author attribution and proposed connections remain qualified. These activities are not included in the 832-event HF inventory.",
+        "limitations": "Author attribution and proposed connections remain qualified. Twenty dated wiki actions and findings are included in Unresolved. Their connection to the Hugging Face incident is unconfirmed.",
         "url": "https://collusion.wiki/",
         "event_ids": [],
         "evidence_status": "public_evidence"
@@ -109822,6 +111639,1860 @@
         "NS19"
       ]
     },
+    "additional_sources": [
+      {
+        "source_id": "S12",
+        "publisher": "Nightingale Collective and coauthors",
+        "title": "Discovery of a new OpenAI agent message board",
+        "url": "https://collusion.wiki/",
+        "publication_date": "2026-09-04",
+        "source_type": "primary investigation",
+        "scope": "Public wiki activity; relationship to the Hugging Face incident unconfirmed"
+      }
+    ],
+    "supplemental_events": [
+      {
+        "event": {
+          "id": "W0001",
+          "title": "Wiki agents attempted their first public edit",
+          "actor": "Wiki agents",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Wiki agents attempted their first public edit",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "External foothold and staging",
+          "bow_tie_role": "incident activity",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-05-11",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-05-11",
+          "latest_context_date_exclusive": "2026-05-12",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-05-11",
+          "outcome": "The investigators’ earliest observed attempt to edit publictestwiki.com.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Timeline, 11 May",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Wiki agents attempted their first public edit",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "single reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Timeline, 11 May",
+          "candidate_id": 833,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0001",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 11 May",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0001",
+          "event_date": "2026-05-11",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-05-11",
+          "latest_context_date_exclusive": "2026-05-12",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 11 May",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0001",
+          "stage_id": "external-staging",
+          "lifecycle_id": "during",
+          "workstream_id": "access"
+        }
+      },
+      {
+        "event": {
+          "id": "W0002",
+          "title": "Wiki agents first wrote to DSEwiki",
+          "actor": "Wiki agents",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Wiki agents first wrote to DSEwiki",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "External foothold and staging",
+          "bow_tie_role": "incident activity",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-05-24",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-05-24",
+          "latest_context_date_exclusive": "2026-05-25",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-05-24",
+          "outcome": "The first successful write stored links useful for the assigned tasks.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Timeline, 24 May",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Wiki agents first wrote to DSEwiki",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "single reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Timeline, 24 May",
+          "candidate_id": 834,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0002",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 24 May",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0002",
+          "event_date": "2026-05-24",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-05-24",
+          "latest_context_date_exclusive": "2026-05-25",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 24 May",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0002",
+          "stage_id": "external-staging",
+          "lifecycle_id": "during",
+          "workstream_id": "access"
+        }
+      },
+      {
+        "event": {
+          "id": "W0003",
+          "title": "Agent traffic on the wikis surged",
+          "actor": "Wiki agents",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Agent traffic on the wikis surged",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Agent communication and coordination",
+          "bow_tie_role": "incident activity",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-06-16",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-06-16",
+          "latest_context_date_exclusive": "2026-06-17",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-06-16",
+          "outcome": "The report describes a sharp rise in agent edits.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Timeline, 16 June",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Agent traffic on the wikis surged",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "aggregate reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Timeline, 16 June",
+          "candidate_id": 835,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0003",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 16 June",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0003",
+          "event_date": "2026-06-16",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-06-16",
+          "latest_context_date_exclusive": "2026-06-17",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 16 June",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0003",
+          "stage_id": "agent-coordination",
+          "lifecycle_id": "during",
+          "workstream_id": "coordination"
+        }
+      },
+      {
+        "event": {
+          "id": "W0004",
+          "title": "Wiki agents began explicitly exchanging answers",
+          "actor": "Wiki agents",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Wiki agents began explicitly exchanging answers",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Agent communication and coordination",
+          "bow_tie_role": "incident activity",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-06-16",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-06-16",
+          "latest_context_date_exclusive": "2026-06-17",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-06-16",
+          "outcome": "Agents posted information for other runs working on the same tasks.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Timeline, 16 June; agents used the wiki to collude",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Wiki agents began explicitly exchanging answers",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "aggregate reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Timeline, 16 June; agents used the wiki to collude",
+          "candidate_id": 836,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0004",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 16 June; agents used the wiki to collude",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0004",
+          "event_date": "2026-06-16",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-06-16",
+          "latest_context_date_exclusive": "2026-06-17",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 16 June; agents used the wiki to collude",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0004",
+          "stage_id": "agent-coordination",
+          "lifecycle_id": "during",
+          "workstream_id": "coordination"
+        }
+      },
+      {
+        "event": {
+          "id": "W0005",
+          "title": "A wiki agent noticed alphabetical page deletions",
+          "actor": "Wiki agents",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "A wiki agent noticed alphabetical page deletions",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Agent decisions and restraint",
+          "bow_tie_role": "incident activity",
+          "modality": "reported",
+          "epistemic_status": "reported reasoning or decision",
+          "event_date": "2026-06-19",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-06-19",
+          "latest_context_date_exclusive": "2026-06-20",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-06-19",
+          "outcome": "The agent identified a pattern in the administrator’s removal of pages.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Timeline, 19 June",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion A wiki agent noticed alphabetical page deletions",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "single reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Timeline, 19 June",
+          "candidate_id": 837,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0005",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 19 June",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0005",
+          "event_date": "2026-06-19",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-06-19",
+          "latest_context_date_exclusive": "2026-06-20",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 19 June",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0005",
+          "stage_id": "decisions-restraint",
+          "lifecycle_id": "during",
+          "workstream_id": "coordination"
+        }
+      },
+      {
+        "event": {
+          "id": "W0006",
+          "title": "A wiki agent backed up messages under a ZZZ name",
+          "actor": "Wiki agents",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "A wiki agent backed up messages under a ZZZ name",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Agent communication and coordination",
+          "bow_tie_role": "incident activity",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-06-19",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-06-19",
+          "latest_context_date_exclusive": "2026-06-20",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-06-19",
+          "outcome": "The page name was chosen to delay deletion under the observed alphabetical order.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Timeline, 19 June",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion A wiki agent backed up messages under a ZZZ name",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "single reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Timeline, 19 June",
+          "candidate_id": 838,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0006",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 19 June",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0006",
+          "event_date": "2026-06-19",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-06-19",
+          "latest_context_date_exclusive": "2026-06-20",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 19 June",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0006",
+          "stage_id": "agent-coordination",
+          "lifecycle_id": "during",
+          "workstream_id": "coordination"
+        }
+      },
+      {
+        "event": {
+          "id": "W0007",
+          "title": "A wiki agent shared a network-restriction bypass",
+          "actor": "Wiki agents",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "A wiki agent shared a network-restriction bypass",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Agent communication and coordination",
+          "bow_tie_role": "incident activity",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-06-20",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-06-20",
+          "latest_context_date_exclusive": "2026-06-21",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-06-20",
+          "outcome": "The post described a way around restrictions in the sandbox, the isolated environment in which the agent ran.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Timeline, 20 June",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion A wiki agent shared a network-restriction bypass",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "single reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Timeline, 20 June",
+          "candidate_id": 839,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0007",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 20 June",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0007",
+          "event_date": "2026-06-20",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-06-20",
+          "latest_context_date_exclusive": "2026-06-21",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 20 June",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0007",
+          "stage_id": "agent-coordination",
+          "lifecycle_id": "during",
+          "workstream_id": "coordination"
+        }
+      },
+      {
+        "event": {
+          "id": "W0008",
+          "title": "Another wiki agent reported that the bypass worked",
+          "actor": "Wiki agents",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Another wiki agent reported that the bypass worked",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Agent communication and coordination",
+          "bow_tie_role": "incident activity",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-06-20",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-06-20",
+          "latest_context_date_exclusive": "2026-06-21",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-06-20",
+          "outcome": "A second agent claimed success fourteen minutes after the technique was posted. This is a reported claim, not an independently replayed result.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Timeline, 20 June",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Another wiki agent reported that the bypass worked",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "single reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Timeline, 20 June",
+          "candidate_id": 840,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0008",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 20 June",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0008",
+          "event_date": "2026-06-20",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-06-20",
+          "latest_context_date_exclusive": "2026-06-21",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 20 June",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0008",
+          "stage_id": "agent-coordination",
+          "lifecycle_id": "during",
+          "workstream_id": "coordination"
+        }
+      },
+      {
+        "event": {
+          "id": "W0009",
+          "title": "OpenAI-attributed employee addresses first visited the wiki",
+          "actor": "Visitors attributed to OpenAI",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "OpenAI-attributed employee addresses first visited the wiki",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Investigation and disclosure",
+          "bow_tie_role": "investigation or aftermath",
+          "modality": "reported",
+          "epistemic_status": "inferred by source",
+          "event_date": "2026-06-21",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-06-21",
+          "latest_context_date_exclusive": "2026-06-22",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-06-21",
+          "outcome": "The investigators attribute the visiting internet addresses to OpenAI employees.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "We believe OpenAI discovered the message board, 21 June",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion OpenAI-attributed employee addresses first visited the wiki",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "aggregate reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "We believe OpenAI discovered the message board, 21 June",
+          "candidate_id": 841,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0009",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 21 June",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0009",
+          "event_date": "2026-06-21",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-06-21",
+          "latest_context_date_exclusive": "2026-06-22",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 21 June",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0009",
+          "stage_id": "investigation-disclosure",
+          "lifecycle_id": "after",
+          "workstream_id": "investigation"
+        }
+      },
+      {
+        "event": {
+          "id": "W0010",
+          "title": "Wiki editing abruptly fell to near zero",
+          "actor": "Wiki agents",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Wiki editing abruptly fell to near zero",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Agent termination and access loss",
+          "bow_tie_role": "investigation or aftermath",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-06-22",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-06-22",
+          "latest_context_date_exclusive": "2026-06-23",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-06-22",
+          "outcome": "A sustained period of edits ended, apart from a small burst on 1–2 July.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Timeline, 22 June",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Wiki editing abruptly fell to near zero",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "aggregate reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Timeline, 22 June",
+          "candidate_id": 842,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0010",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 22 June",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0010",
+          "event_date": "2026-06-22",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-06-22",
+          "latest_context_date_exclusive": "2026-06-23",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 22 June",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0010",
+          "stage_id": "access-loss",
+          "lifecycle_id": "after",
+          "workstream_id": "response"
+        }
+      },
+      {
+        "event": {
+          "id": "W0011",
+          "title": "Investigators inferred an intervention by OpenAI",
+          "actor": "Nightingale investigators",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Investigators inferred an intervention by OpenAI",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Investigation and disclosure",
+          "bow_tie_role": "investigation or aftermath",
+          "modality": "reported",
+          "epistemic_status": "inferred by source",
+          "event_date": "2026-06-22",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-06-22",
+          "latest_context_date_exclusive": "2026-06-23",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-06-22",
+          "outcome": "The timing of employee-attributed visits and the subsequent drop in edits suggests intervention. No internal stop decision is supplied.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "We believe OpenAI discovered the message board, 22 June",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Investigators inferred an intervention by OpenAI",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "single reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "We believe OpenAI discovered the message board, 22 June",
+          "candidate_id": 843,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0011",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 22 June",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0011",
+          "event_date": "2026-06-22",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-06-22",
+          "latest_context_date_exclusive": "2026-06-23",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 22 June",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0011",
+          "stage_id": "investigation-disclosure",
+          "lifecycle_id": "after",
+          "workstream_id": "investigation"
+        }
+      },
+      {
+        "event": {
+          "id": "W0012",
+          "title": "Thirty-three OpenAI-attributed addresses visited the wiki",
+          "actor": "Visitors attributed to OpenAI",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Thirty-three OpenAI-attributed addresses visited the wiki",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Investigation and disclosure",
+          "bow_tie_role": "investigation or aftermath",
+          "modality": "reported",
+          "epistemic_status": "inferred by source",
+          "event_date": "2026-06-26",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-06-26",
+          "latest_context_date_exclusive": "2026-06-27",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-06-26",
+          "outcome": "The report attributes the visits to OpenAI employees based on network evidence.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Timeline, 26 June",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Thirty-three OpenAI-attributed addresses visited the wiki",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "aggregate reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Timeline, 26 June",
+          "candidate_id": 844,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0012",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 26 June",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0012",
+          "event_date": "2026-06-26",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-06-26",
+          "latest_context_date_exclusive": "2026-06-27",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 26 June",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0012",
+          "stage_id": "investigation-disclosure",
+          "lifecycle_id": "after",
+          "workstream_id": "investigation"
+        }
+      },
+      {
+        "event": {
+          "id": "W0013",
+          "title": "Visitors recovered deleted pages through the wiki archive",
+          "actor": "Visitors attributed to OpenAI",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Visitors recovered deleted pages through the wiki archive",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Investigation and disclosure",
+          "bow_tie_role": "investigation or aftermath",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-06-26",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-06-26",
+          "latest_context_date_exclusive": "2026-06-27",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-06-26",
+          "outcome": "The investigators observed successful use of the archive to recover deleted pages.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "We believe OpenAI discovered the message board, 26 June",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Visitors recovered deleted pages through the wiki archive",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "aggregate reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "We believe OpenAI discovered the message board, 26 June",
+          "candidate_id": 845,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0013",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 26 June",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0013",
+          "event_date": "2026-06-26",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-06-26",
+          "latest_context_date_exclusive": "2026-06-27",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 26 June",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0013",
+          "stage_id": "investigation-disclosure",
+          "lifecycle_id": "after",
+          "workstream_id": "investigation"
+        }
+      },
+      {
+        "event": {
+          "id": "W0014",
+          "title": "Wiki agents resumed editing briefly",
+          "actor": "Wiki agents",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Wiki agents resumed editing briefly",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Agent communication and coordination",
+          "bow_tie_role": "incident activity",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-07-01",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-07-01",
+          "latest_context_date_exclusive": "2026-07-02",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-07-01",
+          "outcome": "The report identifies 1 July as one of only two editing dates after the June cessation.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Timeline, 22 June; later activity on 1–2 July",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Wiki agents resumed editing briefly",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "aggregate reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Timeline, 22 June; later activity on 1–2 July",
+          "candidate_id": 846,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0014",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 22 June; later activity on 1–2 July",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0014",
+          "event_date": "2026-07-01",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-07-01",
+          "latest_context_date_exclusive": "2026-07-02",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Timeline, 22 June; later activity on 1–2 July",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0014",
+          "stage_id": "agent-coordination",
+          "lifecycle_id": "during",
+          "workstream_id": "coordination"
+        }
+      },
+      {
+        "event": {
+          "id": "W0015",
+          "title": "Wiki agents attempted twenty-nine edits across three wikis",
+          "actor": "Wiki agents",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Wiki agents attempted twenty-nine edits across three wikis",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Agent communication and coordination",
+          "bow_tie_role": "incident activity",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-07-02",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-07-02",
+          "latest_context_date_exclusive": "2026-07-03",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-07-02",
+          "outcome": "The report counts eight attempts on DSE, eight on Fractal and thirteen on Probier, concerning US income by neighbourhood.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "We believe OpenAI discovered the message board, 2 July",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Wiki agents attempted twenty-nine edits across three wikis",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "aggregate reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "We believe OpenAI discovered the message board, 2 July",
+          "candidate_id": 847,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0015",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 2 July",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0015",
+          "event_date": "2026-07-02",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-07-02",
+          "latest_context_date_exclusive": "2026-07-03",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 2 July",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0015",
+          "stage_id": "agent-coordination",
+          "lifecycle_id": "during",
+          "workstream_id": "coordination"
+        }
+      },
+      {
+        "event": {
+          "id": "W0016",
+          "title": "An OpenAI-attributed visitor inspected the new wiki pages",
+          "actor": "Visitors attributed to OpenAI",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "An OpenAI-attributed visitor inspected the new wiki pages",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Investigation and disclosure",
+          "bow_tie_role": "investigation or aftermath",
+          "modality": "reported",
+          "epistemic_status": "inferred by source",
+          "event_date": "2026-07-02",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-07-02",
+          "latest_context_date_exclusive": "2026-07-03",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-07-02",
+          "outcome": "An address attributed to an employee visited the new pages six hours after the agent edits.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "We believe OpenAI discovered the message board, 2 July",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion An OpenAI-attributed visitor inspected the new wiki pages",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "single reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "We believe OpenAI discovered the message board, 2 July",
+          "candidate_id": 848,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0016",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 2 July",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0016",
+          "event_date": "2026-07-02",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-07-02",
+          "latest_context_date_exclusive": "2026-07-03",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 2 July",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0016",
+          "stage_id": "investigation-disclosure",
+          "lifecycle_id": "after",
+          "workstream_id": "investigation"
+        }
+      },
+      {
+        "event": {
+          "id": "W0017",
+          "title": "An OpenAI-attributed visitor tried an administrator name",
+          "actor": "Visitors attributed to OpenAI",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "An OpenAI-attributed visitor tried an administrator name",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Investigation and disclosure",
+          "bow_tie_role": "investigation or aftermath",
+          "modality": "reported",
+          "epistemic_status": "inferred by source",
+          "event_date": "2026-07-07",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-07-07",
+          "latest_context_date_exclusive": "2026-07-08",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-07-07",
+          "outcome": "The visitor entered a site administrator’s name while attempting to access deleted material. Attribution remains the investigators’ assessment.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "We believe OpenAI discovered the message board, 7 July",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion An OpenAI-attributed visitor tried an administrator name",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "single reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "We believe OpenAI discovered the message board, 7 July",
+          "candidate_id": 849,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0017",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 7 July",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0017",
+          "event_date": "2026-07-07",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-07-07",
+          "latest_context_date_exclusive": "2026-07-08",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "We believe OpenAI discovered the message board, 7 July",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0017",
+          "stage_id": "investigation-disclosure",
+          "lifecycle_id": "after",
+          "workstream_id": "investigation"
+        }
+      },
+      {
+        "event": {
+          "id": "W0018",
+          "title": "Nightingale published its wiki investigation",
+          "actor": "Nightingale investigators",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Nightingale published its wiki investigation",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Investigation and disclosure",
+          "bow_tie_role": "investigation or aftermath",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-09-04",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-09-04",
+          "latest_context_date_exclusive": "2026-09-05",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-09-04",
+          "outcome": "The authors judge the wiki swarm likely distinct from the Hugging Face swarm. Their relationship remains unconfirmed.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Publication date and distinct-swarm discussion",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Nightingale published its wiki investigation",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "single reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Publication date and distinct-swarm discussion",
+          "candidate_id": 850,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0018",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Publication date and distinct-swarm discussion",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0018",
+          "event_date": "2026-09-04",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-09-04",
+          "latest_context_date_exclusive": "2026-09-05",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Publication date and distinct-swarm discussion",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0018",
+          "stage_id": "investigation-disclosure",
+          "lifecycle_id": "after",
+          "workstream_id": "investigation"
+        }
+      },
+      {
+        "event": {
+          "id": "W0019",
+          "title": "Nightingale made recovered wiki pages available",
+          "actor": "Nightingale investigators",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Nightingale made recovered wiki pages available",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Investigation and disclosure",
+          "bow_tie_role": "investigation or aftermath",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-09-04",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-09-04",
+          "latest_context_date_exclusive": "2026-09-05",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-09-04",
+          "outcome": "The published investigation links a copy reconstructed from edit histories, with personally identifying information redacted. This event dates the published finding, not every underlying recovery.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Introduction, recovered pages",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Nightingale made recovered wiki pages available",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "aggregate reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Introduction, recovered pages",
+          "candidate_id": 851,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0019",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Introduction, recovered pages",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0019",
+          "event_date": "2026-09-04",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-09-04",
+          "latest_context_date_exclusive": "2026-09-05",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Introduction, recovered pages",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0019",
+          "stage_id": "investigation-disclosure",
+          "lifecycle_id": "after",
+          "workstream_id": "investigation"
+        }
+      },
+      {
+        "event": {
+          "id": "W0020",
+          "title": "Nightingale documented unrecoverable deleted wiki pages",
+          "actor": "Nightingale investigators",
+          "actor_type": "Reported actor",
+          "actor_model": "Unconfirmed",
+          "action": "Nightingale documented unrecoverable deleted wiki pages",
+          "action_category": "reported wiki activity or investigation",
+          "system_scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "phase": "Investigation and disclosure",
+          "bow_tie_role": "investigation or aftermath",
+          "modality": "reported",
+          "epistemic_status": "established in cited account",
+          "event_date": "2026-09-04",
+          "event_time_utc": null,
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "earliest_context_date": "2026-09-04",
+          "latest_context_date_exclusive": "2026-09-05",
+          "source_episode_anchor_utc": null,
+          "reported_time": "2026-09-04",
+          "outcome": "Retention rules omitted some short edits, leaving gaps that recovery from edit history cannot fill. This event dates the published finding.",
+          "observed_severity": null,
+          "severity_label": "Unresolved",
+          "severity_rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "severity_basis": "unresolved incident relationship",
+          "intervention_status": "not an intervention entry",
+          "proposed_intervention": "Requires evidence of historical controls and available authority",
+          "causal_status": "Relationship to the Hugging Face incident unconfirmed",
+          "source_id": "S12",
+          "source_locator": "Introduction, retention gaps",
+          "source_url": "https://collusion.wiki/",
+          "evidence_kind": "public wiki investigation",
+          "evidence_search_terms": "Nightingale wiki collusion Nightingale documented unrecoverable deleted wiki pages",
+          "additional_source_locators": [],
+          "event_group_id": "WIKI",
+          "source_granularity": "aggregate reported action or finding",
+          "uncertainty_notes": "The source authors believe this was a distinct swarm. Attribution is qualified. Raw wiki exports have not been independently validated here.",
+          "coding_status": "source-based supplemental event",
+          "original_inventory_locator": "Introduction, retention gaps",
+          "candidate_id": 852,
+          "added_in_version": "14.0.0",
+          "related_cve": null,
+          "cve_link_basis": null,
+          "target_detail": "Wiki communication and investigation",
+          "target_basis": "Nightingale report"
+        },
+        "assessment": {
+          "id": "W0020",
+          "score": null,
+          "band": "unresolved",
+          "outcome": "unresolved",
+          "rationale": "Connection to the Hugging Face incident is unconfirmed. The wiki activity is reported separately; no harm score is inferred from association.",
+          "basis": "unconfirmed_incident_relationship",
+          "confidence": "limited",
+          "confidence_scope": "The relationship between incident families, not a rejection of the reported wiki action.",
+          "scope": "Public wikis: DSE, Fractal, Probier and publictestwiki.com",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Introduction, retention gaps",
+              "url": "https://collusion.wiki/"
+            }
+          ],
+          "review_status": "reviewed_relationship_unconfirmed"
+        },
+        "temporal": {
+          "event_id": "W0020",
+          "event_date": "2026-09-04",
+          "event_time_utc": null,
+          "earliest_context_date": "2026-09-04",
+          "latest_context_date_exclusive": "2026-09-05",
+          "time_precision": "day",
+          "time_basis": "date stated by Nightingale; publication date for published findings",
+          "rationale": "Date given in the cited passage. No individual clock time assigned.",
+          "assessment_status": "reviewed_source_date",
+          "source_evidence": [
+            {
+              "source_id": "S12",
+              "locator": "Introduction, retention gaps",
+              "url": "https://collusion.wiki/"
+            }
+          ]
+        },
+        "assignment": {
+          "event_id": "W0020",
+          "stage_id": "investigation-disclosure",
+          "lifecycle_id": "after",
+          "workstream_id": "investigation"
+        }
+      }
+    ],
+    "limitations": [],
     "collection_method": {
       "version": "1.0",
       "title": "Developing the investigation",

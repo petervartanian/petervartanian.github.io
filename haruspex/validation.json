@@ -1,10 +1,10 @@
 {
-  "application_version": "13.0.1",
+  "application_version": "14.0.0",
   "assessments_version": "3.0.1",
   "visual_encodings_version": "6.2.0",
   "incident_ontology_version": "1.0.0",
   "temporal_assessments_version": "1.0.0",
-  "verified_on": "2026-09-09",
+  "verified_on": "2026-09-10",
   "canonical_records": 832,
   "canonical_sha256": "59c1bb8c9fb9510bb9079f83d97e1f3aec56d4037737d42598cfa659777d534b",
   "canonical_unchanged": true,
@@ -110,12 +110,14 @@
     "v10.1 browser review: lifecycle switching, keyboard zoom and the date handle remain responsive during movement. The paper detection/response link shows 8 related events in a fitted time window.",
     "v10.1 independent review: active child opacity is included in outgoing snapshots; overview gestures use the short fade bridge; enabling reduced motion cancels view fades. Syntax and build checks pass.",
     "v10.1 console review captured no errors. No end-to-end FPS benchmark is claimed.",
-    "v13 browser review: The introduction appears before the sphere. The sphere has 864 textured fragments and its curved title shares the surface texture. Forward page scrolling separates the surface; reverse page scrolling reassembles it.",
-    "v13 browser review: The sphere has a nominal radius of 295.2px at 1280x720 and 167.7px at 390x844. Phone review found no horizontal overflow. The completed phone field reports all 599 Impact events and no inert controls.",
-    "v13 browser review: Clicking the sphere and keyboard activation reach the event field. Native Bow-tie selection and arrow-key navigation into CAST complete without restarting the sphere passage or captured console errors.",
-    "v13: JavaScript syntax and strict build checks pass. The package is checked file-for-file against the source tree, with canonical checksum and private-path exclusions enforced. The 832 canonical events and all severity assignments are unchanged.",
-    "Retained v12 review: All three full-range assessment fields account for the complete 832-event inventory. The 70,000 decorative stars, egg reveal, coverage note, creator credit, stacked quote attribution and expanded CAST paper were reviewed at desktop and phone widths.",
-    "v13.0.1: The introduction separates Enter the field and Read the investigation with … OR …. Browser layout checks confirm a spaced desktop row and centered phone stack without overlap or horizontal overflow. Strict build passes."
+    "v14: 852 unique events with 45 fields each. Event, date, assessment and ontology ID sets match exactly. Severity, lifecycle, workstream and temporal counts each total 852. Canonical 832-event checksum is unchanged.",
+    "v14: Browser review confirmed 20 Nightingale search matches in the Unresolved field, with ordinary selectable W event IDs, source citations and unconfirmed-connection explanations.",
+    "v14: The egg reveal begins You found it! Beyond these 852 explorable events and explains the different message/file, cache-entry, transcript and recovered-action units, unknown full count and relevant evidence holders. Source citations use Roman endnotes.",
+    "v14: Browser canvas diagnostics confirm 70000 unique decorative stars and a nonsequential shuffled identifier sample.",
+    "v14: Browser review confirmed an unlabelled sphere, rounded intermediate daughter cells, completed event field and restoration of controls. No triangle mesh remains. Cached texture drawing replaces per-cell gradient construction.",
+    "v14: Event banner retains the selected marker and curved connector while dimming and blurring the field. Native click and Tab navigation preserve the open banner. A 390x844 review found a 358px-wide banner entirely within the viewport and no horizontal overflow.",
+    "v14: Bow-tie selection and keyboard navigation to Investigate complete. The investigation expands CAST in its introduction and uses superscript Roman references with matching endnotes. Introduction ellipses belong to the two choices.",
+    "v14: All application JavaScript syntax checks and strict build validations pass. Combined dataset has matching date and stage metadata for the supplemental events; timeline inputs now allow dates through 4 September."
   ],
   "limits": [
     "This is a provisional, developing public-source CAST analysis, not a completed or exhaustive investigation. Search completeness and a maximal number of obtainable facts are not claimed.",
@@ -131,7 +133,7 @@
     "Colors are supplemented by labels and workstream filters. Shape conveys evidence, outline treatment conveys assessment disposition, and size distinguishes single reported units from grouped activity without estimating an underlying count.",
     "Dense windows can overlap at wide zoom. Zoom and nearby-record selection expose individual records. The phone control graph uses horizontal scrolling.",
     "Reduced-motion handling was code-reviewed, without an emulated reduced-motion browser run. No end-to-end FPS benchmark was performed.",
-    "The wiki report and export catalogue were reviewed, but its raw exports were not acquired. A manifest download failed. Counts and hashes from that catalogue have not been independently checked against the files."
+    "Only 20 dated actions and findings from the public wiki investigation are imported. Its full raw export corpus has not been acquired or independently validated. A connection to the Hugging Face swarm is unconfirmed."
   ],
   "geometry_module_version": "1.0.0",
   "performance": {
@@ -150,7 +152,7 @@
         "cached_projection_median": 0.025
       }
     },
-    "benchmark_limit": "Historical computation-only microbenchmark excludes canvas and DOM work. Not rerun for v13. Browser interactions were reviewed at desktop and phone widths; no end-to-end FPS claim."
+    "benchmark_limit": "No new end-to-end frame-rate benchmark. Browser interactions were checked at desktop and phone sizes. Sphere texture caching reduces repeated gradient construction."
   },
   "aggregate_background": {
     "semantics": "Illustrative density of source-reported aggregate activity not individually resolved in the detailed record; not one particle per event.",
@@ -166,7 +168,7 @@
       }
     ],
     "aggregation": "Different units can overlap. Do not add totals or subtract832 to invent an exact remainder.",
-    "catalogue": "Egg beside the main field Legend unlocks five-digit decorative numbers and a local magnifying shimmer. No historical event details are assigned."
+    "catalogue": "70000 unique decorative numbers are deterministically shuffled in space. The egg explains source totals and disclosure gaps before enabling number discovery."
   },
   "cast_analysis_version": "1.0.0",
   "assessment_fields": {
@@ -188,7 +190,7 @@
     "scope": "Selective supporting links from the 832-event corpus. Unlinked events remain in the Atlas; selection does not mark them irrelevant or causal.",
     "completeness": "Not a completed or exhaustive CAST study. A richer control model requires answers and underlying evidence already identified in Q01–Q16."
   },
-  "research_expansion_version": "1.1",
+  "research_expansion_version": "1.2",
   "research_coverage": {
     "evidence_items": 27,
     "questions_reviewed": 16,
@@ -235,5 +237,52 @@
   "marker_scope_counts": {
     "single": 624,
     "grouped": 208
+  },
+  "working_events": 852,
+  "supplemental_wiki_events": 20,
+  "working_severity_counts": {
+    "0": 33,
+    "1": 155,
+    "2": 138,
+    "3": 78,
+    "4": 17,
+    "5": 0,
+    "preventive": 178,
+    "context": 192,
+    "unresolved": 61
+  },
+  "working_temporal_counts": {
+    "events": 852,
+    "with_event_date": 385,
+    "with_event_time_utc": 55,
+    "finite_context_windows": 840,
+    "open_left_context_windows": 12,
+    "open_right_context_windows": 0,
+    "targeted_records_reviewed": 18,
+    "canonical_records_carried_forward_without_individual_review": 814,
+    "records_with_changed_temporal_fields": 12,
+    "new_exact_dates": 0,
+    "new_clock_times": 0,
+    "assessment_status": {
+      "canonical_carried_forward_not_individually_researched": 814,
+      "confirmed_explicit_date_and_time": 1,
+      "confirmed_explicit_date": 1,
+      "reviewed_existing_context_window": 2,
+      "reviewed_contextual_upper_bound": 12,
+      "confirmed_supplied_primary_transcript_date": 2,
+      "reviewed_source_date": 20
+    },
+    "time_precision": {
+      "minute": 36,
+      "day": 330,
+      "context interval": 455,
+      "source estimated milliseconds": 19,
+      "open-left context interval": 12
+    }
+  },
+  "working_lifecycle_counts": {
+    "before": 83,
+    "during": 587,
+    "after": 182
   }
 }

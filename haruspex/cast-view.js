@@ -1,6 +1,7 @@
 /* A source-linked systems-question view. It adds no causal claims to event records. */
 ((root) => {
   'use strict';
+  const roman = value => { let n=value,result=''; for(const [v,s] of [[1000,'m'],[900,'cm'],[500,'d'],[400,'cd'],[100,'c'],[90,'xc'],[50,'l'],[40,'xl'],[10,'x'],[9,'ix'],[5,'v'],[4,'iv'],[1,'i']])while(n>=v){result+=s;n-=v;}return result; };
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const lines = (text, length = 29) => {
     const result = []; let current = '';
@@ -138,9 +139,9 @@
         {sources:[added('NS18'),added('NS19')],note:'Separate wiki investigation and public export catalogue. The authors consider it a distinct swarm. The catalogue is reviewed here, but the raw exports have not been acquired or merged into this event inventory.'},
         {sources:[added('NS20')],note:'Cotra’s September interview, 01:14:30 and 01:28:23. Predictions about more capable agents are conditional judgments, separate from findings about the July incident.'},
       ];
-      const ref = (...numbers) => `<sup class="paper-citation">${numbers.map(number=>`<a href="#cast-source-${number}" data-paper-ref="${number}" aria-label="Source note ${number}">${number}</a>`).join(', ')}</sup>`;
+      const ref = (...numbers) => `<sup class="paper-citation">${numbers.map(number=>`<a href="#cast-source-${number}" data-paper-ref="${number}" aria-label="Endnote ${roman(number)}">${roman(number)}</a>`).join(', ')}</sup>`;
       return `<article class="cast-paper" aria-labelledby="cast-paper-title">
-        <header class="paper-title"><h2 id="cast-paper-title">Why control failed</h2><p class="paper-deck">A first-pass CAST analysis of the OpenAI–Hugging Face incident. Which interventions could have prevented the attacks, cut them short, or limited their consequences?</p></header>
+        <header class="paper-title"><h2 id="cast-paper-title">Why control failed</h2><p class="paper-deck">An investigation of how control failed, using Causal Analysis based on Systems Theory (CAST), a method developed at MIT for examining accidents across people, technology and organizations. Which interventions could have prevented these attacks or limited their consequences?</p></header>
         <div class="paper-body">
           <section class="paper-section"><h3>What this investigation must explain</h3>
             <p>The public accounts describe evaluation agents moving beyond assigned work, exchanging information across runs and using unauthorized access to reach connected services, including Hugging Face. The episode crossed technical and organizational boundaries: research tasks, shared infrastructure, credentials, external workloads and human response teams all became part of the same investigation.${ref(2,3,4)}</p>
@@ -189,7 +190,7 @@
           </section>
           <section class="paper-section"><h3>Investigate the pattern, as well as this incident</h3>
             <p>Nightingale’s September report describes a separate swarm coordinating through public wikis. Its authors believe it was distinct from the Hugging Face swarm. It offers a comparison: did similar permissions, shared state or gaps in response allow different agents to develop the same unwanted cooperation?${ref(12)}</p>
-            <p>The public export catalogue separates saves, deletions, reverts and probes, and provides coverage gaps. The next step is to inspect those exports, reconcile native timestamps and test the proposed attribution. These are leads for a comparative CAST analysis. They are not additional Hugging Face events.</p>
+            <p>The public export catalogue separates saves, deletions, reverts and probes, and provides coverage gaps. The next step is to inspect those exports, reconcile native timestamps and test the proposed attribution. Twenty dated wiki actions and findings are now explorable in Unresolved. Their descriptions preserve the authors’ assessment that this was probably a separate swarm. The raw export corpus has not been imported.</p>
             <p>Cotra’s September interview warns that persistent covert deployments could become feasible within months if security does not improve. That places her conditional forecast around early 2027, not a verified date for AGI. The practical question is whether the proposed controls still work when agents can persist longer, coordinate better and interfere with their own investigation.${ref(13)}</p>
           </section>
           <section class="paper-section"><h3>Developing the analysis further</h3>
@@ -199,7 +200,7 @@
             <p>The public-source collection is documented below. Private evidence requests and the proposed experiments have not been carried out. The working conclusion is a set of connected explanations with explicit tests: reachable authority, shared state, incentives, escalation and containment must be examined together. Each explanation should change when the evidence warrants it.</p>
           </section>
         </div>
-        <section class="paper-source-notes" aria-labelledby="paper-sources-title"><h3 id="paper-sources-title">Source notes</h3><ol>${notes.map((note,index)=>`<li id="cast-source-${index+1}" tabindex="-1">${note.sources.filter(Boolean).map(source=>`<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.title || source.publisher || source.url)}</a>`).join('; ')}<p>${esc(note.note)}</p></li>`).join('')}</ol></section>
+        <section class="paper-source-notes" aria-labelledby="paper-sources-title"><h3 id="paper-sources-title">Endnotes</h3><ol class="roman-endnotes">${notes.map((note,index)=>`<li id="cast-source-${index+1}" tabindex="-1">${note.sources.filter(Boolean).map(source=>`<a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.title || source.publisher || source.url)}</a>`).join('; ')}<p>${esc(note.note)}</p></li>`).join('')}</ol></section>
         <details class="paper-research-notes"><summary>Evidence collected & next investigations</summary><p>The supporting analysis preserves source passages, alternative explanations, linked events and the collection plan for every open question.</p><nav class="paper-note-links" aria-label="Supporting research">${sections.filter(([key])=>key!=='inquiry').map(([key,label])=>`<button data-cast-section="${key}">${esc(label)}</button>`).join('')}</nav><p class="cast-note">Reported changes and analytical proposals remain separate. No private evidence request has been sent.</p></details>
       </article>`;
     }
@@ -255,6 +256,7 @@
       const title = active === 'finding' ? 'A closer look' : sections.find(([key])=>key===active)?.[1] || 'Research notes';
       const body = isPaper ? paper() : active === 'finding' ? inquiry() : active === 'findings' ? cards(data.findings) : active === 'evidence' ? researchView() : active === 'structure' ? graph() : active === 'changes' ? changes() : active === 'questions' ? questions() : scope();
       element.innerHTML = `<div class="cast-shell ${isPaper?'paper-shell':'paper-appendix'}">${isPaper?'':`<button class="paper-back" data-cast-section="inquiry">Return to the paper</button><div class="cast-heading"><h2>${esc(title)}</h2></div>`}<div class="cast-content">${body}</div></div>`;
+      root.HaruspexReader?.annotate(element.querySelector('.cast-content'));
       wireEvents(element);
       wireInquiry(element);
       element.querySelectorAll('[data-cast-section]').forEach(button=>button.addEventListener('click',()=>{

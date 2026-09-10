@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#0b0f10">
-  <meta name="description" content="Haruspex: an open field of 832 actions, decisions and uncertainties in the OpenAI–Hugging Face incident.">
+  <meta name="description" content="Haruspex: an open field of 852 actions, decisions and uncertainties in the OpenAI–Hugging Face incident.">
   <title>Haruspex — The OpenAI–Hugging Face incident</title>
   <style>/* STYLES */</style>
 </head>
@@ -18,11 +18,12 @@
       <div class="intro-main">
         <div class="opening-quotation" id="opening-quotation">
           <h1 id="intro-title">“/* OPENING_QUOTE */”</h1>
-          <p class="quote-credit"><a id="quote-source" href="/* OPENING_URL */" target="_blank" rel="noopener noreferrer" aria-label="Ajeya Cotra"><svg viewBox="0 0 152 24" aria-hidden="true"><text x="0" y="19" textLength="152" lengthAdjust="spacing">/* OPENING_AUTHOR */</text></svg></a><span id="quote-role"><svg viewBox="0 0 152 20" role="img" aria-label="M.T.S. @ METR"><text x="0" y="14" textLength="152" lengthAdjust="spacing">M.T.S. @ METR</text></svg></span></p>
+          <p class="quote-credit"><a id="quote-source" href="/* OPENING_URL */" target="_blank" rel="noopener noreferrer" aria-label="Ajeya Cotra"><svg viewBox="0 0 152 24" aria-hidden="true"><text x="0" y="19" textLength="152" lengthAdjust="spacing">/* OPENING_AUTHOR */</text></svg></a><span id="quote-role"><svg viewBox="0 0 152 20" role="img" aria-label="Member of Technical Staff at Model Evaluation &amp; Threat Research"><text x="0" y="14" textLength="152" lengthAdjust="spacing">M.T.S. @ METR</text></svg></span></p>
         </div>
-        <p class="intro-story">In mid-July 2026, AI agents under evaluation at OpenAI broke into Hugging Face, a ~<a href="https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/" target="_blank" rel="noopener noreferrer" title="NVIDIA’s September 2026 acquisition announcement">$13B</a> hub for AI models and datasets. Roughly <a href="https://www.planned-obsolescence.org/p/the-hugging-face-attack-surprised" target="_blank" rel="noopener noreferrer">700 agents</a> collaborated in the attack, with the <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noopener noreferrer">later intrusions</a> targeting OpenAI itself. Evidently, AI systems are now capable of organizing sustained attacks that no human had ordered. Preventing a worse recurrence of this incident requires reconstructing - event by event - (i) how control failed, (ii) which interventions could have prevented or curtailed the attacks, and (iii) whether the protections that limited the damage would withstand more capable agents.</p>
-        <div class="intro-actions"><a id="enter-explorer" class="intro-enter" href="#scene">Enter the field</a><span class="intro-choice">… OR …</span><button id="intro-cast" class="intro-cast">Read the investigation</button></div>
+        <p class="intro-story">In mid-July 2026, AI agents under evaluation at OpenAI broke into Hugging Face, a ~$13B<sup class="endnote-ref"><a href="#intro-note-i" data-intro-note="i" aria-label="Endnote i">i</a></sup> hub for AI models and datasets. Roughly 700 agents<sup class="endnote-ref"><a href="#intro-note-ii" data-intro-note="ii" aria-label="Endnote ii">ii</a></sup> collaborated in the attack, with the later intrusions<sup class="endnote-ref"><a href="#intro-note-iii" data-intro-note="iii" aria-label="Endnote iii">iii</a></sup> targeting OpenAI itself. Evidently, AI systems are now capable of organizing sustained attacks that no human had ordered. Preventing a worse recurrence of this incident requires reconstructing - event by event - (i) how control failed, (ii) which interventions could have prevented or curtailed the attacks, and (iii) whether the protections that limited the damage would withstand more capable agents.</p>
+        <div class="intro-actions"><a id="enter-explorer" class="intro-enter" href="#scene">Enter the field…</a><span class="intro-choice">OR</span><button id="intro-cast" class="intro-cast">…Read the investigation</button></div>
       </div>
+      <details class="intro-endnotes" id="intro-endnotes"><summary>Endnotes</summary><ol class="roman-endnotes"><li id="intro-note-i" tabindex="-1"><a href="https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/" target="_blank" rel="noopener noreferrer">NVIDIA, acquisition announcement</a></li><li id="intro-note-ii" tabindex="-1"><a href="https://www.planned-obsolescence.org/p/the-hugging-face-attack-surprised" target="_blank" rel="noopener noreferrer">Ajeya Cotra, The Hugging Face attack surprised me</a></li><li id="intro-note-iii" tabindex="-1"><a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noopener noreferrer">OpenAI, Hugging Face incident and the road ahead</a></li></ol></details>
       <div class="intro-foot"><a class="airi-reference" href="https://airisk.mit.edu/" target="_blank" rel="noopener noreferrer" aria-label="MIT AI Risk Initiative"><img src="/* AIRI_LOGO */" width="150" height="45" alt="MIT AI Risk Initiative"></a>
 
       </div>
@@ -72,7 +73,7 @@
           <div id="assessment-tabs" class="assessment-tabs" role="group" aria-label="Assessment field">
             <button data-assessment="impact" aria-pressed="true" class="selected">Impact <span id="assessment-impact-count" class="assessment-count">599</span></button>
             <button data-assessment="context" aria-pressed="false">Context <span id="assessment-context-count" class="assessment-count">192</span></button>
-            <button data-assessment="unresolved" aria-pressed="false">Unresolved <span id="assessment-unresolved-count" class="assessment-count">41</span></button>
+            <button data-assessment="unresolved" aria-pressed="false">Unresolved <span id="assessment-unresolved-count" class="assessment-count">61</span></button>
           </div>
           <span class="plot-period" id="plot-period">7–14 July 2026</span>
         </div>
@@ -110,7 +111,7 @@
         </div>
         <div class="field-foot">
           <div class="field-discoveries"><button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button><button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button></div>
-          <div class="field-readout"><span><b id="visible-count">—</b> of 832 events</span><span id="viewport-count"></span><button id="coverage-info" aria-haspopup="dialog">Full total unknown</button><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
+          <div class="field-readout"><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="coverage-info" aria-haspopup="dialog">Full total unknown</button><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
           <div class="timeline-navigation">
             <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
             <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
@@ -153,7 +154,8 @@
       <div id="record-list-wrap"><div id="record-list"></div><button id="load-more" class="load-more">Show more events <span>↓</span></button></div>
     </section>
   </main>
-  <aside class="detail-panel" id="detail-panel" aria-label="Selected event details" hidden>
+  <div id="event-focus" hidden><div class="focus-veil"></div><canvas id="focus-origin" aria-hidden="true"></canvas><svg id="focus-thread" aria-hidden="true"><path/></svg></div>
+  <aside class="detail-panel" id="detail-panel" aria-labelledby="event-banner-title" role="dialog" aria-modal="true" tabindex="-1" hidden>
     <div class="detail-top"><div><button id="previous-event" aria-label="Previous visible event">←</button><button id="next-event" aria-label="Next visible event">→</button><button id="detail-close" aria-label="Close event details">×</button></div></div>
     <div id="event-detail" aria-live="polite"></div>
   </aside>

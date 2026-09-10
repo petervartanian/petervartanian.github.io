@@ -100,6 +100,15 @@ const workstreamIndex = uniqueIndex(encodings.groups, 'key', 'Workstreams');
 const stageIndex = uniqueIndex(incidentOntology.stages, 'id', 'Stages');
 const lifecycleIndex = uniqueIndex(incidentOntology.lifecycle, 'id', 'Lifecycle');
 const assignmentIndex = uniqueIndex(incidentOntology.assignments, 'event_id', 'Ontology assignments');
+const supplementalIndex=uniqueIndex((researchExpansion.supplemental_events || []).map(item=>item.event),'id','Supplemental events');
+const additionalSources=uniqueIndex(researchExpansion.additional_sources || [],'source_id','Additional event sources');
+for(const item of researchExpansion.supplemental_events || []){
+  requireValid(!eventIndex.has(item.event.id) && Object.keys(item.event).length===45, 'Supplemental events require unique IDs and all 45 fields.');
+  requireValid(additionalSources.has(item.event.source_id) && item.event.source_locator && item.event.source_url, 'Supplemental events require primary-source provenance.');
+  requireValid(item.assessment.id===item.event.id && item.assessment.band==='unresolved' && item.assessment.score===null, 'Wiki events retain their unresolved incident relationship.');
+  requireValid(stageIndex.has(item.assignment.stage_id) && lifecycleIndex.has(item.assignment.lifecycle_id), 'Supplemental stage and lifecycle must exist.');
+  requireValid(Number.isFinite(Date.parse(item.temporal.event_date)) && item.temporal.event_id===item.event.id, 'Supplemental dates require a source date.');
+}
 const sourcePhases = new Set(parsed.events.map((event) => event.phase));
 const assignedPhases = encodings.groups.flatMap((group) => group.phases);
 requireValid(sourcePhases.size === 27, 'The canonical inventory must contain exactly 27 source phases.');
@@ -197,5 +206,28 @@ const html = template
 const output = new URL('index.html', root);
 await writeFile(output, html);
 await writeFile(new URL('haruspex-dataset.json', root), dataset);
-await writeFile(new URL('haruspex-atlas-data-v10.json', root), JSON.stringify({ ...parsed, severity_assessments: assessments, visual_encodings: encodings, incident_ontology: incidentOntology, temporal_assessments: temporalAssessments, cast_analysis: castAnalysis, research_expansion: researchExpansion, opening_quotations: openingQuotations }, null, 2));
-console.log(JSON.stringify({ output: fileURLToPath(output), events: parsed.events.length, bytes: Buffer.byteLength(html) }));
+const extras=researchExpansion.supplemental_events||[];
+const combinedOntology=structuredClone(incidentOntology);
+for(const item of extras){combinedOntology.assignments.push(item.assignment);combinedOntology.lifecycle.find(l=>l.id===item.assignment.lifecycle_id).count++;const stage=combinedOntology.stages.find(s=>s.id===item.assignment.stage_id);stage.count++;stage.lifecycle_counts[item.assignment.lifecycle_id]++;if(!stage.source_ids.includes(item.event.source_id))stage.source_ids.push(item.event.source_id);}
+const combinedAssessments=structuredClone(assessments);combinedAssessments.records.push(...extras.map(item=>item.assessment));combinedAssessments.total_records=combinedAssessments.records.length;
+combinedAssessments.scale.values.find(v=>v.band==='unresolved').definition='The cited evidence leaves the effect, authorization, scope, or relationship to this incident unsettled. Each event explains what remains unknown. No numerical score is assigned.';
+combinedAssessments.counts.unresolved=(combinedAssessments.counts.unresolved||0)+extras.length;
+const combinedTemporal={...temporalAssessments,records:[...temporalAssessments.records,...extras.map(item=>item.temporal)]};
+const mergedEvents=[...parsed.events,...extras.map(item=>item.event)],mergedSources=[...parsed.sources,...(researchExpansion.additional_sources||[])];
+const addedEvents=extras;
+combinedAssessments.total_records=mergedEvents.length;
+combinedAssessments.counts.unresolved=41+addedEvents.length;combinedAssessments.outcome_counts.unresolved=41+addedEvents.length;
+combinedAssessments.scale.display_conventions.size='Size distinguishes a single reported unit from grouped activity, not severity or the number of underlying instances.';
+combinedAssessments.scale.display_conventions.shape='Circle: Reported; diamond: Reasoning; triangle: Inferred; six-point star: Accounts differ.';
+combinedAssessments.scale.display_conventions.review_dispositions='Context and Unresolved are separate unordered fields. Hollow and broken outlines preserve workstream colors and evidence shapes.';
+combinedTemporal.counts.events=mergedEvents.length;combinedTemporal.counts.with_event_date=mergedEvents.filter(e=>e.event_date).length;
+combinedTemporal.counts.finite_context_windows=combinedTemporal.records.filter(e=>e.earliest_context_date&&e.latest_context_date_exclusive).length;
+combinedTemporal.counts.time_precision={};combinedTemporal.counts.assessment_status={};
+for(const record of combinedTemporal.records){combinedTemporal.counts.time_precision[record.time_precision]=(combinedTemporal.counts.time_precision[record.time_precision]||0)+1;combinedTemporal.counts.assessment_status[record.assessment_status]=(combinedTemporal.counts.assessment_status[record.assessment_status]||0)+1;}
+combinedTemporal.scope+=' The working inventory additionally includes 20 dated wiki actions and findings from the Nightingale investigation.';
+combinedOntology.counts.events=mergedEvents.length;combinedOntology.counts.incident_sources=mergedSources.length;combinedOntology.counts.system_contexts=new Set(mergedEvents.map(e=>e.system_scope)).size;
+combinedOntology.counts.lifecycle=Object.fromEntries(combinedOntology.lifecycle.map(l=>[l.id,l.count]));combinedOntology.counts.workstream={};
+for(const item of combinedOntology.assignments)combinedOntology.counts.workstream[item.workstream_id]=(combinedOntology.counts.workstream[item.workstream_id]||0)+1;
+combinedOntology.scopes.inventory='852 explorable events: 832 canonical events plus 20 wiki actions and findings in Unresolved. This is a working inventory, not a proven maximum. Wiki activity has no confirmed connection to the Hugging Face incident.';
+await writeFile(new URL('haruspex-atlas-data-v10.json', root), JSON.stringify({ ...parsed, metadata:{...parsed.metadata,version:'1.2',as_of:'2026-09-10',event_count:mergedEvents.length,source_count:mergedSources.length,canonical_event_count:832,previous_inventory_count:832,additional_events:20,additional_event_scope:'Twenty wiki actions and findings in Unresolved; connection to the Hugging Face incident unconfirmed.'}, events:[...parsed.events,...extras.map(item=>item.event)], sources:[...parsed.sources,...(researchExpansion.additional_sources||[])], severity_assessments:combinedAssessments, visual_encodings: encodings, incident_ontology: combinedOntology, temporal_assessments: combinedTemporal, cast_analysis: castAnalysis, research_expansion: researchExpansion, opening_quotations: openingQuotations }, null, 2));
+console.log(JSON.stringify({ output: fileURLToPath(output), events: parsed.events.length + supplementalIndex.size, bytes: Buffer.byteLength(html) }));
