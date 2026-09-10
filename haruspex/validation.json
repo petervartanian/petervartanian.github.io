@@ -1,5 +1,5 @@
 {
-  "application_version": "13.0.0",
+  "application_version": "13.0.1",
   "assessments_version": "3.0.1",
   "visual_encodings_version": "6.2.0",
   "incident_ontology_version": "1.0.0",
@@ -114,7 +114,8 @@
     "v13 browser review: The sphere has a nominal radius of 295.2px at 1280x720 and 167.7px at 390x844. Phone review found no horizontal overflow. The completed phone field reports all 599 Impact events and no inert controls.",
     "v13 browser review: Clicking the sphere and keyboard activation reach the event field. Native Bow-tie selection and arrow-key navigation into CAST complete without restarting the sphere passage or captured console errors.",
     "v13: JavaScript syntax and strict build checks pass. The package is checked file-for-file against the source tree, with canonical checksum and private-path exclusions enforced. The 832 canonical events and all severity assignments are unchanged.",
-    "Retained v12 review: All three full-range assessment fields account for the complete 832-event inventory. The 70,000 decorative stars, egg reveal, coverage note, creator credit, stacked quote attribution and expanded CAST paper were reviewed at desktop and phone widths."
+    "Retained v12 review: All three full-range assessment fields account for the complete 832-event inventory. The 70,000 decorative stars, egg reveal, coverage note, creator credit, stacked quote attribution and expanded CAST paper were reviewed at desktop and phone widths.",
+    "v13.0.1: The introduction separates Enter the field and Read the investigation with … OR …. Browser layout checks confirm a spaced desktop row and centered phone stack without overlap or horizontal overflow. Strict build passes."
   ],
   "limits": [
     "This is a provisional, developing public-source CAST analysis, not a completed or exhaustive investigation. Search completeness and a maximal number of obtainable facts are not claimed.",

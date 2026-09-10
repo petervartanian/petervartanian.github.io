@@ -175,7 +175,7 @@ Every filtered record is reachable through the keyboard-accessible register. The
 - `index.template.html`, `style.css`, `app.js`, `build.mjs`: source files; rebuild with `node build.mjs`.
 - `validation.json`: recorded data and interaction checks.
 
-This is application version 13.0.0. Severity scores and canonical records are unchanged; additional research is tracked separately; the 3.0.1 assessment revision only standardizes Near-miss spelling. The canonical dataset remains unchanged; reviewed assessments, corrected current evidence display, temporal bounds, ontology and visual conventions live in separate versioned layers. Full original fields remain available on each event.
+This is application version 13.0.1. Severity scores and canonical records are unchanged; additional research is tracked separately; the 3.0.1 assessment revision only standardizes Near-miss spelling. The canonical dataset remains unchanged; reviewed assessments, corrected current evidence display, temporal bounds, ontology and visual conventions live in separate versioned layers. Full original fields remain available on each event.
 
 The 832 records are a working inventory drawn from 11 primary sources, including the three starter documents. Some records represent group actions. The inventory is not a proven maximum and does not reconstruct inaccessible logs. Four source comparisons remain explicit. Completed review means each pending record received a defensible disposition, not that every source claim or event is independently verified.
 
