@@ -1,7 +1,5 @@
 'use strict';
 // Native links handle navigation and the always-visible notes.
-document.querySelectorAll('[data-enhanced]').forEach(el => { el.hidden = false; });
-document.querySelector('.print-button')?.addEventListener('click', () => window.print());
 
 // The mobile rests until someone moves it; springs let it settle again.
 const mobile = document.querySelector('.mobile-svg');

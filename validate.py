@@ -78,6 +78,15 @@ for section in data['cv']['sections']:
     for item in section['items']:check(item in cv,f'Missing CV detail: {item}')
 for org in ['Occidental College','California Institute of Technology','3.97/4.00','4.00/4.00','Classical Nahuatl','Arabic (Fuṣḥā and Lebanese)']:
     check(org in cv,f'Missing education/language detail: {org}')
+markdown = (ROOT/'cv/peter-vartanian-cv.md').read_text()
+check('download="peter-vartanian-cv.md"' in (ROOT/'cv/index.html').read_text(), 'CV download link is missing')
+for entry in data['cv']['experience']:
+    org = re.sub(r'[*/]+$', '', entry['organization'])
+    check(org in markdown and entry['dates'] in markdown, f'Markdown CV omits {org}')
+for label in ['Experience', 'Education', 'Languages', 'Honors', 'Skills & methods']:
+    check(label in markdown, f'Markdown CV omits section {label}')
+for marker in ['i', 'ii', 'iii', 'iv']:
+    check(f'[^{marker}]:' in markdown, f'Markdown CV omits note {marker}')
 for path in ['sitemap.xml','feed.xml']:ET.parse(ROOT/path)
 check('artifacts' not in (ROOT/'sitemap.xml').read_text(),'Placeholder route remains in sitemap')
 check('url=/portfolio/' in (ROOT/'artifacts/index.html').read_text(),'Old artifacts bookmarks do not redirect')

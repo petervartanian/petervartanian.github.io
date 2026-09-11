@@ -4,6 +4,7 @@ from html import escape as e
 import json
 import re
 from hashlib import sha256
+from cv_markdown import export_cv
 
 ROOT = Path(__file__).parent
 DATA = json.loads((ROOT / 'content/site.json').read_text())
@@ -219,12 +220,15 @@ for section in cv['sections']:
     else:
         cv_sections += f'<section class="cv-section" id="{anchor}"><h2><span class="section-number">{major[label]}.</span> <strong class="section-text">{e(label)}</strong></h2>{content}</section>\n'
 cv_sections += '</section>'
-about = f'''<div class="title-line"><h1>Curriculum vitæ</h1><button class="print-button" data-enhanced hidden>Print / PDF</button></div>
+about = f'''<div class="title-line"><h1>Curriculum vitæ</h1><a class="download-button" href="/cv/peter-vartanian-cv.md" download="peter-vartanian-cv.md">Download .MD</a></div>
 <section class="cv-section" id="experience"><h2><span class="section-number">I.</span> <strong class="section-text">Experience</strong></h2>{experience}{experience_notes}</section>
 {cv_sections}'''
 page('cv', 'CV', 'Education, experience, languages, and research methods.', about, '/cv/')
+(ROOT / 'cv/peter-vartanian-cv.md').write_text(export_cv(about))
 
 socials = [('LinkedIn', 'https://www.linkedin.com/in/petervartanian/'), ('Substack', 'https://substack.com/@petersmemos'), ('GitHub', 'https://github.com/petervartanian'), ('Hugging Face', 'https://huggingface.co/petervartanian'), ('X', 'https://x.com/petersmemos'), ('Google Scholar', 'https://scholar.google.com/citations?user=DuD0EXEAAAAJ'), ('ORCID', 'https://orcid.org/0009-0009-8538-5811')]
+social_order = ['Substack', 'X', 'LinkedIn', 'Google Scholar', 'ORCID', 'GitHub', 'Hugging Face']
+socials.sort(key=lambda item: social_order.index(item[0]))
 profile_values = {'LinkedIn': '@petervartanian', 'Substack': '@petersmemos', 'GitHub': '@petervartanian', 'Hugging Face': '@petervartanian', 'X': '@petersmemos', 'Google Scholar': 'DuD0EXEAAAAJ', 'ORCID': '0009-0009-8538-5811'}
 def contact_label(label):
     icon = {'Email': 'email', 'Text': 'phone'}.get(label, label.lower().replace(' ', '-'))
