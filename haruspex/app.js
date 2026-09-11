@@ -317,6 +317,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     ? event._time.start >= range[0] && event._time.start < range[1]
     : (event._time.start === null || event._time.start < range[1]) && (event._time.end === null || event._time.end > range[0]);
   const readingSort = (a, b) => (a._time.center ?? Infinity) - (b._time.center ?? Infinity) || a.id.localeCompare(b.id);
+  // Bow-tie order: dated events by their centre, open-start events by the head that marks their upper bound, undated events last.
+  const bowInstant = (event) => event._time.center ?? event._time.end ?? event._time.start ?? Infinity;
+  const bowOrder = (a, b) => (bowInstant(a) - bowInstant(b)) || a.id.localeCompare(b.id);
   function getVisible() {
     return filteredPool.filter((event) => overlaps(event, state.range));
   }
@@ -364,7 +367,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
       light.addColorStop(1, `${band.fill}00`);
       brush.fillStyle = light; brush.fillRect(-extent, -extent, extent * 2, extent * 2);
       brush.beginPath();
-      if (event._status === 'reported') brush.arc(0, 0, r, 0, Math.PI * 2);
+      if (event._status === 'reported') { brush.arc(0, 0, r, 0, Math.PI * 2); brush.closePath(); } // Safari strokes an unclosed full circle without its dash pattern.
       else {
         const star = event._status === 'disputed';
         const count = star ? 12 : event._status === 'reasoning' ? 4 : 3;
@@ -858,7 +861,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     }
     bctx.restore();
     if (!camera) bowBackdrop = snapshotCanvas(bowCanvas);
-    const clusters = (focused ? [{ ...focused, index: 0 }] : groupEvents.map((group, index) => ({ ...group, index }))).map((cluster) => ({ ...cluster, layoutEntries: bowLayoutKey === `${width},${height},${state.lifecycle},${fieldTop},${fieldBottom}` ? [] : events.filter((event) => cluster.roles.includes(event.bow_tie_role)).sort(readingSort) }));
+    const clusters = (focused ? [{ ...focused, index: 0 }] : groupEvents.map((group, index) => ({ ...group, index }))).map((cluster) => ({ ...cluster, layoutEntries: bowLayoutKey === `${width},${height},${state.lifecycle},${fieldTop},${fieldBottom}` ? [] : events.filter((event) => cluster.roles.includes(event.bow_tie_role)).sort(bowOrder) }));
     const visibleIds = new Set(visible.map((event) => event.id));
     const grid = new Map();
     function distance(x, y) {
@@ -872,14 +875,15 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if (bowLayoutKey !== geometryKey) {
     bowPoints = [];
     for (const cluster of clusters) {
-      cluster.layoutEntries.forEach((event) => {
+      const total = cluster.layoutEntries.length;
+      cluster.layoutEntries.forEach((event, rank) => {
         const rand = random(772 + event._index * 937);
         let best = null;
         for (let attempt = 0; attempt < 24; attempt += 1) {
-          const u = rand(); const v = (rand() + rand() - 1) / 2;
+          // Time runs left to right inside every wing: each event keeps its chronological slot, and only its vertical place is searched.
+          const u = (rank + .05 + .9 * rand()) / total; const v = (rand() + rand() - 1) / 2;
           let x; let y;
           if (focused) {
-            // Broad, open ribbons; these are group layouts, without a time axis.
             x = margin + 10 + u * (width - margin * 2 - 20);
             const fieldStart = fieldTop + 28;
             const fieldEnd = fieldBottom;
@@ -890,9 +894,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
             x = width * (.365 + u * .27);
             y = centerY + v * spread * 1.05 * (.08 + Math.sin(u * Math.PI) * .92);
           } else {
-            const outer = cluster.index === 0 ? margin : width - margin;
-            x = outer + (cluster.index === 0 ? 1 : -1) * u * (width * .34 - margin);
-            y = centerY + v * spread * 1.8 * (1 - u * .65);
+            const toKnot = cluster.index === 0 ? u : 1 - u;
+            x = cluster.index === 0 ? margin + u * (width * .34 - margin) : width - margin - (1 - u) * (width * .34 - margin);
+            y = centerY + v * spread * 1.8 * (1 - toKnot * .65);
           }
           const clearance = distance(x, y);
           if (!best || clearance > best.clearance) best = { x, y, clearance };
@@ -921,7 +925,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     }).join('');
     if (!camera) $$('[data-bow-group]').forEach((button) => button.addEventListener('click', () => focusBowtie(button.dataset.bowGroup || null)));
     if (!camera && selectedFocus !== undefined) $(`#bowtie-navigation [data-bow-group="${selectedFocus}"]`)?.focus({ preventScroll: true });
-    if (!camera) bowCanvas.setAttribute('aria-label', `${focused ? focused.label : 'Bow tie'}: ${bowPoints.length} events. ${clusters.map((cluster) => `${cluster.label}: ${cluster.entries.length}`).join('; ')}. Color identifies incident workstream; shape identifies evidence status. Severity uses boxed numbers and, in the swarm, vertical bands. Size distinguishes single reported units from grouped activity. Points can be selected. Curves are structural grouping, not proven causal links. Short fading tails identify unknown starts without expressing a duration. There is no time axis in this view.`);
+    if (!camera) bowCanvas.setAttribute('aria-label', `${focused ? focused.label : 'Bow tie'}: ${bowPoints.length} events. ${clusters.map((cluster) => `${cluster.label}: ${cluster.entries.length}`).join('; ')}. Color identifies incident workstream; shape identifies evidence status. Severity uses boxed numbers and, in the swarm, vertical bands. Size distinguishes single reported units from grouped activity. Points can be selected. Curves are structural grouping, not proven causal links. Short fading tails identify unknown starts without expressing a duration. Within each wing, events run chronologically from left to right, spaced by order rather than elapsed time; undated events follow the dated ones.`);
     $('#date-tail-label').textContent='Unknown start · tail length is not duration';
     bowCanvas.dataset.openTails=String(bowPoints.filter(p=>p.event._time.openStart).length);
     $('#visible-count').textContent = visible.length; $('#total-event-count').textContent = events.length;
@@ -948,6 +952,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   });
   bowCanvas.addEventListener('pointerleave', () => { $('#bowtie-tooltip').hidden = true; showStar(null); });
   bowCanvas.addEventListener('click', (event) => { const hits = bowHits(event); if (hits.length) { selectEvent(hits[0].event.id, { nearby: hits.map((point) => point.event) }); renderBowtie(); } else discoverStar(event, true); });
+  for (const surface of [timeline, bowCanvas]) surface.addEventListener('dblclick', (event) => { event.preventDefault(); closeDetails(); reset(); });
   function boundedRange(start, end) {
     const span = Math.max(MIN_TIME_SPAN, Math.min(end - start, fullRange[1] - fullRange[0]));
     const a = Math.max(fullRange[0], Math.min(start, fullRange[1] - span));
@@ -1285,7 +1290,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     ['ablation','A controlled comparison that removes or changes one training ingredient to test its contribution.'],
     ['checkpoint','A saved version of a trained model.'],
     ['scorer','The automated process that judges whether an evaluation task succeeded.'],
-    ['bow-tie','A view grouping precursors, incident activity and subsequent response around a central event. Its connecting lines do not establish causation.'],
+    ['bow-tie','A view grouping precursors, incident activity and subsequent response around a central event. Within each wing, events run chronologically from left to right. Its connecting lines do not establish causation.'],
   ];
   function explainTerms(container){
     if(container.querySelector('.view-terms'))return;
@@ -1539,7 +1544,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('#framework-info').addEventListener('click', openFramework);
   function openCoverage(){openDialog('How much happened?',coverageContent());}
   $('#background-info').addEventListener('click',openCoverage);
-  function fitEggMessage(message){const span=message.firstElementChild;if(!span)return;message.classList.remove('wrapped');message.style.fontSize='14px';const room=()=>message.clientWidth-24;let size=Math.min(14,14*room()/Math.max(1,span.scrollWidth));for(let i=0;i<12;i++){message.style.fontSize=`${Math.floor(size*10)/10}px`;if(span.scrollWidth<=room()||size<=9)break;size-=.2;}if(size<9||span.scrollWidth>room()){message.style.fontSize='9px';message.classList.add('wrapped');}}
+  function fitEggMessage(message){const span=message.firstElementChild;if(!span)return;message.classList.remove('wrapped');message.style.fontSize='';let size=parseFloat(getComputedStyle(message).fontSize)||10;while(span.scrollWidth>message.clientWidth&&size>9){size=Math.max(9,Math.round((size-.2)*10)/10);message.style.fontSize=`${size}px`;}if(span.scrollWidth>message.clientWidth){message.style.fontSize='9px';message.classList.add('wrapped');}}
   $('#hidden-egg').addEventListener('click', () => {
     starsUnlocked = !starsUnlocked;
     $('#hidden-egg').setAttribute('aria-pressed', String(starsUnlocked));

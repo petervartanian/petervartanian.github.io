@@ -1048,9 +1048,9 @@ body:has(#scene[data-view="cast"]) #egg-message{display:none}
 #detail-panel[data-hoisted="true"] .detail-title{font-size:23px}#detail-panel[data-hoisted="true"] .detail-top{top:-18px;gap:4px}#detail-panel[data-hoisted="true"] .detail-top button{min-width:25px}
 .milestone:last-child{grid-column:auto}
 .field-readout.egg-revealed> :not(#egg-message){visibility:hidden;pointer-events:none}
-.field-readout #egg-message{position:absolute;inset:0;z-index:1;max-width:none;width:100%;height:100%;margin:0;padding:0 10px;box-sizing:border-box;display:flex;align-items:center;white-space:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;border:0;border-radius:2px;background:#103629;color:#8ee0b3;font:11px/1.3 var(--sans,Arial,sans-serif);box-shadow:none;pointer-events:auto}
+.field-readout #egg-message{position:absolute;inset:0;z-index:1;max-width:none;width:100%;height:100%;margin:0;padding:0 10px;box-sizing:border-box;display:flex;align-items:center;white-space:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;border:0;border-radius:2px;background:#103629;color:#8ee0b3;font:inherit;line-height:1.3;box-shadow:none;pointer-events:auto}
 .field-readout #egg-message[hidden]{display:none}
-@media(max-width:600px){.field-readout #egg-message{font-size:10px}}
+@media(max-width:600px){.field-readout #egg-message{font-size:inherit}}
 
 body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#focus-origin{display:none}
 #milestones{grid-template-columns:repeat(4,minmax(0,1fr))}.milestone em{display:block;font:9px var(--mono);font-style:normal;color:var(--dim);margin-top:7px;letter-spacing:.02em}
@@ -1060,11 +1060,11 @@ body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#fo
 /* The egg reveal: one line to the right of the egg, spanning the rest of the readout row. Type is sized to fit; below 9px it wraps. The ground is a feathered wash of the workstream colours, not a box. */
 .field-readout.egg-revealed{min-height:30px}
 .field-readout.egg-revealed> :not(#egg-message){display:none}
-.field-readout #egg-message{font-size:12px;line-height:1.3;padding:0 18px;color:#8ee0b3;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;text-shadow:0 0 14px #0b0f10,0 0 3px #0b0f10}
+.field-readout #egg-message{font:inherit;line-height:1.3;padding:0;color:#8ee0b3;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;text-shadow:0 0 14px #0b0f10,0 0 3px #0b0f10}
 .field-readout #egg-message::before{content:"";position:absolute;inset:-8px -6px;z-index:-1;pointer-events:none;background:radial-gradient(50% 130% at 4% 50%,#e2b93a2a,transparent 65%),radial-gradient(40% 140% at 27% 50%,#2bd2c226,transparent 65%),radial-gradient(40% 140% at 50% 50%,#c691fe26,transparent 65%),radial-gradient(40% 140% at 73% 50%,#ff834626,transparent 65%),radial-gradient(40% 140% at 96% 50%,#72a7ff2a,transparent 65%),radial-gradient(1px 1px at 12% 26%,#ffffff66,transparent 100%),radial-gradient(1px 1px at 38% 74%,#ffffff55,transparent 100%),radial-gradient(1px 1px at 64% 20%,#ffffff55,transparent 100%),radial-gradient(1px 1px at 87% 68%,#ffffff66,transparent 100%),#070d14d9;-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
 .field-readout #egg-message>span{display:inline-block;white-space:nowrap}
 .field-readout #egg-message strong{font-weight:700;color:#b9f1d2;text-decoration:none}
-.field-readout #egg-message.wrapped{position:static;inset:auto;height:auto;white-space:normal;padding:6px 18px}
+.field-readout #egg-message.wrapped{position:static;inset:auto;height:auto;white-space:normal;padding:6px 0}
 .field-readout #egg-message.wrapped>span{white-space:normal;display:inline}
 
 /* The Legend flyout: one section per key, contents centred both ways. */
@@ -1097,6 +1097,26 @@ body{overflow:hidden}
 /* "the rest" in the egg line opens the coverage note. */
 #egg-message .egg-link{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
 #egg-message .egg-link:hover{color:#b9f1d2}
+
+/* Title screen: one viewport, sized by height as well as width */
+.intro{display:flex;flex-direction:column;height:100svh;min-height:0;padding:clamp(16px,2.6svh,28px) 48px clamp(14px,2.2svh,24px);overflow:auto}
+.intro-header{flex:none}
+.intro-main{flex:none;margin:auto 0;padding:clamp(10px,2.4svh,28px) 0;max-width:1240px}
+.intro h1{font-size:clamp(38px,min(6.6vw,11svh),104px);line-height:1.04;letter-spacing:-.032em;max-width:1150px}
+.quote-credit{margin-top:clamp(12px,2.2svh,24px)}
+.intro-story{max-width:660px;margin-top:clamp(14px,3svh,30px);font-family:var(--serif);font-size:clamp(13px,min(1.22vw,2.05svh),17px);line-height:1.7;color:#a5b9bf}
+.intro-story+.intro-story{margin-top:clamp(8px,1.6svh,16px)}
+.intro-story .aim{color:var(--jewel-gold);font-variant-numeric:tabular-nums}
+.intro-actions{margin-top:clamp(16px,3.2svh,32px);gap:26px}
+.intro-enter{min-height:0;min-width:0;justify-content:flex-start;padding:0;border:0;border-radius:0;background:none;font:clamp(15px,min(1.3vw,2.2svh),18px)/1.4 var(--serif);color:#eef0e9;text-decoration:underline;text-decoration-color:#e2b93a88;text-underline-offset:5px;gap:10px}
+.intro-enter:hover{background:none;color:#fff;text-decoration-color:var(--jewel-gold)}
+.intro-choice{font-size:10px;letter-spacing:.14em;color:#6f858d}
+.intro-cast{min-height:0;padding:0;font:clamp(14px,min(1.2vw,2.05svh),17px)/1.4 var(--serif);color:#9fb0bb;text-decoration:underline;text-decoration-color:#9fb0bb44;text-underline-offset:5px}
+.intro-cast:hover{color:#d5e1e6}
+.intro-foot{flex:none;padding-top:clamp(10px,1.8svh,18px)}
+.airi-reference img{width:clamp(96px,12svh,132px)}
+@media(max-width:780px){.intro{padding-left:32px;padding-right:32px}}
+@media(max-width:560px){.intro{padding-left:23px;padding-right:23px}.intro-main{margin:0}.intro-actions{flex-direction:column;align-items:flex-start;gap:14px}}
 </style>
 </head>
 <body>
@@ -1112,8 +1132,7 @@ body{overflow:hidden}
           <p class="quote-credit"><a id="quote-source" href="https://www.dwarkesh.com/p/ajeya-cotra?t=8158" target="_blank" rel="noopener noreferrer" aria-label="Ajeya Cotra"><svg viewBox="0 0 152 24" aria-hidden="true"><text x="0" y="19" textLength="152" lengthAdjust="spacing">Ajeya Cotra</text></svg></a><span id="quote-role"><svg viewBox="0 0 152 20" role="img" aria-label="Member of Technical Staff at Model Evaluation &amp; Threat Research"><text x="0" y="14" textLength="152" lengthAdjust="spacing">M.T.S. @ METR</text></svg></span></p>
         </div>
         <p class="intro-story">In mid-July 2026, AI agents under evaluation at OpenAI broke into Hugging Face, a ~<a href="https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/" target="_blank" rel="noopener noreferrer" title="NVIDIA’s September 2026 acquisition announcement">$13B</a> hub for AI models and datasets. Roughly <a href="https://www.planned-obsolescence.org/p/the-hugging-face-attack-surprised" target="_blank" rel="noopener noreferrer">700 agents</a> collaborated in the attack, with the <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noopener noreferrer">later intrusions</a> targeting OpenAI itself. Evidently, AI systems are now capable of organizing sustained attacks that no human had ordered.</p>
-        <p class="intro-story">Preventing a worse recurrence of this incident requires reconstructing, event by event:</p>
-        <ol class="intro-aims"><li>how control failed,</li><li>which interventions could have prevented or curtailed the attacks, and</li><li>whether the protections that limited the damage would withstand more capable agents.</li></ol>
+        <p class="intro-story">Preventing a worse recurrence of this incident requires reconstructing, event by event, <span class="aim">(i)</span> how control failed, <span class="aim">(ii)</span> which interventions could have prevented or curtailed the attacks, and <span class="aim">(iii)</span> whether the protections that limited the damage would withstand more capable agents.</p>
         <div class="intro-actions"><a id="enter-explorer" class="intro-enter" href="#scene">Enter the field…</a><span class="intro-choice">OR</span><button id="intro-cast" class="intro-cast">…Read the investigation</button></div>
       </div>
 
@@ -2219,6 +2238,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     ? event._time.start >= range[0] && event._time.start < range[1]
     : (event._time.start === null || event._time.start < range[1]) && (event._time.end === null || event._time.end > range[0]);
   const readingSort = (a, b) => (a._time.center ?? Infinity) - (b._time.center ?? Infinity) || a.id.localeCompare(b.id);
+  // Bow-tie order: dated events by their centre, open-start events by the head that marks their upper bound, undated events last.
+  const bowInstant = (event) => event._time.center ?? event._time.end ?? event._time.start ?? Infinity;
+  const bowOrder = (a, b) => (bowInstant(a) - bowInstant(b)) || a.id.localeCompare(b.id);
   function getVisible() {
     return filteredPool.filter((event) => overlaps(event, state.range));
   }
@@ -2266,7 +2288,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
       light.addColorStop(1, `${band.fill}00`);
       brush.fillStyle = light; brush.fillRect(-extent, -extent, extent * 2, extent * 2);
       brush.beginPath();
-      if (event._status === 'reported') brush.arc(0, 0, r, 0, Math.PI * 2);
+      if (event._status === 'reported') { brush.arc(0, 0, r, 0, Math.PI * 2); brush.closePath(); } // Safari strokes an unclosed full circle without its dash pattern.
       else {
         const star = event._status === 'disputed';
         const count = star ? 12 : event._status === 'reasoning' ? 4 : 3;
@@ -2760,7 +2782,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     }
     bctx.restore();
     if (!camera) bowBackdrop = snapshotCanvas(bowCanvas);
-    const clusters = (focused ? [{ ...focused, index: 0 }] : groupEvents.map((group, index) => ({ ...group, index }))).map((cluster) => ({ ...cluster, layoutEntries: bowLayoutKey === `${width},${height},${state.lifecycle},${fieldTop},${fieldBottom}` ? [] : events.filter((event) => cluster.roles.includes(event.bow_tie_role)).sort(readingSort) }));
+    const clusters = (focused ? [{ ...focused, index: 0 }] : groupEvents.map((group, index) => ({ ...group, index }))).map((cluster) => ({ ...cluster, layoutEntries: bowLayoutKey === `${width},${height},${state.lifecycle},${fieldTop},${fieldBottom}` ? [] : events.filter((event) => cluster.roles.includes(event.bow_tie_role)).sort(bowOrder) }));
     const visibleIds = new Set(visible.map((event) => event.id));
     const grid = new Map();
     function distance(x, y) {
@@ -2774,14 +2796,15 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if (bowLayoutKey !== geometryKey) {
     bowPoints = [];
     for (const cluster of clusters) {
-      cluster.layoutEntries.forEach((event) => {
+      const total = cluster.layoutEntries.length;
+      cluster.layoutEntries.forEach((event, rank) => {
         const rand = random(772 + event._index * 937);
         let best = null;
         for (let attempt = 0; attempt < 24; attempt += 1) {
-          const u = rand(); const v = (rand() + rand() - 1) / 2;
+          // Time runs left to right inside every wing: each event keeps its chronological slot, and only its vertical place is searched.
+          const u = (rank + .05 + .9 * rand()) / total; const v = (rand() + rand() - 1) / 2;
           let x; let y;
           if (focused) {
-            // Broad, open ribbons; these are group layouts, without a time axis.
             x = margin + 10 + u * (width - margin * 2 - 20);
             const fieldStart = fieldTop + 28;
             const fieldEnd = fieldBottom;
@@ -2792,9 +2815,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
             x = width * (.365 + u * .27);
             y = centerY + v * spread * 1.05 * (.08 + Math.sin(u * Math.PI) * .92);
           } else {
-            const outer = cluster.index === 0 ? margin : width - margin;
-            x = outer + (cluster.index === 0 ? 1 : -1) * u * (width * .34 - margin);
-            y = centerY + v * spread * 1.8 * (1 - u * .65);
+            const toKnot = cluster.index === 0 ? u : 1 - u;
+            x = cluster.index === 0 ? margin + u * (width * .34 - margin) : width - margin - (1 - u) * (width * .34 - margin);
+            y = centerY + v * spread * 1.8 * (1 - toKnot * .65);
           }
           const clearance = distance(x, y);
           if (!best || clearance > best.clearance) best = { x, y, clearance };
@@ -2823,7 +2846,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     }).join('');
     if (!camera) $$('[data-bow-group]').forEach((button) => button.addEventListener('click', () => focusBowtie(button.dataset.bowGroup || null)));
     if (!camera && selectedFocus !== undefined) $(`#bowtie-navigation [data-bow-group="${selectedFocus}"]`)?.focus({ preventScroll: true });
-    if (!camera) bowCanvas.setAttribute('aria-label', `${focused ? focused.label : 'Bow tie'}: ${bowPoints.length} events. ${clusters.map((cluster) => `${cluster.label}: ${cluster.entries.length}`).join('; ')}. Color identifies incident workstream; shape identifies evidence status. Severity uses boxed numbers and, in the swarm, vertical bands. Size distinguishes single reported units from grouped activity. Points can be selected. Curves are structural grouping, not proven causal links. Short fading tails identify unknown starts without expressing a duration. There is no time axis in this view.`);
+    if (!camera) bowCanvas.setAttribute('aria-label', `${focused ? focused.label : 'Bow tie'}: ${bowPoints.length} events. ${clusters.map((cluster) => `${cluster.label}: ${cluster.entries.length}`).join('; ')}. Color identifies incident workstream; shape identifies evidence status. Severity uses boxed numbers and, in the swarm, vertical bands. Size distinguishes single reported units from grouped activity. Points can be selected. Curves are structural grouping, not proven causal links. Short fading tails identify unknown starts without expressing a duration. Within each wing, events run chronologically from left to right, spaced by order rather than elapsed time; undated events follow the dated ones.`);
     $('#date-tail-label').textContent='Unknown start · tail length is not duration';
     bowCanvas.dataset.openTails=String(bowPoints.filter(p=>p.event._time.openStart).length);
     $('#visible-count').textContent = visible.length; $('#total-event-count').textContent = events.length;
@@ -2850,6 +2873,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   });
   bowCanvas.addEventListener('pointerleave', () => { $('#bowtie-tooltip').hidden = true; showStar(null); });
   bowCanvas.addEventListener('click', (event) => { const hits = bowHits(event); if (hits.length) { selectEvent(hits[0].event.id, { nearby: hits.map((point) => point.event) }); renderBowtie(); } else discoverStar(event, true); });
+  for (const surface of [timeline, bowCanvas]) surface.addEventListener('dblclick', (event) => { event.preventDefault(); closeDetails(); reset(); });
   function boundedRange(start, end) {
     const span = Math.max(MIN_TIME_SPAN, Math.min(end - start, fullRange[1] - fullRange[0]));
     const a = Math.max(fullRange[0], Math.min(start, fullRange[1] - span));
@@ -3187,7 +3211,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     ['ablation','A controlled comparison that removes or changes one training ingredient to test its contribution.'],
     ['checkpoint','A saved version of a trained model.'],
     ['scorer','The automated process that judges whether an evaluation task succeeded.'],
-    ['bow-tie','A view grouping precursors, incident activity and subsequent response around a central event. Its connecting lines do not establish causation.'],
+    ['bow-tie','A view grouping precursors, incident activity and subsequent response around a central event. Within each wing, events run chronologically from left to right. Its connecting lines do not establish causation.'],
   ];
   function explainTerms(container){
     if(container.querySelector('.view-terms'))return;
@@ -3441,7 +3465,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('#framework-info').addEventListener('click', openFramework);
   function openCoverage(){openDialog('How much happened?',coverageContent());}
   $('#background-info').addEventListener('click',openCoverage);
-  function fitEggMessage(message){const span=message.firstElementChild;if(!span)return;message.classList.remove('wrapped');message.style.fontSize='14px';const room=()=>message.clientWidth-24;let size=Math.min(14,14*room()/Math.max(1,span.scrollWidth));for(let i=0;i<12;i++){message.style.fontSize=`${Math.floor(size*10)/10}px`;if(span.scrollWidth<=room()||size<=9)break;size-=.2;}if(size<9||span.scrollWidth>room()){message.style.fontSize='9px';message.classList.add('wrapped');}}
+  function fitEggMessage(message){const span=message.firstElementChild;if(!span)return;message.classList.remove('wrapped');message.style.fontSize='';let size=parseFloat(getComputedStyle(message).fontSize)||10;while(span.scrollWidth>message.clientWidth&&size>9){size=Math.max(9,Math.round((size-.2)*10)/10);message.style.fontSize=`${size}px`;}if(span.scrollWidth>message.clientWidth){message.style.fontSize='9px';message.classList.add('wrapped');}}
   $('#hidden-egg').addEventListener('click', () => {
     starsUnlocked = !starsUnlocked;
     $('#hidden-egg').setAttribute('aria-pressed', String(starsUnlocked));
