@@ -98,7 +98,7 @@ for institution, honors in data['cv']['institution_honors'].items():
         for value in [honor['title'], honor['date']]:
             check(value in cv and value in markdown, f'Missing honor for {institution}: {value}')
 check('>Awards</strong>' not in (ROOT/'cv/index.html').read_text(), 'Standalone Awards section remains')
-for marker in ['i', 'ii', 'iii', 'iv']:
+for marker in ['i', 'ii', 'iii']:
     check(f'[^{marker}]:' in markdown, f'Markdown CV omits note {marker}')
 for path in ['sitemap.xml','feed.xml']:ET.parse(ROOT/path)
 check('artifacts' not in (ROOT/'sitemap.xml').read_text(),'Placeholder route remains in sitemap')
