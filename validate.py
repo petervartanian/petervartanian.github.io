@@ -54,7 +54,14 @@ for name,p in pages.items():
             check(unquote(parts.fragment) in ids,f'{name}: missing anchor {url}')
 
 data=json.loads((ROOT/'content/site.json').read_text())
-archive=' '.join(pages['portfolio/index.html'].text)
+logo_data=json.loads((ROOT/'content/institution-logos.json').read_text())
+for key, logo in logo_data.items():
+    check((ROOT/'assets/logos'/logo['file']).is_file(), f'Missing institution logo: {key}')
+    check(f'logo-{key}"' in (ROOT/'cv/index.html').read_text(), f'Institution logo absent from CV: {key}')
+cv_html=(ROOT/'cv/index.html').read_text()
+for row in re.findall(r'<tr>(.*?)</tr>', cv_html.split('id="education"')[0], re.S):
+    check('institution-logo' in row, 'Experience entry is missing its institution mark')
+archive=re.sub(r'\s+', ' ', ' '.join(pages['portfolio/index.html'].text))
 for work in data['writings']:
     check(work['title'] in archive,f'Missing publication: {work["title"]}')
     check(work['url'] in pages['portfolio/index.html'].refs,f'Missing publication URL: {work["title"]}')
@@ -79,6 +86,7 @@ for section in data['cv']['sections']:
 for org in ['Occidental College','California Institute of Technology','3.97/4.00','4.00/4.00','Classical Nahuatl','Arabic (Fuṣḥā and Lebanese)']:
     check(org in cv,f'Missing education/language detail: {org}')
 markdown = (ROOT/'cv/peter-vartanian-cv.md').read_text()
+markdown = re.sub(r'<img\b[^>]*>\s*', '', markdown)
 check('download="peter-vartanian-cv.md"' in (ROOT/'cv/index.html').read_text(), 'CV download link is missing')
 for entry in data['cv']['experience']:
     org = re.sub(r'[*/]+$', '', entry['organization'])

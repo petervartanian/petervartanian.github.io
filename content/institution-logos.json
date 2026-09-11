@@ -1,0 +1,192 @@
+{
+  "oxy": {
+    "file": "oxy.png",
+    "source": "https://www.oxy.edu/sites/default/files/images/2022-07/logo-footer.png",
+    "aliases": [
+      "Occidental College",
+      "Occidental Consulting Group",
+      "Urban & Environmental Policy Institute at Occidental College",
+      "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy",
+      "Charles R. Blyth Fund at Occidental College"
+    ],
+    "width": 32,
+    "note": "Orange OXY mark from the official footer lockup, with reversed white text omitted for use on light backgrounds."
+  },
+  "caltech": {
+    "file": "caltech.png",
+    "source": "https://www.caltech.edu/static/core/img/favicon-192.png?v=7.12.0",
+    "bytes": 8372,
+    "aliases": [
+      "California Institute of Technology",
+      "Caltech"
+    ],
+    "width": 20
+  },
+  "mit": {
+    "file": "mit.png",
+    "source": "https://cdn.prod.website-files.com/669550d38372f33552d2516e/6a0e77811e81794f8b1e3d8b_airi-icon-red.png",
+    "bytes": 2921,
+    "aliases": [
+      "MIT AI Risk Initiative",
+      "MIT’s AI Risk Initiative"
+    ],
+    "width": 20
+  },
+  "arcola": {
+    "file": "arcola.png",
+    "source": "https://media.licdn.com/dms/image/v2/D4E0BAQGCwbobmAcpLA/company-logo_200_200/B4EZvGuD.HHIAI-/0/1768565522695/arcola_ai_logo?e=2147483647&v=beta&t=bqzPWyuLNEWEStoeqxInX0MbDs2CgMdxtLFKKyS8SUo",
+    "bytes": 3212,
+    "aliases": [
+      "Arcola AI"
+    ],
+    "width": 40,
+    "source_page": "https://uk.linkedin.com/company/arcola-ai"
+  },
+  "aire": {
+    "file": "aire.png",
+    "source": "https://www.airiskexplorer.com/favicon.ico",
+    "bytes": 5801,
+    "aliases": [
+      "AI Risk Explorer"
+    ],
+    "width": 20
+  },
+  "hoover": {
+    "file": "hoover.png",
+    "source": "https://www.hoover.org/themes/hoover/favicon.ico",
+    "bytes": 41662,
+    "aliases": [
+      "Hoover Institution on War, Revolution, and Peace at Stanford University",
+      "Hoover Institution"
+    ],
+    "width": 20
+  },
+  "pon": {
+    "file": "pon.png",
+    "source": "https://www.pon.harvard.edu/wp-content/themes/pon-haven-foundation-6/img/pon-harvard-shield-logo.png",
+    "bytes": 11217,
+    "aliases": [
+      "The Program on Negotiation at Harvard Law School"
+    ],
+    "width": 20
+  },
+  "change": {
+    "file": "change.svg",
+    "source": "https://www.citieschange.org/dist/images/favicon.5d467a.svg",
+    "bytes": 5294,
+    "aliases": [
+      "City Hub and Network for Gender Equity"
+    ],
+    "width": 20
+  },
+  "verum": {
+    "file": "verum.png",
+    "source": "https://verumlegalis.org/wp-content/uploads/2025/08/cropped-verum-legalis-logo-1.png?w=192",
+    "bytes": 17551,
+    "aliases": [
+      "Verum Legalis: The Occidental College Law Review"
+    ],
+    "width": 20
+  },
+  "un": {
+    "file": "un.png",
+    "source": "https://www.un.org/en/img/splash/un-logo.png",
+    "bytes": 8782,
+    "aliases": [
+      "Office of the Chair of the First Committee of the UN General Assembly",
+      "UN"
+    ],
+    "width": 20
+  },
+  "bis": {
+    "file": "bis.png",
+    "source": "https://www.bis.gov/_next/static/media/BISlogo.ec218e79.png",
+    "bytes": 203508,
+    "aliases": [
+      "Bureau of Industry and Security at the U.S. Department of Commerce",
+      "Bureau of Industry and Security"
+    ],
+    "width": 20
+  },
+  "austria": {
+    "file": "austria.png",
+    "source": "https://www.auslandsdienst.at/wp-content/uploads/2024/09/cropped-logo-192x192.png",
+    "bytes": 3021,
+    "aliases": [
+      "Austrian Service Abroad"
+    ],
+    "width": 20
+  },
+  "wolf": {
+    "file": "wolf.png",
+    "source": "https://www.wolftheiss.com/wp-content/themes/360vier-theme/resources/assets/src/favicons/android-chrome-192x192.png",
+    "bytes": 6401,
+    "aliases": [
+      "Wolf Theiss"
+    ],
+    "width": 20
+  },
+  "alpbach": {
+    "file": "alpbach.png",
+    "source": "https://www.alpbach.org/uploads/_192x192_crop_center-center_100_none/favicon-new.png",
+    "bytes": 927,
+    "aliases": [
+      "European Forum Alpbach"
+    ],
+    "width": 20
+  },
+  "newspaper": {
+    "file": "newspaper.png",
+    "source": "https://www.theoccidentalnews.com/wp-content/uploads/2018/08/cropped-TheOccidentalSquareLogo_cleanedges-192x192.png",
+    "bytes": 9244,
+    "aliases": [
+      "The Occidental Newspaper"
+    ],
+    "width": 20
+  },
+  "hrca": {
+    "file": "hrca.png",
+    "source": "https://static.wixstatic.com/media/11c7c6_a74f54f5373e4d7d99cf1aec55712d51~mv2.png/v1/crop/x_0,y_513,w_2401,h_1305/fill/w_242,h_131,al_c,q_85/HRCA-01.png",
+    "bytes": 30878,
+    "aliases": [
+      "Human Rights Cities Alliance"
+    ],
+    "width": 40
+  },
+  "nti": {
+    "file": "nti.png",
+    "source": "https://images.seeklogo.com/logo-png/37/1/nuclear-threat-initiative-nti-logo-png_seeklogo-373879.png",
+    "bytes": 15282,
+    "aliases": [
+      "FutureSafe at the Nuclear Threat Initiative",
+      "Nuclear Threat Initiative"
+    ],
+    "width": 30
+  },
+  "oecd": {
+    "file": "oecd.png",
+    "source": "https://oecd.ai/assets/images/logo-oecd-light.svg",
+    "aliases": [
+      "OECD Mission Action Lab",
+      "OECD"
+    ],
+    "width": 40
+  },
+  "family": {
+    "file": "family.svg",
+    "source": null,
+    "note": "Neutral office symbol for an unnamed confidential employer; not an institutional logo.",
+    "aliases": [
+      "Family Office"
+    ],
+    "width": 20
+  },
+  "state": {
+    "file": "state.png",
+    "source": "https://upload.wikimedia.org/wikipedia/commons/8/81/U.S._Department_of_State_official_seal.svg",
+    "aliases": [
+      "U.S. Mission to International Organizations in Vienna"
+    ],
+    "width": 20
+  }
+}

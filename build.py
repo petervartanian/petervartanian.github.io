@@ -5,6 +5,7 @@ import json
 import re
 from hashlib import sha256
 from cv_markdown import export_cv
+from institution_logos import add_institution_logos, add_markdown_logos
 
 ROOT = Path(__file__).parent
 DATA = json.loads((ROOT / 'content/site.json').read_text())
@@ -15,6 +16,7 @@ JS_VERSION = sha256((ROOT / 'assets/js/personal.js').read_bytes()).hexdigest()[:
 
 
 def page(key, title, description, body, path):
+    body = add_institution_logos(body)
     nav_parts = []
     for i, (k, label, url) in enumerate(NAV):
         if i:
@@ -256,7 +258,7 @@ about = f'''<div class="title-line"><h1>Curriculum Vitæ</h1><a class="download-
 <section class="cv-section" id="experience"><h2><span class="section-number">I.</span> <strong class="section-text">Experience</strong></h2>{experience}{experience_notes}</section>
 {cv_sections}'''
 page('cv', 'CV', 'Education, experience, languages, and research methods.', about, '/cv/')
-(ROOT / 'cv/peter-vartanian-cv.md').write_text(export_cv(about))
+(ROOT / 'cv/peter-vartanian-cv.md').write_text(add_markdown_logos(export_cv(about)))
 
 socials = [('LinkedIn', 'https://www.linkedin.com/in/petervartanian/'), ('Substack', 'https://substack.com/@petersmemos'), ('GitHub', 'https://github.com/petervartanian'), ('Hugging Face', 'https://huggingface.co/petervartanian'), ('X', 'https://x.com/petersmemos'), ('Google Scholar', 'https://scholar.google.com/citations?user=DuD0EXEAAAAJ'), ('ORCID', 'https://orcid.org/0009-0009-8538-5811')]
 social_order = ['LinkedIn', 'Substack', 'GitHub', 'X', 'Hugging Face', 'Google Scholar', 'ORCID']
