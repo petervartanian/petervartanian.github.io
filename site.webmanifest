@@ -1,11 +1,11 @@
 {
   "name": "Peter H. Vartanian",
   "short_name": "P. Vartanian",
-  "description": "From Weng in the Tyrolean Alps. A personal repository of notes, experiments, and inquiry in techn\u0113, statecraft, and jurisprudence.",
+  "description": "Research and writing by Peter H. Vartanian.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#800080",
-  "theme_color": "#800080",
+  "background_color": "#faf8f7",
+  "theme_color": "#faf8f7",
   "orientation": "portrait-primary",
   "categories": [
     "education",
@@ -39,14 +39,6 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "assets/img/phv-site-preview-1200x630.jpg",
-      "sizes": "1200x630",
-      "type": "image/jpeg",
-      "form_factor": "wide"
     }
   ]
 }

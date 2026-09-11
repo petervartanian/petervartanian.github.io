@@ -1,13 +1,3 @@
-/* TEAM */
-
 Name: Peter H. Vartanian
 Site: https://petervartanian.xyz/
-Contact: peter [dot] vartanian [at] icloud [dot] com
-Location: Cambridge, MA
-
-/* SITE */
-
-Description: A personal repository of notes, experiments, and inquiry.
-Typography: Spectral
-Icons: Tabler Icons, custom PhV brand assets
-Last updated: 2026-07-24
+Typography: Georgia; Sorts Mill Goudy by Barry Schwartz (name and titles)

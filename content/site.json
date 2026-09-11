@@ -1,0 +1,287 @@
+{
+  "writings": [
+    {
+      "title": "Research Radar: AI May Not Start Wars. But It Is Changing What Wars Are Fought Over",
+      "venue": "Reboot Democracy",
+      "credit": "Jul. 7, 2026 · Co-authored with Elana Banin, Emily Parker, Parul Wadhawan, Yan Zhu & Guillem Bas",
+      "url": "https://rebootdemocracy.ai/blog/future-of-war",
+      "published": "2026-07-07",
+      "category": "security"
+    },
+    {
+      "title": "Allied Mettle, Allied Metals: A Market-Based Playbook for Critical-Mineral Supply Chains",
+      "venue": "Hoover Institution on War, Revolution, and Peace at Stanford University",
+      "credit": "Feb. 20, 2026 · Solo-authored · Recipient of the Director’s Award from Fmr. SecState Condoleezza Rice †",
+      "url": "https://www.hoover.org/sites/default/files/2026-02/HISPBC2025_DirectorsAward_2025.pdf#page=28",
+      "published": "2026-02-20",
+      "category": "resources"
+    },
+    {
+      "title": "EU (Legal) Statecraft in an Age of Coercion",
+      "venue": "Claremont–UC Research Conference on the European Union",
+      "credit": "Nov. 10, 2025 · Solo-authored ‡",
+      "url": "https://scholarship.claremont.edu/cgi/viewcontent.cgi?article=1230&context=urceu",
+      "published": "2025-11-10",
+      "category": "law"
+    },
+    {
+      "title": "The Lone Star Paradigm: A Texan Blueprint for U.S. Energy Leadership in the Twenty-First Century",
+      "venue": "The National Interest: Energy World",
+      "credit": "Feb. 11, 2025 · Co-authored with Igor Logvinenko",
+      "url": "https://nationalinterest.org/blog/energy-world/u-s-energy-leadership-in-the-21st-century",
+      "published": "2025-02-11",
+      "category": "resources"
+    },
+    {
+      "title": "omphalOS",
+      "venue": "Bureau of Industry and Security",
+      "credit": "May 8, 2024 · Solo-authored §",
+      "url": "https://github.com/petervartanian/omphalos",
+      "published": "2024-05-08",
+      "category": "security"
+    }
+  ],
+  "publication_notes": [
+    "† My white paper received the Director's Award from Secretary of State (ret.) Condoleezza Rice. Nota bene: A copyediting error lists an incorrect institutional affiliation with a firm that briefly retained me on contract. It should read Fas/Jus; for more, see my CV.",
+    "‡ My term \"geo-legality\" was cited and discussed by the Turkish award-winning journalist Hakkı Öcal in the Daily Sabah in the edition of Jan. 26, 2026.",
+    "§ My blue paper contains an adversarial Python/Rust/Go toolkit with 20,000+ SQL queries for detecting illicit procurement of AI and dual-use hardware, as well as luxury goods."
+  ],
+  "cv": {
+    "experience": [
+      {
+        "organization": "MIT AI Risk Initiative & Arcola AI*/**",
+        "dates": "Jun. 2026 – Present"
+      },
+      {
+        "organization": "AI Risk Explorer*/***",
+        "dates": "Feb. 2026 – Jun. 2026"
+      },
+      {
+        "organization": "Family Office*/****",
+        "dates": "Sep. 2025 – Jun. 2026"
+      },
+      {
+        "organization": "Hoover Institution on War, Revolution, and Peace at Stanford University*",
+        "dates": "Aug. 2025 – Aug. 2025"
+      },
+      {
+        "organization": "FutureSafe at the Nuclear Threat Initiative*",
+        "dates": "Jun. 2025 – Aug. 2025"
+      },
+      {
+        "organization": "The Program on Negotiation at Harvard Law School*",
+        "dates": "Jan. 2025 – May 2025"
+      },
+      {
+        "organization": "City Hub and Network for Gender Equity*",
+        "dates": "Jan. 2025 – May 2025"
+      },
+      {
+        "organization": "OECD Mission Action Lab",
+        "dates": "Dec. 2024 – Jan. 2025"
+      },
+      {
+        "organization": "Verum Legalis: The Occidental College Law Review",
+        "dates": "Jan. 2024 – Jan. 2025"
+      },
+      {
+        "organization": "Office of the Chair of the First Committee of the UN General Assembly*",
+        "dates": "Aug. 2024 – Dec. 2024"
+      },
+      {
+        "organization": "Urban & Environmental Policy Institute at Occidental College",
+        "dates": "May 2024 – Aug. 2024"
+      },
+      {
+        "organization": "Human Rights Cities Alliance*",
+        "dates": "Jan. 2024 – May 2024"
+      },
+      {
+        "organization": "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy*",
+        "dates": "Mar. 2023 – May 2024"
+      },
+      {
+        "organization": "Bureau of Industry and Security at the U.S. Department of Commerce*",
+        "dates": "Sep. 2023 – May 2024"
+      },
+      {
+        "organization": "Charles R. Blyth Fund at Occidental College",
+        "dates": "Apr. 2023 – May 2024"
+      },
+      {
+        "organization": "Austrian Service Abroad",
+        "dates": "May 2023 – Aug. 2023"
+      },
+      {
+        "organization": "U.S. Mission to International Organizations in Vienna",
+        "dates": "Sep. 2022 – May 2023"
+      },
+      {
+        "organization": "Occidental Consulting Group",
+        "dates": "Sep. 2022 – May 2023"
+      },
+      {
+        "organization": "Wolf Theiss*****",
+        "dates": "Dec. 2022 – Jan. 2023"
+      },
+      {
+        "organization": "European Forum Alpbach",
+        "dates": "May 2022 – Aug. 2022"
+      },
+      {
+        "organization": "The Occidental Newspaper",
+        "dates": "Sep. 2021 – May 2022"
+      },
+      {
+        "organization": "Wolf Theiss",
+        "dates": "Dec. 2021 – Jan. 2022"
+      }
+    ],
+    "sections": [
+      {
+        "label": "Education",
+        "items": [
+          "Occidental College Aug. 2021 – May 2025 Bachelor of Arts with Honors 1.Stuart Chevalier Program in Diplomacy + World Affairs (DWA) 2.Comparative Studies in Literature + Culture (CSLC) 3.97/4.00 · Summa cum Laude · ΦBK",
+          "California Institute of Technology Aug. 2021 – May 2025 Special Student Social Sciences 4.00/4.00"
+        ]
+      },
+      {
+        "label": "Languages (per the Interagency Language Roundtable's Scale)",
+        "items": [
+          {
+            "name": "German",
+            "level": "5"
+          },
+          {
+            "name": "Armenian",
+            "level": "4+"
+          },
+          {
+            "name": "Yiddish",
+            "level": "4+"
+          },
+          {
+            "name": "Spanish",
+            "level": "4"
+          },
+          {
+            "name": "French",
+            "level": "3+"
+          },
+          {
+            "name": "Portuguese",
+            "level": "3+"
+          },
+          {
+            "name": "Russian",
+            "level": "2+"
+          },
+          {
+            "name": "Korean",
+            "level": "2"
+          },
+          {
+            "name": "Amharic",
+            "level": "1+"
+          },
+          {
+            "name": "Fuṣḥā",
+            "level": "1+"
+          },
+          {
+            "name": "Lebanese",
+            "level": "1+"
+          },
+          {
+            "name": "Italian",
+            "level": "1+"
+          },
+          {
+            "name": "Turkish",
+            "level": "1+"
+          },
+          {
+            "name": "Mandarin",
+            "level": "1"
+          },
+          {
+            "name": "Anc. Greek",
+            "level": ""
+          },
+          {
+            "name": "Cl. Latin",
+            "level": ""
+          },
+          {
+            "name": "Cl. Nahuatl",
+            "level": ""
+          }
+        ]
+      },
+      {
+        "label": "Honors",
+        "items": [
+          "Director’s Award from Fmr. SecState Condoleezza Rice Feb. 2026",
+          "DWA Award for Exemplary Achievement in Academic and Co-curricular Activities May 2025",
+          "DWA Prize for Best Thesis Overall May 2025",
+          "Alternate selection for the James C. Gaither Junior Fellowship at the Carnegie Endowment for International Peace Mar. 2025",
+          "Election to Phi Beta Kappa (as a Junior) Oct. 2024",
+          "Critical Language Scholarship Mar. 2024",
+          "Gilman International Scholarship Dec. 2023"
+        ]
+      },
+      {
+        "label": "Programming",
+        "items": [
+          "Python (e.g., pandas, NumPy/SciPy, Jupyter, regex, NetworkX)",
+          "SQL (e.g., PostgreSQL, DuckDB, SQLite; joins, CTEs, aggregation)",
+          "R (e.g., tidyverse, ggplot2, data wrangling, reproducible analysis)",
+          "Bash (CLI + grep/sed/awk)",
+          "Datalog (incl. Soufflé + Flan)",
+          "Rust",
+          "Go",
+          "Git",
+          "LaTeX"
+        ]
+      },
+      {
+        "label": "Tools + platforms",
+        "items": [
+          "QGIS + ArcGIS",
+          "Promptfoo",
+          "Garak",
+          "Vector search + vector databases",
+          "Docker"
+        ]
+      },
+      {
+        "label": "AI / Security",
+        "items": [
+          "LLM + multimodal red teaming",
+          "Prompt injection, jailbreak, + escalation-chain design",
+          "Vulnerability reporting",
+          "OSINT tooling"
+        ]
+      },
+      {
+        "label": "Methods",
+        "items": [
+          "Causal inference; natural, survey, + conjoint experiments",
+          "Event-data construction + fusion",
+          "Bayesian estimation",
+          "Scenario-based threat modeling",
+          "Social media/fora (via custom Python tools) + SOCMINT",
+          "Open-source + targeted research",
+          "Analytic-method design"
+        ]
+      }
+    ],
+    "notes": [
+      "*Involving primary authorship or substantive execution of projects, as reflected on my LinkedIn and the Home page.",
+      "**Facilitated by the Cambridge Boston Alignment Initiative (CBAI).",
+      "***Facilitated by the Supervised Program for Alignment Research (SPAR).",
+      "****Contracted by a confidential European family office.",
+      "*****Undertaken as a return engagement."
+    ]
+  }
+}

@@ -1,4 +1,4 @@
-name: build
+name: Check website
 
 on:
   push:
@@ -6,15 +6,16 @@ on:
   pull_request:
 
 jobs:
-  jekyll:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/setup-python@v5
         with:
-          ruby-version: "3.2"
-          bundler-cache: true
-      - name: Build site
-        env:
-          JEKYLL_ENV: production
-        run: bundle exec jekyll build
+          python-version: "3.12"
+      - name: Build personal pages
+        run: python build.py
+      - name: Verify content and navigation
+        run: python validate.py
+      - name: Check generated pages are current
+        run: git diff --exit-code
