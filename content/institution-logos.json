@@ -4,7 +4,6 @@
     "source": "User-supplied institution seal",
     "aliases": [
       "Occidental College",
-      "Occidental Consulting Group",
       "Urban & Environmental Policy Institute at Occidental College",
       "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy",
       "Charles R. Blyth Fund at Occidental College"
@@ -186,6 +185,14 @@
     "source": "https://upload.wikimedia.org/wikipedia/commons/8/81/U.S._Department_of_State_official_seal.svg",
     "aliases": [
       "U.S. Mission to International Organizations in Vienna"
+    ],
+    "width": 20
+  },
+  "ocg": {
+    "file": "ocg.png",
+    "source": "User-supplied Occidental Consulting Group logo",
+    "aliases": [
+      "Occidental Consulting Group"
     ],
     "width": 20
   }

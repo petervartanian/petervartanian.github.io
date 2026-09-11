@@ -33,7 +33,7 @@ https://petervartanian.xyz/cv/
 | <img src="https://petervartanian.xyz/assets/logos/oxy-seal.png" width="20" height="20" alt=""> Charles R. Blyth Fund at Occidental College | Apr. 2023 – May 2024 |
 | <img src="https://petervartanian.xyz/assets/logos/austria.png" width="20" height="20" alt=""> Austrian Service Abroad | May 2023 – Aug. 2023 |
 | <img src="https://petervartanian.xyz/assets/logos/state.png" width="20" height="20" alt=""> U.S. Mission to International Organizations in Vienna | Sep. 2022 – May 2023 |
-| <img src="https://petervartanian.xyz/assets/logos/oxy-seal.png" width="20" height="20" alt=""> Occidental Consulting Group | Sep. 2022 – May 2023 |
+| <img src="https://petervartanian.xyz/assets/logos/ocg.png" width="20" height="20" alt=""> Occidental Consulting Group | Sep. 2022 – May 2023 |
 | <img src="https://petervartanian.xyz/assets/logos/wolf.png" width="20" height="20" alt=""> Wolf Theiss[^iv] | Dec. 2022 – Jan. 2023 |
 | <img src="https://petervartanian.xyz/assets/logos/alpbach.png" width="20" height="20" alt=""> European Forum Alpbach | May 2022 – Aug. 2022 |
 | <img src="https://petervartanian.xyz/assets/logos/newspaper.png" width="20" height="20" alt=""> The Occidental Newspaper | Sep. 2021 – May 2022 |
