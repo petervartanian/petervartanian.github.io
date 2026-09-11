@@ -65,7 +65,7 @@ Honors
 
 - GPA: 3.97/4.00
 - *Summa cum Laude*
-- ΦBK
+- ΦBK (elected as a junior)
 
 ### California Institute of Technology
 
@@ -75,7 +75,9 @@ Special Student
 
 - Field of study: Social Science (SS)
 
-GPA: 4.00/4.00
+Honors
+
+- GPA: 4.00/4.00
 
 ## III. **Languages**
 
