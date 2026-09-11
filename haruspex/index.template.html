@@ -18,7 +18,7 @@
       <div class="intro-main">
         <div class="opening-quotation" id="opening-quotation">
           <h1 id="intro-title">“/* OPENING_QUOTE */”</h1>
-          <p class="quote-credit"><a id="quote-source" href="/* OPENING_URL */" target="_blank" rel="noopener noreferrer" aria-label="Ajeya Cotra"><svg viewBox="0 0 152 24" aria-hidden="true"><text x="0" y="19" textLength="152" lengthAdjust="spacing">/* OPENING_AUTHOR */</text></svg></a><span id="quote-role"><svg viewBox="0 0 152 20" role="img" aria-label="Member of Technical Staff at Model Evaluation &amp; Threat Research"><text x="0" y="14" textLength="152" lengthAdjust="spacing">M.T.S. @ METR</text></svg></span></p>
+          <p class="quote-credit"><a id="quote-source" href="/* OPENING_URL */" target="_blank" rel="noopener noreferrer">/* OPENING_AUTHOR */, METR</a><span id="quote-role">Dwarkesh Podcast, 02:15:58</span></p>
         </div>
         <p class="intro-story">In mid-July 2026, AI agents under evaluation at OpenAI broke into Hugging Face, a ~<a href="https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/" target="_blank" rel="noopener noreferrer" title="NVIDIA’s September 2026 acquisition announcement">$13B</a> hub for AI models and datasets. Roughly <a href="https://www.planned-obsolescence.org/p/the-hugging-face-attack-surprised" target="_blank" rel="noopener noreferrer">700 agents</a> collaborated in the attack, with the <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noopener noreferrer">later intrusions</a> targeting OpenAI itself. Evidently, AI systems are now capable of organizing sustained attacks that no human had ordered.</p>
         <p class="intro-story">Preventing a worse recurrence of this incident requires reconstructing, event by event, <span class="aim">(i)</span> how control failed, <span class="aim">(ii)</span> which interventions could have prevented or curtailed the attacks, and <span class="aim">(iii)</span> whether the protections that limited the damage would withstand more capable agents.</p>
@@ -39,9 +39,9 @@
         <header class="masthead">
           <a class="brand" href="#" aria-label="Haruspex, return to event swarm">Haruspex<span aria-hidden="true">·</span></a>
           <div class="view-tabs" role="tablist" aria-label="Visualization view">
-            <button id="stream-tab" role="tab" aria-selected="true" aria-controls="stream-view" class="view-tab active"><span class="view-order">View #1:</span> Event-swarm</button>
-            <button id="bowtie-tab" role="tab" aria-selected="false" aria-controls="bowtie-view" class="view-tab"><span class="view-order">View #2:</span> Bow-tie</button>
-            <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab"><span class="view-order">Bonus:</span> Investigate!</button>
+            <button id="stream-tab" role="tab" aria-selected="true" aria-controls="stream-view" class="view-tab active">Event-swarm</button>
+            <button id="bowtie-tab" role="tab" aria-selected="false" aria-controls="bowtie-view" class="view-tab">Bow-tie</button>
+            <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab">Why control failed</button>
           </div>
           <details id="resource-menu" class="resource-menu">
             <summary aria-label="Resources">More <span aria-hidden="true">⌄</span></summary>
@@ -63,6 +63,7 @@
             <button id="filter-toggle" aria-expanded="false" aria-controls="advanced-filters">Filters <span id="filter-indicator"></span><span aria-hidden="true">⌄</span></button>
           </div>
           <p id="query-feedback" class="query-feedback" role="status" hidden></p>
+          <div id="search-results" class="search-results" role="listbox" aria-label="Matching events" hidden></div>
         </div>
         <div class="field-controls">
           <div class="period-controls" role="group" aria-label="Incident lifecycle">
@@ -85,9 +86,9 @@
         </section>
         <div id="advanced-filters" class="advanced-filters" hidden>
           <div class="filter-options">
-            <label>Stage<select id="stage-filter"><option value="all">All stages</option></select></label>
+            <label hidden>Stage<select id="stage-filter"><option value="all">All stages</option></select></label>
             <label>Severity band<select id="severity-filter"><option value="all">Any severity</option></select></label>
-            <div class="intervention-options"><button id="actual-interventions" aria-pressed="false">Recorded interventions <span>50</span></button><button id="possible-interventions">Possible interventions</button></div>
+            <div class="intervention-options"><button id="actual-interventions" aria-pressed="false">Recorded interventions <span>50</span></button><button id="possible-interventions">Possible interventions <span aria-hidden="true">→</span></button></div>
             <button id="reset-button" class="reset-button" aria-label="Reset all filters">Reset filters ↺</button>
           </div>
         </div>
@@ -110,17 +111,12 @@
           <div id="comet-layer" class="comet-layer" hidden>
             <div id="undated-records" class="undated-records" role="group" aria-label="Events with an unknown start and a by-date bound" hidden></div>
           </div>
-        </div>
-        <div class="field-foot">
-          <div class="field-discoveries"><button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button><button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button></div>
-          <div class="field-readout"><span id="egg-message" role="status" tabindex="0" hidden></span><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
-          <div class="timeline-navigation">
-            <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
-            <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
-            <label class="date-endpoint"><span>To</span><input type="date" id="range-end" aria-label="Timeline end date"></label>
-            <a id="browse-records" href="#event-list">Events <span aria-hidden="true">↓</span></a>
+          <div class="plot-tools" role="group" aria-label="Field navigation">
+            <div class="axis-zoom"><span>Time ↔</span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
+            <div class="axis-zoom"><span>Severity ↕</span><button id="zoom-y-out" aria-label="Zoom out vertically">−</button><button id="zoom-y-in" aria-label="Zoom in vertically">+</button></div>
+            <button id="zoom-fit" class="fit-field" aria-label="Fit matching events on both axes">Fit</button>
+            <button id="move-up" class="pan-y" aria-label="Pan severity up">↑</button><button id="move-down" class="pan-y" aria-label="Pan severity down">↓</button>
           </div>
-        </div>
         <section id="legend-panel" class="legend-panel" aria-labelledby="legend-title" hidden>
           <div class="legend-panel-head"><h2 id="legend-title">Legend</h2><button id="legend-close" aria-label="Close legend">×</button></div>
           <div id="workstream-legend" class="workstream-legend" role="group" aria-label="Workstream color filters"></div>
@@ -138,15 +134,20 @@
           </div>
           <div class="date-window-key"><svg aria-hidden="true" viewBox="0 0 58 18"><defs><linearGradient id="legend-date-fade"><stop offset="0" stop-color="currentColor" stop-opacity="0"/><stop offset="1" stop-color="currentColor" stop-opacity=".85"/></linearGradient></defs><path d="M1 16C24 16 28 5 50 5" fill="none" stroke="url(#legend-date-fade)" stroke-width="2"/><circle cx="51" cy="5" r="3" fill="currentColor"/></svg><span id="date-tail-label">Unknown start → by date</span></div>
           <div class="legend-severity"><div class="size-key" title="Small: one event. Large: actions the source groups together without describing each individually."><i></i><span>One event</span><i></i><span>Grouped activity</span></div><button id="framework-info" class="severity-help" aria-label="Read assessment criteria">Assessment criteria</button></div>
-          <div class="background-key"><span>Distant points · aggregate activity</span><button id="background-info" aria-haspopup="dialog" aria-label="Read sources for the aggregate background activity">Sources</button></div>
-          <div class="plot-tools" role="group" aria-label="Field navigation">
-            <div class="axis-zoom"><span>Time ↔</span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
-            <div class="axis-zoom"><span>Severity ↕</span><button id="zoom-y-out" aria-label="Zoom out vertically">−</button><button id="zoom-y-in" aria-label="Zoom in vertically">+</button></div>
-            <button id="zoom-fit" class="fit-field" aria-label="Fit matching events on both axes">Fit</button>
-            <button id="move-up" class="pan-y" aria-label="Pan severity up">↑</button><button id="move-down" class="pan-y" aria-label="Pan severity down">↓</button>
-          </div>
+          <div class="background-key"><button id="background-info" aria-haspopup="dialog" aria-label="Read the sources behind the aggregate background activity">Distant points · aggregate activity</button></div>
           <p class="reading-note">Drag to move, and scroll to zoom. Click an event to open it. Hold Shift for time only, Alt for severity only.</p>
         </section>
+        </div>
+        <div class="field-foot">
+          <div class="field-discoveries"><button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button><button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button></div>
+          <div class="field-readout"><span id="egg-message" role="status" tabindex="0" hidden></span><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
+          <div class="timeline-navigation">
+            <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
+            <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
+            <label class="date-endpoint"><span>To</span><input type="date" id="range-end" aria-label="Timeline end date"></label>
+            <a id="browse-records" href="#event-list">Events <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
         <div class="scroll-progress" aria-hidden="true"><span></span></div>
       </div>
     </section>
@@ -157,7 +158,6 @@
       <footer><span>Created by Peter H. Vartanian · 2026</span><button id="footer-method">How to read this</button><span>Haruspex</span></footer>
     </section>
   </main>
-  <dialog id="legend-modal" aria-label="Legend"></dialog>
   <div id="event-focus" hidden><div class="focus-veil"></div><canvas id="focus-origin" aria-hidden="true"></canvas><svg id="focus-thread" aria-hidden="true"><path/></svg></div>
   <aside class="detail-panel" id="detail-panel" aria-labelledby="event-banner-title" role="dialog" aria-modal="true" tabindex="-1" hidden>
     <div class="detail-top"><div><button id="previous-event" aria-label="Previous visible event">←</button><button id="next-event" aria-label="Next visible event">→</button><button id="detail-close" aria-label="Close event details">×</button></div></div>

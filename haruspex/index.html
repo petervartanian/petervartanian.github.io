@@ -1117,6 +1117,83 @@ body{overflow:hidden}
 .airi-reference img{width:clamp(96px,12svh,132px)}
 @media(max-width:780px){.intro{padding-left:32px;padding-right:32px}}
 @media(max-width:560px){.intro{padding-left:23px;padding-right:23px}.intro-main{margin:0}.intro-actions{flex-direction:column;align-items:flex-start;gap:14px}}
+
+/* Field chrome: legend beside the plot, tools, banner, search, filters, list */
+/* 1 · a wheel gesture on the title nudges the only way forward */
+.intro-enter{transition:color 200ms,text-decoration-color 200ms}
+@keyframes enter-nudge{0%{translate:0}35%{translate:8px 0;color:#fff;text-decoration-color:var(--jewel-gold)}100%{translate:0}}
+.intro-enter.nudge{animation:enter-nudge 900ms var(--motion-ease,ease)}
+@media(prefers-reduced-motion:reduce){.intro-enter.nudge{animation:none;text-decoration-color:var(--jewel-gold)}}
+/* 2 · banner: the title yields to the facts, the header bar goes */
+#detail-panel .detail-title{font-size:21px;line-height:1.25;margin:8px 0 12px}
+#detail-panel[data-hoisted="true"] .detail-title{font-size:20px}
+#detail-panel .detail-top{background:linear-gradient(#0e1a24 60%,#0e1a2400);padding:0 0 10px;justify-content:flex-end}
+#detail-panel .detail-top button{min-height:26px;min-width:26px;font-size:16px}
+#detail-panel .event-description{font-size:12px;line-height:1.6}
+/* 3 · legend docked beside the plot, keys only; tools at the top right of the plot */
+#scene #legend-panel{position:absolute;inset:var(--dock-top,118px) var(--scene-edge,40px) var(--dock-bottom,118px) auto;z-index:12;width:292px;max-width:none;max-height:none;margin:0;padding:12px 14px 16px;box-sizing:border-box;overflow:auto;scrollbar-width:thin;transform:none;translate:none;background:#0e171df2;border:1px solid #879d9b33;border-radius:6px;box-shadow:0 18px 55px #0007;pointer-events:auto}
+#scene #legend-panel[hidden]{display:none}
+#scene #legend-panel> :not(.legend-panel-head){padding:10px 2px;min-height:0;gap:6px 14px}
+#scene #legend-panel .legend-panel-head{margin-bottom:4px;padding:0 2px}
+#scene #legend-panel .legend-panel-head h2{font-size:21px}
+#scene #legend-panel .legend-panel-head button{min-width:26px;min-height:26px;font-size:20px}
+#scene #legend-panel .workstream-legend button,#scene #legend-panel .legend button{min-height:24px;padding:2px 0}
+#scene #legend-panel .background-key button{font-size:10px;color:#8c9ba0;text-decoration:underline;text-decoration-color:#8c9ba044;text-underline-offset:3px}
+#scene #legend-panel .background-key button:hover{color:#dfe7ea}
+#scene.legend-open #plot-wrap,#scene.legend-open #bowtie-view{padding-right:calc(var(--scene-edge,40px) + 306px);box-sizing:border-box}
+body:has(#scene) #scene .plot-tools{position:absolute;left:auto;right:var(--scene-edge,40px);top:var(--dock-top,118px);z-index:9;display:flex;align-items:center;gap:10px;pointer-events:auto}
+body:has(#scene) #scene.legend-open .plot-tools{right:calc(var(--scene-edge,40px) + 306px)}
+#scene .plot-tools .axis-zoom{display:flex;align-items:center;gap:2px}
+#scene .plot-tools .axis-zoom>span{font-size:10px;color:#8c9ba0;margin-right:4px}
+#scene .plot-tools button{min-width:24px;min-height:24px;padding:0 3px;font-size:15px;color:#a7b3ba;background:none;border:0}
+#scene .plot-tools button:hover:not(:disabled){color:#fff}
+#scene .plot-tools .fit-field{font-size:10px;padding:0 4px;border:0;border-radius:0;background:none;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#8c9ba044}
+#scene .plot-tools .pan-y{font-size:13px}
+#scene[data-view="cast"] .plot-tools,#scene[data-view="cast"] #legend-panel{display:none}
+@media(max-width:780px){#scene #legend-panel{inset:auto var(--scene-edge,15px) var(--dock-bottom,90px) var(--scene-edge,15px);width:auto;max-height:58svh}#scene.legend-open #plot-wrap,#scene.legend-open #bowtie-view{padding-right:0}body:has(#scene) #scene.legend-open .plot-tools{right:var(--scene-edge,15px)}}
+/* 4 · nothing to read below 10px; every target at least 24px */
+.assessment-count,#stage-total,.date-endpoint>span,.search kbd,.legend button b,.size-key,.reading-note{font-size:10px}
+.query-help{width:24px;height:24px;font-size:11px}
+.back-up{padding:8px 4px;margin:-8px -4px}
+#browse-records{padding:6px 0;margin:-6px 0}
+.range-handle::before{content:"";position:absolute;inset:-4px -8px}
+/* 5 · filters: one place for stages, quiet selects, toggles that look like toggles */
+.filter-options{grid-template-columns:1fr}
+.filter-options select{appearance:none;-webkit-appearance:none;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23acbcc1' stroke-width='1.2'/%3E%3C/svg%3E") no-repeat right 2px center/10px 6px;border:0;border-bottom:1px solid #8ca2ac55;border-radius:0;padding:8px 22px 8px 0;color:#dfe7ea;font:12px "Helvetica Neue",Arial,sans-serif;cursor:pointer}
+.filter-options select:hover{border-bottom-color:#acbcc1}
+.filter-options select:focus-visible{outline:none;border-bottom-color:var(--yellow)}
+.intervention-options{justify-content:flex-start;gap:28px}
+.intervention-options button{display:inline-flex;align-items:center;gap:8px;padding:6px 0;color:#b7c4c9}
+.intervention-options button:hover{color:#fff}
+.intervention-options #actual-interventions::before{content:"";width:8px;height:8px;border-radius:50%;border:1px solid #8ca2ac;flex:none;transition:background-color 200ms,border-color 200ms}
+.intervention-options #actual-interventions[aria-pressed="true"]::before{background:var(--yellow);border-color:var(--yellow)}
+.intervention-options #possible-interventions{text-decoration:underline;text-decoration-color:#8ca2ac44;text-underline-offset:4px}
+.intervention-options #possible-interventions span{margin-left:2px}
+/* 6 · search results under the field */
+.search-results{position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:16;pointer-events:auto;max-height:min(420px,60svh);overflow:auto;padding:6px 0;background:#10191ff5;border:1px solid #8ca2ac35;border-radius:9px;box-shadow:0 18px 55px #0007;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.search-results[hidden]{display:none}
+.search-results button{display:grid;grid-template-columns:14px minmax(0,1fr) auto;align-items:center;gap:10px;width:100%;padding:8px 14px;text-align:left;font-size:12px;line-height:1.35;color:#dfe7ea;background:none;border:0}
+.search-results button:hover,.search-results button:focus-visible{background:#7baa8514;color:#fff;outline:none}
+.search-results .result-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.search-results .result-meta{font:10px var(--mono);color:var(--dim);white-space:nowrap}
+.search-results .result-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:4px;padding:8px 14px 4px;border-top:1px solid #8ca2ac1a;font-size:11px;color:var(--muted)}
+.search-results .result-foot a{color:#dfe7ea;text-decoration:none}.search-results .result-foot a:hover{color:var(--yellow)}
+.search-results .result-foot a span{color:var(--yellow);padding-left:6px}
+.search-results .result-empty{margin:0;padding:8px 14px;font-size:12px;color:var(--muted)}
+.search-results .event-mark{width:12px;height:12px;margin:0;vertical-align:0}
+/* 9 · credit as plain text */
+.quote-credit{display:flex!important;flex-direction:column;align-items:flex-start;gap:1px!important;width:auto!important;grid-template-columns:none}
+.quote-credit #quote-source{display:inline;width:auto;font:15px/1.5 var(--serif);color:#cadcd5;text-decoration:none;border:0}
+.quote-credit #quote-source:hover{color:#eff3e7;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#7fa99a66}
+.quote-credit #quote-role{display:block;width:auto;margin:0!important;font:italic 13px/1.5 var(--serif);color:#8da6ae}
+/* 10 · show more as a line, not a box */
+.load-more{border:0;border-radius:0;background:none;margin:34px auto 0;padding:8px 0;width:auto;font:15px/1.4 var(--serif);color:#b7c4c9;text-decoration:underline;text-decoration-color:#8ca2ac44;text-underline-offset:5px}
+.load-more:hover{color:#fff;text-decoration-color:var(--yellow)}
+.load-more span{padding-left:10px;color:var(--yellow)}
+/* 11 · rows say what a click does; dialogs keep a readable measure */
+.row-arrow{font-size:11px;color:var(--dim);opacity:0;transition:opacity 200ms}
+.record-row:hover .row-arrow,.record-row:focus-visible .row-arrow,.record-row.selected .row-arrow{opacity:1}
+#dialog-content p,#dialog-content li,#dialog-content dd,#dialog-content h3{max-width:68ch}
 </style>
 </head>
 <body>
@@ -1129,7 +1206,7 @@ body{overflow:hidden}
       <div class="intro-main">
         <div class="opening-quotation" id="opening-quotation">
           <h1 id="intro-title">“This might be the clearest warning shot we ever get.”</h1>
-          <p class="quote-credit"><a id="quote-source" href="https://www.dwarkesh.com/p/ajeya-cotra?t=8158" target="_blank" rel="noopener noreferrer" aria-label="Ajeya Cotra"><svg viewBox="0 0 152 24" aria-hidden="true"><text x="0" y="19" textLength="152" lengthAdjust="spacing">Ajeya Cotra</text></svg></a><span id="quote-role"><svg viewBox="0 0 152 20" role="img" aria-label="Member of Technical Staff at Model Evaluation &amp; Threat Research"><text x="0" y="14" textLength="152" lengthAdjust="spacing">M.T.S. @ METR</text></svg></span></p>
+          <p class="quote-credit"><a id="quote-source" href="https://www.dwarkesh.com/p/ajeya-cotra?t=8158" target="_blank" rel="noopener noreferrer">Ajeya Cotra, METR</a><span id="quote-role">Dwarkesh Podcast, 02:15:58</span></p>
         </div>
         <p class="intro-story">In mid-July 2026, AI agents under evaluation at OpenAI broke into Hugging Face, a ~<a href="https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/" target="_blank" rel="noopener noreferrer" title="NVIDIA’s September 2026 acquisition announcement">$13B</a> hub for AI models and datasets. Roughly <a href="https://www.planned-obsolescence.org/p/the-hugging-face-attack-surprised" target="_blank" rel="noopener noreferrer">700 agents</a> collaborated in the attack, with the <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noopener noreferrer">later intrusions</a> targeting OpenAI itself. Evidently, AI systems are now capable of organizing sustained attacks that no human had ordered.</p>
         <p class="intro-story">Preventing a worse recurrence of this incident requires reconstructing, event by event, <span class="aim">(i)</span> how control failed, <span class="aim">(ii)</span> which interventions could have prevented or curtailed the attacks, and <span class="aim">(iii)</span> whether the protections that limited the damage would withstand more capable agents.</p>
@@ -1150,9 +1227,9 @@ body{overflow:hidden}
         <header class="masthead">
           <a class="brand" href="#" aria-label="Haruspex, return to event swarm">Haruspex<span aria-hidden="true">·</span></a>
           <div class="view-tabs" role="tablist" aria-label="Visualization view">
-            <button id="stream-tab" role="tab" aria-selected="true" aria-controls="stream-view" class="view-tab active"><span class="view-order">View #1:</span> Event-swarm</button>
-            <button id="bowtie-tab" role="tab" aria-selected="false" aria-controls="bowtie-view" class="view-tab"><span class="view-order">View #2:</span> Bow-tie</button>
-            <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab"><span class="view-order">Bonus:</span> Investigate!</button>
+            <button id="stream-tab" role="tab" aria-selected="true" aria-controls="stream-view" class="view-tab active">Event-swarm</button>
+            <button id="bowtie-tab" role="tab" aria-selected="false" aria-controls="bowtie-view" class="view-tab">Bow-tie</button>
+            <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab">Why control failed</button>
           </div>
           <details id="resource-menu" class="resource-menu">
             <summary aria-label="Resources">More <span aria-hidden="true">⌄</span></summary>
@@ -1174,6 +1251,7 @@ body{overflow:hidden}
             <button id="filter-toggle" aria-expanded="false" aria-controls="advanced-filters">Filters <span id="filter-indicator"></span><span aria-hidden="true">⌄</span></button>
           </div>
           <p id="query-feedback" class="query-feedback" role="status" hidden></p>
+          <div id="search-results" class="search-results" role="listbox" aria-label="Matching events" hidden></div>
         </div>
         <div class="field-controls">
           <div class="period-controls" role="group" aria-label="Incident lifecycle">
@@ -1196,9 +1274,9 @@ body{overflow:hidden}
         </section>
         <div id="advanced-filters" class="advanced-filters" hidden>
           <div class="filter-options">
-            <label>Stage<select id="stage-filter"><option value="all">All stages</option></select></label>
+            <label hidden>Stage<select id="stage-filter"><option value="all">All stages</option></select></label>
             <label>Severity band<select id="severity-filter"><option value="all">Any severity</option></select></label>
-            <div class="intervention-options"><button id="actual-interventions" aria-pressed="false">Recorded interventions <span>50</span></button><button id="possible-interventions">Possible interventions</button></div>
+            <div class="intervention-options"><button id="actual-interventions" aria-pressed="false">Recorded interventions <span>50</span></button><button id="possible-interventions">Possible interventions <span aria-hidden="true">→</span></button></div>
             <button id="reset-button" class="reset-button" aria-label="Reset all filters">Reset filters ↺</button>
           </div>
         </div>
@@ -1221,17 +1299,12 @@ body{overflow:hidden}
           <div id="comet-layer" class="comet-layer" hidden>
             <div id="undated-records" class="undated-records" role="group" aria-label="Events with an unknown start and a by-date bound" hidden></div>
           </div>
-        </div>
-        <div class="field-foot">
-          <div class="field-discoveries"><button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button><button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button></div>
-          <div class="field-readout"><span id="egg-message" role="status" tabindex="0" hidden></span><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
-          <div class="timeline-navigation">
-            <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
-            <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
-            <label class="date-endpoint"><span>To</span><input type="date" id="range-end" aria-label="Timeline end date"></label>
-            <a id="browse-records" href="#event-list">Events <span aria-hidden="true">↓</span></a>
+          <div class="plot-tools" role="group" aria-label="Field navigation">
+            <div class="axis-zoom"><span>Time ↔</span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
+            <div class="axis-zoom"><span>Severity ↕</span><button id="zoom-y-out" aria-label="Zoom out vertically">−</button><button id="zoom-y-in" aria-label="Zoom in vertically">+</button></div>
+            <button id="zoom-fit" class="fit-field" aria-label="Fit matching events on both axes">Fit</button>
+            <button id="move-up" class="pan-y" aria-label="Pan severity up">↑</button><button id="move-down" class="pan-y" aria-label="Pan severity down">↓</button>
           </div>
-        </div>
         <section id="legend-panel" class="legend-panel" aria-labelledby="legend-title" hidden>
           <div class="legend-panel-head"><h2 id="legend-title">Legend</h2><button id="legend-close" aria-label="Close legend">×</button></div>
           <div id="workstream-legend" class="workstream-legend" role="group" aria-label="Workstream color filters"></div>
@@ -1249,15 +1322,20 @@ body{overflow:hidden}
           </div>
           <div class="date-window-key"><svg aria-hidden="true" viewBox="0 0 58 18"><defs><linearGradient id="legend-date-fade"><stop offset="0" stop-color="currentColor" stop-opacity="0"/><stop offset="1" stop-color="currentColor" stop-opacity=".85"/></linearGradient></defs><path d="M1 16C24 16 28 5 50 5" fill="none" stroke="url(#legend-date-fade)" stroke-width="2"/><circle cx="51" cy="5" r="3" fill="currentColor"/></svg><span id="date-tail-label">Unknown start → by date</span></div>
           <div class="legend-severity"><div class="size-key" title="Small: one event. Large: actions the source groups together without describing each individually."><i></i><span>One event</span><i></i><span>Grouped activity</span></div><button id="framework-info" class="severity-help" aria-label="Read assessment criteria">Assessment criteria</button></div>
-          <div class="background-key"><span>Distant points · aggregate activity</span><button id="background-info" aria-haspopup="dialog" aria-label="Read sources for the aggregate background activity">Sources</button></div>
-          <div class="plot-tools" role="group" aria-label="Field navigation">
-            <div class="axis-zoom"><span>Time ↔</span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
-            <div class="axis-zoom"><span>Severity ↕</span><button id="zoom-y-out" aria-label="Zoom out vertically">−</button><button id="zoom-y-in" aria-label="Zoom in vertically">+</button></div>
-            <button id="zoom-fit" class="fit-field" aria-label="Fit matching events on both axes">Fit</button>
-            <button id="move-up" class="pan-y" aria-label="Pan severity up">↑</button><button id="move-down" class="pan-y" aria-label="Pan severity down">↓</button>
-          </div>
+          <div class="background-key"><button id="background-info" aria-haspopup="dialog" aria-label="Read the sources behind the aggregate background activity">Distant points · aggregate activity</button></div>
           <p class="reading-note">Drag to move, and scroll to zoom. Click an event to open it. Hold Shift for time only, Alt for severity only.</p>
         </section>
+        </div>
+        <div class="field-foot">
+          <div class="field-discoveries"><button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button><button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button></div>
+          <div class="field-readout"><span id="egg-message" role="status" tabindex="0" hidden></span><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
+          <div class="timeline-navigation">
+            <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
+            <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
+            <label class="date-endpoint"><span>To</span><input type="date" id="range-end" aria-label="Timeline end date"></label>
+            <a id="browse-records" href="#event-list">Events <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
         <div class="scroll-progress" aria-hidden="true"><span></span></div>
       </div>
     </section>
@@ -1268,7 +1346,6 @@ body{overflow:hidden}
       <footer><span>Created by Peter H. Vartanian · 2026</span><button id="footer-method">How to read this</button><span>Haruspex</span></footer>
     </section>
   </main>
-  <dialog id="legend-modal" aria-label="Legend"></dialog>
   <div id="event-focus" hidden><div class="focus-veil"></div><canvas id="focus-origin" aria-hidden="true"></canvas><svg id="focus-thread" aria-hidden="true"><path/></svg></div>
   <aside class="detail-panel" id="detail-panel" aria-labelledby="event-banner-title" role="dialog" aria-modal="true" tabindex="-1" hidden>
     <div class="detail-top"><div><button id="previous-event" aria-label="Previous visible event">←</button><button id="next-event" aria-label="Next visible event">→</button><button id="detail-close" aria-label="Close event details">×</button></div></div>
@@ -1815,7 +1892,7 @@ body{overflow:hidden}
     const reduced=matchMedia('(prefers-reduced-motion: reduce)'),inertStates=new Map();
     const TAU=Math.PI*2,TILT=.46,SPIN_MS=48000,POP_MS=1200,MARBLE=520,RIM=96;
     const easeOut=t=>{const v=clamp(t);return 1-Math.pow(1-v,3);};
-    let size,center,radius,glow,grain,backdrop,endpoints=[],marble=[],dustColors=[],ratio=1,warmIndex=0,baseGradient=null,surfaceLayer=null,surfaceBmp=null,glowBmp=null,backdropBmp=null,lastPaint=0;
+    let size,center,radius,glow,grain,backdrop,endpoints=[],marble=[],dustColors=[],ratio=1,warmIndex=0,baseGradient=null,surfaceLayer=null,surfaceBmp=null,glowBmp=null,backdropBmp=null,lastPaint=0,nudgeAt=-1e9;
     const marbleBitmaps=new Map();const bitmap=(source,done)=>{if(window.createImageBitmap)createImageBitmap(source).then(done).catch(()=>{});};
     const warmCanvas=document.createElement('canvas');warmCanvas.width=warmCanvas.height=40;const warmCtx=warmCanvas.getContext('2d');
     let dirty=true,popped=false,popping=null,hover=false,frame=null,sizeKey='',locked=false,rotationAt=performance.now();
@@ -1857,6 +1934,8 @@ body{overflow:hidden}
       const gx=Math.max(0,center.x-radius*1.7),gy=Math.max(0,center.y-radius*1.7),gw=Math.min(width,center.x+radius*1.7)-gx,gh=Math.min(height,center.y+radius*1.7)-gy;
       const path=silhouette(angle);
       ctx.save();ctx.globalAlpha=alpha;
+      // The ball breathes once it has waited three seconds, and swells briefly when a wheel gesture asks the page to move.
+      const t=performance.now(),idle=t-rotationAt,n=(t-nudgeAt)/700;let k=1;if(idle>3000)k+=.012*(.5-.5*Math.cos((idle-3000)/1500*Math.PI));if(n>=0&&n<1)k+=.035*Math.sin(n*Math.PI);if(k!==1){ctx.translate(center.x,center.y);ctx.scale(k,k);ctx.translate(-center.x,-center.y);}
       ctx.fillStyle=baseGradient;ctx.fill(path);
       ctx.globalCompositeOperation='source-atop';
       for(const m of marble){const p=project(m.unit,1,angle);if(p.depth<.48)continue;const w=m.r*2*p.s*(1+.4*(p.depth-.5));ctx.globalAlpha=alpha*m.alpha*lift*(.45+.55*p.light);ctx.drawImage(marbleBitmaps.get(m.color)||marbleSprite(m.color),p.x-w/2,p.y-w/2,w,w);}
@@ -1911,6 +1990,7 @@ body{overflow:hidden}
     function enter({behavior='smooth'}={}){window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});if(!popped)pop({instant:isReading()});}
     function show({behavior='smooth'}={}){reform();window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});}
     button.addEventListener('click',()=>pop());
+    scene.addEventListener('wheel',()=>{if(!popped&&!popping){nudgeAt=performance.now();start();}},{passive:true});
     button.addEventListener('pointerenter',()=>{hover=true;});button.addEventListener('pointerleave',()=>{hover=false;});
     reduced.addEventListener('change',()=>{dirty=true;});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else start();});
@@ -2609,7 +2689,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const oldRows = new Map($$('#record-list [data-record]').map((node) => [node.dataset.record, node.getBoundingClientRect()]));
     $('#record-count').textContent = `${visible.length} / ${events.length} events`;
     const entries = visible.slice(0, state.limit);
-    $('#record-list').innerHTML = entries.length ? entries.map((event) => `<button class="record-row ${event.id === state.selected ? 'selected' : ''}" data-record="${event.id}" aria-label="${escapeHtml(`${event.id}, ${event.title}, ${eventStyle(event).label}, ${LABELS[event._status]}, ${bandLabel(event)}, ${dateLabel(event, true)}`)}"><span class="row-id">${event.id}</span><span class="row-date">${escapeHtml(dateLabel(event, true))}</span><span class="row-title">${eventMark(event)}${escapeHtml(event.title)}</span><span class="row-severity">${severityBadge(event)}</span><span class="row-status"><span class="mark ${SHAPES[event._status]}"></span>${LABELS[event._status]}</span><span class="row-arrow" aria-hidden="true">↗</span></button>`).join('') : '<p class="list-empty">No events match this view.</p>';
+    $('#record-list').innerHTML = entries.length ? entries.map((event) => `<button class="record-row ${event.id === state.selected ? 'selected' : ''}" data-record="${event.id}" aria-label="${escapeHtml(`${event.id}, ${event.title}, ${eventStyle(event).label}, ${LABELS[event._status]}, ${bandLabel(event)}, ${dateLabel(event, true)}`)}"><span class="row-id">${event.id}</span><span class="row-date">${escapeHtml(dateLabel(event, true))}</span><span class="row-title">${eventMark(event)}${escapeHtml(event.title)}</span><span class="row-severity">${severityBadge(event)}</span><span class="row-status"><span class="mark ${SHAPES[event._status]}"></span>${LABELS[event._status]}</span><span class="row-arrow" aria-hidden="true">Open</span></button>`).join('') : '<p class="list-empty">No events match this view.</p>';
     $$('[data-record]').forEach((button) => button.addEventListener('click', () => { selectEvent(button.dataset.record, { trigger: button }); }));
     if (!reducedMotion.matches) $$('#record-list [data-record]').forEach((node) => {
       const rect = node.getBoundingClientRect(); const prior = oldRows.get(node.dataset.record);
@@ -2873,6 +2953,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   });
   bowCanvas.addEventListener('pointerleave', () => { $('#bowtie-tooltip').hidden = true; showStar(null); });
   bowCanvas.addEventListener('click', (event) => { const hits = bowHits(event); if (hits.length) { selectEvent(hits[0].event.id, { nearby: hits.map((point) => point.event) }); renderBowtie(); } else discoverStar(event, true); });
+  $('#intro').addEventListener('wheel', (event) => { const intro = $('#intro'); if (event.deltaY <= 0 || intro.scrollHeight > intro.clientHeight + 2) return; const link = $('#enter-explorer'); if (link.classList.contains('nudge')) return; link.classList.add('nudge'); setTimeout(() => link.classList.remove('nudge'), 950); }, { passive: true });
   for (const surface of [timeline, bowCanvas]) surface.addEventListener('dblclick', (event) => { event.preventDefault(); closeDetails(); reset(); });
   function boundedRange(start, end) {
     const span = Math.max(MIN_TIME_SPAN, Math.min(end - start, fullRange[1] - fullRange[0]));
@@ -3038,6 +3119,17 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if (!$('#stage-panel').hidden) renderStages();
     syncNavigationIndicators();
   }
+  let searchDismissed = '';
+  function renderSearchResults() {
+    const box = $('#search-results'); const term = state.search.trim();
+    if (!term || searchDismissed === term || state.view === 'cast') { box.hidden = true; box.innerHTML = ''; return; }
+    const matches = allFilteredPool;
+    const rows = matches.slice(0, 8).map((event) => `<button type="button" role="option" data-result="${event.id}">${eventMark(event)}<span class="result-title">${escapeHtml(event.title)}</span><span class="result-meta">${escapeHtml(dateLabel(event, true))}</span></button>`).join('');
+    box.innerHTML = `${rows || '<p class="result-empty">No events match.</p>'}<div class="result-foot"><span>${matches.length} matching ${matches.length === 1 ? 'event' : 'events'}</span>${matches.length ? '<a href="#event-list" id="results-to-list">Events <span aria-hidden="true">↓</span></a>' : ''}</div>`;
+    box.hidden = false;
+    $$('#search-results [data-result]').forEach((button) => button.addEventListener('click', () => { box.hidden = true; searchDismissed = term; selectEvent(button.dataset.result, { trigger: button }); }));
+    $('#results-to-list')?.addEventListener('click', (event) => { event.preventDefault(); box.hidden = true; searchDismissed = term; $('#event-list').scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start' }); });
+  }
   function refresh() {
     stopMotion();
     allFilteredPool = events.filter((event) => matchesBase(event) && matchesGroup(event)).sort(readingSort);
@@ -3051,6 +3143,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if (state.view !== 'stream') { $('#unplaced-button').hidden = true; $('#undated-records').hidden = true; }
     $('#comet-layer').hidden = true;
     drawTimeline(); renderList(); if (!detailPanel.hidden) renderDetail();
+    renderSearchResults();
     if (state.view === 'bowtie') renderBowtie();
     if (state.view === 'cast') renderCast();
     scrollGateway?.invalidate();
@@ -3085,7 +3178,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if (view === 'cast') { detailPanel.getAnimations().forEach(animation=>animation.cancel()); if(!detailPanel.hidden)closeDetails(); }
     for (const key of ['stream', 'bowtie', 'cast']) $(`#${key}-view`).hidden = key !== view;
     $$('.view-tab').forEach((button) => { const selected = button.id === `${view}-tab`; button.setAttribute('aria-selected', String(selected)); button.tabIndex = selected ? 0 : -1; button.classList.toggle('active', selected); });
-    closeLegend(); closeStages(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false');
+    if (view === 'cast') closeLegend(); closeStages(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false');
     if(view!=='cast')drawCosmos();
   }
   function freezeVisibleView() {
@@ -3271,21 +3364,24 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   }
   function factForRecord(label, value) { return `<dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd>`; }
   function openMethod() {
-    openDialog('Reading the field', `<p>Haruspex brings together ${events.length} explorable events across Impact, Context, and Unresolved from ${data.sources.length} primary sources. Each point is a reported action, result, communication, decision or investigative finding. Some events describe grouped activity because details of the individual instances are unavailable.</p><h3>Color follows the workstream</h3><div class="method-workstreams">${visualData.groups.map((group) => `<span>${workstreamSwatch(group)}${escapeHtml(group.label)}</span>`).join('')}</div><p>Each color identifies one part of the incident: evaluation, access, coordination, intrusion, response or investigation. These group the source workstream labels already attached to the events. An event keeps its color across every view, whatever its severity or evidence status. All events retain their workstream color. Context has a hollow outline; Unresolved has a broken outline. Those treatments preserve the evidence shape and do not invent a numerical severity. Click a color key to filter that workstream; click it again to restore all workstreams.</p><h3>Shape tells you about evidence</h3><div class="method-key">${Object.keys(SHAPES).map((status) => `<span><i class="mark ${SHAPES[status]}"></i>${LABELS[status]}</span>`).join('')}</div><p>Reported means attested by the cited source, not independently established ground truth. Reasoning events preserve what an agent or person said or decided; they do not prove motivation or cause. Inferred events reflect a source’s inference. Discrepancies preserve accounts that may describe different stages.</p><h3>Time has different resolutions</h3><p>${events.filter(e=>e.event_date&&e.event_time_utc).length} events have an individual clock time, ${events.filter(e=>e.event_date&&!e.event_time_utc).length} have a date only, and ${events.filter(e=>!e.event_date).length} have context intervals. Exact clock points keep their source time. Points without individual times are packed within the visible part of their source date windows for readability. Their horizontal position is not a known time or order, and placement adapts when the view changes. Select a point or enable Date windows to see its interval as a line. Color and shape identify workstream and evidence; size distinguishes a single reported unit from grouped activity; it does not count the underlying instances. None encodes date precision; dates and their limits are also shown in the tooltip and event details. The 12 events without a supported earliest date have tails that fade in from the left and end at their upper date bound, within their Impact or Context field. The head marks the latest contextual bound, not the event time. A tail has no known starting point, duration or probability distribution. If its bound lies outside the visible range, only the continuing tail appears; its head is never moved to the edge. Select a head or trail to open the event. All remain available in the event list. Fresh primary-source checks did not establish their individual dates; their contextual upper bound is inferred and visible in Date evidence. They can appear in the bow tie, which does not assign a time coordinate.</p><h3>One severity scale</h3><p>Levels 1–5 describe consequences for the affected systems and organization, from a small local effect to devastating organizational loss. They use the same scope throughout. Zero identifies a documented near-miss with no realized harm in the specific assessed outcome. Preventive actions occupy a separate band below zero, with no numerical magnitude assigned. Context and Unresolved have their own unordered fields, reached through the category controls. They have no position on the severity scale. Unresolved includes uncertain consequences and an unconfirmed connection to this incident, as specified in each event. Their reviews are complete, with no numeric score invented. Open Severity to read the criteria, or an event to inspect its rationale.</p><h3>The event swarm and the bow tie</h3><p>The name Event swarm is inspired by <a href="https://observablehq.github.io/plot/transforms/dodge" target="_blank" rel="noopener noreferrer">beeswarm plots</a>, which keep individual points visible. This adaptation accommodates source date windows.</p><p>Small vertical offsets separate points at the same severity; those offsets have no analytical meaning. The distant field suggests the much larger activity that cannot be individually resolved here: roughly 17,600 recovered attacker actions in Hugging Face’s account and more than 70,000 distinct messages and files in METR’s account. These source totals can overlap and use different units; they cannot be added or reduced by subtracting the displayed event count. Background stars suggest aggregate density. Their hidden numbers belong to a decorative catalogue, with no incident details, dates or severity attached. <span class="citation-only"><a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">Hugging Face forensic timeline</a> · <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR and Redwood investigation</a></span> Before, During and After group incident roles, independently of date. Choose any of the 27 stages to narrow the field. The bow tie uses the same membership and filters. Structure exposes the ontology, definitions and connected facets. Points retain their identity as they move between views. The motion explains a change of layout, not a path through time or a causal connection. Each focused lifecycle is a single continuous field. Shared event positions stay stable when filters change; interrupted movement resumes from the displayed position and velocity. Responses may happen while activity continues. Reduced-motion preferences are respected.</p><h3>What is missing stays visible</h3><p>Every event includes all 45 fields, including unavailable values. The dataset does not expand published totals into invented individual events, reconstruct inaccessible private logs, or invent optimal interventions. Its ${events.length} events are a working inventory, not a proven absolute maximum. The CAST view adds six analyst proposals alongside six groups of reported changes. Each retains evidence, unknowns and verification needs; none is claimed to be an optimal intervention. Its 16 open questions preserve the earlier investigation register. The investigation connects events to control paths, findings, additional public evidence and specific collection plans. It is a provisional CAST analysis; new evidence can revise it. The original question register stays intact, with new findings and remaining gaps recorded alongside it.</p><h3>Explore the events</h3><p>Select a point, browse the event list, or search for an actor, system or event ID. Drag the field to move in either direction. Scroll to zoom both axes, hold Shift for time alone or Alt for vertical zoom alone; the separate Time and vertical buttons offer the same controls. When the field has keyboard focus, arrow keys pan and + / − zoom. Home fits the matching events. The field remains pinned briefly as you scroll, then gives way to the event list. Navigation never changes a stored event time. Drag either handle on the overview to adjust that end of the date range. Drag its middle to move the whole window, or set the From and To dates. The end date is inclusive and all dates use UTC. The overview groups events by window midpoints as a navigation aid; its heights are not counts of verified events at those times. Keyboard users can reach every filtered event through the list; open an event to inspect all fields and its primary source. Export downloads the complete dataset, including field definitions and source comparisons.</p>`);
+    openDialog('Reading the field', `<p>Haruspex brings together ${events.length} explorable events across Impact, Context, and Unresolved from ${data.sources.length} primary sources. Each point is a reported action, result, communication, decision or investigative finding. Some events describe grouped activity because details of the individual instances are unavailable.</p><h3>Color follows the workstream</h3><div class="method-workstreams">${visualData.groups.map((group) => `<span>${workstreamSwatch(group)}${escapeHtml(group.label)}</span>`).join('')}</div><p>Each color identifies one part of the incident: evaluation, access, coordination, intrusion, response or investigation. These group the source workstream labels already attached to the events. An event keeps its color across every view, whatever its severity or evidence status. All events retain their workstream color. Context has a hollow outline; Unresolved has a broken outline. Those treatments preserve the evidence shape and do not invent a numerical severity. Click a color key to filter that workstream; click it again to restore all workstreams.</p><h3>Shape tells you about evidence</h3><div class="method-key">${Object.keys(SHAPES).map((status) => `<span><i class="mark ${SHAPES[status]}"></i>${LABELS[status]}</span>`).join('')}</div><p>Reported means attested by the cited source, not independently established ground truth. Reasoning events preserve what an agent or person said or decided; they do not prove motivation or cause. Inferred events reflect a source’s inference. Discrepancies preserve accounts that may describe different stages.</p><h3>Time has different resolutions</h3><p>${events.filter(e=>e.event_date&&e.event_time_utc).length} events have an individual clock time, ${events.filter(e=>e.event_date&&!e.event_time_utc).length} have a date only, and ${events.filter(e=>!e.event_date).length} have context intervals. Exact clock points keep their source time. Points without individual times are packed within the visible part of their source date windows for readability. Their horizontal position is not a known time or order, and placement adapts when the view changes. Select a point or enable Date windows to see its interval as a line. Color and shape identify workstream and evidence; size distinguishes a single reported unit from grouped activity; it does not count the underlying instances. None encodes date precision; dates and their limits are also shown in the tooltip and event details. The 12 events without a supported earliest date have tails that fade in from the left and end at their upper date bound, within their Impact or Context field. The head marks the latest contextual bound, not the event time. A tail has no known starting point, duration or probability distribution. If its bound lies outside the visible range, only the continuing tail appears; its head is never moved to the edge. Select a head or trail to open the event. All remain available in the event list. Fresh primary-source checks did not establish their individual dates; their contextual upper bound is inferred and visible in Date evidence. They can appear in the bow tie, which does not assign a time coordinate.</p><h3>One severity scale</h3><p>Levels 1–5 describe consequences for the affected systems and organization, from a small local effect to devastating organizational loss. They use the same scope throughout. Zero identifies a documented near-miss with no realized harm in the specific assessed outcome. Preventive actions occupy a separate band below zero, with no numerical magnitude assigned. Context and Unresolved have their own unordered fields, reached through the category controls. They have no position on the severity scale. Unresolved includes uncertain consequences and an unconfirmed connection to this incident, as specified in each event. Their reviews are complete, with no numeric score invented. Open Severity to read the criteria, or an event to inspect its rationale.</p><h3>The event swarm and the bow tie</h3><p>The name Event swarm is inspired by <a href="https://observablehq.github.io/plot/transforms/dodge" target="_blank" rel="noopener noreferrer">beeswarm plots</a>, which keep individual points visible. This adaptation accommodates source date windows.</p><p>Small vertical offsets separate points at the same severity; those offsets have no analytical meaning. The distant field suggests the much larger activity that cannot be individually resolved here: roughly 17,600 recovered attacker actions in Hugging Face’s account and more than 70,000 distinct messages and files in METR’s account. These source totals can overlap and use different units; they cannot be added or reduced by subtracting the displayed event count. Background stars suggest aggregate density. Their hidden numbers belong to a decorative catalogue, with no incident details, dates or severity attached. <span class="citation-only"><a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">Hugging Face forensic timeline</a> · <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR and Redwood investigation</a></span> Before, During and After group incident roles, independently of date. Choose any of the 27 stages to narrow the field. The bow tie uses the same membership and filters. Structure exposes the ontology, definitions and connected facets. Points retain their identity as they move between views. The motion explains a change of layout, not a path through time or a causal connection. Each focused lifecycle is a single continuous field. Shared event positions stay stable when filters change; interrupted movement resumes from the displayed position and velocity. Responses may happen while activity continues. Reduced-motion preferences are respected.</p><h3>What is missing stays visible</h3><p>Every event includes all 45 fields, including unavailable values. The dataset does not expand published totals into invented individual events, reconstruct inaccessible private logs, or invent optimal interventions. Its ${events.length} events are a working inventory, not a proven absolute maximum. The CAST view adds six analyst proposals alongside six groups of reported changes. Each retains evidence, unknowns and verification needs; none is claimed to be an optimal intervention. Its 16 open questions preserve the earlier investigation register. The investigation connects events to control paths, findings, additional public evidence and specific collection plans. It is a provisional CAST analysis; new evidence can revise it. The original question register stays intact, with new findings and remaining gaps recorded alongside it.</p><h3>Explore the events</h3><p>Select a point, browse the event list, or search for an actor, system or event ID. Drag the field to move in either direction. Scroll to zoom both axes, hold Shift for time alone or Alt for vertical zoom alone; the separate Time and vertical buttons offer the same controls. When the field has keyboard focus, arrow keys pan and + / − zoom. Home fits the matching events. The field remains pinned briefly as you scroll, then gives way to the event list. Navigation never changes a stored event time. Drag either handle on the overview to adjust that end of the date range. Drag its middle to move the whole window, or set the From and To dates. The end date is inclusive and all dates use UTC. The overview groups events by window midpoints as a navigation aid; its heights are not counts of verified events at those times. Keyboard users can reach every filtered event through the list; open an event to inspect all fields and its primary source. Export downloads the complete dataset, including field definitions and source comparisons.</p>${searchGuide()}`);
+    bindQueryExamples();
   }
   function openOntology() {
     openDialog('Incident structure', `<p>${events.length} events organized into 27 stages and six workstreams. The wiki events are included in Unresolved because their relationship to the Hugging Face incident is unconfirmed.</p><div class="ontology-lifecycle">${ontology.lifecycle.map((life) => `<button data-ontology-life="${life.id}"><strong>${escapeHtml(life.label)}</strong><span>${life.count} events</span><small>${escapeHtml(life.definition)}</small></button>`).join('')}</div><p>These are roles within the incident. Response and investigation can overlap ongoing activity; dates remain an independent dimension.</p><h3>Explore a stage</h3><div class="ontology-stages">${visualData.groups.map((group) => `<section><h4>${workstreamSwatch(group)}${escapeHtml(group.label)}</h4>${ontology.stages.filter((stage) => stage.workstream_id === group.key).map((stage) => `<button data-ontology-stage="${stage.id}">${escapeHtml(stage.label)}<small>${stage.count}</small></button>`).join('')}</section>`).join('')}</div><h3>What each event connects</h3><div class="ontology-relations"><span>Actor</span><span>System</span><span>Stage</span><strong>Event</strong><span>Source</span><span>Assessment</span><span>Lifecycle</span></div><p>Every event retains its actor, system context, source, date window, stage and assessment. The connections describe the available evidence; they do not invent causal links.</p><details class="ontology-definitions"><summary>Ontology definitions and provenance</summary><dl>${ontology.entity_types.map((type) => `<dt>${escapeHtml(type.label)}</dt><dd>${escapeHtml(type.definition)}</dd>`).join('')}</dl><table class="framework-table"><tbody>${ontology.relation_types.map((relation) => `<tr><th>${escapeHtml(relation.label)}</th><td>${escapeHtml(relation.domain)} → ${escapeHtml(relation.range)}<br>${escapeHtml(relation.definition)}</td></tr>`).join('')}</tbody></table><p>The local model uses concepts from published cyber-investigation standards to describe entities, relationships and source provenance. It does not claim formal conformance to those standards. Its full definitions and event assignments are included in Export.</p>${ontology.sources.map((source) => `<p><a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(source.name || source.title)}</a></p>`).join('')}</details>`);
     $$('[data-ontology-life]').forEach((button) => button.addEventListener('click', () => { $('#info-dialog').close(); closeStages(); selectLifecycle(button.dataset.ontologyLife); }));
     $$('[data-ontology-stage]').forEach((button) => button.addEventListener('click', () => { $('#info-dialog').close(); selectStage(button.dataset.ontologyStage); }));
   }
-  function openQueryHelp() {
-    const examples = [['Substantial or worse', 'severity>=3'], ['Hugging Face systems', 'system:"Hugging Face"'], ['Agent coordination', 'stage:"Agent coordination"'], ['Reported near-misses', 'severity:0 evidence:reported'], ['OpenAI’s account', 'source:S01'], ['Incident precursors', 'lifecycle:before']];
-    openDialog('Search the incident', `<p>Search freely, or combine a few fields to ask a more precise question.</p><div class="query-examples">${examples.map(([label, value]) => `<button data-query="${escapeHtml(value)}"><span>${label}</span><code>${escapeHtml(value)}</code></button>`).join('')}</div><p>Combine terms with spaces. Put a phrase in quotation marks; add a minus before a term to exclude it.</p><p><code>severity>=3 system:"Hugging Face" -source:S02</code></p><p>Available fields: actor, system, stage, workstream, lifecycle, source, evidence, severity, outcome and id. Severity also accepts <code>preventive</code>, <code>context</code>, and <code>unresolved</code>.</p><p>Dates use <code>date:2026-07-11</code>, <code>before:2026-07-11</code> or <code>after:2026-07-11</code>. Date searches include compatible source windows, so a match does not establish an exact event time.</p><p>The lifecycle, stage and other active filters still apply. Fit reframes the matching events.</p>`);
+  const searchExamples = [['Substantial or worse', 'severity>=3'], ['Hugging Face systems', 'system:"Hugging Face"'], ['Agent coordination', 'stage:"Agent coordination"'], ['Reported near-misses', 'severity:0 evidence:reported'], ['OpenAI’s account', 'source:S01'], ['Incident precursors', 'lifecycle:before']];
+  function searchGuide() { const examples = searchExamples; return `<h3 id="help-search">Search the incident</h3><p>Search freely, or combine a few fields to ask a more precise question.</p><div class="query-examples">${examples.map(([label, value]) => `<button data-query="${escapeHtml(value)}"><span>${label}</span><code>${escapeHtml(value)}</code></button>`).join('')}</div><p>Combine terms with spaces. Put a phrase in quotation marks; add a minus before a term to exclude it.</p><p><code>severity>=3 system:"Hugging Face" -source:S02</code></p><p>Available fields: actor, system, stage, workstream, lifecycle, source, evidence, severity, outcome and id. Severity also accepts <code>preventive</code>, <code>context</code>, and <code>unresolved</code>.</p><p>Dates use <code>date:2026-07-11</code>, <code>before:2026-07-11</code> or <code>after:2026-07-11</code>. Date searches include compatible source windows, so a match does not establish an exact event time.</p><p>The lifecycle, stage and other active filters still apply. Fit reframes the matching events.</p>`; }
+  function bindQueryExamples() {
     $$('[data-query]').forEach((button) => button.addEventListener('click', () => {
       $('#info-dialog').close(); clearTimeout(queryTimer);
       navigate(() => { state.search = button.dataset.query; query = window.HaruspexQuery.compile(state.search); alignAssessmentToSearch(); $('#event-search').value = state.search; }, { fit: true });
     }));
   }
+  function openQueryHelp() { openMethod(); const target = $('#help-search'); if (target) target.scrollIntoView({ block: 'start' }); }
+
   function notify(message) {
     clearTimeout(noticeTimer); $('#notification').textContent = message; $('#notification').hidden = false;
     noticeTimer = setTimeout(() => { $('#notification').hidden = true; }, 2800);
@@ -3434,26 +3530,29 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $$('[data-status]').forEach((button) => button.addEventListener('click', () => navigate(() => { const status = button.dataset.status; if (state.statuses.has(status)) state.statuses.delete(status); else state.statuses.add(status); })));
   let queryTimer;
   $('#event-search').addEventListener('input', (event) => {
-    clearTimeout(queryTimer); const value = event.target.value;
+    clearTimeout(queryTimer); const value = event.target.value; searchDismissed = '';
     queryTimer = setTimeout(() => navigate(() => { state.search = value; query = window.HaruspexQuery.compile(value); alignAssessmentToSearch(); }), 180);
   });
+  $('#event-search').addEventListener('keydown', (event) => { if (event.key === 'Escape' && !$('#search-results').hidden) { event.stopPropagation(); searchDismissed = state.search.trim(); $('#search-results').hidden = true; } });
+  document.addEventListener('pointerdown', (event) => { if (!$('#search-results').hidden && !event.target.closest('.scene-heading')) { searchDismissed = state.search.trim(); $('#search-results').hidden = true; } });
   $('#stage-filter').addEventListener('change', (event) => selectStage(event.target.value));
   $('#severity-filter').addEventListener('change', (event) => navigate(() => { state.severity = event.target.value; if (state.severity !== 'all') state.assessment = ['context', 'unresolved'].includes(state.severity) ? state.severity : 'impact'; state.vertical = [0, 1]; }));
-  const legendModal=$('#legend-modal');legendModal.append($('#legend-panel'));
-  legendModal.addEventListener('click',event=>{if(event.target===legendModal)closeLegend(true);});
-  legendModal.addEventListener('close',()=>{$('#legend-panel').hidden=true;$('#legend-toggle').setAttribute('aria-expanded','false');});
+  function refitPlot(){stopMotion();if(state.view==='bowtie'){bowLayoutKey='';renderBowtie();}else if(state.view==='stream')drawTimeline();}
+  function placeDock(){const scene=$('#scene').getBoundingClientRect(),controls=$('.field-controls').getBoundingClientRect(),foot=$('.field-foot').getBoundingClientRect();$('#scene').style.setProperty('--dock-top',`${Math.max(60,Math.round(controls.bottom-scene.top+8))}px`);$('#scene').style.setProperty('--dock-bottom',`${Math.max(40,Math.round(scene.bottom-foot.top+8))}px`);}
+  placeDock();window.addEventListener('resize',placeDock);
   function closeLegend(restoreFocus = false) {
     const panel = $('#legend-panel');
     if (panel.hidden) return;
-    panel.hidden=true;legendModal.close(); $('#legend-toggle').setAttribute('aria-expanded', 'false');
+    panel.hidden=true;$('#scene').classList.remove('legend-open');refitPlot(); $('#legend-toggle').setAttribute('aria-expanded', 'false');
     if (restoreFocus) $('#legend-toggle').focus({ preventScroll: true });
   }
   $('#legend-toggle').addEventListener('click', () => {
     const show = $('#legend-panel').hidden;
-    if (show) { closeStages(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false'); $('#legend-panel').hidden = false;legendModal.showModal();$('#legend-close').focus(); }
+    if (show) { closeStages(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false'); placeDock();$('#legend-panel').hidden = false;$('#scene').classList.add('legend-open');refitPlot();$('#legend-close').focus({ preventScroll: true }); }
     else closeLegend();
     $('#legend-toggle').setAttribute('aria-expanded', String(show));
   });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !$('#legend-panel').hidden && !$('#info-dialog').open && $('#detail-panel').hidden) closeLegend(); });
   $('#legend-close').addEventListener('click', () => closeLegend(true));
   function closeStages() { disappear($('#stage-panel')); $('#stage-toggle').setAttribute('aria-expanded', 'false'); }
   $('#stage-toggle').addEventListener('click', () => { closeLegend(); const show = $('#stage-panel').hidden; if (show) { $('#stage-panel').hidden = false; appear($('#stage-panel')); } else disappear($('#stage-panel')); $('#stage-toggle').setAttribute('aria-expanded', String(show)); if (show) { $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false'); renderStages(); } });

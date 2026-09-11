@@ -26,7 +26,7 @@
     const reduced=matchMedia('(prefers-reduced-motion: reduce)'),inertStates=new Map();
     const TAU=Math.PI*2,TILT=.46,SPIN_MS=48000,POP_MS=1200,MARBLE=520,RIM=96;
     const easeOut=t=>{const v=clamp(t);return 1-Math.pow(1-v,3);};
-    let size,center,radius,glow,grain,backdrop,endpoints=[],marble=[],dustColors=[],ratio=1,warmIndex=0,baseGradient=null,surfaceLayer=null,surfaceBmp=null,glowBmp=null,backdropBmp=null,lastPaint=0;
+    let size,center,radius,glow,grain,backdrop,endpoints=[],marble=[],dustColors=[],ratio=1,warmIndex=0,baseGradient=null,surfaceLayer=null,surfaceBmp=null,glowBmp=null,backdropBmp=null,lastPaint=0,nudgeAt=-1e9;
     const marbleBitmaps=new Map();const bitmap=(source,done)=>{if(window.createImageBitmap)createImageBitmap(source).then(done).catch(()=>{});};
     const warmCanvas=document.createElement('canvas');warmCanvas.width=warmCanvas.height=40;const warmCtx=warmCanvas.getContext('2d');
     let dirty=true,popped=false,popping=null,hover=false,frame=null,sizeKey='',locked=false,rotationAt=performance.now();
@@ -68,6 +68,8 @@
       const gx=Math.max(0,center.x-radius*1.7),gy=Math.max(0,center.y-radius*1.7),gw=Math.min(width,center.x+radius*1.7)-gx,gh=Math.min(height,center.y+radius*1.7)-gy;
       const path=silhouette(angle);
       ctx.save();ctx.globalAlpha=alpha;
+      // The ball breathes once it has waited three seconds, and swells briefly when a wheel gesture asks the page to move.
+      const t=performance.now(),idle=t-rotationAt,n=(t-nudgeAt)/700;let k=1;if(idle>3000)k+=.012*(.5-.5*Math.cos((idle-3000)/1500*Math.PI));if(n>=0&&n<1)k+=.035*Math.sin(n*Math.PI);if(k!==1){ctx.translate(center.x,center.y);ctx.scale(k,k);ctx.translate(-center.x,-center.y);}
       ctx.fillStyle=baseGradient;ctx.fill(path);
       ctx.globalCompositeOperation='source-atop';
       for(const m of marble){const p=project(m.unit,1,angle);if(p.depth<.48)continue;const w=m.r*2*p.s*(1+.4*(p.depth-.5));ctx.globalAlpha=alpha*m.alpha*lift*(.45+.55*p.light);ctx.drawImage(marbleBitmaps.get(m.color)||marbleSprite(m.color),p.x-w/2,p.y-w/2,w,w);}
@@ -122,6 +124,7 @@
     function enter({behavior='smooth'}={}){window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});if(!popped)pop({instant:isReading()});}
     function show({behavior='smooth'}={}){reform();window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});}
     button.addEventListener('click',()=>pop());
+    scene.addEventListener('wheel',()=>{if(!popped&&!popping){nudgeAt=performance.now();start();}},{passive:true});
     button.addEventListener('pointerenter',()=>{hover=true;});button.addEventListener('pointerleave',()=>{hover=false;});
     reduced.addEventListener('change',()=>{dirty=true;});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else start();});
