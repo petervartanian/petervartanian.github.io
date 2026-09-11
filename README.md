@@ -19,3 +19,5 @@ The homepage has an interactive SVG mobile with varied coloured shapes and a sus
 `/portfolio/` retains all published writing. `/writing/` is an alias. The old placeholder collection at `/artifacts/` redirects to `/portfolio/`.
 
 The build updates only the personal pages. Other applications in the repository are neither modified nor linked from the personal site.
+
+Shared links use four 1200 × 630 preview images with backgrounds matching their pages. The preview artwork can be regenerated with `scripts/preview_cards.py` (Pillow) and `scripts/render_preview_cards.cjs` (Sharp); these optional tools are not needed to build the site. Approved PNGs live in `assets/img/social-*.png`.

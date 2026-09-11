@@ -23,6 +23,9 @@ def page(key, title, description, body, path):
     nav = '\n'.join(nav_parts)
     name_tag = 'h1' if key == 'home' and path == '/' else 'div'
     name = 'Peter <span class="name-anchor">H.</span> Vartanian' if key == 'home' else 'Peter H. Vartanian'
+    image_version = sha256((ROOT / f'assets/img/social-{key}.png').read_bytes()).hexdigest()[:12]
+    image_url = f'https://petervartanian.xyz/assets/img/social-{key}.png?v={image_version}'
+    image_alt = f'Peter H. Vartanian — {title}, with a composition of colored mobile shapes'
     html = f'''<!doctype html>
 <html lang="en">
 <head>
@@ -36,8 +39,16 @@ def page(key, title, description, body, path):
   <meta property="og:description" content="{e(description)}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://petervartanian.xyz{path}">
-  <meta property="og:image" content="https://petervartanian.xyz/assets/img/social-{key}.png">
+  <meta property="og:image" content="{image_url}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="{e(image_alt)}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{e(title)} — Peter H. Vartanian">
+  <meta name="twitter:description" content="{e(description)}">
+  <meta name="twitter:image" content="{image_url}">
+  <meta name="twitter:image:alt" content="{e(image_alt)}">
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="alternate" type="application/atom+xml" title="Writing" href="/feed.xml">
   <link rel="manifest" href="/site.webmanifest">
