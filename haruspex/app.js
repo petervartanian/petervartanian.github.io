@@ -565,6 +565,10 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if(state.view==='stream')$('#date-tail-label').textContent='Unknown start → by date';
     timeline.dataset.openTails = String(tailSegments.length);
   }
+  function syncRangeInputs() {
+    $('#range-start').value = new Date(state.range[0]).toISOString().slice(0, 10);
+    $('#range-end').value = new Date(state.range[1] - 1).toISOString().slice(0, 10);
+  }
   function drawOverview(displayRange = state.range, reuseBins = false) {
     overviewRange = [...displayRange];
     const { width, height } = fitCanvas(overview, octx);
@@ -1095,8 +1099,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#active-filter').hidden = !extras.length; $('#active-filter').textContent = `${extras.join(' · ')} ×`;
     const filterCount = Number(state.stage !== 'all') + Number(state.workstream !== 'all') + Number(state.severity !== 'all') + Number(state.interventions) + Number(state.temporal !== 'all') + (4 - state.statuses.size);
     $('#filter-indicator').textContent = filterCount || '';
-    $('#range-start').value = new Date(state.range[0]).toISOString().slice(0, 10);
-    $('#range-end').value = new Date(state.range[1] - 1).toISOString().slice(0, 10);
+    syncRangeInputs();
     $('#query-feedback').hidden = !query.error;
     $('#query-feedback').textContent = query.error || '';
     $('#event-search').setAttribute('aria-invalid', String(!!query.error));
@@ -1387,7 +1390,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
         const dv = -dy / Math.max(1, plotSize.bottom - plotSize.top) * (drag.vertical[1] - drag.vertical[0]);
         if (!event.altKey) state.range = boundedRange(drag.range[0] + dt, drag.range[1] + dt);
         if (!event.shiftKey) state.vertical = boundedVertical(drag.vertical[0] + dv, drag.vertical[1] + dv);
-        queueCamera(); $('#plot-tooltip').hidden = true; showStar(null);
+        syncRangeInputs(); queueCamera(); $('#plot-tooltip').hidden = true; showStar(null);
       }
       return;
     }
@@ -1428,6 +1431,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const centerY = Math.max(0, Math.min(1, (y - plotSize.top) / (plotSize.bottom - plotSize.top)));
     const delta = event.deltaY * (event.deltaMode === 1 ? 16 : 1);
     zoom(Math.exp(Math.max(-.45, Math.min(.45, delta * .002))), event.shiftKey ? 'x' : event.altKey ? 'y' : 'both', centerX, centerY, false);
+    syncRangeInputs();
   }, { passive: false });
   timeline.addEventListener('keydown', (event) => {
     if (['+', '=', '-'].includes(event.key)) { event.preventDefault(); zoom(event.key === '-' ? 1.5 : .67, event.altKey ? 'y' : 'both'); return; }
@@ -1471,7 +1475,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if (brushDrag.mode === 'pan') {
       const delta = time - brushDrag.time; state.range = boundedRange(brushDrag.range[0] + delta, brushDrag.range[1] + delta);
     } else setEndpoint(brushDrag.mode, time);
-    queueCamera();
+    syncRangeInputs(); queueCamera();
   });
   function finishBrush(event) { if (brush.hasPointerCapture(event.pointerId)) brush.releasePointerCapture(event.pointerId); brushDrag = null; finishCamera(); }
   brush.addEventListener('pointerup', finishBrush); brush.addEventListener('pointercancel', finishBrush);

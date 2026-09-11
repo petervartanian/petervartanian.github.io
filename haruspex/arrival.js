@@ -114,12 +114,16 @@
       if(popped)return;
       if(isReading()){pop({instant:true});return;}
       host.hidden=false;
-      if(!popping){scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);}
+      if(!popping){scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);const b=bounds();if(scrollY>b.top+1)window.scrollTo({top:b.top,behavior:'instant'});}
       start();
     }
     function enter({behavior='smooth'}={}){window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});if(!popped)pop({instant:isReading()});}
     function show({behavior='smooth'}={}){reform();window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});}
     button.addEventListener('click',()=>pop());
+    // Nothing scrolls past the ball until it is popped: downward wheel and key attempts at its top are refused; anything else snaps back in sync().
+    const gated=()=>!popped&&!popping&&scrollY>=bounds().top-1;
+    window.addEventListener('wheel',(e)=>{if(e.deltaY>0&&gated())e.preventDefault();},{passive:false});
+    window.addEventListener('keydown',(e)=>{if(!gated()||document.activeElement===button||['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(['PageDown','ArrowDown','End',' '].includes(e.key))e.preventDefault();});
     button.addEventListener('pointerenter',()=>{hover=true;});button.addEventListener('pointerleave',()=>{hover=false;});
     reduced.addEventListener('change',()=>{dirty=true;});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else start();});
