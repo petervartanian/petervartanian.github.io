@@ -4,6 +4,10 @@
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 16px;
   color-scheme: light;
+  --mark-size: 40px;
+  --mark-column: 75px;
+  --mark-gap: 12px;
+  --mark-text-inset: 90px;
   --paper: #faf8f7;
   --ink: #3f3544;
   --link: #755276;
@@ -81,10 +85,10 @@ button { font-family: inherit; font-size: 12px; color: var(--link); background: 
 .experience-list { list-style: disc; padding-left: 19px; }
 .experience-list li { margin-bottom: 20px; padding: 0; }
 .organization { line-height: 1.5; font-size: 15px; }
-.institution-entry { display: grid; grid-template-columns: 75px minmax(0, 1fr); column-gap: 12px; align-items: center; }
-.institution-logo-slot { display: flex; align-items: center; justify-content: center; min-height: 23px; }
-.institution-logo { display: block; width: 40px; height: auto; max-width: 100%; object-fit: contain; object-position: center; }
-.institution-name { min-width: 0; padding: 0 3px; }
+.institution-entry, .contact-label { display: grid; grid-template-columns: var(--mark-column) minmax(0, 1fr); column-gap: var(--mark-gap); align-items: center; }
+.institution-logo-slot, .contact-icon-slot { display: flex; align-items: center; justify-content: center; min-height: 23px; }
+.institution-logo { display: block; width: var(--mark-size); height: auto; max-width: 100%; object-fit: contain; object-position: center; }
+.institution-name, .contact-name { min-width: 0; padding: 0 3px; }
 .institution-text { box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .primary-contribution:has(.institution-entry) { display: block; padding: 0; background: none; }
 .primary-contribution .institution-name { justify-self: start; }
@@ -119,10 +123,9 @@ sup a { padding: 4px 0; }
 .experience-award-row th { padding-top: 0; }
 .experience-award-row td { padding-top: 1px; }
 .date-part { display: inline-block; white-space: nowrap; }
-.contact-table th { width: 160px; }
-.contact-label { display: flex; align-items: center; gap: 9px; }
-.contact-icon { display: block; width: 19px; height: 19px; flex: 0 0 19px; object-fit: contain; }
-.contact-table td { text-align: right; overflow-wrap: anywhere; }
+.contact-table th { width: 240px; }
+.contact-icon { display: block; width: var(--mark-size); height: var(--mark-size); object-fit: contain; }
+.contact-table td { text-align: right; vertical-align: middle; overflow-wrap: anywhere; }
 .contact-list { margin: 29px 0; font-size: 15px; }
 .contact-list div { display: grid; grid-template-columns: 55px 1fr; gap: 15px; margin: 15px 0; line-height: 1.6; }
 .contact-list dt { color: var(--quiet); }
@@ -186,8 +189,9 @@ a.note-badge:hover, .note-ref:hover { background: var(--link); color: var(--pape
   header { padding-top: 43px; }
   .site-name { font-size: 31px; }
   header nav { margin-top: 20px; gap: 0; font-size: 13px; }
-  .contact-table th { width: 122px; padding-right: 8px; }
-  .contact-label { gap: 7px; }
+  .contact-table tr { display: block; margin-bottom: 16px; }
+  .contact-table.contact-table th { display: block; width: auto; padding: 0; }
+  .contact-table.contact-table td { display: block; padding: 4px 0 0 var(--mark-text-inset); text-align: left; }
   main { margin-top: 40px; }
   p { font-size: 15px; line-height: 1.75; }
   footer { margin-top: 44px; }
@@ -211,8 +215,6 @@ header nav a::after, .download-button::after { min-width: 44px; min-height: 44px
   .download-button { padding: 8px; font-size: 11px; }
   .experience-table th { padding-right: 12px; }
   .experience-table td { width: 94px; padding-left: 10px; }
-  .contact-table th { width: 116px; }
-  .contact-table td { padding-left: 8px; }
 }
 @media print {
   body[data-page=home] .page { display: block; min-height: 0; }

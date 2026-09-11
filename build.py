@@ -269,7 +269,7 @@ socials.sort(key=lambda item: social_order.index(item[0]))
 profile_values = {'LinkedIn': '@petervartanian', 'Substack': '@petersmemos', 'GitHub': '@petervartanian', 'Hugging Face': '@petervartanian', 'X': '@petersmemos', 'Google Scholar': 'DuD0EXEAAAAJ', 'ORCID': '0009-0009-8538-5811'}
 def contact_label(label):
     icon = {'Email': 'email', 'Text': 'phone'}.get(label, label.lower().replace(' ', '-'))
-    return f'<span class="contact-label"><img src="/assets/icons/{icon}.svg" class="contact-icon" width="19" height="19" alt="" aria-hidden="true"><span>{e(label)}</span></span>'
+    return f'<span class="contact-label"><span class="contact-icon-slot"><img src="/assets/icons/{icon}.svg" class="contact-icon" width="40" height="40" alt="" aria-hidden="true"></span><span class="contact-name">{e(label)}</span></span>'
 
 
 contact = f'''<h1>Contact</h1>
