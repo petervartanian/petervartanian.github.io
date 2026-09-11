@@ -62,15 +62,11 @@ Bachelor of Arts with Honors
 - Major #1: Stuart Chevalier Program in Diplomacy + World Affairs (DWA)
 - Major #2: Comparative Studies in Literature + Culture (CSLC)
 
-#### Academic record
-
-Standing
+#### Distinctions
 
 - GPA: 3.97/4.00
 - *Summa cum Laude*
 - ΦBK (elected as a junior) Oct. 2024
-
-Recognition
 
 - DWA Award for Exemplary Achievement in Academic and Co-curricular Activities May 2025
 - DWA Prize for Best Thesis Overall May 2025
@@ -86,13 +82,9 @@ Special Student
 
 - Field of study: Social Science (SS)
 
-#### Academic record
-
-Standing
+#### Distinctions
 
 - GPA: 4.00/4.00
-
-Recognition
 
 - Gordon McClure Memorial Communications Prize in History Jun. 2024
 
