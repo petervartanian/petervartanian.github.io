@@ -86,14 +86,14 @@
     "width": 20
   },
   "un": {
-    "file": "un-trimmed.png",
-    "source": "https://www.un.org/en/img/splash/un-logo.png",
+    "file": "unga-gold.png",
+    "source": "User-supplied UN General Assembly emblem",
     "aliases": [
       "Office of the Chair of the First Committee of the UN General Assembly",
       "UN"
     ],
-    "width": 24,
-    "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved."
+    "width": 23,
+    "note": "Gold emblem trimmed to visible artwork; white background made transparent and natural proportions preserved."
   },
   "bis": {
     "file": "bis.png",
