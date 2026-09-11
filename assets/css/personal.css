@@ -79,7 +79,7 @@ button { font-family: inherit; font-size: 12px; color: var(--link); background: 
 .experience-list { list-style: disc; padding-left: 19px; }
 .experience-list li { margin-bottom: 20px; padding: 0; }
 .organization { line-height: 1.5; font-size: 15px; }
-.institution-entry { display: grid; grid-template-columns: 75px minmax(0, 1fr); column-gap: 12px; align-items: start; }
+.institution-entry { display: grid; grid-template-columns: 75px minmax(0, 1fr); column-gap: 12px; align-items: center; }
 .institution-logo-slot { display: flex; align-items: center; min-height: 23px; }
 .institution-logo { display: block; height: auto; max-height: 20px; max-width: 100%; object-fit: contain; object-position: left center; }
 .institution-name { min-width: 0; padding: 0 3px; }
