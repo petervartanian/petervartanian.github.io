@@ -1370,12 +1370,6 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   }
   function hitTest(x, y, radius = 14) {
     const hits = points.map((point) => ({ ...point, distance: Math.hypot(point.x - x, point.y - y) })).filter((point) => point.distance < radius);
-    const ids = new Set(hits.map((point) => point.event.id));
-    for (const tail of tailSegments) {
-      if (!ids.has(tail.event.id) && x >= tail.startX && x <= tail.endX && Math.abs(y - tailY(tail, x)) < 5) {
-        hits.push({ ...tail, x, distance: Math.abs(y - tailY(tail, x)) + 5 });
-      }
-    }
     return hits.sort((a, b) => a.distance - b.distance);
   }
   function pointerCoordinates(event) { const rect = timeline.getBoundingClientRect(); return { x: event.clientX - rect.left, y: event.clientY - rect.top }; }
@@ -1552,7 +1546,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#hidden-egg').setAttribute('aria-pressed', String(starsUnlocked));
     $('#hidden-egg span').textContent = starsUnlocked ? '🐣' : '🥚';
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
-    if (!starsUnlocked) { showStar(null);$('#egg-message').hidden=true;$('.field-readout').classList.remove('egg-revealed');return; }
+    if (!starsUnlocked) { showStar(null);const message=$('#egg-message');const done=()=>{message.hidden=true;$('.field-readout').classList.remove('egg-revealed');};if(reducedMotion.matches||message.hidden)done();else{const fade=message.animate([{opacity:1},{opacity:0}],{duration:240,easing:'ease-in'});fade.onfinish=done;fade.oncancel=done;}return; }
     if(state.view==='cast')changeView('stream');
     const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found the stars:</strong> over 70,000 messages and files beyond these ${events.length} events, encoded as 1.2 million entries in a cache of 20 million. But without fuller disclosure from OpenAI, Hugging Face and METR/Redwood, the rest stays dark.</span>`;message.hidden=false;fitEggMessage(message);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
 

@@ -88,7 +88,9 @@
       for(const g of endpoints){const t=easeOut((progress-g.delay)/(1-g.delay)),o=g.origin,bend=Math.sin(t*Math.PI)*g.bend,x=mix(o.x,g.x,t)+bend,y=mix(o.y,g.y,t)-bend*.42;paintPoint(ctx,{...g,radius:mix(o.r,g.radius,t)},x,y,Math.max(shatter,t)*(.85+.15*t));}
       canvas.dataset.progress=progress.toFixed(3);
     }
-    function settle(){popped=true;popping=null;host.hidden=true;scene.dataset.gateway='events';scene.style.setProperty('--gateway-reveal','1');lock(false);stop();}
+    // Until the ball is popped the page ends at it: the sections below are not rendered, so nothing can scroll past, with no scroll listeners at all.
+    function gate(on){for(const el of [document.getElementById('event-list'),document.querySelector('footer')]){if(el&&el.hidden!==on)el.hidden=on;}}
+    function settle(){popped=true;popping=null;host.hidden=true;scene.dataset.gateway='events';scene.style.setProperty('--gateway-reveal','1');lock(false);gate(false);stop();}
     function pop({instant=false}={}){
       if(popped||popping)return;
       if(dirty)prepare();
@@ -109,21 +111,17 @@
     }
     function start(){if(frame===null&&!popped)frame=requestAnimationFrame(tick);}
     function stop(){if(frame!==null){cancelAnimationFrame(frame);frame=null;}}
-    function reform(){popped=false;popping=null;dirty=true;host.hidden=false;button.disabled=false;scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);rotationAt=performance.now();start();}
+    function reform(){popped=false;popping=null;dirty=true;host.hidden=false;button.disabled=false;scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);gate(true);rotationAt=performance.now();start();}
     function sync(){
       if(popped)return;
       if(isReading()){pop({instant:true});return;}
       host.hidden=false;
-      if(!popping){scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);const b=bounds();if(scrollY>b.top+1)window.scrollTo({top:b.top,behavior:'instant'});}
+      if(!popping){scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);gate(true);}
       start();
     }
     function enter({behavior='smooth'}={}){window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});if(!popped)pop({instant:isReading()});}
     function show({behavior='smooth'}={}){reform();window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});}
     button.addEventListener('click',()=>pop());
-    // Nothing scrolls past the ball until it is popped: downward wheel and key attempts at its top are refused; anything else snaps back in sync().
-    const gated=()=>!popped&&!popping&&scrollY>=bounds().top-1;
-    window.addEventListener('wheel',(e)=>{if(e.deltaY>0&&gated())e.preventDefault();},{passive:false});
-    window.addEventListener('keydown',(e)=>{if(!gated()||document.activeElement===button||['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(['PageDown','ArrowDown','End',' '].includes(e.key))e.preventDefault();});
     button.addEventListener('pointerenter',()=>{hover=true;});button.addEventListener('pointerleave',()=>{hover=false;});
     reduced.addEventListener('change',()=>{dirty=true;});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else start();});
