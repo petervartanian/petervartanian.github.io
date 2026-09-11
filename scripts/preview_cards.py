@@ -9,7 +9,7 @@ parts=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assi
 scales=next(ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='piece_scales' for t in n.targets))
 fontpath=str(root/'assets/fonts/SortsMillGoudy-Regular.ttf')
 S=2
-palettes={'home':('#faf8f7','#3f3544','#755276'),'writing':('#faf5f3','#483639','#884d5a'),'cv':('#f4f7fa','#303d4e','#46698a'),'contact':('#f8f4f9','#473b50','#785987')}
+palettes={'home':('#ffffff','#3f3544','#755276'),'writing':('#efeafa','#483639','#884d5a'),'cv':('#fff0df','#303d4e','#46698a'),'contact':('#eaf5ef','#473b50','#785987')}
 
 def smallcaps(draw,text,pos,size,fill):
  x,y=pos

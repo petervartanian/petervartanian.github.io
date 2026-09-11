@@ -10,7 +10,7 @@ from institution_logos import add_institution_logos
 ROOT = Path(__file__).parent
 DATA = json.loads((ROOT / 'content/site.json').read_text())
 NAV = [('home', 'Home', '/'), ('writing', 'Writing', '/portfolio/'), ('cv', 'CV', '/cv/'), ('contact', 'Contact', '/contact/')]
-COLORS = {'home': '#faf8f7', 'writing': '#faf5f3', 'cv': '#f4f7fa', 'contact': '#f8f4f9'}
+COLORS = {'home': '#ffffff', 'writing': '#efeafa', 'cv': '#fff0df', 'contact': '#eaf5ef'}
 CSS_VERSION = sha256((ROOT / 'assets/css/personal.css').read_bytes()).hexdigest()[:12]
 JS_VERSION = sha256((ROOT / 'assets/js/personal.js').read_bytes()).hexdigest()[:12]
 

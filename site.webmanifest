@@ -4,8 +4,8 @@
   "description": "Research and writing by Peter H. Vartanian.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#faf8f7",
-  "theme_color": "#faf8f7",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
   "orientation": "portrait-primary",
   "categories": [
     "education",
