@@ -9,6 +9,18 @@ ALIASES = {escape(name): key for key, logo in LOGOS.items() for name in logo['al
 NAMES = re.compile(r'(?<!\w)(?:' + '|'.join(re.escape(name) for name in sorted(ALIASES, key=len, reverse=True)) + r')(?!\w)')
 
 
+PHRASE_BREAKS = {
+    'hoover': [' at Stanford University'],
+    'un': [' of the UN General Assembly'],
+    'mckinnon': [' &amp; John Parke Young Initiative', ' on the Global Political Economy'],
+    'pon': [' at Harvard Law School'],
+    'verum': [' The Occidental College Law Review'],
+    'uepi': [' at Occidental College'],
+    'bis': [' at the U.S. Department of Commerce'],
+    'state': [' to International Organizations', ' in Vienna'],
+}
+
+
 def add_institution_logos(markup):
     def decorate(match, number=None):
         name = match[0]
@@ -16,6 +28,10 @@ def add_institution_logos(markup):
         logo = LOGOS[key]
         if number is not None:
             name = f'({number}) {name}'
+        boundaries = PHRASE_BREAKS.get(key, [])
+        if boundaries:
+            phrases = re.split('(?=' + '|'.join(re.escape(part) for part in boundaries) + ')', name)
+            name = ' '.join(f'<span class="institution-phrase">{phrase.strip()}</span>' for phrase in phrases if phrase.strip())
         image = f'<img class="institution-logo logo-{key}" src="/assets/logos/{logo["file"]}" width="{logo["width"]}" height="{logo["height"]}" alt="" aria-hidden="true" decoding="async">'
         return f'<span class="institution-entry"><span class="institution-logo-slot">{image}</span><span class="institution-name"><span class="institution-text">{name}</span></span></span>'
 
