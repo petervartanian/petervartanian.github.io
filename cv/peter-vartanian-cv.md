@@ -58,17 +58,31 @@ Aug. 2021 – May 2025
 
 Bachelor of Arts with Honors
 
-Stuart Chevalier Program in Diplomacy + World Affairs (DWA) · Comparative Studies in Literature + Culture (CSLC)
+Stuart Chevalier Program in Diplomacy + World Affairs (DWA)
 
-3.97/4.00 · *Summa cum Laude* · ΦBK
+Comparative Studies in Literature + Culture (CSLC)
+
+**Honors**
+
+GPA: 3.97/4.00
+
+*Summa cum Laude*
+
+ΦBK
 
 ### California Institute of Technology
 
 Aug. 2021 – May 2025
 
-Special Student · Social Sciences
+Interdisciplinary Studies Program (ISP)
 
-4.00/4.00
+Undergraduate coursework in Social Sciences
+
+Special Student (SS)
+
+Graduate coursework in Social Sciences
+
+GPA: 4.00/4.00
 
 ## III. **Languages**
 
@@ -98,9 +112,9 @@ My proficiencies follow the [ILR’s 0–5 scale](https://www.govtilr.org/Skills
 - Classical Latin
 - Classical Nahuatl
 
-## IV. **Honors**
+## IV. **Awards**
 
-| Honor | Date |
+| Award | Date |
 | --- | --- |
 | Director’s Award from Fmr. SecState Condoleezza Rice | Feb. 2026 |
 | DWA Award for Exemplary Achievement in Academic and Co-curricular Activities | May 2025 |

@@ -83,7 +83,7 @@ check('download="peter-vartanian-cv.md"' in (ROOT/'cv/index.html').read_text(), 
 for entry in data['cv']['experience']:
     org = re.sub(r'[*/]+$', '', entry['organization'])
     check(org in markdown and entry['dates'] in markdown, f'Markdown CV omits {org}')
-for label in ['Experience', 'Education', 'Languages', 'Honors', 'Skills & methods']:
+for label in ['Experience', 'Education', 'Languages', 'Awards', 'Skills & methods']:
     check(label in markdown, f'Markdown CV omits section {label}')
 for marker in ['i', 'ii', 'iii', 'iv']:
     check(f'[^{marker}]:' in markdown, f'Markdown CV omits note {marker}')

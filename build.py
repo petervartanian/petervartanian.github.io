@@ -200,8 +200,19 @@ cv_sections = ''
 for section in cv['sections']:
     if section['label'] == 'Education':
         label, anchor = 'Education', 'education'
-        content = '''<div class="education-item"><h3>Occidental College</h3><p class="dates"><span class="date-part">Aug. 2021 –</span> <span class="date-part">May 2025</span></p><p>Bachelor of Arts with Honors</p><p>Stuart Chevalier Program in Diplomacy + World Affairs (DWA)<br>Comparative Studies in Literature + Culture (CSLC)</p><p>3.97/4.00 · <em>Summa cum Laude</em> · ΦBK</p></div>
-<div class="education-item"><h3>California Institute of Technology</h3><p class="dates"><span class="date-part">Aug. 2021 –</span> <span class="date-part">May 2025</span></p><p>Special Student · Social Sciences</p><p>4.00/4.00</p></div>'''
+        content = '''<div class="education-item"><h3>Occidental College</h3>
+<p class="dates"><span class="date-part">Aug. 2021 –</span> <span class="date-part">May 2025</span></p>
+<div class="education-group"><p>Bachelor of Arts with Honors</p>
+<div class="education-details"><p>Stuart Chevalier Program in Diplomacy + World Affairs (DWA)</p><p>Comparative Studies in Literature + Culture (CSLC)</p></div></div>
+<div class="education-group"><p><strong>Honors</strong></p>
+<div class="education-details"><p>GPA: 3.97/4.00</p><p><em>Summa cum Laude</em></p><p>ΦBK</p></div></div></div>
+<div class="education-item"><h3>California Institute of Technology</h3>
+<p class="dates"><span class="date-part">Aug. 2021 –</span> <span class="date-part">May 2025</span></p>
+<div class="education-group"><p>Interdisciplinary Studies Program (ISP)</p>
+<div class="education-details"><p>Undergraduate coursework in Social Sciences</p></div></div>
+<div class="education-group"><p>Special Student (SS)</p>
+<div class="education-details"><p>Graduate coursework in Social Sciences</p></div></div>
+<p>GPA: 4.00/4.00</p></div>'''
     elif section['label'].startswith('Languages'):
         label, anchor = 'Languages', 'languages'
         content = '<section class="cv-subsection"><h3><span class="subsection-number">A.</span> Modern languages</h3><p class="quiet">My proficiencies follow the <a href="https://www.govtilr.org/Skills/ILRscale2.htm">ILR’s 0–5 scale</a> (with + marking intermediate levels).</p><table class="cv-table language-table" aria-label="Modern languages and ILR proficiency"><tbody>'
@@ -211,9 +222,9 @@ for section in cv['sections']:
             name = 'Arabic (Fuṣḥā and Lebanese)' if item['name'] == 'Fuṣḥā' else item['name']
             content += f'<tr><th scope="row">{e(name)}</th><td>{e(item["level"])}</td></tr>'
         content += '</tbody></table></section><section class="cv-subsection"><h3><span class="subsection-number">B.</span> Philological training</h3><table class="cv-table" aria-label="Philological training"><tbody><tr><td>Ancient Greek</td></tr><tr><td>Classical Latin</td></tr><tr><td>Classical Nahuatl</td></tr></tbody></table></section>'
-    elif section['label'] == 'Honors':
-        label, anchor = 'Honors', 'honors'
-        content = '<table class="cv-table honors-table" aria-label="Honors and award dates"><tbody>'
+    elif section['label'] == 'Awards':
+        label, anchor = 'Awards', 'awards'
+        content = '<span id="honors" aria-hidden="true"></span><table class="cv-table awards-table" aria-label="Awards and dates"><tbody>'
         for item in section['items']:
             award, date = re.fullmatch(r'(.+) ([A-Z][a-z]+\.? \d{4})', item).groups()
             content += f'<tr><th scope="row">{cv_text(award)} </th><td>{e(date)}</td></tr>'
@@ -222,7 +233,7 @@ for section in cv['sections']:
         label = section['label']
         anchor = re.sub(r'[^a-z]+', '-', label.lower()).strip('-')
         content = f'<table class="cv-table" aria-label="{e(label)}"><tbody>' + ''.join('<tr><td>'+cv_text(item)+'</td></tr>' for item in section['items']) + '</tbody></table>'
-    major = {'Education': 'II', 'Languages': 'III', 'Honors': 'IV'}
+    major = {'Education': 'II', 'Languages': 'III', 'Awards': 'IV'}
     minor = {'Programming': 'A', 'Tools + platforms': 'B', 'AI / Security': 'C', 'Methods': 'D'}
     if label == 'Programming':
         cv_sections += '<section class="cv-section" id="skills"><h2><span class="section-number">V.</span> <strong class="section-text">Skills &amp; methods</strong></h2>'

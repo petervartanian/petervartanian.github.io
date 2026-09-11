@@ -19,7 +19,7 @@ def export_cv(html):
                 for row in re.findall(r'<tr>(.*?)</tr>', body, re.S)]
         if len(rows[0]) == 1:
             return '\n\n' + '\n'.join('- ' + row[0] for row in rows) + '\n\n'
-        headers = ['Organization', 'Dates'] if 'experience-table' in attrs else ['Language', 'ILR proficiency'] if 'language-table' in attrs else ['Honor', 'Date']
+        headers = ['Organization', 'Dates'] if 'experience-table' in attrs else ['Language', 'ILR proficiency'] if 'language-table' in attrs else ['Award', 'Date']
         lines = [headers, ['---', '---']] + rows
         return '\n\n' + '\n'.join('| ' + ' | '.join(row) + ' |' for row in lines) + '\n\n'
 
