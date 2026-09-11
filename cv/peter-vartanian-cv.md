@@ -34,7 +34,7 @@ https://petervartanian.xyz/cv/
 | Austrian Service Abroad | May 2023 – Aug. 2023 |
 | U.S. Mission to International Organizations in Vienna | Sep. 2022 – May 2023 |
 | Occidental Consulting Group | Sep. 2022 – May 2023 |
-| Wolf Theiss | Dec. 2021 – Jan. 2022; Dec. 2022 – Jan. 2023 |
+| Wolf Theiss | (1) Dec. 2021 – Jan. 2022; (2) Dec. 2022 – Jan. 2023 |
 | European Forum Alpbach | May 2022 – Aug. 2022 |
 | The Occidental Newspaper | Sep. 2021 – May 2022 |
 

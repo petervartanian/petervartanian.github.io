@@ -32,7 +32,7 @@ def add_institution_logos(markup):
         if boundaries:
             phrases = re.split('(?=' + '|'.join(re.escape(part) for part in boundaries) + ')', name)
             name = ' '.join(f'<span class="institution-phrase">{phrase.strip()}</span>' for phrase in phrases if phrase.strip())
-        image = f'<img class="institution-logo logo-{key}" src="/assets/logos/{logo["file"]}" width="{logo["width"]}" height="{logo["height"]}" alt="" aria-hidden="true" decoding="async">'
+        image = f'<img class="institution-logo logo-{key}" src="/assets/logos/{logo["file"]}" width="{logo["width"]}" height="{logo["height"]}" style="--logo-width: {logo["width"]}px" alt="" aria-hidden="true" decoding="async">'
         return f'<span class="institution-entry"><span class="institution-logo-slot">{image}</span><span class="institution-name"><span class="institution-text">{name}</span></span></span>'
 
     parts = re.split(r'(<[^>]+>)', markup)

@@ -38,9 +38,9 @@
     "aliases": [
       "Arcola AI"
     ],
-    "width": 19,
+    "width": 42,
     "source_page": "https://uk.linkedin.com/company/arcola-ai",
-    "height": 6
+    "height": 12
   },
   "aire": {
     "file": "ai-risk-explorer-trimmed.png",
@@ -141,9 +141,9 @@
     "aliases": [
       "European Forum Alpbach"
     ],
-    "width": 19,
+    "width": 36,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 5
+    "height": 10
   },
   "newspaper": {
     "file": "newspaper-trimmed.png",
@@ -162,8 +162,8 @@
     "aliases": [
       "Human Rights Cities Alliance"
     ],
-    "width": 19,
-    "height": 10
+    "width": 38,
+    "height": 19
   },
   "nti": {
     "file": "nti-globe-transparent.png",
@@ -187,14 +187,14 @@
     "height": 9
   },
   "family": {
-    "file": "family-muted.svg",
+    "file": "family-monogram.svg",
     "source": null,
-    "note": "Neutral office symbol with a muted slate tone and fine strokes; not an institutional logo.",
+    "note": "Neutral typographic FO placeholder for an unnamed family office; not an institutional logo.",
     "aliases": [
       "Family Office"
     ],
     "width": 19,
-    "height": 19
+    "height": 16
   },
   "state": {
     "file": "state.png",
@@ -241,8 +241,8 @@
     "aliases": [
       "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy"
     ],
-    "width": 19,
+    "width": 44,
     "note": "White background made transparent and empty margins trimmed; original combined wordmark retained.",
-    "height": 9
+    "height": 21
   }
 }
