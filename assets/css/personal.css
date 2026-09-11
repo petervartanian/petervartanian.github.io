@@ -87,6 +87,8 @@ sup a { padding: 4px; }
 .education-group { margin: 15px 0; }
 .education-details { margin-left: 20px; font-size: 13px; }
 .education-details p { margin: 3px 0; }
+.education-honors { margin: 7px 0 0 20px; padding-left: 16px; list-style: disc; font-size: 13px; line-height: 1.65; }
+.education-honors li { padding-left: 2px; margin: 3px 0; }
 .simple-list { padding-left: 19px; list-style: disc; font-size: 14px; }
 .simple-list li { line-height: 1.7; margin-bottom: 8px; }
 .cv-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin: 15px 0 23px; font-size: 14px; line-height: 1.65; }

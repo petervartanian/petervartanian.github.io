@@ -203,15 +203,13 @@ for section in cv['sections']:
         content = '''<div class="education-item"><h3>Occidental College</h3>
 <p class="dates"><span class="date-part">Aug. 2021 –</span> <span class="date-part">May 2025</span></p>
 <div class="education-group"><p>Bachelor of Arts with Honors</p>
-<div class="education-details"><p>Stuart Chevalier Program in Diplomacy + World Affairs (DWA)</p><p>Comparative Studies in Literature + Culture (CSLC)</p></div></div>
-<div class="education-group"><p><strong>Honors</strong></p>
-<div class="education-details"><p>GPA: 3.97/4.00</p><p><em>Summa cum Laude</em></p><p>ΦBK</p></div></div></div>
+<div class="education-details"><p>Major #1: Stuart Chevalier Program in Diplomacy + World Affairs (DWA)</p><p>Major #2: Comparative Studies in Literature + Culture (CSLC)</p></div></div>
+<div class="education-group"><p>Honors</p>
+<ul class="education-honors"><li>GPA: 3.97/4.00</li><li><em>Summa cum Laude</em></li><li>ΦBK</li></ul></div></div>
 <div class="education-item"><h3>California Institute of Technology</h3>
 <p class="dates"><span class="date-part">Aug. 2021 –</span> <span class="date-part">May 2025</span></p>
-<div class="education-group"><p>Interdisciplinary Studies Program (ISP)</p>
-<div class="education-details"><p>Undergraduate coursework in Social Sciences</p></div></div>
-<div class="education-group"><p>Special Student (SS)</p>
-<div class="education-details"><p>Graduate coursework in Social Sciences</p></div></div>
+<div class="education-group"><p>Special Student</p>
+<div class="education-details"><p>Social Sciences</p></div></div>
 <p>GPA: 4.00/4.00</p></div>'''
     elif section['label'].startswith('Languages'):
         label, anchor = 'Languages', 'languages'

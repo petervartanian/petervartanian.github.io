@@ -27,6 +27,7 @@ def export_cv(html):
     html = html.replace('Shaded entries', 'Bold entries')
     html = re.sub(r'<p class="experience-note"[^>]*><span class="note-badge">(.*?)</span><span>(.*?)</span></p>',
                   lambda m: '\n\n[^' + m[1] + ']: ' + inline(m[2]) + '\n\n', html, flags=re.S)
+    html = re.sub(r'<ul[^>]*>(.*?)</ul>', lambda m: '\n\n' + '\n'.join('- ' + inline(item) for item in re.findall(r'<li[^>]*>(.*?)</li>', m[1], re.S)) + '\n\n', html, flags=re.S)
     html = re.sub(r'<table([^>]*)>(.*?)</table>', table, html, flags=re.S)
     html = re.sub(r'<h([123])[^>]*>(.*?)</h\1>', lambda m: '\n\n' + '#' * int(m[1]) + ' ' + inline(m[2]) + '\n\n', html, flags=re.S)
     html = re.sub(r'<p[^>]*>(.*?)</p>', lambda m: '\n\n' + inline(m[1]) + '\n\n', html, flags=re.S)

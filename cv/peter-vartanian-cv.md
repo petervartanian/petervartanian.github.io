@@ -58,29 +58,23 @@ Aug. 2021 – May 2025
 
 Bachelor of Arts with Honors
 
-Stuart Chevalier Program in Diplomacy + World Affairs (DWA)
+Major #1: Stuart Chevalier Program in Diplomacy + World Affairs (DWA)
 
-Comparative Studies in Literature + Culture (CSLC)
+Major #2: Comparative Studies in Literature + Culture (CSLC)
 
-**Honors**
+Honors
 
-GPA: 3.97/4.00
-
-*Summa cum Laude*
-
-ΦBK
+- GPA: 3.97/4.00
+- *Summa cum Laude*
+- ΦBK
 
 ### California Institute of Technology
 
 Aug. 2021 – May 2025
 
-Interdisciplinary Studies Program (ISP)
+Special Student
 
-Undergraduate coursework in Social Sciences
-
-Special Student (SS)
-
-Graduate coursework in Social Sciences
+Social Sciences
 
 GPA: 4.00/4.00
 
