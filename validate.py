@@ -62,7 +62,7 @@ for work in data['writings']:
     clean=re.sub(r'[†‡§]','',work['credit']).strip()
     check(all(part.strip() in archive for part in clean.split(' · ')),f'Missing authorship or date: {work["title"]}')
 cv=''.join(pages['cv/index.html'].text)
-check('Curriculum vitæ' in cv, 'CV title must use vitæ')
+check('Curriculum Vitæ' in cv, 'CV title must use vitæ')
 writing_html=(ROOT/'portfolio/index.html').read_text()
 check('<details id="publication-notes"' not in writing_html and 'note-box' not in writing_html and all(f'<p id="publication-note-{i}">' in writing_html for i in [1, 2, 4]), 'Notes must remain visible together without separate boxes')
 check('Peter’s Memos' in archive, 'Missing memo section')

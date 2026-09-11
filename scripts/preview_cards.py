@@ -32,7 +32,7 @@ for key,(paper,ink,accent) in palettes.items():
  name_layer=name_layer.crop(name_layer.getbbox())
  layers=[name_layer]
  if key!='home':
-  label={'writing':'Writing','cv':'Curriculum vitæ','contact':'Contact'}[key]
+  label={'writing':'Writing','cv':'Curriculum Vitæ','contact':'Contact'}[key]
   label_layer=Image.new('RGBA',(1200*S,120*S))
   ImageDraw.Draw(label_layer).text((0,75*S),label,font=ImageFont.truetype(fontpath,44*S),fill=accent,anchor='ls')
   layers.append(label_layer.crop(label_layer.getbbox()))

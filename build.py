@@ -231,7 +231,7 @@ for section in cv['sections']:
     else:
         cv_sections += f'<section class="cv-section" id="{anchor}"><h2><span class="section-number">{major[label]}.</span> <strong class="section-text">{e(label)}</strong></h2>{content}</section>\n'
 cv_sections += '</section>'
-about = f'''<div class="title-line"><h1>Curriculum vitæ</h1><a class="download-button" href="/cv/peter-vartanian-cv.md" download="peter-vartanian-cv.md">Download .MD</a></div>
+about = f'''<div class="title-line"><h1>Curriculum Vitæ</h1><a class="download-button" href="/cv/peter-vartanian-cv.md" download="peter-vartanian-cv.md">Download .MD</a></div>
 <section class="cv-section" id="experience"><h2><span class="section-number">I.</span> <strong class="section-text">Experience</strong></h2>{experience}{experience_notes}</section>
 {cv_sections}'''
 page('cv', 'CV', 'Education, experience, languages, and research methods.', about, '/cv/')

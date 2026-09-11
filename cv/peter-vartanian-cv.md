@@ -1,6 +1,6 @@
 # Peter H. Vartanian
 
-Curriculum vitæ
+Curriculum Vitæ
 
 https://petervartanian.xyz/cv/
 

@@ -33,4 +33,4 @@ def export_cv(html):
     text = inline(html)
     text = re.sub(r'\n[ \t]+', '\n', text)
     text = re.sub(r'\n{3,}', '\n\n', text)
-    return text.replace('# Curriculum vitæ', '# Peter H. Vartanian\n\nCurriculum vitæ\n\nhttps://petervartanian.xyz/cv/', 1).strip() + '\n'
+    return text.replace('# Curriculum Vitæ', '# Peter H. Vartanian\n\nCurriculum Vitæ\n\nhttps://petervartanian.xyz/cv/', 1).strip() + '\n'
