@@ -44,6 +44,68 @@ if (mobile) {
   let nudges = 0;
   const clamp = value => Math.max(-48, Math.min(48, value));
   mobile.setAttribute('role','group');
+  let shake = 0, lastShake = 0, portraitCooldown = 0, portrait = null, returnFocus = null;
+  function putPortraitAway() {
+    if (!portrait || portrait.hidden) return;
+    const restoreFocus = document.activeElement === portrait;
+    portrait.getAnimations().forEach(animation => animation.cancel());
+    portrait.hidden = true;
+    shake = 0;
+    portraitCooldown = performance.now() + 2500;
+    if (restoreFocus) returnFocus?.focus({preventScroll:true});
+  }
+  function dropPortrait(keyboard) {
+    if (!portrait) {
+      portrait = document.createElement('button');
+      portrait.className = 'fallen-portrait';
+      portrait.type = 'button';
+      portrait.hidden = true;
+      portrait.setAttribute('aria-label', 'Put the portrait away');
+      const photo = new Image(480, 480);
+      photo.alt = 'Peter H. Vartanian';
+      photo.draggable = false;
+      photo.src = '/assets/img/peter-portrait.webp';
+      portrait.append(photo);
+      portrait.addEventListener('click', putPortraitAway);
+      portrait.addEventListener('contextmenu', event => event.preventDefault());
+      document.body.append(portrait);
+    }
+    returnFocus = document.activeElement;
+    portrait.style.visibility = 'hidden';
+    portrait.hidden = false;
+    const box = mobile.getBoundingClientRect();
+    const size = portrait.getBoundingClientRect().width;
+    const left = Math.max(16, Math.min(innerWidth-size-16, box.right-size*.45));
+    const top = Math.max(16, Math.min(innerHeight-size-24, box.bottom-size*.7));
+    portrait.style.left = `${left}px`;
+    portrait.style.top = `${top}px`;
+    const startX = box.left+box.width*.55-left-size/2;
+    const startY = Math.min(-35, box.top+box.height*.28-top);
+    portrait.querySelector('img').decode().catch(() => {}).then(() => {
+      if (portrait.hidden) return;
+      portrait.style.visibility = '';
+      if (!reducedMotion.matches) portrait.animate([
+        {transform:`translate(${startX}px, ${startY}px) rotate(-24deg) scale(.7)`,opacity:0,offset:0},
+        {opacity:1,offset:.15},
+        {transform:'translate(0, 9px) rotate(11deg) scale(1)',offset:.76},
+        {transform:'translate(0, -5px) rotate(1deg)',offset:.9},
+        {transform:'translate(0, 0) rotate(4deg)',offset:1}
+      ], {duration:720,easing:'cubic-bezier(.4,0,.7,1)'});
+      if (keyboard) portrait.focus({preventScroll:true});
+    });
+  }
+  function shakeLoose(amount, keyboard=false) {
+    const now = performance.now();
+    if (now < portraitCooldown || (portrait && !portrait.hidden)) return;
+    shake = Math.max(0, shake-(now-lastShake)*.05) + amount;
+    lastShake = now;
+    if (shake >= 180) {shake=0;dropPortrait(keyboard);}
+  }
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') putPortraitAway();
+  });
+  window.addEventListener('resize', putPortraitAway);
+
 
   function draw() {
     pieces.forEach(p => {
@@ -85,11 +147,12 @@ if (mobile) {
       const directions={ArrowLeft:[-14,0],ArrowRight:[14,0],ArrowUp:[0,-14],ArrowDown:[0,14]};
       if (event.key==='Escape') { piece.x=0;piece.y=0;piece.vx=0;piece.vy=0;draw();return; }
       if (event.key==='Enter' || event.key===' ') {
-        event.preventDefault();piece.x=clamp(piece.x+12);piece.y=clamp(piece.y-8);
+        event.preventDefault();shakeLoose(55,true);piece.x=clamp(piece.x+12);piece.y=clamp(piece.y-8);
         draw();if(!reducedMotion.matches) animate();return;
       }
       if (!directions[event.key]) return;
       event.preventDefault();
+      shakeLoose(36,true);
       piece.x=clamp(piece.x+directions[event.key][0]);piece.y=clamp(piece.y+directions[event.key][1]);
       draw();if(!reducedMotion.matches) animate();
     });
@@ -104,6 +167,7 @@ if (mobile) {
       const p=point(event);
       if(Math.hypot(p.x-dragging.start.x,p.y-dragging.start.y)>4) dragging.moved=true;
       const x=clamp(p.x-piece.home[0]-dragging.dx),y=clamp(p.y-piece.home[1]-dragging.dy);
+      shakeLoose(Math.min(80,Math.hypot(x-piece.x,y-piece.y)));
       piece.vx=(x-piece.x)*.4;piece.vy=(y-piece.y)*.4;piece.x=x;piece.y=y;
       draw();
     });
@@ -117,6 +181,7 @@ if (mobile) {
     for(const name of ['pointerup','pointercancel','lostpointercapture']) piece.element.addEventListener(name,release);
   });
   function stir() {
+    shakeLoose(55);
     nudges++;
     pieces.forEach((p,i) => {
       if(reducedMotion.matches) {p.x=Math.sin(i*1.7+nudges)*13;p.y=Math.cos(i*1.3+nudges)*9;}
