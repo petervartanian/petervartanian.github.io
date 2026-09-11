@@ -4,10 +4,10 @@
   font-family: Georgia, 'Times New Roman', serif;
   font-size: 16px;
   color-scheme: light;
-  --mark-size: 40px;
-  --mark-column: 75px;
-  --mark-gap: 12px;
-  --mark-text-inset: 90px;
+  --mark-size: 19px;
+  --mark-column: 19px;
+  --mark-gap: 9px;
+  --mark-text-inset: calc(var(--mark-column) + var(--mark-gap) + 3px);
   --paper: #faf8f7;
   --ink: #3f3544;
   --link: #755276;
@@ -110,7 +110,7 @@ sup a { padding: 4px 0; }
 .education-list li { padding-left: 2px; margin: 3px 0; }
 .education-award { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; }
 .education-award-date { color: var(--quiet); font-size: 12px; white-space: nowrap; }
-.experience-award { display: block; margin-left: 90px; font-size: 13px; line-height: 1.65; }
+.experience-award { display: block; margin-left: var(--mark-text-inset); font-size: 13px; line-height: 1.65; }
 .education-label { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .simple-list { padding-left: 19px; list-style: disc; font-size: 14px; }
 .simple-list li { line-height: 1.7; margin-bottom: 8px; }
@@ -123,7 +123,8 @@ sup a { padding: 4px 0; }
 .experience-award-row th { padding-top: 0; }
 .experience-award-row td { padding-top: 1px; }
 .date-part { display: inline-block; white-space: nowrap; }
-.contact-table th { width: 240px; }
+.contact-table th { width: 160px; }
+.contact-name { padding: 0; }
 .contact-icon { display: block; width: var(--mark-size); height: var(--mark-size); object-fit: contain; }
 .contact-table td { text-align: right; vertical-align: middle; overflow-wrap: anywhere; }
 .contact-list { margin: 29px 0; font-size: 15px; }
@@ -182,16 +183,15 @@ a.note-badge:hover, .note-ref:hover { background: var(--link); color: var(--pape
 @media (max-width: 600px) {
   .experience-table tr { display: block; margin-bottom: 16px; }
   .experience-table th { display: block; padding: 0; }
-  .experience-table.experience-table td { display: block; width: auto; padding: 4px 0 0 90px; text-align: left; }
+  .experience-table.experience-table td { display: block; width: auto; padding: 4px 0 0 var(--mark-text-inset); text-align: left; }
   .experience-award-row { margin-top: -8px; }
   .experience-table td { width: 108px; }
   .page { width: calc(100% - 44px); }
   header { padding-top: 43px; }
   .site-name { font-size: 31px; }
   header nav { margin-top: 20px; gap: 0; font-size: 13px; }
-  .contact-table tr { display: block; margin-bottom: 16px; }
-  .contact-table.contact-table th { display: block; width: auto; padding: 0; }
-  .contact-table.contact-table td { display: block; padding: 4px 0 0 var(--mark-text-inset); text-align: left; }
+  .contact-table th { width: 122px; padding-right: 8px; }
+  .contact-label { --mark-gap: 7px; }
   main { margin-top: 40px; }
   p { font-size: 15px; line-height: 1.75; }
   footer { margin-top: 44px; }
@@ -210,6 +210,8 @@ header nav a, .download-button, .note-ref, a.note-badge { position: relative; }
 header nav a::after, .download-button::after, .note-ref::after, a.note-badge::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: max(100%, 24px); height: max(100%, 24px); }
 header nav a::after, .download-button::after { min-width: 44px; min-height: 44px; }
 @media (max-width: 360px) {
+  .contact-table th { width: 116px; }
+  .contact-table td { padding-left: 8px; }
   .title-line { gap: 10px; }
   .title-line h1 { font-size: 22px; white-space: nowrap; }
   .download-button { padding: 8px; font-size: 11px; }
