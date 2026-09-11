@@ -9,6 +9,24 @@ for (const eventName of ['contextmenu', 'dragstart']) {
 }
 // Native links handle navigation and the always-visible notes.
 
+// Filter only experience rows; the download always retains the complete CV.
+const primaryOnly = document.querySelector('#primary-only');
+if (primaryOnly) {
+  const rows = [...document.querySelectorAll('.experience-table tr')];
+  let primary = false;
+  const entries = rows.map(row => {
+    if (!row.classList.contains('experience-award-row')) {
+      primary = Boolean(row.querySelector('.primary-contribution'));
+    }
+    return { row, primary };
+  });
+  primaryOnly.checked = false;
+  primaryOnly.closest('.experience-filter').hidden = false;
+  primaryOnly.addEventListener('change', () => {
+    for (const entry of entries) entry.row.hidden = primaryOnly.checked && !entry.primary;
+  });
+}
+
 // The mobile rests until someone moves it; springs let it settle again.
 const mobile = document.querySelector('.mobile-svg');
 if (mobile) {

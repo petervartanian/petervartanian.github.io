@@ -202,7 +202,7 @@ def institution_honors(institution, academic=False):
         items = [item for item in items if item['title'].startswith('ΦBK') == academic]
     return ''.join(f'<li><span class="education-award"><span>{e(item["title"])}</span> <span class="education-award-date">{e(item["date"])}</span></span></li>' for item in items)
 
-experience = '<h3>Current</h3><table class="cv-table experience-table" aria-label="Current experience and dates"><tbody>' + experience_rows(cv['experience'][:1]) + '</tbody></table><h3>Previous</h3><table class="cv-table experience-table" aria-label="Previous experience and dates"><tbody>' + experience_rows(cv['experience'][1:]) + '</tbody></table>'
+experience = '<div class="experience-filter" hidden><label><input type="checkbox" id="primary-only" role="switch" aria-describedby="contribution-key"><span>Primary contributions only</span></label></div><h3>Current</h3><table class="cv-table experience-table" aria-label="Current experience and dates"><tbody>' + experience_rows(cv['experience'][:1]) + '</tbody></table><h3>Previous</h3><table class="cv-table experience-table" aria-label="Previous experience and dates"><tbody>' + experience_rows(cv['experience'][1:]) + '</tbody></table>'
 
 
 def cv_text(text):
@@ -214,7 +214,7 @@ cv_notes = [
     'Facilitated by the <a href="https://sparai.org/">Supervised Program for Alignment Research</a> (SPAR) and <a href="https://kairos-project.org/">Kairos</a>.',
     'Supported by a micro-grant from a confidential European family office.'
 ]
-experience_notes = '<aside id="experience-notes" class="experience-notes" aria-labelledby="experience-notes-title"><h3 id="experience-notes-title">Notes</h3><p class="contribution-key"><span class="primary-contribution">Shaded entries</span> indicate primary authorship or substantive responsibility for my work undertaken.</p>' + ''.join(f'<p class="experience-note" id="experience-note-{i}"><span class="note-badge">{NOTE_NUMERALS[i]}</span><span>{note}</span></p>' for i, note in enumerate(cv_notes, 1)) + '</aside>'
+experience_notes = '<aside id="experience-notes" class="experience-notes" aria-labelledby="experience-notes-title"><h3 id="experience-notes-title">Notes</h3><p class="contribution-key" id="contribution-key"><span class="primary-contribution">Shaded entries</span> indicate primary authorship or substantive responsibility for my work undertaken.</p>' + ''.join(f'<p class="experience-note" id="experience-note-{i}"><span class="note-badge">{NOTE_NUMERALS[i]}</span><span>{note}</span></p>' for i, note in enumerate(cv_notes, 1)) + '</aside>'
 cv_sections = ''
 for section in cv['sections']:
     if section['label'] == 'Education':
