@@ -4,7 +4,6 @@
     "source": "User-supplied institution seal",
     "aliases": [
       "Occidental College",
-      "Urban & Environmental Policy Institute at Occidental College",
       "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy"
     ],
     "width": 20,
@@ -200,6 +199,14 @@
     "source": "User-supplied Blyth Fund logo",
     "aliases": [
       "Charles R. Blyth Fund at Occidental College"
+    ],
+    "width": 20
+  },
+  "uepi": {
+    "file": "uepi.png",
+    "source": "User-supplied Urban & Environmental Policy Institute logo",
+    "aliases": [
+      "Urban & Environmental Policy Institute at Occidental College"
     ],
     "width": 20
   }
