@@ -58,9 +58,8 @@ Aug. 2021 – May 2025
 
 Bachelor of Arts with Honors
 
-Major #1: Stuart Chevalier Program in Diplomacy + World Affairs (DWA)
-
-Major #2: Comparative Studies in Literature + Culture (CSLC)
+- Major #1: Stuart Chevalier Program in Diplomacy + World Affairs (DWA)
+- Major #2: Comparative Studies in Literature + Culture (CSLC)
 
 Honors
 
@@ -74,7 +73,7 @@ Aug. 2021 – May 2025
 
 Special Student
 
-Social Sciences
+- Field of study: Social Science (SS)
 
 GPA: 4.00/4.00
 
