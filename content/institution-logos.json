@@ -3,8 +3,7 @@
     "file": "oxy-seal.png",
     "source": "User-supplied institution seal",
     "aliases": [
-      "Occidental College",
-      "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy"
+      "Occidental College"
     ],
     "width": 20,
     "note": "Resized proportionally from the supplied PNG; seal artwork preserved."
@@ -212,5 +211,14 @@
     ],
     "width": 17,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved."
+  },
+  "mckinnon": {
+    "file": "mckinnon-young.png",
+    "source": "User-supplied McKinnon Center and John Parke Young Initiative logo",
+    "aliases": [
+      "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy"
+    ],
+    "width": 42,
+    "note": "White background made transparent and empty margins trimmed; original combined wordmark retained."
   }
 }

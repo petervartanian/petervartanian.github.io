@@ -28,7 +28,7 @@ https://petervartanian.xyz/cv/
 | **<img src="https://petervartanian.xyz/assets/logos/unga-emblem.png" width="24" height="20" alt=""> Office of the Chair of the First Committee of the UN General Assembly** | Aug. 2024 – Dec. 2024 |
 | <img src="https://petervartanian.xyz/assets/logos/uepi-transparent-trimmed.png" width="17" height="20" alt=""> Urban & Environmental Policy Institute at Occidental College | May 2024 – Aug. 2024 |
 | **<img src="https://petervartanian.xyz/assets/logos/hrca.png" width="39" height="20" alt=""> Human Rights Cities Alliance** | Jan. 2024 – May 2024 |
-| **<img src="https://petervartanian.xyz/assets/logos/oxy-seal.png" width="20" height="20" alt=""> McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy** | Mar. 2023 – May 2024 |
+| **<img src="https://petervartanian.xyz/assets/logos/mckinnon-young.png" width="42" height="20" alt=""> McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy** | Mar. 2023 – May 2024 |
 | **<img src="https://petervartanian.xyz/assets/logos/bis.png" width="20" height="20" alt=""> Bureau of Industry and Security at the U.S. Department of Commerce** | Sep. 2023 – May 2024 |
 | <img src="https://petervartanian.xyz/assets/logos/blyth-transparent-trimmed.png" width="20" height="20" alt=""> Charles R. Blyth Fund at Occidental College | Apr. 2023 – May 2024 |
 | <img src="https://petervartanian.xyz/assets/logos/austria-trimmed.png" width="58" height="20" alt=""> Austrian Service Abroad | May 2023 – Aug. 2023 |
