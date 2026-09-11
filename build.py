@@ -16,7 +16,8 @@ JS_VERSION = sha256((ROOT / 'assets/js/personal.js').read_bytes()).hexdigest()[:
 
 
 def page(key, title, description, body, path):
-    body = add_institution_logos(body)
+    if key == 'cv':
+        body = add_institution_logos(body)
     nav_parts = []
     for i, (k, label, url) in enumerate(NAV):
         if i:
