@@ -14,7 +14,7 @@ def add_institution_logos(markup):
         name = match[0]
         key = ALIASES[name]
         logo = LOGOS[key]
-        image = f'<img class="institution-logo logo-{key}" src="/assets/logos/{logo["file"]}" width="{logo["width"]}" height="20" alt="" aria-hidden="true" decoding="async">'
+        image = f'<img class="institution-logo logo-{key}" src="/assets/logos/{logo["file"]}" width="{logo["width"]}" height="{logo["height"]}" alt="" aria-hidden="true" decoding="async">'
         return f'<span class="institution-entry"><span class="institution-logo-slot">{image}</span><span class="institution-name">{name}</span></span>'
 
     parts = re.split(r'(<[^>]+>)', markup)
@@ -26,12 +26,3 @@ def add_institution_logos(markup):
     # Keep footnote references attached to the final institution name.
     result = re.sub(r'</span></span>(</span>)?(<sup>.*?</sup>)', lambda m: m[2] + '</span></span>' + (m[1] or ''), result)
     return result
-
-
-def add_markdown_logos(markdown):
-    aliases = {name: key for key, logo in LOGOS.items() for name in logo['aliases']}
-    names = re.compile(r'(?<!\w)(?:' + '|'.join(re.escape(name) for name in sorted(aliases, key=len, reverse=True)) + r')(?!\w)')
-    def decorate(match):
-        logo = LOGOS[aliases[match[0]]]
-        return f'<img src="https://petervartanian.xyz/assets/logos/{logo["file"]}" width="{logo["width"]}" height="20" alt=""> {match[0]}'
-    return names.sub(decorate, markdown)

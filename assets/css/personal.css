@@ -81,7 +81,7 @@ button { font-family: inherit; font-size: 12px; color: var(--link); background: 
 .organization { line-height: 1.5; font-size: 15px; }
 .institution-entry { display: grid; grid-template-columns: 75px minmax(0, 1fr); column-gap: 12px; align-items: center; }
 .institution-logo-slot { display: flex; align-items: center; min-height: 23px; }
-.institution-logo { display: block; height: auto; max-height: 20px; max-width: 100%; object-fit: contain; object-position: left center; }
+.institution-logo { display: block; height: auto; max-height: 34px; max-width: 100%; object-fit: contain; object-position: left center; }
 .institution-name { min-width: 0; padding: 0 3px; }
 .primary-contribution:has(.institution-entry) { display: block; padding: 0; background: none; }
 .primary-contribution .institution-name { justify-self: start; background: color-mix(in srgb, var(--link) 7%, transparent); }

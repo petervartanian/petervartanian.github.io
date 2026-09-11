@@ -10,33 +10,33 @@ https://petervartanian.xyz/cv/
 
 | Organization | Dates |
 | --- | --- |
-| **<img src="https://petervartanian.xyz/assets/logos/mit-trimmed.png" width="19" height="20" alt=""> MIT AI Risk Initiative & <img src="https://petervartanian.xyz/assets/logos/arcola.png" width="68" height="20" alt=""> Arcola AI**[^i] | Jun. 2026 – Present |
+| **MIT AI Risk Initiative & Arcola AI**[^i] | Jun. 2026 – Present |
 
 ### Previous
 
 | Organization | Dates |
 | --- | --- |
-| **<img src="https://petervartanian.xyz/assets/logos/ai-risk-explorer-trimmed.png" width="22" height="20" alt=""> AI Risk Explorer**[^ii] | Feb. 2026 – Jun. 2026 |
-| **<img src="https://petervartanian.xyz/assets/logos/family.svg" width="20" height="20" alt=""> Family Office**[^iii] | Sep. 2025 – Jun. 2026 |
-| **<img src="https://petervartanian.xyz/assets/logos/hoover-trimmed.png" width="20" height="20" alt=""> Hoover Institution on War, Revolution, and Peace at Stanford University** | Aug. 2025 – Aug. 2025 |
+| **AI Risk Explorer**[^ii] | Feb. 2026 – Jun. 2026 |
+| **Family Office**[^iii] | Sep. 2025 – Jun. 2026 |
+| **Hoover Institution on War, Revolution, and Peace at Stanford University** | Aug. 2025 – Aug. 2025 |
 | Director’s Award from Fmr. SecState Condoleezza Rice | Feb. 2026 |
-| **<img src="https://petervartanian.xyz/assets/logos/nti-globe-transparent.png" width="20" height="20" alt=""> FutureSafe at the Nuclear Threat Initiative** | Jun. 2025 – Aug. 2025 |
-| **<img src="https://petervartanian.xyz/assets/logos/program-on-negotiation-transparent-trimmed.png" width="48" height="20" alt=""> The Program on Negotiation at Harvard Law School** | Jan. 2025 – May 2025 |
-| **<img src="https://petervartanian.xyz/assets/logos/change.svg" width="20" height="20" alt=""> City Hub and Network for Gender Equity** | Jan. 2025 – May 2025 |
-| <img src="https://petervartanian.xyz/assets/logos/mission-action-lab-original.png" width="41" height="20" alt=""> OECD Mission Action Lab | Dec. 2024 – Jan. 2025 |
-| <img src="https://petervartanian.xyz/assets/logos/verum.png" width="20" height="20" alt=""> Verum Legalis: The Occidental College Law Review | Jan. 2024 – Jan. 2025 |
-| **<img src="https://petervartanian.xyz/assets/logos/unga-emblem.png" width="24" height="20" alt=""> Office of the Chair of the First Committee of the UN General Assembly** | Aug. 2024 – Dec. 2024 |
-| <img src="https://petervartanian.xyz/assets/logos/uepi-transparent-trimmed.png" width="17" height="20" alt=""> Urban & Environmental Policy Institute at Occidental College | May 2024 – Aug. 2024 |
-| **<img src="https://petervartanian.xyz/assets/logos/hrca.png" width="39" height="20" alt=""> Human Rights Cities Alliance** | Jan. 2024 – May 2024 |
-| **<img src="https://petervartanian.xyz/assets/logos/mckinnon-young.png" width="42" height="20" alt=""> McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy** | Mar. 2023 – May 2024 |
-| **<img src="https://petervartanian.xyz/assets/logos/bis.png" width="20" height="20" alt=""> Bureau of Industry and Security at the U.S. Department of Commerce** | Sep. 2023 – May 2024 |
-| <img src="https://petervartanian.xyz/assets/logos/blyth-transparent-trimmed.png" width="20" height="20" alt=""> Charles R. Blyth Fund at Occidental College | Apr. 2023 – May 2024 |
-| <img src="https://petervartanian.xyz/assets/logos/austria-trimmed.png" width="58" height="20" alt=""> Austrian Service Abroad | May 2023 – Aug. 2023 |
-| <img src="https://petervartanian.xyz/assets/logos/state.png" width="20" height="20" alt=""> U.S. Mission to International Organizations in Vienna | Sep. 2022 – May 2023 |
-| <img src="https://petervartanian.xyz/assets/logos/ocg-transparent.png" width="20" height="20" alt=""> Occidental Consulting Group | Sep. 2022 – May 2023 |
-| <img src="https://petervartanian.xyz/assets/logos/wolf.png" width="20" height="20" alt=""> Wolf Theiss | Dec. 2021 – Jan. 2022; Dec. 2022 – Jan. 2023 |
-| <img src="https://petervartanian.xyz/assets/logos/alpbach-transparent-trimmed.png" width="75" height="20" alt=""> European Forum Alpbach | May 2022 – Aug. 2022 |
-| <img src="https://petervartanian.xyz/assets/logos/newspaper-trimmed.png" width="20" height="20" alt=""> The Occidental Newspaper | Sep. 2021 – May 2022 |
+| **FutureSafe at the Nuclear Threat Initiative** | Jun. 2025 – Aug. 2025 |
+| **The Program on Negotiation at Harvard Law School** | Jan. 2025 – May 2025 |
+| **City Hub and Network for Gender Equity** | Jan. 2025 – May 2025 |
+| OECD Mission Action Lab | Dec. 2024 – Jan. 2025 |
+| Verum Legalis: The Occidental College Law Review | Jan. 2024 – Jan. 2025 |
+| **Office of the Chair of the First Committee of the UN General Assembly** | Aug. 2024 – Dec. 2024 |
+| Urban & Environmental Policy Institute at Occidental College | May 2024 – Aug. 2024 |
+| **Human Rights Cities Alliance** | Jan. 2024 – May 2024 |
+| **McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy** | Mar. 2023 – May 2024 |
+| **Bureau of Industry and Security at the U.S. Department of Commerce** | Sep. 2023 – May 2024 |
+| Charles R. Blyth Fund at Occidental College | Apr. 2023 – May 2024 |
+| Austrian Service Abroad | May 2023 – Aug. 2023 |
+| U.S. Mission to International Organizations in Vienna | Sep. 2022 – May 2023 |
+| Occidental Consulting Group | Sep. 2022 – May 2023 |
+| Wolf Theiss | Dec. 2021 – Jan. 2022; Dec. 2022 – Jan. 2023 |
+| European Forum Alpbach | May 2022 – Aug. 2022 |
+| The Occidental Newspaper | Sep. 2021 – May 2022 |
 
 ### Notes
 
@@ -50,7 +50,7 @@ https://petervartanian.xyz/cv/
 
 ## II. **Education**
 
-### <img src="https://petervartanian.xyz/assets/logos/oxy-seal.png" width="20" height="20" alt=""> Occidental College
+### Occidental College
 
 Aug. 2021 – May 2025
 
@@ -75,7 +75,7 @@ Awards
 - Critical Language Scholarship Mar. 2024
 - Gilman International Scholarship Dec. 2023
 
-### <img src="https://petervartanian.xyz/assets/logos/caltech-seal.png" width="20" height="20" alt=""> California Institute of Technology
+### California Institute of Technology
 
 Aug. 2021 – May 2025
 

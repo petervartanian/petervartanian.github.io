@@ -86,7 +86,7 @@ for section in data['cv']['sections']:
 for org in ['Occidental College','California Institute of Technology','3.97/4.00','4.00/4.00','Classical Nahuatl','Arabic (Fuṣḥā and Lebanese)']:
     check(org in cv,f'Missing education/language detail: {org}')
 markdown = (ROOT/'cv/peter-vartanian-cv.md').read_text()
-markdown = re.sub(r'<img\b[^>]*>\s*', '', markdown)
+check('<img' not in markdown and '/assets/logos/' not in markdown and '![' not in markdown, 'Markdown CV must not contain images or image URLs')
 check('download="peter-vartanian-cv.md"' in (ROOT/'cv/index.html').read_text(), 'CV download link is missing')
 for entry in data['cv']['experience']:
     org = re.sub(r'[*/]+$', '', entry['organization'])
