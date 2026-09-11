@@ -123,7 +123,7 @@ def writing_row(item, index):
     note = {1: '†', 2: '‡', 4: '§'}.get(index, '')
     credit = item['credit'].replace(note, '').strip() if note else item['credit']
     credit_lines = '<br>'.join(e(part.strip()) for part in credit.split(' · '))
-    note_link = f'<a class="note-ref" href="#publication-note-{index}" aria-label="Publication note {note}">{note}</a>' if note else ''
+    note_link = f'<sup><a class="note-ref" href="#publication-note-{index}" aria-label="Publication note {note}">{note}</a></sup>' if note else ''
     return f'''<li class="publication">
   <a class="publication-title" href="{e(item['url'])}">{title}</a>
   <p class="venue"><em>{e(item['venue'])}</em></p>
