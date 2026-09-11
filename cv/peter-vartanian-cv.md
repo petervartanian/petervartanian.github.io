@@ -10,7 +10,7 @@ https://petervartanian.xyz/cv/
 
 | Organization | Dates |
 | --- | --- |
-| **MIT AI Risk Initiative & Arcola AI**[^i] | Jun. 2026 – Present |
+| **(1) MIT AI Risk Initiative; (2) Arcola AI**[^i] | Jun. 2026 – Present |
 
 ### Previous
 

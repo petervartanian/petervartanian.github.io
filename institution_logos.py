@@ -10,16 +10,21 @@ NAMES = re.compile(r'(?<!\w)(?:' + '|'.join(re.escape(name) for name in sorted(A
 
 
 def add_institution_logos(markup):
-    def decorate(match):
+    def decorate(match, number=None):
         name = match[0]
         key = ALIASES[name]
         logo = LOGOS[key]
+        if number is not None:
+            name = f'({number}) {name}'
         image = f'<img class="institution-logo logo-{key}" src="/assets/logos/{logo["file"]}" width="{logo["width"]}" height="{logo["height"]}" alt="" aria-hidden="true" decoding="async">'
         return f'<span class="institution-entry"><span class="institution-logo-slot">{image}</span><span class="institution-name"><span class="institution-text">{name}</span></span></span>'
 
     parts = re.split(r'(<[^>]+>)', markup)
     for index in range(0, len(parts), 2):
-        parts[index] = NAMES.sub(decorate, parts[index])
+        if parts[index] == 'MIT AI Risk Initiative &amp; Arcola AI':
+            parts[index] = ' '.join(decorate(match, number) for number, match in enumerate(NAMES.finditer(parts[index]), 1))
+        else:
+            parts[index] = NAMES.sub(decorate, parts[index])
     result = ''.join(parts)
     # Keep joint affiliations in the same row, with each name aligned to its mark.
     result = result.replace('</span></span></span> &amp; <span class="institution-entry">', ' &amp;</span></span></span> <span class="institution-entry">')
