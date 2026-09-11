@@ -68,7 +68,7 @@ check('<details id="publication-notes"' not in writing_html and 'note-box' not i
 check('Peter’s Memos' in archive, 'Missing memo section')
 check('brunellaism' not in writing_html, 'Removed post must not be linked')
 check('<ol' not in (ROOT/'cv/index.html').read_text(), 'Only CV headings and subheadings should be numbered')
-for numeral in ['I.', 'II.', 'III.', 'IV.', 'V.']:
+for numeral in ['I.', 'II.', 'III.', 'IV.']:
     check(numeral in cv, f'Missing CV section number {numeral}')
 for entry in data['cv']['experience']:
     org=re.sub(r'[*/]+$','',entry['organization'])
@@ -83,8 +83,13 @@ check('download="peter-vartanian-cv.md"' in (ROOT/'cv/index.html').read_text(), 
 for entry in data['cv']['experience']:
     org = re.sub(r'[*/]+$', '', entry['organization'])
     check(org in markdown and entry['dates'] in markdown, f'Markdown CV omits {org}')
-for label in ['Experience', 'Education', 'Languages', 'Awards', 'Skills & methods']:
+for label in ['Experience', 'Education', 'Languages', 'Skills & methods']:
     check(label in markdown, f'Markdown CV omits section {label}')
+for institution, honors in data['cv']['institution_honors'].items():
+    for honor in honors:
+        for value in [honor['title'], honor['date']]:
+            check(value in cv and value in markdown, f'Missing honor for {institution}: {value}')
+check('>Awards</strong>' not in (ROOT/'cv/index.html').read_text(), 'Standalone Awards section remains')
 for marker in ['i', 'ii', 'iii', 'iv']:
     check(f'[^{marker}]:' in markdown, f'Markdown CV omits note {marker}')
 for path in ['sitemap.xml','feed.xml']:ET.parse(ROOT/path)

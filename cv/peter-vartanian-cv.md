@@ -18,7 +18,7 @@ https://petervartanian.xyz/cv/
 | --- | --- |
 | **AI Risk Explorer**[^ii] | Feb. 2026 – Jun. 2026 |
 | **Family Office**[^iii] | Sep. 2025 – Jun. 2026 |
-| **Hoover Institution on War, Revolution, and Peace at Stanford University** | Aug. 2025 – Aug. 2025 |
+| **Hoover Institution on War, Revolution, and Peace at Stanford University** Director’s Award from Fmr. SecState Condoleezza Rice Feb. 2026 | Aug. 2025 – Aug. 2025 |
 | **FutureSafe at the Nuclear Threat Initiative** | Jun. 2025 – Aug. 2025 |
 | **The Program on Negotiation at Harvard Law School** | Jan. 2025 – May 2025 |
 | **City Hub and Network for Gender Equity** | Jan. 2025 – May 2025 |
@@ -65,7 +65,12 @@ Honors
 
 - GPA: 3.97/4.00
 - *Summa cum Laude*
-- ΦBK (elected as a junior)
+- DWA Award for Exemplary Achievement in Academic and Co-curricular Activities May 2025
+- DWA Prize for Best Thesis Overall May 2025
+- Alternate selection for the James C. Gaither Junior Fellowship at the Carnegie Endowment for International Peace Mar. 2025
+- ΦBK (elected as a junior) Oct. 2024
+- Critical Language Scholarship Mar. 2024
+- Gilman International Scholarship Dec. 2023
 
 ### California Institute of Technology
 
@@ -78,6 +83,7 @@ Special Student
 Honors
 
 - GPA: 4.00/4.00
+- Gordon McClure Memorial Communications Prize in History
 
 ## III. **Languages**
 
@@ -107,19 +113,7 @@ My proficiencies follow the [ILR’s 0–5 scale](https://www.govtilr.org/Skills
 - Classical Latin
 - Classical Nahuatl
 
-## IV. **Awards**
-
-| Award | Date |
-| --- | --- |
-| Director’s Award from Fmr. SecState Condoleezza Rice | Feb. 2026 |
-| DWA Award for Exemplary Achievement in Academic and Co-curricular Activities | May 2025 |
-| DWA Prize for Best Thesis Overall | May 2025 |
-| Alternate selection for the James C. Gaither Junior Fellowship at the Carnegie Endowment for International Peace | Mar. 2025 |
-| Election to Phi Beta Kappa (as a Junior) | Oct. 2024 |
-| Critical Language Scholarship | Mar. 2024 |
-| Gilman International Scholarship | Dec. 2023 |
-
-## V. **Skills & methods**
+## IV. **Skills & methods**
 
 ### A. Programming
 

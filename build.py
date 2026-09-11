@@ -180,7 +180,18 @@ def date_range(text):
 
 
 def experience_rows(rows):
-    return ''.join(f'''<tr><th scope="row">{org_name(r['organization'])}</th><td>{date_range(r['dates'])}</td></tr>\n''' for r in rows)
+    result = ''
+    for row in rows:
+        organization = org_name(row['organization'])
+        if row['organization'].startswith('Hoover Institution'):
+            for award in cv['institution_honors']['Hoover Institution']:
+                organization += f' <span class="experience-award">{e(award["title"])} <span class="education-award-date">{e(award["date"])}</span></span>'
+        result += f'<tr><th scope="row">{organization}</th><td>{date_range(row["dates"])}</td></tr>\n'
+    return result
+
+
+def institution_honors(institution):
+    return ''.join(f'<li><span class="education-award"><span>{e(item["title"])}</span> <span class="education-award-date">{e(item["date"])}</span></span></li>' for item in cv['institution_honors'][institution])
 
 experience = '<h3>Current</h3><table class="cv-table experience-table" aria-label="Current experience and dates"><tbody>' + experience_rows(cv['experience'][:1]) + '</tbody></table><h3>Previous</h3><table class="cv-table experience-table" aria-label="Previous experience and dates"><tbody>' + experience_rows(cv['experience'][1:]) + '</tbody></table>'
 
@@ -200,17 +211,17 @@ cv_sections = ''
 for section in cv['sections']:
     if section['label'] == 'Education':
         label, anchor = 'Education', 'education'
-        content = '''<div class="education-item"><h3>Occidental College</h3>
+        content = f'''<div class="education-item"><h3>Occidental College</h3>
 <p class="dates"><span class="date-part">Aug. 2021 –</span> <span class="date-part">May 2025</span></p>
 <div class="education-group"><p>Bachelor of Arts with Honors</p>
 <ul class="education-list"><li><span class="education-label">Major #1</span>: Stuart Chevalier Program in Diplomacy + World Affairs (DWA)</li><li><span class="education-label">Major #2</span>: Comparative Studies in Literature + Culture (CSLC)</li></ul></div>
-<div class="education-group"><p>Honors</p>
-<ul class="education-list"><li>GPA: 3.97/4.00</li><li><em>Summa cum Laude</em></li><li>ΦBK (elected as a junior)</li></ul></div></div>
+<div class="education-group" id="honors"><span id="awards" aria-hidden="true"></span><p>Honors</p>
+<ul class="education-list"><li>GPA: 3.97/4.00</li><li><em>Summa cum Laude</em></li>{institution_honors("Occidental College")}</ul></div></div>
 <div class="education-item"><h3>California Institute of Technology</h3>
 <p class="dates"><span class="date-part">Aug. 2021 –</span> <span class="date-part">May 2025</span></p>
 <div class="education-group"><p>Special Student</p>
 <ul class="education-list"><li><span class="education-label">Field of study</span>: Social Science (SS)</li></ul></div>
-<div class="education-group"><p>Honors</p><ul class="education-list"><li>GPA: 4.00/4.00</li></ul></div></div>'''
+<div class="education-group"><p>Honors</p><ul class="education-list"><li>GPA: 4.00/4.00</li>{institution_honors("California Institute of Technology")}</ul></div></div>'''
     elif section['label'].startswith('Languages'):
         label, anchor = 'Languages', 'languages'
         content = '<section class="cv-subsection"><h3><span class="subsection-number">A.</span> Modern languages</h3><p class="quiet">My proficiencies follow the <a href="https://www.govtilr.org/Skills/ILRscale2.htm">ILR’s 0–5 scale</a> (with + marking intermediate levels).</p><table class="cv-table language-table" aria-label="Modern languages and ILR proficiency"><tbody>'
@@ -220,21 +231,14 @@ for section in cv['sections']:
             name = 'Arabic (Fuṣḥā and Lebanese)' if item['name'] == 'Fuṣḥā' else item['name']
             content += f'<tr><th scope="row">{e(name)}</th><td>{e(item["level"])}</td></tr>'
         content += '</tbody></table></section><section class="cv-subsection"><h3><span class="subsection-number">B.</span> Philological training</h3><table class="cv-table" aria-label="Philological training"><tbody><tr><td>Ancient Greek</td></tr><tr><td>Classical Latin</td></tr><tr><td>Classical Nahuatl</td></tr></tbody></table></section>'
-    elif section['label'] == 'Awards':
-        label, anchor = 'Awards', 'awards'
-        content = '<span id="honors" aria-hidden="true"></span><table class="cv-table awards-table" aria-label="Awards and dates"><tbody>'
-        for item in section['items']:
-            award, date = re.fullmatch(r'(.+) ([A-Z][a-z]+\.? \d{4})', item).groups()
-            content += f'<tr><th scope="row">{cv_text(award)} </th><td>{e(date)}</td></tr>'
-        content += '</tbody></table>'
     else:
         label = section['label']
         anchor = re.sub(r'[^a-z]+', '-', label.lower()).strip('-')
         content = f'<table class="cv-table" aria-label="{e(label)}"><tbody>' + ''.join('<tr><td>'+cv_text(item)+'</td></tr>' for item in section['items']) + '</tbody></table>'
-    major = {'Education': 'II', 'Languages': 'III', 'Awards': 'IV'}
+    major = {'Education': 'II', 'Languages': 'III'}
     minor = {'Programming': 'A', 'Tools + platforms': 'B', 'AI / Security': 'C', 'Methods': 'D'}
     if label == 'Programming':
-        cv_sections += '<section class="cv-section" id="skills"><h2><span class="section-number">V.</span> <strong class="section-text">Skills &amp; methods</strong></h2>'
+        cv_sections += '<section class="cv-section" id="skills"><h2><span class="section-number">IV.</span> <strong class="section-text">Skills &amp; methods</strong></h2>'
     if label in minor:
         cv_sections += f'<section class="cv-subsection" id="{anchor}"><h3><span class="subsection-number">{minor[label]}.</span> {e(label)}</h3>{content}</section>\n'
     else:

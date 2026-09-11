@@ -219,18 +219,6 @@
         ]
       },
       {
-        "label": "Awards",
-        "items": [
-          "Director’s Award from Fmr. SecState Condoleezza Rice Feb. 2026",
-          "DWA Award for Exemplary Achievement in Academic and Co-curricular Activities May 2025",
-          "DWA Prize for Best Thesis Overall May 2025",
-          "Alternate selection for the James C. Gaither Junior Fellowship at the Carnegie Endowment for International Peace Mar. 2025",
-          "Election to Phi Beta Kappa (as a Junior) Oct. 2024",
-          "Critical Language Scholarship Mar. 2024",
-          "Gilman International Scholarship Dec. 2023"
-        ]
-      },
-      {
         "label": "Programming",
         "items": [
           "Python (e.g., pandas, NumPy/SciPy, Jupyter, regex, NetworkX)",
@@ -282,6 +270,46 @@
       "***Facilitated by the Supervised Program for Alignment Research (SPAR).",
       "****Contracted by a confidential European family office.",
       "*****Undertaken as a return engagement."
-    ]
+    ],
+    "institution_honors": {
+      "Occidental College": [
+        {
+          "title": "DWA Award for Exemplary Achievement in Academic and Co-curricular Activities",
+          "date": "May 2025"
+        },
+        {
+          "title": "DWA Prize for Best Thesis Overall",
+          "date": "May 2025"
+        },
+        {
+          "title": "Alternate selection for the James C. Gaither Junior Fellowship at the Carnegie Endowment for International Peace",
+          "date": "Mar. 2025"
+        },
+        {
+          "title": "ΦBK (elected as a junior)",
+          "date": "Oct. 2024"
+        },
+        {
+          "title": "Critical Language Scholarship",
+          "date": "Mar. 2024"
+        },
+        {
+          "title": "Gilman International Scholarship",
+          "date": "Dec. 2023"
+        }
+      ],
+      "California Institute of Technology": [
+        {
+          "title": "Gordon McClure Memorial Communications Prize in History",
+          "date": ""
+        }
+      ],
+      "Hoover Institution": [
+        {
+          "title": "Director’s Award from Fmr. SecState Condoleezza Rice",
+          "date": "Feb. 2026"
+        }
+      ]
+    }
   }
 }
