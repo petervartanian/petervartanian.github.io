@@ -45,11 +45,75 @@ if (mobile) {
   const clamp = value => Math.max(-48, Math.min(48, value));
   mobile.setAttribute('role','group');
   let shake = 0, lastShake = 0, portraitCooldown = 0, portrait = null, returnFocus = null;
+  let shed = false, leafFall = null;
+  function shedLeaves() {
+    if (shed) return;
+    shed = true;
+    dragging = null;
+    if (frame) cancelAnimationFrame(frame);
+    frame = null;
+    previousTime = 0;
+    if (!reducedMotion.matches) {
+      const ns = 'http://www.w3.org/2000/svg';
+      const layer = document.createElementNS(ns, 'svg');
+      layer.setAttribute('class', 'falling-pieces');
+      layer.setAttribute('viewBox', `0 0 ${innerWidth} ${innerHeight}`);
+      layer.setAttribute('aria-hidden', 'true');
+      document.body.append(layer);
+      leafFall = layer;
+      const falls = pieces.map((piece, i) => {
+        const matrix = piece.element.getScreenCTM();
+        const bounds = piece.element.getBoundingClientRect();
+        const wrapper = document.createElementNS(ns, 'g');
+        const copy = piece.element.cloneNode(true);
+        copy.removeAttribute('class');
+        copy.removeAttribute('tabindex');
+        copy.removeAttribute('role');
+        copy.removeAttribute('aria-label');
+        copy.setAttribute('transform', `matrix(${matrix.a} ${matrix.b} ${matrix.c} ${matrix.d} ${matrix.e} ${matrix.f})`);
+        wrapper.append(copy);
+        layer.append(wrapper);
+        wrapper.style.transformOrigin = `${bounds.x+bounds.width/2}px ${bounds.y+bounds.height/2}px`;
+        const drift = (i%2 ? 1 : -1)*(30+(i*23)%105);
+        const distance = Math.max(100, innerHeight-bounds.top+90);
+        const spin = (i%2 ? 1 : -1)*(55+(i*37)%150);
+        return wrapper.animate([
+          {transform:'translate(0, 0) rotate(0deg)',opacity:1,offset:0},
+          {transform:`translate(${drift*.18}px, -10px) rotate(${spin*.12}deg)`,opacity:1,offset:.2},
+          {transform:`translate(${drift*.65}px, ${distance*.48}px) rotate(${spin*.65}deg)`,opacity:1,offset:.68},
+          {transform:`translate(${drift}px, ${distance}px) rotate(${spin}deg)`,opacity:0,offset:1}
+        ], {duration:950+(i*73)%400,delay:(i*19)%115,easing:'ease-in',fill:'forwards'}).finished.catch(() => {});
+      });
+      Promise.all(falls).then(() => {layer.remove();if(leafFall===layer) leafFall=null;});
+    }
+    mobile.classList.add('mobile-shed');
+    pieces.forEach(piece => {
+      piece.element.setAttribute('tabindex', '-1');
+      piece.element.setAttribute('aria-hidden', 'true');
+    });
+  }
+  function restoreLeaves() {
+    if (leafFall) {
+      leafFall.getAnimations({subtree:true}).forEach(animation => animation.cancel());
+      leafFall.remove();
+      leafFall = null;
+    }
+    shed = false;
+    mobile.classList.remove('mobile-shed');
+    pieces.forEach(piece => {
+      piece.x=0;piece.y=0;piece.vx=0;piece.vy=0;
+      piece.element.setAttribute('tabindex', '0');
+      piece.element.removeAttribute('aria-hidden');
+    });
+    draw();
+  }
+
   function putPortraitAway() {
     if (!portrait || portrait.hidden) return;
     const restoreFocus = document.activeElement === portrait;
     portrait.getAnimations().forEach(animation => animation.cancel());
     portrait.hidden = true;
+    restoreLeaves();
     shake = 0;
     portraitCooldown = performance.now() + 2500;
     if (restoreFocus) returnFocus?.focus({preventScroll:true});
@@ -74,9 +138,9 @@ if (mobile) {
     portrait.style.visibility = 'hidden';
     portrait.hidden = false;
     const box = mobile.getBoundingClientRect();
-    const size = portrait.getBoundingClientRect().width;
-    const left = Math.max(16, Math.min(innerWidth-size-16, box.right-size*.45));
-    const top = Math.max(16, Math.min(innerHeight-size-24, box.bottom-size*.7));
+    const size = portrait.offsetWidth;
+    const left = Math.max(16, Math.min(innerWidth-size-16, box.left+box.width/2-size/2));
+    const top = Math.max(16, Math.min(innerHeight-size-24, box.top+box.height*.7-size/2));
     portrait.style.left = `${left}px`;
     portrait.style.top = `${top}px`;
     const startX = box.left+box.width*.55-left-size/2;
@@ -84,12 +148,13 @@ if (mobile) {
     portrait.querySelector('img').decode().catch(() => {}).then(() => {
       if (portrait.hidden) return;
       portrait.style.visibility = '';
+      shedLeaves();
       if (!reducedMotion.matches) portrait.animate([
         {transform:`translate(${startX}px, ${startY}px) rotate(-24deg) scale(.7)`,opacity:0,offset:0},
         {opacity:1,offset:.15},
         {transform:'translate(0, 9px) rotate(11deg) scale(1)',offset:.76},
         {transform:'translate(0, -5px) rotate(1deg)',offset:.9},
-        {transform:'translate(0, 0) rotate(4deg)',offset:1}
+        {transform:'translate(0, 0) rotate(7deg)',offset:1}
       ], {duration:720,easing:'cubic-bezier(.4,0,.7,1)'});
       if (keyboard) portrait.focus({preventScroll:true});
     });
@@ -108,6 +173,7 @@ if (mobile) {
 
 
   function draw() {
+    if (shed) return;
     pieces.forEach(p => {
       const x=p.home[0]+p.x, y=p.home[1]+p.y, angle=p.x*.16;
       const radians=angle*Math.PI/180, [ax,ay]=p.attachment;
@@ -133,6 +199,7 @@ if (mobile) {
     else { frame=null; previousTime=0; }
   }
   function animate() {
+    if (shed) return;
     if (!frame && !document.hidden) { previousTime=0; frame=requestAnimationFrame(settle); }
   }
   function point(event) {
@@ -144,6 +211,7 @@ if (mobile) {
     piece.element.setAttribute('role','button');
     piece.element.setAttribute('aria-label',`${piece.element.dataset.name}. Drag or use arrow keys; Escape resets it.`);
     piece.element.addEventListener('keydown',event => {
+      if (shed) return;
       const directions={ArrowLeft:[-14,0],ArrowRight:[14,0],ArrowUp:[0,-14],ArrowDown:[0,14]};
       if (event.key==='Escape') { piece.x=0;piece.y=0;piece.vx=0;piece.vy=0;draw();return; }
       if (event.key==='Enter' || event.key===' ') {
@@ -157,7 +225,7 @@ if (mobile) {
       draw();if(!reducedMotion.matches) animate();
     });
     piece.element.addEventListener('pointerdown',event => {
-      if(event.button!==0 || dragging) return;
+      if(shed || event.button!==0 || dragging) return;
       const p=point(event);
       dragging={piece,id:event.pointerId,dx:p.x-piece.home[0]-piece.x,dy:p.y-piece.home[1]-piece.y,start:p,moved:false};
       piece.element.setPointerCapture(event.pointerId);
@@ -168,6 +236,7 @@ if (mobile) {
       if(Math.hypot(p.x-dragging.start.x,p.y-dragging.start.y)>4) dragging.moved=true;
       const x=clamp(p.x-piece.home[0]-dragging.dx),y=clamp(p.y-piece.home[1]-dragging.dy);
       shakeLoose(Math.min(80,Math.hypot(x-piece.x,y-piece.y)));
+      if (shed) return;
       piece.vx=(x-piece.x)*.4;piece.vy=(y-piece.y)*.4;piece.x=x;piece.y=y;
       draw();
     });
