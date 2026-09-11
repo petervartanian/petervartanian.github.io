@@ -25,7 +25,7 @@ https://petervartanian.xyz/cv/
 | **<img src="https://petervartanian.xyz/assets/logos/change.svg" width="20" height="20" alt=""> City Hub and Network for Gender Equity** | Jan. 2025 – May 2025 |
 | <img src="https://petervartanian.xyz/assets/logos/mission-action-lab-original.png" width="41" height="20" alt=""> OECD Mission Action Lab | Dec. 2024 – Jan. 2025 |
 | <img src="https://petervartanian.xyz/assets/logos/verum.png" width="20" height="20" alt=""> Verum Legalis: The Occidental College Law Review | Jan. 2024 – Jan. 2025 |
-| **<img src="https://petervartanian.xyz/assets/logos/unga-gold.png" width="23" height="20" alt=""> Office of the Chair of the First Committee of the UN General Assembly** | Aug. 2024 – Dec. 2024 |
+| **<img src="https://petervartanian.xyz/assets/logos/unga-emblem.png" width="24" height="20" alt=""> Office of the Chair of the First Committee of the UN General Assembly** | Aug. 2024 – Dec. 2024 |
 | <img src="https://petervartanian.xyz/assets/logos/uepi-transparent-trimmed.png" width="17" height="20" alt=""> Urban & Environmental Policy Institute at Occidental College | May 2024 – Aug. 2024 |
 | **<img src="https://petervartanian.xyz/assets/logos/hrca.png" width="39" height="20" alt=""> Human Rights Cities Alliance** | Jan. 2024 – May 2024 |
 | **<img src="https://petervartanian.xyz/assets/logos/oxy-seal.png" width="20" height="20" alt=""> McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy** | Mar. 2023 – May 2024 |
