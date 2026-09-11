@@ -1190,9 +1190,8 @@ body:has(#scene) #scene.legend-open .plot-tools{right:calc(var(--scene-edge,40px
 #dialog-content p,#dialog-content li,#dialog-content dd,#dialog-content h3{max-width:68ch}
 
 /* Title: the story and its actions sit against the right margin; the egg line speaks in monospace */
-.intro-story{margin-left:auto;text-align:right}
-.intro-actions{justify-content:flex-end}
-@media(max-width:560px){.intro-actions{align-items:flex-end}}
+.intro-story{margin-left:auto;max-width:696px;text-align:right}
+.intro-actions{justify-content:flex-start}
 .view-order{font-size:10px}
 .field-readout #egg-message{font-family:var(--mono);letter-spacing:0}
 .field-readout #egg-message strong{font-weight:700}
