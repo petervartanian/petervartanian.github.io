@@ -62,7 +62,7 @@ footer { text-align: center; border-top: 1px solid var(--line); color: var(--qui
 .venue, .credit, .dates, .quiet { font-size: 12px; color: var(--quiet); line-height: 1.55; }
 .venue { margin: 7px 0 2px; }
 .credit { margin-bottom: 0; }
-.note-ref { margin-left: 4px; padding: 6px 3px; }
+.note-ref { margin-left: 0; padding: 6px 0; }
 details { margin: 34px 0 27px; font-size: 12px; color: var(--quiet); }
 summary { cursor: pointer; color: var(--link); padding: 8px 0; }
 details p { margin: 13px 0; }
@@ -80,8 +80,8 @@ button { font-family: inherit; font-size: 12px; color: var(--link); background: 
 .experience-list li { margin-bottom: 20px; padding: 0; }
 .organization { line-height: 1.5; font-size: 15px; }
 .dates { margin: 3px 0 0; }
-sup { font-size: 9px; margin-left: 5px; }
-sup a { padding: 4px; }
+sup { font-size: 9px; margin-left: 0; }
+sup a { padding: 4px 0; }
 .education-item { margin-bottom: 27px; font-size: 14px; }
 .education-item p { margin: 7px 0; line-height: 1.65; }
 .education-group { margin: 15px 0; }
@@ -143,7 +143,7 @@ sup a { padding: 4px; }
 .contribution-key { margin-bottom: 22px; }
 .experience-note { display: grid; grid-template-columns: 24px minmax(0, 1fr); column-gap: 12px; align-items: start; margin: 0 0 12px; }
 .note-badge { display: inline-block; min-width: 22px; color: var(--link); font-size: 11px; line-height: inherit; text-align: center; text-decoration: none; }
-.experience-table sup .note-badge { min-width: 0; padding: 0 2px; font-size: 9px; }
+.experience-table sup .note-badge { min-width: 0; padding: 0; font-size: 9px; }
 a.note-badge:hover { text-decoration: underline; }
 .experience-note:last-child { margin-bottom: 0; }
 .experience-note:target { color: var(--link); }
