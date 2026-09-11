@@ -168,16 +168,9 @@ a.note-badge:hover { text-decoration: underline; }
   .profile-list > div { grid-template-columns: 95px 1fr; gap: 15px; font-size: 14px; }
   .profile-list dd { font-size: 12px; }
 }
-@media screen and (min-width: 601px) and (min-height: 600px) {
-  body[data-page=home] .page { height: 100svh; display: flex; flex-direction: column; }
-  body[data-page=home] header { padding-top: clamp(22px, 4vh, 45px); flex-shrink: 0; }
-  body[data-page=home] header nav { margin-top: 14px; }
-  body[data-page=home] main { flex: 1; min-height: 0; margin-top: 22px; }
-  body[data-page=home] .introduction { height: 100%; display: grid; grid-template-rows: repeat(3, max-content) minmax(120px, 1fr); }
-  body[data-page=home] .introduction > p { line-height: 1.6; margin-bottom: 14px; }
-  body[data-page=home] .mobile-figure { height: 100%; max-height: 250px; width: auto; max-width: 90%; aspect-ratio: 520 / 450; margin: 0 auto; align-self: center; }
-  body[data-page=home] .sculpture { height: 100%; }
-  body[data-page=home] footer { flex-shrink: 0; margin-top: 14px; padding: 12px 0 16px; }
+body[data-page=home] footer { border: 0; margin-top: 24px; padding: 12px 0 18px; text-align: right; font-size: 10px; }
+@media screen and (min-width: 601px) {
+  body[data-page=home] footer { position: fixed; right: 22px; bottom: 16px; margin: 0; padding: 0; }
 }
 @media print {
   body { background: white !important; color: #111 !important; }
