@@ -1012,6 +1012,7 @@ footer>span:first-child{letter-spacing:0;text-transform:none}
 #sphere-enter:focus-visible{outline:1px solid #d7eff077;outline-offset:12px}
 #scene[data-gateway="sphere"]> :not(.incident-gateway),#scene[data-gateway="disintegrating"]> :not(.incident-gateway){opacity:var(--gateway-reveal,0);pointer-events:none}
 #scene[data-gateway="sphere"]>.visual-column,#scene[data-gateway="disintegrating"]>.visual-column{opacity:0}
+#scene[data-gateway="disintegrating"]> :not(.incident-gateway){will-change:opacity}
 @media(prefers-reduced-motion:reduce){#scene[data-gateway]> :not(.incident-gateway){transition:none}}
 
 /* An event unfurls from its own marker, with the rest of the field out of focus. */
