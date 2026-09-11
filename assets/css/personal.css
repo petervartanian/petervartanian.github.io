@@ -67,8 +67,10 @@ details { margin: 34px 0 27px; font-size: 12px; color: var(--quiet); }
 summary { cursor: pointer; color: var(--link); padding: 8px 0; }
 details p { margin: 13px 0; }
 .elsewhere { font-size: 14px; margin-top: 33px; }
-.title-line { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
-.title-line h1 { margin-bottom: 20px; }
+.title-line { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.title-line h1 { margin: 0; }
+.print-button { border: 1px solid var(--line); border-radius: 3px; padding: 8px 12px; line-height: 1.2; text-decoration: none; }
+.print-button:hover { border-color: var(--link); }
 button { font-family: inherit; font-size: 12px; color: var(--link); background: none; border: 0; padding: 8px 0; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .section-text { font-weight: 700; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .cv-section { --subsection-gutter: 20px; margin-top: 38px; padding-left: 40px; }
@@ -165,6 +167,17 @@ a.note-badge:hover { text-decoration: underline; }
   .contact-list div { grid-template-columns: 43px 1fr; gap: 10px; }
   .profile-list > div { grid-template-columns: 95px 1fr; gap: 15px; font-size: 14px; }
   .profile-list dd { font-size: 12px; }
+}
+@media screen and (min-width: 601px) and (min-height: 600px) {
+  body[data-page=home] .page { height: 100svh; display: flex; flex-direction: column; }
+  body[data-page=home] header { padding-top: clamp(22px, 4vh, 45px); flex-shrink: 0; }
+  body[data-page=home] header nav { margin-top: 14px; }
+  body[data-page=home] main { flex: 1; min-height: 0; margin-top: 22px; }
+  body[data-page=home] .introduction { height: 100%; display: grid; grid-template-rows: repeat(3, max-content) minmax(120px, 1fr); }
+  body[data-page=home] .introduction > p { line-height: 1.6; margin-bottom: 14px; }
+  body[data-page=home] .mobile-figure { height: 100%; max-height: 250px; width: auto; max-width: 90%; aspect-ratio: 520 / 450; margin: 0 auto; align-self: center; }
+  body[data-page=home] .sculpture { height: 100%; }
+  body[data-page=home] footer { flex-shrink: 0; margin-top: 14px; padding: 12px 0 16px; }
 }
 @media print {
   body { background: white !important; color: #111 !important; }

@@ -232,7 +232,7 @@ def contact_label(label):
 
 
 contact = f'''<h1>Contact</h1>
-<p>I am happy to hear from you.</p>
+<p>I am happy to hear from you!</p>
 <table class="cv-table contact-table" aria-label="Contact details"><tbody><tr><th scope="row">{contact_label("Email")}</th><td><a href="mailto:peter.vartanian@icloud.com">peter.vartanian@icloud.com</a></td></tr><tr><th scope="row">{contact_label("Text")}</th><td><a href="sms:+17477869132">+1 747 786 9132</a></td></tr></tbody></table>
 <p class="profile-intro">You can also find me on:</p><table class="cv-table contact-table" aria-label="Profiles"><tbody>''' + ''.join(f'<tr><th scope="row">{contact_label(label)}</th><td><a href="{e(url)}">{e(profile_values[label])}</a></td></tr>' for label, url in socials) + '</tbody></table>'
 page('contact', 'Contact', 'Get in touch with Peter H. Vartanian.', contact, '/contact/')
