@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 const root = new URL('./', import.meta.url);
@@ -22,6 +22,13 @@ const [template, styles, app, dataset, severity, visuals, ontology, query, tempo
   readFile(new URL('assets/mit-airi-official.svg', root), 'utf8'),
   readFile(new URL('arrival.js', root), 'utf8'),
 ]);
+const fontsDir = new URL('assets/fonts/', root);
+const fontFiles = (await readdir(fontsDir)).filter((name) => /^spectral-\d+-(normal|italic)\.woff2$/.test(name)).sort();
+const fontFaces = (await Promise.all(fontFiles.map(async (name) => {
+  const [, weight, style] = name.match(/^spectral-(\d+)-(normal|italic)\.woff2$/);
+  const data = await readFile(new URL(name, fontsDir));
+  return `@font-face{font-family:Spectral;font-style:${style};font-weight:${weight};font-display:swap;src:url(data:font/woff2;base64,${data.toString('base64')}) format('woff2')}`;
+}))).join('');
 const parsed = JSON.parse(dataset);
 const encodings = JSON.parse(visuals);
 const incidentOntology = JSON.parse(ontology);
@@ -192,7 +199,7 @@ const html = template
   .replace('/* OPENING_AUTHOR */', () => htmlText(heroQuote.author))
   .replace('/* OPENING_URL */', () => htmlText(heroQuote.url))
   .replace('/* AIRI_LOGO */', () => `data:image/svg+xml;base64,${Buffer.from(airiLogo).toString('base64')}`)
-  .replace('/* STYLES */', () => styles)
+  .replace('/* STYLES */', () => fontFaces + styles)
   .replace('/* DATASET */', () => JSON.stringify(parsed).replace(/</g, '\\u003c'))
   .replace('/* SEVERITY */', () => JSON.stringify(assessments).replace(/</g, '\\u003c'))
   .replace('/* VISUALS */', () => JSON.stringify(encodings).replace(/</g, '\\u003c'))

@@ -1539,7 +1539,6 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('#framework-info').addEventListener('click', openFramework);
   function openCoverage(){openDialog('How much happened?',coverageContent());}
   $('#background-info').addEventListener('click',openCoverage);
-  $('#coverage-info').addEventListener('click',openCoverage);
   function fitEggMessage(message){const span=message.firstElementChild;if(!span)return;message.classList.remove('wrapped');message.style.fontSize='14px';const room=()=>message.clientWidth-24;let size=Math.min(14,14*room()/Math.max(1,span.scrollWidth));for(let i=0;i<12;i++){message.style.fontSize=`${Math.floor(size*10)/10}px`;if(span.scrollWidth<=room()||size<=9)break;size-=.2;}if(size<9||span.scrollWidth>room()){message.style.fontSize='9px';message.classList.add('wrapped');}}
   $('#hidden-egg').addEventListener('click', () => {
     starsUnlocked = !starsUnlocked;
@@ -1548,7 +1547,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
     if (!starsUnlocked) { showStar(null);const message=$('#egg-message');const done=()=>{message.hidden=true;$('.field-readout').classList.remove('egg-revealed');};if(reducedMotion.matches||message.hidden)done();else{const fade=message.animate([{opacity:1},{opacity:0}],{duration:240,easing:'ease-in'});fade.onfinish=done;fade.oncancel=done;}return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found the stars:</strong> over 70,000 messages and files beyond the ${events.length} events here, encoded as 1.2 million entries (in a cache of 20 million). But only OpenAI, Hugging Face and METR/Redwood can disclose the rest.</span>`;message.hidden=false;fitEggMessage(message);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found the stars:</strong> over 70,000 messages and files beyond the ${events.length} events here, encoded as 1.2 million entries (in a cache of 20 million). But only OpenAI, Hugging Face and METR/Redwood can disclose <button type="button" class="egg-link" id="egg-rest">the rest</button>.</span>`;message.hidden=false;fitEggMessage(message);message.querySelector('#egg-rest')?.addEventListener('click',openCoverage);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
@@ -1598,12 +1597,12 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   function attachBanner(animate){
     if(selectedSourceAnchor)focusAnchor=selectedSourceAnchor;
     else{const selected=(state.view==='bowtie'?bowPoints:points).find(point=>point.event.id===state.selected),rect=(state.view==='bowtie'?bowCanvas:timeline).getBoundingClientRect();focusAnchor=selected?{x:rect.left+selected.x,y:rect.top+selected.y}:{x:innerWidth/2,y:100};}
+    if(animate)veilShownAt=performance.now();
     focusBackground(true);positionBanner(animate);$('#detail-close').focus({preventScroll:true});
   }
   document.body.append($('#focus-origin'));
-  let veilPressed=false;
-  $('#event-focus .focus-veil').addEventListener('pointerdown',()=>{veilPressed=true;});
-  $('#event-focus .focus-veil').addEventListener('click',()=>{if(veilPressed)closeDetails();veilPressed=false;});
+  let veilShownAt=0;
+  $('#event-focus .focus-veil').addEventListener('click',()=>{if(performance.now()-veilShownAt>250)closeDetails();});
   window.addEventListener('resize',()=>{if(!$('#egg-message').hidden)fitEggMessage($('#egg-message'));if(focusAnchor?.lineLength){const hoist=document.querySelector(`.milestone[data-event="${state.selected}"]`);if(hoist){const r=hoist.getBoundingClientRect();focusAnchor.documentX=r.left+scrollX;focusAnchor.documentY=r.top+scrollY;focusAnchor.lineLength=r.width;}}positionBanner();});
   document.addEventListener('keydown',event=>{
     if(event.key!=='Tab'||detailPanel.hidden||$('#info-dialog').open)return;
@@ -1681,10 +1680,14 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const progress = Math.max(0, Math.min(1, -rect.top / distance));
     $('#scene').style.setProperty('--scroll-progress', String(progress));
     scrollGateway?.sync();
-    if(!detailPanel.hidden&&focusAnchor?.lineLength)positionBanner();
+    if(!detailPanel.hidden&&focusAnchor?.lineLength){const hoist=document.querySelector(`.milestone[data-event="${state.selected}"]`);if(hoist){const r=hoist.getBoundingClientRect();focusAnchor.documentX=r.left+scrollX;focusAnchor.documentY=r.top+scrollY;focusAnchor.lineLength=r.width;}positionBanner();}
 
   };
   window.addEventListener('scroll', () => { if (scrollFrame === null) scrollFrame = requestAnimationFrame(syncScroll); }, { passive: true });
+  $('#event-list').addEventListener('scroll', () => { if (scrollFrame === null) scrollFrame = requestAnimationFrame(syncScroll); }, { passive: true });
+  $('#back-to-title').addEventListener('click', (event) => { event.preventDefault(); closeDetails(); window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' }); });
+  $('#back-to-field').addEventListener('click', (event) => { event.preventDefault(); closeDetails(); scrollToField({ behavior: reducedMotion.matches ? 'auto' : 'smooth' }); });
+  $('#browse-records').addEventListener('click', (event) => { event.preventDefault(); $('#event-list').scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth', block: 'start' }); });
   $$('[data-status]').forEach((button) => { const count = events.filter((event) => event._status === button.dataset.status).length; button.querySelector('b').textContent = count; });
   window.HaruspexArrival?.init({events, palette:visualData.groups.map(group => group.fill), colorOf:event => eventStyle(event).fill});
   updateSeverityOptions(); renderWorkstreamLegend(); syncControls(); drawCosmos(); refresh(); syncScroll(); $('#bowtie-tab').tabIndex = -1; $('#cast-tab').tabIndex = -1; $('#scene').dataset.view = 'stream';
