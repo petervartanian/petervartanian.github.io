@@ -5,8 +5,7 @@
     "aliases": [
       "Occidental College",
       "Urban & Environmental Policy Institute at Occidental College",
-      "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy",
-      "Charles R. Blyth Fund at Occidental College"
+      "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy"
     ],
     "width": 20,
     "note": "Resized proportionally from the supplied PNG; seal artwork preserved."
@@ -193,6 +192,14 @@
     "source": "User-supplied Occidental Consulting Group logo",
     "aliases": [
       "Occidental Consulting Group"
+    ],
+    "width": 20
+  },
+  "blyth": {
+    "file": "blyth.png",
+    "source": "User-supplied Blyth Fund logo",
+    "aliases": [
+      "Charles R. Blyth Fund at Occidental College"
     ],
     "width": 20
   }

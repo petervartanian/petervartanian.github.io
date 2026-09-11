@@ -30,7 +30,7 @@ https://petervartanian.xyz/cv/
 | **<img src="https://petervartanian.xyz/assets/logos/hrca.png" width="40" height="20" alt=""> Human Rights Cities Alliance** | Jan. 2024 – May 2024 |
 | **<img src="https://petervartanian.xyz/assets/logos/oxy-seal.png" width="20" height="20" alt=""> McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy** | Mar. 2023 – May 2024 |
 | **<img src="https://petervartanian.xyz/assets/logos/bis.png" width="20" height="20" alt=""> Bureau of Industry and Security at the U.S. Department of Commerce** | Sep. 2023 – May 2024 |
-| <img src="https://petervartanian.xyz/assets/logos/oxy-seal.png" width="20" height="20" alt=""> Charles R. Blyth Fund at Occidental College | Apr. 2023 – May 2024 |
+| <img src="https://petervartanian.xyz/assets/logos/blyth.png" width="20" height="20" alt=""> Charles R. Blyth Fund at Occidental College | Apr. 2023 – May 2024 |
 | <img src="https://petervartanian.xyz/assets/logos/austria.png" width="20" height="20" alt=""> Austrian Service Abroad | May 2023 – Aug. 2023 |
 | <img src="https://petervartanian.xyz/assets/logos/state.png" width="20" height="20" alt=""> U.S. Mission to International Organizations in Vienna | Sep. 2022 – May 2023 |
 | <img src="https://petervartanian.xyz/assets/logos/ocg.png" width="20" height="20" alt=""> Occidental Consulting Group | Sep. 2022 – May 2023 |
