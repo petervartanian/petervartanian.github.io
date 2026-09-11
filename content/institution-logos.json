@@ -59,9 +59,8 @@
     "width": 20
   },
   "pon": {
-    "file": "pon.png",
-    "source": "https://www.pon.harvard.edu/wp-content/themes/pon-haven-foundation-6/img/pon-harvard-shield-logo.png",
-    "bytes": 11217,
+    "file": "program-on-negotiation.png",
+    "source": "User-supplied Program on Negotiation logo",
     "aliases": [
       "The Program on Negotiation at Harvard Law School"
     ],

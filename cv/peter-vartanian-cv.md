@@ -21,7 +21,7 @@ https://petervartanian.xyz/cv/
 | **<img src="https://petervartanian.xyz/assets/logos/hoover.png" width="20" height="20" alt=""> Hoover Institution on War, Revolution, and Peace at Stanford University** | Aug. 2025 – Aug. 2025 |
 | Director’s Award from Fmr. SecState Condoleezza Rice | Feb. 2026 |
 | **<img src="https://petervartanian.xyz/assets/logos/nti.png" width="30" height="20" alt=""> FutureSafe at the Nuclear Threat Initiative** | Jun. 2025 – Aug. 2025 |
-| **<img src="https://petervartanian.xyz/assets/logos/pon.png" width="20" height="20" alt=""> The Program on Negotiation at Harvard Law School** | Jan. 2025 – May 2025 |
+| **<img src="https://petervartanian.xyz/assets/logos/program-on-negotiation.png" width="20" height="20" alt=""> The Program on Negotiation at Harvard Law School** | Jan. 2025 – May 2025 |
 | **<img src="https://petervartanian.xyz/assets/logos/change.svg" width="20" height="20" alt=""> City Hub and Network for Gender Equity** | Jan. 2025 – May 2025 |
 | <img src="https://petervartanian.xyz/assets/logos/mission-action-lab.png" width="20" height="20" alt=""> OECD Mission Action Lab | Dec. 2024 – Jan. 2025 |
 | <img src="https://petervartanian.xyz/assets/logos/verum.png" width="20" height="20" alt=""> Verum Legalis: The Occidental College Law Review | Jan. 2024 – Jan. 2025 |
