@@ -66,10 +66,13 @@ Honors
 
 - GPA: 3.97/4.00
 - *Summa cum Laude*
+- ΦBK (elected as a junior) Oct. 2024
+
+Awards & distinctions
+
 - DWA Award for Exemplary Achievement in Academic and Co-curricular Activities May 2025
 - DWA Prize for Best Thesis Overall May 2025
 - Alternate selection for the James C. Gaither Junior Fellowship at the Carnegie Endowment for International Peace Mar. 2025
-- ΦBK (elected as a junior) Oct. 2024
 - Critical Language Scholarship Mar. 2024
 - Gilman International Scholarship Dec. 2023
 

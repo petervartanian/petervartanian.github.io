@@ -190,8 +190,11 @@ def experience_rows(rows):
     return result
 
 
-def institution_honors(institution):
-    return ''.join(f'<li><span class="education-award"><span>{e(item["title"])}</span> <span class="education-award-date">{e(item["date"])}</span></span></li>' for item in cv['institution_honors'][institution])
+def institution_honors(institution, academic=False):
+    items = cv['institution_honors'][institution]
+    if institution == 'Occidental College':
+        items = [item for item in items if item['title'].startswith('ΦBK') == academic]
+    return ''.join(f'<li><span class="education-award"><span>{e(item["title"])}</span> <span class="education-award-date">{e(item["date"])}</span></span></li>' for item in items)
 
 experience = '<h3>Current</h3><table class="cv-table experience-table" aria-label="Current experience and dates"><tbody>' + experience_rows(cv['experience'][:1]) + '</tbody></table><h3>Previous</h3><table class="cv-table experience-table" aria-label="Previous experience and dates"><tbody>' + experience_rows(cv['experience'][1:]) + '</tbody></table>'
 
@@ -215,8 +218,10 @@ for section in cv['sections']:
 <p class="dates"><span class="date-part">Aug. 2021 –</span> <span class="date-part">May 2025</span></p>
 <div class="education-group"><p>Bachelor of Arts with Honors</p>
 <ul class="education-list"><li><span class="education-label">Major #1</span>: Stuart Chevalier Program in Diplomacy + World Affairs (DWA)</li><li><span class="education-label">Major #2</span>: Comparative Studies in Literature + Culture (CSLC)</li></ul></div>
-<div class="education-group" id="honors"><span id="awards" aria-hidden="true"></span><p>Honors</p>
-<ul class="education-list"><li>GPA: 3.97/4.00</li><li><em>Summa cum Laude</em></li>{institution_honors("Occidental College")}</ul></div></div>
+<div class="education-group" id="honors"><p>Honors</p>
+<ul class="education-list"><li>GPA: 3.97/4.00</li><li><em>Summa cum Laude</em></li>{institution_honors("Occidental College", academic=True)}</ul></div>
+<div class="education-group" id="awards"><p>Awards &amp; distinctions</p>
+<ul class="education-list">{institution_honors("Occidental College")}</ul></div></div>
 <div class="education-item"><h3>California Institute of Technology</h3>
 <p class="dates"><span class="date-part">Aug. 2021 –</span> <span class="date-part">May 2025</span></p>
 <div class="education-group"><p>Special Student</p>
