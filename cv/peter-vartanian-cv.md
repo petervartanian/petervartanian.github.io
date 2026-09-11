@@ -10,14 +10,14 @@ https://petervartanian.xyz/cv/
 
 | Organization | Dates |
 | --- | --- |
-| **MIT AI Risk Initiative & Arcola AI**[^i] | Jun. 2026 – Present |
+| **MIT AI Risk Initiative & Arcola AI** [^i] | Jun. 2026 – Present |
 
 ### Previous
 
 | Organization | Dates |
 | --- | --- |
-| **AI Risk Explorer**[^ii] | Feb. 2026 – Jun. 2026 |
-| **Family Office**[^iii] | Sep. 2025 – Jun. 2026 |
+| **AI Risk Explorer** [^ii] | Feb. 2026 – Jun. 2026 |
+| **Family Office** [^iii] | Sep. 2025 – Jun. 2026 |
 | **Hoover Institution on War, Revolution, and Peace at Stanford University** | Aug. 2025 – Aug. 2025 |
 | **FutureSafe at the Nuclear Threat Initiative** | Jun. 2025 – Aug. 2025 |
 | **The Program on Negotiation at Harvard Law School** | Jan. 2025 – May 2025 |
@@ -33,14 +33,14 @@ https://petervartanian.xyz/cv/
 | Austrian Service Abroad | May 2023 – Aug. 2023 |
 | U.S. Mission to International Organizations in Vienna | Sep. 2022 – May 2023 |
 | Occidental Consulting Group | Sep. 2022 – May 2023 |
-| Wolf Theiss[^iv] | Dec. 2022 – Jan. 2023 |
+| Wolf Theiss [^iv] | Dec. 2022 – Jan. 2023 |
 | European Forum Alpbach | May 2022 – Aug. 2022 |
 | The Occidental Newspaper | Sep. 2021 – May 2022 |
 | Wolf Theiss | Dec. 2021 – Jan. 2022 |
 
 ### Notes
 
-**Bold entries** indicate primary authorship or substantive responsibility for the work undertaken.
+**Bold entries** indicate primary authorship or substantive responsibility for my work undertaken.
 
 [^i]: Facilitated by the [Cambridge Boston Alignment Initiative](https://www.cbai.ai/) (CBAI) and [Coefficient Giving](https://coefficientgiving.org/).
 

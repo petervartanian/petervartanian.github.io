@@ -123,7 +123,7 @@ def writing_row(item, index):
     note = {1: '†', 2: '‡', 4: '§'}.get(index, '')
     credit = item['credit'].replace(note, '').strip() if note else item['credit']
     credit_lines = '<br>'.join(e(part.strip()) for part in credit.split(' · '))
-    note_link = f' <a class="note-ref" href="#publication-note-{index}" aria-label="Publication note {note}">{note}</a>' if note else ''
+    note_link = f'&nbsp;<a class="note-ref" href="#publication-note-{index}" aria-label="Publication note {note}">{note}</a>' if note else ''
     return f'''<li class="publication">
   <a class="publication-title" href="{e(item['url'])}">{title}</a>
   <p class="venue"><em>{e(item['venue'])}</em></p>
@@ -168,7 +168,7 @@ def org_name(text):
     for marker in markers:
         if marker == '*': continue
         number = len(marker) - 1
-        name += f'<sup><a class="note-badge" href="#experience-note-{number}" aria-label="Experience note {NOTE_NUMERALS[number]}">{NOTE_NUMERALS[number]}</a></sup>'
+        name += f'&nbsp;<sup><a class="note-badge" href="#experience-note-{number}" aria-label="Experience note {NOTE_NUMERALS[number]}">{NOTE_NUMERALS[number]}</a></sup>'
     return name
 
 
@@ -195,7 +195,7 @@ cv_notes = [
     'Supported by a micro-grant from a confidential European family office.',
     'Undertaken as a return engagement.'
 ]
-experience_notes = '<aside id="experience-notes" class="experience-notes" aria-labelledby="experience-notes-title"><h3 id="experience-notes-title">Notes</h3><p class="contribution-key"><span class="primary-contribution">Shaded entries</span> indicate primary authorship or substantive responsibility for the work undertaken.</p>' + ''.join(f'<p class="experience-note" id="experience-note-{i}"><span class="note-badge">{NOTE_NUMERALS[i]}</span><span>{note}</span></p>' for i, note in enumerate(cv_notes, 1)) + '</aside>'
+experience_notes = '<aside id="experience-notes" class="experience-notes" aria-labelledby="experience-notes-title"><h3 id="experience-notes-title">Notes</h3><p class="contribution-key"><span class="primary-contribution">Shaded entries</span> indicate primary authorship or substantive responsibility for my work undertaken.</p>' + ''.join(f'<p class="experience-note" id="experience-note-{i}"><span class="note-badge">{NOTE_NUMERALS[i]}</span><span>{note}</span></p>' for i, note in enumerate(cv_notes, 1)) + '</aside>'
 cv_sections = ''
 for section in cv['sections']:
     if section['label'] == 'Education':
