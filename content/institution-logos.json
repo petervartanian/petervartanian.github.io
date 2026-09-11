@@ -150,14 +150,14 @@
     "width": 40
   },
   "nti": {
-    "file": "nti.png",
-    "source": "https://images.seeklogo.com/logo-png/37/1/nuclear-threat-initiative-nti-logo-png_seeklogo-373879.png",
-    "bytes": 15282,
+    "file": "nti-globe.png",
+    "source": "User-supplied NTI logo",
     "aliases": [
       "FutureSafe at the Nuclear Threat Initiative",
       "Nuclear Threat Initiative"
     ],
-    "width": 30
+    "width": 20,
+    "note": "Cropped to the red globe only; wordmark, rules, and tagline omitted."
   },
   "oecd": {
     "file": "mission-action-lab.png",
