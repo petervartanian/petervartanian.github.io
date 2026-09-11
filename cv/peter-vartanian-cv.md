@@ -16,7 +16,7 @@ https://petervartanian.xyz/cv/
 
 | Organization | Dates |
 | --- | --- |
-| **<img src="https://petervartanian.xyz/assets/logos/aire.png" width="20" height="20" alt=""> AI Risk Explorer**[^ii] | Feb. 2026 – Jun. 2026 |
+| **<img src="https://petervartanian.xyz/assets/logos/ai-risk-explorer.png" width="20" height="20" alt=""> AI Risk Explorer**[^ii] | Feb. 2026 – Jun. 2026 |
 | **<img src="https://petervartanian.xyz/assets/logos/family.svg" width="20" height="20" alt=""> Family Office**[^iii] | Sep. 2025 – Jun. 2026 |
 | **<img src="https://petervartanian.xyz/assets/logos/hoover.png" width="20" height="20" alt=""> Hoover Institution on War, Revolution, and Peace at Stanford University** | Aug. 2025 – Aug. 2025 |
 | Director’s Award from Fmr. SecState Condoleezza Rice | Feb. 2026 |

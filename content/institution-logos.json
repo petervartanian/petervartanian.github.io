@@ -40,13 +40,13 @@
     "source_page": "https://uk.linkedin.com/company/arcola-ai"
   },
   "aire": {
-    "file": "aire.png",
-    "source": "https://www.airiskexplorer.com/favicon.ico",
-    "bytes": 5801,
+    "file": "ai-risk-explorer.png",
+    "source": "User-supplied AI Risk Explorer logo",
     "aliases": [
       "AI Risk Explorer"
     ],
-    "width": 20
+    "width": 20,
+    "note": "Transparent margins trimmed; artwork proportionally fitted within a square."
   },
   "hoover": {
     "file": "hoover.png",
