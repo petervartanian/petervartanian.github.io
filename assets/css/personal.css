@@ -88,6 +88,7 @@ sup a { padding: 4px 0; }
 .academic-record { margin-top: 22px; }
 .academic-record h4 { margin: 0 0 12px; font-size: 14px; font-weight: 700; }
 .academic-record .education-group { margin: 12px 0 16px 20px; }
+.academic-record .record-label { color: var(--quiet); font-size: 13px; }
 .academic-record .education-list { margin-left: 0; }
 .education-list { margin: 7px 0 0 20px; padding-left: 16px; list-style: disc; font-size: 13px; line-height: 1.65; }
 .education-list li { padding-left: 2px; margin: 3px 0; }
