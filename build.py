@@ -227,7 +227,7 @@ page('cv', 'CV', 'Education, experience, languages, and research methods.', abou
 (ROOT / 'cv/peter-vartanian-cv.md').write_text(export_cv(about))
 
 socials = [('LinkedIn', 'https://www.linkedin.com/in/petervartanian/'), ('Substack', 'https://substack.com/@petersmemos'), ('GitHub', 'https://github.com/petervartanian'), ('Hugging Face', 'https://huggingface.co/petervartanian'), ('X', 'https://x.com/petersmemos'), ('Google Scholar', 'https://scholar.google.com/citations?user=DuD0EXEAAAAJ'), ('ORCID', 'https://orcid.org/0009-0009-8538-5811')]
-social_order = ['Substack', 'X', 'LinkedIn', 'Google Scholar', 'ORCID', 'GitHub', 'Hugging Face']
+social_order = ['LinkedIn', 'Substack', 'GitHub', 'X', 'Hugging Face', 'Google Scholar', 'ORCID']
 socials.sort(key=lambda item: social_order.index(item[0]))
 profile_values = {'LinkedIn': '@petervartanian', 'Substack': '@petersmemos', 'GitHub': '@petervartanian', 'Hugging Face': '@petervartanian', 'X': '@petersmemos', 'Google Scholar': 'DuD0EXEAAAAJ', 'ORCID': '0009-0009-8538-5811'}
 def contact_label(label):
