@@ -219,16 +219,16 @@ for section in cv['sections']:
 <div class="education-group"><p>Bachelor of Arts with Honors</p>
 <ul class="education-list"><li><span class="education-label">Major #1</span>: Stuart Chevalier Program in Diplomacy + World Affairs (DWA)</li><li><span class="education-label">Major #2</span>: Comparative Studies in Literature + Culture (CSLC)</li></ul></div>
 <section class="academic-record"><h4>Distinctions</h4>
-<div class="education-group" id="honors"><p class="record-label">Academic honors</p>
+<div class="education-group" id="honors"><p class="record-label">Honors</p>
 <ul class="education-list"><li>GPA: 3.97/4.00</li><li><em>Summa cum Laude</em></li>{institution_honors("Occidental College", academic=True)}</ul></div>
-<div class="education-group" id="awards"><p class="record-label">Awards &amp; scholarships</p>
+<div class="education-group" id="awards"><p class="record-label">Awards</p>
 <ul class="education-list">{institution_honors("Occidental College")}</ul></div></section></div>
 <div class="education-item"><h3>California Institute of Technology</h3>
 <p class="dates"><span class="date-part">Aug. 2021 –</span> <span class="date-part">May 2025</span></p>
 <div class="education-group"><p>Special Student</p>
 <ul class="education-list"><li><span class="education-label">Field of study</span>: Social Science (SS)</li></ul></div>
 <section class="academic-record"><h4>Distinctions</h4>
-<div class="education-group"><p class="record-label">Academic honors</p><ul class="education-list"><li>GPA: 4.00/4.00</li></ul></div>
+<div class="education-group"><p class="record-label">Honors</p><ul class="education-list"><li>GPA: 4.00/4.00</li></ul></div>
 <div class="education-group"><p class="record-label">Awards</p><ul class="education-list">{institution_honors("California Institute of Technology")}</ul></div></section></div>'''
     elif section['label'].startswith('Languages'):
         label, anchor = 'Languages', 'languages'

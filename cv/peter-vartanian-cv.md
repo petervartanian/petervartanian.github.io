@@ -64,13 +64,13 @@ Bachelor of Arts with Honors
 
 #### Distinctions
 
-Academic honors
+Honors
 
 - GPA: 3.97/4.00
 - *Summa cum Laude*
 - ΦBK (elected as a junior) Oct. 2024
 
-Awards & scholarships
+Awards
 
 - DWA Award for Exemplary Achievement in Academic and Co-curricular Activities May 2025
 - DWA Prize for Best Thesis Overall May 2025
@@ -88,7 +88,7 @@ Special Student
 
 #### Distinctions
 
-Academic honors
+Honors
 
 - GPA: 4.00/4.00
 
