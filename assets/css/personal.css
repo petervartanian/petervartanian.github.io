@@ -11,6 +11,8 @@
   --line: #3f354420;
 }
 * { box-sizing: border-box; }
+img { pointer-events: none; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
+svg, canvas { -webkit-touch-callout: none; }
 html { scroll-padding-top: 30px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; background: var(--paper); color: var(--ink); }
 body[data-page=writing] { --paper: #faf5f3; --ink: #483639; --link: #884d5a; --quiet: #7c686a; --line: #48363920; }

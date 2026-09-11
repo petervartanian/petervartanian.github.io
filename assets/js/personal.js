@@ -1,4 +1,12 @@
 'use strict';
+// Keep artwork decorative without disabling ordinary link and text menus.
+for (const eventName of ['contextmenu', 'dragstart']) {
+  document.addEventListener(eventName, event => {
+    if (event.target instanceof Element && event.target.closest('img, picture, svg, canvas')) {
+      event.preventDefault();
+    }
+  });
+}
 // Native links handle navigation and the always-visible notes.
 
 // The mobile rests until someone moves it; springs let it settle again.
