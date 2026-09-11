@@ -18,7 +18,7 @@
       <div class="intro-main">
         <div class="opening-quotation" id="opening-quotation">
           <h1 id="intro-title">“/* OPENING_QUOTE */”</h1>
-          <p class="quote-credit"><a id="quote-source" href="/* OPENING_URL */" target="_blank" rel="noopener noreferrer">/* OPENING_AUTHOR */, METR</a><span id="quote-role">Dwarkesh Podcast, 02:15:58</span></p>
+          <p class="quote-credit"><a id="quote-source" href="/* OPENING_URL */" target="_blank" rel="noopener noreferrer" aria-label="Ajeya Cotra"><svg viewBox="0 0 152 24" aria-hidden="true"><text x="0" y="19" textLength="152" lengthAdjust="spacing">/* OPENING_AUTHOR */</text></svg></a><span id="quote-role"><svg viewBox="0 0 152 20" role="img" aria-label="Member of Technical Staff at Model Evaluation &amp; Threat Research"><text x="0" y="14" textLength="152" lengthAdjust="spacing">M.T.S. @ METR</text></svg></span></p>
         </div>
         <p class="intro-story">In mid-July 2026, AI agents under evaluation at OpenAI broke into Hugging Face, a ~<a href="https://blogs.nvidia.com/blog/nvidia-to-acquire-hugging-face/" target="_blank" rel="noopener noreferrer" title="NVIDIA’s September 2026 acquisition announcement">$13B</a> hub for AI models and datasets. Roughly <a href="https://www.planned-obsolescence.org/p/the-hugging-face-attack-surprised" target="_blank" rel="noopener noreferrer">700 agents</a> collaborated in the attack, with the <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/" target="_blank" rel="noopener noreferrer">later intrusions</a> targeting OpenAI itself. Evidently, AI systems are now capable of organizing sustained attacks that no human had ordered.</p>
         <p class="intro-story">Preventing a worse recurrence of this incident requires reconstructing, event by event, <span class="aim">(i)</span> how control failed, <span class="aim">(ii)</span> which interventions could have prevented or curtailed the attacks, and <span class="aim">(iii)</span> whether the protections that limited the damage would withstand more capable agents.</p>
@@ -39,9 +39,9 @@
         <header class="masthead">
           <a class="brand" href="#" aria-label="Haruspex, return to event swarm">Haruspex<span aria-hidden="true">·</span></a>
           <div class="view-tabs" role="tablist" aria-label="Visualization view">
-            <button id="stream-tab" role="tab" aria-selected="true" aria-controls="stream-view" class="view-tab active">Event-swarm</button>
-            <button id="bowtie-tab" role="tab" aria-selected="false" aria-controls="bowtie-view" class="view-tab">Bow-tie</button>
-            <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab">Why control failed</button>
+            <button id="stream-tab" role="tab" aria-selected="true" aria-controls="stream-view" class="view-tab active"><span class="view-order">View #1:</span> Event-swarm</button>
+            <button id="bowtie-tab" role="tab" aria-selected="false" aria-controls="bowtie-view" class="view-tab"><span class="view-order">View #2:</span> Bow-tie</button>
+            <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab"><span class="view-order">Bonus:</span> Investigate!</button>
           </div>
           <details id="resource-menu" class="resource-menu">
             <summary aria-label="Resources">More <span aria-hidden="true">⌄</span></summary>
