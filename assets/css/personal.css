@@ -88,8 +88,9 @@ sup a { padding: 4px 0; }
 .education-item { margin-bottom: 27px; font-size: 14px; }
 .education-item p { margin: 7px 0; line-height: 1.65; }
 .education-group { margin: 15px 0; }
-.academic-record { margin-top: 18px; }
-.academic-record h4 { margin: 0 0 10px; font-size: 13px; font-weight: 700; }
+.academic-record { margin: 18px 0 0; color: var(--ink); }
+.academic-record > summary { padding: 4px 0; font-size: 13px; font-weight: 700; color: var(--ink); }
+.academic-record > summary::marker { color: var(--quiet); font-size: 10px; }
 .academic-record .education-group { margin: 10px 0 14px 20px; }
 .academic-record .record-label { color: var(--quiet); font-size: 12px; }
 .academic-record .education-list { margin-left: 0; font-size: 12px; }

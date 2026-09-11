@@ -23,6 +23,7 @@ def export_cv(html):
         lines = [headers, ['---', '---']] + rows
         return '\n\n' + '\n'.join('| ' + ' | '.join(row) + ' |' for row in lines) + '\n\n'
 
+    html = re.sub(r'<summary>(.*?)</summary>', r'<h4>\1</h4>', html)
     html = re.sub(r'<a[^>]*class="download-button"[^>]*>.*?</a>', '', html)
     html = html.replace('Shaded entries', 'Bold entries')
     html = re.sub(r'<p class="experience-note"[^>]*><span class="note-badge">(.*?)</span><span>(.*?)</span></p>',
