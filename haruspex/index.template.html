@@ -36,6 +36,7 @@
           <button id="sphere-enter" aria-label="Enter the OpenAI–Hugging Face incident"><span class="sr-only">Enter the OpenAI–Hugging Face incident</span></button>
         </div>
         <canvas id="cosmos" aria-hidden="true"></canvas>
+        <div class="field-header">
         <header class="masthead">
           <a class="brand" href="#" aria-label="Haruspex, return to event swarm">Haruspex<span aria-hidden="true">·</span></a>
           <div class="view-tabs" role="tablist" aria-label="Visualization view">
@@ -54,12 +55,10 @@
           </details>
           <a id="back-to-title" class="back-up" href="#intro">↑ Title</a>
         </header>
-        <div id="inquiry-context" class="inquiry-context" hidden><button id="return-inquiry"></button><button id="clear-inquiry" aria-label="Show all events">×</button></div>
-        <canvas id="star-lens" aria-hidden="true" hidden></canvas><div id="star-number" class="star-number" hidden aria-live="off"></div>
         <div class="scene-heading">
           <h2 id="page-title" class="sr-only">OpenAI and Hugging Face incident explorer</h2>
           <div class="scene-actions">
-            <label class="search"><span aria-hidden="true">⌕</span><input type="search" id="event-search" placeholder="Search events, people, systems…" aria-describedby="query-feedback" aria-label="Search events"><kbd>/</kbd></label><button id="query-help" class="query-help" aria-label="Search guide">?</button>
+            <button id="search-toggle" class="search-toggle" aria-label="Search events" aria-expanded="false" aria-controls="event-search search-results"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></button><label class="search"><span aria-hidden="true">⌕</span><input type="search" id="event-search" placeholder="Search events, people, systems…" aria-describedby="query-feedback" aria-label="Search events"><kbd>/</kbd></label><button id="query-help" class="query-help" aria-label="Search guide">?</button>
             <button id="filter-toggle" aria-expanded="false" aria-controls="advanced-filters">Filters <span id="filter-indicator"></span><span aria-hidden="true">⌄</span></button>
           </div>
           <p id="query-feedback" class="query-feedback" role="status" hidden></p>
@@ -79,7 +78,11 @@
             <button data-assessment="unresolved" aria-pressed="false">Unresolved <span id="assessment-unresolved-count" class="assessment-count">61</span></button>
           </div>
           <span class="plot-period" id="plot-period">7–14 July 2026</span>
+          <button id="tools-toggle" aria-label="Field navigation" aria-expanded="false" aria-controls="field-navigation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2.5"/><circle cx="15" cy="17" r="2.5"/></svg></button>
         </div>
+        </div>
+        <div id="inquiry-context" class="inquiry-context" hidden><button id="return-inquiry"></button><button id="clear-inquiry" aria-label="Show all events">×</button></div>
+        <canvas id="star-lens" aria-hidden="true" hidden></canvas><div id="star-number" class="star-number" hidden aria-live="off"></div>
         <section id="stage-panel" class="stage-panel" aria-label="Browse incident stages" hidden>
           <div class="stage-panel-head"><button id="all-stages">All stages</button><span id="stage-context"></span><button id="stage-structure">Incident structure</button><button id="stage-close" aria-label="Close stages">×</button></div>
           <div id="stage-list" class="stage-list"></div>
@@ -111,7 +114,7 @@
           <div id="comet-layer" class="comet-layer" hidden>
             <div id="undated-records" class="undated-records" role="group" aria-label="Events with an unknown start and a by-date bound" hidden></div>
           </div>
-          <div class="plot-tools" role="group" aria-label="Field navigation">
+          <div id="field-navigation" class="plot-tools" role="group" aria-label="Field navigation">
             <div class="axis-zoom"><span>Time ↔</span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
             <div class="axis-zoom"><span>Severity ↕</span><button id="zoom-y-out" aria-label="Zoom out vertically">−</button><button id="zoom-y-in" aria-label="Zoom in vertically">+</button></div>
             <button id="zoom-fit" class="fit-field" aria-label="Fit matching events on both axes">Fit</button>

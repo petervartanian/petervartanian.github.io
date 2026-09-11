@@ -418,12 +418,14 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   }
   function drawTimeAxes(ctx, { width, height, left, right, top, bottom, lanes }) {
     const narrow = width < 560;
+    const compactLabels = (bottom - top) / lanes.length < 36;
     const xScale = (time) => left + ((time - state.range[0]) / (state.range[1] - state.range[0])) * (right - left);
     const labelX = narrow ? 12 : 26;
     for (const lane of lanes) {
       if (lane.end <= state.vertical[0] || lane.start >= state.vertical[1]) continue;
       const y = state.assessment === 'impact' ? Math.max(top + 13, Math.min(bottom - 14, lane.y)) : top + 21;
-      const size = narrow ? 22 : 27;
+      const showCount = (!compactLabels && lane.height >= 36) || state.assessment !== 'impact';
+      const size = compactLabels ? 18 : narrow ? 22 : 27;
       const textX = lane.symbol ? labelX + size + (narrow ? 7 : 11) : labelX;
       ctx.strokeStyle = lane.count ? '#D0DADF77' : '#71828A55'; ctx.lineWidth = .8;
       ctx.fillStyle = lane.count ? '#ECF2F4' : '#98A4AB';
@@ -432,18 +434,20 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
         ctx.textAlign = 'center'; ctx.font = `${narrow ? 11 : 14}px "SFMono-Regular",Consolas,monospace`;
         ctx.fillText(lane.symbol, labelX + size / 2, y + (narrow ? 1 : 2));
       }
-      ctx.textAlign = 'left'; ctx.font = `${narrow ? 9 : 12}px "Helvetica Neue",Arial,sans-serif`;
+      ctx.textAlign = 'left'; ctx.font = `${narrow ? 10 : 12}px "Helvetica Neue",Arial,sans-serif`;
       const label = lane.name;
-      ctx.fillText(label, textX, y - 3);
-      ctx.font = `${narrow ? 8 : 9}px "Helvetica Neue",Arial,sans-serif`; ctx.fillStyle = '#80909A';
-      ctx.fillText(state.assessment === 'impact' ? `${lane.count} ${lane.count === 1 ? 'event' : 'events'}` : 'No severity rank', textX, y + 11);
+      ctx.fillText(label, textX, showCount ? y - 3 : y + 1);
+      if (showCount) {
+        ctx.font = '9px "Helvetica Neue",Arial,sans-serif'; ctx.fillStyle = '#80909A';
+        ctx.fillText(state.assessment === 'impact' ? `${lane.count} ${lane.count === 1 ? 'event' : 'events'}` : 'No severity rank', textX, y + 11);
+      }
     }
     const tickCount = narrow ? 4 : width < 900 ? 6 : 9;
     for (let i = 0; i < tickCount; i += 1) {
       const time = state.range[0] + ((state.range[1] - state.range[0]) * i) / (tickCount - 1);
       const x = xScale(time);
       ctx.strokeStyle = '#93AABD38'; ctx.lineWidth = .6; ctx.beginPath(); ctx.moveTo(x, bottom + 10); ctx.lineTo(x, bottom + 15); ctx.stroke();
-      ctx.fillStyle = '#91A3B1'; ctx.font = `${narrow ? 8 : 10}px "Helvetica Neue",Arial,sans-serif`;
+      ctx.fillStyle = '#91A3B1'; ctx.font = '10px "Helvetica Neue",Arial,sans-serif';
       ctx.textAlign = i === 0 ? 'left' : i === tickCount - 1 ? 'right' : 'center';
       const label = state.range[1] - state.range[0] < DAY * 1.5 ? new Date(time).toISOString().slice(11, 16) : shortDate(time);
       ctx.fillText(label, x, bottom + 29);
@@ -457,8 +461,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const narrow = width < 560;
     const left = narrow ? 105 : width < 900 ? 155 : 172;
     const right = width - (narrow ? 20 : 36);
-    const top = (width <= 1000 ? 250 : 156) + (state.investigation && width <= 1000 ? 40 : 0);
-    const bottom = Math.max(top + 120, height - (narrow ? 170 : 152));
+    const { top, bottom } = fieldBounds(height);
     const definitions = facetBands();
     const weightTotal = definitions.reduce((sum, band) => sum + weightByBand.get(band.key), 0);
     const minimumBand = Math.min(.99 / definitions.length, (narrow ? 28 : 32) / Math.max(1, bottom - top));
@@ -841,8 +844,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const focused = groupEvents.find((group) => group.key === state.lifecycle);
     const selectedFocus = document.activeElement?.dataset.bowGroup;
     if (!camera) $('#bowtie-navigation').innerHTML = `<button data-bow-group="" aria-pressed="${!focused}">Overview</button>${groupEvents.map((group) => `<button data-bow-group="${group.key}" aria-pressed="${group.key === state.lifecycle}">${group.label}</button>`).join('')}`;
-    const fieldTop = (width <= 1000 ? 256 : 156) + (state.investigation && width <= 1000 ? 40 : 0);
-    const fieldBottom = Math.max(fieldTop + 130, height - (narrow ? 166 : 146));
+    const { top: fieldTop, bottom: fieldBottom } = fieldBounds(height);
     const centerY = (fieldTop + fieldBottom) / 2;
     const spread = Math.max(40, (fieldBottom - fieldTop) * .44);
     const margin = narrow ? 25 : 65;
@@ -1087,8 +1089,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   }
   function syncControls() {
     $('.reading-note').textContent = state.view === 'stream' ? 'Drag to move, and scroll to zoom. Click an event to open it. Hold Shift for time only, Alt for severity only.' : 'Select an event to inspect its evidence.';
-    $('.legend .toggle').hidden = false;
-    $('.legend .toggle').style.visibility = state.view === 'stream' ? '' : 'hidden';
+    $('.legend .toggle').hidden = state.view !== 'stream';
     $('.legend .toggle').inert = state.view !== 'stream';
     $('#workstream-legend').classList.toggle('has-filter', state.workstream !== 'all');
     $$('#workstream-legend [data-workstream-key]').forEach((button) => button.setAttribute('aria-pressed', String(state.workstream === button.dataset.workstreamKey)));
@@ -1105,6 +1106,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#active-filter').hidden = !extras.length; $('#active-filter').textContent = `${extras.join(' · ')} ×`;
     const filterCount = Number(state.stage !== 'all') + Number(state.workstream !== 'all') + Number(state.severity !== 'all') + Number(state.interventions) + Number(state.temporal !== 'all') + (4 - state.statuses.size);
     $('#filter-indicator').textContent = filterCount || '';
+    $('#search-toggle').classList.toggle('has-query', !!state.search.trim());
     syncRangeInputs();
     $('#query-feedback').hidden = !query.error;
     $('#query-feedback').textContent = query.error || '';
@@ -1126,7 +1128,11 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const rows = matches.slice(0, 8).map((event) => `<button type="button" role="option" data-result="${event.id}">${eventMark(event)}<span class="result-title">${escapeHtml(event.title)}</span><span class="result-meta">${escapeHtml(dateLabel(event, true))}</span></button>`).join('');
     box.innerHTML = `${rows || '<p class="result-empty">No events match.</p>'}<div class="result-foot"><span>${matches.length} matching ${matches.length === 1 ? 'event' : 'events'}</span>${matches.length ? '<a href="#event-list" id="results-to-list">Events <span aria-hidden="true">↓</span></a>' : ''}</div>`;
     box.hidden = false;
-    $$('#search-results [data-result]').forEach((button) => button.addEventListener('click', () => { box.hidden = true; searchDismissed = term; selectEvent(button.dataset.result, { trigger: button }); }));
+    $$('#search-results [data-result]').forEach((button) => button.addEventListener('click', () => {
+      closeSearch();
+      const trigger = matchMedia('(max-width: 1000px)').matches ? $('#search-toggle') : $('#event-search');
+      selectEvent(button.dataset.result, { trigger });
+    }));
     $('#results-to-list')?.addEventListener('click', (event) => { event.preventDefault(); box.hidden = true; searchDismissed = term; $('#event-list').scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'start' }); });
   }
   function refresh() {
@@ -1177,6 +1183,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if (view === 'cast') { detailPanel.getAnimations().forEach(animation=>animation.cancel()); if(!detailPanel.hidden)closeDetails(); }
     for (const key of ['stream', 'bowtie', 'cast']) $(`#${key}-view`).hidden = key !== view;
     $$('.view-tab').forEach((button) => { const selected = button.id === `${view}-tab`; button.setAttribute('aria-selected', String(selected)); button.tabIndex = selected ? 0 : -1; button.classList.toggle('active', selected); });
+    closeSearch(); closeTools();
     if (view === 'cast') closeLegend(); closeStages(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false');
     if(view!=='cast')drawCosmos();
   }
@@ -1257,12 +1264,14 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     syncNavigationIndicators();
   }
   function scrollToField(options={}) {
+    $('#explorer').scrollTop = 0;
     if(scrollGateway)scrollGateway.enter(options);
     else $('#scene').scrollIntoView(options);
   }
   function enterField() {
+    $('#explorer').scrollTop = 0;
     changeView('stream');finishCamera();stopMotion();
-    if(scrollGateway)scrollGateway.show();
+    if(scrollGateway)scrollGateway.show({behavior:'instant'});
     else $('#scene').scrollIntoView({behavior:'instant'});
   }
   const roman = value => {let n=value,out='';for(const[v,s]of [[1000,'m'],[900,'cm'],[500,'d'],[400,'cd'],[100,'c'],[90,'xc'],[50,'l'],[40,'xl'],[10,'x'],[9,'ix'],[5,'v'],[4,'iv'],[1,'i']])while(n>=v){out+=s;n-=v;}return out;};
@@ -1532,13 +1541,72 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     clearTimeout(queryTimer); const value = event.target.value; searchDismissed = '';
     queryTimer = setTimeout(() => navigate(() => { state.search = value; query = window.HaruspexQuery.compile(value); alignAssessmentToSearch(); }), 180);
   });
-  $('#event-search').addEventListener('keydown', (event) => { if (event.key === 'Escape' && !$('#search-results').hidden) { event.stopPropagation(); searchDismissed = state.search.trim(); $('#search-results').hidden = true; } });
-  document.addEventListener('pointerdown', (event) => { if (!$('#search-results').hidden && !event.target.closest('.scene-heading')) { searchDismissed = state.search.trim(); $('#search-results').hidden = true; } });
+  function closeSearch(restoreFocus = false) {
+    const heading = $('.scene-heading');
+    const wasOpen = heading.classList.contains('search-open');
+    heading.classList.remove('search-open');
+    $('#search-toggle').setAttribute('aria-expanded', 'false');
+    searchDismissed = state.search.trim(); $('#search-results').hidden = true;
+    if (restoreFocus && wasOpen) $('#search-toggle').focus({ preventScroll: true });
+  }
+  function openSearch() {
+    if (state.view === 'cast') changeView('stream');
+    closeStages(); closeLegend(); closeTools();
+    $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false');
+    $('#resource-menu').open = false;
+    $('.scene-heading').classList.add('search-open');
+    $('#search-toggle').setAttribute('aria-expanded', 'true');
+    searchDismissed = ''; renderSearchResults();
+    $('#event-search').focus({ preventScroll: true });
+  }
+  $('#search-toggle').addEventListener('click', () => $('.scene-heading').classList.contains('search-open') ? closeSearch(true) : openSearch());
+  $('.scene-heading').addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') { event.stopPropagation(); closeSearch(true); }
+  });
+  document.addEventListener('pointerdown', (event) => {
+    if (!event.target.closest('.scene-heading')) closeSearch();
+    if (!event.target.closest('#field-navigation, #tools-toggle')) closeTools();
+  });
   $('#stage-filter').addEventListener('change', (event) => selectStage(event.target.value));
   $('#severity-filter').addEventListener('change', (event) => navigate(() => { state.severity = event.target.value; if (state.severity !== 'all') state.assessment = ['context', 'unresolved'].includes(state.severity) ? state.severity : 'impact'; state.vertical = [0, 1]; }));
   function refitPlot(){stopMotion();if(state.view==='bowtie'){bowLayoutKey='';renderBowtie();}else if(state.view==='stream')drawTimeline();}
-  function placeDock(){const scene=$('#scene').getBoundingClientRect(),controls=$('.field-controls').getBoundingClientRect(),foot=$('.field-foot').getBoundingClientRect();$('#scene').style.setProperty('--dock-top',`${Math.max(60,Math.round(controls.bottom-scene.top+8))}px`);$('#scene').style.setProperty('--dock-bottom',`${Math.max(40,Math.round(scene.bottom-foot.top+8))}px`);}
+  function fieldBounds(height) {
+    const scene = $('#scene').getBoundingClientRect();
+    const controls = $('.field-controls').getBoundingClientRect();
+    const compact = matchMedia('(max-width: 1000px)').matches;
+    const tools = $('#field-navigation').getBoundingClientRect();
+    const inquiry = $('#inquiry-context');
+    const headerBottom = Math.max(controls.bottom, !compact && tools.height ? tools.bottom : 0, !inquiry.hidden ? inquiry.getBoundingClientRect().bottom : 0);
+    const top = Math.max(60, headerBottom - scene.top + 16);
+    const readout = $('.field-readout').getBoundingClientRect();
+    const bottom = Math.max(top + 48, Math.min(height - 48, readout.top - scene.top - 42));
+    return { top, bottom };
+  }
+  function placeDock() {
+    const scene = $('#scene').getBoundingClientRect();
+    const controls = $('.field-controls').getBoundingClientRect();
+    const foot = $('.field-foot').getBoundingClientRect();
+    $('#scene').style.setProperty('--dock-top', `${Math.max(60, Math.round(controls.bottom - scene.top + 8))}px`);
+    $('#scene').style.setProperty('--dock-bottom', `${Math.max(40, Math.round(scene.bottom - foot.top + 8))}px`);
+  }
   placeDock();window.addEventListener('resize',placeDock);
+  function closeTools(restoreFocus = false) {
+    const wasOpen = $('#scene').classList.contains('tools-open');
+    $('#scene').classList.remove('tools-open');
+    $('#tools-toggle').setAttribute('aria-expanded', 'false');
+    if (restoreFocus && wasOpen) $('#tools-toggle').focus({ preventScroll: true });
+  }
+  $('#tools-toggle').addEventListener('click', () => {
+    const open = !$('#scene').classList.contains('tools-open');
+    closeSearch(); closeLegend(); closeStages();
+    $('#scene').classList.toggle('tools-open', open);
+    $('#tools-toggle').setAttribute('aria-expanded', String(open));
+  });
+  $('#field-navigation').addEventListener('keydown', event => { if (event.key === 'Escape') { event.stopPropagation(); closeTools(true); } });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !$('#info-dialog').open && $('#detail-panel').hidden) closeTools(true);
+  });
+  new ResizeObserver(() => { placeDock(); refitPlot(); }).observe($('.field-header'));
   function closeLegend(restoreFocus = false) {
     const panel = $('#legend-panel');
     if (panel.hidden) return;
@@ -1666,7 +1734,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('#load-more').addEventListener('click', () => { state.limit += 24; renderList(); });
   $('#list-toggle').addEventListener('click', () => { const collapsed = !$('#record-list-wrap').hidden; $('#record-list-wrap').hidden = collapsed; $('#list-toggle').setAttribute('aria-expanded', String(!collapsed)); $('#list-toggle').textContent = collapsed ? 'Expand +' : 'Collapse −'; });
   $('.brand').addEventListener('click', (event) => { event.preventDefault(); changeView('stream'); reset(); closeDetails(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false'); window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
-  document.addEventListener('keydown', (event) => { if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) && !$('#info-dialog').open) { event.preventDefault(); $('#event-search').focus(); } });
+  document.addEventListener('keydown', (event) => { if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) && !$('#info-dialog').open && $('#detail-panel').hidden) { event.preventDefault(); openSearch(); } });
   ontology.stages.forEach((stage) => { const option = document.createElement('option'); option.value = stage.id; option.textContent = stage.label; $('#stage-filter').append(option); });
   // Turning points as the sources mark them, each card naming who marks it.
   const milestones = [
