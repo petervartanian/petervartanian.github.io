@@ -1,7 +1,7 @@
 {
   "oxy": {
-    "file": "oxy.png",
-    "source": "https://www.oxy.edu/sites/default/files/images/2022-07/logo-footer.png",
+    "file": "oxy-seal.png",
+    "source": "User-supplied institution seal",
     "aliases": [
       "Occidental College",
       "Occidental Consulting Group",
@@ -9,18 +9,18 @@
       "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy",
       "Charles R. Blyth Fund at Occidental College"
     ],
-    "width": 32,
-    "note": "Orange OXY mark from the official footer lockup, with reversed white text omitted for use on light backgrounds."
+    "width": 20,
+    "note": "Resized proportionally from the supplied PNG; seal artwork preserved."
   },
   "caltech": {
-    "file": "caltech.png",
-    "source": "https://www.caltech.edu/static/core/img/favicon-192.png?v=7.12.0",
-    "bytes": 8372,
+    "file": "caltech-seal.png",
+    "source": "User-supplied institution seal",
     "aliases": [
       "California Institute of Technology",
       "Caltech"
     ],
-    "width": 20
+    "width": 20,
+    "note": "Resized proportionally from the supplied PNG; seal artwork preserved."
   },
   "mit": {
     "file": "mit.png",
