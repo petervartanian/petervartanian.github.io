@@ -14,15 +14,18 @@ def add_institution_logos(markup):
         name = match[0]
         key = ALIASES[name]
         logo = LOGOS[key]
-        # Keep the icon with the first word while allowing long names to wrap.
-        first, separator, rest = name.partition(' ')
         image = f'<img class="institution-logo logo-{key}" src="/assets/logos/{logo["file"]}" width="{logo["width"]}" height="20" alt="" aria-hidden="true" decoding="async">'
-        return f'<span class="institution-start">{image}{first}</span>{separator}{rest}'
+        return f'<span class="institution-entry"><span class="institution-logo-slot">{image}</span><span class="institution-name">{name}</span></span>'
 
     parts = re.split(r'(<[^>]+>)', markup)
     for index in range(0, len(parts), 2):
         parts[index] = NAMES.sub(decorate, parts[index])
-    return ''.join(parts)
+    result = ''.join(parts)
+    # Keep joint affiliations in the same row, with each name aligned to its mark.
+    result = result.replace('</span></span> &amp; <span class="institution-entry">', ' &amp;</span></span> <span class="institution-entry">')
+    # Keep footnote references attached to the final institution name.
+    result = re.sub(r'</span></span>(</span>)?(<sup>.*?</sup>)', lambda m: m[2] + '</span></span>' + (m[1] or ''), result)
+    return result
 
 
 def add_markdown_logos(markdown):
