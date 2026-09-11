@@ -18,7 +18,8 @@ https://petervartanian.xyz/cv/
 | --- | --- |
 | **AI Risk Explorer**[^ii] | Feb. 2026 – Jun. 2026 |
 | **Family Office**[^iii] | Sep. 2025 – Jun. 2026 |
-| **Hoover Institution on War, Revolution, and Peace at Stanford University** Director’s Award from Fmr. SecState Condoleezza Rice Feb. 2026 | Aug. 2025 – Aug. 2025 |
+| **Hoover Institution on War, Revolution, and Peace at Stanford University** | Aug. 2025 – Aug. 2025 |
+| Director’s Award from Fmr. SecState Condoleezza Rice | Feb. 2026 |
 | **FutureSafe at the Nuclear Threat Initiative** | Jun. 2025 – Aug. 2025 |
 | **The Program on Negotiation at Harvard Law School** | Jan. 2025 – May 2025 |
 | **City Hub and Network for Gender Equity** | Jan. 2025 – May 2025 |

@@ -16,7 +16,7 @@ def export_cv(html):
     def table(match):
         attrs, body = match.groups()
         rows = [[inline(cell).replace('|', r'\|') for cell in re.findall(r'<t[hd][^>]*>(.*?)</t[hd]>', row, re.S)]
-                for row in re.findall(r'<tr>(.*?)</tr>', body, re.S)]
+                for row in re.findall(r'<tr\b[^>]*>(.*?)</tr>', body, re.S)]
         if len(rows[0]) == 1:
             return '\n\n' + '\n'.join('- ' + row[0] for row in rows) + '\n\n'
         headers = ['Organization', 'Dates'] if 'experience-table' in attrs else ['Language', 'ILR proficiency'] if 'language-table' in attrs else ['Award', 'Date']

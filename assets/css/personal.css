@@ -89,8 +89,7 @@ sup a { padding: 4px 0; }
 .education-list li { padding-left: 2px; margin: 3px 0; }
 .education-award { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; }
 .education-award-date { color: var(--quiet); font-size: 12px; white-space: nowrap; }
-.experience-award { display: block; margin: 8px 0 0 20px; font-size: 13px; line-height: 1.65; }
-.experience-award .education-award-date { display: block; }
+.experience-award { display: block; margin-left: 20px; font-size: 13px; line-height: 1.65; }
 .education-label { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 .simple-list { padding-left: 19px; list-style: disc; font-size: 14px; }
 .simple-list li { line-height: 1.7; margin-bottom: 8px; }
@@ -100,6 +99,8 @@ sup a { padding: 4px 0; }
 .cv-table th + td { padding-left: 16px; }
 .language-table td { width: 54px; text-align: right; color: var(--quiet); }
 .experience-table td { width: 156px; text-align: right; color: var(--quiet); font-size: 12px; padding-top: 11px; }
+.experience-award-row th { padding-top: 0; }
+.experience-award-row td { padding-top: 1px; }
 .date-part { display: inline-block; white-space: nowrap; }
 .contact-table th { width: 160px; }
 .contact-label { display: flex; align-items: center; gap: 9px; }

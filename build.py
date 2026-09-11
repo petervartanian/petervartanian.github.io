@@ -183,10 +183,10 @@ def experience_rows(rows):
     result = ''
     for row in rows:
         organization = org_name(row['organization'])
+        result += f'<tr><th scope="row">{organization}</th><td>{date_range(row["dates"])}</td></tr>\n'
         if row['organization'].startswith('Hoover Institution'):
             for award in cv['institution_honors']['Hoover Institution']:
-                organization += f' <span class="experience-award">{e(award["title"])} <span class="education-award-date">{e(award["date"])}</span></span>'
-        result += f'<tr><th scope="row">{organization}</th><td>{date_range(row["dates"])}</td></tr>\n'
+                result += f'<tr class="experience-award-row"><th scope="row"><span class="experience-award">{e(award["title"])}</span></th><td>{date_range(award["date"])}</td></tr>\n'
     return result
 
 
