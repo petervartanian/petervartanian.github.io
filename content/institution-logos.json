@@ -20,14 +20,14 @@
     "note": "Resized proportionally from the supplied PNG; seal artwork preserved."
   },
   "mit": {
-    "file": "mit.png",
+    "file": "mit-trimmed.png",
     "source": "https://cdn.prod.website-files.com/669550d38372f33552d2516e/6a0e77811e81794f8b1e3d8b_airi-icon-red.png",
-    "bytes": 2921,
     "aliases": [
       "MIT AI Risk Initiative",
       "MIT’s AI Risk Initiative"
     ],
-    "width": 20
+    "width": 19,
+    "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved."
   },
   "arcola": {
     "file": "arcola.png",
@@ -40,32 +40,32 @@
     "source_page": "https://uk.linkedin.com/company/arcola-ai"
   },
   "aire": {
-    "file": "ai-risk-explorer.png",
+    "file": "ai-risk-explorer-trimmed.png",
     "source": "User-supplied AI Risk Explorer logo",
     "aliases": [
       "AI Risk Explorer"
     ],
-    "width": 20,
-    "note": "Transparent margins trimmed; artwork proportionally fitted within a square."
+    "width": 22,
+    "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved."
   },
   "hoover": {
-    "file": "hoover.png",
+    "file": "hoover-trimmed.png",
     "source": "https://www.hoover.org/themes/hoover/favicon.ico",
-    "bytes": 41662,
     "aliases": [
       "Hoover Institution on War, Revolution, and Peace at Stanford University",
       "Hoover Institution"
     ],
-    "width": 20
+    "width": 20,
+    "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved."
   },
   "pon": {
-    "file": "program-on-negotiation-transparent.png",
+    "file": "program-on-negotiation-transparent-trimmed.png",
     "source": "User-supplied Program on Negotiation logo",
     "aliases": [
       "The Program on Negotiation at Harvard Law School"
     ],
-    "width": 20,
-    "note": " White background made transparent; original artwork proportions retained."
+    "width": 48,
+    "note": "Outer frame removed; wordmark and shield preserved. Trimmed to visible artwork with transparent edges; natural proportions preserved."
   },
   "change": {
     "file": "change.svg",
@@ -86,14 +86,14 @@
     "width": 20
   },
   "un": {
-    "file": "un.png",
+    "file": "un-trimmed.png",
     "source": "https://www.un.org/en/img/splash/un-logo.png",
-    "bytes": 8782,
     "aliases": [
       "Office of the Chair of the First Committee of the UN General Assembly",
       "UN"
     ],
-    "width": 24
+    "width": 24,
+    "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved."
   },
   "bis": {
     "file": "bis.png",
@@ -106,13 +106,13 @@
     "width": 20
   },
   "austria": {
-    "file": "austria.png",
+    "file": "austria-trimmed.png",
     "source": "https://www.auslandsdienst.at/wp-content/uploads/2024/09/cropped-logo-192x192.png",
-    "bytes": 3021,
     "aliases": [
       "Austrian Service Abroad"
     ],
-    "width": 20
+    "width": 58,
+    "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved."
   },
   "wolf": {
     "file": "wolf.png",
@@ -124,22 +124,22 @@
     "width": 20
   },
   "alpbach": {
-    "file": "alpbach-transparent.png",
+    "file": "alpbach-transparent-trimmed.png",
     "source": "https://www.alpbach.org/uploads/_192x192_crop_center-center_100_none/favicon-new.png",
     "aliases": [
       "European Forum Alpbach"
     ],
-    "width": 20,
-    "note": " White background made transparent; original artwork proportions retained."
+    "width": 75,
+    "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved."
   },
   "newspaper": {
-    "file": "newspaper.png",
+    "file": "newspaper-trimmed.png",
     "source": "https://www.theoccidentalnews.com/wp-content/uploads/2018/08/cropped-TheOccidentalSquareLogo_cleanedges-192x192.png",
-    "bytes": 9244,
     "aliases": [
       "The Occidental Newspaper"
     ],
-    "width": 20
+    "width": 20,
+    "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved."
   },
   "hrca": {
     "file": "hrca.png",
@@ -196,21 +196,21 @@
     "note": " White background made transparent; original artwork proportions retained."
   },
   "blyth": {
-    "file": "blyth-transparent.png",
+    "file": "blyth-transparent-trimmed.png",
     "source": "User-supplied Blyth Fund logo",
     "aliases": [
       "Charles R. Blyth Fund at Occidental College"
     ],
     "width": 20,
-    "note": " White background made transparent; original artwork proportions retained."
+    "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved."
   },
   "uepi": {
-    "file": "uepi-transparent.png",
+    "file": "uepi-transparent-trimmed.png",
     "source": "User-supplied Urban & Environmental Policy Institute logo",
     "aliases": [
       "Urban & Environmental Policy Institute at Occidental College"
     ],
-    "width": 20,
-    "note": " White background made transparent; original artwork proportions retained."
+    "width": 17,
+    "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved."
   }
 }
