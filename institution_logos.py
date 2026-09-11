@@ -15,14 +15,14 @@ def add_institution_logos(markup):
         key = ALIASES[name]
         logo = LOGOS[key]
         image = f'<img class="institution-logo logo-{key}" src="/assets/logos/{logo["file"]}" width="{logo["width"]}" height="{logo["height"]}" alt="" aria-hidden="true" decoding="async">'
-        return f'<span class="institution-entry"><span class="institution-logo-slot">{image}</span><span class="institution-name">{name}</span></span>'
+        return f'<span class="institution-entry"><span class="institution-logo-slot">{image}</span><span class="institution-name"><span class="institution-text">{name}</span></span></span>'
 
     parts = re.split(r'(<[^>]+>)', markup)
     for index in range(0, len(parts), 2):
         parts[index] = NAMES.sub(decorate, parts[index])
     result = ''.join(parts)
     # Keep joint affiliations in the same row, with each name aligned to its mark.
-    result = result.replace('</span></span> &amp; <span class="institution-entry">', ' &amp;</span></span> <span class="institution-entry">')
+    result = result.replace('</span></span></span> &amp; <span class="institution-entry">', ' &amp;</span></span></span> <span class="institution-entry">')
     # Keep footnote references attached to the final institution name.
-    result = re.sub(r'</span></span>(</span>)?(<sup>.*?</sup>)', lambda m: m[2] + '</span></span>' + (m[1] or ''), result)
+    result = re.sub(r'</span></span></span>(</span>)?(<sup>.*?</sup>)', lambda m: m[2] + '</span></span></span>' + (m[1] or ''), result)
     return result

@@ -83,8 +83,10 @@ button { font-family: inherit; font-size: 12px; color: var(--link); background: 
 .institution-logo-slot { display: flex; align-items: center; min-height: 23px; }
 .institution-logo { display: block; height: auto; max-height: 34px; max-width: 100%; object-fit: contain; object-position: left center; }
 .institution-name { min-width: 0; padding: 0 3px; }
+.institution-text { box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .primary-contribution:has(.institution-entry) { display: block; padding: 0; background: none; }
-.primary-contribution .institution-name { justify-self: start; background: color-mix(in srgb, var(--link) 7%, transparent); }
+.primary-contribution .institution-name { justify-self: start; }
+.primary-contribution .institution-text { padding: 1px 0; background: color-mix(in srgb, var(--link) 7%, transparent); }
 .dates { margin: 3px 0 0; }
 sup { font-size: 9px; margin-left: 0; }
 sup a { padding: 4px 0; }
