@@ -36,7 +36,7 @@
     "aliases": [
       "Arcola AI"
     ],
-    "width": 40,
+    "width": 68,
     "source_page": "https://uk.linkedin.com/company/arcola-ai"
   },
   "aire": {
@@ -59,12 +59,13 @@
     "width": 20
   },
   "pon": {
-    "file": "program-on-negotiation.png",
+    "file": "program-on-negotiation-transparent.png",
     "source": "User-supplied Program on Negotiation logo",
     "aliases": [
       "The Program on Negotiation at Harvard Law School"
     ],
-    "width": 20
+    "width": 20,
+    "note": " White background made transparent; original artwork proportions retained."
   },
   "change": {
     "file": "change.svg",
@@ -92,7 +93,7 @@
       "Office of the Chair of the First Committee of the UN General Assembly",
       "UN"
     ],
-    "width": 20
+    "width": 24
   },
   "bis": {
     "file": "bis.png",
@@ -123,13 +124,13 @@
     "width": 20
   },
   "alpbach": {
-    "file": "alpbach.png",
+    "file": "alpbach-transparent.png",
     "source": "https://www.alpbach.org/uploads/_192x192_crop_center-center_100_none/favicon-new.png",
-    "bytes": 927,
     "aliases": [
       "European Forum Alpbach"
     ],
-    "width": 20
+    "width": 20,
+    "note": " White background made transparent; original artwork proportions retained."
   },
   "newspaper": {
     "file": "newspaper.png",
@@ -147,26 +148,26 @@
     "aliases": [
       "Human Rights Cities Alliance"
     ],
-    "width": 40
+    "width": 39
   },
   "nti": {
-    "file": "nti-globe.png",
+    "file": "nti-globe-transparent.png",
     "source": "User-supplied NTI logo",
     "aliases": [
       "FutureSafe at the Nuclear Threat Initiative",
       "Nuclear Threat Initiative"
     ],
     "width": 20,
-    "note": "Cropped to the red globe only; wordmark, rules, and tagline omitted."
+    "note": "Cropped to the red globe only; wordmark, rules, and tagline omitted. White background made transparent; original artwork proportions retained."
   },
   "oecd": {
-    "file": "mission-action-lab.png",
+    "file": "mission-action-lab-original.png",
     "source": "User-supplied Mission Action Lab wordmark",
-    "note": "Original lettering rearranged into three lines within a square, preserving color and letter proportions.",
+    "note": "Original two-line wordmark, rules, proportions, and transparency preserved.",
     "aliases": [
       "OECD Mission Action Lab"
     ],
-    "width": 20
+    "width": 41
   },
   "family": {
     "file": "family.svg",
@@ -186,27 +187,30 @@
     "width": 20
   },
   "ocg": {
-    "file": "ocg.png",
+    "file": "ocg-transparent.png",
     "source": "User-supplied Occidental Consulting Group logo",
     "aliases": [
       "Occidental Consulting Group"
     ],
-    "width": 20
+    "width": 20,
+    "note": " White background made transparent; original artwork proportions retained."
   },
   "blyth": {
-    "file": "blyth.png",
+    "file": "blyth-transparent.png",
     "source": "User-supplied Blyth Fund logo",
     "aliases": [
       "Charles R. Blyth Fund at Occidental College"
     ],
-    "width": 20
+    "width": 20,
+    "note": " White background made transparent; original artwork proportions retained."
   },
   "uepi": {
-    "file": "uepi.png",
+    "file": "uepi-transparent.png",
     "source": "User-supplied Urban & Environmental Policy Institute logo",
     "aliases": [
       "Urban & Environmental Policy Institute at Occidental College"
     ],
-    "width": 20
+    "width": 20,
+    "note": " White background made transparent; original artwork proportions retained."
   }
 }
