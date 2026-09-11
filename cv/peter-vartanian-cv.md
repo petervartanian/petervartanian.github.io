@@ -23,7 +23,7 @@ https://petervartanian.xyz/cv/
 | **<img src="https://petervartanian.xyz/assets/logos/nti.png" width="30" height="20" alt=""> FutureSafe at the Nuclear Threat Initiative** | Jun. 2025 – Aug. 2025 |
 | **<img src="https://petervartanian.xyz/assets/logos/pon.png" width="20" height="20" alt=""> The Program on Negotiation at Harvard Law School** | Jan. 2025 – May 2025 |
 | **<img src="https://petervartanian.xyz/assets/logos/change.svg" width="20" height="20" alt=""> City Hub and Network for Gender Equity** | Jan. 2025 – May 2025 |
-| <img src="https://petervartanian.xyz/assets/logos/oecd.png" width="40" height="20" alt=""> OECD Mission Action Lab | Dec. 2024 – Jan. 2025 |
+| <img src="https://petervartanian.xyz/assets/logos/mission-action-lab.png" width="20" height="20" alt=""> OECD Mission Action Lab | Dec. 2024 – Jan. 2025 |
 | <img src="https://petervartanian.xyz/assets/logos/verum.png" width="20" height="20" alt=""> Verum Legalis: The Occidental College Law Review | Jan. 2024 – Jan. 2025 |
 | **<img src="https://petervartanian.xyz/assets/logos/un.png" width="20" height="20" alt=""> Office of the Chair of the First Committee of the UN General Assembly** | Aug. 2024 – Dec. 2024 |
 | <img src="https://petervartanian.xyz/assets/logos/uepi.png" width="20" height="20" alt=""> Urban & Environmental Policy Institute at Occidental College | May 2024 – Aug. 2024 |

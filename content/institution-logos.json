@@ -161,13 +161,13 @@
     "width": 30
   },
   "oecd": {
-    "file": "oecd.png",
-    "source": "https://oecd.ai/assets/images/logo-oecd-light.svg",
+    "file": "mission-action-lab.png",
+    "source": "User-supplied Mission Action Lab wordmark",
+    "note": "Original lettering rearranged into three lines within a square, preserving color and letter proportions.",
     "aliases": [
-      "OECD Mission Action Lab",
-      "OECD"
+      "OECD Mission Action Lab"
     ],
-    "width": 40
+    "width": 20
   },
   "family": {
     "file": "family.svg",

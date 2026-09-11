@@ -81,7 +81,6 @@ button { font-family: inherit; font-size: 12px; color: var(--link); background: 
 .organization { line-height: 1.5; font-size: 15px; }
 .institution-start { white-space: nowrap; }
 .institution-logo { display: inline-block; height: 20px; object-fit: contain; vertical-align: -4px; margin-right: 6px; }
-.logo-oecd { filter: brightness(0) saturate(100%); opacity: .8; }
 .dates { margin: 3px 0 0; }
 sup { font-size: 9px; margin-left: 0; }
 sup a { padding: 4px 0; }
