@@ -92,6 +92,7 @@ button { font-family: inherit; font-size: 12px; color: var(--link); background: 
 .experience-list li { margin-bottom: 20px; padding: 0; }
 .organization { line-height: 1.5; font-size: 15px; }
 .institution-entry, .contact-label { display: grid; grid-template-columns: var(--mark-column) minmax(0, 1fr); column-gap: var(--mark-gap); align-items: center; }
+.institution-entry + .institution-entry { margin-top: 12px; }
 .institution-logo-slot, .contact-icon-slot { display: flex; align-items: center; justify-content: center; min-height: 23px; }
 .institution-logo { display: block; width: var(--logo-width, var(--mark-size)); height: auto; max-width: 100%; object-fit: contain; object-position: center; }
 .institution-name, .contact-name { min-width: 0; padding: 0 3px; }
