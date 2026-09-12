@@ -5,9 +5,9 @@
     "aliases": [
       "Occidental College"
     ],
-    "width": 28,
+    "width": 30,
     "note": "Resized proportionally from the supplied PNG; seal artwork preserved.",
-    "height": 28
+    "height": 30
   },
   "caltech": {
     "file": "caltech-seal.png",
@@ -27,9 +27,9 @@
       "MIT AI Risk Initiative",
       "MIT’s AI Risk Initiative"
     ],
-    "width": 24,
+    "width": 32,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 26
+    "height": 35
   },
   "arcola": {
     "file": "arcola.png",
@@ -38,9 +38,9 @@
     "aliases": [
       "Arcola AI"
     ],
-    "width": 44,
+    "width": 54,
     "source_page": "https://uk.linkedin.com/company/arcola-ai",
-    "height": 13
+    "height": 16
   },
   "aire": {
     "file": "ai-risk-explorer-trimmed.png",
@@ -48,9 +48,9 @@
     "aliases": [
       "AI Risk Explorer"
     ],
-    "width": 28,
+    "width": 29,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 26
+    "height": 27
   },
   "hoover": {
     "file": "hoover-trimmed.png",
@@ -80,8 +80,8 @@
     "aliases": [
       "City Hub and Network for Gender Equity"
     ],
-    "width": 25,
-    "height": 25
+    "width": 26,
+    "height": 26
   },
   "verum": {
     "file": "verum.png",
@@ -100,9 +100,9 @@
       "Office of the Chair of the First Committee of the UN General Assembly",
       "UN"
     ],
-    "width": 29,
+    "width": 31,
     "note": "Latest user-supplied transparent gold emblem; trimmed to artwork and proportionally resized.",
-    "height": 25
+    "height": 27
   },
   "bis": {
     "file": "bis.png",
@@ -121,9 +121,9 @@
     "aliases": [
       "Austrian Service Abroad"
     ],
-    "width": 29,
+    "width": 44,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 10
+    "height": 15
   },
   "wolf": {
     "file": "wolf.png",
@@ -141,9 +141,9 @@
     "aliases": [
       "European Forum Alpbach"
     ],
-    "width": 29,
+    "width": 48,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 8
+    "height": 13
   },
   "newspaper": {
     "file": "newspaper-trimmed.png",
@@ -151,9 +151,9 @@
     "aliases": [
       "The Occidental Newspaper"
     ],
-    "width": 19,
+    "width": 29,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 19
+    "height": 29
   },
   "hrca": {
     "file": "hrca.png",
@@ -172,9 +172,9 @@
       "FutureSafe at the Nuclear Threat Initiative",
       "Nuclear Threat Initiative"
     ],
-    "width": 25,
+    "width": 27,
     "note": "Cropped to the red globe only; wordmark, rules, and tagline omitted. White background made transparent; original artwork proportions retained.",
-    "height": 25
+    "height": 27
   },
   "oecd": {
     "file": "mission-action-lab-original.png",
@@ -193,8 +193,8 @@
     "aliases": [
       "Family Office"
     ],
-    "width": 22,
-    "height": 19
+    "width": 34,
+    "height": 29
   },
   "state": {
     "file": "vienna-mission-seal.png",
@@ -212,9 +212,9 @@
     "aliases": [
       "Occidental Consulting Group"
     ],
-    "width": 24,
+    "width": 26,
     "note": " White background made transparent; original artwork proportions retained.",
-    "height": 24
+    "height": 26
   },
   "blyth": {
     "file": "blyth-transparent-trimmed.png",
@@ -222,9 +222,9 @@
     "aliases": [
       "Charles R. Blyth Fund at Occidental College"
     ],
-    "width": 27,
+    "width": 30,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 27
+    "height": 30
   },
   "uepi": {
     "file": "uepi-transparent-trimmed.png",
@@ -232,9 +232,9 @@
     "aliases": [
       "Urban & Environmental Policy Institute at Occidental College"
     ],
-    "width": 22,
+    "width": 24,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 26
+    "height": 28
   },
   "mckinnon": {
     "file": "mckinnon-young.png",

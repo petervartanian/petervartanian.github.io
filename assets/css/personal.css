@@ -20,7 +20,7 @@ svg, canvas { -webkit-touch-callout: none; }
 html { scroll-padding-top: 30px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; background: var(--paper); color: var(--ink); }
 body[data-page=writing] { --paper: #faf8fd; --note-background: #e4d9ef; --note-hover: #d7c8e5; --note-ink: #654c79; --ink: #483639; --link: #884d5a; --quiet: #7c686a; --line: #48363920; }
-body[data-page=cv] { --mark-column: 44px; --mark-text-inset: calc(var(--mark-column) + var(--mark-gap) + 3px); --paper: #fffaf5; --note-background: #f1d9bc; --note-hover: #ecd0ae; --note-ink: #785127; --ink: #303d4e; --link: #46698a; --quiet: #657381; --line: #303d4e20; }
+body[data-page=cv] { --mark-column: 54px; --mark-text-inset: calc(var(--mark-column) + var(--mark-gap) + 3px); --paper: #fffaf5; --note-background: #f1d9bc; --note-hover: #ecd0ae; --note-ink: #785127; --ink: #303d4e; --link: #46698a; --quiet: #657381; --line: #303d4e20; }
 body[data-page=contact] { --paper: #f7fbf8; --ink: #473b50; --link: #785987; --quiet: #77677e; --line: #473b5020; }
 a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent); }
 a:hover { text-decoration-color: currentColor; }
@@ -94,7 +94,6 @@ button { font-family: inherit; font-size: 12px; color: var(--link); background: 
 .institution-entry, .contact-label { display: grid; grid-template-columns: var(--mark-column) minmax(0, 1fr); column-gap: var(--mark-gap); align-items: center; }
 .institution-logo-slot, .contact-icon-slot { display: flex; align-items: center; justify-content: center; min-height: 23px; }
 .institution-logo { display: block; width: var(--logo-width, var(--mark-size)); height: auto; max-width: 100%; object-fit: contain; object-position: center; }
-.institution-logo.logo-pon, .institution-logo.logo-mckinnon { max-width: none; flex-shrink: 0; }
 .institution-name, .contact-name { min-width: 0; padding: 0 3px; }
 .institution-phrase { display: inline-block; max-width: 100%; vertical-align: top; }
 .institution-wide { display: inline-block; width: max-content; max-width: calc(100% + 172px); vertical-align: top; }
