@@ -85,38 +85,45 @@ if (mobile) {
         return wrapper.animate([
           {transform:'translate(0, 0) rotate(0deg)',opacity:1},
           {transform:`translate(${drift}px, ${distance}px) rotate(${spin}deg)`,opacity:1}
-        ], {duration,delay:(i%5)*22,easing:'cubic-bezier(.32,0,.7,1)',fill:'both'}).finished
+        ], {duration,delay:(i%5)*22,easing:'cubic-bezier(.333,0,.667,.333)',fill:'both'}).finished
           .then(async()=>{
-            const landed=`translate(${drift}px, ${distance}px) rotate(${spin}deg)`;
-            await wrapper.animate([
-              {transform:landed},
-              {transform:`translate(${drift}px, ${distance+halfHeight*.7}px) rotate(${spin+12}deg) scale(.4,.22)`,filter:'saturate(.65)'}
-            ],{duration:260,delay:220,easing:'cubic-bezier(.4,0,.8,1)',fill:'forwards'}).finished;
-            // Leave torn paper on the floor rather than dissolving it into transparency.
-            const pigment=[...piece.element.querySelectorAll('[fill], [stroke]')]
-              .map(e=>[e.getAttribute('fill'),e.getAttribute('stroke')].find(c=>c && c!=='none' && c!=='transparent'))
-              .find(Boolean) || '#8b7b8e';
-            const center=Math.max(14,Math.min(stageBounds.width-14,bounds.left-stageBounds.left+bounds.width/2+drift));
-            for(let j=0;j<3;j++) {
-              const scrap=document.createElementNS(ns,'path');
-              const size=2.5+((i+j*3)%5)*.55;
-              const x=Math.max(6,Math.min(stageBounds.width-6,center+(j-1)*(6+i%4)));
-              const y=stageBounds.height+14;
-              scrap.setAttribute('d',`M${-size} 0 L${-size*.7} ${-size*.65} L${size*.15} ${-size} L${size} ${-size*.2} L${size*.55} 0Z`);
-              scrap.setAttribute('fill',pigment);
-              scrap.setAttribute('class','paper-scrap');
-              scrap.setAttribute('transform',`translate(${x} ${y})`);
-              layer.append(scrap);
-              scrap.animate([
-                {transform:`translate(${center}px,${y-5}px) rotate(${(j-1)*25}deg)`},
-                {transform:`translate(${x}px,${y}px) rotate(0deg)`}
-              ],{duration:240+j*45,easing:'cubic-bezier(.2,.7,.4,1)'});
+            // Decay the actual artwork: discoloration followed by spreading holes.
+            const defs=document.createElementNS(ns,'defs');
+            const mask=document.createElementNS(ns,'mask');
+            mask.id=`paper-rot-${i}`;
+            mask.setAttribute('maskUnits','userSpaceOnUse');
+            const x=bounds.left-stageBounds.left-2,y=bounds.top-stageBounds.top-2;
+            const width=bounds.width+4,height=bounds.height+4;
+            for(const [key,value] of Object.entries({x,y,width,height})) mask.setAttribute(key,value);
+            const paper=document.createElementNS(ns,'rect');
+            for(const [key,value] of Object.entries({x,y,width,height,fill:'white'})) paper.setAttribute(key,value);
+            mask.append(paper);defs.append(mask);layer.prepend(defs);
+            wrapper.setAttribute('mask',`url(#${mask.id})`);
+            wrapper.animate([{filter:'none'},{filter:'grayscale(.7) sepia(.85) brightness(.62)'}],{duration:1400,fill:'forwards'});
+            for(let row=0;row<5;row++) for(let col=0;col<5;col++) {
+              const hole=document.createElementNS(ns,'path');
+              const cx=x+(col+.5)*width/5,cy=y+(row+.5)*height/5;
+              const radius=Math.hypot(width/5,height/5)*.95;
+              const outline=scale=>Array.from({length:11},(_,k)=>{
+                const angle=k*Math.PI*2/11;
+                const r=radius*scale*(.86+.14*Math.sin(k*2.7+row*4+col*3+i));
+                return `${k?'L':'M'}${cx+Math.cos(angle)*r} ${cy+Math.sin(angle)*r}`;
+              }).join(' ')+' Z';
+              hole.setAttribute('d',outline(0));hole.setAttribute('fill','black');
+              const growth=document.createElementNS(ns,'animate');
+              growth.setAttribute('attributeName','d');growth.setAttribute('from',outline(0));
+              growth.setAttribute('to',outline(1));
+              growth.setAttribute('dur',`${850+((row*7+col*3+i)%5)*100}ms`);
+              growth.setAttribute('begin','indefinite');growth.setAttribute('fill','freeze');
+              hole.append(growth);mask.append(hole);
+              setTimeout(()=>{if(growth.isConnected) growth.beginElement();},250+((row*3+col*7+i)%7)*65);
             }
-            wrapper.remove();
+            await new Promise(resolve=>setTimeout(resolve,2100));
+            wrapper.remove();defs.remove();
           })
           .catch(() => {});
       });
-      Promise.all(falls).then(() => {layer.classList.add('settled-scraps');});
+      Promise.all(falls).then(() => {layer.remove();if(leafFall===layer)leafFall=null;});
     }
     mobile.classList.add('mobile-shed');
     pieces.forEach(piece => {
@@ -157,7 +164,7 @@ if (mobile) {
       if(!reducedMotion.matches) portrait.animate([
         {transform:`translateY(${-distance}px) rotate(-5deg)`},
         {transform:'translateY(0) rotate(7deg)'}
-      ],{duration:720,delay:60,easing:'cubic-bezier(.32,0,.7,1)',fill:'backwards'});
+      ],{duration:720,delay:60,easing:'cubic-bezier(.333,0,.667,.333)',fill:'backwards'});
       if(keyboard) portrait.focus({preventScroll:true});
     });
   }
@@ -167,7 +174,7 @@ if (mobile) {
   function draw() {
     if (shed) return;
     pieces.forEach(p => {
-      const x=p.home[0]+p.x, y=p.home[1]+p.y, angle=p.x*.16;
+      const x=p.home[0]+p.x, y=p.home[1]+p.y, angle=p.angle || 0;
       const radians=angle*Math.PI/180, [ax,ay]=p.attachment;
       p.element.setAttribute('transform', `translate(${x} ${y}) rotate(${angle})`);
       p.wire.setAttribute('d', `M${p.mount[0]} ${p.mount[1]}L${x+ax*Math.cos(radians)-ay*Math.sin(radians)} ${y+ax*Math.sin(radians)+ay*Math.cos(radians)}`);
@@ -178,23 +185,26 @@ if (mobile) {
     previousTime = time;
     let energy = 0;
     const active=lastInteraction!==null && time-lastInteraction<700;
-    const amplitude=7+62*Math.pow(Math.min(1,activeDuration/5000),1.2);
+    const dt=step/60;
+    const strength=1+8*Math.pow(Math.min(1,activeDuration/5000),1.4);
     pieces.forEach((p,i) => {
-      if (reducedMotion.matches) { p.vx=0; p.vy=0; return; }
-      if(active) {
-        // Both taps and pointer movement excite this same motion, never the frame.
-        const phase=time/190+i*.8;
-        p.vx+=(Math.sin(phase)*amplitude-p.x)*.075*step;
-        p.vy+=(Math.cos(phase*.83+i)*amplitude*.35-p.y)*.075*step;
-      }
-      p.vx = (p.vx-p.x*.018*step)*Math.pow(.96,step);
-      p.vy = (p.vy-p.y*.022*step)*Math.pow(.96,step);
-      p.x += p.vx*step;
-      p.y += p.vy*step;
-      energy += Math.abs(p.x)+Math.abs(p.y)+Math.abs(p.vx)+Math.abs(p.vy);
+      if(reducedMotion.matches) return;
+      p.theta=p.theta || 0;p.omega=p.omega || 0;p.drive=p.drive || 0;
+      p.drive+=((active?strength:0)-p.drive)*(1-Math.exp(-dt/.28));
+      const [ax,ay]=p.attachment;
+      const dx=p.home[0]+ax-p.mount[0],dy=p.home[1]+ay-p.mount[1];
+      const length=Math.max(24,Math.hypot(dx,dy)),rest=Math.atan2(dx,dy);
+      const acceleration=-(800/length)*Math.sin(p.theta)-1.5*p.omega+p.drive*Math.sin(time/225+i*.8);
+      p.omega+=acceleration*dt;
+      p.theta+=p.omega*dt;
+      const sin=Math.sin(p.theta),cos=Math.cos(p.theta);
+      p.x=p.mount[0]+length*Math.sin(rest+p.theta)-(ax*cos-ay*sin)-p.home[0];
+      p.y=p.mount[1]+length*Math.cos(rest+p.theta)-(ax*sin+ay*cos)-p.home[1];
+      p.angle=p.theta*180/Math.PI;
+      energy+=Math.abs(p.theta)+Math.abs(p.omega)+p.drive;
     });
     draw();
-    if (energy > .15 || active) frame=requestAnimationFrame(settle);
+    if (energy > .003 || active) frame=requestAnimationFrame(settle);
     else { frame=null; previousTime=0; }
   }
   function animate() {

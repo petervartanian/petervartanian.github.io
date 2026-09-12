@@ -54,3 +54,10 @@ for(let t=2420;t<=6400;t+=20){
 }
 assert(Math.max(...motion)>3,'Pieces continue a visible settling swing after interaction stops');
 console.log('Passed: motion settles gradually rather than stopping abruptly.');
+const strings=setup();
+for(let t=0;t<=4000;t+=20){
+ vm.runInContext(`clock=${t};if(clock%400===0)tap();settle(clock);`,strings);
+ const errors=vm.runInContext(`pieces.map(p=>{const a=(p.angle||0)*Math.PI/180;const x=p.home[0]+p.x+p.attachment[0]*Math.cos(a)-p.attachment[1]*Math.sin(a)-p.mount[0];const y=p.home[1]+p.y+p.attachment[0]*Math.sin(a)+p.attachment[1]*Math.cos(a)-p.mount[1];return Math.abs(Math.hypot(x,y)-50);})`,strings);
+ assert(errors.every(e=>e<1e-6),'Suspension lengths remain fixed during motion');
+}
+console.log('Passed: pendulum movement preserves the suspension lengths.');

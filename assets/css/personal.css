@@ -267,7 +267,6 @@ header nav a::after, .download-button::after { min-width: 44px; min-height: 44px
 @media print { .fallen-portrait { display: none; } }
 
 .mobile-shed .mobile-piece, .mobile-shed [data-wire] { visibility: hidden; pointer-events: none; }
-.paper-scrap { filter: saturate(.65); transform-box: fill-box; transform-origin: center bottom; }
 .mobile-svg.mobile-shed { touch-action: pan-y; cursor: default; }
 .falling-pieces { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 31; overflow: visible; pointer-events: none; }
 @media print { .falling-pieces { display: none; } }
