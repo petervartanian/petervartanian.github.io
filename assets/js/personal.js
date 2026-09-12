@@ -58,9 +58,10 @@ if (mobile) {
       const ns = 'http://www.w3.org/2000/svg';
       const layer = document.createElementNS(ns, 'svg');
       layer.setAttribute('class', 'falling-pieces');
-      layer.setAttribute('viewBox', `0 0 ${innerWidth} ${innerHeight}`);
+      const stageBounds=stage.getBoundingClientRect();
+      layer.setAttribute('viewBox', `0 0 ${stageBounds.width} ${stageBounds.height}`);
       layer.setAttribute('aria-hidden', 'true');
-      document.body.append(layer);
+      stage.append(layer);
       leafFall = layer;
       const falls = pieces.map((piece, i) => {
         const matrix = piece.element.getScreenCTM();
@@ -71,21 +72,21 @@ if (mobile) {
         copy.removeAttribute('tabindex');
         copy.removeAttribute('role');
         copy.removeAttribute('aria-label');
-        copy.setAttribute('transform', `matrix(${matrix.a} ${matrix.b} ${matrix.c} ${matrix.d} ${matrix.e} ${matrix.f})`);
+        copy.setAttribute('transform', `matrix(${matrix.a} ${matrix.b} ${matrix.c} ${matrix.d} ${matrix.e-stageBounds.left} ${matrix.f-stageBounds.top})`);
         wrapper.append(copy);
         layer.append(wrapper);
-        wrapper.style.transformOrigin = `${bounds.x+bounds.width/2}px ${bounds.y+bounds.height/2}px`;
+        wrapper.style.transformOrigin = `${bounds.x-stageBounds.left+bounds.width/2}px ${bounds.y-stageBounds.top+bounds.height/2}px`;
         const drift = (i%2 ? 1 : -1)*(8+(i*7)%22);
         const spin = (i%2 ? 1 : -1)*(12+(i*11)%35);
         const radians=spin*Math.PI/180;
         const halfHeight=(bounds.width*Math.abs(Math.sin(radians))+bounds.height*Math.abs(Math.cos(radians)))/2;
         const distance=Math.max(0,stage.getBoundingClientRect().bottom+14-(bounds.top+bounds.height/2)-halfHeight);
-        const duration=Math.max(900,Math.sqrt(2*distance/320)*1000);
+        const duration=Math.max(540,Math.sqrt(2*distance/750)*1000);
         return wrapper.animate([
           {transform:'translate(0, 0) rotate(0deg)',opacity:1},
           {transform:`translate(${drift}px, ${distance}px) rotate(${spin}deg)`,opacity:1}
-        ], {duration,delay:(i%5)*35,easing:'cubic-bezier(.333,0,.667,.333)',fill:'both'}).finished
-          .then(()=>wrapper.animate([{opacity:1},{opacity:0}],{duration:650,delay:300,fill:'forwards'}).finished)
+        ], {duration,delay:(i%5)*22,easing:'cubic-bezier(.32,0,.7,1)',fill:'both'}).finished
+          .then(()=>wrapper.animate([{opacity:1},{opacity:0}],{duration:420,delay:180,fill:'forwards'}).finished)
           .catch(() => {});
       });
       Promise.all(falls).then(() => {layer.remove();if(leafFall===layer) leafFall=null;});
@@ -99,6 +100,9 @@ if (mobile) {
   function positionPortrait() {
     if (!portrait) return;
     const size=portrait.offsetWidth,angle=7*Math.PI/180;
+    const tip=mobile.createSVGPoint();tip.x=266;tip.y=68;
+    const arch=tip.matrixTransform(mobile.getScreenCTM());
+    portrait.parentElement.style.setProperty('--portrait-arch',`${arch.y-stage.getBoundingClientRect().top}px`);
     // The lowest corner of the tilted square rests exactly on the floor.
     portrait.style.left=`${(stage.clientWidth-size)/2}px`;
     portrait.style.top=`${stage.getBoundingClientRect().height+14-size*(1+Math.cos(angle)+Math.sin(angle))/2}px`;
@@ -114,16 +118,19 @@ if (mobile) {
     photo.src='/assets/img/peter-portrait.webp';
     portrait.append(photo);
     portrait.addEventListener('contextmenu',event=>event.preventDefault());
-    stage.append(portrait);
+    const reveal=document.createElement('div');
+    reveal.className='portrait-reveal';
+    reveal.append(portrait);stage.append(reveal);
     photo.decode().catch(()=>{}).then(()=>{
       positionPortrait();
-      const distance=Math.max(35,portrait.offsetTop-stage.clientHeight*.18);
+      const arch=parseFloat(portrait.parentElement.style.getPropertyValue('--portrait-arch'));
+      const distance=Math.max(35,portrait.offsetTop+portrait.offsetHeight-arch);
       portrait.style.visibility='';
       shedLeaves();
       if(!reducedMotion.matches) portrait.animate([
         {transform:`translateY(${-distance}px) rotate(-5deg)`},
         {transform:'translateY(0) rotate(7deg)'}
-      ],{duration:Math.max(1000,Math.sqrt(2*distance/320)*1000),delay:140,easing:'cubic-bezier(.333,0,.667,.333)',fill:'backwards'});
+      ],{duration:720,delay:60,easing:'cubic-bezier(.32,0,.7,1)',fill:'backwards'});
       if(keyboard) portrait.focus({preventScroll:true});
     });
   }
@@ -153,8 +160,8 @@ if (mobile) {
         p.vx+=(Math.sin(phase)*amplitude-p.x)*.045*step;
         p.vy+=(Math.cos(phase*.83+i)*amplitude*.35-p.y)*.045*step;
       }
-      p.vx = (p.vx-p.x*.018*step)*Math.pow(.975,step);
-      p.vy = (p.vy-p.y*.022*step)*Math.pow(.975,step);
+      p.vx = (p.vx-p.x*.018*step)*Math.pow(.96,step);
+      p.vy = (p.vy-p.y*.022*step)*Math.pow(.96,step);
       p.x += p.vx*step;
       p.y += p.vy*step;
       energy += Math.abs(p.x)+Math.abs(p.y)+Math.abs(p.vx)+Math.abs(p.vy);

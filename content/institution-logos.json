@@ -90,8 +90,8 @@
     "aliases": [
       "Verum Legalis: The Occidental College Law Review"
     ],
-    "width": 24,
-    "height": 24
+    "width": 29,
+    "height": 29
   },
   "un": {
     "file": "unga-emblem.png",
@@ -112,8 +112,8 @@
       "Bureau of Industry and Security at the U.S. Department of Commerce",
       "Bureau of Industry and Security"
     ],
-    "width": 27,
-    "height": 27
+    "width": 32,
+    "height": 32
   },
   "austria": {
     "file": "austria-trimmed.png",
@@ -132,8 +132,8 @@
     "aliases": [
       "Wolf Theiss"
     ],
-    "width": 20,
-    "height": 20
+    "width": 25,
+    "height": 25
   },
   "alpbach": {
     "file": "alpbach-transparent-trimmed.png",
@@ -197,13 +197,14 @@
     "height": 19
   },
   "state": {
-    "file": "state.png",
-    "source": "https://upload.wikimedia.org/wikipedia/commons/8/81/U.S._Department_of_State_official_seal.svg",
+    "file": "vienna-mission-seal.png",
+    "source": "User-supplied United States Mission to International Organizations in Vienna seal",
     "aliases": [
       "U.S. Mission to International Organizations in Vienna"
     ],
-    "width": 27,
-    "height": 27
+    "width": 32,
+    "height": 32,
+    "note": "Cropped to the seal; press-release heading and surrounding whitespace removed, with transparent exterior."
   },
   "ocg": {
     "file": "ocg-transparent.png",
