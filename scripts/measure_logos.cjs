@@ -71,13 +71,23 @@ async function measure(asset) {
   const references = measured.filter(row => row.kind === 'contact').map(row => row.before.footprint_area).sort((a, b) => a - b);
   const target = references[Math.floor(references.length / 2)];
   const diameter = Math.sqrt(4 * target / Math.PI);
+  const baseWidths = new Map(measured.map(row => [row.id, row.kind === 'contact' ? row.before.width :
+    row.rasterWidth * (circles.has(row.id) ? diameter / row.span : Math.sqrt(target / row.footprint))]));
   const report = {contact_box_px: 19, target_footprint_px2: target, circle_visible_diameter_px: round(diameter), rows: []};
   for (const row of measured) {
     let width = row.before.width;
     let rule = 'unchanged contact reference';
     if (row.kind === 'cv') {
-      width = row.rasterWidth * (circles.has(row.id) ? diameter / row.span : Math.sqrt(target / row.footprint));
+      width = baseWidths.get(row.id);
       rule = circles.has(row.id) ? 'common visible diameter' : 'common outer footprint area';
+      const referenceId = logos[row.id].painted_area_reference;
+      if (referenceId) {
+        const reference = measured.find(item => item.kind === 'cv' && item.id === referenceId);
+        if (!reference) throw new Error(`Missing painted-area reference: ${referenceId}`);
+        const referenceArea = reference.atWidth(baseWidths.get(referenceId)).painted_area;
+        width *= Math.sqrt(referenceArea / row.atWidth(width).painted_area);
+        rule = `painted area matched to ${reference.name}`;
+      }
       logos[row.id].width = round(width);
       logos[row.id].height = row.atWidth(width).height;
     }
