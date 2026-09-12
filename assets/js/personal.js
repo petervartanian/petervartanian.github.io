@@ -288,7 +288,19 @@ if (mobile) {
     thread.setAttribute('class','name-thread');
     thread.setAttribute('aria-hidden','true');
     thread.setAttribute('focusable','false');
-    thread.append(path);
+    const taper=document.createElementNS(ns,'path');
+    taper.setAttribute('class','thread-taper');
+    const defs=document.createElementNS(ns,'defs');
+    const gradient=document.createElementNS(ns,'linearGradient');
+    gradient.id='thread-taper-color';
+    gradient.setAttribute('gradientUnits','userSpaceOnUse');
+    for(const [offset,color] of [['0%','var(--ink)'],['100%','currentColor']]) {
+      const stop=document.createElementNS(ns,'stop');
+      stop.setAttribute('offset',offset);stop.setAttribute('stop-color',color);
+      gradient.append(stop);
+    }
+    defs.append(gradient);
+    thread.append(defs,path,taper);
     page.append(thread);
     function routeThread() {
       positionPortrait();
@@ -332,6 +344,22 @@ if (mobile) {
         }
       });
       path.setAttribute('d',route.join(' '));
+      // Follow the actual curve while narrowing smoothly out of the period.
+      const length=parseFloat(getComputedStyle(anchor).fontSize)*.42;
+      const edges=[[],[]];
+      for(let i=0;i<=24;i++) {
+        const u=i/24,d=u*length,p=path.getPointAtLength(d);
+        const before=path.getPointAtLength(Math.max(0,d-.1));
+        const after=path.getPointAtLength(d+.1);
+        const dx=after.x-before.x,dy=after.y-before.y,n=Math.hypot(dx,dy)||1;
+        const half=.425+1.35*Math.pow(1-u,3);
+        edges[0].push(`${p.x-dy/n*half},${p.y+dx/n*half}`);
+        edges[1].push(`${p.x+dy/n*half},${p.y-dx/n*half}`);
+      }
+      taper.setAttribute('d',`M${edges[0].join(' L')} L${edges[1].reverse().join(' L')} Z`);
+      const tail=path.getPointAtLength(length);
+      gradient.setAttribute('x1',sx);gradient.setAttribute('y1',sy);
+      gradient.setAttribute('x2',tail.x);gradient.setAttribute('y2',tail.y);
     }
     routeThread();
     new ResizeObserver(routeThread).observe(page);
