@@ -17,5 +17,7 @@ jobs:
         run: python build.py
       - name: Verify content and navigation
         run: python validate.py
+      - name: Verify natural shake gestures
+        run: node scripts/test_mobile_shake.cjs
       - name: Check generated pages are current
         run: git diff --exit-code

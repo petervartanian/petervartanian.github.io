@@ -46,7 +46,7 @@ if (mobile) {
   mobile.setAttribute('role','group');
   let portrait = null;
   let shakeMotion = null;
-  let shed = false, leafFall = null, restoringPortrait = false;
+  let shed = false, leafFall = null;
   function shedLeaves() {
     if (shed) return;
     shed = true;
@@ -55,7 +55,7 @@ if (mobile) {
     if (frame) cancelAnimationFrame(frame);
     frame = null;
     previousTime = 0;
-    if (!reducedMotion.matches && !restoringPortrait) {
+    if (!reducedMotion.matches) {
       const ns = 'http://www.w3.org/2000/svg';
       const layer = document.createElementNS(ns, 'svg');
       layer.setAttribute('class', 'falling-pieces');
@@ -100,8 +100,7 @@ if (mobile) {
     portrait.style.left = `${Math.max(16, Math.min(innerWidth-size-16, box.left+box.width/2-size/2))}px`;
     portrait.style.top = `${Math.max(16, Math.min(innerHeight-size-24, box.top+box.height*.7-size/2))}px`;
   }
-  function dropPortrait(keyboard=false, restored=false) {
-    restoringPortrait = restored;
+  function dropPortrait(keyboard=false) {
     if (!portrait) {
       portrait = document.createElement('div');
       portrait.className = 'fallen-portrait';
@@ -129,8 +128,7 @@ if (mobile) {
       if (portrait.hidden) return;
       portrait.style.visibility = '';
       shedLeaves();
-      try { localStorage.setItem('portrait-discovered', 'yes'); } catch {}
-      if (!restored && !reducedMotion.matches) portrait.animate([
+      if (!reducedMotion.matches) portrait.animate([
         {transform:`translate(${startX}px, ${startY}px) rotate(-24deg) scale(.7)`,opacity:0,offset:0},
         {opacity:1,offset:.15},
         {transform:'translate(0, 9px) rotate(11deg) scale(1)',offset:.76},
@@ -142,23 +140,30 @@ if (mobile) {
   }
   function trackShake(x, y, time, keyboard=false) {
     if (portrait || !shakeMotion) return;
-    const m = shakeMotion, dt = Math.max(8, time-m.time);
-    const dx=x-m.x, dy=y-m.y, distance=Math.hypot(dx,dy);
-    const speed=Math.min(3, distance/dt);
-    m.energy=Math.max(0,m.energy-dt*.12);
-    if (distance>1) {
-      const reversal = dx*m.dx+dy*m.dy < 0;
-      if (reversal) {
-        // A substantial, fast change of direction counts; taps and tiny jitters do not.
-        if(m.travel>=20 && speed>.45 && m.speed>.45) m.energy+=Math.min(100,m.travel*speed);
-        m.travel=0;
+    const m=shakeMotion, dt=Math.max(1,time-m.time);
+    const speed=Math.min(3,Math.hypot(x-m.x,y-m.y)/dt);
+    m.energy=Math.max(0,m.energy-dt*.08);
+    if (!m.axis && Math.hypot(x-m.startX,y-m.startY)>=8) {
+      m.axis=Math.abs(x-m.startX)>=Math.abs(y-m.startY)?'x':'y';
+      m.origin=m.axis==='x'?m.startX:m.startY;
+      m.extreme=m.origin;
+    }
+    if (m.axis) {
+      const value=m.axis==='x'?x:y;
+      if (!m.direction) m.direction=value>=m.origin?1:-1;
+      m.peak=Math.max(m.peak,speed);
+      if ((value-m.extreme)*m.direction>=0) m.extreme=value;
+      else if ((m.extreme-value)*m.direction>=10) {
+        const excursion=Math.abs(m.extreme-m.origin);
+        // Judge the whole swing, including its peak speed. Real hands slow down at a turn.
+        if (excursion>=28 && m.peak>=.5) m.energy+=Math.min(110,excursion*m.peak);
+        m.origin=m.extreme;m.extreme=value;m.direction*=-1;m.peak=speed;
       }
-      m.travel+=distance;m.dx=dx;m.dy=dy;m.speed=speed;
     }
     m.x=x;m.y=y;m.time=time;
-    if(m.energy>=130) dropPortrait(keyboard);
+    if(m.energy>=150) dropPortrait(keyboard);
   }
-  const newMotion=(x,y,time)=>({x,y,time,dx:0,dy:0,speed:0,travel:0,energy:0});
+  const newMotion=(x,y,time)=>({x,y,time,startX:x,startY:y,axis:null,direction:0,origin:0,extreme:0,peak:0,energy:0});
   window.addEventListener('resize', positionPortrait);
 
 
@@ -261,7 +266,6 @@ if (mobile) {
     else if(!reducedMotion.matches) animate();
   });
   draw();
-  try { if(localStorage.getItem('portrait-discovered')==='yes') dropPortrait(false,true); } catch {}
 
   // Route the suspension thread through whitespace using the rendered text bounds.
   const page=document.querySelector('body[data-page=home] .page');
@@ -309,8 +313,8 @@ if (mobile) {
         if(i<paragraphs.length-1){
           const next=paragraphs[i+1],nextSide=i%2===0?right:left;
           const gapY=(paragraph.bottom+next.top)/2;
-          route.push(`C${side} ${gapY} ${origin.width*.5} ${gapY} ${origin.width*.5} ${gapY}`,
-            `S${nextSide} ${gapY} ${nextSide} ${next.top+7}`);
+          // One cubic across the gap avoids a zero-length tangent at its midpoint.
+          route.push(`C${side} ${gapY} ${nextSide} ${gapY} ${nextSide} ${next.top+7}`);
         } else {
           route.push(`C${side} ${ey-12} ${ex} ${ey-23} ${ex} ${ey}`);
         }

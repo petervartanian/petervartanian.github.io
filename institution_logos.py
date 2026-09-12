@@ -29,8 +29,7 @@ def add_institution_logos(markup):
             name = f'({number}) {name}'
         if key == 'mckinnon':
             first, second = name.split(' &amp; ', 1)
-            second = second.replace('Global Political Economy', '<span class="institution-phrase">Global Political Economy</span>')
-            name = f'{first} <br>&amp; {second}'
+            name = f'{first} <br><span class="institution-wide">&amp; {second}</span>'
         boundaries = PHRASE_BREAKS.get(key, [])
         if boundaries:
             phrases = re.split('(?=' + '|'.join(re.escape(part) for part in boundaries) + ')', name)
