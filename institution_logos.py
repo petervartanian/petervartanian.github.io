@@ -47,6 +47,6 @@ def add_institution_logos(markup):
     result = ''.join(parts)
     # Keep joint affiliations in the same row, with each name aligned to its mark.
     result = result.replace('</span></span></span> &amp; <span class="institution-entry">', ' &amp;</span></span></span> <span class="institution-entry">')
-    # Keep footnote references attached to the final institution name.
-    result = re.sub(r'</span></span></span>(</span>)?(<sup>.*?</sup>)', lambda m: m[2] + '</span></span></span>' + (m[1] or ''), result)
+    # Keep references immediately after the final name, outside its shaded text.
+    result = re.sub(r'</span></span></span>(</span>)?(<sup>.*?</sup>)', lambda m: '</span>' + m[2] + '</span></span>' + (m[1] or ''), result)
     return result
