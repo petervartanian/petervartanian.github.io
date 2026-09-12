@@ -79,46 +79,97 @@ if (mobile) {
         const drift = (i%2 ? 1 : -1)*(8+(i*7)%22);
         const spin = (i%2 ? 1 : -1)*(12+(i*11)%35);
         const radians=spin*Math.PI/180;
-        const halfHeight=(bounds.width*Math.abs(Math.sin(radians))+bounds.height*Math.abs(Math.cos(radians)))/2;
-        const distance=Math.max(0,stage.getBoundingClientRect().bottom+14-(bounds.top+bounds.height/2)-halfHeight);
+        const centerX=bounds.left+bounds.width/2,centerY=bounds.top+bounds.height/2;
+        let lowest=-Infinity;
+        // Land on the painted outline, not the corners of a rotated bounding box.
+        for(const geometry of piece.element.querySelectorAll('path,circle,ellipse')) {
+          const paint=getComputedStyle(geometry);
+          if(geometry.getAttribute('fill')==='transparent' || (paint.fill==='none' && paint.stroke==='none')) continue;
+          const transform=geometry.getScreenCTM(),length=geometry.getTotalLength();
+          const stroke=paint.stroke==='none'?0:parseFloat(paint.strokeWidth)/2*Math.hypot(
+            Math.sin(radians)*transform.a+Math.cos(radians)*transform.b,
+            Math.sin(radians)*transform.c+Math.cos(radians)*transform.d
+          );
+          for(let sample=0;sample<=96;sample++) {
+            const point=geometry.getPointAtLength(length*sample/96).matrixTransform(transform);
+            lowest=Math.max(lowest,(point.x-centerX)*Math.sin(radians)+(point.y-centerY)*Math.cos(radians)+stroke);
+          }
+        }
+        const distance=Math.max(0,stageBounds.bottom+14-centerY-lowest);
         const duration=Math.max(540,Math.sqrt(2*distance/750)*1000);
         return wrapper.animate([
           {transform:'translate(0, 0) rotate(0deg)',opacity:1},
           {transform:`translate(${drift}px, ${distance}px) rotate(${spin}deg)`,opacity:1}
         ], {duration,delay:(i%5)*22,easing:'cubic-bezier(.333,0,.667,.333)',fill:'both'}).finished
           .then(async()=>{
-            // Decay the actual artwork: discoloration followed by spreading holes.
+            // Stain the paper, then shed jagged fragments from the perimeter inward.
             const defs=document.createElementNS(ns,'defs');
-            const mask=document.createElementNS(ns,'mask');
-            mask.id=`paper-rot-${i}`;
-            mask.setAttribute('maskUnits','userSpaceOnUse');
-            const x=bounds.left-stageBounds.left-2,y=bounds.top-stageBounds.top-2;
-            const width=bounds.width+4,height=bounds.height+4;
-            for(const [key,value] of Object.entries({x,y,width,height})) mask.setAttribute(key,value);
-            const paper=document.createElementNS(ns,'rect');
-            for(const [key,value] of Object.entries({x,y,width,height,fill:'white'})) paper.setAttribute(key,value);
-            mask.append(paper);defs.append(mask);layer.prepend(defs);
-            wrapper.setAttribute('mask',`url(#${mask.id})`);
-            wrapper.animate([{filter:'none'},{filter:'grayscale(.7) sepia(.85) brightness(.62)'}],{duration:1400,fill:'forwards'});
-            for(let row=0;row<5;row++) for(let col=0;col<5;col++) {
-              const hole=document.createElementNS(ns,'path');
-              const cx=x+(col+.5)*width/5,cy=y+(row+.5)*height/5;
-              const radius=Math.hypot(width/5,height/5)*.95;
-              const outline=scale=>Array.from({length:11},(_,k)=>{
-                const angle=k*Math.PI*2/11;
-                const r=radius*scale*(.86+.14*Math.sin(k*2.7+row*4+col*3+i));
-                return `${k?'L':'M'}${cx+Math.cos(angle)*r} ${cy+Math.sin(angle)*r}`;
-              }).join(' ')+' Z';
-              hole.setAttribute('d',outline(0));hole.setAttribute('fill','black');
-              const growth=document.createElementNS(ns,'animate');
-              growth.setAttribute('attributeName','d');growth.setAttribute('from',outline(0));
-              growth.setAttribute('to',outline(1));
-              growth.setAttribute('dur',`${850+((row*7+col*3+i)%5)*100}ms`);
-              growth.setAttribute('begin','indefinite');growth.setAttribute('fill','freeze');
-              hole.append(growth);mask.append(hole);
-              setTimeout(()=>{if(growth.isConnected) growth.beginElement();},250+((row*3+col*7+i)%7)*65);
+            const make=(name,attributes={})=>{
+              const element=document.createElementNS(ns,name);
+              for(const [key,value] of Object.entries(attributes)) element.setAttribute(key,value);
+              return element;
+            };
+            const grain=make('filter',{id:`paper-grain-${i}`,x:'-5%',y:'-5%',width:'110%',height:'110%'});
+            grain.append(
+              make('feTurbulence',{type:'fractalNoise',baseFrequency:'.16',numOctaves:3,seed:i+1,result:'grain'}),
+              make('feColorMatrix',{in:'grain',type:'matrix',values:'.2 .2 .2 0 .35 .2 .2 .2 0 .35 .2 .2 .2 0 .35 0 0 0 0 1',result:'weathering'}),
+              make('feBlend',{in:'SourceGraphic',in2:'weathering',mode:'multiply'}),
+              make('feComposite',{in2:'SourceGraphic',operator:'in'})
+            );
+            defs.append(grain);layer.prepend(defs);
+            await new Promise(resolve=>setTimeout(resolve,180));
+            copy.setAttribute('filter',`url(#${grain.id})`);
+            wrapper.animate([{filter:'none'},{filter:'sepia(1) saturate(.7) brightness(.62)'}],{duration:450,fill:'forwards'});
+            await new Promise(resolve=>setTimeout(resolve,700));
+            const x=bounds.left-stageBounds.left-1,y=bounds.top-stageBounds.top-1;
+            const width=bounds.width+2,height=bounds.height+2;
+            const rows=3,cols=3,cw=width/cols,ch=height/rows;
+            const noise=seed=>Math.sin(seed*12.9898+i*7.13);
+            const grid=Array.from({length:rows+1},(_,r)=>Array.from({length:cols+1},(_,c)=>[
+              x+c*cw+(c>0&&c<cols?noise(r*8+c)*cw*.22:0),
+              y+r*ch+(r>0&&r<rows?noise(r*6+c+3)*ch*.22:0)
+            ]));
+            const edge=(a,b)=>{
+              const reverse=a[0]>b[0] || (a[0]===b[0] && a[1]>b[1]);
+              const start=reverse?b:a,end=reverse?a:b;
+              const points=Array.from({length:7},(_,k)=>{
+                const t=k/6,wobble=k===0||k===6?0:noise(start[0]+end[0]+start[1]+end[1]+k*17)*.14;
+                return [start[0]+(end[0]-start[0])*t+(end[1]-start[1])*wobble,start[1]+(end[1]-start[1])*t-(end[0]-start[0])*wobble];
+              });
+              return (reverse?points.reverse():points).slice(0,-1);
+            };
+            const fragments=[];
+            for(let row=0;row<rows;row++) for(let col=0;col<cols;col++) {
+              const a=grid[row][col],b=grid[row][col+1],c=grid[row+1][col+1],d=grid[row+1][col];
+              // Neighboring fragments share exactly the same ragged edge.
+              const points=[...edge(a,b),...edge(b,c),...edge(c,d),...edge(d,a)];
+              const cx=(a[0]+b[0]+c[0]+d[0])/4,cy=(a[1]+b[1]+c[1]+d[1])/4;
+              const clip=make('clipPath',{id:`paper-flake-${i}-${row}-${col}`,clipPathUnits:'userSpaceOnUse'});
+              const outline=make('polygon',{points:points.map(p=>p.join(',')).join(' ')});
+              const shrinking=make('animate',{attributeName:'points',dur:'850ms',begin:'indefinite',fill:'freeze',keyTimes:'0;.72;1'});
+              const contours=[points,points.map(([px,py],k)=>{
+                const remaining=.35+.22*noise(k+row*5+col);
+                return [cx+(px-cx)*remaining,cy+(py-cy)*remaining];
+              }),points.map(()=>[cx,cy])];
+              shrinking.setAttribute('values',contours.map(p=>p.map(v=>v.join(',')).join(' ')).join(';'));
+              outline.append(shrinking);clip.append(outline);defs.append(clip);
+              const fragment=make('g',{'class':'paper-fragment','clip-path':`url(#${clip.id})`});
+              fragment.append(copy.cloneNode(true));wrapper.append(fragment);
+              fragment.style.transformOrigin=`${cx}px ${cy}px`;
+              const originX=bounds.left-stageBounds.left+bounds.width/2,originY=bounds.top-stageBounds.top+bounds.height/2;
+              const landedY=originY+(cx-originX)*Math.sin(radians)+(cy-originY)*Math.cos(radians)+distance;
+              const fall=Math.max(0,stageBounds.height+13-landedY),side=noise(row*4+col+2)*7;
+              const tx=side*Math.cos(radians)+fall*Math.sin(radians),ty=-side*Math.sin(radians)+fall*Math.cos(radians);
+              const edgeDepth=Math.min(row,col,rows-1-row,cols-1-col);
+              const delay=edgeDepth*310+((row*3+col+i)%4)*45;
+              setTimeout(()=>{if(shrinking.isConnected) shrinking.beginElement();},delay+120);
+              fragments.push(fragment.animate([
+                {transform:'translate(0,0) rotate(0deg)'},
+                {transform:`translate(${tx}px,${ty}px) rotate(${noise(row*7+col)*24}deg)`}
+              ],{delay,duration:980,easing:'cubic-bezier(.333,0,.667,.333)',fill:'both'}).finished.then(()=>fragment.remove()));
             }
-            await new Promise(resolve=>setTimeout(resolve,2100));
+            copy.remove();
+            await Promise.all(fragments);
             wrapper.remove();defs.remove();
           })
           .catch(() => {});
@@ -184,17 +235,20 @@ if (mobile) {
     const step = previousTime ? Math.min((time-previousTime)/16.67,2) : 1;
     previousTime = time;
     let energy = 0;
-    const active=lastInteraction!==null && time-lastInteraction<700;
+    const active=lastInteraction!==null && time-lastInteraction<320;
     const dt=step/60;
-    const strength=1+8*Math.pow(Math.min(1,activeDuration/5000),1.4);
+    const strength=8+20*Math.pow(Math.min(1,activeDuration/5000),1.45);
     pieces.forEach((p,i) => {
       if(reducedMotion.matches) return;
       p.theta=p.theta || 0;p.omega=p.omega || 0;p.drive=p.drive || 0;
-      p.drive+=((active?strength:0)-p.drive)*(1-Math.exp(-dt/.28));
+      p.drive+=((active?strength:0)-p.drive)*(1-Math.exp(-dt/.06));
+      p.phase=(p.phase || 0)+dt*10.4;
       const [ax,ay]=p.attachment;
       const dx=p.home[0]+ax-p.mount[0],dy=p.home[1]+ay-p.mount[1];
-      const length=Math.max(24,Math.hypot(dx,dy)),rest=Math.atan2(dx,dy);
-      const acceleration=-(800/length)*Math.sin(p.theta)-1.5*p.omega+p.drive*Math.sin(time/225+i*.8);
+      // Never lengthen short strings: doing so teleports pieces on the first frame.
+      const length=Math.hypot(dx,dy),rest=Math.atan2(dx,dy);
+      const frequency=9.5-Math.min(length,140)/140;
+      const acceleration=-frequency*frequency*Math.sin(p.theta)-4*p.omega+p.drive*Math.sin(p.phase+i*.72);
       p.omega+=acceleration*dt;
       p.theta+=p.omega*dt;
       const sin=Math.sin(p.theta),cos=Math.cos(p.theta);
