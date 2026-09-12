@@ -5,6 +5,7 @@ import re
 
 def export_cv(html):
     def inline(value):
+        value = value.replace('<span class="language-level">', '— ')
         value = re.sub(r'<sup><a[^>]*>(.*?)</a></sup>', r'[^\1]', value)
         value = re.sub(r'<span class="primary-contribution">(.*?)</span>', r'**\1**', value)
         value = re.sub(r'<a[^>]*href="([^"]+)"[^>]*>(.*?)</a>', lambda m: f'[{m[2]}]({m[1]})', value)

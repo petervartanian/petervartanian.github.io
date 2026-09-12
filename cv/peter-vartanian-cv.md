@@ -99,21 +99,19 @@ Awards
 
 My proficiencies follow the [ILR’s 0–5 scale](https://www.govtilr.org/Skills/ILRscale2.htm) (with + marking intermediate levels).
 
-| Language | ILR proficiency |
-| --- | --- |
-| German | 5 |
-| Armenian | 4+ |
-| Yiddish | 4+ |
-| Spanish | 4 |
-| French | 3+ |
-| Portuguese | 3+ |
-| Russian | 2+ |
-| Korean | 2 |
-| Amharic | 1+ |
-| Arabic (Fuṣḥā and Lebanese) | 1+ |
-| Italian | 1+ |
-| Turkish | 1+ |
-| Mandarin | 1 |
+- German — 5
+- Armenian — 4+
+- Yiddish — 4+
+- Spanish — 4
+- French — 3+
+- Portuguese — 3+
+- Russian — 2+
+- Korean — 2
+- Amharic — 1+
+- Arabic (Fuṣḥā and Lebanese) — 1+
+- Italian — 1+
+- Turkish — 1+
+- Mandarin — 1
 
 ### B. Philological training
 

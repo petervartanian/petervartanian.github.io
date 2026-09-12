@@ -237,17 +237,17 @@ for section in cv['sections']:
 <div class="education-group"><p class="record-label">Awards</p><ul class="education-list">{institution_honors("California Institute of Technology")}</ul></div></details></div>'''
     elif section['label'].startswith('Languages'):
         label, anchor = 'Languages', 'languages'
-        content = '<section class="cv-subsection"><h3><span class="subsection-number">A.</span> Modern languages</h3><p class="quiet">My proficiencies follow the <a href="https://www.govtilr.org/Skills/ILRscale2.htm">ILR’s 0–5 scale</a> (with + marking intermediate levels).</p><table class="cv-table language-table" aria-label="Modern languages and ILR proficiency"><tbody>'
+        content = '<section class="cv-subsection"><h3><span class="subsection-number">A.</span> Modern languages</h3><p class="quiet">My proficiencies follow the <a href="https://www.govtilr.org/Skills/ILRscale2.htm">ILR’s 0–5 scale</a> (with + marking intermediate levels).</p><ul class="cv-bullets language-list" role="list" aria-label="Modern languages and ILR proficiency">'
         for item in section['items']:
             if not item['level']: continue
             if item['name'] == 'Lebanese': continue
             name = 'Arabic (Fuṣḥā and Lebanese)' if item['name'] == 'Fuṣḥā' else item['name']
-            content += f'<tr><th scope="row">{e(name)}</th><td>{e(item["level"])}</td></tr>'
-        content += '</tbody></table></section><section class="cv-subsection"><h3><span class="subsection-number">B.</span> Philological training</h3><table class="cv-table" aria-label="Philological training"><tbody><tr><td>Ancient Greek</td></tr><tr><td>Classical Latin</td></tr><tr><td>Classical Nahuatl</td></tr></tbody></table></section>'
+            content += f'<li><span class="language-entry"><span>{e(name)}</span> <span class="language-level">{e(item["level"])}</span></span></li>'
+        content += '</ul></section><section class="cv-subsection"><h3><span class="subsection-number">B.</span> Philological training</h3><ul class="cv-bullets" role="list" aria-label="Philological training"><li>Ancient Greek</li><li>Classical Latin</li><li>Classical Nahuatl</li></ul></section>'
     else:
         label = section['label']
         anchor = re.sub(r'[^a-z]+', '-', label.lower()).strip('-')
-        content = f'<table class="cv-table" aria-label="{e(label)}"><tbody>' + ''.join('<tr><td>'+cv_text(item)+'</td></tr>' for item in section['items']) + '</tbody></table>'
+        content = f'<ul class="cv-bullets" role="list" aria-label="{e(label)}">' + ''.join('<li>'+cv_text(item)+'</li>' for item in section['items']) + '</ul>'
     major = {'Education': 'II', 'Languages': 'III'}
     minor = {'Programming': 'A', 'Tools + platforms': 'B', 'AI / Security': 'C', 'Methods': 'D'}
     if label == 'Programming':
