@@ -86,10 +86,37 @@ if (mobile) {
           {transform:'translate(0, 0) rotate(0deg)',opacity:1},
           {transform:`translate(${drift}px, ${distance}px) rotate(${spin}deg)`,opacity:1}
         ], {duration,delay:(i%5)*22,easing:'cubic-bezier(.32,0,.7,1)',fill:'both'}).finished
-          .then(()=>wrapper.animate([{opacity:1},{opacity:0}],{duration:420,delay:180,fill:'forwards'}).finished)
+          .then(async()=>{
+            const landed=`translate(${drift}px, ${distance}px) rotate(${spin}deg)`;
+            await wrapper.animate([
+              {transform:landed},
+              {transform:`translate(${drift}px, ${distance+halfHeight*.7}px) rotate(${spin+12}deg) scale(.4,.22)`,filter:'saturate(.65)'}
+            ],{duration:260,delay:220,easing:'cubic-bezier(.4,0,.8,1)',fill:'forwards'}).finished;
+            // Leave torn paper on the floor rather than dissolving it into transparency.
+            const pigment=[...piece.element.querySelectorAll('[fill], [stroke]')]
+              .map(e=>[e.getAttribute('fill'),e.getAttribute('stroke')].find(c=>c && c!=='none' && c!=='transparent'))
+              .find(Boolean) || '#8b7b8e';
+            const center=Math.max(14,Math.min(stageBounds.width-14,bounds.left-stageBounds.left+bounds.width/2+drift));
+            for(let j=0;j<3;j++) {
+              const scrap=document.createElementNS(ns,'path');
+              const size=2.5+((i+j*3)%5)*.55;
+              const x=Math.max(6,Math.min(stageBounds.width-6,center+(j-1)*(6+i%4)));
+              const y=stageBounds.height+14;
+              scrap.setAttribute('d',`M${-size} 0 L${-size*.7} ${-size*.65} L${size*.15} ${-size} L${size} ${-size*.2} L${size*.55} 0Z`);
+              scrap.setAttribute('fill',pigment);
+              scrap.setAttribute('class','paper-scrap');
+              scrap.setAttribute('transform',`translate(${x} ${y})`);
+              layer.append(scrap);
+              scrap.animate([
+                {transform:`translate(${center}px,${y-5}px) rotate(${(j-1)*25}deg)`},
+                {transform:`translate(${x}px,${y}px) rotate(0deg)`}
+              ],{duration:240+j*45,easing:'cubic-bezier(.2,.7,.4,1)'});
+            }
+            wrapper.remove();
+          })
           .catch(() => {});
       });
-      Promise.all(falls).then(() => {layer.remove();if(leafFall===layer) leafFall=null;});
+      Promise.all(falls).then(() => {layer.classList.add('settled-scraps');});
     }
     mobile.classList.add('mobile-shed');
     pieces.forEach(piece => {
@@ -151,14 +178,14 @@ if (mobile) {
     previousTime = time;
     let energy = 0;
     const active=lastInteraction!==null && time-lastInteraction<700;
-    const amplitude=7+48*Math.pow(Math.min(1,activeDuration/5000),1.4);
+    const amplitude=7+62*Math.pow(Math.min(1,activeDuration/5000),1.2);
     pieces.forEach((p,i) => {
       if (reducedMotion.matches) { p.vx=0; p.vy=0; return; }
       if(active) {
         // Both taps and pointer movement excite this same motion, never the frame.
         const phase=time/190+i*.8;
-        p.vx+=(Math.sin(phase)*amplitude-p.x)*.045*step;
-        p.vy+=(Math.cos(phase*.83+i)*amplitude*.35-p.y)*.045*step;
+        p.vx+=(Math.sin(phase)*amplitude-p.x)*.075*step;
+        p.vy+=(Math.cos(phase*.83+i)*amplitude*.35-p.y)*.075*step;
       }
       p.vx = (p.vx-p.x*.018*step)*Math.pow(.96,step);
       p.vy = (p.vy-p.y*.022*step)*Math.pow(.96,step);
