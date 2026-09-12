@@ -5,9 +5,9 @@
     "aliases": [
       "Occidental College"
     ],
-    "width": 31,
+    "width": 34,
     "note": "Resized proportionally from the supplied PNG; seal artwork preserved.",
-    "height": 31
+    "height": 34
   },
   "caltech": {
     "file": "caltech-seal.png",
@@ -16,9 +16,9 @@
       "California Institute of Technology",
       "Caltech"
     ],
-    "width": 28,
+    "width": 34,
     "note": "Resized proportionally from the supplied PNG; seal artwork preserved.",
-    "height": 28
+    "height": 34
   },
   "mit": {
     "file": "mit-trimmed.png",
@@ -27,9 +27,9 @@
       "MIT AI Risk Initiative",
       "MIT’s AI Risk Initiative"
     ],
-    "width": 28,
+    "width": 26,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 30
+    "height": 28
   },
   "arcola": {
     "file": "arcola-transparent.png",
@@ -38,7 +38,7 @@
     "aliases": [
       "Arcola AI"
     ],
-    "width": 52,
+    "width": 54,
     "source_page": "https://uk.linkedin.com/company/arcola-ai",
     "height": 16,
     "note": "Original wordmark and tagline retained; off-white background removed."
@@ -60,9 +60,9 @@
       "Hoover Institution on War, Revolution, and Peace at Stanford University",
       "Hoover Institution"
     ],
-    "width": 30,
+    "width": 34,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 30
+    "height": 34
   },
   "pon": {
     "file": "program-on-negotiation-transparent-trimmed.png",
@@ -72,7 +72,7 @@
     ],
     "width": 56,
     "note": "Outer frame removed; wordmark and shield preserved. Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 22
+    "height": 23
   },
   "change": {
     "file": "change.svg",
@@ -81,8 +81,8 @@
     "aliases": [
       "City Hub and Network for Gender Equity"
     ],
-    "width": 28,
-    "height": 28
+    "width": 34,
+    "height": 34
   },
   "verum": {
     "file": "verum.png",
@@ -91,8 +91,8 @@
     "aliases": [
       "Verum Legalis: The Occidental College Law Review"
     ],
-    "width": 29,
-    "height": 29
+    "width": 34,
+    "height": 34
   },
   "un": {
     "file": "unga-emblem.png",
@@ -101,9 +101,9 @@
       "Office of the Chair of the First Committee of the UN General Assembly",
       "UN"
     ],
-    "width": 34,
+    "width": 40,
     "note": "Latest user-supplied transparent gold emblem; trimmed to artwork and proportionally resized.",
-    "height": 29
+    "height": 34
   },
   "bis": {
     "file": "bis.png",
@@ -113,8 +113,8 @@
       "Bureau of Industry and Security at the U.S. Department of Commerce",
       "Bureau of Industry and Security"
     ],
-    "width": 31,
-    "height": 31
+    "width": 34,
+    "height": 34
   },
   "austria": {
     "file": "austria-trimmed.png",
@@ -122,9 +122,9 @@
     "aliases": [
       "Austrian Service Abroad"
     ],
-    "width": 44,
+    "width": 42,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 15
+    "height": 14
   },
   "wolf": {
     "file": "wolf.png",
@@ -133,8 +133,8 @@
     "aliases": [
       "Wolf Theiss"
     ],
-    "width": 26,
-    "height": 26
+    "width": 28,
+    "height": 28
   },
   "alpbach": {
     "file": "alpbach-transparent-trimmed.png",
@@ -142,7 +142,7 @@
     "aliases": [
       "European Forum Alpbach"
     ],
-    "width": 47,
+    "width": 46,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
     "height": 12
   },
@@ -152,9 +152,9 @@
     "aliases": [
       "The Occidental Newspaper"
     ],
-    "width": 29,
+    "width": 34,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 29
+    "height": 34
   },
   "hrca": {
     "file": "hrca.png",
@@ -164,7 +164,7 @@
       "Human Rights Cities Alliance"
     ],
     "width": 50,
-    "height": 25
+    "height": 26
   },
   "nti": {
     "file": "nti-globe-transparent.png",
@@ -173,9 +173,9 @@
       "FutureSafe at the Nuclear Threat Initiative",
       "Nuclear Threat Initiative"
     ],
-    "width": 28,
+    "width": 34,
     "note": "Cropped to the red globe only; wordmark, rules, and tagline omitted. White background made transparent; original artwork proportions retained.",
-    "height": 28
+    "height": 34
   },
   "oecd": {
     "file": "mission-action-lab-original.png",
@@ -184,8 +184,8 @@
     "aliases": [
       "OECD Mission Action Lab"
     ],
-    "width": 48,
-    "height": 23
+    "width": 50,
+    "height": 24
   },
   "family": {
     "file": "family-monogram.svg",
@@ -194,8 +194,8 @@
     "aliases": [
       "Family Office"
     ],
-    "width": 38,
-    "height": 32
+    "width": 36,
+    "height": 31
   },
   "state": {
     "file": "vienna-mission-seal.png",
@@ -203,8 +203,8 @@
     "aliases": [
       "U.S. Mission to International Organizations in Vienna"
     ],
-    "width": 31,
-    "height": 31,
+    "width": 34,
+    "height": 34,
     "note": "Cropped to the seal; press-release heading and surrounding whitespace removed, with transparent exterior."
   },
   "ocg": {
@@ -213,9 +213,9 @@
     "aliases": [
       "Occidental Consulting Group"
     ],
-    "width": 28,
+    "width": 30,
     "note": " White background made transparent; original artwork proportions retained.",
-    "height": 28
+    "height": 30
   },
   "blyth": {
     "file": "blyth-transparent-trimmed.png",
@@ -223,9 +223,9 @@
     "aliases": [
       "Charles R. Blyth Fund at Occidental College"
     ],
-    "width": 32,
+    "width": 35,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 32
+    "height": 35
   },
   "uepi": {
     "file": "uepi-transparent-trimmed.png",
@@ -233,9 +233,9 @@
     "aliases": [
       "Urban & Environmental Policy Institute at Occidental College"
     ],
-    "width": 25,
+    "width": 27,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 30
+    "height": 32
   },
   "mckinnon": {
     "file": "mckinnon-young.png",
