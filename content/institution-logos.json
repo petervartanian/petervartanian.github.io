@@ -5,9 +5,9 @@
     "aliases": [
       "Occidental College"
     ],
-    "width": 19,
+    "width": 23,
     "note": "Resized proportionally from the supplied PNG; seal artwork preserved.",
-    "height": 19
+    "height": 23
   },
   "caltech": {
     "file": "caltech-seal.png",
@@ -16,9 +16,9 @@
       "California Institute of Technology",
       "Caltech"
     ],
-    "width": 19,
+    "width": 20,
     "note": "Resized proportionally from the supplied PNG; seal artwork preserved.",
-    "height": 19
+    "height": 20
   },
   "mit": {
     "file": "mit-trimmed.png",
@@ -27,9 +27,9 @@
       "MIT AI Risk Initiative",
       "MIT’s AI Risk Initiative"
     ],
-    "width": 19,
+    "width": 24,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 21
+    "height": 26
   },
   "arcola": {
     "file": "arcola.png",
@@ -38,9 +38,9 @@
     "aliases": [
       "Arcola AI"
     ],
-    "width": 42,
+    "width": 44,
     "source_page": "https://uk.linkedin.com/company/arcola-ai",
-    "height": 12
+    "height": 13
   },
   "aire": {
     "file": "ai-risk-explorer-trimmed.png",
@@ -48,9 +48,9 @@
     "aliases": [
       "AI Risk Explorer"
     ],
-    "width": 19,
+    "width": 23,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 17
+    "height": 21
   },
   "hoover": {
     "file": "hoover-trimmed.png",
@@ -59,9 +59,9 @@
       "Hoover Institution on War, Revolution, and Peace at Stanford University",
       "Hoover Institution"
     ],
-    "width": 19,
+    "width": 21,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 19
+    "height": 21
   },
   "pon": {
     "file": "program-on-negotiation-transparent-trimmed.png",
@@ -80,8 +80,8 @@
     "aliases": [
       "City Hub and Network for Gender Equity"
     ],
-    "width": 19,
-    "height": 19
+    "width": 17,
+    "height": 17
   },
   "verum": {
     "file": "verum.png",
@@ -100,9 +100,9 @@
       "Office of the Chair of the First Committee of the UN General Assembly",
       "UN"
     ],
-    "width": 19,
+    "width": 25,
     "note": "Latest user-supplied transparent gold emblem; trimmed to artwork and proportionally resized.",
-    "height": 16
+    "height": 21
   },
   "bis": {
     "file": "bis.png",
@@ -112,8 +112,8 @@
       "Bureau of Industry and Security at the U.S. Department of Commerce",
       "Bureau of Industry and Security"
     ],
-    "width": 19,
-    "height": 19
+    "width": 20,
+    "height": 20
   },
   "austria": {
     "file": "austria-trimmed.png",
@@ -121,9 +121,9 @@
     "aliases": [
       "Austrian Service Abroad"
     ],
-    "width": 19,
+    "width": 29,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 7
+    "height": 10
   },
   "wolf": {
     "file": "wolf.png",
@@ -132,8 +132,8 @@
     "aliases": [
       "Wolf Theiss"
     ],
-    "width": 19,
-    "height": 19
+    "width": 15,
+    "height": 15
   },
   "alpbach": {
     "file": "alpbach-transparent-trimmed.png",
@@ -141,9 +141,9 @@
     "aliases": [
       "European Forum Alpbach"
     ],
-    "width": 36,
+    "width": 29,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 10
+    "height": 8
   },
   "newspaper": {
     "file": "newspaper-trimmed.png",
@@ -162,7 +162,7 @@
     "aliases": [
       "Human Rights Cities Alliance"
     ],
-    "width": 38,
+    "width": 37,
     "height": 19
   },
   "nti": {
@@ -172,9 +172,9 @@
       "FutureSafe at the Nuclear Threat Initiative",
       "Nuclear Threat Initiative"
     ],
-    "width": 19,
+    "width": 17,
     "note": "Cropped to the red globe only; wordmark, rules, and tagline omitted. White background made transparent; original artwork proportions retained.",
-    "height": 19
+    "height": 17
   },
   "oecd": {
     "file": "mission-action-lab-original.png",
@@ -184,7 +184,7 @@
       "OECD Mission Action Lab"
     ],
     "width": 42,
-    "height": 20
+    "height": 21
   },
   "family": {
     "file": "family-monogram.svg",
@@ -193,8 +193,8 @@
     "aliases": [
       "Family Office"
     ],
-    "width": 19,
-    "height": 16
+    "width": 22,
+    "height": 19
   },
   "state": {
     "file": "state.png",
@@ -211,9 +211,9 @@
     "aliases": [
       "Occidental Consulting Group"
     ],
-    "width": 19,
+    "width": 20,
     "note": " White background made transparent; original artwork proportions retained.",
-    "height": 19
+    "height": 20
   },
   "blyth": {
     "file": "blyth-transparent-trimmed.png",
@@ -221,9 +221,9 @@
     "aliases": [
       "Charles R. Blyth Fund at Occidental College"
     ],
-    "width": 19,
+    "width": 27,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 19
+    "height": 27
   },
   "uepi": {
     "file": "uepi-transparent-trimmed.png",
@@ -241,8 +241,8 @@
     "aliases": [
       "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy"
     ],
-    "width": 44,
+    "width": 42,
     "note": "White background made transparent and empty margins trimmed; original combined wordmark retained.",
-    "height": 21
+    "height": 20
   }
 }

@@ -4,6 +4,7 @@ from html import escape
 import json
 import re
 
+# Display widths are optically tuned to each mark's visible artwork; proportions stay natural.
 LOGOS = json.loads((Path(__file__).parent / 'content/institution-logos.json').read_text())
 ALIASES = {escape(name): key for key, logo in LOGOS.items() for name in logo['aliases']}
 NAMES = re.compile(r'(?<!\w)(?:' + '|'.join(re.escape(name) for name in sorted(ALIASES, key=len, reverse=True)) + r')(?!\w)')
