@@ -32,16 +32,15 @@
     "height": 28
   },
   "arcola": {
-    "file": "arcola-transparent.png",
-    "source": "https://media.licdn.com/dms/image/v2/D4E0BAQGCwbobmAcpLA/company-logo_200_200/B4EZvGuD.HHIAI-/0/1768565522695/arcola_ai_logo?e=2147483647&v=beta&t=bqzPWyuLNEWEStoeqxInX0MbDs2CgMdxtLFKKyS8SUo",
-    "bytes": 3212,
+    "file": "arcola-a.png",
+    "source": "User-supplied Arcola AI wordmark; first capital A",
+    "bytes": 1153,
     "aliases": [
       "Arcola AI"
     ],
-    "width": 54,
-    "source_page": "https://uk.linkedin.com/company/arcola-ai",
-    "height": 16,
-    "note": "Original wordmark and tagline retained; off-white background removed."
+    "width": 28,
+    "height": 32,
+    "note": "First A cropped directly from the supplied logo; original navy color and proportions preserved, with a transparent background."
   },
   "aire": {
     "file": "ai-risk-explorer-user-transparent.png",
