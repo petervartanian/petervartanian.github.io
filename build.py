@@ -122,6 +122,9 @@ page('home', 'Home', 'Research and writing by Peter H. Vartanian.', home, '/')
 
 def writing_row(item, index):
     title = e(item['title'])
+    for lead in ('Research Radar: AI May Not Start Wars.', 'Allied Mettle, Allied Metals:'):
+        if title.startswith(lead + ' '):
+            title = title.replace(lead + ' ', lead + ' <br>', 1)
     if item['title'] != 'omphalOS':
         title = f'“{title}”'
     note = {1: '†', 2: '‡', 4: '§'}.get(index, '')
