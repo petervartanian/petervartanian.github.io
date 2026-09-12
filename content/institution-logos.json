@@ -27,9 +27,9 @@
       "MIT AI Risk Initiative",
       "MIT’s AI Risk Initiative"
     ],
-    "width": 34,
+    "width": 28,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 37
+    "height": 30
   },
   "arcola": {
     "file": "arcola.png",
@@ -38,19 +38,19 @@
     "aliases": [
       "Arcola AI"
     ],
-    "width": 56,
+    "width": 52,
     "source_page": "https://uk.linkedin.com/company/arcola-ai",
-    "height": 17
+    "height": 16
   },
   "aire": {
-    "file": "ai-risk-explorer-trimmed.png",
-    "source": "User-supplied AI Risk Explorer logo",
+    "file": "ai-risk-explorer-user-transparent.png",
+    "source": "Latest user-supplied AI Risk Explorer mark",
     "aliases": [
       "AI Risk Explorer"
     ],
     "width": 30,
-    "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 28
+    "note": "Background removed with antialiased transparency; artwork cropped to its visible bounds. Display width preserved.",
+    "height": 27
   },
   "hoover": {
     "file": "hoover-trimmed.png",
@@ -141,9 +141,9 @@
     "aliases": [
       "European Forum Alpbach"
     ],
-    "width": 50,
+    "width": 44,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 13
+    "height": 11
   },
   "newspaper": {
     "file": "newspaper-trimmed.png",
@@ -193,8 +193,8 @@
     "aliases": [
       "Family Office"
     ],
-    "width": 40,
-    "height": 34
+    "width": 32,
+    "height": 27
   },
   "state": {
     "file": "vienna-mission-seal.png",
