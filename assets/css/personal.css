@@ -150,7 +150,7 @@ sup a { padding: 4px 0; }
 .publication-notes p:last-child { margin-bottom: 0; }
 .endnote-marker { color: var(--quiet); }
 .publication-notes p:target { color: var(--link); }
-.memos { margin-top: 43px; }
+.memos { margin-top: 36px; border-top: 1px solid var(--line); padding-top: 30px; }
 .memos h2 { font-size: 18px; margin-bottom: 14px; }
 .memos p { font-size: 15px; }
 .memo-outline, .memo-outline ul { list-style: none; padding: 0; margin: 0; }
