@@ -69,9 +69,9 @@
     "aliases": [
       "The Program on Negotiation at Harvard Law School"
     ],
-    "width": 19,
+    "width": 42,
     "note": "Outer frame removed; wordmark and shield preserved. Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 8
+    "height": 18
   },
   "change": {
     "file": "change.svg",
@@ -183,8 +183,8 @@
     "aliases": [
       "OECD Mission Action Lab"
     ],
-    "width": 19,
-    "height": 9
+    "width": 42,
+    "height": 20
   },
   "family": {
     "file": "family-monogram.svg",

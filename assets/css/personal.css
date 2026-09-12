@@ -20,7 +20,7 @@ svg, canvas { -webkit-touch-callout: none; }
 html { scroll-padding-top: 30px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; background: var(--paper); color: var(--ink); }
 body[data-page=writing] { --paper: #faf8fd; --ink: #483639; --link: #884d5a; --quiet: #7c686a; --line: #48363920; }
-body[data-page=cv] { --mark-column: 44px; --paper: #fffaf5; --ink: #303d4e; --link: #46698a; --quiet: #657381; --line: #303d4e20; }
+body[data-page=cv] { --mark-column: 44px; --mark-text-inset: calc(var(--mark-column) + var(--mark-gap) + 3px); --paper: #fffaf5; --ink: #303d4e; --link: #46698a; --quiet: #657381; --line: #303d4e20; }
 body[data-page=contact] { --paper: #f7fbf8; --ink: #473b50; --link: #785987; --quiet: #77677e; --line: #473b5020; }
 a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent); }
 a:hover { text-decoration-color: currentColor; }
