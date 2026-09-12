@@ -44,16 +44,18 @@ if (mobile) {
   let nudges = 0;
   const clamp = value => Math.max(-48, Math.min(48, value));
   mobile.setAttribute('role','group');
-  let shake = 0, lastShake = 0, portraitCooldown = 0, portrait = null, returnFocus = null;
-  let shed = false, leafFall = null;
+  let portrait = null;
+  let shakeMotion = null;
+  let shed = false, leafFall = null, restoringPortrait = false;
   function shedLeaves() {
     if (shed) return;
     shed = true;
     dragging = null;
+    document.body.classList.remove('shaking-mobile');
     if (frame) cancelAnimationFrame(frame);
     frame = null;
     previousTime = 0;
-    if (!reducedMotion.matches) {
+    if (!reducedMotion.matches && !restoringPortrait) {
       const ns = 'http://www.w3.org/2000/svg';
       const layer = document.createElementNS(ns, 'svg');
       layer.setAttribute('class', 'falling-pieces');
@@ -92,49 +94,27 @@ if (mobile) {
       piece.element.setAttribute('aria-hidden', 'true');
     });
   }
-  function restoreLeaves() {
-    if (leafFall) {
-      leafFall.getAnimations({subtree:true}).forEach(animation => animation.cancel());
-      leafFall.remove();
-      leafFall = null;
-    }
-    shed = false;
-    mobile.classList.remove('mobile-shed');
-    pieces.forEach(piece => {
-      piece.x=0;piece.y=0;piece.vx=0;piece.vy=0;
-      piece.element.setAttribute('tabindex', '0');
-      piece.element.removeAttribute('aria-hidden');
-    });
-    draw();
+  function positionPortrait() {
+    if (!portrait) return;
+    const box = mobile.getBoundingClientRect(), size = portrait.offsetWidth;
+    portrait.style.left = `${Math.max(16, Math.min(innerWidth-size-16, box.left+box.width/2-size/2))}px`;
+    portrait.style.top = `${Math.max(16, Math.min(innerHeight-size-24, box.top+box.height*.7-size/2))}px`;
   }
-
-  function putPortraitAway() {
-    if (!portrait || portrait.hidden) return;
-    const restoreFocus = document.activeElement === portrait;
-    portrait.getAnimations().forEach(animation => animation.cancel());
-    portrait.hidden = true;
-    restoreLeaves();
-    shake = 0;
-    portraitCooldown = performance.now() + 2500;
-    if (restoreFocus) returnFocus?.focus({preventScroll:true});
-  }
-  function dropPortrait(keyboard) {
+  function dropPortrait(keyboard=false, restored=false) {
+    restoringPortrait = restored;
     if (!portrait) {
-      portrait = document.createElement('button');
+      portrait = document.createElement('div');
       portrait.className = 'fallen-portrait';
-      portrait.type = 'button';
+      portrait.tabIndex = -1;
       portrait.hidden = true;
-      portrait.setAttribute('aria-label', 'Put the portrait away');
       const photo = new Image(480, 480);
       photo.alt = 'Peter H. Vartanian';
       photo.draggable = false;
       photo.src = '/assets/img/peter-portrait.webp';
       portrait.append(photo);
-      portrait.addEventListener('click', putPortraitAway);
       portrait.addEventListener('contextmenu', event => event.preventDefault());
       document.body.append(portrait);
     }
-    returnFocus = document.activeElement;
     portrait.style.visibility = 'hidden';
     portrait.hidden = false;
     const box = mobile.getBoundingClientRect();
@@ -149,7 +129,8 @@ if (mobile) {
       if (portrait.hidden) return;
       portrait.style.visibility = '';
       shedLeaves();
-      if (!reducedMotion.matches) portrait.animate([
+      try { localStorage.setItem('portrait-discovered', 'yes'); } catch {}
+      if (!restored && !reducedMotion.matches) portrait.animate([
         {transform:`translate(${startX}px, ${startY}px) rotate(-24deg) scale(.7)`,opacity:0,offset:0},
         {opacity:1,offset:.15},
         {transform:'translate(0, 9px) rotate(11deg) scale(1)',offset:.76},
@@ -159,17 +140,26 @@ if (mobile) {
       if (keyboard) portrait.focus({preventScroll:true});
     });
   }
-  function shakeLoose(amount, keyboard=false) {
-    const now = performance.now();
-    if (now < portraitCooldown || (portrait && !portrait.hidden)) return;
-    shake = Math.max(0, shake-(now-lastShake)*.05) + amount;
-    lastShake = now;
-    if (shake >= 180) {shake=0;dropPortrait(keyboard);}
+  function trackShake(x, y, time, keyboard=false) {
+    if (portrait || !shakeMotion) return;
+    const m = shakeMotion, dt = Math.max(8, time-m.time);
+    const dx=x-m.x, dy=y-m.y, distance=Math.hypot(dx,dy);
+    const speed=Math.min(3, distance/dt);
+    m.energy=Math.max(0,m.energy-dt*.12);
+    if (distance>1) {
+      const reversal = dx*m.dx+dy*m.dy < 0;
+      if (reversal) {
+        // A substantial, fast change of direction counts; taps and tiny jitters do not.
+        if(m.travel>=20 && speed>.45 && m.speed>.45) m.energy+=Math.min(100,m.travel*speed);
+        m.travel=0;
+      }
+      m.travel+=distance;m.dx=dx;m.dy=dy;m.speed=speed;
+    }
+    m.x=x;m.y=y;m.time=time;
+    if(m.energy>=130) dropPortrait(keyboard);
   }
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') putPortraitAway();
-  });
-  window.addEventListener('resize', putPortraitAway);
+  const newMotion=(x,y,time)=>({x,y,time,dx:0,dy:0,speed:0,travel:0,energy:0});
+  window.addEventListener('resize', positionPortrait);
 
 
   function draw() {
@@ -209,33 +199,41 @@ if (mobile) {
   pieces.forEach((piece,i) => {
     piece.element.setAttribute('tabindex','0');
     piece.element.setAttribute('role','button');
-    piece.element.setAttribute('aria-label',`${piece.element.dataset.name}. Drag or use arrow keys; Escape resets it.`);
+    piece.element.setAttribute('aria-label',`${piece.element.dataset.name}. Drag or use arrow keys; Shift with arrows shakes it; Escape resets it.`);
     piece.element.addEventListener('keydown',event => {
       if (shed) return;
       const directions={ArrowLeft:[-14,0],ArrowRight:[14,0],ArrowUp:[0,-14],ArrowDown:[0,14]};
       if (event.key==='Escape') { piece.x=0;piece.y=0;piece.vx=0;piece.vy=0;draw();return; }
       if (event.key==='Enter' || event.key===' ') {
-        event.preventDefault();shakeLoose(55,true);piece.x=clamp(piece.x+12);piece.y=clamp(piece.y-8);
+        event.preventDefault();piece.x=clamp(piece.x+12);piece.y=clamp(piece.y-8);
         draw();if(!reducedMotion.matches) animate();return;
       }
       if (!directions[event.key]) return;
       event.preventDefault();
-      shakeLoose(36,true);
+      const now=performance.now();
+      if(!shakeMotion || now-shakeMotion.time>350) shakeMotion=newMotion(0,0,now-30);
+      const strength=event.shiftKey?3:1;
+      trackShake(shakeMotion.x+directions[event.key][0]*strength,shakeMotion.y+directions[event.key][1]*strength,now,true);
       piece.x=clamp(piece.x+directions[event.key][0]);piece.y=clamp(piece.y+directions[event.key][1]);
       draw();if(!reducedMotion.matches) animate();
     });
     piece.element.addEventListener('pointerdown',event => {
       if(shed || event.button!==0 || dragging) return;
+      event.preventDefault();
+      document.body.classList.add('shaking-mobile');
+      window.getSelection()?.removeAllRanges();
+      shakeMotion=newMotion(event.clientX,event.clientY,performance.now());
       const p=point(event);
       dragging={piece,id:event.pointerId,dx:p.x-piece.home[0]-piece.x,dy:p.y-piece.home[1]-piece.y,start:p,moved:false};
       piece.element.setPointerCapture(event.pointerId);
     });
     piece.element.addEventListener('pointermove',event => {
       if(dragging?.piece!==piece || dragging.id!==event.pointerId) return;
+      event.preventDefault();
       const p=point(event);
       if(Math.hypot(p.x-dragging.start.x,p.y-dragging.start.y)>4) dragging.moved=true;
       const x=clamp(p.x-piece.home[0]-dragging.dx),y=clamp(p.y-piece.home[1]-dragging.dy);
-      shakeLoose(Math.min(80,Math.hypot(x-piece.x,y-piece.y)));
+      trackShake(event.clientX,event.clientY,performance.now());
       if (shed) return;
       piece.vx=(x-piece.x)*.4;piece.vy=(y-piece.y)*.4;piece.x=x;piece.y=y;
       draw();
@@ -244,13 +242,13 @@ if (mobile) {
       if(dragging?.piece!==piece || dragging.id!==event.pointerId) return;
       const tap=!dragging.moved && event.type==='pointerup';
       dragging=null;
+      document.body.classList.remove('shaking-mobile');
       if(tap) stir();
       else animate();
     }
     for(const name of ['pointerup','pointercancel','lostpointercapture']) piece.element.addEventListener(name,release);
   });
   function stir() {
-    shakeLoose(55);
     nudges++;
     pieces.forEach((p,i) => {
       if(reducedMotion.matches) {p.x=Math.sin(i*1.7+nudges)*13;p.y=Math.cos(i*1.3+nudges)*9;}
@@ -259,10 +257,11 @@ if (mobile) {
     draw();if(!reducedMotion.matches) animate();
   }
   document.addEventListener('visibilitychange',() => {
-    if(document.hidden) {if(frame) cancelAnimationFrame(frame);frame=null;previousTime=0;dragging=null;}
+    if(document.hidden) {if(frame) cancelAnimationFrame(frame);frame=null;previousTime=0;dragging=null;document.body.classList.remove('shaking-mobile');}
     else if(!reducedMotion.matches) animate();
   });
   draw();
+  try { if(localStorage.getItem('portrait-discovered')==='yes') dropPortrait(false,true); } catch {}
 
   // Route the suspension thread through whitespace using the rendered text bounds.
   const page=document.querySelector('body[data-page=home] .page');
@@ -277,6 +276,7 @@ if (mobile) {
     thread.append(path);
     page.append(thread);
     function routeThread() {
+      positionPortrait();
       const origin=page.getBoundingClientRect();
       const rect=element=>{
         const b=element.getBoundingClientRect();
@@ -292,7 +292,7 @@ if (mobile) {
       const sx=name.right-2,sy=name.bottom-parseFloat(getComputedStyle(anchor).fontSize)*.46;
       const left=Math.min(...paragraphs.map(p=>p.left))-13;
       const right=Math.max(...paragraphs.map(p=>p.right))+13;
-      const tip=mobile.createSVGPoint();tip.x=266;tip.y=10;
+      const tip=mobile.createSVGPoint();tip.x=266;tip.y=12;
       const end=tip.matrixTransform(mobile.getScreenCTM());
       const ex=end.x-origin.left,ey=end.y-origin.top;
       thread.setAttribute('viewBox',`0 0 ${origin.width} ${origin.height}`);
