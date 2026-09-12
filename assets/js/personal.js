@@ -80,12 +80,12 @@ if (mobile) {
         const radians=spin*Math.PI/180;
         const halfHeight=(bounds.width*Math.abs(Math.sin(radians))+bounds.height*Math.abs(Math.cos(radians)))/2;
         const distance=Math.max(0,stage.getBoundingClientRect().bottom+14-(bounds.top+bounds.height/2)-halfHeight);
-        const duration=Math.max(220,Math.sqrt(2*distance/1800)*1000);
+        const duration=Math.max(900,Math.sqrt(2*distance/320)*1000);
         return wrapper.animate([
           {transform:'translate(0, 0) rotate(0deg)',opacity:1},
           {transform:`translate(${drift}px, ${distance}px) rotate(${spin}deg)`,opacity:1}
-        ], {duration,easing:'cubic-bezier(.333,0,.667,.333)',fill:'forwards'}).finished
-          .then(()=>wrapper.animate([{opacity:1},{opacity:0}],{duration:220,fill:'forwards'}).finished)
+        ], {duration,delay:(i%5)*35,easing:'cubic-bezier(.333,0,.667,.333)',fill:'both'}).finished
+          .then(()=>wrapper.animate([{opacity:1},{opacity:0}],{duration:650,delay:300,fill:'forwards'}).finished)
           .catch(() => {});
       });
       Promise.all(falls).then(() => {layer.remove();if(leafFall===layer) leafFall=null;});
@@ -123,7 +123,7 @@ if (mobile) {
       if(!reducedMotion.matches) portrait.animate([
         {transform:`translateY(${-distance}px) rotate(-5deg)`},
         {transform:'translateY(0) rotate(7deg)'}
-      ],{duration:Math.max(300,Math.sqrt(2*distance/1800)*1000),easing:'cubic-bezier(.333,0,.667,.333)'});
+      ],{duration:Math.max(1000,Math.sqrt(2*distance/320)*1000),delay:140,easing:'cubic-bezier(.333,0,.667,.333)',fill:'backwards'});
       if(keyboard) portrait.focus({preventScroll:true});
     });
   }
@@ -149,12 +149,12 @@ if (mobile) {
       if (reducedMotion.matches) { p.vx=0; p.vy=0; return; }
       if(active) {
         // Both taps and pointer movement excite this same motion, never the frame.
-        const phase=time/135+i*.8;
-        p.vx+=(Math.sin(phase)*amplitude-p.x)*.065*step;
-        p.vy+=(Math.cos(phase*.83+i)*amplitude*.35-p.y)*.065*step;
+        const phase=time/190+i*.8;
+        p.vx+=(Math.sin(phase)*amplitude-p.x)*.045*step;
+        p.vy+=(Math.cos(phase*.83+i)*amplitude*.35-p.y)*.045*step;
       }
-      p.vx = (p.vx-p.x*.025*step)*Math.pow(.92,step);
-      p.vy = (p.vy-p.y*.032*step)*Math.pow(.92,step);
+      p.vx = (p.vx-p.x*.018*step)*Math.pow(.975,step);
+      p.vy = (p.vy-p.y*.022*step)*Math.pow(.975,step);
       p.x += p.vx*step;
       p.y += p.vy*step;
       energy += Math.abs(p.x)+Math.abs(p.y)+Math.abs(p.vx)+Math.abs(p.vy);

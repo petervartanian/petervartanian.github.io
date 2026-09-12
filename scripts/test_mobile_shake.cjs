@@ -45,3 +45,12 @@ vm.runInContext("clock=8000;send('pointerdown');clock=14000;send('pointerup');",
 assert.equal(vm.runInContext('reveals',paused),0,'Holding still does not count as shaking');
 assert(!source.includes("assembly.setAttribute('transform'"),'Frame is never transformed');
 console.log('Passed: fixed frame, identical click/drag leaf motion, progressive five-second buildup, pause reset, reduced motion, and no reveal from holding still.');
+const settling=setup();
+for(let t=0;t<=2400;t+=20)vm.runInContext(`clock=${t};if(clock%400===0)tap();settle(clock);`,settling);
+const motion=[];
+for(let t=2420;t<=6400;t+=20){
+ vm.runInContext(`clock=${t};settle(clock);`,settling);
+ if(t>=4000&&t<=4400)motion.push(vm.runInContext('Math.max(...pieces.map(p=>Math.abs(p.x)))',settling));
+}
+assert(Math.max(...motion)>3,'Pieces continue a visible settling swing after interaction stops');
+console.log('Passed: motion settles gradually rather than stopping abruptly.');
