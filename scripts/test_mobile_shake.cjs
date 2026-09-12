@@ -23,7 +23,7 @@ for (const hz of [30, 60, 120]) {
 console.log('Passed: natural horizontal/vertical shaking reveals once; slow movements, jitter, and taps do not (30/60/120 Hz).');
 
 // Exercise the actual root-SVG pointer handlers, starting between the hanging pieces.
-const pointerCode=source.slice(source.indexOf('  function beginShake('),source.indexOf('  function stir()'));
+const pointerCode=source.slice(source.indexOf('  function beginShake('),source.indexOf('  function stir('));
 const pointerContext=vm.createContext({Math});
 vm.runInContext(`
 let portrait=null,shakeMotion=null,reveals=0,dragging=null,shed=false,clock=0,prevented=0,captured=null,cleared=0;
@@ -49,3 +49,27 @@ assert.equal(vm.runInContext('cleared',pointerContext),1,'Dragging clears text s
 assert.equal(vm.runInContext("classes.has('shaking-mobile')",pointerContext),false,'Selection lock is released');
 assert(fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8').includes('class="mobile-hit-area"'),'The SVG includes an area for dragging between pieces');
 console.log('Passed: whole-mobile pointer capture, portrait reveal, and selection cleanup.');
+
+// Replay actual click handlers with the same momentum decay used by touch and keyboard.
+const stirCode=source.slice(source.indexOf('  function stir('),source.indexOf("  document.addEventListener('visibilitychange'"));
+for(const interval of [180,2000]) {
+ const context=vm.createContext({Math});
+ vm.runInContext(`
+ let portrait=null,shakeMotion=null,reveals=0,dragging=null,shed=false,clock=0,nudges=0,tapEnergy=0,lastTap=0;
+ const tree={x:0,y:0,vx:0,vy:0},pieces=[],listeners={};
+ const reducedMotion={matches:false};
+ const mobile={addEventListener:(type,handler)=>listeners[type]=handler,setPointerCapture:()=>{}};
+ const document={body:{classList:{add:()=>{},remove:()=>{}}}};
+ const window={getSelection:()=>null},performance={now:()=>clock};
+ const point=e=>({x:e.clientX,y:e.clientY}),clamp=v=>Math.max(-48,Math.min(48,v));
+ function draw(){} function animate(){} function dropPortrait(){portrait={};reveals++;}
+ ${detector}
+ ${pointerCode}
+ ${stirCode}
+ function tap(t){clock=t;for(const type of ['pointerdown','pointerup']) listeners[type]({type,button:0,pointerId:1,clientX:0,clientY:0,preventDefault:()=>{}});}
+ tap(0);tap(${interval});tap(${2*interval});
+ `,context);
+ assert.equal(vm.runInContext('reveals',context),interval===180?1:0);
+ assert.notEqual(vm.runInContext('tree.vx',context),0,'A click shakes the whole mobile');
+}
+console.log('Passed: brisk clicks release the portrait; isolated clicks only shake the mobile.');

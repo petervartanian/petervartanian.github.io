@@ -44,6 +44,7 @@ if (mobile) {
   let frame = null;
   let previousTime = 0;
   let nudges = 0;
+  let tapEnergy = 0, lastTap = 0;
   const clamp = value => Math.max(-48, Math.min(48, value));
   mobile.setAttribute('role','group');
   let portrait = null;
@@ -213,14 +214,13 @@ if (mobile) {
   pieces.forEach((piece,i) => {
     piece.element.setAttribute('tabindex','0');
     piece.element.setAttribute('role','button');
-    piece.element.setAttribute('aria-label',`${piece.element.dataset.name}. Drag or use arrow keys; Shift with arrows shakes it; Escape resets it.`);
+    piece.element.setAttribute('aria-label',`${piece.element.dataset.name}. Click or tap to shake; Enter or Space also shakes it. Arrow keys move it; Escape resets it.`);
     piece.element.addEventListener('keydown',event => {
       if (shed) return;
       const directions={ArrowLeft:[-14,0],ArrowRight:[14,0],ArrowUp:[0,-14],ArrowDown:[0,14]};
       if (event.key==='Escape') { piece.x=0;piece.y=0;piece.vx=0;piece.vy=0;draw();return; }
       if (event.key==='Enter' || event.key===' ') {
-        event.preventDefault();piece.x=clamp(piece.x+12);piece.y=clamp(piece.y-8);
-        draw();if(!reducedMotion.matches) animate();return;
+        event.preventDefault();stir(true);return;
       }
       if (!directions[event.key]) return;
       event.preventDefault();
@@ -264,13 +264,24 @@ if (mobile) {
   mobile.addEventListener('pointerdown',beginShake);
   mobile.addEventListener('pointermove',moveShake);
   for(const name of ['pointerup','pointercancel','lostpointercapture']) mobile.addEventListener(name,releaseShake);
-  function stir() {
+  function stir(keyboard=false) {
+    if(shed || portrait) return;
+    const now=performance.now();
+    tapEnergy=Math.max(0,tapEnergy-(now-lastTap)*.09)+70;
+    lastTap=now;
     nudges++;
+    const direction=nudges%2?1:-1;
+    if(!reducedMotion.matches) {
+      tree.x=clamp(tree.x+direction*15);
+      tree.vx=direction*8;
+      tree.vy=-3;
+    }
     pieces.forEach((p,i) => {
       if(reducedMotion.matches) {p.x=Math.sin(i*1.7+nudges)*13;p.y=Math.cos(i*1.3+nudges)*9;}
       else {p.vx+=Math.sin(i*1.7+nudges)*4;p.vy+=Math.cos(i*1.3+nudges)*2.5;}
     });
     draw();if(!reducedMotion.matches) animate();
+    if(tapEnergy>=150) dropPortrait(keyboard);
   }
   document.addEventListener('visibilitychange',() => {
     if(document.hidden) {if(frame) cancelAnimationFrame(frame);frame=null;previousTime=0;dragging=null;document.body.classList.remove('shaking-mobile');}
