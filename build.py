@@ -205,7 +205,7 @@ def institution_honors(institution, academic=False):
         items = [item for item in items if item['title'].startswith('ΦBK') == academic]
     return ''.join(f'<li><span class="education-award"><span>{e(item["title"])}</span> <span class="education-award-date">{e(item["date"])}</span></span></li>' for item in items)
 
-experience = '<div class="experience-filter" hidden><label><input type="checkbox" id="primary-only" role="switch" aria-describedby="contribution-key"><span>Primary contributions only</span></label></div><h3>Current</h3><table class="cv-table experience-table" aria-label="Current experience and dates"><tbody>' + experience_rows(cv['experience'][:1]) + '</tbody></table><h3>Previous</h3><table class="cv-table experience-table" aria-label="Previous experience and dates"><tbody>' + experience_rows(cv['experience'][1:]) + '</tbody></table>'
+experience = '<div class="experience-filter" hidden><label><input type="checkbox" id="primary-only" role="switch" aria-describedby="contribution-key"><span>Primary contributions only</span></label> <span>(see <a href="#contribution-key">Notes</a>)</span></div><h3>Current</h3><table class="cv-table experience-table" aria-label="Current experience and dates"><tbody>' + experience_rows(cv['experience'][:1]) + '</tbody></table><h3>Previous</h3><table class="cv-table experience-table" aria-label="Previous experience and dates"><tbody>' + experience_rows(cv['experience'][1:]) + '</tbody></table>'
 
 
 def cv_text(text):
