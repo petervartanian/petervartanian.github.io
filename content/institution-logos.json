@@ -178,14 +178,14 @@
     "height": 19.02
   },
   "oecd": {
-    "file": "mission-action-lab-original.png",
-    "source": "User-supplied Mission Action Lab wordmark",
-    "note": "Original two-line wordmark, rules, proportions, and transparency preserved.",
+    "file": "oecd-global-forum-technology.png",
+    "source": "User-supplied OECD Global Forum on Technology emblem",
+    "note": "White background removed and empty margins trimmed, preserving the fine blue linework, central disc, and natural proportions.",
     "aliases": [
-      "OECD Mission Action Lab"
+      "OECD Global Forum on Technology"
     ],
-    "width": 24.08,
-    "height": 11.72
+    "width": 19.53,
+    "height": 19.53
   },
   "family": {
     "file": "family-monogram.svg",

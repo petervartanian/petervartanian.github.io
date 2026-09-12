@@ -23,7 +23,7 @@ https://petervartanian.xyz/cv/
 | **FutureSafe at the Nuclear Threat Initiative** | Jun. 2025 – Aug. 2025 |
 | **The Program on Negotiation at Harvard Law School** | Jan. 2025 – May 2025 |
 | **City Hub and Network for Gender Equity** | Jan. 2025 – May 2025 |
-| OECD Mission Action Lab | Dec. 2024 – Jan. 2025 |
+| OECD Global Forum on Technology | Dec. 2024 – Jan. 2025 |
 | Verum Legalis: The Occidental College Law Review | Jan. 2024 – Jan. 2025 |
 | **Office of the Chair of the First Committee of the UN General Assembly** | Aug. 2024 – Dec. 2024 |
 | Urban & Environmental Policy Institute at Occidental College | May 2024 – Aug. 2024 |
