@@ -65,14 +65,14 @@
     "height": 19.34
   },
   "pon": {
-    "file": "program-on-negotiation-transparent-trimmed.png",
-    "source": "User-supplied Program on Negotiation logo",
+    "file": "harvard-law-shield.png",
+    "source": "User-supplied Harvard Law School shield",
     "aliases": [
       "The Program on Negotiation at Harvard Law School"
     ],
-    "width": 30.12,
-    "note": "Outer frame removed; wordmark and shield preserved. Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 12.58
+    "width": 17.34,
+    "note": "Empty transparent margins trimmed; original shield, white artwork, and natural proportions preserved.",
+    "height": 20.36
   },
   "change": {
     "file": "change.svg",
@@ -157,14 +157,14 @@
     "height": 19.28
   },
   "hrca": {
-    "file": "hrca.png",
-    "source": "https://static.wixstatic.com/media/11c7c6_a74f54f5373e4d7d99cf1aec55712d51~mv2.png/v1/crop/x_0,y_513,w_2401,h_1305/fill/w_242,h_131,al_c,q_85/HRCA-01.png",
-    "bytes": 30878,
+    "file": "hrca-fist-transparent.png",
+    "source": "User-supplied Human Rights Cities Alliance fist and globe mark",
+    "note": "White exterior removed and empty margins trimmed; fist and globe details retained with natural proportions.",
     "aliases": [
       "Human Rights Cities Alliance"
     ],
-    "width": 26.31,
-    "height": 13.45
+    "width": 18.77,
+    "height": 19.53
   },
   "nti": {
     "file": "nti-globe-transparent.png",
