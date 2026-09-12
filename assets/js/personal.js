@@ -27,12 +27,17 @@ if (primaryOnly) {
   });
 }
 
-// The frame stays fixed; interaction excites only its suspended pieces.
+// The top arch stays fixed; the lower tiers join the leaves as shaking builds.
 const mobile = document.querySelector('.mobile-svg');
 if (mobile) {
   const stage=mobile.closest('.sculpture');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const pieces = [...mobile.querySelectorAll('.mobile-piece')].map(element => ({
+  const tiers = [...mobile.querySelectorAll('.mobile-tier')].map(element => ({
+    element, pivot:element.dataset.pivot.split(',').map(Number),
+    theta:0, omega:0, drive:0, phase:0
+  }));
+  const pieces = [...mobile.querySelectorAll('.mobile-piece')]
+    .sort((a,b)=>Number(a.dataset.piece)-Number(b.dataset.piece)).map(element => ({
     element, home:element.dataset.home.split(',').map(Number),
     mount:element.dataset.mount.split(',').map(Number),
     attachment:element.dataset.attachment.split(',').map(Number),
@@ -69,12 +74,16 @@ if (mobile) {
       layer.setAttribute('aria-hidden', 'true');
       stage.append(layer);
       leafFall = layer;
-      const falls = pieces.map((piece, i) => {
+      const falling = [
+        ...tiers.map(tier => ({element:tier.element.querySelector('.mobile-tier-frame'),isFrame:true})),
+        ...pieces
+      ];
+      const falls = falling.map((piece, i) => {
         const matrix = piece.element.getScreenCTM();
         const bounds = piece.element.getBoundingClientRect();
         const wrapper = document.createElementNS(ns, 'g');
         const copy = piece.element.cloneNode(true);
-        copy.removeAttribute('class');
+        copy.classList.remove('mobile-piece');
         copy.removeAttribute('tabindex');
         copy.removeAttribute('role');
         copy.removeAttribute('aria-label');
@@ -84,14 +93,14 @@ if (mobile) {
         const centerY=bounds.top-stageBounds.top+bounds.height/2;
         wrapper.style.transformOrigin = `${bounds.left-stageBounds.left+bounds.width/2}px ${centerY}px`;
         const drift = (i%2 ? 1 : -1)*(8+(i*7)%22);
-        const spin = (i%2 ? 1 : -1)*(12+(i*11)%35);
+        const spin = (i%2 ? 1 : -1)*(piece.isFrame ? 9 : 12+(i*11)%35);
         const radius=Math.hypot(bounds.width,bounds.height)/2;
         const distance=Math.max(0,dropEdge-centerY+radius+20);
         const duration=Math.max(540,Math.sqrt(2*distance/750)*1000);
         return wrapper.animate([
           {transform:'translate(0, 0) rotate(0deg)'},
           {transform:`translate(${drift}px, ${distance}px) rotate(${spin}deg)`}
-        ], {duration,delay:(i%5)*22,easing:'cubic-bezier(.333,0,.667,.333)',fill:'both'}).finished
+        ], {duration,delay:piece.isFrame?90+i*50:((i-2)%5)*22,easing:'cubic-bezier(.333,0,.667,.333)',fill:'both'}).finished
           .catch(() => {})
           .then(() => wrapper.remove());
       });
@@ -156,6 +165,9 @@ if (mobile) {
 
   function draw() {
     if (shed) return;
+    tiers.forEach(tier => {
+      tier.element.setAttribute('transform',`rotate(${tier.theta*180/Math.PI} ${tier.pivot.join(' ')})`);
+    });
     pieces.forEach(p => {
       const x=p.home[0]+p.x, y=p.home[1]+p.y, angle=p.angle || 0;
       const radians=angle*Math.PI/180, [ax,ay]=p.attachment;
@@ -170,6 +182,19 @@ if (mobile) {
     const active=lastInteraction!==null && time-lastInteraction<320;
     const dt=step/60;
     const strength=8+20*Math.pow(Math.min(1,activeDuration/5000),1.45);
+    const buildup=Math.max(0,Math.min(1,(activeDuration-900)/3100));
+    const tierStrength=buildup*buildup*(3-2*buildup);
+    tiers.forEach((tier,i) => {
+      if(reducedMotion.matches) return;
+      const drive=active?tierStrength*(5+i*2):0;
+      tier.drive+=(drive-tier.drive)*(1-Math.exp(-dt/.12));
+      tier.phase+=dt*6.8;
+      const frequency=6.8+i*.65;
+      const acceleration=-frequency*frequency*Math.sin(tier.theta)-3.6*tier.omega+tier.drive*Math.sin(tier.phase+i*.8);
+      tier.omega+=acceleration*dt;
+      tier.theta+=tier.omega*dt;
+      energy+=Math.abs(tier.theta)+Math.abs(tier.omega)+tier.drive;
+    });
     pieces.forEach((p,i) => {
       if(reducedMotion.matches) return;
       p.theta=p.theta || 0;p.omega=p.omega || 0;p.drive=p.drive || 0;

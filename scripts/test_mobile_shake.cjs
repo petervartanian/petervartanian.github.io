@@ -2,16 +2,19 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 const source=fs.readFileSync(require('node:path').join(__dirname,'../assets/js/personal.js'),'utf8');
 const code=source.slice(source.indexOf('  function draw()'),source.indexOf("  document.addEventListener('visibilitychange'"));
 const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
-const geometry=[...html.matchAll(/class="mobile-piece"[^>]*data-home="([^"]+)"[^>]*data-mount="([^"]+)"[^>]*data-attachment="([^"]+)"/g)].map(m=>({home:m[1].split(',').map(Number),mount:m[2].split(',').map(Number),attachment:m[3].split(',').map(Number)}));
+const geometry=[...html.matchAll(/class="mobile-piece"[^>]*data-piece="(\d+)"[^>]*data-home="([^"]+)"[^>]*data-mount="([^"]+)"[^>]*data-attachment="([^"]+)"/g)].sort((a,b)=>Number(a[1])-Number(b[1])).map(m=>({home:m[2].split(',').map(Number),mount:m[3].split(',').map(Number),attachment:m[4].split(',').map(Number)}));
+const pivots=[...html.matchAll(/class="mobile-tier"[^>]*data-pivot="([^"]+)"/g)].map(m=>m[1].split(',').map(Number));
 assert.equal(geometry.length,15,'Use the actual fifteen pieces for suspension checks');
+assert.deepEqual(pivots,[[266,68],[266,216]],'Both lower tiers hinge at the actual parent-bar connections');
 function setup(reduced=false,actual=false){
  const c=vm.createContext({Math});
  vm.runInContext(`
  let shed=false,portrait=null,dragging=null,frame=null,previousTime=0,activeDuration=0,lastInteraction=null,clock=0,reveals=0;
  const listeners={},classes=new Set(),transforms=[];
  const geometry=${JSON.stringify(geometry)};
+ const tiers=${JSON.stringify(pivots)}.map(pivot=>({pivot,theta:0,omega:0,drive:0,phase:0,element:{setAttribute(){}}}));
  const pieces=(${actual}?geometry:Array.from({length:3},(_,i)=>({home:[i*40,50],mount:[i*40,0],attachment:[0,0]}))).map(p=>({...p,x:0,y:0,vx:0,vy:0,wire:{setAttribute(){}},element:{dataset:{name:'piece'},setAttribute(k,v){if(k==='transform') transforms.push(v);},addEventListener(){}}}));
- const mobile={addEventListener:(k,f)=>listeners[k]=f,setPointerCapture(){},setAttribute(){throw Error('Frame must not move');}};
+ const mobile={addEventListener:(k,f)=>listeners[k]=f,setPointerCapture(){},setAttribute(){throw Error('Top frame must not move');}};
  const document={hidden:false,body:{classList:{add:c=>classes.add(c),remove:c=>classes.delete(c)}}};
  const window={getSelection:()=>({removeAllRanges(){}})},performance={now:()=>clock};
  const reducedMotion={matches:${reduced}};
@@ -38,17 +41,17 @@ function run(mode,reduced=false){
  }
  assert.equal(vm.runInContext('reveals',c),1,'Five seconds of activity releases once');
  if(!reduced)assert(late>early*2,'Motion builds progressively');
- return vm.runInContext('JSON.stringify(pieces.map(p=>[p.x,p.y]))',c);
+ return vm.runInContext('JSON.stringify([pieces.map(p=>[p.x,p.y]),tiers.map(t=>t.theta)])',c);
 }
-assert.equal(run('click'),run('drag'),'Clicks and shaking produce the identical leaf motion');
+assert.equal(run('click'),run('drag'),'Clicks and shaking produce identical leaf and tier motion');
 run('click',true);
 const paused=setup();
 vm.runInContext('tap();clock=400;tap();clock=2000;tap();',paused);
 assert.equal(vm.runInContext('activeDuration',paused),0,'Pauses reset buildup');
 vm.runInContext("clock=8000;send('pointerdown');clock=14000;send('pointerup');",paused);
 assert.equal(vm.runInContext('reveals',paused),0,'Holding still does not count as shaking');
-assert(!source.includes("assembly.setAttribute('transform'"),'Frame is never transformed');
-console.log('Passed: fixed frame, identical click/drag leaf motion, progressive five-second buildup, pause reset, reduced motion, and no reveal from holding still.');
+assert(!source.includes("assembly.setAttribute('transform'"),'Top frame is never transformed');
+console.log('Passed: fixed top frame, identical click/drag motion, progressive five-second buildup, pause reset, reduced motion, and no reveal from holding still.');
 const settling=setup();
 for(let t=0;t<=2400;t+=20)vm.runInContext(`clock=${t};if(clock%400===0)tap();settle(clock);`,settling);
 const motion=[];
@@ -78,3 +81,19 @@ for(let t=0;t<=500;t+=20){
 }
 assert(maxTravel>3&&turned,'One tap produces a visible swing and turnaround within half a second');
 console.log('Passed: immediate response with a brisk, continuous swing.');
+const tierMotion=setup(false,true);
+const tierTravel=[0,0];
+for(let t=0;t<=4600;t+=20){
+ vm.runInContext(`clock=${t};if(clock%400===0)tap();settle(clock);`,tierMotion);
+ const angles=vm.runInContext('tiers.map(t=>Math.abs(t.theta)*180/Math.PI)',tierMotion);
+ if(t<=900)assert(angles.every(a=>a===0),'Leaves respond first; tiers do not jump on initial touch');
+ angles.forEach((a,i)=>tierTravel[i]=Math.max(tierTravel[i],a));
+}
+assert(tierTravel.every(a=>a>3&&a<20),'Both lower tiers develop a visible, bounded swing');
+for(let t=4620;t<=9000;t+=20)vm.runInContext(`clock=${t};settle(clock);`,tierMotion);
+assert(vm.runInContext('tiers.every(t=>Math.abs(t.theta)<.002&&Math.abs(t.omega)<.01)',tierMotion),'Both tiers settle when shaking stops');
+assert.equal(vm.runInContext('reveals',tierMotion),0,'Moving tiers do not shorten the five-second reveal');
+const stillTiers=setup(true,true);
+vm.runInContext('tap();clock=4000;settle(clock);',stillTiers);
+assert(vm.runInContext('tiers.every(t=>t.theta===0)',stillTiers),'Reduced motion leaves both tiers still');
+console.log(`Passed: lower tiers join gradually, swing ${tierTravel.map(a=>a.toFixed(1)).join('° / ')}°, and settle without changing reveal timing.`);

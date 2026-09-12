@@ -101,15 +101,29 @@ mobile_parts = [(name, home, mount, (ax * piece_scales.get(i, 1), ay * piece_sca
                  f'<g transform="scale({piece_scales.get(i, 1)})">{shape}</g>')
                 for i, (name, home, mount, (ax, ay), shape) in enumerate(mobile_parts)]
 mobile = '<figure class="mobile-figure"><div class="sculpture"><svg class="mobile-svg" viewBox="0 0 520 450" role="img" aria-labelledby="mobile-title"><title id="mobile-title">A hanging composition of fifteen colored paper shapes</title>'
-mobile += '<rect class="mobile-hit-area" width="520" height="450" fill="transparent"/><g class="mobile-assembly"><g class="mobile-wires" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M266 10V68 M117 114Q191 48 266 68Q352 48 421 118 M266 68V216 M47 282Q133 205 266 216Q366 221 455 282 M266 216L260 340 M130 351Q215 321 260 340Q305 322 330 365Q389 359 425 380"/>'
-for i, (_, (x, y), (mx, my), (ax, ay), _) in enumerate(mobile_parts):
-    mobile += f'<path data-wire="{i}" d="M{mx} {my}L{x + ax} {y + ay}"/>'
-mobile += '</g>'
-for i, (name, (x, y), (mx, my), (ax, ay), shape) in enumerate(mobile_parts):
-    if i >= 9:
-        shape = '<circle r="18" fill="transparent"/>' + shape
-    mobile += f'<g class="mobile-piece" data-piece="{i}" data-name="{name}" data-home="{x},{y}" data-mount="{mx},{my}" data-attachment="{ax},{ay}" transform="translate({x} {y})">{shape}</g>'
-mobile += '</g></svg></div></figure>'
+mobile += '<rect class="mobile-hit-area" width="520" height="450" fill="transparent"/><g class="mobile-assembly">'
+# Nested tiers share their parents' motion; each string stays on its own bar.
+mobile_rows = [
+    (None, 'M266 10V68 M117 114Q191 48 266 68Q352 48 421 118', [0, 1, 8, 9, 10, 11]),
+    ('266,68', 'M266 68V216 M47 282Q133 205 266 216Q366 221 455 282', [2, 3, 4, 5, 12]),
+    ('266,216', 'M266 216L260 340 M130 351Q215 321 260 340Q305 322 330 365Q389 359 425 380', [6, 7, 13, 14]),
+]
+for row, (pivot, path, indices) in enumerate(mobile_rows):
+    if pivot:
+        mobile += f'<g class="mobile-tier" data-tier="{row}" data-pivot="{pivot}">'
+    frame_class = 'mobile-tier-frame' if pivot else 'mobile-top-frame'
+    mobile += f'<g class="mobile-wires {frame_class}" fill="none" stroke="currentColor"><path d="{path}"/></g>'
+    mobile += '<g class="mobile-wires" fill="none" stroke="currentColor">'
+    for i in indices:
+        _, (x, y), (mx, my), (ax, ay), _ = mobile_parts[i]
+        mobile += f'<path data-wire="{i}" d="M{mx} {my}L{x + ax} {y + ay}"/>'
+    mobile += '</g>'
+    for i in indices:
+        name, (x, y), (mx, my), (ax, ay), shape = mobile_parts[i]
+        if i >= 9:
+            shape = '<circle r="18" fill="transparent"/>' + shape
+        mobile += f'<g class="mobile-piece" data-piece="{i}" data-name="{name}" data-home="{x},{y}" data-mount="{mx},{my}" data-attachment="{ax},{ay}" transform="translate({x} {y})">{shape}</g>'
+mobile += '</g></g></g></svg></div></figure>'
 
 home = f'''<div class="introduction">
   <p>I am a pertinacious thinker-and-doer who hails from <a href="https://mapcarta.com/N1938447213">Weng</a>, a hamlet in the Tyrolean Alps.</p>
