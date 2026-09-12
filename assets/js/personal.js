@@ -30,6 +30,7 @@ if (primaryOnly) {
 // The frame stays fixed; interaction excites only its suspended pieces.
 const mobile = document.querySelector('.mobile-svg');
 if (mobile) {
+  const stage=mobile.closest('.sculpture');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const pieces = [...mobile.querySelectorAll('.mobile-piece')].map(element => ({
     element, home:element.dataset.home.split(',').map(Number),
@@ -74,15 +75,18 @@ if (mobile) {
         wrapper.append(copy);
         layer.append(wrapper);
         wrapper.style.transformOrigin = `${bounds.x+bounds.width/2}px ${bounds.y+bounds.height/2}px`;
-        const drift = (i%2 ? 1 : -1)*(30+(i*23)%105);
-        const distance = Math.max(100, innerHeight-bounds.top+90);
-        const spin = (i%2 ? 1 : -1)*(55+(i*37)%150);
+        const drift = (i%2 ? 1 : -1)*(8+(i*7)%22);
+        const spin = (i%2 ? 1 : -1)*(12+(i*11)%35);
+        const radians=spin*Math.PI/180;
+        const halfHeight=(bounds.width*Math.abs(Math.sin(radians))+bounds.height*Math.abs(Math.cos(radians)))/2;
+        const distance=Math.max(0,stage.getBoundingClientRect().bottom+14-(bounds.top+bounds.height/2)-halfHeight);
+        const duration=Math.max(220,Math.sqrt(2*distance/1800)*1000);
         return wrapper.animate([
-          {transform:'translate(0, 0) rotate(0deg)',opacity:1,offset:0},
-          {transform:`translate(${drift*.18}px, -10px) rotate(${spin*.12}deg)`,opacity:1,offset:.2},
-          {transform:`translate(${drift*.65}px, ${distance*.48}px) rotate(${spin*.65}deg)`,opacity:1,offset:.68},
-          {transform:`translate(${drift}px, ${distance}px) rotate(${spin}deg)`,opacity:0,offset:1}
-        ], {duration:950+(i*73)%400,delay:(i*19)%115,easing:'ease-in',fill:'forwards'}).finished.catch(() => {});
+          {transform:'translate(0, 0) rotate(0deg)',opacity:1},
+          {transform:`translate(${drift}px, ${distance}px) rotate(${spin}deg)`,opacity:1}
+        ], {duration,easing:'cubic-bezier(.333,0,.667,.333)',fill:'forwards'}).finished
+          .then(()=>wrapper.animate([{opacity:1},{opacity:0}],{duration:220,fill:'forwards'}).finished)
+          .catch(() => {});
       });
       Promise.all(falls).then(() => {layer.remove();if(leafFall===layer) leafFall=null;});
     }
@@ -94,46 +98,33 @@ if (mobile) {
   }
   function positionPortrait() {
     if (!portrait) return;
-    const box = mobile.getBoundingClientRect(), size = portrait.offsetWidth;
-    portrait.style.left = `${Math.max(16, Math.min(innerWidth-size-16, box.left+box.width/2-size/2))}px`;
-    portrait.style.top = `${Math.max(16, Math.min(innerHeight-size-24, box.top+box.height*.7-size/2))}px`;
+    const size=portrait.offsetWidth,angle=7*Math.PI/180;
+    // The lowest corner of the tilted square rests exactly on the floor.
+    portrait.style.left=`${(stage.clientWidth-size)/2}px`;
+    portrait.style.top=`${stage.getBoundingClientRect().height+14-size*(1+Math.cos(angle)+Math.sin(angle))/2}px`;
   }
   function dropPortrait(keyboard=false) {
-    if (!portrait) {
-      portrait = document.createElement('div');
-      portrait.className = 'fallen-portrait';
-      portrait.tabIndex = -1;
-      portrait.hidden = true;
-      const photo = new Image(480, 480);
-      photo.alt = 'Peter H. Vartanian';
-      photo.draggable = false;
-      photo.src = '/assets/img/peter-portrait.webp';
-      portrait.append(photo);
-      portrait.addEventListener('contextmenu', event => event.preventDefault());
-      document.body.append(portrait);
-    }
-    portrait.style.visibility = 'hidden';
-    portrait.hidden = false;
-    const box = mobile.getBoundingClientRect();
-    const size = portrait.offsetWidth;
-    const left = Math.max(16, Math.min(innerWidth-size-16, box.left+box.width/2-size/2));
-    const top = Math.max(16, Math.min(innerHeight-size-24, box.top+box.height*.7-size/2));
-    portrait.style.left = `${left}px`;
-    portrait.style.top = `${top}px`;
-    const startX = box.left+box.width*.55-left-size/2;
-    const startY = Math.min(-35, box.top+box.height*.28-top);
-    portrait.querySelector('img').decode().catch(() => {}).then(() => {
-      if (portrait.hidden) return;
-      portrait.style.visibility = '';
+    if (portrait) return;
+    portrait=document.createElement('div');
+    portrait.className='fallen-portrait';
+    portrait.tabIndex=-1;
+    portrait.style.visibility='hidden';
+    const photo=new Image(480,480);
+    photo.alt='Peter H. Vartanian';photo.draggable=false;
+    photo.src='/assets/img/peter-portrait.webp';
+    portrait.append(photo);
+    portrait.addEventListener('contextmenu',event=>event.preventDefault());
+    stage.append(portrait);
+    photo.decode().catch(()=>{}).then(()=>{
+      positionPortrait();
+      const distance=Math.max(35,portrait.offsetTop-stage.clientHeight*.18);
+      portrait.style.visibility='';
       shedLeaves();
-      if (!reducedMotion.matches) portrait.animate([
-        {transform:`translate(${startX}px, ${startY}px) rotate(-24deg) scale(.7)`,opacity:0,offset:0},
-        {opacity:1,offset:.15},
-        {transform:'translate(0, 9px) rotate(11deg) scale(1)',offset:.76},
-        {transform:'translate(0, -5px) rotate(1deg)',offset:.9},
-        {transform:'translate(0, 0) rotate(7deg)',offset:1}
-      ], {duration:720,easing:'cubic-bezier(.4,0,.7,1)'});
-      if (keyboard) portrait.focus({preventScroll:true});
+      if(!reducedMotion.matches) portrait.animate([
+        {transform:`translateY(${-distance}px) rotate(-5deg)`},
+        {transform:'translateY(0) rotate(7deg)'}
+      ],{duration:Math.max(300,Math.sqrt(2*distance/1800)*1000),easing:'cubic-bezier(.333,0,.667,.333)'});
+      if(keyboard) portrait.focus({preventScroll:true});
     });
   }
   window.addEventListener('resize', positionPortrait);
