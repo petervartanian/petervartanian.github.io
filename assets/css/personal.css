@@ -50,12 +50,12 @@ main { margin-top: 48px; }
 .sculpture { aspect-ratio: 520 / 420; }
 .name-anchor { position: relative; z-index: 1; }
 .name-baseline { display: inline-block; width: 0; height: 0; }
-.mobile-svg { touch-action: none; cursor: grab; display: block; width: 100%; height: 100%; overflow: visible; }
+.mobile-svg { touch-action: none; cursor: pointer; display: block; width: 100%; height: 100%; overflow: visible; }
 .mobile-wires { color: #8b7b8e; stroke-linecap: round; stroke-linejoin: round; }
 .mobile-wires path { vector-effect: non-scaling-stroke; stroke-width: .85px; }
 .mobile-svg, body.shaking-mobile, body.shaking-mobile * { user-select: none; -webkit-user-select: none; }
-.mobile-piece { cursor: grab; touch-action: none; }
-.mobile-svg:active, .mobile-piece:active { cursor: grabbing; }
+.mobile-piece { cursor: pointer; touch-action: none; }
+.mobile-svg:active, .mobile-piece:active { cursor: pointer; }
 .mobile-piece:focus-visible { outline: 1px dashed var(--link); outline-offset: 7px; }
 body[data-page=home] .home-links { justify-content: center; margin-top: 15px; }
 footer { text-align: center; border-top: 1px solid var(--line); color: var(--quiet); padding: 24px 0 34px; margin-top: 62px; font-size: 11px; }

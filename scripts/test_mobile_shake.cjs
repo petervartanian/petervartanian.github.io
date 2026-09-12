@@ -1,75 +1,47 @@
-// Replay smooth hand movements, including the slowdown at each reversal.
-const fs = require('node:fs');
-const vm = require('node:vm');
-const assert = require('node:assert/strict');
-const source = fs.readFileSync(require('node:path').join(__dirname, '../assets/js/personal.js'), 'utf8');
-const detector = source.slice(source.indexOf('  function trackShake('), source.indexOf("  window.addEventListener('resize', positionPortrait)"));
-function replay(amplitude, period, hz, seconds = 3, vertical = false) {
-  const context = vm.createContext({ Math });
-  vm.runInContext('let portrait=null,shakeMotion=null,reveals=0;function dropPortrait(){portrait={};reveals++;}' + detector + 'shakeMotion=newMotion(0,0,0);', context);
-  for (let t = 1000/hz; t <= seconds*1000; t += 1000/hz) {
-    const position = amplitude*Math.sin(2*Math.PI*t/period);
-    vm.runInContext(`trackShake(${vertical?0:position},${vertical?position:0},${t})`, context);
-  }
-  return vm.runInContext('reveals', context);
-}
-for (const hz of [30, 60, 120]) {
-  assert.equal(replay(70, 360, hz), 1, `Smooth vigorous shake at ${hz} Hz`);
-  assert.equal(replay(55, 340, hz, 3, true), 1, `Vertical shake at ${hz} Hz`);
-  assert.equal(replay(70, 4000, hz, 12), 0, `Slow motion at ${hz} Hz`);
-  assert.equal(replay(5, 100, hz), 0, `Small jitter at ${hz} Hz`);
-  assert.equal(replay(0, 100, hz), 0, `Stationary taps at ${hz} Hz`);
-}
-console.log('Passed: natural horizontal/vertical shaking reveals once; slow movements, jitter, and taps do not (30/60/120 Hz).');
-
-// Exercise the actual root-SVG pointer handlers, starting between the hanging pieces.
-const pointerCode=source.slice(source.indexOf('  function beginShake('),source.indexOf('  function stir('));
-const pointerContext=vm.createContext({Math});
-vm.runInContext(`
-let portrait=null,shakeMotion=null,reveals=0,dragging=null,shed=false,clock=0,prevented=0,captured=null,cleared=0;
-const tree={x:0,y:0,vx:0,vy:0},listeners={},classes=new Set();
-const mobile={addEventListener:(type,handler)=>listeners[type]=handler,setPointerCapture:id=>captured=id};
-const document={body:{classList:{add:c=>classes.add(c),remove:c=>classes.delete(c)}}};
-const window={getSelection:()=>({removeAllRanges:()=>cleared++})};
-const performance={now:()=>clock};
-const point=e=>({x:e.clientX,y:e.clientY});
-const clamp=v=>Math.max(-48,Math.min(48,v));
-function draw(){} function animate(){} function stir(){}
-function dropPortrait(){portrait={};reveals++;}
-${detector}
-${pointerCode}
-function send(type,x,y,time){clock=time;listeners[type]({type,button:0,pointerId:7,clientX:x,clientY:y,preventDefault:()=>prevented++});}
-send('pointerdown',0,0,0);
-`,pointerContext);
-for(let t=16;t<=1600;t+=16) vm.runInContext(`send('pointermove',${70*Math.sin(2*Math.PI*t/360)},0,${t});`,pointerContext);
-vm.runInContext("send('pointerup',0,0,1616)",pointerContext);
-assert.equal(vm.runInContext('reveals',pointerContext),1,'Root-SVG dragging reveals the portrait');
-assert.equal(vm.runInContext('captured',pointerContext),7,'SVG keeps the pointer captured');
-assert.equal(vm.runInContext('cleared',pointerContext),1,'Dragging clears text selection');
-assert.equal(vm.runInContext("classes.has('shaking-mobile')",pointerContext),false,'Selection lock is released');
-assert(fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8').includes('class="mobile-hit-area"'),'The SVG includes an area for dragging between pieces');
-console.log('Passed: whole-mobile pointer capture, portrait reveal, and selection cleanup.');
-
-// Replay actual click handlers with the same momentum decay used by touch and keyboard.
-const stirCode=source.slice(source.indexOf('  function stir('),source.indexOf("  document.addEventListener('visibilitychange'"));
-for(const interval of [180,2000]) {
- const context=vm.createContext({Math});
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const source=fs.readFileSync(require('node:path').join(__dirname,'../assets/js/personal.js'),'utf8');
+const code=source.slice(source.indexOf('  function draw()'),source.indexOf("  document.addEventListener('visibilitychange'"));
+function setup(reduced=false){
+ const c=vm.createContext({Math});
  vm.runInContext(`
- let portrait=null,shakeMotion=null,reveals=0,dragging=null,shed=false,clock=0,nudges=0,tapEnergy=0,lastTap=0;
- const tree={x:0,y:0,vx:0,vy:0},pieces=[],listeners={};
- const reducedMotion={matches:false};
- const mobile={addEventListener:(type,handler)=>listeners[type]=handler,setPointerCapture:()=>{}};
- const document={body:{classList:{add:()=>{},remove:()=>{}}}};
- const window={getSelection:()=>null},performance={now:()=>clock};
- const point=e=>({x:e.clientX,y:e.clientY}),clamp=v=>Math.max(-48,Math.min(48,v));
- function draw(){} function animate(){} function dropPortrait(){portrait={};reveals++;}
- ${detector}
- ${pointerCode}
- ${stirCode}
- function tap(t){clock=t;for(const type of ['pointerdown','pointerup']) listeners[type]({type,button:0,pointerId:1,clientX:0,clientY:0,preventDefault:()=>{}});}
- tap(0);tap(${interval});tap(${2*interval});
- `,context);
- assert.equal(vm.runInContext('reveals',context),interval===180?1:0);
- assert.notEqual(vm.runInContext('tree.vx',context),0,'A click shakes the whole mobile');
+ let shed=false,portrait=null,dragging=null,frame=null,previousTime=0,activeDuration=0,lastInteraction=null,clock=0,reveals=0;
+ const listeners={},classes=new Set(),transforms=[];
+ const pieces=Array.from({length:3},(_,i)=>({home:[i*40,50],mount:[i*40,0],attachment:[0,0],x:0,y:0,vx:0,vy:0,wire:{setAttribute(){}},element:{dataset:{name:'piece'},setAttribute(k,v){if(k==='transform') transforms.push(v);},addEventListener(){}}}));
+ const mobile={addEventListener:(k,f)=>listeners[k]=f,setPointerCapture(){},setAttribute(){throw Error('Frame must not move');}};
+ const document={hidden:false,body:{classList:{add:c=>classes.add(c),remove:c=>classes.delete(c)}}};
+ const window={getSelection:()=>({removeAllRanges(){}})},performance={now:()=>clock};
+ const reducedMotion={matches:${reduced}};
+ function requestAnimationFrame(){return 1;} function dropPortrait(){reveals++;portrait={};shed=true;}
+ ${code}
+ function send(type,x=0){listeners[type]({type,button:0,pointerId:1,clientX:x,clientY:0,preventDefault(){}});}
+ function tap(){send('pointerdown');send('pointerup');}
+ `,c);return c;
 }
-console.log('Passed: brisk clicks release the portrait; isolated clicks only shake the mobile.');
+function run(mode,reduced=false){
+ const c=setup(reduced);let early=0,late=0;
+ for(let t=0;t<=5400;t+=20){
+  vm.runInContext(`clock=${t}`,c);
+  if(mode==='click' && t%400===0) vm.runInContext('tap()',c);
+  if(mode==='drag'){
+   if(t===0) vm.runInContext("send('pointerdown')",c);
+   if(t%400===0)vm.runInContext(`send('pointermove',${t%800===0?40:-40})`,c);
+  }
+  if(!reduced)vm.runInContext(`if(!shed)settle(${t})`,c);
+  const magnitude=vm.runInContext('Math.max(...pieces.map(p=>Math.abs(p.x)))',c);
+  if(t<1000)early=Math.max(early,magnitude);
+  if(t>3500&&t<4800)late=Math.max(late,magnitude);
+  if(t<5000)assert.equal(vm.runInContext('reveals',c),0,'No early reveal');
+ }
+ assert.equal(vm.runInContext('reveals',c),1,'Five seconds of activity releases once');
+ if(!reduced)assert(late>early*2,'Motion builds progressively');
+ return vm.runInContext('JSON.stringify(pieces.map(p=>[p.x,p.y]))',c);
+}
+assert.equal(run('click'),run('drag'),'Clicks and shaking produce the identical leaf motion');
+run('click',true);
+const paused=setup();
+vm.runInContext('tap();clock=400;tap();clock=2000;tap();',paused);
+assert.equal(vm.runInContext('activeDuration',paused),0,'Pauses reset buildup');
+vm.runInContext("clock=8000;send('pointerdown');clock=14000;send('pointerup');",paused);
+assert.equal(vm.runInContext('reveals',paused),0,'Holding still does not count as shaking');
+assert(!source.includes("assembly.setAttribute('transform'"),'Frame is never transformed');
+console.log('Passed: fixed frame, identical click/drag leaf motion, progressive five-second buildup, pause reset, reduced motion, and no reveal from holding still.');

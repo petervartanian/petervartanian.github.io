@@ -27,7 +27,7 @@ if (primaryOnly) {
   });
 }
 
-// The mobile rests until someone moves it; springs let it settle again.
+// The frame stays fixed; interaction excites only its suspended pieces.
 const mobile = document.querySelector('.mobile-svg');
 if (mobile) {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -38,17 +38,12 @@ if (mobile) {
     wire:mobile.querySelector(`[data-wire="${element.dataset.piece}"]`),
     x:0, y:0, vx:0, vy:0
   }));
-  const assembly=mobile.querySelector('.mobile-assembly');
-  const tree={x:0,y:0,vx:0,vy:0};
   let dragging = null;
   let frame = null;
   let previousTime = 0;
-  let nudges = 0;
-  let tapEnergy = 0, lastTap = 0;
-  const clamp = value => Math.max(-48, Math.min(48, value));
+  let activeDuration = 0, lastInteraction = null;
   mobile.setAttribute('role','group');
   let portrait = null;
-  let shakeMotion = null;
   let shed = false, leafFall = null;
   function shedLeaves() {
     if (shed) return;
@@ -141,38 +136,11 @@ if (mobile) {
       if (keyboard) portrait.focus({preventScroll:true});
     });
   }
-  function trackShake(x, y, time, keyboard=false) {
-    if (portrait || !shakeMotion) return;
-    const m=shakeMotion, dt=Math.max(1,time-m.time);
-    const speed=Math.min(3,Math.hypot(x-m.x,y-m.y)/dt);
-    m.energy=Math.max(0,m.energy-dt*.08);
-    if (!m.axis && Math.hypot(x-m.startX,y-m.startY)>=8) {
-      m.axis=Math.abs(x-m.startX)>=Math.abs(y-m.startY)?'x':'y';
-      m.origin=m.axis==='x'?m.startX:m.startY;
-      m.extreme=m.origin;
-    }
-    if (m.axis) {
-      const value=m.axis==='x'?x:y;
-      if (!m.direction) m.direction=value>=m.origin?1:-1;
-      m.peak=Math.max(m.peak,speed);
-      if ((value-m.extreme)*m.direction>=0) m.extreme=value;
-      else if ((m.extreme-value)*m.direction>=10) {
-        const excursion=Math.abs(m.extreme-m.origin);
-        // Judge the whole swing, including its peak speed. Real hands slow down at a turn.
-        if (excursion>=28 && m.peak>=.5) m.energy+=Math.min(110,excursion*m.peak);
-        m.origin=m.extreme;m.extreme=value;m.direction*=-1;m.peak=speed;
-      }
-    }
-    m.x=x;m.y=y;m.time=time;
-    if(m.energy>=150) dropPortrait(keyboard);
-  }
-  const newMotion=(x,y,time)=>({x,y,time,startX:x,startY:y,axis:null,direction:0,origin:0,extreme:0,peak:0,energy:0});
   window.addEventListener('resize', positionPortrait);
 
 
   function draw() {
     if (shed) return;
-    assembly.setAttribute('transform', `translate(266 10) rotate(${tree.x*.16}) scale(1 ${1+tree.y*.0007}) translate(-266 -10)`);
     pieces.forEach(p => {
       const x=p.home[0]+p.x, y=p.home[1]+p.y, angle=p.x*.16;
       const radians=angle*Math.PI/180, [ax,ay]=p.attachment;
@@ -184,15 +152,16 @@ if (mobile) {
     const step = previousTime ? Math.min((time-previousTime)/16.67,2) : 1;
     previousTime = time;
     let energy = 0;
-    if (!dragging && !reducedMotion.matches) {
-      tree.vx=(tree.vx-tree.x*.035*step)*Math.pow(.86,step);
-      tree.vy=(tree.vy-tree.y*.035*step)*Math.pow(.86,step);
-      tree.x+=tree.vx*step;tree.y+=tree.vy*step;
-      energy+=Math.abs(tree.x)+Math.abs(tree.y)+Math.abs(tree.vx)+Math.abs(tree.vy);
-    }
-    pieces.forEach(p => {
-      if (dragging?.piece === p) return;
+    const active=lastInteraction!==null && time-lastInteraction<700;
+    const amplitude=7+48*Math.pow(Math.min(1,activeDuration/5000),1.4);
+    pieces.forEach((p,i) => {
       if (reducedMotion.matches) { p.vx=0; p.vy=0; return; }
+      if(active) {
+        // Both taps and pointer movement excite this same motion, never the frame.
+        const phase=time/135+i*.8;
+        p.vx+=(Math.sin(phase)*amplitude-p.x)*.065*step;
+        p.vy+=(Math.cos(phase*.83+i)*amplitude*.35-p.y)*.065*step;
+      }
       p.vx = (p.vx-p.x*.025*step)*Math.pow(.92,step);
       p.vy = (p.vy-p.y*.032*step)*Math.pow(.92,step);
       p.x += p.vx*step;
@@ -200,36 +169,22 @@ if (mobile) {
       energy += Math.abs(p.x)+Math.abs(p.y)+Math.abs(p.vx)+Math.abs(p.vy);
     });
     draw();
-    if (energy > .15) frame=requestAnimationFrame(settle);
+    if (energy > .15 || active) frame=requestAnimationFrame(settle);
     else { frame=null; previousTime=0; }
   }
   function animate() {
     if (shed) return;
     if (!frame && !document.hidden) { previousTime=0; frame=requestAnimationFrame(settle); }
   }
-  function point(event) {
-    const p = mobile.createSVGPoint(); p.x=event.clientX; p.y=event.clientY;
-    return p.matrixTransform(mobile.getScreenCTM().inverse());
-  }
-  pieces.forEach((piece,i) => {
+  pieces.forEach(piece => {
     piece.element.setAttribute('tabindex','0');
     piece.element.setAttribute('role','button');
-    piece.element.setAttribute('aria-label',`${piece.element.dataset.name}. Click or tap to shake; Enter or Space also shakes it. Arrow keys move it; Escape resets it.`);
+    piece.element.setAttribute('aria-label',`${piece.element.dataset.name}. Click or tap to shake; Enter, Space or arrow keys also shake it.`);
     piece.element.addEventListener('keydown',event => {
       if (shed) return;
-      const directions={ArrowLeft:[-14,0],ArrowRight:[14,0],ArrowUp:[0,-14],ArrowDown:[0,14]};
-      if (event.key==='Escape') { piece.x=0;piece.y=0;piece.vx=0;piece.vy=0;draw();return; }
-      if (event.key==='Enter' || event.key===' ') {
-        event.preventDefault();stir(true);return;
+      if (['Enter',' ','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(event.key)) {
+        event.preventDefault();stir(true);
       }
-      if (!directions[event.key]) return;
-      event.preventDefault();
-      const now=performance.now();
-      if(!shakeMotion || now-shakeMotion.time>350) shakeMotion=newMotion(0,0,now-30);
-      const strength=event.shiftKey?3:1;
-      trackShake(shakeMotion.x+directions[event.key][0]*strength,shakeMotion.y+directions[event.key][1]*strength,now,true);
-      piece.x=clamp(piece.x+directions[event.key][0]);piece.y=clamp(piece.y+directions[event.key][1]);
-      draw();if(!reducedMotion.matches) animate();
     });
   });
   // Capture the whole mobile, including branches and the spaces between pieces.
@@ -238,22 +193,18 @@ if (mobile) {
     event.preventDefault();
     document.body.classList.add('shaking-mobile');
     window.getSelection()?.removeAllRanges();
-    shakeMotion=newMotion(event.clientX,event.clientY,performance.now());
-    const p=point(event);
-    dragging={id:event.pointerId,start:p,startX:tree.x,startY:tree.y,moved:false};
+    dragging={id:event.pointerId,x:event.clientX,y:event.clientY,moved:false};
     mobile.setPointerCapture(event.pointerId);
   }
   function moveShake(event) {
     if(!dragging || dragging.id!==event.pointerId) return;
     event.preventDefault();
-    const p=point(event);
-    if(Math.hypot(p.x-dragging.start.x,p.y-dragging.start.y)>4) dragging.moved=true;
-    const x=clamp(dragging.startX+p.x-dragging.start.x),y=clamp(dragging.startY+p.y-dragging.start.y);
-    trackShake(event.clientX,event.clientY,performance.now());
-    if(shed) return;
-    tree.vx=(x-tree.x)*.25;tree.vy=(y-tree.y)*.25;tree.x=x;tree.y=y;
-    draw();
+    if(Math.hypot(event.clientX-dragging.x,event.clientY-dragging.y)<6) return;
+    dragging.moved=true;
+    dragging.x=event.clientX;dragging.y=event.clientY;
+    stir();
   }
+
   function releaseShake(event) {
     if(!dragging || dragging.id!==event.pointerId) return;
     const tap=!dragging.moved && event.type==='pointerup';
@@ -267,24 +218,14 @@ if (mobile) {
   function stir(keyboard=false) {
     if(shed || portrait) return;
     const now=performance.now();
-    tapEnergy=Math.max(0,tapEnergy-(now-lastTap)*.09)+70;
-    lastTap=now;
-    nudges++;
-    const direction=nudges%2?1:-1;
-    if(!reducedMotion.matches) {
-      tree.x=clamp(tree.x+direction*15);
-      tree.vx=direction*8;
-      tree.vy=-3;
-    }
-    pieces.forEach((p,i) => {
-      if(reducedMotion.matches) {p.x=Math.sin(i*1.7+nudges)*13;p.y=Math.cos(i*1.3+nudges)*9;}
-      else {p.vx+=Math.sin(i*1.7+nudges)*4;p.vy+=Math.cos(i*1.3+nudges)*2.5;}
-    });
-    draw();if(!reducedMotion.matches) animate();
-    if(tapEnergy>=150) dropPortrait(keyboard);
+    const gap=lastInteraction===null?Infinity:now-lastInteraction;
+    activeDuration=gap<=850?activeDuration+gap:0;
+    lastInteraction=now;
+    if(!reducedMotion.matches) animate();
+    if(activeDuration>=5000) dropPortrait(keyboard);
   }
   document.addEventListener('visibilitychange',() => {
-    if(document.hidden) {if(frame) cancelAnimationFrame(frame);frame=null;previousTime=0;dragging=null;document.body.classList.remove('shaking-mobile');}
+    if(document.hidden) {if(frame) cancelAnimationFrame(frame);frame=null;previousTime=0;dragging=null;activeDuration=0;lastInteraction=null;document.body.classList.remove('shaking-mobile');}
     else if(!reducedMotion.matches) animate();
   });
   draw();
