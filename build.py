@@ -26,7 +26,7 @@ def page(key, title, description, body, path):
         nav_parts.append(f'<a href="{url}"'+(' aria-current="page"' if key == k else '')+f'>{label}</a>')
     nav = '\n'.join(nav_parts)
     name_tag = 'h1' if key == 'home' and path == '/' else 'div'
-    name = 'Peter <span class="name-anchor">H.</span> Vartanian' if key == 'home' else 'Peter H. Vartanian'
+    name = 'Peter H<span class="name-anchor">.<span class="name-baseline" aria-hidden="true"></span></span> Vartanian' if key == 'home' else 'Peter H. Vartanian'
     image_version = sha256((ROOT / f'assets/img/social-{key}.png').read_bytes()).hexdigest()[:12]
     image_url = f'https://petervartanian.xyz/assets/img/social-{key}.png?v={image_version}'
     image_alt = f'Peter H. Vartanian — {title}, with a composition of colored mobile shapes'
@@ -101,7 +101,7 @@ mobile_parts = [(name, home, mount, (ax * piece_scales.get(i, 1), ay * piece_sca
                  f'<g transform="scale({piece_scales.get(i, 1)})">{shape}</g>')
                 for i, (name, home, mount, (ax, ay), shape) in enumerate(mobile_parts)]
 mobile = '<figure class="mobile-figure"><div class="sculpture"><svg class="mobile-svg" viewBox="0 0 520 450" role="img" aria-labelledby="mobile-title"><title id="mobile-title">A hanging composition of fifteen colored paper shapes</title>'
-mobile += '<g class="mobile-wires" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M266 10V68 M117 114Q191 48 266 68Q352 48 421 118 M266 68V216 M47 282Q133 205 266 216Q366 221 455 282 M266 216L260 340 M130 351Q215 321 260 340Q305 322 330 365Q389 359 425 380"/>'
+mobile += '<rect class="mobile-hit-area" width="520" height="450" fill="transparent"/><g class="mobile-assembly"><g class="mobile-wires" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M266 10V68 M117 114Q191 48 266 68Q352 48 421 118 M266 68V216 M47 282Q133 205 266 216Q366 221 455 282 M266 216L260 340 M130 351Q215 321 260 340Q305 322 330 365Q389 359 425 380"/>'
 for i, (_, (x, y), (mx, my), (ax, ay), _) in enumerate(mobile_parts):
     mobile += f'<path data-wire="{i}" d="M{mx} {my}L{x + ax} {y + ay}"/>'
 mobile += '</g>'
@@ -109,7 +109,7 @@ for i, (name, (x, y), (mx, my), (ax, ay), shape) in enumerate(mobile_parts):
     if i >= 9:
         shape = '<circle r="18" fill="transparent"/>' + shape
     mobile += f'<g class="mobile-piece" data-piece="{i}" data-name="{name}" data-home="{x},{y}" data-mount="{mx},{my}" data-attachment="{ax},{ay}" transform="translate({x} {y})">{shape}</g>'
-mobile += '</svg></div></figure>'
+mobile += '</g></svg></div></figure>'
 
 home = f'''<div class="introduction">
   <p>I am a pertinacious thinker-and-doer who hails from <a href="https://mapcarta.com/N1938447213">Weng</a>, a hamlet in the Tyrolean Alps.</p>
@@ -156,7 +156,7 @@ publication_notes = [
 writing += '<section id="publication-notes" class="publication-notes"><h2>Notes</h2>' + ''.join(f'<p id="publication-note-{index}"><span class="note-badge">{note[0]}</span><span>{note[2:]}</span></p>' for index, note in zip([1, 2, 4], publication_notes)) + '</section>'
 writing += '''<section class="memos"><h2>Peter’s Memos</h2>
 <ul class="memo-outline" role="list"><li><span class="memo-mark" aria-hidden="true">¶</span><p>In Kevin Roose’s <a href="https://us.macmillan.com/books/9780374618766/theagichronicles/"><em>The AGI Chronicles</em></a>, researchers and founders circulate memos to develop ideas and submit them to scrutiny.</p>
-<ul role="list"><li><span class="memo-mark" aria-hidden="true">↳</span><p>My Substack, <a href="https://substack.com/@petersmemos">Peter’s Memos</a>, borrows that form to keep my penchant for long-form writing from yielding only a library of unfinished drafts.</p></li></ul>
+<ul role="list"><li><span class="memo-mark" aria-hidden="true">↳</span><p>My Substack, <a href="https://substack.com/@petersmemos">Peter’s Memos</a>, borrows that form to keep my penchant for long-form writing from yielding a premature <em>Nachlass</em>—papers left unpublished at death.</p></li></ul>
 </li></ul></section>'''
 page('writing', 'Writing', 'Published writing on security, resources, law, and technology.', writing, '/portfolio/')
 

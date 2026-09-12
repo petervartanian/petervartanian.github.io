@@ -38,6 +38,8 @@ if (mobile) {
     wire:mobile.querySelector(`[data-wire="${element.dataset.piece}"]`),
     x:0, y:0, vx:0, vy:0
   }));
+  const assembly=mobile.querySelector('.mobile-assembly');
+  const tree={x:0,y:0,vx:0,vy:0};
   let dragging = null;
   let frame = null;
   let previousTime = 0;
@@ -169,6 +171,7 @@ if (mobile) {
 
   function draw() {
     if (shed) return;
+    assembly.setAttribute('transform', `translate(266 10) rotate(${tree.x*.16}) scale(1 ${1+tree.y*.0007}) translate(-266 -10)`);
     pieces.forEach(p => {
       const x=p.home[0]+p.x, y=p.home[1]+p.y, angle=p.x*.16;
       const radians=angle*Math.PI/180, [ax,ay]=p.attachment;
@@ -180,6 +183,12 @@ if (mobile) {
     const step = previousTime ? Math.min((time-previousTime)/16.67,2) : 1;
     previousTime = time;
     let energy = 0;
+    if (!dragging && !reducedMotion.matches) {
+      tree.vx=(tree.vx-tree.x*.035*step)*Math.pow(.86,step);
+      tree.vy=(tree.vy-tree.y*.035*step)*Math.pow(.86,step);
+      tree.x+=tree.vx*step;tree.y+=tree.vy*step;
+      energy+=Math.abs(tree.x)+Math.abs(tree.y)+Math.abs(tree.vx)+Math.abs(tree.vy);
+    }
     pieces.forEach(p => {
       if (dragging?.piece === p) return;
       if (reducedMotion.matches) { p.vx=0; p.vy=0; return; }
@@ -222,37 +231,39 @@ if (mobile) {
       piece.x=clamp(piece.x+directions[event.key][0]);piece.y=clamp(piece.y+directions[event.key][1]);
       draw();if(!reducedMotion.matches) animate();
     });
-    piece.element.addEventListener('pointerdown',event => {
-      if(shed || event.button!==0 || dragging) return;
-      event.preventDefault();
-      document.body.classList.add('shaking-mobile');
-      window.getSelection()?.removeAllRanges();
-      shakeMotion=newMotion(event.clientX,event.clientY,performance.now());
-      const p=point(event);
-      dragging={piece,id:event.pointerId,dx:p.x-piece.home[0]-piece.x,dy:p.y-piece.home[1]-piece.y,start:p,moved:false};
-      piece.element.setPointerCapture(event.pointerId);
-    });
-    piece.element.addEventListener('pointermove',event => {
-      if(dragging?.piece!==piece || dragging.id!==event.pointerId) return;
-      event.preventDefault();
-      const p=point(event);
-      if(Math.hypot(p.x-dragging.start.x,p.y-dragging.start.y)>4) dragging.moved=true;
-      const x=clamp(p.x-piece.home[0]-dragging.dx),y=clamp(p.y-piece.home[1]-dragging.dy);
-      trackShake(event.clientX,event.clientY,performance.now());
-      if (shed) return;
-      piece.vx=(x-piece.x)*.4;piece.vy=(y-piece.y)*.4;piece.x=x;piece.y=y;
-      draw();
-    });
-    function release(event) {
-      if(dragging?.piece!==piece || dragging.id!==event.pointerId) return;
-      const tap=!dragging.moved && event.type==='pointerup';
-      dragging=null;
-      document.body.classList.remove('shaking-mobile');
-      if(tap) stir();
-      else animate();
-    }
-    for(const name of ['pointerup','pointercancel','lostpointercapture']) piece.element.addEventListener(name,release);
   });
+  // Capture the whole mobile, including branches and the spaces between pieces.
+  function beginShake(event) {
+    if(shed || event.button!==0 || dragging) return;
+    event.preventDefault();
+    document.body.classList.add('shaking-mobile');
+    window.getSelection()?.removeAllRanges();
+    shakeMotion=newMotion(event.clientX,event.clientY,performance.now());
+    const p=point(event);
+    dragging={id:event.pointerId,start:p,startX:tree.x,startY:tree.y,moved:false};
+    mobile.setPointerCapture(event.pointerId);
+  }
+  function moveShake(event) {
+    if(!dragging || dragging.id!==event.pointerId) return;
+    event.preventDefault();
+    const p=point(event);
+    if(Math.hypot(p.x-dragging.start.x,p.y-dragging.start.y)>4) dragging.moved=true;
+    const x=clamp(dragging.startX+p.x-dragging.start.x),y=clamp(dragging.startY+p.y-dragging.start.y);
+    trackShake(event.clientX,event.clientY,performance.now());
+    if(shed) return;
+    tree.vx=(x-tree.x)*.25;tree.vy=(y-tree.y)*.25;tree.x=x;tree.y=y;
+    draw();
+  }
+  function releaseShake(event) {
+    if(!dragging || dragging.id!==event.pointerId) return;
+    const tap=!dragging.moved && event.type==='pointerup';
+    dragging=null;
+    document.body.classList.remove('shaking-mobile');
+    if(tap) stir(); else animate();
+  }
+  mobile.addEventListener('pointerdown',beginShake);
+  mobile.addEventListener('pointermove',moveShake);
+  for(const name of ['pointerup','pointercancel','lostpointercapture']) mobile.addEventListener(name,releaseShake);
   function stir() {
     nudges++;
     pieces.forEach((p,i) => {
@@ -293,7 +304,8 @@ if (mobile) {
       const first=paragraphs[0];
       const gapX=(nav[1].right+nav[2].left)/2;
       const navTop=Math.min(...nav.map(b=>b.top)),navBottom=Math.max(...nav.map(b=>b.bottom));
-      const sx=name.right-2,sy=name.bottom-parseFloat(getComputedStyle(anchor).fontSize)*.46;
+      const baseline=rect(anchor.querySelector('.name-baseline'));
+      const sx=(name.left+name.right)/2,sy=baseline.top-parseFloat(getComputedStyle(anchor).fontSize)*.06;
       const left=Math.min(...paragraphs.map(p=>p.left))-13;
       const right=Math.max(...paragraphs.map(p=>p.right))+13;
       const tip=mobile.createSVGPoint();tip.x=266;tip.y=12;
