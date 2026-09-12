@@ -106,9 +106,18 @@ if (mobile) {
   function positionPortrait() {
     if (!portrait) return;
     const size=portrait.offsetWidth,angle=7*Math.PI/180;
-    const tip=mobile.createSVGPoint();tip.x=266;tip.y=68;
-    const arch=tip.matrixTransform(mobile.getScreenCTM());
-    portrait.parentElement.style.setProperty('--portrait-arch',`${arch.y-stage.getBoundingClientRect().top}px`);
+    const bounds=stage.getBoundingClientRect(),matrix=mobile.getScreenCTM();
+    const project=(x,y)=>{
+      const point=mobile.createSVGPoint();point.x=x;point.y=y;
+      const screen=point.matrixTransform(matrix);
+      return [screen.x-bounds.left,screen.y-bounds.top+.6];
+    };
+    // Match the two curves of the top arch, leaving its suspension line visible.
+    const [left,controlLeft,center,controlRight,right]=[[117,114],[191,48],[266,68],[352,48],[421,118]].map(([x,y])=>project(x,y));
+    const bottom=bounds.height+24,farRight=bounds.width+24;
+    const opening=`M-24 ${left[1]} L${left} Q${controlLeft} ${center} Q${controlRight} ${right} L${farRight} ${right[1]} V${bottom} H-24 Z`;
+    portrait.parentElement.style.clipPath=`path("${opening}")`;
+    portrait.parentElement.style.setProperty('--portrait-arch',`${Math.min(left[1],controlLeft[1],center[1],controlRight[1],right[1])}px`);
     // The lowest corner of the tilted square rests exactly on the floor.
     portrait.style.left=`${(stage.clientWidth-size)/2}px`;
     portrait.style.top=`${stage.getBoundingClientRect().height+14-size*(1+Math.cos(angle)+Math.sin(angle))/2}px`;
@@ -130,7 +139,9 @@ if (mobile) {
     photo.decode().catch(()=>{}).then(()=>{
       positionPortrait();
       const arch=parseFloat(portrait.parentElement.style.getPropertyValue('--portrait-arch'));
-      const distance=Math.max(35,portrait.offsetTop+portrait.offsetHeight-arch);
+      const initialAngle=5*Math.PI/180;
+      const lowerCorner=portrait.offsetTop+portrait.offsetHeight*(1+Math.cos(initialAngle)+Math.sin(initialAngle))/2;
+      const distance=Math.max(35,lowerCorner-arch+2);
       portrait.style.visibility='';
       shedLeaves();
       if(!reducedMotion.matches) portrait.animate([
