@@ -41,7 +41,7 @@ def add_institution_logos(markup):
     parts = re.split(r'(<[^>]+>)', markup)
     for index in range(0, len(parts), 2):
         if parts[index] == 'MIT AI Risk Initiative &amp; Arcola AI':
-            parts[index] = ' '.join(decorate(match, number) for number, match in enumerate(NAMES.finditer(parts[index]), 1))
+            parts[index] = ' &amp; '.join(decorate(match, number) for number, match in enumerate(NAMES.finditer(parts[index]), 1))
         else:
             parts[index] = NAMES.sub(decorate, parts[index])
     result = ''.join(parts)
