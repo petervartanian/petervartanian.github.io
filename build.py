@@ -156,7 +156,7 @@ publication_notes = [
 writing += '<section id="publication-notes" class="publication-notes"><h2>Notes</h2>' + ''.join(f'<p id="publication-note-{index}"><span class="note-badge">{note[0]}</span><span>{note[2:]}</span></p>' for index, note in zip([1, 2, 4], publication_notes)) + '</section>'
 writing += '''<section class="memos"><h2>Peter’s Memos</h2>
 <ul class="memo-outline" role="list"><li><span class="memo-mark" aria-hidden="true">¶</span><p>In Kevin Roose’s <a href="https://us.macmillan.com/books/9780374618766/theagichronicles/"><em>The AGI Chronicles</em></a>, researchers and founders circulate memos to develop ideas and submit them to scrutiny.</p>
-<ul role="list"><li><span class="memo-mark" aria-hidden="true">↳</span><p>My Substack, <a href="https://substack.com/@petersmemos">Peter’s Memos</a>, borrows that form to keep my penchant for long-form writing from yielding a premature <em>Nachlass</em>—papers left unpublished at death.</p></li></ul>
+<ul role="list"><li><span class="memo-mark" aria-hidden="true">↳</span><p>My Substack, <a href="https://substack.com/@petersmemos">Peter’s Memos</a>, borrows that form to keep my penchant for long-form writing from yielding a <em>Nachlass</em> of unfinished drafts.</p></li></ul>
 </li></ul></section>'''
 page('writing', 'Writing', 'Published writing on security, resources, law, and technology.', writing, '/portfolio/')
 
