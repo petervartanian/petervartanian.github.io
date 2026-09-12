@@ -32,7 +32,7 @@
     "height": 30
   },
   "arcola": {
-    "file": "arcola.png",
+    "file": "arcola-transparent.png",
     "source": "https://media.licdn.com/dms/image/v2/D4E0BAQGCwbobmAcpLA/company-logo_200_200/B4EZvGuD.HHIAI-/0/1768565522695/arcola_ai_logo?e=2147483647&v=beta&t=bqzPWyuLNEWEStoeqxInX0MbDs2CgMdxtLFKKyS8SUo",
     "bytes": 3212,
     "aliases": [
@@ -40,7 +40,8 @@
     ],
     "width": 52,
     "source_page": "https://uk.linkedin.com/company/arcola-ai",
-    "height": 16
+    "height": 16,
+    "note": "Original wordmark and tagline retained; off-white background removed."
   },
   "aire": {
     "file": "ai-risk-explorer-user-transparent.png",
@@ -59,9 +60,9 @@
       "Hoover Institution on War, Revolution, and Peace at Stanford University",
       "Hoover Institution"
     ],
-    "width": 27,
+    "width": 30,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 27
+    "height": 30
   },
   "pon": {
     "file": "program-on-negotiation-transparent-trimmed.png",
@@ -69,9 +70,9 @@
     "aliases": [
       "The Program on Negotiation at Harvard Law School"
     ],
-    "width": 50,
+    "width": 56,
     "note": "Outer frame removed; wordmark and shield preserved. Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 20
+    "height": 22
   },
   "change": {
     "file": "change.svg",
@@ -80,8 +81,8 @@
     "aliases": [
       "City Hub and Network for Gender Equity"
     ],
-    "width": 27,
-    "height": 27
+    "width": 28,
+    "height": 28
   },
   "verum": {
     "file": "verum.png",
@@ -90,8 +91,8 @@
     "aliases": [
       "Verum Legalis: The Occidental College Law Review"
     ],
-    "width": 27,
-    "height": 27
+    "width": 29,
+    "height": 29
   },
   "un": {
     "file": "unga-emblem.png",
@@ -100,9 +101,9 @@
       "Office of the Chair of the First Committee of the UN General Assembly",
       "UN"
     ],
-    "width": 32,
+    "width": 34,
     "note": "Latest user-supplied transparent gold emblem; trimmed to artwork and proportionally resized.",
-    "height": 27
+    "height": 29
   },
   "bis": {
     "file": "bis.png",
@@ -112,8 +113,8 @@
       "Bureau of Industry and Security at the U.S. Department of Commerce",
       "Bureau of Industry and Security"
     ],
-    "width": 29,
-    "height": 29
+    "width": 31,
+    "height": 31
   },
   "austria": {
     "file": "austria-trimmed.png",
@@ -121,9 +122,9 @@
     "aliases": [
       "Austrian Service Abroad"
     ],
-    "width": 46,
+    "width": 44,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 16
+    "height": 15
   },
   "wolf": {
     "file": "wolf.png",
@@ -132,8 +133,8 @@
     "aliases": [
       "Wolf Theiss"
     ],
-    "width": 24,
-    "height": 24
+    "width": 26,
+    "height": 26
   },
   "alpbach": {
     "file": "alpbach-transparent-trimmed.png",
@@ -141,9 +142,9 @@
     "aliases": [
       "European Forum Alpbach"
     ],
-    "width": 44,
+    "width": 47,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 11
+    "height": 12
   },
   "newspaper": {
     "file": "newspaper-trimmed.png",
@@ -151,9 +152,9 @@
     "aliases": [
       "The Occidental Newspaper"
     ],
-    "width": 30,
+    "width": 29,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 30
+    "height": 29
   },
   "hrca": {
     "file": "hrca.png",
@@ -162,8 +163,8 @@
     "aliases": [
       "Human Rights Cities Alliance"
     ],
-    "width": 44,
-    "height": 22
+    "width": 50,
+    "height": 25
   },
   "nti": {
     "file": "nti-globe-transparent.png",
@@ -183,8 +184,8 @@
     "aliases": [
       "OECD Mission Action Lab"
     ],
-    "width": 43,
-    "height": 21
+    "width": 48,
+    "height": 23
   },
   "family": {
     "file": "family-monogram.svg",
@@ -193,8 +194,8 @@
     "aliases": [
       "Family Office"
     ],
-    "width": 32,
-    "height": 27
+    "width": 38,
+    "height": 32
   },
   "state": {
     "file": "vienna-mission-seal.png",
@@ -212,9 +213,9 @@
     "aliases": [
       "Occidental Consulting Group"
     ],
-    "width": 27,
+    "width": 28,
     "note": " White background made transparent; original artwork proportions retained.",
-    "height": 27
+    "height": 28
   },
   "blyth": {
     "file": "blyth-transparent-trimmed.png",
@@ -222,9 +223,9 @@
     "aliases": [
       "Charles R. Blyth Fund at Occidental College"
     ],
-    "width": 31,
+    "width": 32,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 31
+    "height": 32
   },
   "uepi": {
     "file": "uepi-transparent-trimmed.png",
@@ -232,9 +233,9 @@
     "aliases": [
       "Urban & Environmental Policy Institute at Occidental College"
     ],
-    "width": 24,
+    "width": 25,
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
-    "height": 29
+    "height": 30
   },
   "mckinnon": {
     "file": "mckinnon-young.png",
@@ -242,8 +243,8 @@
     "aliases": [
       "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy"
     ],
-    "width": 46,
+    "width": 54,
     "note": "White background made transparent and empty margins trimmed; original combined wordmark retained.",
-    "height": 22
+    "height": 26
   }
 }
