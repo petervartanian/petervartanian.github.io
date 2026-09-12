@@ -238,13 +238,13 @@
     "height": 18.91
   },
   "mckinnon": {
-    "file": "mckinnon-young.png",
-    "source": "User-supplied McKinnon Center and John Parke Young Initiative logo",
+    "file": "mckinnon-young-globes.png",
+    "source": "User-supplied McKinnon/Young globe halves, combined side by side",
     "aliases": [
       "McKinnon Center for Global Affairs & John Parke Young Initiative on the Global Political Economy"
     ],
-    "width": 26.47,
-    "note": "White background made transparent and empty margins trimmed; original combined wordmark retained.",
-    "height": 12.66
+    "width": 19.55,
+    "note": "Orange Europe/Africa half on the left and grey Americas half on the right, at equal heights with natural proportions. Both supplied dividers sit on the outer edges; backgrounds are transparent.",
+    "height": 14.74
   }
 }
