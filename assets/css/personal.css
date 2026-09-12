@@ -218,6 +218,15 @@ a.note-badge:hover, .note-ref:hover { background: var(--note-hover, var(--link))
   .profile-list dd { font-size: 12px; }
 }
 body[data-page=home] footer { border: 0; margin-top: auto; padding: 24px 0 16px; text-align: center; font-size: 10px; }
+body[data-page=contact] .page { display: flex; flex-direction: column; min-height: 100vh; min-height: 100svh; }
+body[data-page=contact] header { padding-top: clamp(24px, 6svh, 65px); }
+body[data-page=contact] main { margin-top: clamp(20px, 4svh, 40px); }
+body[data-page=contact] h1 { margin-bottom: 16px; }
+body[data-page=contact] main > p { margin-bottom: 12px; }
+body[data-page=contact] .profile-intro { margin-top: 22px; }
+body[data-page=contact] .contact-table { margin: 0; }
+body[data-page=contact] .contact-table th, body[data-page=contact] .contact-table td { padding-top: 4px; padding-bottom: 4px; }
+body[data-page=contact] footer { border: 0; margin-top: auto; padding: 24px 0 16px; font-size: 10px; }
 header nav a, .download-button, .note-ref, a.note-badge { position: relative; }
 header nav a::after, .download-button::after, .note-ref::after, a.note-badge::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: max(100%, 24px); height: max(100%, 24px); }
 header nav a::after, .download-button::after { min-width: 44px; min-height: 44px; }
