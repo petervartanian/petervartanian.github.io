@@ -88,17 +88,10 @@
     const components = reference.split('→').map((number) => p.steps[Number(number) - 1]);
     return components.every(Boolean) ? components.map(stepLabel).join(' → ') : reference;
   }));
-  const focusAndReveal = (element, transition = false) => {
+  const focusAndReveal = (element, returnToTop = false) => {
     element.focus({ preventScroll: true });
-    const reveal = () => {
-      if (transition) window.scrollTo({ top: 0, behavior: reduced.matches ? 'instant' : 'smooth' });
-      else element.scrollIntoView({ block: 'start', behavior: reduced.matches || state.pathway === 'X-01' ? 'instant' : 'smooth' });
-    };
-    if (transition && !reduced.matches) {
-      // Scroll to the final position after the introduction has changed height.
-      Promise.all($('.opening-shell').getAnimations().map((animation) => animation.finished.catch(() => {})))
-        .then(() => { if (document.activeElement === element) reveal(); });
-    } else reveal();
+    if (returnToTop) window.scrollTo({ top: 0, behavior: 'instant' });
+    else element.scrollIntoView({ block: 'start', behavior: reduced.matches || state.pathway === 'X-01' ? 'instant' : 'smooth' });
   };
 
   function normalize() {
@@ -508,7 +501,7 @@
     const result = event.target.closest('[data-search-incident]');
     if (result) selectIncident(result.dataset.searchIncident);
   });
-  $('#all-pathways').addEventListener('click', () => {
+  function showOverview() {
     state.pathway = '';
     normalize();
     $('#overview-search').value = '';
@@ -516,6 +509,12 @@
     writeLocation();
     focusAndReveal($('#choose-title'), true);
     announce('Choose a pathway');
+  }
+  $('#all-pathways').addEventListener('click', showOverview);
+  $('#auspex-home').addEventListener('click', (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    showOverview();
   });
 
   function renderResults() {

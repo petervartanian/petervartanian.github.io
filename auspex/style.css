@@ -503,14 +503,9 @@ body:has(dialog[open]) { overflow: hidden; }
   overflow: clip;
   opacity: 1;
   visibility: visible;
-  transition: opacity 220ms ease, max-height 420ms ease, visibility 0s;
 }
 .opening-shell.is-focused {
   max-height: 0;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 180ms ease, max-height 420ms ease, visibility 0s 420ms;
-}
-@media (prefers-reduced-motion: reduce) {
-  .opening-shell, .opening-shell.is-focused { transition: none; }
 }
