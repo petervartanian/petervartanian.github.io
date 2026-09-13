@@ -1336,3 +1336,16 @@ body:has(#scene) #scene[data-view="cast"] .plot-tools{display:none}
   .stage-workstream button,.stage-panel-head>button,.filter-options button{min-height:44px}
   .intro-enter,.intro-cast{min-height:44px;display:inline-flex;align-items:center}
 }
+
+/* Shared identity asset, embedded by the build for offline use. */
+.intro-brand .haruspex-mark{width:48px;height:48px;flex:none}
+.brand .haruspex-mark{width:32px;height:32px;flex:none}
+.intro-brand,.field-header .brand{gap:9px}
+@media(max-width:560px){.intro-brand .haruspex-mark{width:32px;height:32px}.brand .haruspex-mark{width:24px;height:24px}.field-header .brand{gap:6px}}
+
+/* Shared project credit; retain the quiet footer and its reading-guide link. */
+footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px 24px;padding-inline:0;max-width:1550px;margin-inline:auto;line-height:1.65}
+.site-credit .credit-author,.site-credit .credit-project{display:block;max-width:none}
+.site-credit .credit-project{justify-self:end;text-align:right}
+.site-credit .credit-heart{display:inline-block;width:1em;height:1em;vertical-align:-.08em;fill:#a0a0a0}
+@media(max-width:600px){footer.site-credit{grid-template-columns:1fr;gap:8px}.site-credit .credit-project{grid-row:2}.site-credit #footer-method{grid-row:3;justify-self:start;margin-top:8px}}

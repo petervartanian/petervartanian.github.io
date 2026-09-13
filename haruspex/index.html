@@ -1344,6 +1344,19 @@ body:has(#scene) #scene[data-view="cast"] .plot-tools{display:none}
   .stage-workstream button,.stage-panel-head>button,.filter-options button{min-height:44px}
   .intro-enter,.intro-cast{min-height:44px;display:inline-flex;align-items:center}
 }
+
+/* Shared identity asset, embedded by the build for offline use. */
+.intro-brand .haruspex-mark{width:48px;height:48px;flex:none}
+.brand .haruspex-mark{width:32px;height:32px;flex:none}
+.intro-brand,.field-header .brand{gap:9px}
+@media(max-width:560px){.intro-brand .haruspex-mark{width:32px;height:32px}.brand .haruspex-mark{width:24px;height:24px}.field-header .brand{gap:6px}}
+
+/* Shared project credit; retain the quiet footer and its reading-guide link. */
+footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px 24px;padding-inline:0;max-width:1550px;margin-inline:auto;line-height:1.65}
+.site-credit .credit-author,.site-credit .credit-project{display:block;max-width:none}
+.site-credit .credit-project{justify-self:end;text-align:right}
+.site-credit .credit-heart{display:inline-block;width:1em;height:1em;vertical-align:-.08em;fill:#a0a0a0}
+@media(max-width:600px){footer.site-credit{grid-template-columns:1fr;gap:8px}.site-credit .credit-project{grid-row:2}.site-credit #footer-method{grid-row:3;justify-self:start;margin-top:8px}}
 </style>
 </head>
 <body>
@@ -1352,7 +1365,7 @@ body:has(#scene) #scene[data-view="cast"] .plot-tools{display:none}
   <main>
     <section id="intro" class="intro" aria-labelledby="intro-title">
       <canvas id="intro-field" class="intro-art" aria-hidden="true"></canvas>
-      <header class="intro-header"><a href="#intro" class="intro-brand" aria-label="Haruspex title page">Haruspex<span aria-hidden="true">·</span></a></header>
+      <header class="intro-header"><a href="#intro" class="intro-brand" aria-label="Haruspex title page"><img class="haruspex-mark" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSI+CiAgPHBhdGggZD0iTTE1IDhDOCA3IDQgMTQgNiAyM0M3IDI5IDEzIDMyIDE3IDI4QzIwIDI1IDE1IDIzIDEzIDIwQzEwIDE2IDE5IDE0IDE4IDExQzE4IDkgMTcgOCAxNSA4WiIgZmlsbD0iIzZkOGM5ZSIvPgogIDxwYXRoIGQ9Ik0yNiA3QzMwIDcgMzkgMTEgNDEgMTZDNDMgMjEgMzMgMjMgMjcgMjFDMjIgMTkgMjMgMTQgMjQgMTBDMjQgOCAyNSA3IDI2IDdaIiBzdHJva2U9IiM4MTZjODgiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTI2IDI2QzIyIDI0IDE4IDI5IDIyIDMyQzI1IDM1IDMwIDI5IDMzIDMyQzM2IDM1IDI5IDM4IDI1IDM2IiBzdHJva2U9IiM2NDgyNzQiIHN0cm9rZS13aWR0aD0iNC4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNSA0MkMxOCA0MCAzMCAzOSA0MyA0MiIgc3Ryb2tlPSIjOGE5MjlhIiBzdHJva2Utd2lkdGg9IjEuMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=" width="48" height="48" alt="">Haruspex</a></header>
       <div class="intro-main">
         <div class="opening-quotation" id="opening-quotation">
           <h1 id="intro-title">“This might be the clearest warning shot we ever get.”</h1>
@@ -1376,7 +1389,7 @@ body:has(#scene) #scene[data-view="cast"] .plot-tools{display:none}
         <canvas id="cosmos" aria-hidden="true"></canvas>
         <div class="field-header">
         <header class="masthead">
-          <a class="brand" href="#" aria-label="Haruspex, return to event swarm">Haruspex<span aria-hidden="true">·</span></a>
+          <a class="brand" href="#" aria-label="Haruspex, return to event swarm"><img class="haruspex-mark" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSI+CiAgPHBhdGggZD0iTTE1IDhDOCA3IDQgMTQgNiAyM0M3IDI5IDEzIDMyIDE3IDI4QzIwIDI1IDE1IDIzIDEzIDIwQzEwIDE2IDE5IDE0IDE4IDExQzE4IDkgMTcgOCAxNSA4WiIgZmlsbD0iIzZkOGM5ZSIvPgogIDxwYXRoIGQ9Ik0yNiA3QzMwIDcgMzkgMTEgNDEgMTZDNDMgMjEgMzMgMjMgMjcgMjFDMjIgMTkgMjMgMTQgMjQgMTBDMjQgOCAyNSA3IDI2IDdaIiBzdHJva2U9IiM4MTZjODgiIHN0cm9rZS13aWR0aD0iMS43IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTI2IDI2QzIyIDI0IDE4IDI5IDIyIDMyQzI1IDM1IDMwIDI5IDMzIDMyQzM2IDM1IDI5IDM4IDI1IDM2IiBzdHJva2U9IiM2NDgyNzQiIHN0cm9rZS13aWR0aD0iNC4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNNSA0MkMxOCA0MCAzMCAzOSA0MyA0MiIgc3Ryb2tlPSIjOGE5MjlhIiBzdHJva2Utd2lkdGg9IjEuMSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=" width="48" height="48" alt="">Haruspex</a>
           <div class="view-tabs" role="tablist" aria-label="Visualization view">
             <button id="stream-tab" role="tab" aria-selected="true" aria-controls="stream-view" class="view-tab active"><span class="view-order">View #1:</span> Event-swarm</button>
             <button id="bowtie-tab" role="tab" aria-selected="false" aria-controls="bowtie-view" class="view-tab"><span class="view-order">View #2:</span> Bow-tie</button>
@@ -1496,7 +1509,7 @@ body:has(#scene) #scene[data-view="cast"] .plot-tools{display:none}
       <div class="section-heading"><div><h2 id="record-heading">Events</h2></div><div class="record-controls"><a id="back-to-field" class="back-up" href="#scene">↑ Field</a><span id="record-count"></span><button id="list-toggle" aria-expanded="true" aria-controls="record-list-wrap">Collapse −</button></div></div>
       <div class="milestone-strip" aria-label="Turning points marked by the sources"><div id="milestones"></div></div>
       <div id="record-list-wrap"><div id="record-list"></div><button id="load-more" class="load-more">Show more events <span>↓</span></button></div>
-      <footer><span>Created by Peter H. Vartanian · 2026</span><button id="footer-method">How to read this</button><span>Haruspex</span></footer>
+      <footer class="site-credit"><span class="credit-author">Created with <svg class="credit-heart" viewBox="0 0 16 16" role="img" aria-label="love"><path d="M8 14 2.1 8.2C-1.7 4.4 3.6-.5 8 4c4.4-4.5 9.7.4 5.9 4.2Z"/></svg> by Peter H. Vartanian (2026)</span><button id="footer-method">How to read this</button><span class="credit-project">This project is part of the suite <em>From Incident to Intervention</em> (FI2I).</span></footer>
     </section>
   </main>
   <div id="event-focus" hidden><div class="focus-veil"></div><canvas id="focus-origin" aria-hidden="true"></canvas><svg id="focus-thread" aria-hidden="true"><path/></svg></div>

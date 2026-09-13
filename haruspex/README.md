@@ -6,6 +6,8 @@ The title page uses one verified incident-specific excerpt from Ajeya Cotra. Her
 
 The navigation reads **View #1: Event-swarm**, **View #2: Bow-tie**, and **Bonus: Investigate!** The Event-swarm uses a full-viewport canvas beneath compact floating controls and stays pinned briefly while scrolling. The Legend docks at the right of the field and holds only the keys; the zoom and pan controls sit at the top right of the plot. Time runs horizontally. **Impact** is the umbrella for adverse effects, Near-misses and Preventive actions, displayed on the established severity scale. Context and Unresolved are separate unordered fields, with no implied place beneath Preventive. The three fields partition 852 explorable events: 599 Impact, 192 Context, and 61 Unresolved. Twenty dated wiki actions and findings are included directly in Unresolved. Their relationship to the Hugging Face incident remains unconfirmed. The Bow-tie groups incident roles; Investigate opens a continuous white paper introducing Causal Analysis based on Systems Theory (CAST) and applying it to the incident. Full, **I. Before**, **II. During**, **III. After**, and 27 detailed stages explore the same event inventory. The Roman numerals distinguish lifecycle roles; the assessment fields stay unnumbered because they are alternatives, not steps or ranks. Each focused lifecycle, including During and After, uses one continuous field.
 
+The header and Event-swarm brand use the saved three-form Haruspex mark: a solid blue-gray lobe, hollow purple wedge and folded green loop. `build.mjs` embeds the unchanged SVG in the self-contained page; desktop and phone sizes follow the existing layout.
+
 ## Severity
 
 | Symbol | Label | Meaning |

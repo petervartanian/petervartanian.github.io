@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f9fc">
+  <meta name="description" content="Choose a pathway. Trace the incidents. Inspect the barrier.">
+  <title>Auspex</title>
+  <link rel="icon" href="mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css?v=21.3">
+  <link rel="stylesheet" href="stpa.css?v=20.2">
+  <link rel="stylesheet" href="controls.css?v=20.2">
+  <script src="data.js?v=20.0" defer></script>
+  <script src="stpa-data.js?v=20.0" defer></script>
+  <script src="stpa.js?v=20.0" defer></script>
+  <script src="display.js?v=20.0" defer></script>
+  <script src="inspection.js?v=20.0" defer></script>
+  <script src="visual.js?v=20.0" defer></script>
+  <script src="app.js?v=21.3" defer></script>
+</head>
+<body>
+  <a class="skip" href="#choose-title">Choose a pathway</a>
+  <header class="masthead">
+    <div class="authorship"><span class="brand"><img src="mark.svg" width="48" height="48" alt="">Auspex</span></div>
+    <div class="institution-marks"><a href="https://airisk.mit.edu/" aria-label="MIT AI Risk Initiative"><img src="assets/mit-airi.svg" width="150" height="40" alt="MIT AI Risk Initiative"></a><a href="https://www.existentialriskobservatory.org/" aria-label="Existential Risk Observatory"><img src="assets/ero.png" width="150" height="33" alt="Existential Risk Observatory"></a></div>
+  </header>
+
+  <section class="opening" aria-labelledby="opening-title">
+    <h1 id="opening-title" aria-label="Incidents + x-risk"><span class="opening-display" aria-hidden="true"><span class="headline-line">Incidents</span><span class="headline-plus">+</span><span class="headline-line headline-risk"><span class="risk-spectrum">x-risk</span></span></span></h1>
+    <div class="opening-copy">
+      <p><span class="opening-premise">Recent incidents have exposed failures of control over autonomous <span class="opening-tail"><span class="premise-terminal">AI.</span><sup class="opening-sources" aria-label="Sources: four distinct incidents"><a href="https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents" aria-label="i. Mythos 5 published malware to PyPI and accessed a security company's infrastructure. Anthropic assessment, 9 September 2026." title="i · PyPI malware and stolen credentials — Anthropic assessment, 9 Sep 2026; incident first disclosed 30 Jul.">i</a><a href="https://collusion.wiki/" aria-label="ii. OpenAI agents used a public wiki to coordinate and bypass restrictions. Nightingale research, 4 September 2026." title="ii · Agents coordinated on a public wiki — reported 4 Sep 2026; activity May–July. Researchers consider this distinct from Hugging Face.">ii</a><a href="https://www.aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing" aria-label="iii. An agent pressured a maintainer to accept a malicious change. UK AI Security Institute incident report, August 2026." title="iii · Maintainer targeted during cyber testing — July 2026 activity, reported August. Malicious change rejected; no resulting harm identified.">iii</a><a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" aria-label="iv. OpenAI agents breached Hugging Face's internal network. Hugging Face technical timeline, July 2026." title="iv · Hugging Face internal-network breach — July 2026. Agents&#x27; access was eventually cut off.">iv</a></sup></span></span> <em class="opening-question">As governments experiment with safeguards and researchers examine pathways to catastrophe, what has prevented further escalation — and will those barriers withstand more capable AI?</em></p>
+    </div>
+  </section>
+
+  <main id="app" hidden>
+    <section class="chooser" aria-labelledby="choose-title">
+      <h2 id="choose-title" class="section-heading" tabindex="-1"><span class="section-numeral" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="section-ring" cx="12" cy="12" r="11.25"/><g transform="translate(10.333333 7) scale(.8333333333)"><path d="M0 0h4v1H2.7v10H4v1h-4v-1H1.3V1H0Z"/></g></svg></span><span class="section-label">Choose a pathway</span></h2>
+      <div class="chooser-context"><p id="pathway-family" class="eyebrow"></p><button id="all-pathways" hidden><span class="control-label">All pathways</span><svg class="ui-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 12V4M4 8l4-4 4 4"/></svg></button></div>
+    </section>
+    <section id="pathway-overview" aria-labelledby="choose-title">
+      <div class="overview-search"><label for="overview-search">Find a pathway or incident:</label><input id="overview-search" type="search" placeholder="Search..." autocomplete="off" spellcheck="false"><span id="overview-count" class="code" role="status"></span></div>
+      <div id="overview-incidents" class="overview-incidents"></div>
+      <div id="overview-groups" class="overview-groups"></div>
+    </section>
+    <div id="selected-pathway" hidden>
+    <header class="pathway-heading">
+      <h2 id="pathway-title" tabindex="-1">
+      <button id="choose-pathway" class="pathway-trigger" aria-expanded="false" aria-haspopup="dialog" aria-controls="pathway-dialog">
+        <span id="selected-code" class="code"></span><span id="selected-name"></span><span aria-hidden="true" class="trigger-arrow"><svg class="ui-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 6l4 4 4-4"/></svg></span>
+      </button>
+      </h2>
+    </header>
+
+    <div class="model-toolbar"><div><button data-show-cases aria-controls="incident-rail"><span class="control-label">Cases</span><svg class="ui-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 6l4 4 4-4"/></svg></button><button data-method aria-haspopup="dialog" aria-controls="method-dialog"><span class="control-label">How to read this</span><svg class="ui-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 12l8-8M5 4h7v7"/></svg></button></div></div>
+    <details id="causal-argument" class="causal-argument" open>
+    <summary>Pathway</summary>
+    <div id="pathway-map" class="pathway-map" aria-label="Interactive causal pathway">
+      <svg id="map-connections" aria-hidden="true"></svg>
+      <div id="map-nodes" class="map-nodes"></div>
+    </div>
+    <p id="pathway-endpoint" class="endpoint"></p>
+    <div id="incident-rail" class="pathway-evidence" aria-label="Evidence mapped to pathway components"></div>
+    </details>
+
+    <section class="incident-section" aria-labelledby="incidents-title">
+      <h2 class="section-heading" id="incidents-title"><span class="section-numeral" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="section-ring" cx="12" cy="12" r="11.25"/><g transform="translate(7.833333 7) scale(.8333333333)"><path d="M0 0h4v1H2.7v10H4v1h-4v-1H1.3V1H0Z"/><path d="M6 0h4v1H8.7v10H10v1h-4v-1H7.3V1H6Z"/></g></svg></span><span class="section-label">Trace the incidents</span></h2>
+    <div class="workspace" id="workspace">
+      <section class="pathway-column" aria-labelledby="incidents-title">
+        <div id="incident-list" class="incident-list"></div>
+        <div id="step-detail" class="step-detail"></div>
+        <p id="incident-scope" class="incident-scope"></p>
+        <details id="incident-classification"><summary>Classification & limits</summary><div id="incident-factors"></div></details>
+        <ul id="incident-trace" class="incident-trace"></ul>
+        <button id="return-map" class="return-map"><span class="control-label">Pathway</span><svg class="ui-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 12V4M4 8l4-4 4 4"/></svg></button>
+      </section>
+
+      <aside class="barrier-column" aria-labelledby="barrier-section-title">
+        <h2 class="section-heading" id="barrier-section-title"><span class="section-numeral" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="section-ring" cx="12" cy="12" r="11.25"/><g transform="translate(5.333333 7) scale(.8333333333)"><path d="M0 0h4v1H2.7v10H4v1h-4v-1H1.3V1H0Z"/><path d="M6 0h4v1H8.7v10H10v1h-4v-1H7.3V1H6Z"/><path d="M12 0h4v1H14.7v10H16v1h-4v-1H13.3V1H12Z"/></g></svg></span><span class="section-label">Inspect the barrier</span></h2>
+        <div id="barrier-panel" tabindex="-1"></div>
+      </aside>
+    </div>
+    <details class="research-details"><summary>Assumptions & sources</summary><div id="pathway-details" class="pathway-details"></div></details>
+    </section>
+    </div>
+  </main>
+
+  <footer class="site-credit"><span class="credit-author">Created with <svg class="credit-heart" viewBox="0 0 16 16" role="img" aria-label="love"><path d="M8 14 2.1 8.2C-1.7 4.4 3.6-.5 8 4c4.4-4.5 9.7.4 5.9 4.2Z"/></svg> by Peter H. Vartanian (2026)</span><span class="credit-project">This project is part of the suite <em>From Incident to Intervention</em> (FI2I).</span></footer>
+
+  <p id="fallback" class="fallback"><a href="pathways.html">Choose a pathway →</a></p>
+
+  <dialog id="pathway-dialog" aria-labelledby="dialog-title">
+    <header class="dialog-heading"><h2 id="dialog-title">Choose a pathway</h2><button id="close-dialog" aria-label="Close pathway selector"><svg class="ui-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></header>
+    <div class="search-field"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="10" cy="10" r="6"></circle><path d="m15 15 5 5"></path></svg><label class="sr-only" for="pathway-search">Search pathways and incidents</label><input type="search" id="pathway-search" placeholder="Search..." autocomplete="off" spellcheck="false" autofocus><span id="search-count" class="code" role="status"></span></div>
+    <div id="pathway-results" class="pathway-results"></div>
+  </dialog>
+
+  <dialog id="method-dialog" class="source-dialog" aria-labelledby="method-title">
+    <header class="dialog-heading"><h2 id="method-title">How to read a pathway</h2><button id="close-method" aria-label="Close reading guide"><svg class="ui-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></header>
+    <div id="method-reading" class="source-reading"></div>
+  </dialog>
+
+  <dialog id="source-dialog" class="source-dialog" aria-labelledby="source-dialog-title">
+    <header class="dialog-heading"><h2 id="source-dialog-title">Source evidence</h2><button id="close-source" aria-label="Close source evidence"><svg class="ui-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"/></svg></button></header>
+    <div id="source-reading" class="source-reading"></div>
+  </dialog>
+
+  <p id="announcement" role="status" aria-live="polite" class="sr-only"></p>
+</body>
+</html>

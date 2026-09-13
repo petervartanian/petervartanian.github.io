@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = new URL('./', import.meta.url);
 const datasetPath = new URL('../outputs/haruspex-2026-09-09/haruspex-dataset.json', root);
-const [template, styles, app, dataset, severity, visuals, ontology, query, temporal, fieldLayout, cast, castView, research, quotations, collectionMethod, airiLogo, arrival] = await Promise.all([
+const [template, styles, app, dataset, severity, visuals, ontology, query, temporal, fieldLayout, cast, castView, research, quotations, collectionMethod, airiLogo, arrival, haruspexMark] = await Promise.all([
   readFile(new URL('index.template.html', root), 'utf8'),
   readFile(new URL('style.css', root), 'utf8'),
   readFile(new URL('app.js', root), 'utf8'),
@@ -21,6 +21,7 @@ const [template, styles, app, dataset, severity, visuals, ontology, query, tempo
   readFile(new URL('collection-method.json', root), 'utf8'),
   readFile(new URL('assets/mit-airi-official.svg', root), 'utf8'),
   readFile(new URL('arrival.js', root), 'utf8'),
+  readFile(new URL('assets/haruspex-mark.svg', root), 'utf8'),
 ]);
 const fontsDir = new URL('assets/fonts/', root);
 const fontFiles = (await readdir(fontsDir)).filter((name) => /^spectral-\d+-(normal|italic)\.woff2$/.test(name)).sort();
@@ -195,6 +196,7 @@ const htmlText = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;
 const heroQuote = openingQuotations.quotations.find(item => item.id === openingQuotations.recommendation.hero);
 requireValid(!!heroQuote, 'Opening quote must resolve.');
 const html = template
+  .replaceAll('/* HARUSPEX_MARK */', () => `data:image/svg+xml;base64,${Buffer.from(haruspexMark).toString('base64')}`)
   .replace('/* OPENING_QUOTE */', () => htmlText(heroQuote.quote))
   .replace('/* OPENING_AUTHOR */', () => htmlText(heroQuote.author))
   .replace('/* OPENING_URL */', () => htmlText(heroQuote.url))
