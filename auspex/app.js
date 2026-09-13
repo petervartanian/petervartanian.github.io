@@ -88,9 +88,14 @@
     const components = reference.split('→').map((number) => p.steps[Number(number) - 1]);
     return components.every(Boolean) ? components.map(stepLabel).join(' → ') : reference;
   }));
-  const focusAndReveal = (element) => {
+  const focusAndReveal = (element, transition = false) => {
     element.focus({ preventScroll: true });
-    element.scrollIntoView({ block: 'start', behavior: state.pathway === 'X-01' || reduced.matches ? 'instant' : 'smooth' });
+    const reveal = () => element.scrollIntoView({ block: 'start', behavior: reduced.matches || (state.pathway === 'X-01' && !transition) ? 'instant' : 'smooth' });
+    if (transition && !reduced.matches) {
+      // Scroll to the final position after the introduction has changed height.
+      Promise.all($('.opening-copy').getAnimations().map((animation) => animation.finished.catch(() => {})))
+        .then(() => { if (document.activeElement === element) reveal(); });
+    } else reveal();
   };
 
   function normalize() {
@@ -361,6 +366,9 @@
 
   function render() {
     const p = pathways.get(state.pathway);
+    $('.opening').classList.toggle('is-focused', !!p);
+    $('.opening-copy').inert = !!p;
+    $('.opening-copy').setAttribute('aria-hidden', String(!!p));
     $('#app').dataset.pathway = p?.id || '';
     const isA1 = p?.id === 'X-01';
     a1Tools.hidden = !isA1;
@@ -406,6 +414,7 @@
 
   function selectPathway(id, reveal = false) {
     if (!pathways.has(id)) return;
+    const enteringPathway = !state.pathway;
     state.pathway = id;
     state.overlay = false;
     state.inspect = false;
@@ -418,7 +427,7 @@
     render();
     writeLocation();
     announce(`${pathways.get(id).displayId} · ${pathways.get(id).title}`);
-    if (reveal) focusAndReveal($('#pathway-title'));
+    if (reveal) focusAndReveal($('#pathway-title'), enteringPathway);
   }
 
   const searchable = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
@@ -501,7 +510,7 @@
     $('#overview-search').value = '';
     render();
     writeLocation();
-    focusAndReveal($('#choose-title'));
+    focusAndReveal($('#choose-title'), true);
     announce('Choose a pathway');
   });
 
@@ -847,8 +856,9 @@
     title.style.height = '';
     display.style.height = 'auto';
     display.style.fontSize = '';
-    if (!openingColumns.matches) { placeOpeningPlus(); return; }
     const height = $('.opening-copy > p').getBoundingClientRect().height;
+    $('.opening-copy').style.setProperty('--copy-height', `${Math.ceil(height)}px`);
+    if (!openingColumns.matches) { placeOpeningPlus(); return; }
     const naturalHeight = display.getBoundingClientRect().height;
     const fontSize = parseFloat(getComputedStyle(display).fontSize);
     if (!height || !naturalHeight) return;
@@ -858,7 +868,7 @@
     display.style.height = '100%';
     placeOpeningPlus();
   };
-  new ResizeObserver(fitOpening).observe($('.opening-copy'));
+  new ResizeObserver(fitOpening).observe($('.opening-copy > p'));
   openingColumns.addEventListener('change', fitOpening);
   document.fonts.ready.then(fitOpening);
   // Align badges to the capital-height center; descenders must not pull the badge down.
