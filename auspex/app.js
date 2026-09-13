@@ -90,10 +90,13 @@
   }));
   const focusAndReveal = (element, transition = false) => {
     element.focus({ preventScroll: true });
-    const reveal = () => element.scrollIntoView({ block: 'start', behavior: reduced.matches || (state.pathway === 'X-01' && !transition) ? 'instant' : 'smooth' });
+    const reveal = () => {
+      if (transition) window.scrollTo({ top: 0, behavior: reduced.matches ? 'instant' : 'smooth' });
+      else element.scrollIntoView({ block: 'start', behavior: reduced.matches || state.pathway === 'X-01' ? 'instant' : 'smooth' });
+    };
     if (transition && !reduced.matches) {
       // Scroll to the final position after the introduction has changed height.
-      Promise.all($('.opening-copy').getAnimations().map((animation) => animation.finished.catch(() => {})))
+      Promise.all($('.opening-shell').getAnimations().map((animation) => animation.finished.catch(() => {})))
         .then(() => { if (document.activeElement === element) reveal(); });
     } else reveal();
   };
@@ -366,9 +369,9 @@
 
   function render() {
     const p = pathways.get(state.pathway);
-    $('.opening').classList.toggle('is-focused', !!p);
-    $('.opening-copy').inert = !!p;
-    $('.opening-copy').setAttribute('aria-hidden', String(!!p));
+    $('.opening-shell').classList.toggle('is-focused', !!p);
+    $('.opening-shell').inert = !!p;
+    $('.opening-shell').setAttribute('aria-hidden', String(!!p));
     $('#app').dataset.pathway = p?.id || '';
     const isA1 = p?.id === 'X-01';
     a1Tools.hidden = !isA1;
@@ -486,6 +489,7 @@
   function selectIncident(id) {
     const a = data.assessments.find((item) => item.id === id);
     if (!a) return;
+    const enteringPathway = !state.pathway;
     state.pathway = a.pathway;
     state.overlay = a.pathway === 'X-01';
     state.inspect = false;
@@ -497,7 +501,7 @@
     normalize();
     render();
     writeLocation();
-    focusAndReveal(a.pathway === 'X-01' ? $('#incidents-title') : $(`#incident-${a.incident}`));
+    focusAndReveal(a.pathway === 'X-01' ? $('#incidents-title') : $(`#incident-${a.incident}`), enteringPathway);
     announce(incidents.get(a.incident).title);
   }
   $('#overview-incidents').addEventListener('click', (event) => {
@@ -857,7 +861,6 @@
     display.style.height = 'auto';
     display.style.fontSize = '';
     const height = $('.opening-copy > p').getBoundingClientRect().height;
-    $('.opening-copy').style.setProperty('--copy-height', `${Math.ceil(height)}px`);
     if (!openingColumns.matches) { placeOpeningPlus(); return; }
     const naturalHeight = display.getBoundingClientRect().height;
     const fontSize = parseFloat(getComputedStyle(display).fontSize);
@@ -869,6 +872,9 @@
     placeOpeningPlus();
   };
   new ResizeObserver(fitOpening).observe($('.opening-copy > p'));
+  new ResizeObserver(() => {
+    $('.opening-shell').style.setProperty('--opening-height', `${Math.ceil($('.opening').getBoundingClientRect().height)}px`);
+  }).observe($('.opening'));
   openingColumns.addEventListener('change', fitOpening);
   document.fonts.ready.then(fitOpening);
   // Align badges to the capital-height center; descenders must not pull the badge down.

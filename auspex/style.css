@@ -497,25 +497,20 @@ body:has(dialog[open]) { overflow: hidden; }
   main { padding: 0; }
 }
 
-/* Let the introduction recede as the reader enters the incident workspace. */
-.opening-copy {
-  max-height: var(--copy-height, none);
+/* Collapse the whole introduction while keeping the masthead above I and II. */
+.opening-shell {
+  max-height: var(--opening-height, none);
   overflow: clip;
   opacity: 1;
   visibility: visible;
-  transition: opacity 220ms ease, transform 360ms ease, max-height 420ms ease, visibility 0s;
+  transition: opacity 220ms ease, max-height 420ms ease, visibility 0s;
 }
-.opening.is-focused .opening-copy {
+.opening-shell.is-focused {
   max-height: 0;
   opacity: 0;
-  transform: translateY(-12px);
   visibility: hidden;
-  transition: opacity 180ms ease, transform 360ms ease, max-height 420ms ease, visibility 0s 420ms;
-}
-@media (max-width: 700px) {
-  .opening { transition: row-gap 420ms ease; }
-  .opening.is-focused { row-gap: 0; }
+  transition: opacity 180ms ease, max-height 420ms ease, visibility 0s 420ms;
 }
 @media (prefers-reduced-motion: reduce) {
-  .opening, .opening-copy, .opening.is-focused .opening-copy { transition: none; }
+  .opening-shell, .opening-shell.is-focused { transition: none; }
 }
