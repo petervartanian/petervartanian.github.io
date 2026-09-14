@@ -134,27 +134,27 @@
     return `<div class="stpa-state-explorer"><div class="stpa-state-menu" role="group" aria-label="Explore barrier states">${stateDefinitions.map(s=>`<button data-explore-state="${s.id}" aria-pressed="${s.id===current.id}" aria-controls="state-definition">${barrierGlyph(s.id)}<span>${esc(s.label)}</span></button>`).join('')}</div><section id="state-definition" class="stpa-state-definition" aria-live="polite">${barrierGlyph(current.id)}<div><h3>${esc(current.label)}</h3><p>${esc(current.definition)}</p><p class="stpa-state-question">${esc(current.question)}</p><p class="stpa-state-example">${esc(current.example)} ${sourceMark(exampleSource)}</p></div></section><details><summary>Brittleness & recovery</summary><p>A barrier can hold in one incident and still be brittle. Ask which change in capability, access, timing or operating conditions would defeat it.</p><p>Recovery stops escalation, limits harm or restores control after the loss-of-control event. Reinforcement strengthens a barrier.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">Recovery controls ↗</a></p></details></div>`;
   }
   function recoveryGuide() {
-    return `<div class="stpa-recovery-guide"><div class="stpa-change-flow"><span>Hazardous situation</span><span aria-hidden="true">→</span><strong>Recovery</strong><span aria-hidden="true">→</span><span>Escalation stopped, harm limited or control restored</span></div><p>Recovery acts on the affected system after the loss-of-control event. It can prevent a consequence, reduce its severity or restore effective control.</p><div class="stpa-change-flow"><span>Existing protection</span><span aria-hidden="true">→</span><strong>Reinforcement</strong><span aria-hidden="true">→</span><span>Strengthened barrier</span></div><p>Reinforcement changes a barrier relative to a baseline. A recovery barrier can be reinforced too. Repair restores a defective barrier’s intended function; reinforcement improves the protection.</p><p>The wavy route on this map shows the model’s stated recovery outcome. It remains conditional on an effective intervention.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">UK CAA · Recovery controls ↗</a></p></div>`;
+    return `<div class="stpa-recovery-guide"><div class="stpa-change-flow"><span>Hazardous situation</span><span aria-hidden="true">→</span><strong>Recovery</strong><span aria-hidden="true">→</span><span>Escalation stopped, harm limited or control restored</span></div><p>Recovery acts on the affected system after the loss-of-control event. It can prevent a consequence, reduce its severity or restore effective control.</p><div class="stpa-change-flow"><span>Existing protection</span><span aria-hidden="true">→</span><strong>Reinforcement</strong><span aria-hidden="true">→</span><span>Strengthened barrier</span></div><p>Reinforcement changes a barrier relative to a baseline. A recovery barrier can be reinforced too. Repair restores a defective barrier’s intended function; reinforcement improves the protection.</p><p>The double-line route on this map shows the model’s stated recovery outcome. It remains conditional on an effective intervention.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">UK CAA · Recovery controls ↗</a></p></div>`;
   }
   function routeSymbol(kind) {
     const path=kind==='recovery'
-      ? `<path d="M2,12${waveSegment([2,12],[28,12],8,3)}"/><path class="route-tip" d="M25 9l6 3-6 3z"/>`
+      ? '<path class="route-rail" d="M2 10H25M2 14H25"/><path class="route-tip" d="M25 8l7 4-7 4z"/>'
       : kind==='feedback'?'<path class="route-line" d="M29 17H5V4H26"/><path d="m21 1 4 3-4 3m5-6 4 3-4 3"/>'
-      : kind==='safeguard'?'<path class="route-twist" d="M2 12H8L14 6L20 18L26 12H32"/>'
+      : kind==='safeguard'?'<path d="M2 12H14M20 12H32"/><path class="a1-barrier-stem" d="M17 5V19"/><path class="a1-barrier-caps" d="M14.5 5H19.5M14.5 19H19.5"/>'
       : '<path class="route-line" d="M2 10H30"/><path d="m25 6 5 4-5 4"/>';
     return `<svg class="a1-route-symbol is-${kind}" viewBox="0 0 34 24" aria-hidden="true" focusable="false">${path}</svg>`;
   }
   const routeDefinitions=[
     {id:'contribution',label:'Possible progression',definition:'One component may contribute to another. Any stated conditions must also hold. These arrows cover both contributing causes and possible consequences; they do not assign a probability.'},
     {id:'optional',label:'Optional route',definition:'A dashed branch can be bypassed. The pathway can continue through another route; taking this branch can still depend on stated conditions.'},
-    {id:'recovery',label:'Recovery',definition:'A close-set green wave leads toward containing harm or restoring control. Its filled arrowhead marks the direction; success depends on the intervention working.'},
+    {id:'recovery',label:'Recovery',definition:'Two fine parallel green lines lead toward containing harm or restoring control. Its filled arrowhead marks the direction; success depends on the intervention working.'},
     {id:'feedback',label:'Feedback',definition:'A dotted return line with two arrowheads shows how an outcome changes an earlier input or decision. It can amplify harm or help correct it.'}
   ];
   function overlayGuide() {
     return '<h3>Incidents on the map</h3><p>Select a dated case to see what happened at the relevant component, then inspect a barrier. Select another case to switch, or close the card to clear it.</p><p>An open question stays inside the incident card. Open it to read why it matters and what the case leaves unanswered. The related component is highlighted; the incident evidence and barrier assessments stay at their original location.</p>';
   }
   function pathsGuide(staticMode=false) {
-    return `<div class="a1-path-guide"><div class="a1-stage-guide"><span><b>0.</b> Context</span><span><b>1.</b> Precursors</span><span><b>2.</b> Event</span><span><b>3.</b> Consequences</span><span class="is-recovery"><b>R</b> Recovery</span></div><p>The cloud at 0 shows the assumed upstream conditions and the authority exercised within them. Those conditions shape decisions and controls; feedback can change the setting in turn. The full STPA analysis examines the control actions, feedback, responsibilities and constraints behind this view.</p><p>Precursors may lead to the central loss-of-control event. Consequences depend on what follows, and recovery may interrupt that progression.</p><dl class="a1-path-definitions">${routeDefinitions.map(r=>`<div>${routeSymbol(r.id)}<dt>${esc(r.label)}</dt><dd>${esc(r.definition)}</dd></div>`).join('')}<div class="a1-safeguard-definition">${routeSymbol('safeguard')}<dt>Proposed safeguard</dt><dd>A sharp zigzag interrupts the line where a safeguard is proposed. It is part of the route, with no separate icon; effectiveness has not been established. Actual barrier states belong to the cited incident.</dd></div></dl><p>Possible means a transition could happen. Conditional names what else must hold. Both use the forward arrow, with the condition retained beside the relevant component or in the route description. Optional means the pathway can bypass that branch.</p>${staticMode?'':`<details class="a1-proposed-register"><summary>Safeguards in this pathway</summary>${projectedLinks().filter(l=>proposedSafeguard(l)).map(l=>`<p><strong>${esc(node(l.from).number)} → ${esc(node(l.to).number)}</strong> ${esc(proposedSafeguard(l))}</p>`).join('')}</details>`}${overlayGuide()}<p class="a1-guide-source">Drawing conventions are specific to this site. <a href="https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/about-bowtie/how-does-bowtie-work/" target="_blank" rel="noopener noreferrer">Bow-tie structure ↗</a> · <a href="https://psas.scripts.mit.edu/home/get_file.php?name=STPA_Handbook.pdf" target="_blank" rel="noopener noreferrer">STPA handbook ↗</a></p>${staticMode?`<h3>Barrier modes</h3><dl class="a1-path-definitions">${stateDefinitions.map(s=>`<div>${barrierGlyph(s.id)}<dt>${esc(s.label)}</dt><dd>${esc(s.definition)}</dd></div>`).join('')}</dl>${recoveryGuide()}`:''}</div>`;
+    return `<div class="a1-path-guide"><div class="a1-stage-guide"><span><b>0.</b> Context</span><span><b>1.</b> Precursors</span><span><b>2.</b> Event</span><span><b>3.</b> Consequences</span><span class="is-recovery"><b>R</b> Recovery</span></div><p>The cloud at 0 shows the assumed upstream conditions and the authority exercised within them. Those conditions shape decisions and controls; feedback can change the setting in turn. The full STPA analysis examines the control actions, feedback, responsibilities and constraints behind this view.</p><p>Precursors may lead to the central loss-of-control event. Consequences depend on what follows, and recovery may interrupt that progression.</p><dl class="a1-path-definitions">${routeDefinitions.map(r=>`<div>${routeSymbol(r.id)}<dt>${esc(r.label)}</dt><dd>${esc(r.definition)}</dd></div>`).join('')}<div class="a1-safeguard-definition">${routeSymbol('safeguard')}<dt>Proposed safeguard</dt><dd>A short capped mark shows a proposed safeguard: an intentional barrier to progression. Proposed describes its status, not an assessed performance state. Its effectiveness is not established by the pathway. Actual barrier states belong to the cited incident.</dd></div></dl><p>Possible means a transition could happen. Conditional names what else must hold. Both use the forward arrow, with the condition retained beside the relevant component or in the route description. Optional means the pathway can bypass that branch.</p>${staticMode?'':`<details class="a1-proposed-register"><summary>Safeguards in this pathway</summary>${projectedLinks().filter(l=>proposedSafeguard(l)).map(l=>`<p><strong>${esc(node(l.from).number)} → ${esc(node(l.to).number)}</strong> ${esc(proposedSafeguard(l))}</p>`).join('')}</details>`}${overlayGuide()}<p class="a1-guide-source">Drawing conventions are specific to this site. <a href="https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/about-bowtie/how-does-bowtie-work/" target="_blank" rel="noopener noreferrer">Bow-tie structure ↗</a> · <a href="https://psas.scripts.mit.edu/home/get_file.php?name=STPA_Handbook.pdf" target="_blank" rel="noopener noreferrer">STPA handbook ↗</a></p>${staticMode?`<h3>Barrier modes</h3><dl class="a1-path-definitions">${stateDefinitions.map(s=>`<div>${barrierGlyph(s.id)}<dt>${esc(s.label)}</dt><dd>${esc(s.definition)}</dd></div>`).join('')}</dl>${recoveryGuide()}`:''}</div>`;
   }
   function mapGuide(mode='paths',selected='unknown') {
     const tabs=[['paths','Path types'],['barriers','Barrier modes'],['recovery','Recovery & reinforcement']];
@@ -235,46 +235,46 @@
     return shared.map(id=>control(id)?.title).filter(Boolean).join('; ');
   }
   const pointText = p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`;
-  // Small repeated lobes stay within the route corridor and flatten at each join.
-  function waveSegment(a, b, wavelength = 18, amplitude = 3) {
-    const dx=b[0]-a[0],dy=b[1]-a[1],length=Math.hypot(dx,dy);
-    if (length<12) return ` L${pointText(b)}`;
-    const ux=dx/length,uy=dy/length,pad=Math.min(3,length/8),span=length-2*pad;
-    const halves=2*Math.max(1,Math.round(span/wavelength)),step=span/halves;
-    const height=Math.min(amplitude,step/2)*4/3;
-    const at=(distance,offset=0)=>[a[0]+ux*distance-uy*offset,a[1]+uy*distance+ux*offset];
-    let d=` L${pointText(at(pad))}`;
-    for (let i=0;i<halves;i++) {
-      const from=pad+i*step,to=from+step,sign=i%2?-1:1;
-      const c1=at(from+step/3,i===0?0:sign*height);
-      const c2=at(to-step/3,i===halves-1?0:sign*height);
-      d+=` C${pointText(c1)} ${pointText(c2)} ${pointText(at(to))}`;
-    }
-    return d+` L${pointText(b)}`;
+  const polyline = points => points.map((p,i)=>`${i?'L':'M'}${pointText(p)}`).join(' ');
+  function offsetPolyline(points, offset) {
+    const normals=points.slice(1).map((b,i)=>{
+      const a=points[i],length=Math.hypot(b[0]-a[0],b[1]-a[1]);
+      return [-(b[1]-a[1])/length,(b[0]-a[0])/length];
+    });
+    return points.map((p,i)=>{
+      const before=normals[Math.max(0,i-1)],after=normals[Math.min(i,normals.length-1)];
+      const divisor=1+before[0]*after[0]+before[1]*after[1];
+      const shift=divisor>.1?[(before[0]+after[0])*offset/divisor,(before[1]+after[1])*offset/divisor]:before.map(n=>n*offset);
+      return [p[0]+shift[0],p[1]+shift[1]];
+    });
   }
   function connectionGeometry(kind, points, safeguard = false) {
     const clean=points.filter((p,i)=>!i || p[0]!==points[i-1][0] || p[1]!==points[i-1][1]);
     const segments=clean.slice(1).map((b,i)=>({a:clean[i],b,index:i,length:Math.hypot(b[0]-clean[i][0],b[1]-clean[i][1])}));
     const longest=segments.reduce((best,current)=>!best || current.length>best.length?current:best,null);
-    if (!longest) return {d:`M${pointText(clean[0] || [0,0])}`,sections:[],midpoint:clean[0] || [0,0],tangent:[0,0]};
+    if (!longest) return {d:polyline(clean),sections:[],rails:[],barrier:null,head:null,midpoint:clean[0] || [0,0],tangent:[0,0]};
     const midpoint=[(longest.a[0]+longest.b[0])/2,(longest.a[1]+longest.b[1])/2];
     const tangent=[longest.b[0]-longest.a[0],longest.b[1]-longest.a[1]];
-    const line=(a,b)=>kind==='recovery'?waveSegment(a,b):` L${pointText(b)}`;
-    const sections=[];
-    let d=`M${pointText(clean[0])}`;
-    for (const segment of segments) {
-      if (safeguard && segment===longest && segment.length>32) {
-        const ux=tangent[0]/segment.length,uy=tangent[1]/segment.length;
-        const at=(distance,offset=0)=>[midpoint[0]+ux*distance-uy*offset,midpoint[1]+uy*distance+ux*offset];
-        const before=at(-10),after=at(10);
-        d+=line(segment.a,before);
-        sections.push({d,safeguard:false});
-        sections.push({d:`M${pointText(before)} L${pointText(at(-3.3,-5))} L${pointText(at(3.3,5))} L${pointText(after)}`,safeguard:true});
-        d=`M${pointText(after)}`+line(after,segment.b);
-      } else d+=line(segment.a,segment.b);
+    let sections=[clean],barrier=null;
+    if (safeguard && longest.length>32) {
+      const ux=tangent[0]/longest.length,uy=tangent[1]/longest.length;
+      const at=(distance,offset=0)=>[midpoint[0]+ux*distance-uy*offset,midpoint[1]+uy*distance+ux*offset];
+      sections=[clean.slice(0,longest.index+1).concat([at(-3)]),[at(3)].concat(clean.slice(longest.index+1))];
+      barrier={stem:polyline([at(0,-7),at(0,7)]),caps:polyline([at(-2.5,-7),at(2.5,-7)])+' '+polyline([at(-2.5,7),at(2.5,7)]),center:midpoint};
     }
-    sections.push({d,safeguard:false});
-    return {d:sections.map(section=>section.d).join(' '),sections,midpoint,tangent};
+    let head=null,rails=[];
+    if (kind==='recovery') {
+      const last=sections.at(-1),a=last.at(-2),tip=last.at(-1);
+      const length=Math.hypot(tip[0]-a[0],tip[1]-a[1]),ux=(tip[0]-a[0])/length,uy=(tip[1]-a[1])/length;
+      const size=Math.min(7,length/2),halfWidth=size*4/7;
+      const base=[tip[0]-ux*size,tip[1]-uy*size];
+      head={tip,d:polyline([[base[0]-uy*halfWidth,base[1]+ux*halfWidth],tip,[base[0]+uy*halfWidth,base[1]-ux*halfWidth]])+' Z'};
+      rails=sections.flatMap((section,index)=>{
+        const trimmed=index===sections.length-1?section.slice(0,-1).concat([base]):section;
+        return [-2,2].map(offset=>({d:polyline(offsetPolyline(trimmed,offset)),section:index,offset}));
+      });
+    }
+    return {d:sections.map(polyline).join(' '),sections:sections.map(p=>({d:polyline(p)})),rails,barrier,head,midpoint,tangent};
   }
   function draw() {
     const map=document.querySelector('#pathway-map'), svg=document.querySelector('#map-connections'), route=document.querySelector('#a1-route');
@@ -356,14 +356,17 @@
         }
       }
       const safeguard=proposedSafeguard(link), geometry=connectionGeometry(kind,points,Boolean(safeguard));
-      const marker=kind==='recovery'?'stpa-arrow-recovery':kind==='feedback'?'stpa-arrow-feedback':'stpa-arrow';
-      const classes=`stpa-connection${kind==='optional'?' is-optional':''}${kind==='feedback'?' is-feedback':''}${kind==='recovery'?' is-recovery':''}`;
-      return `<g class="stpa-edge" data-link="${esc(link.id || link.from+'→'+link.to)}" data-from="${esc(link.from)}" data-to="${esc(link.to)}"><title>${esc(link.label || 'Possible contribution')}${safeguard?` — Proposed safeguard: ${esc(safeguard)}`:''}</title>${geometry.sections.map((section,index)=>`<path class="${classes}${section.safeguard?' is-safeguard':''}"${section.safeguard?` data-safeguard="${esc(safeguard)}"`:''} d="${section.d}"${index===geometry.sections.length-1?` marker-end="url(#${marker})"`:''}/>`).join('')}</g>`;
+      const marker=kind==='feedback'?'stpa-arrow-feedback':'stpa-arrow';
+      const classes=`stpa-connection${kind==='optional'?' is-optional':''}${kind==='feedback'?' is-feedback':''}`;
+      const route=kind==='recovery'
+        ? geometry.rails.map(rail=>`<path class="stpa-recovery-rail" d="${rail.d}"/>`).join('')+(geometry.head?`<path class="stpa-recovery-tip" d="${geometry.head.d}"/>`:'')
+        : geometry.sections.map((section,index)=>`<path class="${classes}" d="${section.d}"${index===geometry.sections.length-1?` marker-end="url(#${marker})"`:''}/>`).join('');
+      const protection=geometry.barrier?`<g class="stpa-proposed-barrier" data-safeguard="${esc(safeguard)}" role="img" aria-label="Proposed safeguard: ${esc(safeguard)}"><path class="a1-barrier-stem" d="${geometry.barrier.stem}"/><path class="a1-barrier-caps" d="${geometry.barrier.caps}"/></g>`:'';
+      return `<g class="stpa-edge${kind==='recovery'?' is-recovery':''}" data-link="${esc(link.id || link.from+'→'+link.to)}" data-from="${esc(link.from)}" data-to="${esc(link.to)}"><title>${esc(link.label || 'Possible contribution')}${safeguard?` — Proposed safeguard: ${esc(safeguard)}`:''}</title>${route}${protection}</g>`;
     }).join('');
     const marker=(id,color)=>`<marker id="${id}" viewBox="0 0 8 8" refX="7" refY="4" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M1.5 1.5 6.5 4 1.5 6.5" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker>`;
-    const recoveryMarker='<marker id="stpa-arrow-recovery" viewBox="0 0 8 8" refX="7" refY="4" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 7 4 1 7z" fill="#6d8976"/></marker>';
     const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="11" refY="4" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
-    svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${recoveryMarker}${feedbackMarker}</defs>${paths}`;
+    svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${feedbackMarker}</defs>${paths}`;
   }
   window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle,mapGuide,pathsGuide,routeDefinitions,overlayAnchor,tentativeConnection,overlayGuide,contextCloud,connectionGeometry,routeSymbol};
 })();

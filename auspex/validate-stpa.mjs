@@ -199,40 +199,38 @@ console.log(`Validated seven STPA models and ${barriers} barriers: traceability,
 const catalogue = await parse('pathways.json');
 for (const p of catalogue.pathways.filter(p=>!models.some(m=>m.pathway===p.id))) assert(staticHTML.includes(`id="${p.id}" data-group="${p.group}" data-unworked="true"`));
 
-// Line meaning does not depend on color; recovery alone uses a curve.
-const points=[[0,0],[30,0],[30,80],[60,80]];
-for (const kind of ['contribution','continuation','optional','feedback','recovery']) {
-  const geometry=presentation.connectionGeometry(kind,points);
-  assert.equal(geometry.d.includes(' C'),kind==='recovery');
-  assert(!/undefined|NaN/.test(geometry.d));
-  assert(geometry.tangent.some(value=>value!==0));
+// The approved visual family: calm double recovery lines and a capped barrier.
+const endpoints=d=>{const n=d.match(/-?\d+\.\d+/g).map(Number);return [n.slice(0,2),n.slice(-2)];};
+const paths=[[[0,0],[30,0],[30,80],[60,80]],[[0,0],[200,0]],[[0,0],[0,200]],[[200,20],[0,20]],[[0,0],[0,0],[80,80]],[[0,0],[4,0]]];
+for (const path of paths) for (const kind of ['contribution','continuation','optional','feedback','recovery']) for (const safeguard of [false,true]) {
+  const geometry=presentation.connectionGeometry(kind,path,safeguard);
+  assert(!/NaN|undefined|Infinity/.test(JSON.stringify(geometry)));
+  assert(!/[CQ]/.test(geometry.d),'No waves or decorative bends');
+  assert.deepEqual(endpoints(geometry.sections[0].d)[0],path[0]);
+  assert.deepEqual(endpoints(geometry.sections.at(-1).d)[1],path.at(-1));
+  if(geometry.barrier) {
+    assert.equal(geometry.sections.length,2);
+    const a=endpoints(geometry.sections[0].d)[1],b=endpoints(geometry.sections[1].d)[0];
+    assert(Math.abs(Math.hypot(b[0]-a[0],b[1]-a[1])-6)<.15,'A six-pixel gap gives the barrier breathing room');
+    const [top,bottom]=endpoints(geometry.barrier.stem);
+    assert(Math.abs(Math.hypot(bottom[0]-top[0],bottom[1]-top[1])-14)<.15);
+    assert(Math.abs((bottom[0]-top[0])*geometry.tangent[0]+(bottom[1]-top[1])*geometry.tangent[1])<.2,'Barrier crosses the route');
+  }
+  if(kind==='recovery') {
+    assert.equal(geometry.rails.length,geometry.sections.length*2);
+    assert.deepEqual(Array.from(geometry.head.tip),path.at(-1));
+    for(let i=0;i<geometry.rails.length;i+=2) {
+      const a=endpoints(geometry.rails[i].d)[0],b=endpoints(geometry.rails[i+1].d)[0];
+      assert(Math.abs(Math.hypot(b[0]-a[0],b[1]-a[1])-4)<.15,'Recovery lines stay visibly separate');
+    }
+  } else assert.equal(geometry.rails.length,0);
 }
 const css=await read('stpa.css');
 assert(css.includes('.stpa-connection.is-feedback { stroke-dasharray: .1 4.8'));
 assert(css.includes('.stpa-connection.is-optional { stroke-dasharray: 7 5'));
-assert(presentation.routeSymbol('safeguard').includes('route-twist'));
-assert(!css.includes('route-crossbar') && !css.includes('a1-possible-barrier'));
+assert(css.includes('.stpa-recovery-rail { fill: none; stroke: #6d8976; stroke-width: 1;'));
+assert(presentation.routeSymbol('safeguard').includes('a1-barrier-stem'));
+assert(presentation.routeSymbol('recovery').includes('route-rail'));
+assert(!css.includes('route-twist') && !css.includes('a1-gate-'));
+assert(presentation.pathsGuide().includes('intentional barrier to progression'));
 assert(presentation.pathsGuide().includes('Conditional names what else must hold'));
-
-// Waves repeat at a roughly fixed spatial frequency; safeguards replace a section
-// of the route, so no straight line passes through the angular twist.
-const endpoints=d=>{const n=d.match(/-?\d+\.\d+/g).map(Number);return [n.slice(0,2),n.slice(-2)];};
-for (const path of [points,[[0,0],[200,0]],[[0,0],[0,200]],[[200,20],[0,20]],[[0,0],[0,0],[80,80]],[[0,0],[4,0]]]) {
-  for (const kind of ['contribution','optional','feedback','recovery']) {
-    const plain=presentation.connectionGeometry(kind,path);
-    const twisted=presentation.connectionGeometry(kind,path,true);
-    assert(!/NaN|undefined|Infinity/.test(twisted.d));
-    for (let i=1;i<twisted.sections.length;i++) assert.deepEqual(endpoints(twisted.sections[i-1].d)[1],endpoints(twisted.sections[i].d)[0],'Joined sections must meet');
-    assert.deepEqual(endpoints(twisted.sections[0].d)[0],path[0]);
-    assert.deepEqual(endpoints(twisted.sections.at(-1).d)[1],path.at(-1));
-    if (twisted.sections.length>1) {
-      assert.equal(twisted.sections.length,3);
-      assert(twisted.sections[1].safeguard);
-      assert.equal((twisted.sections[1].d.match(/ L/g)||[]).length,3);
-      assert(!twisted.sections[1].d.includes(' C'));
-    }
-    if(kind==='recovery' && path===points) assert((plain.d.match(/ C/g)||[]).length>=10,'Recovery must have repeated short curves');
-  }
-}
-assert(!css.includes('a1-gate-'));
-assert(css.includes('.stpa-connection.is-safeguard { stroke-dasharray: none'));

@@ -3,7 +3,6 @@
 .stpa-active #map-nodes { display: block; padding: 0; }
 .stpa-active #map-connections { z-index: -1; }
 .stpa-active #map-connections .stpa-connection { stroke: #928896; stroke-width: 1.35; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.stpa-active #map-connections .stpa-connection.is-recovery { stroke: #6d8976; }
 .stpa-active #map-connections .stpa-connection.is-optional { stroke-dasharray: 7 5; stroke-linecap: butt; }
 .stpa-intro { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin: 17px 0 30px; }
 .stpa-kicker { font: 11px/1.6 var(--sans); color: var(--muted); letter-spacing: .035em; margin: 0 0 7px; }
@@ -224,7 +223,10 @@
 .a1-map-key .a1-barrier-key svg { width: 27px; height: 27px; }
 .a1-route-symbol { width: 34px; height: 20px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.3; flex-shrink: 0; }
 .a1-route-symbol.is-optional .route-line { stroke-dasharray: 6 4; stroke-linecap: butt; }
-.a1-route-symbol .route-twist { stroke-linejoin: miter; }
+.a1-route-symbol .route-rail { stroke-width: 1; }
+.a1-barrier-stem, .a1-barrier-caps { fill: none; stroke: #626573; stroke-linecap: butt; }
+.a1-barrier-stem { stroke-width: 1.7; }
+.a1-barrier-caps { stroke-width: 1.35; }
 .a1-proposed-register { margin: 20px 0; }
 .a1-proposed-register p { font: 12px/1.7 var(--sans); }
 .a1-proposed-register strong { font-weight: 500; margin-right: 7px; }
@@ -351,9 +353,9 @@
 .stpa-state-explorer > details { order: 3; margin-top: 5px; }
 .stpa-state-explorer > details p { font: 12px/1.6 var(--sans); }
 .stpa-active #map-connections .stpa-connection.is-feedback { stroke-dasharray: .1 4.8; stroke-linecap: round; stroke-linejoin: miter; stroke-width: 1.8; }
-.stpa-active #map-connections .stpa-connection.is-recovery { stroke-width: 1.5; stroke-dasharray: none; }
+.stpa-active #map-connections .stpa-recovery-rail { fill: none; stroke: #6d8976; stroke-width: 1; stroke-linecap: butt; stroke-linejoin: round; }
+.stpa-active #map-connections .stpa-recovery-tip { fill: #6d8976; stroke: none; }
 .a1-route-symbol.is-feedback .route-line { stroke-dasharray: .1 4; stroke-linecap: round; stroke-width: 1.8; }
-.stpa-active #map-connections .stpa-connection.is-safeguard { stroke-dasharray: none; stroke-linecap: round; stroke-linejoin: miter; stroke-width: 1.6; }
 
 .stpa-change-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 20px; margin: 18px 0; background: var(--tint); font: 14px/1.6 var(--sans); }
 .stpa-change-flow > span:last-child { flex: 1; min-width: 160px; }

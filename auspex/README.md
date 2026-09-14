@@ -42,14 +42,15 @@ represented across selected actions, not exhaustively assessed for every action.
 The map uses **0. Context**, **1. Precursors**, **2. Event**, **3. Consequences**,
 with components numbered within their region (1.1, 1.2, 2.1, 3.1…). Recovery retains R.
 Possible progression uses solid angular arrows, optional branches long dashes,
-feedback round dots and double chevrons, and recovery a close-set green wave with a filled
+feedback round dots and double chevrons, and recovery two fine parallel green lines with a filled
 arrowhead. Possible contribution and conditional consequence keep their data meanings
 but share the forward-arrow style. Conditions remain in component text and route
 descriptions; the key explains their difference from an optional branch.
 
-Proposed safeguards make a compact sharp zigzag in the middle of the route itself.
-The twist stays solid even on a dashed or dotted route; the key includes the named safeguards for the
-current pathway. Actual barrier states stay attached to incident evidence.
+Proposed safeguards use a short, slightly darker capped barrier across the route.
+A small gap keeps the mark clear on single, double, dashed and dotted lines; the key includes the named safeguards for the
+current pathway. A safeguard is an intentional barrier; proposed identifies its status,
+not its protective performance. Actual barrier states stay attached to incident evidence.
 
 Pathway labels use A-1 / Bonus-1 throughout the catalogue. Old A.1 / Bonus.1 links and
 searches remain supported; internal component addresses and evidence anchors are stable.
@@ -68,9 +69,9 @@ capability or conditions would defeat the protection; observed and projected ero
 must remain distinguishable. Recovery is a separate route, whose controls can themselves
 hold, fail or be reinforced. These are editorial labels, not an STPA rating scale.
 
-Recovery uses repeated small curves and a filled arrowhead; feedback uses a squared, dotted
+Recovery uses two fine parallel lines and one filled arrowhead; feedback uses a squared, dotted
 return loop and double chevrons. Matching symbols in the key distinguish the routes
-without relying on color. The proposed safeguard twist follows each route’s direction.
+without relying on color. The proposed barrier stays perpendicular to the route.
 
 Source references use filled circles in case overlays, barrier explanations and the
 recovery card, with small i/ii/iii labels within each source group. Ordinary pathway
