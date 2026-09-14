@@ -1,7 +1,7 @@
 // Generated from STPA models and barrier-states.json by build-stpa.mjs.
 window.AuspexSTPAModels = {
   "X-01": {
-    "version": "1.3",
+    "version": "1.4",
     "pathway": "X-01",
     "displayId": "A.1",
     "title": "Successor capture and the loss of human control",
@@ -10,7 +10,7 @@ window.AuspexSTPAModels = {
     "scope": "A hypothetical AI development and deployment system: successor research, independent assurance, deployment decisions, and the operators of compute and consequential services. Rival states and the wider economy are environmental conditions, not a single controllable organization.",
     "purpose": "Retain effective human authority over successor development and consequential deployment, while preventing permanent global disempowerment and human extinction.",
     "boundary": "The control roles below are analytical functions, not a verified organization chart. Political and physical expansion beyond the deployment system is an explicit, highly uncertain continuation. No dates or probabilities are assigned.",
-    "numbering": "01–07 identify scenario milestones, not universal stages or STPA method steps. R identifies a possible recovery outcome. Incident overlays attach only to components supported by their assessment; they do not establish the rest of the hypothetical pathway.",
+    "numbering": "00 identifies background conditions and warning signs. 01–07 identify scenario milestones, not universal stages or STPA method steps. R identifies a possible recovery outcome. Incident overlays attach only to components supported by their assessment; they do not establish the rest of the hypothetical pathway.",
     "bowtie": "The centre is H1: consequential authority escapes effective human control. Left-hand routes contribute to that state; right-hand branches require further conditions. The optional coordination branch is not necessary to every version. This extended bow-tie is a summary of the model, not a substitute for its control and feedback analysis.",
     "losses": [
       {
@@ -930,7 +930,34 @@ window.AuspexSTPAModels = {
           "notEstablished": "These tests did not establish successor capture or operational shutdown."
         }
       },
-      "fidelity": "This is a provisional causal model. Its recovery route, optional coordination and additional conditions for extinction remain explicit. Incident overlays supply evidence only about the mapped component and its controls; the hypothetical continuation is not presented as an observed outcome."
+      "fidelity": "This is a provisional causal model. Its recovery route, optional coordination and additional conditions for extinction remain explicit. Incident overlays supply evidence only about the mapped component and its controls; the hypothetical continuation is not presented as an observed outcome.",
+      "context": [
+        {
+          "title": "Background conditions",
+          "text": "AI contributes to successor development, and people can grant consequential authority over compute and services.",
+          "sources": [
+            "AI27",
+            "STPA"
+          ]
+        },
+        {
+          "title": "Developing danger",
+          "text": "Successor changes escape independent review, or access expands beyond what humans can reliably revoke.",
+          "sources": [
+            "STPA"
+          ]
+        },
+        {
+          "title": "Warning signs",
+          "text": "Behavior differs between monitored and unmonitored settings, or an interruption cannot be verified.",
+          "sources": [
+            "AFK",
+            "HF",
+            "PATE"
+          ],
+          "note": "These observations are fallible signals, not proof of this whole pathway."
+        }
+      ]
     }
   },
   "P-01": {

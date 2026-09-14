@@ -21,6 +21,15 @@
     const words=String(title).match(/^(.*\s)?(\S+)$/) || ['', '', title];
     return `${esc(words[1] || '')}<span class="a1-noted-word">${esc(words[2])}<sup><a class="a1-note-reference" id="${esc(id)}" href="#${esc(note)}" aria-label="${esc(label)}">*</a></sup></span>`;
   };
+  const contextOpen = new Map();
+  const setContextOpen = (pathway,open) => contextOpen.set(pathway,Boolean(open));
+  function contextPanel(staticMode=false) {
+    const items=list(model.presentation?.context);
+    if (!items.length) return '';
+    const prefix=staticMode?`${model.pathway}-context`:'a1-context';
+    const body=`<div class="a1-context-body">${items.map((item,index)=>`<div class="a1-context-item"><h4>${esc(item.title)}</h4><p>${item.note?notedTitle(item.text,`${prefix}-${index}-reference`,`${prefix}-${index}-footnote`,'Scope of these warning signs'):esc(item.text)}${staticMode?` ${cite(item.sources)}`:''}</p></div>`).join('')}${items.map((item,index)=>item.note?`<p class="a1-footnote" id="${prefix}-${index}-footnote" tabindex="-1"><a href="#${prefix}-${index}-reference" aria-label="Return to warning signs">*</a> ${esc(item.note)}</p>`:'').join('')}</div>`;
+    return staticMode?`<section class="a1-context-reading"><h3>00 · Context & warning signs</h3>${body}</section>`:`<details class="a1-context" data-context-pathway="${esc(model.pathway)}"${contextOpen.get(model.pathway)?' open':''}><summary><span class="a1-number">00</span><span>Context & warning signs</span></summary>${body}</details>`;
+  }
   const tag = s => `<span class="stpa-id">${esc(s)}</span>`;
   const refs = ids => list(ids).map(tag).join(' ');
   const control = id => byId(model.constraints,id);
@@ -121,7 +130,7 @@
       </div>`;
     };
     const headings={before:'Contributing conditions',centre:'Loss of control',after:'Conditional consequences',recovery:'Recovery route'};
-    return `<div id="a1-route" class="a1-route${config?' has-overlay':''}" data-model-pathway="${esc(model.pathway)}" aria-label="Hypothetical pathway: contributing conditions, loss of control, conditional consequences and recovery">${['before','centre','after','recovery'].map(wing=>groups[wing].length?`<section class="a1-region a1-region-${wing}" data-wing="${wing}" aria-label="${headings[wing]}"><h3 class="a1-region-heading">${headings[wing]}</h3>${groups[wing].map(cell).join('')}</section>`:'').join('')}</div>
+    return `${contextPanel()}<div id="a1-route" class="a1-route${config?' has-overlay':''}" data-model-pathway="${esc(model.pathway)}" aria-label="Hypothetical pathway: contributing conditions, loss of control, conditional consequences and recovery">${['before','centre','after','recovery'].map(wing=>groups[wing].length?`<section class="a1-region a1-region-${wing}" data-wing="${wing}" aria-label="${headings[wing]}"><h3 class="a1-region-heading">${headings[wing]}</h3>${groups[wing].map(cell).join('')}</section>`:'').join('')}</div>
     <p class="a1-node-note" id="a1-node-note" tabindex="-1"${config && selected===anchor?' hidden':''}>${esc(node(selected)?.text || model.summary)}</p>${config?`<p class="a1-footnote" id="a1-case-footnote" tabindex="-1"><a href="#a1-case-reference" aria-label="Return to case title">*</a> ${esc(config.limit)}</p>`:''}${node(selected)?.type==='recovery'?'<button class="a1-recovery-link" data-recovery-info>Recovery & reinforcement ↗</button>':''}
     <div class="a1-map-key"><span><i aria-hidden="true"></i>Possible contribution</span>${projectedLinks().some(l=>(l.kind || l.type)==='optional')?'<span><i class="is-optional" aria-hidden="true"></i>Optional route</span>':''}<span>${routeSymbol('recovery')}Recovery</span>${projectedLinks().some(l=>l.kind==='feedback')?`<span>${routeSymbol('feedback')}Feedback</span>`:''}<span><i class="is-proposed" aria-hidden="true"></i>Proposed safeguard · untested</span></div>
     `;
@@ -166,7 +175,7 @@
     return `<ul class="a1-sources">${model.sources.map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ↗</a></li>`).join('')}</ul><p><a href="pathways.html#${esc(model.pathway)}">Full research notes ↗</a></p>`;
   }
   function staticPage() {
-    return `<section class="stpa-static"><h2>${esc(model.title)}</h2><p>${esc(model.status)}</p><p>${esc(model.summary)}</p><p>${esc(model.numbering)}</p><p>${esc(model.presentation.fidelity)}</p>${model.nodes.map(n=>`<section><h4>${esc(n.number)} · ${esc(n.title)}</h4><p>${esc(n.role)}. ${esc(n.text)}</p><p><strong>Mechanism:</strong> ${esc(n.mechanism)}</p><p><strong>Requires:</strong> ${esc(n.requires)}</p><p>Controls: ${refs(n.constraints)} ${cite(n.sources)}</p></section>`).join('')}${analysis()}</section>`.replace(/(id="|href="#)stpa-/g, `$1${model.pathway}-stpa-`).replace(/[ \t]+\n/g, '\n');
+    return `<section class="stpa-static"><h2>${esc(model.title)}</h2><p>${esc(model.status)}</p><p>${esc(model.summary)}</p><p>${esc(model.numbering)}</p><p>${esc(model.presentation.fidelity)}</p>${contextPanel(true)}${model.nodes.map(n=>`<section><h4>${esc(n.number)} · ${esc(n.title)}</h4><p>${esc(n.role)}. ${esc(n.text)}</p><p><strong>Mechanism:</strong> ${esc(n.mechanism)}</p><p><strong>Requires:</strong> ${esc(n.requires)}</p><p>Controls: ${refs(n.constraints)} ${cite(n.sources)}</p></section>`).join('')}${analysis()}</section>`.replace(/(id="|href="#)stpa-/g, `$1${model.pathway}-stpa-`).replace(/[ \t]+\n/g, '\n');
   }
   function roundedPath(points, radius=7) {
     const clean=points.filter((point,index)=>!index || point[0]!==points[index-1][0] || point[1]!==points[index-1][1]);
@@ -292,5 +301,5 @@
     const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="11" refY="4" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
     svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${recoveryMarker}${feedbackMarker}</defs>${paths}`;
   }
-  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle};
+  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle,setContextOpen};
 })();

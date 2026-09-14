@@ -14,6 +14,11 @@ Every model contains losses, hazards, control and feedback relationships, constr
 contextual unsafe control actions, causal scenarios and a conditional recovery route.
 The bow-tie map summarizes the provisional analysis.
 
+A.1 restores the compact “00 · Context & warning signs” disclosure from its original
+prototype: background conditions, developing danger and warning signs. It stays open
+when switching incident overlays. Its content is also in the static research reader;
+00 is outside the causal graph and does not change the numbered milestones.
+
 The other 30 entries show their titles and no case content, in both the application and
 static reader. Their underlying catalogue records are retained for future work.
 
@@ -33,7 +38,7 @@ recovery card, with small i/ii/iii labels within each source group. Ordinary pat
 boxes omit repeated source circles; their citations remain in the full research notes.
 Each circle retains its source title and keyboard access; case evidence opens the
 existing passage reader. Asterisks stay next to the text they qualify. Recovery retains
-its green tint and route; only its source circles use a neutral color. Arrow
+its green tint and route; its source circles have pale neutral fills and dark numerals. Arrow
 attachments are separated on each card edge, and successive bends reuse clear lanes
 instead of drifting outside the map.
 

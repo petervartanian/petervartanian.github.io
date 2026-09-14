@@ -61,6 +61,10 @@ for (const m of models) {
     for (const id of n.constraints) assert(m.constraints.find(c=>c.id===id).nodes.includes(n.id),`Constraint cross-reference ${id}/${n.id}`);
   }
   for (const l of m.links) { has('nodes',[l.from,l.to]); has('constraints',l.constraints||[]); assert(l.label && l.kind); }
+  for (const item of m.presentation.context || []) {
+    assert(item.title && item.text);
+    has('sources',item.sources);
+  }
   for (const u of m.unsafeActions) {
     has('controllers',[u.controller]); has('controlLoops',[u.loop]); has('hazards',u.hazards); has('constraints',u.constraints);
     assert.equal(m.controlLoops.find(l=>l.id===u.loop).controller,u.controller);
@@ -125,6 +129,12 @@ for (const m of models) {
 }
 // A.1's optional coordination and extinction continuation must remain conditional.
 const a=models[0];
+assert.equal(a.presentation.context.length,3);
+assert(presentation.use(a.pathway));
+presentation.setContextOpen(a.pathway,true);
+assert(presentation.renderMap(a.nodes[0].id,null,'').includes('data-context-pathway="X-01" open'));
+presentation.setContextOpen(a.pathway,false);
+assert(!presentation.renderMap(a.nodes[0].id,null,'').includes('data-context-pathway="X-01" open'));
 assert.deepEqual(a.nodes.map(n=>n.number),['01','02','03','04','05','06','07','R']);
 assert(reaches(a.links.filter(l=>l.from!=='X-01:5' && l.to!=='X-01:5'),'X-01:4','X-01:6'));
 assert(a.links.filter(l=>l.from==='X-01:5'||l.to==='X-01:5').every(l=>l.kind==='optional'));

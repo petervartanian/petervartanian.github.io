@@ -807,6 +807,13 @@
       : (current + (['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : 3)) % 4;
     $(`[data-question="${next}"]`).click();
   });
+  document.addEventListener('toggle', (event) => {
+    const panel=event.target;
+    if (panel.isConnected && panel.matches?.('[data-context-pathway]')) {
+      window.AuspexSTPA.setContextOpen(panel.dataset.contextPathway,panel.open);
+    }
+  }, true);
+
   document.addEventListener('click', (event) => {
     const footnote = event.target.closest('a[href^="#a1-"]');
     if (footnote && (footnote.classList.contains('a1-note-reference') || footnote.closest('.a1-footnote'))) {
