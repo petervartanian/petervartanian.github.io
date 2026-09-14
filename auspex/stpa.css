@@ -170,9 +170,7 @@
 .a1-cloud-atmosphere { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .a1-cloud-wisps { fill: none; stroke: var(--accent,#617080); stroke-width: 1; opacity: .16; }
 .a1-cloud-wisps .a1-cloud-drift { opacity: .55; }
-.a1-context-cloud > .a1-cloud-title { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 0 14px 6px; color: var(--accent); font: 400 17px/1.35 var(--sans); text-align: center; }
-.a1-cloud-title::before, .a1-cloud-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 35%,transparent)); }
-.a1-cloud-title::after { transform: scaleX(-1); }
+.a1-context-cloud > .a1-cloud-title { margin: 0 0 6px; color: var(--accent); font: 400 17px/1.35 var(--sans); text-align: center; }
 .a1-cloud-label { white-space: nowrap; }
 .a1-cloud-conditions, .a1-cloud-actors { display: flex; flex-wrap: wrap; justify-content: center; gap: 13px 18px; }
 .a1-cloud-conditions > span { flex: 0 1 120px; }
