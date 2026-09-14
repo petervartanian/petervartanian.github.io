@@ -48,7 +48,8 @@ body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.65 va
 [data-group='B'] { --accent: #397038; --tint: #e5f0df; }
 [data-group='S'] { --accent: #866009; --tint: #f5edcf; }
 [data-group='F'] { --accent: #23678b; --tint: #e0eef5; }
-[data-group='H'] { --accent: #8c5438; --tint: #f6ede1; }
+[data-group='H'] { --accent: #8c5438; --tint: #f3e7d0; }
+[data-group='H'], body:has(#app[data-group='H']) { --page: #fff9ec; --surface: #f4eddf; --line: #e0d7c7; }
 button, input { font: inherit; color: inherit; }
 button { cursor: pointer; border: 0; border-radius: 0; background: none; padding: 0; }
 button:hover, a:hover { color: var(--accent); }
@@ -83,8 +84,9 @@ h1, h2, h3 { font-weight: 400; }
 .opening-display > .headline-line { display: block; white-space: nowrap; }
 .opening-display > .headline-line:first-child { transform: scaleY(1.35); transform-origin: left top; }
 .opening-display > .headline-risk { display: flex; align-items: center; gap: .12em; }
-.headline-plus { display: block; flex: 0 0 auto; width: .48em; height: .56em; color: var(--ink); transform: translateY(-.3em) scaleY(.8); }
+.headline-plus { display: block; flex: 0 0 auto; width: .48em; height: .56em; color: #fff2b8; transform: translateY(-.3em) scaleY(.8); }
 .headline-plus svg { display: block; width: 100%; height: 100%; overflow: visible; fill: currentColor; stroke: none; }
+.headline-plus .plus-ground { fill: var(--ink); }
 .headline-risk { align-self: flex-end; font: italic 400 1.5em/.95 Auspex, Georgia, serif; letter-spacing: -.055em; color: var(--brand-accent); padding-right: .04em; transform: scaleY(1.25); transform-origin: right bottom; }
 /* Include the italic k's overhang in the painted gradient. */
 .risk-spectrum { padding-right: .18em; margin-right: -.18em; }
@@ -138,6 +140,7 @@ main { max-width: 1600px; margin: 0 auto; padding: 0 var(--edge) 60px; }
 .result-group h3 { gap: 12px; }
 
 .overview-group[open] { background: var(--tint); }
+.overview-group[data-group='H'] { background: var(--page); }
 .overview-group summary:hover .cluster-text { color: var(--accent); }
 .overview-group small { display: block; font: 12px/1.5 var(--sans); color: var(--accent); margin-top: 10px; }
 .overview-group ul { list-style: none; padding: 0 24px 22px; margin: 0; }
@@ -389,6 +392,7 @@ body:has(dialog[open]) { overflow: hidden; }
 .reading-page h3 { font-size: 14px; margin-top: 25px; }
 .reading-page li { margin-bottom: 14px; }
 .reading-page article { margin-top: 65px; padding-top: 35px; border-top: 1px solid var(--line); scroll-margin-top: 25px; }
+.reading-page main > article[data-group='H'] { background: var(--page); box-shadow: 0 0 0 16px var(--page); }
 .reading-page article > ol { font: 21px/1.6 var(--serif); }
 @media (max-width: 1100px) {
   .pathway-trigger { gap: 10px; }
