@@ -10,8 +10,8 @@
 :is(#all-pathways, .model-toolbar button, .a1-case-links button, .source-note, .find-incidents, .inspect-current, .return-map, .back-to-incident):hover {
   background: var(--tint); color: var(--accent); border-color: var(--accent); text-decoration: none;
 }
-#all-pathways { background: var(--accent); color: var(--page); border-color: var(--accent); }
-#all-pathways:hover { background: color-mix(in srgb, var(--accent) 85%, var(--ink)); color: var(--page); }
+:is(#all-pathways, .a1-research-link) { min-height: 38px; padding: 9px 13px; background: var(--accent); color: var(--page); border: 1px solid var(--accent); text-decoration: none; }
+:is(#all-pathways, .a1-research-link):hover { background: color-mix(in srgb, var(--accent) 85%, var(--ink)); color: var(--page); text-decoration: none; }
 #app .a1-case-links button[aria-pressed='true'] { background: var(--tint); color: var(--accent); border-color: var(--accent); text-decoration: none; box-shadow: inset 0 -2px 0 var(--accent); }
 .a1-case-links { gap: 10px 14px; }
 #app .source-note { min-height: 34px; padding: 6px 10px; font-size: 11px; border-color: transparent; }
