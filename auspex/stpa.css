@@ -169,8 +169,7 @@
 .a1-cloud-atmosphere { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .a1-cloud-wisps { fill: none; stroke: var(--accent,#617080); stroke-width: 1; opacity: .16; }
 .a1-cloud-wisps .a1-cloud-drift { opacity: .55; }
-.a1-cloud-title { display: flex; align-items: baseline; justify-content: center; gap: 6px; color: var(--accent); font: 10px/1.2 var(--sans); margin-bottom: 13px; }
-.a1-cloud-title > span { font: 16px/1 Auspex,Georgia,serif; }
+.a1-cloud-title { color: var(--accent); font: 500 11px/1.3 var(--sans); text-align: center; white-space: nowrap; margin-bottom: 13px; }
 .a1-cloud-conditions, .a1-cloud-actors { display: flex; flex-wrap: wrap; justify-content: center; gap: 13px 18px; }
 .a1-cloud-conditions > span { flex: 0 1 120px; }
 .a1-cloud-actors > div { flex: 0 1 112px; min-width: 0; }
