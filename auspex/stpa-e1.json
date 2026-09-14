@@ -212,7 +212,13 @@
         "S-01:2"
       ],
       "test": "Can related models produce individually plausible commands that violate a regional limit when executed together?",
-      "limit": "Shared inputs, missing external facilities, or objectives that use up reserve margins can undermine independent dispatch checks."
+      "limit": "Shared inputs, missing external facilities, or objectives that use up reserve margins can undermine independent dispatch checks.",
+      "improvement": {
+        "title": "Check the combined physical effect",
+        "proposal": "Place an independently maintained operating-envelope check between AI dispatch recommendations and authorization. Evaluate their combined effect on the network rather than approving each recommendation in isolation.",
+        "test": "In a validated simulator, submit individually acceptable recommendations that become unsafe together. Check whether the independent limit blocks their joint authorization.",
+        "remaining": "An inaccurate network model or a shared bad input could mislead both the recommendation and its check."
+      }
     },
     {
       "id": "SC2",
@@ -233,7 +239,13 @@
         "S-01:3"
       ],
       "test": "Do independent network simulations and staged drills contain the specified credible combinations of disturbances?",
-      "limit": "Unmodeled neighboring systems, stale topology, conflicting relay behavior, or inadequate reserves can defeat coordinated protection."
+      "limit": "Unmodeled neighboring systems, stale topology, conflicting relay behavior, or inadequate reserves can defeat coordinated protection.",
+      "improvement": {
+        "title": "Review protection across the boundary",
+        "proposal": "Require neighboring operators to review joint protection settings against a shared, current network model. Resolve incompatible assumptions before approving a material operating change.",
+        "test": "Use a validated simulator to carry a disturbance across an operator boundary. Check whether the agreed protection limits contain it without relying on unavailable reserves.",
+        "remaining": "Stale topology or an unmodeled interaction could still defeat the coordinated protection."
+      }
     },
     {
       "id": "SC3",
@@ -252,7 +264,13 @@
         "S-01:3"
       ],
       "test": "Does loss or staleness of a monitoring tool trigger a verified fallback and timely corrective decision?",
-      "limit": "Common telemetry failures, undetected backup failure, and coordination delay can prevent timely corrective action."
+      "limit": "Common telemetry failures, undetected backup failure, and coordination delay can prevent timely corrective action.",
+      "improvement": {
+        "title": "Make loss of visibility visible",
+        "proposal": "Show operators when the primary state estimate or alarm service becomes unreliable. Provide independently maintained fallback measurements with a rehearsed route to corrective action.",
+        "test": "In a safe drill, disable the primary monitoring path. Check whether operators recognize the loss of visibility and act using the fallback evidence in time.",
+        "remaining": "The fallback may share the same failed input, communications link, or power dependency."
+      }
     },
     {
       "id": "SC4",
@@ -272,7 +290,13 @@
         "S-01:R"
       ],
       "test": "Can restoration work when a neighboring supply, telecommunications service, or usual recovery tool is unavailable?",
-      "limit": "Shared regional dependencies, inaccessible equipment, and early restart can undermine restoration."
+      "limit": "Shared regional dependencies, inaccessible equipment, and early restart can undermine restoration.",
+      "improvement": {
+        "title": "Rehearse restoration without the usual help",
+        "proposal": "Exercise restoration under a scenario in which the usual neighboring supply or coordination service is unavailable. Confirm that essential loads can be supported before relying on the restoration plan.",
+        "test": "Use a validated exercise to withhold that support. Measure time to essential-load service and whether the restored supply can be sustained.",
+        "remaining": "A longer or wider disruption could exhaust the resources available for restoration."
+      }
     },
     {
       "id": "SC5",
@@ -291,7 +315,13 @@
         "S-01:R"
       ],
       "test": "Can care, water, and safe temperatures be sustained for the specified outage duration, including fuel delivery and staffing?",
-      "limit": "Fuel, water, communications, and staff may depend on the same electricity system."
+      "limit": "Fuel, water, communications, and staff may depend on the same electricity system.",
+      "improvement": {
+        "title": "Check the dependencies behind backup power",
+        "proposal": "Make essential-service continuity planning account for the fuel and support services needed to sustain backup power. Assign responsibility for each dependency that could fail during the same outage.",
+        "test": "Run a tabletop exercise in which a key resupply route is unavailable. Check how long the essential service can actually continue and when protective alternatives must begin.",
+        "remaining": "A prolonged regional outage could interrupt several dependencies at once, exceeding the tested endurance."
+      }
     }
   ],
   "nodes": [

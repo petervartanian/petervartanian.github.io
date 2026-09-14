@@ -58,7 +58,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const narrow = matchMedia('(max-width: 800px)');
   const compactMap = matchMedia('(max-width: 700px)');
-  const state = { pathway: '', target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false };
+  const state = { pathway: '', target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false, strengthen: false };
   const isSTPA = (id = state.pathway) => !!window.AuspexSTPA?.has(id);
   const pathwayTitle = p => window.AuspexSTPAModels?.[p.id]?.title || p.title;
   const overlayConfig = () => window.AuspexSTPA?.model?.presentation.overlays[state.incident];
@@ -124,14 +124,14 @@
 
   function normalize() {
     if (!pathways.has(state.pathway)) {
-      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false });
+      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false, strengthen: false });
       window.AuspexSTPA?.use('');
       readingKey = '';
       return;
     }
     const p = pathways.get(state.pathway);
     if (!isSTPA(p.id)) {
-      Object.assign(state, { target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false });
+      Object.assign(state, { target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false, strengthen: false });
       readingKey = '';
       return;
     }
@@ -159,8 +159,10 @@
         ? inspection.barriers[state.barrier]?.observation ?? -1
         : Math.max(0, observationEntries().length - 1);
       state.question = 0;
+      state.strengthen = false;
       readingKey = key;
     }
+    if (!state.inspect) state.strengthen = false;
   }
 
   function writeLocation(replace = false) {
@@ -176,6 +178,7 @@
     if (!isSTPA() && state.incident && state.observation >= 0) url.searchParams.set('o', String(state.observation));
     if (state.question && !isSTPA()) url.searchParams.set('q', questionNames[state.question]);
     if (isSTPA() && state.inspect) url.searchParams.set('inspect', '1');
+    if (isSTPA() && state.inspect && state.strengthen) url.searchParams.set('strengthen', '1');
     // The interface also works when opened directly from disk.
     try {
       if (url.href !== location.href) history[replace ? 'replaceState' : 'pushState'](null, '', url);
@@ -195,6 +198,7 @@
     state.barrier = params.get('b') || '';
     const requested = [state.pathway, state.incident, state.barrier].join('|');
     normalize();
+    state.strengthen = Boolean(state.inspect && params.get('strengthen') === '1');
     const requestedObservation = Number(params.get('o'));
     if (params.has('o') && Number.isInteger(requestedObservation) && requestedObservation >= 0 && requestedObservation < observationEntries().length) state.observation = requestedObservation;
     state.question = state.pathway && state.inspect && !isSTPA() ? Math.max(0, questionNames.indexOf(params.get('q'))) : 0;
@@ -386,7 +390,7 @@
       const proposed = proposedBarrier();
       if (!state.inspect || (!proposed && !selected)) { $('#barrier-panel').innerHTML = ''; return; }
       const context = proposed ? 'Proposed barrier / '+window.AuspexSTPA.node(proposed.from).number+' → '+window.AuspexSTPA.node(proposed.to).number : window.AuspexSTPA.overlayNames[a.incident];
-      $('#barrier-panel').innerHTML = `<div class="a1-inspector-heading"><h3 id="barrier-question">Would this hold against more capable AI?</h3><button class="a1-close-inspector" data-close-inspector>Close</button></div><p class="a1-inspector-case">${escape(context)}</p><div id="barrier-reading" aria-labelledby="barrier-question">${proposed ? window.AuspexSTPA.proposedBarrierView(proposed.id,a,evidenceButtons,state.constraint) : window.AuspexSTPA.incidentBarrierReading(selected,evidenceButtons)}</div>`;
+      $('#barrier-panel').innerHTML = `<div class="a1-inspector-heading"><h3 id="barrier-question">${state.strengthen?'How could this barrier be stronger?':'Would this hold against more capable AI?'}</h3><button class="a1-close-inspector" data-close-inspector>Close</button></div><p class="a1-inspector-case">${escape(context)}</p><div id="barrier-reading" aria-labelledby="barrier-question">${proposed ? window.AuspexSTPA.proposedBarrierView(proposed.id,a,evidenceButtons,state.constraint,{strengthen:state.strengthen}) : window.AuspexSTPA.incidentBarrierReading(selected,evidenceButtons,{strengthen:state.strengthen})}</div>`;
       return;
     }
     if (!selected) {
@@ -799,6 +803,14 @@
   });
   $('#return-map').addEventListener('click', revealMap);
   $('#barrier-panel').addEventListener('click', (event) => {
+    const strengthen = event.target.closest('[data-strengthen]');
+    if (strengthen && isSTPA() && state.inspect) {
+      state.strengthen = strengthen.dataset.strengthen === '1';
+      renderBarrier(); writeLocation();
+      $('#barrier-panel [data-strengthen]')?.focus({preventScroll:true});
+      announce(state.strengthen ? 'Proposed change. The recorded barrier state is unchanged.' : 'Back to the barrier assessment.');
+      return;
+    }
     const related = event.target.closest('[data-related-barrier]');
     if (related && isSTPA()) {
       const selected = localBarriers().find(b=>b.id===related.dataset.relatedBarrier);
@@ -849,7 +861,7 @@
   }
   function closeA1Inspector() {
     const safeguard = state.safeguard, constraint = state.constraint;
-    state.inspect = false;
+    state.inspect = false; state.strengthen = false;
     state.safeguard = ''; state.constraint = '';
     $('#pathway-map').dataset.selectedSafeguard = '';
     $('#pathway-map').dataset.selectedConstraint = '';

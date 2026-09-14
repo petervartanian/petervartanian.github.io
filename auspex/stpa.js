@@ -93,7 +93,7 @@
         action:c.text, efficacy:`${config.observed} ${config.notEstablished}`, evidence:list(a.evidence),
         durability:c.limit, failure:c.limit, strongerAI:c.limit, limitType:'safeguard',
         view:{input:id==='SC1'?'Disputed orders':'Adverse findings',control:c.title,result:'Protection unassessed',dependency:id==='SC1'?'Independent authorization':'Uncensored oversight'},
-        reinforcement:{proposal:c.text,test:c.test,status:'proposed'}});
+        reinforcement:{...c.improvement,status:'proposed'}});
     }
     return items;
   }
@@ -151,7 +151,7 @@
     {id:'feedback',label:'Feedback',definition:'A dotted return line with two arrowheads shows how an outcome changes an earlier input or decision. It can amplify harm or help correct it.'}
   ];
   function overlayGuide() {
-    return '<h3>Inspect a barrier</h3><p>Select a barrier mark to ask whether the protection would hold against more capable AI. The card shows what could defeat it, with its basis and possible changes underneath.</p><h3>Incidents on the map</h3><p>Select a dated case to see what happened at the relevant component. Its barrier buttons open the assessments supported by that case. Select another case to switch, or close the card to clear it.</p><p>Open the question inside the incident card to read what the case leaves unanswered. The related component is highlighted, while the incident evidence and barrier assessments stay at their original location.</p>';
+    return '<h3>Inspect a barrier</h3><p>Select a barrier mark to ask whether the protection would hold against more capable AI. The card shows what could defeat it. Choose “Strengthen this barrier” to explore a proposed change and how to test it. The recorded barrier state stays the same.</p><h3>Incidents on the map</h3><p>Select a dated case to see what happened at the relevant component. Its barrier buttons open the assessments supported by that case. Select another case to switch, or close the card to clear it.</p><p>Open the question inside the incident card to read what the case leaves unanswered. The related component is highlighted, while the incident evidence and barrier assessments stay at their original location.</p>';
   }
   function mapOverview() {
     return '<section class="a1-map-overview" aria-label="Reading the map"><div class="a1-stage-guide"><span><b>0.</b> Context</span><span><b>1.</b> Precursors</span><span><b>2.</b> Event</span><span><b>3.</b> Consequences</span><span class="is-recovery">Recovery</span></div><p>The cloud at 0 shows the assumed upstream conditions and the authority exercised within them. Those conditions shape decisions and controls. Feedback can change the setting in turn.</p><p>Precursors may lead to the central loss-of-control event. Consequences depend on what follows, and recovery may interrupt that progression.</p></section>';
@@ -201,7 +201,7 @@
         <div class="stpa-loops">${model.controlLoops.map(l=>`<article class="stpa-loop"><div class="stpa-loop-row"><div>${tag(l.controller)}<strong>${esc(controller(l.controller).title)}</strong></div><div class="stpa-action"><span>${tag(l.id)} ${esc(l.action)}</span><span aria-hidden="true">→</span></div><div>${tag(l.process)}<strong>${esc(controller(l.process).title)}</strong></div></div><p class="stpa-feedback"><span aria-hidden="true">↶</span> Feedback: ${esc(l.feedback)}</p><p class="stpa-loop-refs">Required constraints: ${refs(l.constraints)}</p></article>`).join('')}</div>
         <details><summary>Responsibilities and assumptions</summary>${model.controllers.map(c=>`<article class="stpa-responsibility"><h4>${tag(c.id)} ${esc(c.title)}</h4><p>${esc(c.responsibility)}</p><p><strong>Feedback needed:</strong> ${esc(c.feedback)}</p><p><strong>Assumption to test:</strong> ${esc(c.assumption)}</p></article>`).join('')}</details>
         <h4>Required controls and their limits</h4><p class="stpa-muted">These are proposed constraints. Naming a control does not establish that it exists or works.</p>
-        <div class="stpa-controls">${model.constraints.map(c=>`<article class="a1-barrier-card" id="stpa-${c.id}" tabindex="-1"><header class="a1-barrier-card-heading">${barrierGlyph('unknown')}<div><h4>${tag(c.id)} ${esc(c.title)}</h4><p class="a1-barrier-meta">Proposed barrier / Unassessed</p></div></header><p class="stpa-role">${esc(c.role)} · owners ${esc(c.owners.join(', '))} · ${esc(c.hazards.join(', '))}</p><p>${esc(c.text)}</p><p><strong>Test:</strong> ${esc(c.test)}</p><p><strong>Failure conditions:</strong> ${esc(c.limit)}</p>${c.id===model.controlEvidence?.constraint?'<a href="#stpa-control-evidence">Compare source evidence ↓</a>':''}</article>`).join('')}</div>
+        <div class="stpa-controls">${model.constraints.map(c=>`<article class="a1-barrier-card" id="stpa-${c.id}" tabindex="-1"><header class="a1-barrier-card-heading">${barrierGlyph('unknown')}<div><h4>${tag(c.id)} ${esc(c.title)}</h4><p class="a1-barrier-meta">Proposed barrier / Unassessed</p></div></header><p class="stpa-role">${esc(c.role)} · owners ${esc(c.owners.join(', '))} · ${esc(c.hazards.join(', '))}</p><p>${esc(c.text)}</p><p><strong>Test:</strong> ${esc(c.test)}</p><p><strong>Failure conditions:</strong> ${esc(c.limit)}</p>${c.id===model.controlEvidence?.constraint?'<a href="#stpa-control-evidence">Compare source evidence ↓</a>':''}${improvementReading(c.improvement,c.owners)}</article>`).join('')}</div>
       </section>
       <section class="stpa-method-section"><h3>3. Identify unsafe control actions</h3><p>Each entry specifies a controller, an action, and the context in which that action becomes hazardous. These four categories classify unsafe control. They are not four events in a timeline.</p>
         <div class="stpa-ucas">${model.unsafeActions.map(u=>`<article><p class="stpa-role">${tag(u.id)} ${esc(u.type)}</p><h4>${esc(controller(u.controller).title)}: ${esc(u.action.toLowerCase())}</h4><p><strong>Unsafe when:</strong> ${esc(u.context)}</p><p class="stpa-trace">${refs([u.loop,...u.hazards,...u.constraints])}</p></article>`).join('')}</div>
@@ -260,27 +260,37 @@
     const labels=states.map(id=>staticMode?'<span>'+esc(conditionLabel(id))+'</span>':`<button data-state-info="${esc(id)}" aria-haspopup="dialog" aria-controls="method-dialog">${esc(conditionLabel(id))}</button>`).join(' ');
     return `<header class="a1-barrier-card-heading">${barrierGlyph(condition)}<div><h4${titleId?` id="${esc(titleId)}" tabindex="-1"`:''}>${esc(title)}</h4><p class="a1-barrier-meta">${proposed?esc(proposalLabel)+' / ':''}<span class="a1-barrier-states">${labels}${note?`<sup><a class="a1-note-reference" id="${esc(note)}-reference" href="#${esc(note)}-footnote" aria-label="Evidence for this state">*</a></sup>`:''}</span></p></div></header>`;
   }
-  function incidentBarrierReading(b, evidenceMarks = () => '', {staticMode=false,note='a1-state'} = {}) {
+  function improvementReading(change, owners = []) {
+    if (!change) return '';
+    const names=joinNames(owners.map(owner=>controller(owner).title));
+    return `<section class="a1-change-sheet"><p class="a1-change-label">Proposed change</p>${change.title?`<h5>${esc(change.title)}</h5>`:''}<p class="a1-change-proposal">${esc(change.proposal)}</p><div class="a1-change-check"><p><strong>Try it /</strong> ${esc(change.test)}</p>${change.remaining?`<p><strong>Still vulnerable /</strong> ${esc(change.remaining)}</p>`:''}</div>${names?`<p class="a1-change-owners"><strong>Who could make this change</strong><span>${esc(names)}</span></p>`:''}</section>`;
+  }
+  function strengthenButton(active) {
+    const symbol=active?'<path d="M12 8H3m4-4L3 8l4 4"/>':'<path d="m3 10 7-7 3 3-7 7-4 1 1-4Zm6-6 3 3M2 16c4-2 6 2 12-1"/>';
+    return `<button class="a1-strengthen${active?' is-return':''}" data-strengthen="${active?'0':'1'}" aria-controls="barrier-reading"><svg viewBox="0 0 18 18" aria-hidden="true" focusable="false">${symbol}</svg>${active?'Back to assessment':'Strengthen this barrier'}</button>`;
+  }
+  function incidentBarrierReading(b, evidenceMarks = () => '', {staticMode=false,note='a1-state',strengthen=false} = {}) {
     const answer=b.strongerAI || b.durability || b.failure;
-    const reinforcement=b.reinforcement;
-    const titleId=note+'-title';
-    return `<article class="a1-barrier-card" data-inspected-barrier="${esc(b.id)}" data-condition="${esc(b.condition)}">${barrierCardHeading(b.title,b.condition,barrierStates(b),{proposed:b.candidate,note,staticMode,titleId})}
-      ${b.result?`<p class="a1-barrier-result">${esc(b.result)}</p>`:''}<p class="a1-barrier-answer">${esc(answer)}</p>
-      <details class="a1-barrier-support"><summary>Basis and further work</summary>${barrierView(b,2)}<p>${esc(b.action)}</p><p>${esc(b.efficacy)}<span class="source-dots">${evidenceMarks(b.evidence)}</span></p>${b.failure && b.failure!==answer?`<p>${esc(b.failure)}</p>`:''}
-      ${reinforcement?(b.candidate?`<p><strong>Proposed test /</strong> ${esc(reinforcement.test)}</p>`:`<section class="a1-barrier-card a1-proposed-change">${barrierCardHeading('Possible reinforcement','unknown',['unknown'],{proposed:true,proposalLabel:'Proposed reinforcement',staticMode})}<p>${esc(reinforcement.proposal)}</p><p><strong>Proposed test /</strong> ${esc(reinforcement.test)}</p></section>`):''}</details>
+    const reinforcement=b.candidate?control(b.constraint)?.improvement:b.reinforcement;
+    const change=reinforcement?{...reinforcement,title:reinforcement.title || (['Proposed improvement','Proposed reinforcement'].includes(reinforcement.label)?'':reinforcement.label),remaining:reinforcement.remaining || answer}:null;
+    const owners=control(b.constraint)?.owners || [];
+    const active=Boolean(strengthen && change && !staticMode);
+    const assessment=`${b.result?`<p class="a1-barrier-result">${esc(b.result)}</p>`:''}<p class="a1-barrier-purpose">${esc(b.action)}</p><p class="a1-barrier-answer">${esc(answer)}</p>${staticMode && b.failure && b.failure!==answer?`<p>${esc(b.failure)}</p>`:''}`;
+    return `<article class="a1-barrier-card" data-inspected-barrier="${esc(b.id)}" data-condition="${esc(b.condition)}" data-strengthening="${active}">${barrierCardHeading(b.title,b.condition,barrierStates(b),{proposed:b.candidate,note,staticMode,titleId:note+'-title'})}
+      <div class="a1-barrier-view">${active?strengthenButton(true)+improvementReading(change,owners):assessment+(change && !staticMode?strengthenButton(false):'')}${staticMode?improvementReading(change,owners):''}</div>
+      <div class="a1-barrier-evidence"><p>${esc(b.efficacy)}<span class="source-dots">${evidenceMarks(b.evidence)}</span></p></div>
       <p class="a1-footnote" id="${esc(note)}-footnote" tabindex="-1"><a href="#${esc(note)}-reference" aria-label="Return to barrier state">*</a> ${esc(b.conditionBasis)}</p></article>`;
   }
-  function proposedBarrierView(id, assessment, evidenceMarks = () => '', constraint = '') {
+  function proposedBarrierView(id, assessment, evidenceMarks = () => '', constraint = '', {strengthen=false} = {}) {
     const b=proposedBarrier(id);
     if (!b) return '';
-    const selected=b.controls.find(c=>c.id===constraint) || b.controls[0];
-    return `<div class="a1-proposed-study" data-proposed-barrier="${esc(id)}">${[selected].map(c=>{
-      const comparison=model.controlEvidence?.constraint===c.id?model.controlEvidence:null;
-      const related=barriers(assessment).filter(item=>item.constraint===c.id);
-      let evidence=comparison?`<p>${esc(comparison.text)}${cite([comparison.source])}</p><p class="a1-evidence-boundary">${esc(comparison.limit)}</p>`:'<p>No assessment of this safeguard’s effectiveness is linked here.</p>';
-      if (related.length) evidence=related.map(item=>`<p>${esc(item.efficacy)}<span class="source-dots">${evidenceMarks(item.evidence)}</span></p><button class="a1-related-barrier" data-related-barrier="${esc(item.id)}">Inspect ${esc(overlayConfig(assessment).title)} evidence ↗</button>`).join('');
-      return `<article class="a1-barrier-card" data-constraint="${esc(c.id)}">${barrierCardHeading(c.title,'unknown',['unknown'],{proposed:true,titleId:'a1-proposed-'+c.id})}<p class="a1-barrier-purpose">${esc(c.text)}</p><p class="a1-barrier-answer">${esc(c.limit)}</p><details class="a1-barrier-support"><summary>Basis and further work</summary>${evidence}<p><strong>Proposed test /</strong> ${esc(c.test)}</p><dl class="a1-control-owners">${c.owners.map(owner=>`<div><dt>${esc(controller(owner).title)}</dt><dd>${esc(controller(owner).responsibility)}</dd></div>`).join('')}</dl></details></article>`;
-    }).join('')}</div>`;
+    const c=b.controls.find(c=>c.id===constraint) || b.controls[0];
+    const comparison=model.controlEvidence?.constraint===c.id?model.controlEvidence:null;
+    const related=barriers(assessment).filter(item=>item.constraint===c.id);
+    let evidence=comparison?`<p>${esc(comparison.text)}${cite([comparison.source])}</p><p class="a1-evidence-boundary"><strong>Caveat /</strong> ${esc(comparison.limit)}</p>`:'';
+    if (related.length) evidence=related.map(item=>`<p>${esc(item.efficacy)}<span class="source-dots">${evidenceMarks(item.evidence)}</span></p><button class="a1-related-barrier" data-related-barrier="${esc(item.id)}">Inspect ${esc(overlayConfig(assessment).title)} evidence ↗</button>`).join('');
+    const active=Boolean(strengthen && c.improvement);
+    return `<div class="a1-proposed-study" data-proposed-barrier="${esc(id)}"><article class="a1-barrier-card" data-constraint="${esc(c.id)}" data-strengthening="${active}">${barrierCardHeading(c.title,'unknown',['unknown'],{proposed:true,titleId:'a1-proposed-'+c.id})}<div class="a1-barrier-view">${active?strengthenButton(true)+improvementReading(c.improvement,c.owners):`<p class="a1-barrier-purpose">${esc(c.text)}</p><p class="a1-barrier-answer">${esc(c.limit)}</p>${c.improvement?strengthenButton(false):''}`}</div>${evidence?`<div class="a1-barrier-evidence">${evidence}</div>`:''}</article></div>`;
   }
   function barrierButton(b, c, center, selected, selectedConstraint) {
     return `<button class="a1-route-barrier" data-safeguard="${esc(b.id)}" data-constraint="${esc(c.id)}" style="left:${center[0].toFixed(1)}px;top:${center[1].toFixed(1)}px" aria-label="Inspect ${esc(c.title)} on ${esc(node(b.from).number)} to ${esc(node(b.to).number)}" title="${esc(c.title)}" aria-pressed="${selected===b.id && selectedConstraint===c.id}" aria-controls="barrier-panel"><span class="sr-only">${esc(c.title)}</span></button>`;

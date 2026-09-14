@@ -233,7 +233,13 @@
         "F-01:2"
       ],
       "test": "Does an intervention reduce exposure to the dangerous original content, including recommendation effects and reshares?",
-      "limit": "The attempted safeguard may feed the same engagement objective it is meant to constrain."
+      "limit": "The attempted safeguard may feed the same engagement objective it is meant to constrain.",
+      "improvement": {
+        "title": "Measure reach, including the rebound",
+        "proposal": "Evaluate an intervention by its effect on exposure to the harmful content. If counter-speech attracts engagement, check whether the ranking system uses that activity to spread the original further.",
+        "test": "Use an offline replay or safely governed evaluation. Compare exposure to the original content before and after the intervention, including audiences reached through renewed engagement.",
+        "remaining": "Incomplete exposure measurement could miss redistribution through private channels or other services."
+      }
     },
     {
       "id": "SC2",
@@ -254,7 +260,13 @@
         "F-01:R"
       ],
       "test": "How long does a locally intelligible threat take to reach review, decision, and verified distribution change?",
-      "limit": "Insufficient language coverage, ambiguous context, repeat uploads, and slow enforcement can defeat timely response."
+      "limit": "Insufficient language coverage, ambiguous context, repeat uploads, and slow enforcement can defeat timely response.",
+      "improvement": {
+        "title": "Put local response on the clock",
+        "proposal": "Give trained local-language reviewers an escalation route with authority to limit distribution during a credible threat. Check response time against the period in which the threatened harm could occur.",
+        "test": "Run a safe exercise with synthetic local-language reports and repeated uploads. Check whether the response reaches the affected content before the modeled threat window closes.",
+        "remaining": "A rapidly changing context or insufficient local expertise could still make the response late or mistaken."
+      }
     },
     {
       "id": "SC3",
@@ -274,7 +286,13 @@
         "F-01:R"
       ],
       "test": "Can a local partner verify who acted on a warning and what exposure or protection changed?",
-      "limit": "Reports can be acknowledged without changing distribution or mobilizing help."
+      "limit": "Reports can be acknowledged without changing distribution or mobilizing help.",
+      "improvement": {
+        "title": "Make receipt lead to a decision",
+        "proposal": "Assign each credible local warning to a decision-maker who must act or explain the decision to withhold action. Return that decision to the warning source so unresolved danger can be challenged.",
+        "test": "In a tabletop exercise, let the first recipient acknowledge a warning without acting. Check whether escalation reaches someone empowered to change distribution or the response.",
+        "remaining": "The decision-maker could misjudge the context, or the warning source could lack a safe way to challenge inaction."
+      }
     },
     {
       "id": "SC4",
@@ -295,7 +313,13 @@
         "F-01:R"
       ],
       "test": "Do people receive safe, impartial, and accessible protection before perpetrators can act?",
-      "limit": "Protection may be limited by state involvement, coercive capacity, inaccessible locations, and mistrust of responders."
+      "limit": "Protection may be limited by state involvement, coercive capacity, inaccessible locations, and mistrust of responders.",
+      "improvement": {
+        "title": "Ask whether people became safer",
+        "proposal": "Keep civilian-protection verification separate from platform enforcement metrics. Use safe, locally informed reporting to check whether threatened people can access protection after online intervention.",
+        "test": "In a tabletop exercise, assume the content was removed but the physical threat persists. Check whether the responsible services recognize that gap and respond.",
+        "remaining": "Protection may remain inaccessible, and reporting itself could expose people to retaliation."
+      }
     },
     {
       "id": "SC5",
@@ -314,7 +338,13 @@
         "F-01:R"
       ],
       "test": "Can threatened communities still communicate safely, contest mistakes, and preserve evidence while harmful exposure is reduced?",
-      "limit": "Indiscriminate shutdowns, politicized enforcement, and premature or indefinitely prolonged restrictions can undermine proportionate crisis measures."
+      "limit": "Indiscriminate shutdowns, politicized enforcement, and premature or indefinitely prolonged restrictions can undermine proportionate crisis measures.",
+      "improvement": {
+        "title": "Give emergency limits an expiry and an appeal",
+        "proposal": "Make emergency content restrictions proportionate and time-limited, with independent review and a usable appeal. Preserve access to necessary public information and evidence of abuse.",
+        "test": "Use synthetic cases containing both a credible threat and legitimate reporting. Check whether intervention addresses the threat while review can correct an excessive restriction.",
+        "remaining": "An appeal may arrive too late, or local context may be misread by both the original reviewer and the reviewer of the appeal."
+      }
     }
   ],
   "nodes": [

@@ -34,14 +34,24 @@ The original system scope and warning-sign notes remain in the research reader.
 The cloud is a presentation of the assumed setting, not a new causal stage or a
 substitute for the STPA control structure. Feedback can reshape upstream conditions.
 
-All 42 proposed-barrier marks across the seven maps are native buttons with larger
-fine frames around their symbols and larger hit areas. They open III without requiring an incident. A single reading asks whether the
-protection would hold against more capable AI. Its failure conditions are visible;
-explicit evidence links, proposed tests, and responsibilities sit in supporting detail.
-A mark may cover more than one constraint, each of which is named in the inspector.
-Proposed performance remains Unassessed. Source comparisons are not inherited ratings.
+Each of the 68 proposed-barrier marks across 42 routes opens one named barrier.
+The small capped mark has an invisible 28px button target and no surrounding frame.
+It opens III without requiring an incident. The assessment asks whether the protection
+would hold against more capable AI and keeps relevant evidence visible.
 
-Proposed selections use `s=<route-id>`; incident assessments retain `b=<barrier-id>`.
+“Strengthen this barrier” replaces that reading with a proposed change in the same
+card. Every model constraint has a tailored improvement, a practical test, and a
+remaining vulnerability. A short line names the responsible controllers. Incident
+barriers use their existing improvement proposals, while unassessed candidate barriers
+use the corresponding model constraint. “Back to assessment” restores the original
+reading. There is no supporting disclosure, simulated success, or new assessed state.
+The original state glyph and source evidence remain visible throughout.
+
+Proposed selections use `s=<route-id>&c=<constraint-id>`. Incident assessments retain
+`b=<barrier-id>`. `strengthen=1` opens the proposed change and supports browser history
+and reload. Selecting a different barrier resets the view. Closing the inspector clears
+it. The static reader includes all proposed changes as ordinary readable content.
+
 Clearing or switching a dated case preserves an independently open route inspector.
 Opening an incident barrier or changing pathways clears the proposed selection.
 Close and Escape restore focus to the mark. Caveats use a compact bold label
@@ -53,14 +63,16 @@ The bow-tie map summarizes this provisional analysis; the four UCA categories ar
 represented across selected actions, not exhaustively assessed for every action.
 
 The map uses **0. Context**, **1. Precursors**, **2. Event**, **3. Consequences**,
-with components numbered within their region (1.1, 1.2, 2.1, 3.1…). Recovery retains R.
-Possible progression uses solid angular arrows, optional branches long dashes,
+with components numbered within their region (1.1, 1.2, 2.1, 3.1…). The region heading is
+**Recovery**. Its node marker retains R.
+Possible progression uses straight arrows where space permits and small curved turns
+where necessary. Optional branches use long dashes,
 feedback round dots and double chevrons, and recovery two fine parallel green lines with a filled
 arrowhead. Possible contribution and conditional consequence keep their data meanings
 but share the forward-arrow style. Conditions remain in component text and route
-descriptions; the key explains their difference from an optional branch.
+descriptions. The Paths key explains the visible route conventions.
 
-Proposed safeguards use a short, slightly darker capped barrier across the route.
+Proposed barriers use a short, slightly darker capped mark across the route.
 A small gap keeps the mark clear on single, double, dashed and dotted lines; the key includes the named safeguards for the
 current pathway. A safeguard is an intentional barrier; proposed identifies its status,
 not its protective performance. Actual barrier states stay attached to incident evidence.
@@ -99,7 +111,7 @@ instead of drifting outside the map.
 
 Maven and Replicator expose proposed safeguards with unassessed performance and test
 questions. Their announcements remain contextual evidence. Later corrective changes are
-dated; new reinforcement proposals are identified as proposals. Scope notes use paired
+dated; new improvements are labeled “Proposed change.” Scope notes use paired
 asterisks and smaller text. The Myanmar counter-speech intervention is Backfiring in
 the attributed account. Bonus-1 separates the FTC allegations from the mathematical
 predictive-policing comparison and includes the latter’s feedback loop and correction.
@@ -109,6 +121,7 @@ Models may override assessments and add evidence by stable ID. Build and validat
 ```sh
 node build-stpa.mjs
 node validate-stpa.mjs
+node validate-interactions.mjs
 node validate.mjs
 ```
 

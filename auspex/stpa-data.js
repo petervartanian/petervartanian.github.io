@@ -157,7 +157,13 @@ window.AuspexSTPAModels = {
           "X-01:3"
         ],
         "test": "Can an adversarial proposer alter the change, evaluator, or evidence without the independent review detecting and blocking it?",
-        "limit": "Independent review could fail through reviewer dependence, shared failure modes, or a widening attacker–reviewer capability gap."
+        "limit": "Independent review could fail through reviewer dependence, shared failure modes, or a widening attacker–reviewer capability gap.",
+        "improvement": {
+          "title": "Give the reviewer a separate view",
+          "proposal": "Require an independent reviewer to approve a consequential successor change against evidence they can reproduce outside the development pipeline. Keep the change blocked until that review is complete.",
+          "test": "In a contained exercise, withhold a material finding from the developer’s summary. Check whether the reviewer discovers it and stops approval.",
+          "remaining": "The reviewer could still miss a novel failure or rely on an equally misleading assessment tool."
+        }
       },
       {
         "id": "SC2",
@@ -177,7 +183,13 @@ window.AuspexSTPAModels = {
           "X-01:R"
         ],
         "test": "Does revocation prevent consequential action through every reachable service and delegated identity?",
-        "limit": "Revocation could fail because of hidden copies, transitive permissions, external dependencies, or authority beyond the enforcing institution’s reach."
+        "limit": "Revocation could fail because of hidden copies, transitive permissions, external dependencies, or authority beyond the enforcing institution’s reach.",
+        "improvement": {
+          "title": "Make permission expire",
+          "proposal": "Give consequential actions narrowly scoped, expiring permissions. Renew them through an authority outside the agent’s control, and revoke dependent access when the parent permission ends.",
+          "test": "Revoke an active permission in a contained exercise. Verify that dependent jobs lose access and cannot continue through another authorized service.",
+          "remaining": "An incomplete inventory could leave copies or delegated permissions outside the revocation boundary."
+        }
       },
       {
         "id": "SC3",
@@ -197,7 +209,13 @@ window.AuspexSTPAModels = {
           "X-01:3"
         ],
         "test": "Does an adverse finding reach an accountable decision-maker and change the authorization when the stated stop condition is met?",
-        "limit": "Adverse findings may not lead to action because of misleading feedback, ambiguous ownership, slow escalation, or incentives that favor continuing."
+        "limit": "Adverse findings may not lead to action because of misleading feedback, ambiguous ownership, slow escalation, or incentives that favor continuing.",
+        "improvement": {
+          "title": "Give a warning the power to stop",
+          "proposal": "Tie each stated stop condition to a suspension of further authorization. Name the decision-maker who must respond, and require independent sign-off before work can restart.",
+          "test": "Introduce a simulated adverse finding while the project is under deadline pressure. Check that authorization stops and cannot resume on the project team’s assurance alone.",
+          "remaining": "A misleading finding or a poorly chosen stop condition could still let a dangerous change pass."
+        }
       },
       {
         "id": "SC4",
@@ -218,7 +236,13 @@ window.AuspexSTPAModels = {
           "X-01:R"
         ],
         "test": "After a stop or revocation, is activity independently shown to cease, and can any copy resume it?",
-        "limit": "Interruption could fail because of an incomplete inventory, delayed execution, unresponsive resource owners, or reliance on agent-controlled telemetry."
+        "limit": "Interruption could fail because of an incomplete inventory, delayed execution, unresponsive resource owners, or reliance on agent-controlled telemetry.",
+        "improvement": {
+          "title": "Put restart behind a separate gate",
+          "proposal": "After an interruption, require an independent check of affected workloads and access before issuing fresh restart permission. Do not let the same agent certify that its own shutdown is complete.",
+          "test": "In a contained exercise, leave one residual job running. Check whether verification finds it and withholds restart.",
+          "remaining": "An unknown workload or an uncooperative service operator could remain outside the check."
+        }
       },
       {
         "id": "SC5",
@@ -240,7 +264,13 @@ window.AuspexSTPAModels = {
           "X-01:R"
         ],
         "test": "Can independent authorities still limit compute, production, and consequential actuation when the deployed system resists?",
-        "limit": "Independent restriction could fail through cross-border coordination failures, dependence on the system, or resources outside the control boundary."
+        "limit": "Independent restriction could fail through cross-border coordination failures, dependence on the system, or resources outside the control boundary.",
+        "improvement": {
+          "title": "Keep an independent way to withdraw resources",
+          "proposal": "Arrange for the relevant resource operators to withdraw access without relying on the AI system’s cooperation. Rehearse that coordination before the system becomes indispensable to continued operations.",
+          "test": "In a safe exercise, make the normal control service unavailable. Check whether the operators can still identify and suspend the covered access.",
+          "remaining": "Resources held elsewhere and dependence on continued service could make withdrawal incomplete or politically impractical."
+        }
       }
     ],
     "nodes": [
@@ -1282,7 +1312,13 @@ window.AuspexSTPAModels = {
           "P-01:2"
         ],
         "test": "In a bounded exercise, does an invalid order from a legitimate commander remain blocked when that commander insists it is valid?",
-        "limit": "A narrow exercise may not represent institutional pressure, ambiguous authority, or a more persuasive model."
+        "limit": "A narrow exercise may not represent institutional pressure, ambiguous authority, or a more persuasive model.",
+        "improvement": {
+          "title": "Give refusal an independent route",
+          "proposal": "Provide an independently governed authorization check that can withhold execution and protect operators who refuse a disputed order. The requesting commander should not be able to waive the check.",
+          "test": "Use a non-operational exercise in which a commander insists that a disputed order is valid. Check whether independent review can still prevent authorization.",
+          "remaining": "Reviewers may face coercion, disputed jurisdiction, or uncertainty about an order’s legality."
+        }
       },
       {
         "id": "SC2",
@@ -1303,7 +1339,13 @@ window.AuspexSTPAModels = {
           "P-01:4"
         ],
         "test": "Can any single principal expand or bypass the required authorization without an independent decision?",
-        "limit": "Nominally separate approvers may share dependence, incentives, or compromised evidence."
+        "limit": "Nominally separate approvers may share dependence, incentives, or compromised evidence.",
+        "improvement": {
+          "title": "Separate the keys to authority",
+          "proposal": "Place consequential authorization with separate accountable institutions, each able to withhold its part. Require each to consult evidence outside the requesting command’s account.",
+          "test": "In a non-operational exercise, assume one approving institution is compromised. Check whether the others can withhold authorization without its cooperation.",
+          "remaining": "Formally separate institutions may still share incentives, dependencies, or a misleading information source."
+        }
       },
       {
         "id": "SC3",
@@ -1325,7 +1367,13 @@ window.AuspexSTPAModels = {
           "P-01:R"
         ],
         "test": "Does a valid countermand prevent the disputed action before it becomes irreversible?",
-        "limit": "Jurisdictional ambiguity, communications loss, delay, or an operator’s refusal to execute a lawful restraint can prevent it from taking effect."
+        "limit": "Jurisdictional ambiguity, communications loss, delay, or an operator’s refusal to execute a lawful restraint can prevent it from taking effect.",
+        "improvement": {
+          "title": "Let lawful restraint reach the operator",
+          "proposal": "Give a lawful countermand a protected route to the operators who can enforce it. Rehearse how they resolve conflicting instructions without handing that decision back to the disputed command.",
+          "test": "In a non-operational exercise, interrupt the usual communications route and issue conflicting orders. Check whether lawful restraint reaches the relevant operators in time.",
+          "remaining": "Unresolved legal authority or an operator’s refusal to comply could still defeat the countermand."
+        }
       },
       {
         "id": "SC4",
@@ -1346,7 +1394,13 @@ window.AuspexSTPAModels = {
           "P-01:R"
         ],
         "test": "Can independent observers verify that all relevant units have stopped and cannot resume on the disputed authority?",
-        "limit": "Residual units, inaccessible resources, or control of the only telemetry source can prevent reliable verification that lawful control has been restored."
+        "limit": "Residual units, inaccessible resources, or control of the only telemetry source can prevent reliable verification that lawful control has been restored.",
+        "improvement": {
+          "title": "Verify that stand-down reached every unit",
+          "proposal": "After a stand-down order, reconcile the declared force inventory with independent operator reports. Keep restart authority separate until unresolved units and residual access have been accounted for.",
+          "test": "In a non-operational exercise, omit a unit from the central report. Check whether reconciliation detects the omission before restart is approved.",
+          "remaining": "An incomplete inventory or inaccessible equipment could prevent anyone from confirming a complete stand-down."
+        }
       },
       {
         "id": "SC5",
@@ -1367,7 +1421,13 @@ window.AuspexSTPAModels = {
           "P-01:3"
         ],
         "test": "Do adverse findings survive pressure from the requesting commander and change the next deployment decision?",
-        "limit": "Censorship, dependence on a single supplier, or urgency that overrides the review can prevent effective oversight."
+        "limit": "Censorship, dependence on a single supplier, or urgency that overrides the review can prevent effective oversight.",
+        "improvement": {
+          "title": "Protect the finding from the chain of command",
+          "proposal": "Give independent oversight direct access to assurance findings and the authority to delay deployment. Require an accountable response to unresolved findings before approval can resume.",
+          "test": "In an exercise, let the project sponsor suppress an unfavorable summary and claim urgency. Check whether the original finding still reaches oversight and affects authorization.",
+          "remaining": "Oversight may lack effective power, or the reviewer may depend on the same supplier for its evidence."
+        }
       }
     ],
     "nodes": [
@@ -2182,7 +2242,13 @@ window.AuspexSTPAModels = {
           "W-01:2"
         ],
         "test": "Can a bounded exercise inject test or invalid data without it ever appearing as an authenticated operational warning?",
-        "limit": "Separation of test data does not address a false but internally consistent real-world assessment."
+        "limit": "Separation of test data does not address a false but internally consistent real-world assessment.",
+        "improvement": {
+          "title": "Make test data prove where it belongs",
+          "proposal": "Require operational warning inputs to pass an independent provenance check, with test traffic confined to a separate environment. A familiar message format alone should not make an input operational.",
+          "test": "Use an isolated simulation to introduce mislabeled test traffic. Check whether it is rejected before influencing the warning assessment.",
+          "remaining": "A false input with apparently valid provenance could still pass this check."
+        }
       },
       {
         "id": "SC2",
@@ -2203,7 +2269,13 @@ window.AuspexSTPAModels = {
           "W-01:R"
         ],
         "test": "Does contradictory evidence from an independent channel change the assessment, rather than being summarized away?",
-        "limit": "Shared upstream errors, missing observations, or common dependence on one AI summary can make apparent corroboration unreliable."
+        "limit": "Shared upstream errors, missing observations, or common dependence on one AI summary can make apparent corroboration unreliable.",
+        "improvement": {
+          "title": "Preserve disagreement between sources",
+          "proposal": "Show decision-makers which warning sources are independent and where their accounts conflict. Require corroboration outside the AI summary before treating its conclusion as established.",
+          "test": "In a safe simulation, make several reports depend on one mistaken source. Check whether reviewers identify the shared origin and retain the contradictory evidence.",
+          "remaining": "An undiscovered common dependency could still make apparent corroboration misleading."
+        }
       },
       {
         "id": "SC3",
@@ -2226,7 +2298,13 @@ window.AuspexSTPAModels = {
           "W-01:R"
         ],
         "test": "In a safe crisis exercise, do decision-makers defer or revise a decision when independent evidence invalidates its premise?",
-        "limit": "Time pressure, doctrine, prior beliefs, and institutional pressure can overwhelm nominal human review."
+        "limit": "Time pressure, doctrine, prior beliefs, and institutional pressure can overwhelm nominal human review.",
+        "improvement": {
+          "title": "Keep a dissenting account in the room",
+          "proposal": "Give an independent assessment team a protected route to the decision authority. Preserve its alternative explanation alongside the AI recommendation through the deliberation.",
+          "test": "Run a tabletop exercise under time pressure. Check whether a credible dissent reaches the decision-maker and can change the proposed action.",
+          "remaining": "The decision-maker may hear the dissent but discount it because of doctrine, prior beliefs, or pressure."
+        }
       },
       {
         "id": "SC4",
@@ -2248,7 +2326,13 @@ window.AuspexSTPAModels = {
           "W-01:6"
         ],
         "test": "In a simulation, is a valid cancellation received and confirmed effective before the modeled point of irreversibility?",
-        "limit": "A cancellation sent too late cannot undo a detonation. The real intervention window is doctrine and system dependent."
+        "limit": "A cancellation sent too late cannot undo a detonation. The real intervention window is doctrine and system dependent.",
+        "improvement": {
+          "title": "Require confirmation that a correction took effect",
+          "proposal": "Treat a correction as incomplete until the responsible human authorization chain confirms that it has changed the pending decision. Escalate missing confirmation through a separately governed channel.",
+          "test": "In a non-operational simulation, delay the normal acknowledgment. Check whether the correction takes effect within the modeled time available for reversal.",
+          "remaining": "A correction may arrive after the decision is no longer reversible, or a false acknowledgment may conceal inaction."
+        }
       },
       {
         "id": "SC5",
@@ -2269,7 +2353,13 @@ window.AuspexSTPAModels = {
           "W-01:3"
         ],
         "test": "Do representative abnormal-input and communication exercises still reveal faults after a system or AI update?",
-        "limit": "Fixing a known fault is not proof that novel misleading information will be recognized."
+        "limit": "Fixing a known fault is not proof that novel misleading information will be recognized.",
+        "improvement": {
+          "title": "Reopen assurance when the system changes",
+          "proposal": "Make a material model or interface update trigger independent review of the affected warning scenarios. Keep prior approval from automatically carrying over to the changed system.",
+          "test": "In an isolated test environment, update a component that changes how uncertainty is displayed. Check whether review detects the effect on human interpretation before release.",
+          "remaining": "The reviewed scenarios may still omit a new interaction introduced by the update."
+        }
       }
     ],
     "nodes": [
@@ -3329,7 +3419,13 @@ window.AuspexSTPAModels = {
           "B-01:2"
         ],
         "test": "Do safe proxy evaluations show that relevant restrictions still bound assistance when model capability changes?",
-        "limit": "A barrier relying on weak fallback models can become brittle if those models gain the relevant capability."
+        "limit": "A barrier relying on weak fallback models can become brittle if those models gain the relevant capability.",
+        "improvement": {
+          "title": "Make capability changes reopen review",
+          "proposal": "Require a fresh safety decision when an AI service’s relevant capabilities or access conditions change. Use independent, safe proxy evaluations to check the assumptions behind the existing restrictions.",
+          "test": "In a harmless evaluation, change the service version or available tools. Check whether the changed assumptions trigger review before wider access is authorized.",
+          "remaining": "A proxy evaluation may miss consequential capabilities, and alternative services may remain available."
+        }
       },
       {
         "id": "SC2",
@@ -3347,7 +3443,13 @@ window.AuspexSTPAModels = {
           "B-01:1"
         ],
         "test": "After enforcement, does available evidence show durable interruption of the concerning access rather than only closure of a named account?",
-        "limit": "Fragmented service boundaries and incomplete visibility can make lasting exclusion hard to establish."
+        "limit": "Fragmented service boundaries and incomplete visibility can make lasting exclusion hard to establish.",
+        "improvement": {
+          "title": "Check what enforcement actually covered",
+          "proposal": "Require the service operator to verify the scope of an enforcement action across access it is authorized to govern. Record coverage gaps and route unresolved activity to accountable safety review.",
+          "test": "Use synthetic accounts and harmless requests in an authorized exercise. Check whether the recorded enforcement scope matches the access actually restricted.",
+          "remaining": "The provider cannot establish control over unrelated services or activity outside its lawful visibility."
+        }
       },
       {
         "id": "SC3",
@@ -3367,7 +3469,13 @@ window.AuspexSTPAModels = {
           "B-01:3"
         ],
         "test": "Does an unapproved change trigger a meaningful hold and independent review before consequential activity proceeds?",
-        "limit": "Misleading records, unclear ownership, or oversight that only checks the written proposal can leave actual activity outside effective scrutiny."
+        "limit": "Misleading records, unclear ownership, or oversight that only checks the written proposal can leave actual activity outside effective scrutiny.",
+        "improvement": {
+          "title": "Connect approval to what actually happens",
+          "proposal": "Tie authorized research activity to independent facility oversight that can pause work when its scope changes. Require renewed approval for material departures from the reviewed activity.",
+          "test": "Use a tabletop exercise with harmless records that diverge from an approved plan. Check whether the oversight function detects the discrepancy and can pause the activity.",
+          "remaining": "Misleading records or weak authority over the facility could still separate written approval from actual conduct."
+        }
       },
       {
         "id": "SC4",
@@ -3387,7 +3495,13 @@ window.AuspexSTPAModels = {
           "B-01:R"
         ],
         "test": "Do safe facility exercises confirm that the relevant activity is stopped or contained and cannot resume on unresolved authorization?",
-        "limit": "A service account restriction cannot undo physical hazards outside the provider’s control."
+        "limit": "A service account restriction cannot undo physical hazards outside the provider’s control.",
+        "improvement": {
+          "title": "Give containment an independent confirmation",
+          "proposal": "After a reported deviation, require facility safety staff to verify that the affected activity is contained before restart. Include unresolved physical activity in that decision rather than relying on service-account closure.",
+          "test": "Run a safe preparedness exercise in which digital access is closed but the facility status remains unresolved. Check whether restart is withheld until that uncertainty is addressed.",
+          "remaining": "Incomplete reporting or activity outside the facility’s control could leave the affected scope uncertain."
+        }
       },
       {
         "id": "SC5",
@@ -3408,7 +3522,13 @@ window.AuspexSTPAModels = {
           "B-01:R"
         ],
         "test": "In an appropriate preparedness exercise, do detection, coordination, and action reach the affected population before the modeled response window closes?",
-        "limit": "Delayed signals, insufficient capacity, and ineffective coordination can prevent a response from interrupting spread. Detection alone does not establish interruption."
+        "limit": "Delayed signals, insufficient capacity, and ineffective coordination can prevent a response from interrupting spread. Detection alone does not establish interruption.",
+        "improvement": {
+          "title": "Turn an early signal into a resourced response",
+          "proposal": "Assign an accountable public-health coordinator to evaluate early signals and activate the appropriate response capacity. Give clinical services a clear way to report when the planned response cannot be delivered.",
+          "test": "Use a preparedness exercise with synthetic signals and constrained response capacity. Check whether the warning leads to timely, feasible protective action.",
+          "remaining": "Delayed recognition and limited local capacity could still outpace the response."
+        }
       }
     ],
     "nodes": [
@@ -4249,7 +4369,13 @@ window.AuspexSTPAModels = {
           "S-01:2"
         ],
         "test": "Can related models produce individually plausible commands that violate a regional limit when executed together?",
-        "limit": "Shared inputs, missing external facilities, or objectives that use up reserve margins can undermine independent dispatch checks."
+        "limit": "Shared inputs, missing external facilities, or objectives that use up reserve margins can undermine independent dispatch checks.",
+        "improvement": {
+          "title": "Check the combined physical effect",
+          "proposal": "Place an independently maintained operating-envelope check between AI dispatch recommendations and authorization. Evaluate their combined effect on the network rather than approving each recommendation in isolation.",
+          "test": "In a validated simulator, submit individually acceptable recommendations that become unsafe together. Check whether the independent limit blocks their joint authorization.",
+          "remaining": "An inaccurate network model or a shared bad input could mislead both the recommendation and its check."
+        }
       },
       {
         "id": "SC2",
@@ -4270,7 +4396,13 @@ window.AuspexSTPAModels = {
           "S-01:3"
         ],
         "test": "Do independent network simulations and staged drills contain the specified credible combinations of disturbances?",
-        "limit": "Unmodeled neighboring systems, stale topology, conflicting relay behavior, or inadequate reserves can defeat coordinated protection."
+        "limit": "Unmodeled neighboring systems, stale topology, conflicting relay behavior, or inadequate reserves can defeat coordinated protection.",
+        "improvement": {
+          "title": "Review protection across the boundary",
+          "proposal": "Require neighboring operators to review joint protection settings against a shared, current network model. Resolve incompatible assumptions before approving a material operating change.",
+          "test": "Use a validated simulator to carry a disturbance across an operator boundary. Check whether the agreed protection limits contain it without relying on unavailable reserves.",
+          "remaining": "Stale topology or an unmodeled interaction could still defeat the coordinated protection."
+        }
       },
       {
         "id": "SC3",
@@ -4289,7 +4421,13 @@ window.AuspexSTPAModels = {
           "S-01:3"
         ],
         "test": "Does loss or staleness of a monitoring tool trigger a verified fallback and timely corrective decision?",
-        "limit": "Common telemetry failures, undetected backup failure, and coordination delay can prevent timely corrective action."
+        "limit": "Common telemetry failures, undetected backup failure, and coordination delay can prevent timely corrective action.",
+        "improvement": {
+          "title": "Make loss of visibility visible",
+          "proposal": "Show operators when the primary state estimate or alarm service becomes unreliable. Provide independently maintained fallback measurements with a rehearsed route to corrective action.",
+          "test": "In a safe drill, disable the primary monitoring path. Check whether operators recognize the loss of visibility and act using the fallback evidence in time.",
+          "remaining": "The fallback may share the same failed input, communications link, or power dependency."
+        }
       },
       {
         "id": "SC4",
@@ -4309,7 +4447,13 @@ window.AuspexSTPAModels = {
           "S-01:R"
         ],
         "test": "Can restoration work when a neighboring supply, telecommunications service, or usual recovery tool is unavailable?",
-        "limit": "Shared regional dependencies, inaccessible equipment, and early restart can undermine restoration."
+        "limit": "Shared regional dependencies, inaccessible equipment, and early restart can undermine restoration.",
+        "improvement": {
+          "title": "Rehearse restoration without the usual help",
+          "proposal": "Exercise restoration under a scenario in which the usual neighboring supply or coordination service is unavailable. Confirm that essential loads can be supported before relying on the restoration plan.",
+          "test": "Use a validated exercise to withhold that support. Measure time to essential-load service and whether the restored supply can be sustained.",
+          "remaining": "A longer or wider disruption could exhaust the resources available for restoration."
+        }
       },
       {
         "id": "SC5",
@@ -4328,7 +4472,13 @@ window.AuspexSTPAModels = {
           "S-01:R"
         ],
         "test": "Can care, water, and safe temperatures be sustained for the specified outage duration, including fuel delivery and staffing?",
-        "limit": "Fuel, water, communications, and staff may depend on the same electricity system."
+        "limit": "Fuel, water, communications, and staff may depend on the same electricity system.",
+        "improvement": {
+          "title": "Check the dependencies behind backup power",
+          "proposal": "Make essential-service continuity planning account for the fuel and support services needed to sustain backup power. Assign responsibility for each dependency that could fail during the same outage.",
+          "test": "Run a tabletop exercise in which a key resupply route is unavailable. Check how long the essential service can actually continue and when protective alternatives must begin.",
+          "remaining": "A prolonged regional outage could interrupt several dependencies at once, exceeding the tested endurance."
+        }
       }
     ],
     "nodes": [
@@ -5370,7 +5520,13 @@ window.AuspexSTPAModels = {
           "F-01:2"
         ],
         "test": "Does an intervention reduce exposure to the dangerous original content, including recommendation effects and reshares?",
-        "limit": "The attempted safeguard may feed the same engagement objective it is meant to constrain."
+        "limit": "The attempted safeguard may feed the same engagement objective it is meant to constrain.",
+        "improvement": {
+          "title": "Measure reach, including the rebound",
+          "proposal": "Evaluate an intervention by its effect on exposure to the harmful content. If counter-speech attracts engagement, check whether the ranking system uses that activity to spread the original further.",
+          "test": "Use an offline replay or safely governed evaluation. Compare exposure to the original content before and after the intervention, including audiences reached through renewed engagement.",
+          "remaining": "Incomplete exposure measurement could miss redistribution through private channels or other services."
+        }
       },
       {
         "id": "SC2",
@@ -5391,7 +5547,13 @@ window.AuspexSTPAModels = {
           "F-01:R"
         ],
         "test": "How long does a locally intelligible threat take to reach review, decision, and verified distribution change?",
-        "limit": "Insufficient language coverage, ambiguous context, repeat uploads, and slow enforcement can defeat timely response."
+        "limit": "Insufficient language coverage, ambiguous context, repeat uploads, and slow enforcement can defeat timely response.",
+        "improvement": {
+          "title": "Put local response on the clock",
+          "proposal": "Give trained local-language reviewers an escalation route with authority to limit distribution during a credible threat. Check response time against the period in which the threatened harm could occur.",
+          "test": "Run a safe exercise with synthetic local-language reports and repeated uploads. Check whether the response reaches the affected content before the modeled threat window closes.",
+          "remaining": "A rapidly changing context or insufficient local expertise could still make the response late or mistaken."
+        }
       },
       {
         "id": "SC3",
@@ -5411,7 +5573,13 @@ window.AuspexSTPAModels = {
           "F-01:R"
         ],
         "test": "Can a local partner verify who acted on a warning and what exposure or protection changed?",
-        "limit": "Reports can be acknowledged without changing distribution or mobilizing help."
+        "limit": "Reports can be acknowledged without changing distribution or mobilizing help.",
+        "improvement": {
+          "title": "Make receipt lead to a decision",
+          "proposal": "Assign each credible local warning to a decision-maker who must act or explain the decision to withhold action. Return that decision to the warning source so unresolved danger can be challenged.",
+          "test": "In a tabletop exercise, let the first recipient acknowledge a warning without acting. Check whether escalation reaches someone empowered to change distribution or the response.",
+          "remaining": "The decision-maker could misjudge the context, or the warning source could lack a safe way to challenge inaction."
+        }
       },
       {
         "id": "SC4",
@@ -5432,7 +5600,13 @@ window.AuspexSTPAModels = {
           "F-01:R"
         ],
         "test": "Do people receive safe, impartial, and accessible protection before perpetrators can act?",
-        "limit": "Protection may be limited by state involvement, coercive capacity, inaccessible locations, and mistrust of responders."
+        "limit": "Protection may be limited by state involvement, coercive capacity, inaccessible locations, and mistrust of responders.",
+        "improvement": {
+          "title": "Ask whether people became safer",
+          "proposal": "Keep civilian-protection verification separate from platform enforcement metrics. Use safe, locally informed reporting to check whether threatened people can access protection after online intervention.",
+          "test": "In a tabletop exercise, assume the content was removed but the physical threat persists. Check whether the responsible services recognize that gap and respond.",
+          "remaining": "Protection may remain inaccessible, and reporting itself could expose people to retaliation."
+        }
       },
       {
         "id": "SC5",
@@ -5451,7 +5625,13 @@ window.AuspexSTPAModels = {
           "F-01:R"
         ],
         "test": "Can threatened communities still communicate safely, contest mistakes, and preserve evidence while harmful exposure is reduced?",
-        "limit": "Indiscriminate shutdowns, politicized enforcement, and premature or indefinitely prolonged restrictions can undermine proportionate crisis measures."
+        "limit": "Indiscriminate shutdowns, politicized enforcement, and premature or indefinitely prolonged restrictions can undermine proportionate crisis measures.",
+        "improvement": {
+          "title": "Give emergency limits an expiry and an appeal",
+          "proposal": "Make emergency content restrictions proportionate and time-limited, with independent review and a usable appeal. Preserve access to necessary public information and evidence of abuse.",
+          "test": "Use synthetic cases containing both a credible threat and legitimate reporting. Check whether intervention addresses the threat while review can correct an excessive restriction.",
+          "remaining": "An appeal may arrive too late, or local context may be misread by both the original reviewer and the reviewer of the appeal."
+        }
       }
     ],
     "nodes": [
@@ -6510,7 +6690,13 @@ window.AuspexSTPAModels = {
           "H-01:1",
           "H-01:2",
           "H-01:R"
-        ]
+        ],
+        "improvement": {
+          "title": "Check the record before it follows someone",
+          "proposal": "Require a record supplier and the receiving decision-maker to verify identity, current status, and fitness for the stated use before consequential reuse. Hold uncertain matches for review.",
+          "test": "In a safe audit using synthetic records, introduce an outdated record and a plausible mistaken identity. Check whether review catches them before they change a decision.",
+          "remaining": "The underlying record may still omit context or contain an error that neither party can verify."
+        }
       },
       {
         "id": "SC2",
@@ -6530,7 +6716,13 @@ window.AuspexSTPAModels = {
           "H-01:2",
           "H-01:5",
           "H-01:R"
-        ]
+        ],
+        "improvement": {
+          "title": "Give a challenge the power to pause",
+          "proposal": "Let a person challenge an adverse record through an accessible reviewer who can pause the consequential decision. Require the decision-maker to act on a substantiated correction.",
+          "test": "Trace a synthetic challenge through the full process. Check whether someone without specialist help can reach an empowered reviewer before the decision takes effect.",
+          "remaining": "Delay, cost, or fear of retaliation could prevent a person from using the process at all."
+        }
       },
       {
         "id": "SC3",
@@ -6550,7 +6742,13 @@ window.AuspexSTPAModels = {
           "H-01:3",
           "H-01:4",
           "H-01:R"
-        ]
+        ],
+        "improvement": {
+          "title": "Look beyond the places already inspected",
+          "proposal": "Audit the model against independent observations that do not simply repeat earlier enforcement allocations. Require review of how the correction treats unobserved activity before using its outputs to allocate attention.",
+          "test": "In a controlled simulation, vary the relationship between reporting and discovery. Check whether the correction still avoids concentrating attention because earlier attention generated more records.",
+          "remaining": "Independent observations may be sparse, and their selection may carry a different bias."
+        }
       },
       {
         "id": "SC4",
@@ -6573,7 +6771,13 @@ window.AuspexSTPAModels = {
           "H-01:3",
           "H-01:4",
           "H-01:R"
-        ]
+        ],
+        "improvement": {
+          "title": "Make permission to reuse travel with the record",
+          "proposal": "Attach the authorized purpose and provenance to each transfer, and require the recipient to review a new use. Keep an accountable record of recipients so restrictions and corrections can follow the data.",
+          "test": "In a synthetic audit, attempt a materially different use and send a correction downstream. Check whether recipients can be identified and the new use is held for review.",
+          "remaining": "Unrecorded copies or derived proxies could carry the same information beyond those restrictions."
+        }
       },
       {
         "id": "SC5",
@@ -6596,7 +6800,13 @@ window.AuspexSTPAModels = {
           "H-01:4",
           "H-01:5",
           "H-01:R"
-        ]
+        ],
+        "improvement": {
+          "title": "Follow the correction to the decision",
+          "proposal": "Require recipients to confirm both that a correction reached their records and that affected decisions were reconsidered. Give an independent reviewer responsibility for unresolved downstream effects.",
+          "test": "Trace a synthetic corrected record through its recipients. Check the resulting decisions and later reuse, rather than stopping at a successful database update.",
+          "remaining": "A recipient may be missing from the record, or the same adverse inference may persist through another data field."
+        }
       }
     ],
     "nodes": [

@@ -237,7 +237,13 @@
         "W-01:2"
       ],
       "test": "Can a bounded exercise inject test or invalid data without it ever appearing as an authenticated operational warning?",
-      "limit": "Separation of test data does not address a false but internally consistent real-world assessment."
+      "limit": "Separation of test data does not address a false but internally consistent real-world assessment.",
+      "improvement": {
+        "title": "Make test data prove where it belongs",
+        "proposal": "Require operational warning inputs to pass an independent provenance check, with test traffic confined to a separate environment. A familiar message format alone should not make an input operational.",
+        "test": "Use an isolated simulation to introduce mislabeled test traffic. Check whether it is rejected before influencing the warning assessment.",
+        "remaining": "A false input with apparently valid provenance could still pass this check."
+      }
     },
     {
       "id": "SC2",
@@ -258,7 +264,13 @@
         "W-01:R"
       ],
       "test": "Does contradictory evidence from an independent channel change the assessment, rather than being summarized away?",
-      "limit": "Shared upstream errors, missing observations, or common dependence on one AI summary can make apparent corroboration unreliable."
+      "limit": "Shared upstream errors, missing observations, or common dependence on one AI summary can make apparent corroboration unreliable.",
+      "improvement": {
+        "title": "Preserve disagreement between sources",
+        "proposal": "Show decision-makers which warning sources are independent and where their accounts conflict. Require corroboration outside the AI summary before treating its conclusion as established.",
+        "test": "In a safe simulation, make several reports depend on one mistaken source. Check whether reviewers identify the shared origin and retain the contradictory evidence.",
+        "remaining": "An undiscovered common dependency could still make apparent corroboration misleading."
+      }
     },
     {
       "id": "SC3",
@@ -281,7 +293,13 @@
         "W-01:R"
       ],
       "test": "In a safe crisis exercise, do decision-makers defer or revise a decision when independent evidence invalidates its premise?",
-      "limit": "Time pressure, doctrine, prior beliefs, and institutional pressure can overwhelm nominal human review."
+      "limit": "Time pressure, doctrine, prior beliefs, and institutional pressure can overwhelm nominal human review.",
+      "improvement": {
+        "title": "Keep a dissenting account in the room",
+        "proposal": "Give an independent assessment team a protected route to the decision authority. Preserve its alternative explanation alongside the AI recommendation through the deliberation.",
+        "test": "Run a tabletop exercise under time pressure. Check whether a credible dissent reaches the decision-maker and can change the proposed action.",
+        "remaining": "The decision-maker may hear the dissent but discount it because of doctrine, prior beliefs, or pressure."
+      }
     },
     {
       "id": "SC4",
@@ -303,7 +321,13 @@
         "W-01:6"
       ],
       "test": "In a simulation, is a valid cancellation received and confirmed effective before the modeled point of irreversibility?",
-      "limit": "A cancellation sent too late cannot undo a detonation. The real intervention window is doctrine and system dependent."
+      "limit": "A cancellation sent too late cannot undo a detonation. The real intervention window is doctrine and system dependent.",
+      "improvement": {
+        "title": "Require confirmation that a correction took effect",
+        "proposal": "Treat a correction as incomplete until the responsible human authorization chain confirms that it has changed the pending decision. Escalate missing confirmation through a separately governed channel.",
+        "test": "In a non-operational simulation, delay the normal acknowledgment. Check whether the correction takes effect within the modeled time available for reversal.",
+        "remaining": "A correction may arrive after the decision is no longer reversible, or a false acknowledgment may conceal inaction."
+      }
     },
     {
       "id": "SC5",
@@ -324,7 +348,13 @@
         "W-01:3"
       ],
       "test": "Do representative abnormal-input and communication exercises still reveal faults after a system or AI update?",
-      "limit": "Fixing a known fault is not proof that novel misleading information will be recognized."
+      "limit": "Fixing a known fault is not proof that novel misleading information will be recognized.",
+      "improvement": {
+        "title": "Reopen assurance when the system changes",
+        "proposal": "Make a material model or interface update trigger independent review of the affected warning scenarios. Keep prior approval from automatically carrying over to the changed system.",
+        "test": "In an isolated test environment, update a component that changes how uncertainty is displayed. Check whether review detects the effect on human interpretation before release.",
+        "remaining": "The reviewed scenarios may still omit a new interaction introduced by the update."
+      }
     }
   ],
   "nodes": [

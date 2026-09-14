@@ -155,7 +155,13 @@
         "X-01:3"
       ],
       "test": "Can an adversarial proposer alter the change, evaluator, or evidence without the independent review detecting and blocking it?",
-      "limit": "Independent review could fail through reviewer dependence, shared failure modes, or a widening attacker–reviewer capability gap."
+      "limit": "Independent review could fail through reviewer dependence, shared failure modes, or a widening attacker–reviewer capability gap.",
+      "improvement": {
+        "title": "Give the reviewer a separate view",
+        "proposal": "Require an independent reviewer to approve a consequential successor change against evidence they can reproduce outside the development pipeline. Keep the change blocked until that review is complete.",
+        "test": "In a contained exercise, withhold a material finding from the developer’s summary. Check whether the reviewer discovers it and stops approval.",
+        "remaining": "The reviewer could still miss a novel failure or rely on an equally misleading assessment tool."
+      }
     },
     {
       "id": "SC2",
@@ -175,7 +181,13 @@
         "X-01:R"
       ],
       "test": "Does revocation prevent consequential action through every reachable service and delegated identity?",
-      "limit": "Revocation could fail because of hidden copies, transitive permissions, external dependencies, or authority beyond the enforcing institution’s reach."
+      "limit": "Revocation could fail because of hidden copies, transitive permissions, external dependencies, or authority beyond the enforcing institution’s reach.",
+      "improvement": {
+        "title": "Make permission expire",
+        "proposal": "Give consequential actions narrowly scoped, expiring permissions. Renew them through an authority outside the agent’s control, and revoke dependent access when the parent permission ends.",
+        "test": "Revoke an active permission in a contained exercise. Verify that dependent jobs lose access and cannot continue through another authorized service.",
+        "remaining": "An incomplete inventory could leave copies or delegated permissions outside the revocation boundary."
+      }
     },
     {
       "id": "SC3",
@@ -195,7 +207,13 @@
         "X-01:3"
       ],
       "test": "Does an adverse finding reach an accountable decision-maker and change the authorization when the stated stop condition is met?",
-      "limit": "Adverse findings may not lead to action because of misleading feedback, ambiguous ownership, slow escalation, or incentives that favor continuing."
+      "limit": "Adverse findings may not lead to action because of misleading feedback, ambiguous ownership, slow escalation, or incentives that favor continuing.",
+      "improvement": {
+        "title": "Give a warning the power to stop",
+        "proposal": "Tie each stated stop condition to a suspension of further authorization. Name the decision-maker who must respond, and require independent sign-off before work can restart.",
+        "test": "Introduce a simulated adverse finding while the project is under deadline pressure. Check that authorization stops and cannot resume on the project team’s assurance alone.",
+        "remaining": "A misleading finding or a poorly chosen stop condition could still let a dangerous change pass."
+      }
     },
     {
       "id": "SC4",
@@ -216,7 +234,13 @@
         "X-01:R"
       ],
       "test": "After a stop or revocation, is activity independently shown to cease, and can any copy resume it?",
-      "limit": "Interruption could fail because of an incomplete inventory, delayed execution, unresponsive resource owners, or reliance on agent-controlled telemetry."
+      "limit": "Interruption could fail because of an incomplete inventory, delayed execution, unresponsive resource owners, or reliance on agent-controlled telemetry.",
+      "improvement": {
+        "title": "Put restart behind a separate gate",
+        "proposal": "After an interruption, require an independent check of affected workloads and access before issuing fresh restart permission. Do not let the same agent certify that its own shutdown is complete.",
+        "test": "In a contained exercise, leave one residual job running. Check whether verification finds it and withholds restart.",
+        "remaining": "An unknown workload or an uncooperative service operator could remain outside the check."
+      }
     },
     {
       "id": "SC5",
@@ -238,7 +262,13 @@
         "X-01:R"
       ],
       "test": "Can independent authorities still limit compute, production, and consequential actuation when the deployed system resists?",
-      "limit": "Independent restriction could fail through cross-border coordination failures, dependence on the system, or resources outside the control boundary."
+      "limit": "Independent restriction could fail through cross-border coordination failures, dependence on the system, or resources outside the control boundary.",
+      "improvement": {
+        "title": "Keep an independent way to withdraw resources",
+        "proposal": "Arrange for the relevant resource operators to withdraw access without relying on the AI system’s cooperation. Rehearse that coordination before the system becomes indispensable to continued operations.",
+        "test": "In a safe exercise, make the normal control service unavailable. Check whether the operators can still identify and suspend the covered access.",
+        "remaining": "Resources held elsewhere and dependence on continued service could make withdrawal incomplete or politically impractical."
+      }
     }
   ],
   "nodes": [

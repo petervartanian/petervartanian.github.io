@@ -247,10 +247,7 @@
 .a1-proposed-study h4 { margin: 0 0 9px; font: 500 14px/1.5 var(--sans); }
 .a1-proposed-study p { font: 13px/1.7 var(--sans); margin: 7px 0; }
 .a1-proposed-study .a1-evidence-boundary { font-size: 11px; color: var(--muted); }
-.a1-control-owners { margin: 15px 0 0; font: 11px/1.65 var(--sans); }
-.a1-control-owners > div + div { margin-top: 10px; }
-.a1-control-owners dt { font-weight: 500; }
-.a1-control-owners dd { margin: 2px 0 0; color: var(--muted); }
+
 
 .a1-overlay { position: relative; margin: -1px 0 0; padding: 14px 13px 12px; border: 1px solid color-mix(in srgb,var(--accent) 30%,var(--line)); border-left: 3px solid var(--accent); border-radius: 0 0 3px 3px; background: color-mix(in srgb,var(--tint) 62%,var(--page)); color: var(--ink); }
 .a1-cell.is-overlaid .a1-step { border-color: color-mix(in srgb,var(--accent) 50%,var(--line)); border-bottom-right-radius: 0; border-bottom-left-radius: 0; background: var(--tint); }
@@ -483,10 +480,33 @@
 .a1-barrier-states sup { margin-left: 1px; }
 .a1-barrier-card .a1-barrier-answer { margin: 10px 0 0; font: 13px/1.7 var(--sans); }
 .a1-barrier-card .a1-barrier-purpose, .a1-barrier-card .a1-barrier-result { margin: 7px 0; color: var(--muted); font: 11px/1.65 var(--sans); }
-.a1-barrier-support { margin: 14px 0 0; border: 0; border-top: 1px solid var(--line); }
-.a1-barrier-support > summary { padding: 8px 0 0; min-height: 32px; font: 11px/1.5 var(--sans); }
-.a1-barrier-support > p, .a1-barrier-support .a1-proposed-change > p { font: 11px/1.7 var(--sans); margin: 10px 0; }
-.a1-barrier-support > .a1-proposed-change { margin-top: 14px; background: color-mix(in srgb,var(--tint) 30%,var(--page)); }
+.a1-strengthen { display: inline-flex; align-items: center; gap: 7px; min-height: 38px; margin: 13px 0 0; padding: 4px 9px 4px 3px; background: transparent; border: 0; border-radius: 2px; color: var(--accent); font: 500 12px/1.5 var(--sans); text-align: left; }
+.a1-strengthen svg { flex: 0 0 19px; width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; transition: transform 160ms ease; }
+.a1-strengthen:hover { background: color-mix(in srgb,var(--accent) 6%,transparent); }
+.a1-strengthen:not(.is-return):hover svg { transform: rotate(-9deg); }
+.a1-strengthen:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.a1-strengthen.is-return { margin: 0 0 9px; font-size: 11px; color: var(--muted); }
+.a1-change-sheet { position: relative; padding: 16px 18px; border-left: 2px solid color-mix(in srgb,var(--accent) 48%,var(--line)); background: linear-gradient(115deg,color-mix(in srgb,var(--tint) 70%,var(--page)),color-mix(in srgb,var(--tint) 18%,var(--page))); }
+.a1-change-sheet::after { content: ''; position: absolute; top: 0; right: 0; width: 12px; height: 12px; background: linear-gradient(45deg,color-mix(in srgb,var(--accent) 14%,var(--page)) 48%,var(--page) 51%); }
+.a1-change-sheet .a1-change-label { margin: 0 0 5px; color: var(--muted); font: 10px/1.5 var(--sans); }
+.a1-change-sheet h5 { margin: 0 0 8px; font: italic 19px/1.4 var(--serif); color: var(--accent); text-wrap: pretty; }
+.a1-change-sheet .a1-change-proposal { margin: 0; font: 13px/1.7 var(--sans); }
+.a1-change-check { margin-top: 14px; padding-top: 3px; border-top: 1px solid color-mix(in srgb,var(--accent) 16%,transparent); }
+.a1-change-check p { margin: 9px 0 0; font: 11px/1.7 var(--sans); }
+.a1-change-check strong { font-weight: 500; }
+.a1-change-sheet .a1-change-owners { margin: 14px 0 0; font: 10px/1.6 var(--sans); color: var(--muted); }
+.a1-change-owners strong { display: block; font-weight: 500; }
+.a1-change-owners span { display: block; }
+.a1-barrier-evidence { margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--line); }
+.a1-barrier-evidence > p { margin: 0 0 8px; font: 11px/1.7 var(--sans); }
+.a1-barrier-evidence > :last-child { margin-bottom: 0; }
+.a1-barrier-evidence .a1-evidence-boundary { margin: 0 -14px -14px; padding: 6px 8px; border-top: 1px solid var(--line); background: color-mix(in srgb,var(--ink) 6%,var(--page)); font-size: 9.5px; line-height: 1.55; }
+#barrier-panel [data-strengthening='true'] .a1-change-sheet { animation: a1-unfold-change 180ms ease-out; }
+.stpa-controls .a1-change-sheet { margin-top: 16px; }
+.a1-static-case-assessment .a1-change-sheet { margin-top: 14px; }
+@keyframes a1-unfold-change { from { opacity: .5; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 500px) { .a1-change-sheet { padding: 13px; } .a1-change-sheet h5 { font-size: 18px; } }
+@media (prefers-reduced-motion: reduce) { #barrier-panel [data-strengthening='true'] .a1-change-sheet { animation: none; } .a1-strengthen svg { transition: none; } }
 .a1-barrier-card > .a1-footnote { margin: 12px -14px -14px; padding: 6px 8px; border-top: 1px solid var(--line); font-size: 9.5px; line-height: 1.55; color: #56616b; background: color-mix(in srgb,var(--ink) 6%,var(--page)); }
 .a1-observed-control.a1-barrier-card { padding: 8px 10px; }
 .a1-case-assessment .a1-observed-control.a1-barrier-card { margin: 0; border: 0; }

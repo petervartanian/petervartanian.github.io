@@ -65,6 +65,9 @@ for (const m of models) {
   for (const c of m.constraints) {
     has('hazards',c.hazards); has('controllers',c.owners); has('nodes',c.nodes);
     assert(c.test && c.limit,`Constraint ${c.id} needs a test and limit`);
+    assert(c.improvement && ['title','proposal','test','remaining'].every(key=>c.improvement[key]?.trim()),`${m.displayId} ${c.id} needs a specific improvement and a way to challenge it`);
+    assert.notEqual(c.improvement.proposal,c.text,'An improvement develops the control rather than repeating its definition');
+    assert(!Object.hasOwn(c.improvement,'condition') && !Object.hasOwn(c.improvement,'states'),'A proposal cannot assign an assessed state');
   }
   for (const l of m.controlLoops) {
     has('controllers',[l.controller,l.process]); has('constraints',l.constraints);
@@ -317,9 +320,19 @@ for (const m of models) {
     assert.equal((view.match(/data-constraint=/g)||[]).length,1);
     assert(view.includes(`data-constraint="${c.id}"`));
     assert(!view.includes('Ibid.') && !view.includes('Proposed safeguard'));
+    assert(!view.includes('<details') && !view.includes('No assessment of this safeguard'));
+    assert(view.includes('Strengthen this barrier'));
+    const changed=presentation.proposedBarrierView(route.id,null,()=>'',c.id,{strengthen:true});
+    assert(changed.includes('Back to assessment') && changed.includes('Proposed change'));
+    const heading=html=>html.match(/<header class="a1-barrier-card-heading">[\s\S]*?<\/header>/)[0];
+    assert.equal(heading(changed),heading(view),'Proposing a change preserves the original status and glyph');
+    assert(!changed.includes('<details') && !changed.includes('No assessment of this safeguard'));
+    assert.equal((changed.match(/class="a1-barrier-card-heading"/g)||[]).length,1);
+    assert(staticHTML.includes(c.improvement.title.replace(/&/g,'&amp;')),'Every improvement is available without JavaScript');
   }
 }
 assert(!staticHTML.includes('stpa-recovery-guide'));
+assert(!staticHTML.includes('data-strengthen='),'The static reader has no inactive strengthening controls');
 const staticKey=staticHTML.match(/<!-- MAP-KEY-START -->([\s\S]*?)<!-- MAP-KEY-END -->/)[1];
 assert.equal((staticKey.match(/class="a1-map-overview"/g)||[]).length,1);
 assert.equal((staticKey.match(/class="a1-method-guide"/g)||[]).length,1);

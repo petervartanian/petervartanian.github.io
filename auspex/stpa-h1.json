@@ -204,7 +204,13 @@
         "H-01:1",
         "H-01:2",
         "H-01:R"
-      ]
+      ],
+      "improvement": {
+        "title": "Check the record before it follows someone",
+        "proposal": "Require a record supplier and the receiving decision-maker to verify identity, current status, and fitness for the stated use before consequential reuse. Hold uncertain matches for review.",
+        "test": "In a safe audit using synthetic records, introduce an outdated record and a plausible mistaken identity. Check whether review catches them before they change a decision.",
+        "remaining": "The underlying record may still omit context or contain an error that neither party can verify."
+      }
     },
     {
       "id": "SC2",
@@ -224,7 +230,13 @@
         "H-01:2",
         "H-01:5",
         "H-01:R"
-      ]
+      ],
+      "improvement": {
+        "title": "Give a challenge the power to pause",
+        "proposal": "Let a person challenge an adverse record through an accessible reviewer who can pause the consequential decision. Require the decision-maker to act on a substantiated correction.",
+        "test": "Trace a synthetic challenge through the full process. Check whether someone without specialist help can reach an empowered reviewer before the decision takes effect.",
+        "remaining": "Delay, cost, or fear of retaliation could prevent a person from using the process at all."
+      }
     },
     {
       "id": "SC3",
@@ -244,7 +256,13 @@
         "H-01:3",
         "H-01:4",
         "H-01:R"
-      ]
+      ],
+      "improvement": {
+        "title": "Look beyond the places already inspected",
+        "proposal": "Audit the model against independent observations that do not simply repeat earlier enforcement allocations. Require review of how the correction treats unobserved activity before using its outputs to allocate attention.",
+        "test": "In a controlled simulation, vary the relationship between reporting and discovery. Check whether the correction still avoids concentrating attention because earlier attention generated more records.",
+        "remaining": "Independent observations may be sparse, and their selection may carry a different bias."
+      }
     },
     {
       "id": "SC4",
@@ -267,7 +285,13 @@
         "H-01:3",
         "H-01:4",
         "H-01:R"
-      ]
+      ],
+      "improvement": {
+        "title": "Make permission to reuse travel with the record",
+        "proposal": "Attach the authorized purpose and provenance to each transfer, and require the recipient to review a new use. Keep an accountable record of recipients so restrictions and corrections can follow the data.",
+        "test": "In a synthetic audit, attempt a materially different use and send a correction downstream. Check whether recipients can be identified and the new use is held for review.",
+        "remaining": "Unrecorded copies or derived proxies could carry the same information beyond those restrictions."
+      }
     },
     {
       "id": "SC5",
@@ -290,7 +314,13 @@
         "H-01:4",
         "H-01:5",
         "H-01:R"
-      ]
+      ],
+      "improvement": {
+        "title": "Follow the correction to the decision",
+        "proposal": "Require recipients to confirm both that a correction reached their records and that affected decisions were reconsidered. Give an independent reviewer responsibility for unresolved downstream effects.",
+        "test": "Trace a synthetic corrected record through its recipients. Check the resulting decisions and later reuse, rather than stopping at a successful database update.",
+        "remaining": "A recipient may be missing from the record, or the same adverse inference may persist through another data field."
+      }
     }
   ],
   "nodes": [

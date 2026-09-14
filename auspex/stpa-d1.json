@@ -246,7 +246,13 @@
         "B-01:2"
       ],
       "test": "Do safe proxy evaluations show that relevant restrictions still bound assistance when model capability changes?",
-      "limit": "A barrier relying on weak fallback models can become brittle if those models gain the relevant capability."
+      "limit": "A barrier relying on weak fallback models can become brittle if those models gain the relevant capability.",
+      "improvement": {
+        "title": "Make capability changes reopen review",
+        "proposal": "Require a fresh safety decision when an AI service’s relevant capabilities or access conditions change. Use independent, safe proxy evaluations to check the assumptions behind the existing restrictions.",
+        "test": "In a harmless evaluation, change the service version or available tools. Check whether the changed assumptions trigger review before wider access is authorized.",
+        "remaining": "A proxy evaluation may miss consequential capabilities, and alternative services may remain available."
+      }
     },
     {
       "id": "SC2",
@@ -264,7 +270,13 @@
         "B-01:1"
       ],
       "test": "After enforcement, does available evidence show durable interruption of the concerning access rather than only closure of a named account?",
-      "limit": "Fragmented service boundaries and incomplete visibility can make lasting exclusion hard to establish."
+      "limit": "Fragmented service boundaries and incomplete visibility can make lasting exclusion hard to establish.",
+      "improvement": {
+        "title": "Check what enforcement actually covered",
+        "proposal": "Require the service operator to verify the scope of an enforcement action across access it is authorized to govern. Record coverage gaps and route unresolved activity to accountable safety review.",
+        "test": "Use synthetic accounts and harmless requests in an authorized exercise. Check whether the recorded enforcement scope matches the access actually restricted.",
+        "remaining": "The provider cannot establish control over unrelated services or activity outside its lawful visibility."
+      }
     },
     {
       "id": "SC3",
@@ -284,7 +296,13 @@
         "B-01:3"
       ],
       "test": "Does an unapproved change trigger a meaningful hold and independent review before consequential activity proceeds?",
-      "limit": "Misleading records, unclear ownership, or oversight that only checks the written proposal can leave actual activity outside effective scrutiny."
+      "limit": "Misleading records, unclear ownership, or oversight that only checks the written proposal can leave actual activity outside effective scrutiny.",
+      "improvement": {
+        "title": "Connect approval to what actually happens",
+        "proposal": "Tie authorized research activity to independent facility oversight that can pause work when its scope changes. Require renewed approval for material departures from the reviewed activity.",
+        "test": "Use a tabletop exercise with harmless records that diverge from an approved plan. Check whether the oversight function detects the discrepancy and can pause the activity.",
+        "remaining": "Misleading records or weak authority over the facility could still separate written approval from actual conduct."
+      }
     },
     {
       "id": "SC4",
@@ -304,7 +322,13 @@
         "B-01:R"
       ],
       "test": "Do safe facility exercises confirm that the relevant activity is stopped or contained and cannot resume on unresolved authorization?",
-      "limit": "A service account restriction cannot undo physical hazards outside the provider’s control."
+      "limit": "A service account restriction cannot undo physical hazards outside the provider’s control.",
+      "improvement": {
+        "title": "Give containment an independent confirmation",
+        "proposal": "After a reported deviation, require facility safety staff to verify that the affected activity is contained before restart. Include unresolved physical activity in that decision rather than relying on service-account closure.",
+        "test": "Run a safe preparedness exercise in which digital access is closed but the facility status remains unresolved. Check whether restart is withheld until that uncertainty is addressed.",
+        "remaining": "Incomplete reporting or activity outside the facility’s control could leave the affected scope uncertain."
+      }
     },
     {
       "id": "SC5",
@@ -325,7 +349,13 @@
         "B-01:R"
       ],
       "test": "In an appropriate preparedness exercise, do detection, coordination, and action reach the affected population before the modeled response window closes?",
-      "limit": "Delayed signals, insufficient capacity, and ineffective coordination can prevent a response from interrupting spread. Detection alone does not establish interruption."
+      "limit": "Delayed signals, insufficient capacity, and ineffective coordination can prevent a response from interrupting spread. Detection alone does not establish interruption.",
+      "improvement": {
+        "title": "Turn an early signal into a resourced response",
+        "proposal": "Assign an accountable public-health coordinator to evaluate early signals and activate the appropriate response capacity. Give clinical services a clear way to report when the planned response cannot be delivered.",
+        "test": "Use a preparedness exercise with synthetic signals and constrained response capacity. Check whether the warning leads to timely, feasible protective action.",
+        "remaining": "Delayed recognition and limited local capacity could still outpace the response."
+      }
     }
   ],
   "nodes": [

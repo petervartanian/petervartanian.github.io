@@ -188,7 +188,7 @@ const assertProposed=(route,incident='',c=route.controls[0])=>{
  assert(!elements.get('#workspace').hidden,'The inspector is visible');
  assert(panel().includes(`data-proposed-barrier="${escaped(route.id)}"`));
  assert(panel().includes('Proposed') && panel().includes('Unassessed'));
- assert(panel().includes('Would this hold against more capable AI?'));
+ assert(panel().includes(test.state.strengthen?'How could this barrier be stronger?':'Would this hold against more capable AI?'));
  assert(!panel().includes('question-lenses') && !panel().includes('role="tablist"'));
  assert.equal((panel().match(/data-constraint=/g)||[]).length,1);
  assert.equal((panel().match(/class="a1-barrier-card-heading"/g)||[]).length,1);
@@ -204,7 +204,8 @@ const assertProposed=(route,incident='',c=route.controls[0])=>{
 const assertClosed=(route,c=route.controls[0])=>{
  assert.equal(test.state.safeguard,'');assert.equal(test.state.inspect,false);
  assert(elements.get('#workspace').hidden);
- for(const name of ['s','c','q','inspect'])assert(!new URL(url).searchParams.has(name),`${name} clears on close`);
+ assert.equal(test.state.strengthen,false);
+ for(const name of ['s','c','q','inspect','strengthen'])assert(!new URL(url).searchParams.has(name),`${name} clears on close`);
  assert.equal(focused,`#pathway-map [data-safeguard="${route.id}"][data-constraint="${c.id}"]`,'Focus returns to the route barrier');
 };
 for(const m of models) {
@@ -217,8 +218,33 @@ for(const m of models) {
   assert(!map().includes('id="a1-overlay"'));
   assert(map().includes('<strong>Explanation:</strong>'));
   const selectedURL=url;
-  assert(panel().includes(escaped(c.text)) && panel().includes(escaped(c.limit)) && panel().includes(escaped(c.test)));
-  for(const owner of c.owners) assert(panel().includes(escaped(m.controllers.find(x=>x.id===owner).title)));
+  assert(panel().includes(escaped(c.text)) && panel().includes(escaped(c.limit)));
+  assert(!panel().includes('<details') && !panel().includes('No assessment of this safeguard'));
+  assert(panel().includes('Strengthen this barrier'));
+  const assessmentHTML=panel(), originalModels=JSON.stringify(context.window.AuspexSTPAModels);
+  const originalMap=map();
+  click('#barrier-panel','strengthen','1');assertProposed(route,'',c);
+  assert.equal(test.state.strengthen,true);assert.equal(new URL(url).searchParams.get('strengthen'),'1');
+  assert(panel().includes(escaped(c.improvement.title)) && panel().includes(escaped(c.improvement.proposal)));
+  assert(panel().includes(escaped(c.improvement.test)) && panel().includes(escaped(c.improvement.remaining)));
+  assert(!panel().includes('Basis and further work') && !panel().includes('<details'));
+  assert.equal(focused,'#barrier-panel [data-strengthen]','Focus follows the replaced action');
+  for(const owner of c.owners) {
+   const controller=m.controllers.find(x=>x.id===owner);
+   assert(panel().includes(escaped(controller.title)));
+   assert(!panel().includes(escaped(controller.responsibility)),'The proposal names the responsible owner without repeating their full role');
+  }
+  const sourcePart=html=>html.split('<div class="a1-barrier-evidence">')[1] || '';
+  assert.equal(sourcePart(panel()),sourcePart(assessmentHTML),'Real evidence remains available in both views');
+  assert.equal(map(),originalMap,'Trying a proposal does not recolor or change the pathway');
+  assert.equal(JSON.stringify(context.window.AuspexSTPAModels),originalModels,'Trying a proposal never changes source data');
+  const proposalURL=url;
+  test.readLocation();assertProposed(route,'',c);assert.equal(test.state.strengthen,true);assert.equal(url,proposalURL);
+  url=selectedURL;windowListeners.popstate();assert.equal(test.state.strengthen,false);assert.equal(panel(),assessmentHTML);
+  url=proposalURL;windowListeners.popstate();assert.equal(test.state.strengthen,true);
+  click('#barrier-panel','strengthen','0');assert.equal(test.state.strengthen,false);assert.equal(url,selectedURL);assert.equal(panel(),assessmentHTML);
+  click('#barrier-panel','strengthen','1');click('#barrier-panel','close-inspector');assertClosed(route,c);
+  clickProposal(route,c);assert.equal(test.state.strengthen,false,'Reopening starts with the actual assessment');
   for(const other of route.controls.filter(x=>x.id!==c.id)) assert(!panel().includes(`data-constraint="${other.id}"`),'Only the clicked barrier opens');
   if(m.controlEvidence) assert.equal(panel().includes(escaped(m.controlEvidence.text)),c.id===m.controlEvidence.constraint);
   for(const q of questionNames) {
@@ -232,6 +258,11 @@ for(const m of models) {
   const old=new URL(selectedURL);old.searchParams.delete('c');url=old.href;test.readLocation();assertProposed(route);
   proposedCount++;
  }
+ const multi=proposals.find(route=>route.controls.length>1);
+ if(multi) {
+  clickProposal(multi,multi.controls[0]);click('#barrier-panel','strengthen','1');
+  clickProposal(multi,multi.controls[1]);assert.equal(test.state.strengthen,false);
+ }
  const route=proposals[0];
  const configs=Object.entries(m.presentation.overlays).map(([incident,config])=>({config,a:context.window.AuspexData.assessments.find(a=>a.pathway===m.pathway&&a.incident===incident)}));
  for(const {a} of configs)for(const proposal of proposals)for(const c of proposal.controls) {
@@ -242,14 +273,15 @@ for(const m of models) {
  const [first,second]=configs;
  click('#incident-rail','case',first.a.id);click('#pathway-map','explore-connection');
  click('#pathway-map','safeguard',route.id);assertProposed(route,first.a.incident);singleCase(first.config);
- click('#pathway-map','clear-incident');assertProposed(route);assert(!map().includes('id="a1-overlay"'));
+ click('#barrier-panel','strengthen','1');
+ click('#pathway-map','clear-incident');assertProposed(route);assert.equal(test.state.strengthen,true);assert(!map().includes('id="a1-overlay"'));
  click('#incident-rail','case',first.a.id);assertProposed(route,first.a.incident);
- click('#incident-rail','case',second.a.id);assertProposed(route,second.a.incident);
+ click('#incident-rail','case',second.a.id);assertProposed(route,second.a.incident);assert.equal(test.state.strengthen,true);
  assert.equal(test.state.exploration,false);singleCase(second.config);
  const related=stpa.barriers(second.a).find(b=>route.controls[0].id===b.constraint);
  if(related) {
   click('#barrier-panel','related-barrier',related.id);
-  assert.equal(test.state.safeguard,'');assert.equal(test.state.barrier,related.id);assert.equal(test.state.inspect,true);
+  assert.equal(test.state.safeguard,'');assert.equal(test.state.barrier,related.id);assert.equal(test.state.inspect,true);assert.equal(test.state.strengthen,false);
   assert(panel().includes(escaped(related.title)));
   click('#pathway-map','safeguard',route.id);assertProposed(route,second.a.incident);
  }
@@ -282,6 +314,39 @@ for(const p of context.window.AuspexData.pathways.filter(p=>!stpa.has(p.id))) {
  assert(!new URL(url).searchParams.has('s'));assert.equal(map(),'');
 }
 assert.equal(proposedCount,68);
+
+// Every incident assessment retains its state, its evidence, and its identity when exploring a change.
+let incidentImprovements=0;
+for(const m of models) {
+ for(const incident of Object.keys(m.presentation.overlays)) {
+  url=`file:///fixture/auspex/index.html?p=${m.displayId}&i=${incident}`;test.readLocation();
+  const a=context.window.AuspexData.assessments.find(a=>a.pathway===m.pathway && a.incident===incident);
+  for(const b of stpa.barriers(a)) {
+   click('#pathway-map','overlay-barrier',b.id);
+   const initial=panel(), initialURL=url, modelBefore=JSON.stringify(m), mapBefore=map();
+   const stateHeader=html=>html.match(/<header class="a1-barrier-card-heading">[\s\S]*?<\/header>/)[0];
+   assert(initial.includes('Strengthen this barrier') && !initial.includes('<details'));
+   click('#barrier-panel','strengthen','1');
+   assert.equal(test.state.strengthen,true);assert.equal(stateHeader(panel()),stateHeader(initial));
+   assert.equal(map(),mapBefore);assert.equal(JSON.stringify(m),modelBefore);
+   const change=b.candidate?m.constraints.find(c=>c.id===b.constraint).improvement:b.reinforcement;
+   assert(panel().includes(escaped(change.proposal)) && panel().includes(escaped(change.test)));
+   assert(panel().includes(escaped(b.efficacy)),'Incident evidence is visible while developing a proposal');
+   assert.equal((panel().match(/class="a1-barrier-card-heading"/g)||[]).length,1,'A proposal is not presented as a second assessed barrier');
+   const changedURL=url;test.readLocation();assert.equal(test.state.strengthen,true);assert.equal(url,changedURL);
+   click('#barrier-panel','strengthen','0');assert.equal(panel(),initial);assert.equal(url,initialURL);
+   click('#barrier-panel','strengthen','1');keydown('#barrier-panel','Escape');assert.equal(test.state.strengthen,false);assert.equal(test.state.inspect,false);
+   assert(!new URL(url).searchParams.has('strengthen'));
+   incidentImprovements++;
+  }
+ }
+}
+assert.equal(incidentImprovements,19);
+for(const params of ['p=A-2&strengthen=1','p=A-1&strengthen=1','p=A-1&s=missing&strengthen=1']) {
+ url='file:///fixture/auspex/index.html?'+params;test.readLocation();
+ assert.equal(test.state.strengthen,false);assert(!new URL(url).searchParams.has('strengthen'));
+}
+
 
 // Feed authored rectangles to draw() to test geometry/button correspondence.
 // This does not measure, render, reconstruct, or screenshot the actual page.
@@ -375,4 +440,4 @@ Object.defineProperty(document,'activeElement',activeDescriptor);geometryMobile=
 assert.equal(drawnRoutes,136);
 assert.equal(connectedArrows,models.reduce((n,m)=>n+m.links.length,0)*2);
 assert.equal(dashedArrows,models.reduce((n,m)=>n+m.links.filter(l=>l.kind==='optional').length,0)*2);
-console.log(`Passed all ${count} incident flows and ${proposedCount} individual barrier inspections across seven models, single readings and legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks also match all ${drawnRoutes} desktop/mobile barrier marks to their controls, all ${connectedArrows} arrows to destination borders, and all ${dashedArrows} dashed arrow endings. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);
+console.log(`Passed all ${count} incident flows and ${proposedCount} individual barrier inspections across seven models, 35 tailored improvements and 19 incident improvement views, unchanged source states, legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks also match all ${drawnRoutes} desktop/mobile barrier marks to their controls, all ${connectedArrows} arrows to destination borders, and all ${dashedArrows} dashed arrow endings. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);
