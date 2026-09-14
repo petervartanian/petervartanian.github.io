@@ -165,11 +165,16 @@
 #app[data-stpa='true'] .pathway-heading { display: grid; grid-template-columns: minmax(0,1fr) minmax(370px,1.08fr); align-items: center; gap: 18px 25px; margin-bottom: 18px; }
 #app[data-stpa='true'] .pathway-heading h2 { grid-column: 1; grid-row: 1; }
 .a1-context-panel { grid-column: 2; grid-row: 1; min-width: 0; }
-.a1-context-cloud { position: relative; isolation: isolate; margin: 0; padding: 10px 24px 16px; min-height: 215px; text-align: center; }
+.a1-context-cloud { margin: 0; text-align: center; }
+.a1-cloud-body { position: relative; isolation: isolate; margin: 0; padding: 28px 24px 16px; min-height: 215px; }
 .a1-cloud-atmosphere { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .a1-cloud-wisps { fill: none; stroke: var(--accent,#617080); stroke-width: 1; opacity: .16; }
 .a1-cloud-wisps .a1-cloud-drift { opacity: .55; }
-.a1-cloud-title { color: var(--accent); font: 500 11px/1.3 var(--sans); text-align: center; white-space: nowrap; margin-bottom: 13px; }
+.a1-context-cloud > .a1-cloud-title { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 0 14px 6px; color: var(--accent); font: 400 clamp(22px,1.8vw,25px)/1.25 var(--sans); text-align: center; }
+.a1-cloud-title::before, .a1-cloud-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 35%,transparent)); }
+.a1-cloud-title::after { transform: scaleX(-1); }
+.a1-cloud-label { white-space: nowrap; }
+.a1-cloud-number { display: inline-block; margin-right: 3px; font: 500 11px/1 var(--sans); vertical-align: super; }
 .a1-cloud-conditions, .a1-cloud-actors { display: flex; flex-wrap: wrap; justify-content: center; gap: 13px 18px; }
 .a1-cloud-conditions > span { flex: 0 1 120px; }
 .a1-cloud-actors > div { flex: 0 1 112px; min-width: 0; }
@@ -187,7 +192,7 @@
   .a1-context-body { grid-template-columns: 1fr; gap: 17px; }
 }
 @media (max-width: 480px) {
-  .a1-context-cloud { padding: 8px 7px 12px; }
+  .a1-cloud-body { padding: 24px 7px 12px; }
   .a1-cloud-conditions, .a1-cloud-actors { gap: 10px; }
   .a1-cloud-conditions { font-size: 12px; }
   .a1-cloud-actors { margin-top: 25px; }
