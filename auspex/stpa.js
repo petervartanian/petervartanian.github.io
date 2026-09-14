@@ -88,7 +88,7 @@
       const c=control(id);
       if (!c) continue;
       items.push({id:`candidate-${id}`, title:c.title, target:config.target, candidate:true, constraint:id,
-        condition:'unknown', states:['unknown'], conditionBasis:'Proposed safeguard; the announcement does not establish its implementation or effectiveness.',
+        condition:'unknown', states:['unknown'], conditionBasis:'This safeguard is proposed; the announcement does not establish its implementation or effectiveness.',
         result:id==='SC1'?'Would an unlawful order be blocked?':'Would adverse findings change the decision?', outcome:'Proposed safeguard',
         action:c.text, efficacy:`${config.observed} ${config.notEstablished}`, evidence:list(a.evidence),
         durability:c.limit, failure:c.limit, strongerAI:c.limit, limitType:'safeguard',
@@ -124,17 +124,17 @@
       <h4 class="a1-overlay-title">${notedTitle(config.title,'a1-case-reference','a1-case-footnote','Scope of this case')}<span class="source-dots">${evidenceMarks(a.evidence)}</span></h4>
       <p class="a1-overlay-observed">${esc(config.observed)}</p>
       ${items.length?`<div class="a1-overlay-barriers">${items.map(b=>`<div class="a1-observed-control"><button data-overlay-barrier="${esc(b.id)}" aria-label="Inspect ${esc(b.title)}: ${esc(barrierStates(b).map(conditionLabel).join(', '))}" aria-pressed="${inspectedBarrier===b.id}" aria-controls="workspace">${barrierGlyph(b.condition)}<span><strong>${esc(b.title)}</strong><small class="a1-barrier-condition">${esc(barrierStates(b).map(conditionLabel).join(' · '))}</small></span><span class="a1-inspect-arrow" aria-hidden="true">↗</span></button><p>${esc(b.result || b.conditionBasis || '')}</p></div>`).join('')}</div>`:''}
-      <details class="a1-case-evidence"><summary>Evidence limits</summary><p>${esc(config.notEstablished)}</p></details>
+      <p class="a1-case-evidence"><strong>Evidence limits /</strong> ${esc(config.notEstablished)}</p>
       ${config.tentative?`<div class="a1-open-question"><span>Open question for ${esc(node(config.tentative.target).number)}</span><button data-explore-connection aria-expanded="${exploration}" aria-controls="a1-question-detail">${esc(config.tentative.question)}<span class="a1-question-toggle" aria-hidden="true">${exploration?'−':'+'}</span></button><div class="a1-question-detail" id="a1-question-detail"${exploration?'':' hidden'}><p>${esc(config.tentative.basis)}${cite(config.tentative.sources)}</p><p>${esc(config.tentative.unresolved)}</p></div></div>`:''}
     </section>`;
   }
   function stateGuide(selected = 'unknown') {
     const current=byId(stateDefinitions,selected) || byId(stateDefinitions,'unknown');
     const exampleSource=byId(stateModel.sources,current.exampleSource);
-    return `<div class="stpa-state-explorer"><div class="stpa-state-menu" role="group" aria-label="Explore barrier states">${stateDefinitions.map(s=>`<button data-explore-state="${s.id}" aria-pressed="${s.id===current.id}" aria-controls="state-definition">${barrierGlyph(s.id)}<span>${esc(s.label)}</span></button>`).join('')}</div><section id="state-definition" class="stpa-state-definition" aria-live="polite">${barrierGlyph(current.id)}<div><h3>${esc(current.label)}</h3><p>${esc(current.definition)}</p><p class="stpa-state-question">${esc(current.question)}</p><p class="stpa-state-example">${esc(current.example)} ${sourceMark(exampleSource)}</p></div></section><details><summary>Brittleness & recovery</summary><p>A barrier can hold in one incident and still be brittle. Ask which change in capability, access, timing or operating conditions would defeat it.</p><p>Recovery stops escalation, limits harm or restores control after the loss-of-control event. Reinforcement strengthens a barrier.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">Recovery controls ↗</a></p></details></div>`;
+    return `<div class="stpa-state-explorer"><div class="stpa-state-menu" role="group" aria-label="Explore barrier states">${stateDefinitions.map(s=>`<button data-explore-state="${s.id}" aria-pressed="${s.id===current.id}" aria-controls="state-definition">${barrierGlyph(s.id)}<span>${esc(s.label)}</span></button>`).join('')}</div><section id="state-definition" class="stpa-state-definition" aria-live="polite">${barrierGlyph(current.id)}<div><h3>${esc(current.label)}</h3><p>${esc(current.definition)}</p><p class="stpa-state-question">${esc(current.question)}</p><p class="stpa-state-example">${esc(current.example)} ${sourceMark(exampleSource)}</p></div></section><details><summary>Brittleness & recovery</summary><p>A barrier can hold in one incident and still be brittle. Ask which change in capability, access, timing, or operating conditions would defeat it.</p><p>Recovery stops escalation, limits harm, or restores control after the loss-of-control event. Reinforcement strengthens a barrier.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">Recovery controls ↗</a></p></details></div>`;
   }
   function recoveryGuide() {
-    return `<div class="stpa-recovery-guide"><div class="stpa-change-flow"><span>Hazardous situation</span><span aria-hidden="true">→</span><strong>Recovery</strong><span aria-hidden="true">→</span><span>Escalation stopped, harm limited or control restored</span></div><p>Recovery acts on the affected system after the loss-of-control event. It can prevent a consequence, reduce its severity or restore effective control.</p><div class="stpa-change-flow"><span>Existing protection</span><span aria-hidden="true">→</span><strong>Reinforcement</strong><span aria-hidden="true">→</span><span>Strengthened barrier</span></div><p>Reinforcement changes a barrier relative to a baseline. A recovery barrier can be reinforced too. Repair restores a defective barrier’s intended function; reinforcement improves the protection.</p><p>The double-line route on this map shows the model’s stated recovery outcome. It remains conditional on an effective intervention.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">UK CAA · Recovery controls ↗</a></p></div>`;
+    return `<div class="stpa-recovery-guide"><div class="stpa-change-flow"><span>Hazardous situation</span><span aria-hidden="true">→</span><strong>Recovery</strong><span aria-hidden="true">→</span><span>Escalation stopped, harm limited, or control restored</span></div><p>Recovery acts on the affected system after the loss-of-control event. It can prevent a consequence, reduce its severity, or restore effective control.</p><div class="stpa-change-flow"><span>Existing protection</span><span aria-hidden="true">→</span><strong>Reinforcement</strong><span aria-hidden="true">→</span><span>Strengthened barrier</span></div><p>Reinforcement changes a barrier relative to a baseline. A recovery barrier can be reinforced too. Repair restores a defective barrier’s intended function; reinforcement improves the protection.</p><p>The double-line route on this map shows the model’s stated recovery outcome. It remains conditional on an effective intervention.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">UK CAA · Recovery controls ↗</a></p></div>`;
   }
   function routeSymbol(kind) {
     const path=kind==='recovery'
@@ -147,14 +147,14 @@
   const routeDefinitions=[
     {id:'contribution',label:'Possible progression',definition:'One component may contribute to another. Any stated conditions must also hold. These arrows cover both contributing causes and possible consequences; they do not assign a probability.'},
     {id:'optional',label:'Optional route',definition:'A dashed branch can be bypassed. The pathway can continue through another route; taking this branch can still depend on stated conditions.'},
-    {id:'recovery',label:'Recovery',definition:'Two fine parallel green lines lead toward containing harm or restoring control. Its filled arrowhead marks the direction; success depends on the intervention working.'},
+    {id:'recovery',label:'Recovery',definition:'Two fine parallel green lines lead toward containing harm or restoring control. A filled arrowhead marks their direction; success depends on the intervention working.'},
     {id:'feedback',label:'Feedback',definition:'A dotted return line with two arrowheads shows how an outcome changes an earlier input or decision. It can amplify harm or help correct it.'}
   ];
   function overlayGuide() {
-    return '<h3>Incidents on the map</h3><p>Select a dated case to see what happened at the relevant component, then inspect a barrier. Select another case to switch, or close the card to clear it.</p><p>An open question stays inside the incident card. Open it to read why it matters and what the case leaves unanswered. The related component is highlighted; the incident evidence and barrier assessments stay at their original location.</p>';
+    return '<h3>Inspect a barrier</h3><p>Select a barrier mark on a route to inspect its proposed mechanism, responsibilities, and tests. Its performance is unassessed unless relevant evidence establishes how it performed.</p><h3>Incidents on the map</h3><p>Select a dated case to see what happened at the relevant component. Its barrier buttons open the assessments supported by that case. Select another case to switch, or close the card to clear it.</p><p>Open the question inside the incident card to read what the case leaves unanswered. The related component is highlighted; the incident evidence and barrier assessments stay at their original location.</p>';
   }
   function pathsGuide(staticMode=false) {
-    return `<div class="a1-path-guide"><div class="a1-stage-guide"><span><b>0.</b> Context</span><span><b>1.</b> Precursors</span><span><b>2.</b> Event</span><span><b>3.</b> Consequences</span><span class="is-recovery"><b>R</b> Recovery</span></div><p>The cloud at 0 shows the assumed upstream conditions and the authority exercised within them. Those conditions shape decisions and controls; feedback can change the setting in turn. The full STPA analysis examines the control actions, feedback, responsibilities and constraints behind this view.</p><p>Precursors may lead to the central loss-of-control event. Consequences depend on what follows, and recovery may interrupt that progression.</p><dl class="a1-path-definitions">${routeDefinitions.map(r=>`<div>${routeSymbol(r.id)}<dt>${esc(r.label)}</dt><dd>${esc(r.definition)}</dd></div>`).join('')}<div class="a1-safeguard-definition">${routeSymbol('safeguard')}<dt>Proposed safeguard</dt><dd>A short capped mark shows a proposed safeguard: an intentional barrier to progression. Proposed describes its status, not an assessed performance state. Its effectiveness is not established by the pathway. Actual barrier states belong to the cited incident.</dd></div></dl><p>Possible means a transition could happen. Conditional names what else must hold. Both use the forward arrow, with the condition retained beside the relevant component or in the route description. Optional means the pathway can bypass that branch.</p>${staticMode?'':`<details class="a1-proposed-register"><summary>Safeguards in this pathway</summary>${projectedLinks().filter(l=>proposedSafeguard(l)).map(l=>`<p><strong>${esc(node(l.from).number)} → ${esc(node(l.to).number)}</strong> ${esc(proposedSafeguard(l))}</p>`).join('')}</details>`}${overlayGuide()}<p class="a1-guide-source">Drawing conventions are specific to this site. <a href="https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/about-bowtie/how-does-bowtie-work/" target="_blank" rel="noopener noreferrer">Bow-tie structure ↗</a> · <a href="https://psas.scripts.mit.edu/home/get_file.php?name=STPA_Handbook.pdf" target="_blank" rel="noopener noreferrer">STPA handbook ↗</a></p>${staticMode?`<h3>Barrier modes</h3><dl class="a1-path-definitions">${stateDefinitions.map(s=>`<div>${barrierGlyph(s.id)}<dt>${esc(s.label)}</dt><dd>${esc(s.definition)}</dd></div>`).join('')}</dl>${recoveryGuide()}`:''}</div>`;
+    return `<div class="a1-path-guide"><div class="a1-stage-guide"><span><b>0.</b> Context</span><span><b>1.</b> Precursors</span><span><b>2.</b> Event</span><span><b>3.</b> Consequences</span><span class="is-recovery"><b>R</b> Recovery</span></div><p>The cloud at 0 shows the assumed upstream conditions and the authority exercised within them. Those conditions shape decisions and controls; feedback can change the setting in turn. The full STPA analysis examines the control actions, feedback, responsibilities, and constraints behind this view.</p><p>Precursors may lead to the central loss-of-control event. Consequences depend on what follows, and recovery may interrupt that progression.</p><dl class="a1-path-definitions">${routeDefinitions.map(r=>`<div>${routeSymbol(r.id)}<dt>${esc(r.label)}</dt><dd>${esc(r.definition)}</dd></div>`).join('')}<div class="a1-safeguard-definition">${routeSymbol('safeguard')}<dt>Proposed safeguard</dt><dd>A short capped mark shows a proposed safeguard: an intentional barrier to progression. Proposed describes its status, not an assessed performance state. Its effectiveness is not established by the pathway. Performance states describe the evidence from a particular incident.</dd></div></dl><p>Possible means a transition could happen. Conditional names what else must hold. Both use the forward arrow, with the condition retained beside the relevant component or in the route description. Optional means the pathway can bypass that branch.</p>${staticMode?'':`<details class="a1-proposed-register"><summary>Safeguards in this pathway</summary>${projectedLinks().filter(l=>proposedSafeguard(l)).map(l=>`<p><strong>${esc(node(l.from).number)} → ${esc(node(l.to).number)}</strong> ${esc(proposedSafeguard(l))}</p>`).join('')}</details>`}${overlayGuide()}<p class="a1-guide-source">Drawing conventions are specific to this site. <a href="https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/about-bowtie/how-does-bowtie-work/" target="_blank" rel="noopener noreferrer">Bow-tie structure ↗</a> · <a href="https://psas.scripts.mit.edu/home/get_file.php?name=STPA_Handbook.pdf" target="_blank" rel="noopener noreferrer">STPA handbook ↗</a></p>${staticMode?`<h3>Barrier modes</h3><dl class="a1-path-definitions">${stateDefinitions.map(s=>`<div>${barrierGlyph(s.id)}<dt>${esc(s.label)}</dt><dd>${esc(s.definition)}</dd></div>`).join('')}</dl>${recoveryGuide()}`:''}</div>`;
   }
   function mapGuide(mode='paths',selected='unknown') {
     const tabs=[['paths','Path types'],['barriers','Barrier modes'],['recovery','Recovery & reinforcement']];
@@ -182,14 +182,14 @@
     };
     const headings={before:'1. Precursors',centre:'2. Event',after:'3. Consequences',recovery:'R. Recovery'};
     const kinds=new Set(projectedLinks().map(l=>(l.kind || l.type)==='continuation'?'contribution':l.kind || l.type));
-    return `<section class="a1-map-field"><div id="a1-route" class="a1-route${config?' has-overlay':''}" data-model-pathway="${esc(model.pathway)}" aria-label="Hypothetical pathway: contributing conditions, loss of control, conditional consequences and recovery">${['before','centre','after','recovery'].map(wing=>groups[wing].length?`<section class="a1-region a1-region-${wing}" data-wing="${wing}" aria-label="${headings[wing]}"><h3 class="a1-region-heading">${headings[wing]}</h3>${groups[wing].map(cell).join('')}</section>`:'').join('')}</div></section>
+    return `<section class="a1-map-field"><div id="a1-route" class="a1-route${config?' has-overlay':''}" data-model-pathway="${esc(model.pathway)}" aria-label="Hypothetical pathway: contributing conditions, loss of control, conditional consequences, and recovery">${['before','centre','after','recovery'].map(wing=>groups[wing].length?`<section class="a1-region a1-region-${wing}" data-wing="${wing}" aria-label="${headings[wing]}"><h3 class="a1-region-heading">${headings[wing]}</h3>${groups[wing].map(cell).join('')}</section>`:'').join('')}</div></section>
     <p class="a1-node-note" id="a1-node-note" tabindex="-1"${config && (selected===anchor || selected===tentativeAnchor)?' hidden':''}>${esc(node(selected)?.text || model.summary)}</p>${config?`<p class="a1-footnote" id="a1-case-footnote" tabindex="-1"><a href="#a1-case-reference" aria-label="Return to case title">*</a> ${esc(config.limit)}</p>`:''}${node(selected)?.type==='recovery'?'<button class="a1-recovery-link" data-recovery-info>Recovery & reinforcement ↗</button>':''}
     <div class="a1-map-key" role="group" aria-label="Path and barrier key">${routeDefinitions.filter(r=>kinds.has(r.id)).map(r=>`<button data-map-guide="paths" aria-haspopup="dialog" aria-label="Explain ${esc(r.label.toLowerCase())}">${routeSymbol(r.id)}<span>${esc(r.label)}</span></button>`).join('')}<button data-map-guide="paths" aria-haspopup="dialog" aria-label="Explain proposed safeguards">${routeSymbol('safeguard')}<span>Proposed safeguard</span></button><button class="a1-barrier-key" data-map-guide="barriers" aria-haspopup="dialog">${barrierGlyph('intact')}<span>Barrier modes ↗</span></button></div>`;
   }
   function targetButton(id) { return Array.from(document.querySelectorAll('#a1-route [data-node]')).find(el=>el.dataset.node===id); }
   function analysis() {
     return `<div class="stpa-analysis-body">
-      <p class="stpa-provisional">Provisional STPA model. Source evidence and hypothetical scenarios are distinguished throughout; the control requirements and test questions are analyst proposals.</p>
+      <p class="stpa-provisional">This STPA model is provisional. Source evidence and hypothetical scenarios are distinguished throughout; the control requirements and test questions are analyst proposals.</p>
       <section class="stpa-method-section"><h3>1. Define the purpose and boundary</h3><p>${esc(model.purpose)}</p><p>${esc(model.scope)}</p><p class="stpa-muted">${esc(model.boundary)}</p>
         <div class="stpa-register-pair"><div><h4>Losses to prevent</h4>${model.losses.map(x=>`<article><h5>${tag(x.id)} ${esc(x.title)}</h5><p>${esc(x.text)}</p></article>`).join('')}</div><div><h4>Hazardous system states</h4>${model.hazards.map(x=>`<article><h5>${tag(x.id)} ${esc(x.title)}</h5><p>${esc(x.text)} ${refs(x.losses)}</p></article>`).join('')}</div></div>
       </section>
@@ -197,16 +197,16 @@
         <div class="stpa-loops">${model.controlLoops.map(l=>`<article class="stpa-loop"><div class="stpa-loop-row"><div>${tag(l.controller)}<strong>${esc(controller(l.controller).title)}</strong></div><div class="stpa-action"><span>${tag(l.id)} ${esc(l.action)}</span><span aria-hidden="true">→</span></div><div>${tag(l.process)}<strong>${esc(controller(l.process).title)}</strong></div></div><p class="stpa-feedback"><span aria-hidden="true">↶</span> Feedback: ${esc(l.feedback)}</p><p class="stpa-loop-refs">Required constraints: ${refs(l.constraints)}</p></article>`).join('')}</div>
         <details><summary>Responsibilities and assumptions</summary>${model.controllers.map(c=>`<article class="stpa-responsibility"><h4>${tag(c.id)} ${esc(c.title)}</h4><p>${esc(c.responsibility)}</p><p><strong>Feedback needed:</strong> ${esc(c.feedback)}</p><p><strong>Assumption to test:</strong> ${esc(c.assumption)}</p></article>`).join('')}</details>
         <h4>Required controls and their limits</h4><p class="stpa-muted">These are proposed constraints. Naming a control does not establish that it exists or works.</p>
-        <div class="stpa-controls">${model.constraints.map(c=>`<article id="stpa-${c.id}" tabindex="-1"><h4>${tag(c.id)} ${esc(c.title)}</h4><p class="stpa-role">${esc(c.role)} · owners ${esc(c.owners.join(', '))} · ${esc(c.hazards.join(', '))}</p><p>${esc(c.text)}</p><p><strong>Test:</strong> ${esc(c.test)}</p><p><strong>Could be defeated by:</strong> ${esc(c.limit)}</p>${c.id===model.controlEvidence?.constraint?'<a href="#stpa-control-evidence">Compare source evidence ↓</a>':''}</article>`).join('')}</div>
+        <div class="stpa-controls">${model.constraints.map(c=>`<article id="stpa-${c.id}" tabindex="-1"><h4>${tag(c.id)} ${esc(c.title)}</h4><p class="stpa-role">${esc(c.role)} · owners ${esc(c.owners.join(', '))} · ${esc(c.hazards.join(', '))}</p><p>${esc(c.text)}</p><p><strong>Test:</strong> ${esc(c.test)}</p><p><strong>Failure conditions:</strong> ${esc(c.limit)}</p>${c.id===model.controlEvidence?.constraint?'<a href="#stpa-control-evidence">Compare source evidence ↓</a>':''}</article>`).join('')}</div>
       </section>
-      <section class="stpa-method-section"><h3>3. Identify unsafe control actions</h3><p>Each entry specifies a controller, an action and the context in which that action becomes hazardous. These four categories classify unsafe control; they are not four events in a timeline.</p>
+      <section class="stpa-method-section"><h3>3. Identify unsafe control actions</h3><p>Each entry specifies a controller, an action, and the context in which that action becomes hazardous. These four categories classify unsafe control; they are not four events in a timeline.</p>
         <div class="stpa-ucas">${model.unsafeActions.map(u=>`<article><p class="stpa-role">${tag(u.id)} ${esc(u.type)}</p><h4>${esc(controller(u.controller).title)}: ${esc(u.action.toLowerCase())}</h4><p><strong>Unsafe when:</strong> ${esc(u.context)}</p><p class="stpa-trace">${refs([u.loop,...u.hazards,...u.constraints])}</p></article>`).join('')}</div>
-        <p class="stpa-muted">Illustrative coverage across selected actions. A complete analysis must examine every relevant control action under all four categories.</p>
+        <p class="stpa-muted">The examples cover selected control actions. A complete analysis must examine every relevant control action under all four categories.</p>
       </section>
       <section class="stpa-method-section"><h3>4. Explain the loss scenarios</h3><p>Examine both why unsafe control actions might occur and why an appropriate control action might fail to execute or achieve its intended effect.</p>
         ${model.scenarios.map(s=>`<article class="stpa-scenario"><h4>${tag(s.id)} ${esc(s.title)}</h4><p class="stpa-role">${esc(s.archetype)}</p><p>${esc(s.text)}</p><p><strong>Unresolved:</strong> ${esc(s.unknown)}</p><p class="stpa-trace">${refs([...s.ucas,...s.hazards])} · milestones ${esc(s.nodes.map(id=>node(id).number).join(', '))} ${cite(s.evidence)}</p></article>`).join('')}
       </section>
-      <section class="stpa-method-section"><h3>What might limit progression?</h3><p>A safeguard, a lack of capability and a lack of opportunity have different implications as AI develops.</p><div class="stpa-limit-types">${model.limitingConditions.map(l=>`<article><h4>${esc(l.kind)}</h4><p>${esc(l.example)}</p><p>${esc(l.question)}</p></article>`).join('')}</div></section>
+      <section class="stpa-method-section"><h3>What might limit progression?</h3><p>A safeguard, a lack of capability, and a lack of opportunity have different implications as AI develops.</p><div class="stpa-limit-types">${model.limitingConditions.map(l=>`<article><h4>${esc(l.kind)}</h4><p>${esc(l.example)}</p><p>${esc(l.question)}</p></article>`).join('')}</div></section>
       ${controlEvidence()}
       <section class="stpa-method-section"><h3>Method and source boundaries</h3><p>${esc(model.limits)}</p><p>${esc(model.numbering)}</p><p>${esc(model.schema)}</p><p>${esc(model.bowtie)}</p><p>Proximal and distal describe causal distance from a specified event or loss. They are not fixed stages or severity ranks. Recovery and later losses are examined relative to the specified loss-of-control boundary.</p>${sourceRegister()}</section>
     </div>`;
@@ -220,7 +220,7 @@
     return `<ol class="stpa-sources">${model.sources.map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ↗</a><p>${esc(s.locator)}. ${esc(s.use)}</p></li>`).join('')}</ol>`;
   }
   function guide() {
-    return '<p>Choose a case to see what was observed at the relevant component, then inspect a barrier and its brittleness: would it hold under more capable AI or different conditions?</p><p>The pathway is hypothetical. Evidence of a mechanism does not establish progression through the scenario.</p>';
+    return '<p>Inspect a barrier to see how it is meant to work and what could defeat it. Choose an incident to see what was observed.</p><p>The pathway is hypothetical. Evidence of a mechanism does not establish progression through the scenario.</p>';
   }
   function research() {
     return `<ul class="a1-sources">${model.sources.map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ↗</a></li>`).join('')}</ul><p><a href="pathways.html#${esc(model.pathway)}">Full research notes ↗</a></p>`;
@@ -233,6 +233,34 @@
     const ids=list(link.constraints);
     const shared=ids.length ? ids : list(node(link.from)?.constraints).filter(id=>list(node(link.to)?.constraints).includes(id));
     return shared.map(id=>control(id)?.title).filter(Boolean).join('; ');
+  }
+  function proposedBarriers() {
+    return projectedLinks().map(link=>{
+      const ids=list(link.constraints);
+      const shared=ids.length?ids:list(node(link.from)?.constraints).filter(id=>list(node(link.to)?.constraints).includes(id));
+      return {id:link.id,title:proposedSafeguard(link),from:link.from,to:link.to,controls:shared.map(control).filter(Boolean)};
+    }).filter(b=>b.id && b.title && b.controls.length);
+  }
+  const proposedBarrier = id => proposedBarriers().find(b=>b.id===id);
+  function proposedBarrierView(id, question, assessment, evidenceMarks = () => '') {
+    const b=proposedBarrier(id);
+    if (!b) return '';
+    return `<div class="a1-proposed-study" data-proposed-barrier="${esc(id)}">${b.controls.map(c=>{
+      let content='';
+      if (question===0) content=`<p>${esc(c.text)}</p><dl class="a1-control-owners">${c.owners.map(owner=>`<div><dt>${esc(controller(owner).title)}</dt><dd>${esc(controller(owner).responsibility)}</dd></div>`).join('')}</dl>`;
+      if (question===1) {
+        const comparison=model.controlEvidence?.constraint===c.id?model.controlEvidence:null;
+        const related=barriers(assessment).filter(item=>item.constraint===c.id);
+        content=comparison?`<p>${esc(comparison.text)}${cite([comparison.source])}</p><p class="a1-evidence-boundary">${esc(comparison.limit)}</p>`:'<p>No assessment of this safeguard’s effectiveness is linked here.</p>';
+        if (related.length) content=related.map(item=>`<p>${esc(item.efficacy)}<span class="source-dots">${evidenceMarks(item.evidence)}</span></p><button class="a1-related-barrier" data-related-barrier="${esc(item.id)}">Inspect ${esc(overlayConfig(assessment).title)} evidence ↗</button>`).join('');
+      }
+      if (question===2) content=`<p>${esc(c.limit)}</p>`;
+      if (question===3) content=`<p><strong>Proposed test /</strong> ${esc(c.test)}</p>`;
+      return `<section data-constraint="${esc(c.id)}"><h4>${esc(c.title)}</h4>${content}</section>`;
+    }).join('')}</div>`;
+  }
+  function barrierButton(b, center, selected) {
+    return `<button class="a1-route-barrier" data-safeguard="${esc(b.id)}" style="left:${center[0].toFixed(1)}px;top:${center[1].toFixed(1)}px" aria-label="Inspect proposed barrier from ${esc(node(b.from).number)} to ${esc(node(b.to).number)}: ${esc(b.title)}" title="${esc(b.title)}" aria-pressed="${selected===b.id}" aria-controls="barrier-panel"><span class="sr-only">${esc(b.title)}</span></button>`;
   }
   const pointText = p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`;
   const polyline = points => points.map((p,i)=>`${i?'L':'M'}${pointText(p)}`).join(' ');
@@ -277,8 +305,13 @@
     return {d:sections.map(polyline).join(' '),sections:sections.map(p=>({d:polyline(p)})),rails,barrier,head,midpoint,tangent};
   }
   function draw() {
-    const map=document.querySelector('#pathway-map'), svg=document.querySelector('#map-connections'), route=document.querySelector('#a1-route');
-    if (!map?.offsetWidth || !svg || !route || !map.classList.contains('stpa-active')) return;
+    const map=document.querySelector('#pathway-map'), svg=document.querySelector('#map-connections'), route=document.querySelector('#a1-route'), controls=document.querySelector('#stpa-barrier-controls');
+    if (!map?.offsetWidth || !svg || !route || !map.classList.contains('stpa-active')) {
+      if (controls) controls.innerHTML='';
+      return;
+    }
+    const focused=document.activeElement?.closest?.('.a1-route-barrier')?.dataset.safeguard;
+    const buttons=[];
     const bounds=map.getBoundingClientRect(),routeBox=route.getBoundingClientRect();
     svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
     const mobile=matchMedia('(max-width: 740px)').matches, links=projectedLinks();
@@ -356,17 +389,23 @@
         }
       }
       const safeguard=proposedSafeguard(link), geometry=connectionGeometry(kind,points,Boolean(safeguard));
+      const proposed=proposedBarrier(link.id);
+      if (geometry.barrier && proposed) buttons.push(barrierButton(proposed,geometry.barrier.center,map.dataset.selectedSafeguard));
       const marker=kind==='feedback'?'stpa-arrow-feedback':'stpa-arrow';
       const classes=`stpa-connection${kind==='optional'?' is-optional':''}${kind==='feedback'?' is-feedback':''}`;
       const route=kind==='recovery'
         ? geometry.rails.map(rail=>`<path class="stpa-recovery-rail" d="${rail.d}"/>`).join('')+(geometry.head?`<path class="stpa-recovery-tip" d="${geometry.head.d}"/>`:'')
         : geometry.sections.map((section,index)=>`<path class="${classes}" d="${section.d}"${index===geometry.sections.length-1?` marker-end="url(#${marker})"`:''}/>`).join('');
-      const protection=geometry.barrier?`<g class="stpa-proposed-barrier" data-safeguard="${esc(safeguard)}" role="img" aria-label="Proposed safeguard: ${esc(safeguard)}"><path class="a1-barrier-stem" d="${geometry.barrier.stem}"/><path class="a1-barrier-caps" d="${geometry.barrier.caps}"/></g>`:'';
+      const protection=geometry.barrier?`<g class="stpa-proposed-barrier" data-safeguard-name="${esc(safeguard)}" role="img" aria-label="Proposed safeguard: ${esc(safeguard)}"><path class="a1-barrier-stem" d="${geometry.barrier.stem}"/><path class="a1-barrier-caps" d="${geometry.barrier.caps}"/></g>`:'';
       return `<g class="stpa-edge${kind==='recovery'?' is-recovery':''}" data-link="${esc(link.id || link.from+'→'+link.to)}" data-from="${esc(link.from)}" data-to="${esc(link.to)}"><title>${esc(link.label || 'Possible contribution')}${safeguard?` — Proposed safeguard: ${esc(safeguard)}`:''}</title>${route}${protection}</g>`;
     }).join('');
     const marker=(id,color)=>`<marker id="${id}" viewBox="0 0 8 8" refX="7" refY="4" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M1.5 1.5 6.5 4 1.5 6.5" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker>`;
     const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="11" refY="4" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
     svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${feedbackMarker}</defs>${paths}`;
+    if (controls) {
+      controls.innerHTML=buttons.join('');
+      if (focused) Array.from(controls.querySelectorAll('[data-safeguard]')).find(button=>button.dataset.safeguard===focused)?.focus({preventScroll:true});
+    }
   }
-  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle,mapGuide,pathsGuide,routeDefinitions,overlayAnchor,tentativeConnection,overlayGuide,contextCloud,connectionGeometry,routeSymbol};
+  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle,mapGuide,pathsGuide,routeDefinitions,overlayAnchor,tentativeConnection,overlayGuide,contextCloud,connectionGeometry,routeSymbol,proposedBarriers,proposedBarrier,proposedBarrierView,barrierButton};
 })();

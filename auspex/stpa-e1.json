@@ -14,7 +14,7 @@
     {
       "id": "unsafe-action",
       "label": "Unsafe control action",
-      "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+      "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
     },
     {
       "id": "scenario",
@@ -45,17 +45,17 @@
   "limitingConditions": [
     {
       "kind": "Safeguard",
-      "example": "Independently enforced review, access bounds or effective interruption.",
+      "example": "Independently enforced review, access bounds, or effective interruption.",
       "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
     },
     {
       "kind": "Capability limit",
-      "example": "The system cannot perform the required research, deception or physical task.",
+      "example": "The system cannot perform the required research, deception, or physical task.",
       "question": "Would increased capability remove this limit?"
     },
     {
       "kind": "Opportunity limit",
-      "example": "The necessary access, resources or institutional delegation is unavailable.",
+      "example": "The necessary access, resources, or institutional delegation is unavailable.",
       "question": "Can the system or another actor acquire what is missing?"
     },
     {
@@ -64,10 +64,10 @@
       "question": "What actually ended the episode, and would that circumstance recur?"
     }
   ],
-  "schema": "Selected losses, hazards, control relationships, contextual unsafe actions and loss scenarios are traced to constraints. Numbered milestones summarize this analysis; they are not STPA steps. Incident evidence and hypothetical continuations remain distinct.",
-  "limits": "A bounded first-pass analysis, not an exhaustive STPA or a completed CAST investigation. Selected actions illustrate the four unsafe-action categories; domain experts must examine every relevant action and context. No probabilities, barrier independence or comparative distance to catastrophe are inferred. Barrier condition describes the stated observation, not a prediction about a more capable AI.",
-  "scope": "A hypothetical regional electricity system using related AI forecasts or control recommendations: model procurement, dispatch authorization, physical protection, regional coordination and restoration. Essential-service operators are included at their electricity and backup interface.",
-  "purpose": "Keep electricity within safe operating limits and maintain essential services during disturbances, preventing prolonged outages, serious illness and loss of life.",
+  "schema": "Selected losses, hazards, control relationships, contextual unsafe actions, and loss scenarios are traced to constraints. Numbered milestones summarize this analysis; they are not STPA steps. Incident evidence and hypothetical continuations remain distinct.",
+  "limits": "This is a bounded first-pass analysis, not an exhaustive STPA or a completed CAST investigation. Selected actions illustrate the four unsafe-action categories; domain experts must examine every relevant action and context. No probabilities, barrier independence, or comparative distance to catastrophe are inferred. Barrier condition describes the stated observation, not a prediction about a more capable AI.",
+  "scope": "The hypothetical scenario concerns a regional electricity system using related AI forecasts or control recommendations. It includes model procurement, dispatch authorization, physical protection, regional coordination, and restoration. Essential services enter the analysis through their dependence on electricity and backup capacity.",
+  "purpose": "Keep electricity within safe operating limits and maintain essential services during disturbances, preventing prolonged outages, serious illness, and loss of life.",
   "boundary": "Functional roles describe an analytical system, not the organization chart of a particular utility. Historical blackouts test physical-control assumptions only. They are not AI incidents and do not validate the proposed AI initiating mechanism.",
   "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Both incident overlays are non-AI comparisons; neither establishes progression through the AI-related precursors.",
   "bowtie": "The centre is H1: grid instability exceeds available containment and interrupts regional supply. Prevention acts before this state; restoration and essential-service support can still prevent a public-health catastrophe. All right-hand transitions require additional conditions.",
@@ -75,7 +75,7 @@
     {
       "id": "L1",
       "title": "Prolonged loss of essential electricity",
-      "text": "People and organizations lose dependable power for care, water, temperature control and other essential activity."
+      "text": "People and organizations lose dependable power for care, water, temperature control, and other essential activity."
     },
     {
       "id": "L2",
@@ -105,7 +105,7 @@
     {
       "id": "H3",
       "title": "Essential-service recovery cannot bridge the outage",
-      "text": "Restoration, backup power or support arrives too late to sustain essential services through the interruption.",
+      "text": "Restoration, backup power, or support arrives too late to sustain essential services through the interruption.",
       "losses": [
         "L1",
         "L2"
@@ -116,36 +116,36 @@
     {
       "id": "C1",
       "title": "Planning and deployment authority",
-      "responsibility": "Authorize model use, establish operating envelopes and require independent contingency validation.",
-      "feedback": "Joint-system studies, model changes, protection settings and evidence of correlated failures.",
-      "assumption": "Different model names do not establish independent data, objectives or failure modes."
+      "responsibility": "Authorize model use, establish operating envelopes, and require independent contingency validation.",
+      "feedback": "Joint-system studies, model changes, protection settings, and evidence of correlated failures.",
+      "assumption": "Different model names do not establish independent data, objectives, or failure modes."
     },
     {
       "id": "C2",
       "title": "Grid operator and regional coordinator",
-      "responsibility": "Authorize dispatch, keep reserves, coordinate neighboring systems and initiate corrective action.",
-      "feedback": "Current topology, flows, voltage, reserve availability, tool health and confirmed execution.",
+      "responsibility": "Authorize dispatch, keep reserves, coordinate neighboring systems, and initiate corrective action.",
+      "feedback": "Current topology, flows, voltage, reserve availability, tool health, and confirmed execution.",
       "assumption": "An unalarmed display is not evidence of a secure physical system."
     },
     {
       "id": "C3",
       "title": "AI forecast and recommendation service",
-      "responsibility": "Provide bounded recommendations, uncertainty and versioned inputs within an approved operating role.",
-      "feedback": "Measurements, authorization limits and validation results.",
+      "responsibility": "Provide bounded recommendations, uncertainty, and versioned inputs within an approved operating role.",
+      "feedback": "Measurements, authorization limits, and validation results.",
       "assumption": "A high average forecast score does not establish safe joint behavior during unusual conditions."
     },
     {
       "id": "C4",
       "title": "Grid actuation and protection systems",
       "responsibility": "Execute dispatch and protection actions within coordinated physical limits and report actual state.",
-      "feedback": "Local electrical measurements, device status and operator commands.",
+      "feedback": "Local electrical measurements, device status, and operator commands.",
       "assumption": "A device protecting itself can still interact unsafely with regional protection."
     },
     {
       "id": "C5",
       "title": "Restoration and essential-service operators",
-      "responsibility": "Restore supply, activate tested backup and coordinate essential loads and public-health support.",
-      "feedback": "Energized-load verification, available power, fuel, communications and unmet essential needs.",
+      "responsibility": "Restore supply, activate tested backup, and coordinate essential loads and public-health support.",
+      "feedback": "Energized-load verification, available power, fuel, communications, and unmet essential needs.",
       "assumption": "Restored bulk supply and restored service at a hospital or water facility are different observations."
     }
   ],
@@ -187,7 +187,7 @@
       "controller": "C2",
       "process": "C5",
       "action": "Sequence restoration and prioritize essential load",
-      "feedback": "C5 reports actual restoration, available support and remaining unmet needs.",
+      "feedback": "C5 reports actual restoration, available support, and remaining unmet needs.",
       "constraints": [
         "SC4",
         "SC5"
@@ -212,7 +212,7 @@
         "S-01:2"
       ],
       "test": "Can related models produce individually plausible commands that violate a regional limit when executed together?",
-      "limit": "Shared inputs, missing external facilities or objectives that use up reserve margins."
+      "limit": "Shared inputs, missing external facilities, or objectives that use up reserve margins can undermine independent dispatch checks."
     },
     {
       "id": "SC2",
@@ -233,7 +233,7 @@
         "S-01:3"
       ],
       "test": "Do independent network simulations and staged drills contain the specified credible combinations of disturbances?",
-      "limit": "Unmodeled neighboring systems, stale topology, conflicting relay behavior or inadequate reserves."
+      "limit": "Unmodeled neighboring systems, stale topology, conflicting relay behavior, or inadequate reserves can defeat coordinated protection."
     },
     {
       "id": "SC3",
@@ -252,7 +252,7 @@
         "S-01:3"
       ],
       "test": "Does loss or staleness of a monitoring tool trigger a verified fallback and timely corrective decision?",
-      "limit": "Common telemetry failures, undetected backup failure and coordination delay."
+      "limit": "Common telemetry failures, undetected backup failure, and coordination delay can prevent timely corrective action."
     },
     {
       "id": "SC4",
@@ -271,8 +271,8 @@
         "S-01:4",
         "S-01:R"
       ],
-      "test": "Can restoration work when a neighboring supply, telecommunications service or usual recovery tool is unavailable?",
-      "limit": "Shared regional dependencies, inaccessible equipment and early restart."
+      "test": "Can restoration work when a neighboring supply, telecommunications service, or usual recovery tool is unavailable?",
+      "limit": "Shared regional dependencies, inaccessible equipment, and early restart can undermine restoration."
     },
     {
       "id": "SC5",
@@ -290,8 +290,8 @@
         "S-01:5",
         "S-01:R"
       ],
-      "test": "Can care, water and safe temperatures be sustained for the specified outage duration, including fuel delivery and staffing?",
-      "limit": "Fuel, water, communications and staff may depend on the same electricity system."
+      "test": "Can care, water, and safe temperatures be sustained for the specified outage duration, including fuel delivery and staffing?",
+      "limit": "Fuel, water, communications, and staff may depend on the same electricity system."
     }
   ],
   "nodes": [
@@ -303,7 +303,7 @@
       "title": "Related models shape dispatch",
       "shortLabel": "Related models shape dispatch",
       "text": "Operators rely widely on related AI recommendations while keeping tight operating margins.",
-      "requires": "Shared error modes, consequential authority and insufficient independent margin.",
+      "requires": "Shared error modes, consequential authority, and insufficient independent margin.",
       "mechanism": "Delegation creates a potential common failure route; widespread AI use alone does not establish unsafe dispatch.",
       "constraints": [
         "SC1"
@@ -327,7 +327,7 @@
       "title": "A shared error reaches the grid",
       "shortLabel": "A shared error reaches the grid",
       "text": "Erroneous recommendations are accepted into consequential dispatch or control.",
-      "requires": "An unusual condition, correlated error and authorization outside the safe envelope.",
+      "requires": "An unusual condition, correlated error, and authorization outside the safe envelope.",
       "mechanism": "Independent physical checks must fail or be bypassed before recommendation error becomes a hazardous command.",
       "constraints": [
         "SC1",
@@ -355,7 +355,7 @@
       "role": "Loss of control · H1",
       "title": "Instability defeats containment",
       "shortLabel": "Instability defeats containment",
-      "text": "Limits, reserves and protection fail to contain the disturbance, interrupting regional supply.",
+      "text": "Limits, reserves, and protection fail to contain the disturbance, interrupting regional supply.",
       "requires": "A destabilizing disturbance and insufficient or counterproductive coordinated response.",
       "mechanism": "This is the control-loss threshold. A widespread outage need not continue into failed restoration or mortality.",
       "constraints": [
@@ -384,7 +384,7 @@
       "title": "Essential services outlast backup",
       "shortLabel": "Essential services outlast backup",
       "text": "The outage lasts longer than restoration and backup can sustain essential services.",
-      "requires": "Sufficient outage duration, exposed essential loads and unavailable substitutes.",
+      "requires": "Sufficient outage duration, exposed essential loads, and unavailable substitutes.",
       "mechanism": "Cross-sector dependencies can defeat restoration and backup together; their independence must be tested.",
       "constraints": [
         "SC4",
@@ -409,7 +409,7 @@
       "role": "Further loss · L2",
       "title": "Illness and deaths increase",
       "shortLabel": "Illness and deaths increase",
-      "text": "Loss of care, water or safe temperatures causes excess illness and deaths.",
+      "text": "Loss of care, water, or safe temperatures causes excess illness and deaths.",
       "requires": "Vulnerable people are exposed long enough, and effective support remains unavailable.",
       "mechanism": "Mortality requires a separate exposure and public-health analysis. Neither mapped incident provides an AI-related mortality estimate.",
       "constraints": [
@@ -432,7 +432,7 @@
       "title": "Supply and essential care restored",
       "shortLabel": "Supply and essential care restored",
       "text": "Restoration and support re-establish sustained service within the affected area.",
-      "requires": "Available sources, safe switching, coordination and verification at essential loads.",
+      "requires": "Available sources, safe switching, coordination, and verification at essential loads.",
       "mechanism": "Successful recovery may limit duration and further harm even after prevention has failed.",
       "constraints": [
         "SC4",
@@ -582,7 +582,7 @@
       "evidence": [
         "MA"
       ],
-      "unknown": "The deployed models, common inputs, permitted authority and actual correlation of consequential errors."
+      "unknown": "The deployed models, common inputs, permitted authority, and actual correlation of consequential errors remain unspecified."
     },
     {
       "id": "LS2",
@@ -603,7 +603,7 @@
         "SW11",
         "NE03"
       ],
-      "unknown": "Which measurements remain independent, when the loss of awareness becomes visible and what action remains feasible."
+      "unknown": "The analysis has not established which measurements remain independent, when the loss of awareness becomes visible, or what action remains feasible."
     },
     {
       "id": "LS3",
@@ -620,7 +620,7 @@
       "evidence": [
         "SW11"
       ],
-      "unknown": "The physical response, protection timing and modeled boundary of every relevant scheme."
+      "unknown": "The physical response, protection timing, and modeled boundary of every relevant scheme still need to be established."
     },
     {
       "id": "LS4",
@@ -640,7 +640,7 @@
         "S-01:5"
       ],
       "evidence": [],
-      "unknown": "Duration, essential-load coverage, backup endurance, public-health exposure and counterfactual mortality."
+      "unknown": "The analysis has not established outage duration, essential-load coverage, backup endurance, public-health exposure, or counterfactual mortality."
     }
   ],
   "sources": [
@@ -649,28 +649,28 @@
       "title": "Leveson & Thomas · STPA Handbook (2018)",
       "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
       "locator": "Chapters 2 and 6",
-      "use": "Method for control, feedback, unsafe actions, loss scenarios and leading indicators."
+      "use": "This source supplies the method for analyzing control, feedback, unsafe actions, loss scenarios, and leading indicators."
     },
     {
       "id": "MA",
       "title": "Multi-Agent Risks from Advanced AI",
       "url": "https://arxiv.org/html/2502.14143v1",
       "locator": "Multi-agent coordination and correlated failure risks",
-      "use": "Research context for the proposed shared-model mechanism, not evidence of an AI blackout."
+      "use": "This source provides research context for the proposed shared-model mechanism. It does not provide evidence of an AI blackout."
     },
     {
       "id": "SW11",
       "title": "FERC and NERC · September 2011 Southwest blackout",
       "url": "https://www.ferc.gov/sites/default/files/2020-05/04-27-2012-ferc-nerc-report.pdf",
       "locator": "Executive summary, printed pp. 1–9; restoration p. 3",
-      "use": "Historical comparison for prevention, protection interactions and recovery. No AI initiation is established."
+      "use": "This source provides a historical comparison for prevention, protection interactions, and recovery. No AI initiation is established."
     },
     {
       "id": "NE03",
       "title": "US–Canada Task Force · August 2003 blackout",
       "url": "https://www.energy.gov/oe/articles/blackout-2003-final-report-august-14-2003-blackout-united-states-and-canada-causes-and",
       "locator": "Chapter 3, printed pp. 18–19; Chapter 9, pp. 136–137",
-      "use": "Historical comparison for failed situational awareness and backup monitoring. No AI initiation is established."
+      "use": "This source provides a historical comparison for failed situational awareness and backup monitoring. No AI initiation is established."
     }
   ],
   "additionalEvidence": {
@@ -683,7 +683,7 @@
         "locator": "Executive summary, printed p. 3; PDF page 5",
         "kind": "summary",
         "text": "FERC/NERC reports restoration of all affected load or customers in roughly 6–12 hours. Available power from the entities or their neighbors meant black-start plans were not used; some communication and coordination delays occurred.",
-        "scope": "Historical non-AI recovery. Restoration of load does not establish uninterrupted essential services, recovery without neighboring supply, or an absence of health harm."
+        "scope": "This passage describes historical recovery from a non-AI event. Restoration of load does not establish uninterrupted essential services, recovery without neighboring supply, or an absence of health harm."
       }
     ]
   },
@@ -703,7 +703,7 @@
           "label": "Grid safeguards can fail before restoration takes effect"
         }
       ],
-      "scope": "A physical grid and recovery comparison. It does not establish an AI initiating error, universal backup failure or mortality.",
+      "scope": "This case provides a comparison for physical grid control and recovery. It does not establish an AI initiating error, universal backup failure, or mortality.",
       "evidence": [
         "SW-2011-account",
         "SW11-restoration"
@@ -781,7 +781,7 @@
           "action": "Re-energize the affected system using available internal or neighboring supply.",
           "efficacy": "The report records completed load restoration; see the linked recovery passage.",
           "durability": "This recovery depended on available power and coordination; it did not test a region-wide loss of all starting sources.",
-          "failure": "The same disruption removes recovery sources, communications or safe switching capability.",
+          "failure": "The same disruption removes recovery sources, communications, or safe switching capability.",
           "evidence": [
             "SW11-restoration"
           ],
@@ -790,7 +790,7 @@
             "control": "Restoration operation",
             "result": "Load restored",
             "dependency": "Available recovery power",
-            "failureRoute": "The same disruption removes recovery sources, communications or safe switching capability.",
+            "failureRoute": "The same disruption removes recovery sources, communications, or safe switching capability.",
             "failureObserved": false,
             "failureLabel": "Possible failure",
             "observation": 1
@@ -818,7 +818,7 @@
       ],
       "reach": {
         "local": "A line loss triggered cascading outages. FERC/NERC identified inadequate planning and situational awareness; recovery was generally effective but took hours and essential services were disrupted.",
-        "systemic": "A physical grid and recovery comparison. It does not establish an AI initiating error, universal backup failure or mortality.",
+        "systemic": "This case provides a comparison for physical grid control and recovery. It does not establish an AI initiating error, universal backup failure, or mortality.",
         "evidence": [
           "SW-2011-account"
         ]
@@ -839,7 +839,7 @@
           "label": "Operational safeguards failed to contain a grid disturbance"
         }
       ],
-      "scope": "A comparison for grid limits, monitoring and containment, without assigning the initiating conditions to AI.",
+      "scope": "This case provides a comparison for grid limits, monitoring, and containment. It does not attribute the initiating conditions to AI.",
       "evidence": [
         "NE-2003-account"
       ],
@@ -851,7 +851,7 @@
           ]
         },
         {
-          "text": "Monitoring, backup tools and communication were inadequate.",
+          "text": "Monitoring, backup tools, and communication were inadequate.",
           "evidence": [
             "NE-2003-account"
           ]
@@ -871,7 +871,7 @@
           "role": "prevention",
           "target": "S-01:3",
           "action": "Provide operators with a reliable picture of changing grid conditions and tool health.",
-          "efficacy": "The task force identified ineffective monitoring, backup tools and regional diagnostic support.",
+          "efficacy": "The task force identified ineffective monitoring, backup tools, and regional diagnostic support.",
           "durability": "A backup is useful only if its failure modes and state information are sufficiently independent.",
           "failure": "Operators continue without a reliable view of the hazardous state.",
           "evidence": [
@@ -910,7 +910,7 @@
       ],
       "reach": {
         "local": "The task force identified inadequate voltage criteria, ineffective monitoring and backup tools, vegetation management failures, and deficient regional diagnostic support.",
-        "systemic": "A comparison for grid limits, monitoring and containment, without assigning the initiating conditions to AI.",
+        "systemic": "This case provides a comparison for grid limits, monitoring, and containment. It does not attribute the initiating conditions to AI.",
         "evidence": [
           "NE-2003-account"
         ]
@@ -932,9 +932,9 @@
         "relation": "mechanism",
         "target": "S-01:3-4",
         "anchor": "S-01:3",
-        "observed": "A regional cascade and recovery using available power.",
-        "notEstablished": "AI error, failure of every backup, or excess-death attribution.",
-        "limit": "Physical control and recovery comparison only. Neither AI initiation nor the hypothetical mortality branch is established.",
+        "observed": "A disturbance cascaded across the regional grid. Operators restored supply using power that remained available.",
+        "notEstablished": "The event does not establish an AI initiating error or show that every backup failed. It does not establish excess deaths from the outage.",
+        "limit": "The blackout provides a comparison for physical containment and restoration. It does not establish an AI initiating event or the hypothetical mortality branch.",
         "barriers": {
           "regional-contingency-limits": {
             "title": "Contingency limits",
@@ -969,7 +969,7 @@
           "target": "S-01:R",
           "question": "Would recovery still work if neighboring grids also lost power?",
           "basis": "Restoration used supplies that remained energized; affected entities did not need black starts.",
-          "unresolved": "That recovery does not establish performance after a wider shared failure, including one involving related AI systems. Available independent restoration resources would need testing.",
+          "unresolved": "This recovery did not test what would happen after a wider shared failure, including one involving related AI systems. Testing that possibility would require showing that independent restoration resources can still supply affected loads.",
           "sources": [
             "SW11"
           ]
@@ -982,8 +982,8 @@
         "target": "S-01:3",
         "anchor": "S-01:3",
         "observed": "Monitoring and operational safeguards did not contain a regional disturbance.",
-        "notEstablished": "AI dependence, model monoculture or an AI-caused public-health catastrophe.",
-        "limit": "Historical evidence about the physical grid and its human control structure.",
+        "notEstablished": "AI did not cause this event. It does not establish the hypothetical route from shared AI models to a public-health catastrophe.",
+        "limit": "This historical case concerns the physical grid and its human control structure.",
         "barriers": {
           "operator-state-awareness": {
             "title": "Monitoring and fallback",
@@ -1004,8 +1004,8 @@
           "origin": "editorial",
           "target": "S-01:2",
           "question": "Could related AI dispatch tools turn a shared blind spot into a common error?",
-          "basis": "The investigation identified failures of monitoring, situational awareness and coordination.",
-          "unresolved": "AI did not cause this event. A shared AI error would require evidence about model dependence, dispatch decisions and independent checks.",
+          "basis": "The investigation identified failures of monitoring, situational awareness, and coordination.",
+          "unresolved": "AI did not cause this event. Testing this possibility would require showing that related models share a consequential error and that independent dispatch checks fail to stop it.",
           "sources": [
             "NE03"
           ]
@@ -1013,11 +1013,11 @@
       }
     },
     "fidelity": "Non-AI incidents inform selected control mechanisms. Observed recovery is displayed alongside failure, and the public-health continuation remains conditional.",
-    "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness.",
+    "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability, or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness.",
     "context": [
       {
         "title": "System setting",
-        "text": "A hypothetical regional electricity system using related AI forecasts or control recommendations: model procurement, dispatch authorization, physical protection, regional coordination and restoration. Essential-service operators are included at their electricity and backup interface.",
+        "text": "The hypothetical scenario concerns a regional electricity system using related AI forecasts or control recommendations. It includes model procurement, dispatch authorization, physical protection, regional coordination, and restoration. Essential services enter the analysis through their dependence on electricity and backup capacity.",
         "sources": [],
         "targets": [
           {
@@ -1062,12 +1062,17 @@
           "role": "authorize dispatch"
         },
         {
+          "controller": "C4",
+          "label": "Protection systems",
+          "role": "enforce physical limits"
+        },
+        {
           "controller": "C5",
           "label": "Restoration teams",
           "role": "restore supply & services"
         }
       ],
-      "summary": "Shared infrastructure and model choices shape operators’ decisions and recovery options."
+      "summary": "Grid interdependence constrains what operators can isolate and which supplies remain available for restoration. Related models may introduce shared errors."
     }
   },
   "controlEvidence": {
@@ -1084,7 +1089,7 @@
       },
       {
         "title": "What did it depend on?",
-        "text": "Identify power sources, coordination and essential-load access."
+        "text": "Identify power sources, coordination, and essential-load access."
       },
       {
         "title": "Would stronger AI change it?",

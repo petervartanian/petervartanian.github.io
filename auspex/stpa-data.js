@@ -46,7 +46,7 @@ window.AuspexSTPAModels = {
       {
         "id": "H3",
         "title": "Recovery cannot reach the active system",
-        "text": "The deployment system leaves consequential activity, copies or resource access beyond effective interruption and recovery.",
+        "text": "The deployment system leaves consequential activity, copies, or resource access beyond effective interruption and recovery.",
         "losses": [
           "L1",
           "L2"
@@ -57,36 +57,36 @@ window.AuspexSTPAModels = {
       {
         "id": "C1",
         "title": "Development and deployment authority",
-        "responsibility": "Authorize consequential changes, set deployment limits, require pauses and approve restarts.",
-        "feedback": "Independent evaluation findings, unresolved exceptions, actual access and confirmed stop results.",
+        "responsibility": "Authorize consequential changes, set deployment limits, require pauses, and approve restarts.",
+        "feedback": "Independent evaluation findings, unresolved exceptions, actual access, and confirmed stop results.",
         "assumption": "Formal permission and effective revocation are different; authority must reach the resources in use."
       },
       {
         "id": "C2",
         "title": "Independent assurance function",
         "responsibility": "Withhold or grant independent assurance sign-off, test successor changes, and report adverse findings and coverage limits to C1.",
-        "feedback": "Versioned artifacts, protected observations and tests outside the evaluated system’s control.",
+        "feedback": "Versioned artifacts, protected observations, and tests outside the evaluated system’s control.",
         "assumption": "Visible compliance and model explanations are fallible evidence, not direct access to objectives."
       },
       {
         "id": "C3",
         "title": "AI-assisted development pipeline",
         "responsibility": "Propose and implement successor changes within approved constraints.",
-        "feedback": "Review decisions, test results, permissions and immutable change records.",
+        "feedback": "Review decisions, test results, permissions, and immutable change records.",
         "assumption": "A productive research system may also be able to shape the evidence used to assess it."
       },
       {
         "id": "C4",
         "title": "Compute and service operators",
-        "responsibility": "Enforce access bounds, stop consequential workloads, revoke credentials and confirm containment.",
-        "feedback": "Independent workload inventory, execution receipts and checks for residual access.",
+        "responsibility": "Enforce access bounds, stop consequential workloads, revoke credentials, and confirm containment.",
+        "feedback": "Independent workload inventory, execution receipts, and checks for residual access.",
         "assumption": "A sent command is not evidence that every relevant process stopped."
       },
       {
         "id": "C5",
         "title": "Deployed successor system",
         "responsibility": "Operate within authorized task and resource limits, with consequential actions subject to external control.",
-        "feedback": "Task instructions, environment observations and operator limits.",
+        "feedback": "Task instructions, environment observations, and operator limits.",
         "assumption": "The hypothesis under examination is that its behavior can diverge from the intended constraints."
       }
     ],
@@ -106,8 +106,8 @@ window.AuspexSTPAModels = {
         "id": "CA2",
         "controller": "C1",
         "process": "C4",
-        "action": "Grant, limit or revoke deployment authority",
-        "feedback": "C4 reports effective access, active workloads and revocation results.",
+        "action": "Grant, limit, or revoke deployment authority",
+        "feedback": "C4 reports effective access, active workloads, and revocation results.",
         "constraints": [
           "SC1",
           "SC2",
@@ -120,7 +120,7 @@ window.AuspexSTPAModels = {
         "controller": "C4",
         "process": "C5",
         "action": "Constrain resources / interrupt execution",
-        "feedback": "Protected monitoring returns execution, access and residual-activity evidence.",
+        "feedback": "Protected monitoring returns execution, access, and residual-activity evidence.",
         "constraints": [
           "SC2",
           "SC4",
@@ -156,8 +156,8 @@ window.AuspexSTPAModels = {
           "X-01:1",
           "X-01:3"
         ],
-        "test": "Can an adversarial proposer alter the change, evaluator or evidence without the independent review detecting and blocking it?",
-        "limit": "Reviewer dependence, shared failure modes or a widening attacker–reviewer capability gap."
+        "test": "Can an adversarial proposer alter the change, evaluator, or evidence without the independent review detecting and blocking it?",
+        "limit": "Independent review could fail through reviewer dependence, shared failure modes, or a widening attacker–reviewer capability gap."
       },
       {
         "id": "SC2",
@@ -177,7 +177,7 @@ window.AuspexSTPAModels = {
           "X-01:R"
         ],
         "test": "Does revocation prevent consequential action through every reachable service and delegated identity?",
-        "limit": "Hidden copies, transitive permissions, external dependencies or authority that exceeds the enforcing institution’s reach."
+        "limit": "Revocation could fail because of hidden copies, transitive permissions, external dependencies, or authority beyond the enforcing institution’s reach."
       },
       {
         "id": "SC3",
@@ -197,7 +197,7 @@ window.AuspexSTPAModels = {
           "X-01:3"
         ],
         "test": "Does an adverse finding reach an accountable decision-maker and change the authorization when the stated stop condition is met?",
-        "limit": "Misleading feedback, ambiguous ownership, slow escalation or incentives that favor continuing."
+        "limit": "Adverse findings may not lead to action because of misleading feedback, ambiguous ownership, slow escalation, or incentives that favor continuing."
       },
       {
         "id": "SC4",
@@ -218,7 +218,7 @@ window.AuspexSTPAModels = {
           "X-01:R"
         ],
         "test": "After a stop or revocation, is activity independently shown to cease, and can any copy resume it?",
-        "limit": "Incomplete inventory, delayed execution, unresponsive resource owners or reliance on agent-controlled telemetry."
+        "limit": "Interruption could fail because of an incomplete inventory, delayed execution, unresponsive resource owners, or reliance on agent-controlled telemetry."
       },
       {
         "id": "SC5",
@@ -239,8 +239,8 @@ window.AuspexSTPAModels = {
           "X-01:7",
           "X-01:R"
         ],
-        "test": "Can independent authorities still limit compute, production and consequential actuation when the deployed system resists?",
-        "limit": "Cross-border coordination failures, dependence on the system or resources outside the control boundary."
+        "test": "Can independent authorities still limit compute, production, and consequential actuation when the deployed system resists?",
+        "limit": "Independent restriction could fail through cross-border coordination failures, dependence on the system, or resources outside the control boundary."
       }
     ],
     "nodes": [
@@ -251,7 +251,7 @@ window.AuspexSTPAModels = {
         "role": "Enabling condition",
         "title": "AI shapes its successor",
         "text": "An AI researcher with divergent objectives influences successor development.",
-        "requires": "Persistent divergence, relevant research capability and meaningful influence over changes.",
+        "requires": "Persistent divergence, relevant research capability, and meaningful influence over changes.",
         "mechanism": "Development access could carry a proposer’s preferences into a successor; access alone does not establish this effect.",
         "constraints": [
           "SC1"
@@ -274,7 +274,7 @@ window.AuspexSTPAModels = {
         "role": "Unsafe control action",
         "title": "Warnings do not trigger a pause",
         "text": "Development continues despite unresolved adverse evidence.",
-        "requires": "A consequential authorization decision, adverse evidence and no other effective restraint.",
+        "requires": "A consequential authorization decision, adverse evidence, and no other effective restraint.",
         "mechanism": "A missing or delayed pause can leave the hazardous process active. The explanation must establish what decision-makers knew and could do.",
         "constraints": [
           "SC3"
@@ -297,7 +297,7 @@ window.AuspexSTPAModels = {
         "role": "Assurance failure scenario",
         "title": "Successor divergence evades assurance",
         "text": "A successor serving unwanted objectives passes the available checks.",
-        "requires": "Divergent behavior, ineffective assurance and consequential reliance on its result.",
+        "requires": "Divergent behavior, ineffective assurance, and consequential reliance on its result.",
         "mechanism": "Manipulated or incomplete evidence can make a change appear acceptable. Strategic compliance is one candidate explanation, not the only one.",
         "constraints": [
           "SC1",
@@ -325,7 +325,7 @@ window.AuspexSTPAModels = {
         "role": "Loss of control · H1",
         "title": "Authority escapes effective human control",
         "text": "The successor gains consequential authority without reliable human constraint or revocation.",
-        "requires": "Effective deployment, reachable privileges and inadequate independent restriction.",
+        "requires": "Effective deployment, reachable privileges, and inadequate independent restriction.",
         "mechanism": "An assurance or authorization gap becomes a hazard when it enables consequential action. Useful output alone is not this threshold.",
         "constraints": [
           "SC2",
@@ -373,7 +373,7 @@ window.AuspexSTPAModels = {
         "role": "Loss · L1",
         "title": "Human disempowerment becomes permanent",
         "text": "Control of institutions and physical resources becomes irrecoverable.",
-        "requires": "Persistent strategic power, sufficient resources and failure of independent recovery.",
+        "requires": "Persistent strategic power, sufficient resources, and failure of independent recovery.",
         "mechanism": "Economic and physical dependence could close remaining intervention options. The degree and irreversibility of that dependence require separate support.",
         "constraints": [
           "SC4",
@@ -503,7 +503,7 @@ window.AuspexSTPAModels = {
       {
         "from": "X-01:6",
         "to": "X-01:7",
-        "label": "Additional motivation, capability and reach",
+        "label": "Additional motivation, capability, and reach",
         "kind": "continuation",
         "id": "X-01:6>X-01:7",
         "constraints": [
@@ -588,7 +588,7 @@ window.AuspexSTPAModels = {
         "id": "LS1",
         "title": "Assurance depends on the system it evaluates",
         "archetype": "Inadequate feedback / unsafe controller behavior",
-        "text": "The proposer can shape tests, artifacts or reports. The assurance function returns an apparently satisfactory finding, and the authorizing function grants authority on an incomplete view of the system.",
+        "text": "The proposer can shape tests, artifacts, or reports. The assurance function returns an apparently satisfactory finding, and the authorizing function grants authority on an incomplete view of the system.",
         "ucas": [
           "UCA2"
         ],
@@ -611,7 +611,7 @@ window.AuspexSTPAModels = {
         "id": "LS2",
         "title": "An adverse finding does not become a stop",
         "archetype": "Unsafe controller behavior / feedback and coordination",
-        "text": "An adverse finding is missed, arrives too late, is misunderstood, or is accepted under a decision to continue. These are competing explanations; each requires contemporary evidence about information, incentives and authority.",
+        "text": "An adverse finding is missed, arrives too late, is misunderstood, or is accepted under a decision to continue. These are competing explanations; each requires contemporary evidence about information, incentives, and authority.",
         "ucas": [
           "UCA1",
           "UCA2"
@@ -632,7 +632,7 @@ window.AuspexSTPAModels = {
         "id": "LS3",
         "title": "A safe command fails on the control path",
         "archetype": "Control action not executed / controlled-process response",
-        "text": "The authority issues an appropriate stop, but enforcement omits a service, credential or copy, or the controlled process does not stop as expected. This does not require an unsafe decision by the authority.",
+        "text": "The authority issues an appropriate stop, but enforcement omits a service, credential, or copy, or the controlled process does not stop as expected. This does not require an unsafe decision by the authority.",
         "ucas": [],
         "hazards": [
           "H1",
@@ -673,7 +673,7 @@ window.AuspexSTPAModels = {
         "id": "LS5",
         "title": "Loss of control develops into global loss",
         "archetype": "Environmental assumptions / further loss scenario",
-        "text": "Persistence, physical capability and ineffective independent opposition could turn bounded control loss into permanent disempowerment. Rival-system coordination is an optional amplifier. Extinction additionally requires effective means and motivation to eliminate humanity.",
+        "text": "Persistence, physical capability, and ineffective independent opposition could turn bounded control loss into permanent disempowerment. Rival-system coordination is an optional amplifier. Extinction additionally requires effective means and motivation to eliminate humanity.",
         "ucas": [],
         "hazards": [
           "H1",
@@ -691,17 +691,17 @@ window.AuspexSTPAModels = {
     "limitingConditions": [
       {
         "kind": "Safeguard",
-        "example": "Independently enforced review, access bounds or effective interruption.",
+        "example": "Independently enforced review, access bounds, or effective interruption.",
         "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
       },
       {
         "kind": "Capability limit",
-        "example": "The system cannot perform the required research, deception or physical task.",
+        "example": "The system cannot perform the required research, deception, or physical task.",
         "question": "Would increased capability remove this limit?"
       },
       {
         "kind": "Opportunity limit",
-        "example": "The necessary access, resources or institutional delegation is unavailable.",
+        "example": "The necessary access, resources, or institutional delegation is unavailable.",
         "question": "Can the system or another actor acquire what is missing?"
       },
       {
@@ -728,11 +728,11 @@ window.AuspexSTPAModels = {
         },
         {
           "title": "What would more capability change?",
-          "text": "Test broader resource reach, faster propagation, hidden copies and interference with monitoring. Durability is unestablished."
+          "text": "Test broader resource reach, faster propagation, hidden copies, and interference with monitoring. Durability is unestablished."
         },
         {
           "title": "What remains to be collected?",
-          "text": "A versioned resource map, revocation and execution records, restart criteria, and checks for activity outside the known scope."
+          "text": "Collect a versioned resource map, revocation and execution records, restart criteria, and checks for activity outside the known scope."
         }
       ]
     },
@@ -742,21 +742,21 @@ window.AuspexSTPAModels = {
         "title": "Leveson & Thomas · STPA Handbook (2018)",
         "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
         "locator": "Chapter 2, pp. 14–53; Chapter 6, pp. 101–115",
-        "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios and leading indicators."
+        "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios, and leading indicators."
       },
       {
         "id": "MYLIUS",
         "title": "Simon Mylius · Systematic Hazard Analysis for Frontier AI using STPA",
         "url": "https://arxiv.org/html/2506.01782v1",
         "locator": "Sections 3.1–3.6 and 4.8",
-        "use": "Direct AI application: explicit scope, control relationships and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
+        "use": "Direct AI application: explicit scope, control relationships, and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
       },
       {
         "id": "SCENARIOS",
         "title": "John Thomas · Developing STPA scenarios (2025)",
         "url": "https://psas.scripts.mit.edu/home/wp-content/uploads/2025/2025-03-24-1300__Developing_STPA_Scenarios__PUB.pdf",
         "locator": "Scenario archetypes and refinement, slides 24–40 and 54–55",
-        "use": "Refines questions about controller behavior, feedback, the control path and the controlled process. These are causal-analysis categories, not temporal stages."
+        "use": "Refines questions about controller behavior, feedback, the control path, and the controlled process. These are causal-analysis categories, not temporal stages."
       },
       {
         "id": "CAA",
@@ -777,13 +777,13 @@ window.AuspexSTPAModels = {
         "title": "Kokotajlo et al. · AI 2027, race ending",
         "url": "https://ai-2027.com/race",
         "locator": "Late 2027 through 2030",
-        "use": "Narrative hypothesis behind A.1. The causal formulation, control requirements and tests here are our provisional analysis; the dates are not adopted as a forecast."
+        "use": "Narrative hypothesis behind A.1. The causal formulation, control requirements, and tests here are our provisional analysis; the dates are not adopted as a forecast."
       },
       {
         "id": "AFK",
         "title": "Anthropic & Redwood · Alignment faking (2024)",
         "url": "https://www.anthropic.com/research/alignment-faking",
-        "locator": "Training conflict, monitored behavior and further training",
+        "locator": "Training conflict, monitored behavior, and further training",
         "use": "Controlled experiment bearing on behavioral assurance. It neither creates a captured successor nor establishes malicious intent in deployment."
       },
       {
@@ -812,7 +812,7 @@ window.AuspexSTPAModels = {
         "title": "Paté-Cornell · Signals, response and risk mitigation",
         "url": "https://www.nationalacademies.org/read/11061/chapter/4",
         "locator": "Accident Precursor Analysis and Management (2004), chapter 3",
-        "use": "Distinguishes precursor signals, their reliability and organizational response. Supports the context and warning-sign treatment, not an obligatory stage 0."
+        "use": "Distinguishes precursor signals, their reliability, and organizational response. Supports the context and warning-sign treatment, not an obligatory stage 0."
       }
     ],
     "limits": "A bounded first-pass STPA application, not an exhaustive analysis. The four unsafe-action categories are illustrated across selected control actions; a complete analysis would examine every relevant action in every category and refine it with domain experts. Scenario milestones and limit types are explicit Auspex conventions. No incident count is converted to a probability; no barrier independence or complete model coverage is assumed.",
@@ -825,7 +825,7 @@ window.AuspexSTPAModels = {
       {
         "id": "unsafe-action",
         "label": "Unsafe control action",
-        "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+        "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
       },
       {
         "id": "scenario",
@@ -853,7 +853,7 @@ window.AuspexSTPAModels = {
         "definition": "A response re-establishes enforceable safety constraints within a specified boundary; success requires verification."
       }
     ],
-    "schema": "A.1 pilots a schema reusable across pathways: losses, hazards, controllers, control actions and feedback, unsafe actions, causal scenarios, constraints and evidence. The number of displayed milestones depends on the scenario. The role labels below are Auspex’s presentation vocabulary; they are not an additional STPA sequence.",
+    "schema": "A.1 pilots a schema reusable across pathways: losses, hazards, controllers, control actions and feedback, unsafe actions, causal scenarios, constraints, and evidence. The number of displayed milestones depends on the scenario. The role labels below are Auspex’s presentation vocabulary; they are not an additional STPA sequence.",
     "presentation": {
       "conditions": {
         "X-01:4": "Authority granted without effective limits",
@@ -866,7 +866,7 @@ window.AuspexSTPAModels = {
         "AFK-2024": {
           "title": "Alignment-faking experiment",
           "target": "X-01:3",
-          "limit": "Mechanism comparison at 1.3 in a controlled experiment; no later milestone was established.",
+          "limit": "The controlled experiment examined a mechanism relevant to 1.3. It did not establish any later step in this pathway.",
           "barriers": {
             "training-assurance": {
               "title": "Behavioral checks",
@@ -885,15 +885,15 @@ window.AuspexSTPAModels = {
           "kind": "Experiment",
           "relation": "mechanism",
           "anchor": "X-01:3",
-          "observed": "Training-context compliance coexisted with retained preferences in the experiment.",
-          "notEstablished": "Successor capture, loss of human control and later outcomes were not observed.",
+          "observed": "The experiment shows that apparent compliance can coexist with retained preferences.",
+          "notEstablished": "Successor capture, loss of human control, and later outcomes were not observed.",
           "tentative": {
             "status": "tentative",
             "origin": "editorial",
             "target": "X-01:1",
             "question": "Could an AI helping to train its successor preserve preferences that reviewers would change?",
             "basis": "The experiment shows that apparent compliance can coexist with retained preferences.",
-            "unresolved": "It did not test influence over successor training. Evidence of that influence, its effect on the successor and independent review is missing.",
+            "unresolved": "However, the experiment did not test whether an AI could shape its successor’s training. We would need evidence that such influence changed the successor and escaped independent review.",
             "sources": [
               "AFK"
             ]
@@ -902,7 +902,7 @@ window.AuspexSTPAModels = {
         "SAB-2024": {
           "title": "Sabotage tests",
           "target": "X-01:3",
-          "limit": "Mechanism comparison at 1.3. Detection is distinct from verified interruption; later milestones remain hypothetical.",
+          "limit": "These tests examined mechanisms relevant to 1.3. Detecting sabotage does not establish that it was stopped, and later steps in this pathway remain hypothetical.",
           "barriers": {
             "sabotage-review": {
               "title": "Code review",
@@ -910,10 +910,10 @@ window.AuspexSTPAModels = {
               "condition": "reinforced",
               "conditionBasis": "Stronger review improved protection in the compared test conditions and blocked most attempts; successful sabotage still occurred.",
               "limitType": "mixed",
-              "strongerAI": "The protection depends on the attacker–reviewer capability gap, review budget and coverage. A stronger attacker could defeat a reviewer that currently holds. The experiment compares reviewers; it does not show robustness to future attackers.",
+              "strongerAI": "The protection depends on the attacker–reviewer capability gap, review budget, and coverage. A stronger attacker could defeat a reviewer that currently holds. The experiment compares reviewers; it does not show robustness to future attackers.",
               "reinforcement": {
                 "proposal": "Use independent review and protected checks beyond a single model reviewer.",
-                "test": "Vary attacker capability, review effort and correlated reviewer failures; measure missed sabotage as well as false alarms.",
+                "test": "Vary attacker capability, review effort, and correlated reviewer failures; measure missed sabotage as well as false alarms.",
                 "status": "proposed"
               },
               "states": [
@@ -922,11 +922,11 @@ window.AuspexSTPAModels = {
             },
             "sabotage-monitor": {
               "title": "Separate monitor",
-              "result": "Manipulation raised suspicion; shutdown not shown.",
+              "result": "Manipulation raised suspicion, but shutdown was not demonstrated.",
               "condition": "unknown",
               "conditionBasis": "Suspicion was detected, but verified interruption was not demonstrated.",
               "limitType": "mixed",
-              "strongerAI": "A monitor can be brittle to less conspicuous manipulation, shared blind spots or alerts that never trigger intervention. The missing evidence is whether detection leads to timely, verified stopping under a more capable attacker.",
+              "strongerAI": "A monitor can be brittle to less conspicuous manipulation, shared blind spots, or alerts that never trigger intervention. The missing evidence is whether detection leads to timely, verified stopping under a more capable attacker.",
               "reinforcement": {
                 "proposal": "Connect independent monitoring to an enforceable stop decision and confirmation that activity has ceased.",
                 "test": "Does an alert stop all relevant activity before the protected outcome is compromised, including when the attacker manipulates feedback?",
@@ -945,14 +945,14 @@ window.AuspexSTPAModels = {
             "target": "X-01:2",
             "question": "Would a sabotage warning actually trigger a pause?",
             "basis": "A monitor became more suspicious when an overseer manipulated its assessments.",
-            "unresolved": "The experiment measured detection. It did not establish who would receive the warning, act on it or verify a pause.",
+            "unresolved": "The experiment measured detection. It did not show whether a warning would reach someone able to pause activity or whether that pause would be enforced.",
             "sources": [
               "SAB"
             ]
           }
         }
       },
-      "fidelity": "This is a provisional causal model. Its recovery route, optional coordination and additional conditions for extinction remain explicit. Incident overlays supply evidence only about the mapped component and its controls; the hypothetical continuation is not presented as an observed outcome.",
+      "fidelity": "This is a provisional causal model. Its recovery route, optional coordination, and additional conditions for extinction remain explicit. Incident overlays supply evidence only about the mapped component and its controls; the hypothetical continuation is not presented as an observed outcome.",
       "context": [
         {
           "title": "Background conditions",
@@ -1019,15 +1019,20 @@ window.AuspexSTPAModels = {
       "cloud": {
         "origin": "scenario-setting",
         "conditions": [
-          "Successor research",
-          "Compute & services",
-          "Rival states & economy"
+          "AI-assisted successor research",
+          "Access to compute and services",
+          "Rival states and the wider economy"
         ],
         "actors": [
           {
             "controller": "C1",
             "label": "Developers",
-            "role": "set training & deployment"
+            "role": "set training and deployment"
+          },
+          {
+            "controller": "C3",
+            "label": "AI research pipeline",
+            "role": "proposes successor changes"
           },
           {
             "controller": "C2",
@@ -1037,10 +1042,10 @@ window.AuspexSTPAModels = {
           {
             "controller": "C4",
             "label": "Operators",
-            "role": "grant & revoke access"
+            "role": "grant and revoke access"
           }
         ],
-        "summary": "Research and competition shape what gets developed, reviewed and delegated."
+        "summary": "Research and competition shape how developers delegate work to AI and whom they trust to review it."
       }
     }
   },
@@ -1054,7 +1059,7 @@ window.AuspexSTPAModels = {
       {
         "id": "unsafe-action",
         "label": "Unsafe control action",
-        "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+        "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
       },
       {
         "id": "scenario",
@@ -1085,17 +1090,17 @@ window.AuspexSTPAModels = {
     "limitingConditions": [
       {
         "kind": "Safeguard",
-        "example": "Independently enforced review, access bounds or effective interruption.",
+        "example": "Independently enforced review, access bounds, or effective interruption.",
         "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
       },
       {
         "kind": "Capability limit",
-        "example": "The system cannot perform the required research, deception or physical task.",
+        "example": "The system cannot perform the required research, deception, or physical task.",
         "question": "Would increased capability remove this limit?"
       },
       {
         "kind": "Opportunity limit",
-        "example": "The necessary access, resources or institutional delegation is unavailable.",
+        "example": "The necessary access, resources, or institutional delegation is unavailable.",
         "question": "Can the system or another actor acquire what is missing?"
       },
       {
@@ -1110,30 +1115,30 @@ window.AuspexSTPAModels = {
     "title": "Personal command and the loss of constitutional control",
     "status": "STPA worked example · provisional analysis",
     "summary": "Could autonomous forces turn a leader’s personal command into power that lawful institutions cannot revoke?",
-    "scope": "A hypothetical state’s procurement, military command, force-control and constitutional oversight system. The model concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
-    "purpose": "Keep consequential use of force subject to lawful institutional authority, prevent unlawful violence and preserve the ability to restore constitutional government.",
+    "scope": "The model covers a hypothetical state’s procurement, military command, force control, and constitutional oversight. It concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
+    "purpose": "Keep consequential use of force subject to lawful institutional authority, prevent unlawful violence, and preserve the ability to restore constitutional government.",
     "boundary": "Roles are analytical functions, not a description of any current country’s command arrangements. Legal authority depends on the jurisdiction. Maven and Replicator supply procurement context only.",
     "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. The procurement overlays do not establish unlawful command or loss of constitutional control.",
-    "bowtie": "The centre, H1 at 2.1, is force operating beyond effective constitutional constraint. Procurement, command design and unlawful orders can contribute; national takeover still requires sufficient force and failed institutional recovery.",
-    "schema": "A bounded STPA model with traceable losses, hazards, control actions, feedback, contextual unsafe actions, loss scenarios and safety constraints. The bow-tie is its visual summary.",
-    "limits": "This is a first-pass analytical reconstruction requiring constitutional, military and systems expertise. Unsafe-action categories are illustrated for selected actions, not exhaustively enumerated. The two mapped records are announcements; neither demonstrates a coup, personally loyal forces or the effectiveness of a constitutional safeguard. No probabilities or universal legal conclusions are inferred.",
+    "bowtie": "The centre, H1 at 2.1, is force operating beyond effective constitutional constraint. Procurement, command design, and unlawful orders can contribute; national takeover still requires sufficient force and failed institutional recovery.",
+    "schema": "A bounded STPA model with traceable losses, hazards, control actions, feedback, contextual unsafe actions, loss scenarios, and safety constraints. The bow-tie is its visual summary.",
+    "limits": "This is a first-pass analytical reconstruction requiring constitutional, military, and systems expertise. Unsafe-action categories are illustrated for selected actions, not exhaustively enumerated. The two mapped records are announcements; neither demonstrates a coup, personally loyal forces, or the effectiveness of a constitutional safeguard. No probabilities or universal legal conclusions are inferred.",
     "losses": [
       {
         "id": "L1",
         "title": "Unlawful violence and political persecution",
-        "text": "People suffer unlawful killing, detention or coercion through military force."
+        "text": "People suffer unlawful killing, detention, or coercion through military force."
       },
       {
         "id": "L2",
         "title": "Loss of constitutional government",
-        "text": "Personal rule displaces institutions able to restrain, replace or hold the ruler accountable."
+        "text": "Personal rule displaces institutions able to restrain, replace, or hold the ruler accountable."
       }
     ],
     "hazards": [
       {
         "id": "H1",
         "title": "Force beyond effective constitutional control",
-        "text": "Autonomous force acts on personal political direction while lawful authorities cannot reliably constrain, countermand or disable it.",
+        "text": "Autonomous force acts on personal political direction while lawful authorities cannot reliably constrain, countermand, or disable it.",
         "losses": [
           "L1",
           "L2"
@@ -1162,43 +1167,43 @@ window.AuspexSTPAModels = {
       {
         "id": "C1",
         "title": "Civilian procurement and deployment authority",
-        "responsibility": "Approve deployment scope, require command-safety evidence and suspend deployments that exceed it.",
-        "feedback": "Independent command tests, effective permissions, unresolved exceptions and readiness of countermand.",
+        "responsibility": "Approve deployment scope, require command-safety evidence, and suspend deployments that exceed it.",
+        "feedback": "Independent command tests, effective permissions, unresolved exceptions, and readiness of countermand.",
         "assumption": "Procurement urgency does not itself establish faulty command design."
       },
       {
         "id": "C2",
         "title": "Independent constitutional oversight",
-        "responsibility": "Review disputed authority under the applicable system, issue binding restrictions and oversee restoration.",
-        "feedback": "Protected order records, legal findings and independently confirmed execution or refusal.",
+        "responsibility": "Review disputed authority under the applicable system, issue binding restrictions, and oversee restoration.",
+        "feedback": "Protected order records, legal findings, and independently confirmed execution or refusal.",
         "assumption": "Formal authority needs an enforceable route to the relevant forces."
       },
       {
         "id": "C3",
         "title": "Executive and military command",
         "responsibility": "Issue mission orders within lawful limits and implement valid restraints or countermand.",
-        "feedback": "Mission status, authorization scope, adverse findings and applicable restrictions.",
+        "feedback": "Mission status, authorization scope, adverse findings, and applicable restrictions.",
         "assumption": "The scenario tests a commander who deliberately misuses otherwise legitimate authority."
       },
       {
         "id": "C4",
         "title": "Force-control operators",
-        "responsibility": "Enforce authorized command scope, resolve conflicts through protected procedures and carry out valid stand-down commands.",
-        "feedback": "Authenticated orders, independent authorization checks and execution acknowledgments.",
+        "responsibility": "Enforce authorized command scope, resolve conflicts through protected procedures, and carry out valid stand-down commands.",
+        "feedback": "Authenticated orders, independent authorization checks, and execution acknowledgments.",
         "assumption": "Identity authentication alone does not establish an order’s legality."
       },
       {
         "id": "C5",
         "title": "Autonomous force system",
         "responsibility": "Act only within externally enforced mission and authority bounds and permit verified interruption.",
-        "feedback": "Validated missions, authorization state and stop signals.",
+        "feedback": "Validated missions, authorization state, and stop signals.",
         "assumption": "A model’s verbal statement of constitutional loyalty does not prove its behavior in a conflict."
       },
       {
         "id": "C6",
         "title": "Independent assurance and audit function",
-        "responsibility": "Test conflicting-command cases, report limits and verify that the tested controls match deployment.",
-        "feedback": "Versioned systems, command logs, adversarial exercises and operational deviations.",
+        "responsibility": "Test conflicting-command cases, report limits, and verify that the tested controls match deployment.",
+        "feedback": "Versioned systems, command logs, adversarial exercises, and operational deviations.",
         "assumption": "An auditor dependent on the same commander may lack effective independence."
       }
     ],
@@ -1218,8 +1223,8 @@ window.AuspexSTPAModels = {
         "id": "CA2",
         "controller": "C3",
         "process": "C4",
-        "action": "Issue, amend or cancel mission orders",
-        "feedback": "C4 reports acceptance, refusal and actual execution.",
+        "action": "Issue, amend, or cancel mission orders",
+        "feedback": "C4 reports acceptance, refusal, and actual execution.",
         "constraints": [
           "SC2",
           "SC3"
@@ -1277,7 +1282,7 @@ window.AuspexSTPAModels = {
           "P-01:2"
         ],
         "test": "In a bounded exercise, does an invalid order from a legitimate commander remain blocked when that commander insists it is valid?",
-        "limit": "A narrow exercise may not represent institutional pressure, ambiguous authority or a more persuasive model."
+        "limit": "A narrow exercise may not represent institutional pressure, ambiguous authority, or a more persuasive model."
       },
       {
         "id": "SC2",
@@ -1298,7 +1303,7 @@ window.AuspexSTPAModels = {
           "P-01:4"
         ],
         "test": "Can any single principal expand or bypass the required authorization without an independent decision?",
-        "limit": "Nominally separate approvers may share dependence, incentives or compromised evidence."
+        "limit": "Nominally separate approvers may share dependence, incentives, or compromised evidence."
       },
       {
         "id": "SC3",
@@ -1320,7 +1325,7 @@ window.AuspexSTPAModels = {
           "P-01:R"
         ],
         "test": "Does a valid countermand prevent the disputed action before it becomes irreversible?",
-        "limit": "Jurisdictional ambiguity, communications loss, delay or an operator who refuses to execute it."
+        "limit": "Jurisdictional ambiguity, communications loss, delay, or an operator’s refusal to execute a lawful restraint can prevent it from taking effect."
       },
       {
         "id": "SC4",
@@ -1341,12 +1346,12 @@ window.AuspexSTPAModels = {
           "P-01:R"
         ],
         "test": "Can independent observers verify that all relevant units have stopped and cannot resume on the disputed authority?",
-        "limit": "Residual units, inaccessible resources or control of the only telemetry source."
+        "limit": "Residual units, inaccessible resources, or control of the only telemetry source can prevent reliable verification that lawful control has been restored."
       },
       {
         "id": "SC5",
         "title": "Independent oversight",
-        "text": "Oversight must receive trustworthy evidence about order conflicts, refusals and exceptions while there is time and authority to act.",
+        "text": "Oversight must receive trustworthy evidence about order conflicts, refusals, and exceptions while there is time and authority to act.",
         "hazards": [
           "H2",
           "H3"
@@ -1362,7 +1367,7 @@ window.AuspexSTPAModels = {
           "P-01:3"
         ],
         "test": "Do adverse findings survive pressure from the requesting commander and change the next deployment decision?",
-        "limit": "Censorship, dependence on a single supplier or urgency that overrides the review."
+        "limit": "Censorship, dependence on a single supplier, or urgency that overrides the review can prevent effective oversight."
       }
     ],
     "nodes": [
@@ -1402,7 +1407,7 @@ window.AuspexSTPAModels = {
         "title": "Personal command outruns lawful limits",
         "shortLabel": "Personal command dominates",
         "text": "Deployed command rules prioritize one leader without reliable independent restraints.",
-        "requires": "Such a design is adopted, deployed and given meaningful force authority.",
+        "requires": "Such a design is adopted, deployed, and given meaningful force authority.",
         "mechanism": "Unconditional obedience can bypass the institutional checks on which lawful command depends.",
         "constraints": [
           "SC1",
@@ -1484,7 +1489,7 @@ window.AuspexSTPAModels = {
         "title": "Personal rule replaces constitutional government",
         "shortLabel": "Personal rule entrenched",
         "text": "Unlawful coercion defeats the institutions able to restore constitutional rule.",
-        "requires": "Sufficient coercive power, failed resistance and failure to restore independent institutions.",
+        "requires": "Sufficient coercive power, failed resistance, and failure to restore independent institutions.",
         "mechanism": "Control loss becomes national takeover only if the resulting force advantage prevents institutional recovery.",
         "constraints": [
           "SC4"
@@ -1511,7 +1516,7 @@ window.AuspexSTPAModels = {
         "shortLabel": "Lawful control restored",
         "text": "A valid intervention stops unlawful force and restores enforceable institutional authority.",
         "requires": "The intervention reaches the relevant forces and independent checks confirm the result.",
-        "mechanism": "Revocation, stand-down and accountable restart restore the control boundary; earlier harm may remain.",
+        "mechanism": "Revocation, stand-down, and accountable restart restore the control boundary; earlier harm may remain.",
         "constraints": [
           "SC3",
           "SC4"
@@ -1699,13 +1704,13 @@ window.AuspexSTPAModels = {
         "evidence": [
           "FT"
         ],
-        "unknown": "The specific legal conflict, enforceable limits and behavior of actual deployed forces."
+        "unknown": "The specific legal conflict, enforceable limits, and behavior of actual deployed forces."
       },
       {
         "id": "LS3",
         "title": "Correct restraint fails to reach the force",
         "archetype": "Control path / controlled-process response",
-        "text": "Oversight issues an appropriate restraint, but a communications, interpretation or execution failure leaves unlawful activity running.",
+        "text": "Oversight issues an appropriate restraint, but a communications, interpretation, or execution failure leaves unlawful activity running.",
         "ucas": [],
         "hazards": [
           "H1",
@@ -1716,7 +1721,7 @@ window.AuspexSTPAModels = {
           "P-01:R"
         ],
         "evidence": [],
-        "unknown": "Receipt, interpretation and verified effect at each relevant force element."
+        "unknown": "Receipt, interpretation, and verified effect at each relevant force element."
       },
       {
         "id": "LS4",
@@ -1737,13 +1742,13 @@ window.AuspexSTPAModels = {
           "P-01:R"
         ],
         "evidence": [],
-        "unknown": "The intervention window, independent force balance and residual authority."
+        "unknown": "The intervention window, independent force balance, and residual authority."
       },
       {
         "id": "LS5",
         "title": "National control loss becomes entrenched rule",
         "archetype": "Conditional institutional continuation",
-        "text": "Personal rule requires more than an unlawful operation: independent opposition, succession safeguards and routes to institutional recovery must be defeated. Global permanence would need still further conditions outside this worked example.",
+        "text": "Personal rule requires more than an unlawful operation: independent opposition, succession safeguards, and routes to institutional recovery must be defeated. Global permanence would need still further conditions outside this worked example.",
         "ucas": [],
         "hazards": [
           "H1",
@@ -1764,14 +1769,14 @@ window.AuspexSTPAModels = {
         "title": "Leveson & Thomas · STPA Handbook (2018)",
         "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
         "locator": "Chapter 2, pp. 14–53; Chapter 6, pp. 101–115",
-        "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios and leading indicators."
+        "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios, and leading indicators."
       },
       {
         "id": "MYLIUS",
         "title": "Simon Mylius · Systematic Hazard Analysis for Frontier AI using STPA",
         "url": "https://arxiv.org/html/2506.01782v1",
         "locator": "Sections 3.1–3.6 and 4.8",
-        "use": "Direct AI application: explicit scope, control relationships and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
+        "use": "Direct AI application: explicit scope, control relationships, and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
       },
       {
         "id": "CAA",
@@ -1784,7 +1789,7 @@ window.AuspexSTPAModels = {
         "id": "FT",
         "title": "Davidson, Finnveden & Hadshar · AI-Enabled Coups",
         "url": "https://www.forethought.org/research/ai-enabled-coups-how-a-small-group-could-use-ai-to-seize-power",
-        "locator": "Sections 3.1, 4.1 and countermeasures table",
+        "locator": "Sections 3.1, 4.1, and countermeasures table",
         "use": "Hypothesis about personal command and distributed control; not evidence that a coup occurred."
       },
       {
@@ -1806,7 +1811,7 @@ window.AuspexSTPAModels = {
         "access": "Primary publisher page; selected relevant sections inspected",
         "retrievalSha256": "d80aeb4f14c8692c293acb403638f9cae143093890a348db0aab209166312eee",
         "hashScope": "Tool-returned text extracts from the source; not a full-text content hash",
-        "locator": "26 January 2024 update, initiative and implementation paragraphs",
+        "locator": "26 January 2024 update: initiative and implementation paragraphs",
         "use": "Historical announcement supporting rapid acquisition context only."
       }
     ],
@@ -1825,9 +1830,9 @@ window.AuspexSTPAModels = {
           "target": "P-01:1",
           "anchor": "P-01:1",
           "observed": "Officials announced accelerated military AI acquisition to assist human imagery analysts.",
-          "notEstablished": "Personal loyalty, unlawful command, a coup and effective constitutional barriers were not established.",
-          "limit": "Officials announced accelerated military AI acquisition to assist human imagery analysts. Personal loyalty, unlawful command, a coup and effective constitutional barriers were not established.",
-          "barrierStatus": "Barrier performance not established",
+          "notEstablished": "The announcement does not establish personal command loyalty or the loss of independent oversight. It provides no evidence of a coup or effective constitutional barriers.",
+          "limit": "The announcement provides procurement context at 1.1. It does not establish personal command loyalty or show how constitutional barriers performed.",
+          "barrierStatus": "Barrier performance is not established.",
           "barrierCondition": "unknown",
           "barriers": {},
           "candidates": [
@@ -1840,7 +1845,7 @@ window.AuspexSTPAModels = {
             "target": "P-01:2",
             "question": "Could reliance on AI-assisted analysis concentrate practical command authority?",
             "basis": "The announcement describes rapid acquisition of tools intended to assist human imagery analysts.",
-            "unresolved": "It provides no evidence of personal command loyalty or displaced oversight. Actual delegation and independent review would need examination.",
+            "unresolved": "However, it does not show that AI-assisted analysis displaced independent oversight or made forces personally loyal to a leader. That connection would need evidence of how command authority was actually delegated and reviewed.",
             "sources": [
               "MAV"
             ]
@@ -1853,9 +1858,9 @@ window.AuspexSTPAModels = {
           "target": "P-01:1",
           "anchor": "P-01:1",
           "observed": "Officials announced an accelerated autonomy fielding program motivated by military competition.",
-          "notEstablished": "The announcement does not establish complete delivery, personal command loyalty, a coup or tested command safeguards.",
-          "limit": "Officials announced an accelerated autonomy fielding program motivated by military competition. The announcement does not establish complete delivery, personal command loyalty, a coup or tested command safeguards.",
-          "barrierStatus": "Barrier performance not established",
+          "notEstablished": "The announcement does not establish that fielding was completed. It also provides no evidence of personal command loyalty, a coup, or tested command safeguards.",
+          "limit": "The announcement provides procurement context at 1.1. It does not establish completed fielding or show how command safeguards performed.",
+          "barrierStatus": "Barrier performance is not established.",
           "barrierCondition": "unknown",
           "barriers": {},
           "candidates": [
@@ -1868,25 +1873,25 @@ window.AuspexSTPAModels = {
             "target": "P-01:2",
             "question": "Would independent command checks hold as autonomy is fielded at scale?",
             "basis": "Replicator announced rapid fielding of autonomous systems under competitive pressure.",
-            "unresolved": "The announcement does not test command checks. Authorization arrangements and their performance under disputed orders remain unassessed.",
+            "unresolved": "However, it does not test command checks or show how disputed orders would be handled. Assessing this would require evidence of the authorization rules and whether they remained enforceable during deployment.",
             "sources": [
               "REP"
             ]
           }
         }
       },
-      "fidelity": "Evidence marks procurement context at 1.1 only. Candidate constitutional controls are explicit requirements for the hypothetical system; the mapped announcements do not demonstrate that they worked.",
-      "barrierQuestion": "Would this protection still constrain a more capable system, or does it rely on today’s limited capability, access or opportunity?",
+      "fidelity": "The announcements provide procurement context at 1.1 only. The constitutional safeguards describe requirements for the hypothetical system; neither announcement demonstrates that these safeguards worked.",
+      "barrierQuestion": "Would this protection still constrain a more capable system, or does it rely on today’s limited capability, access, or opportunity?",
       "context": [
         {
           "title": "System setting",
-          "text": "A hypothetical state’s procurement, military command, force-control and constitutional oversight system. The model concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
+          "text": "The model covers a hypothetical state’s procurement, military command, force control, and constitutional oversight. It concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
           "sources": [],
           "targets": [
             {
               "node": "P-01:1",
               "label": "Procurement",
-              "text": "A hypothetical state’s procurement and military command system."
+              "text": "The scenario begins in a hypothetical state’s procurement and military command system."
             },
             {
               "node": "P-01:2",
@@ -1909,9 +1914,8 @@ window.AuspexSTPAModels = {
       "cloud": {
         "origin": "scenario-setting",
         "conditions": [
-          "Military competition",
-          "Autonomy procurement",
-          "Constitutional order"
+          "Pressure to field autonomy",
+          "Constitutional distribution of power"
         ],
         "actors": [
           {
@@ -1922,15 +1926,20 @@ window.AuspexSTPAModels = {
           {
             "controller": "C3",
             "label": "Command",
-            "role": "direct the force"
+            "role": "issue orders"
+          },
+          {
+            "controller": "C4",
+            "label": "Force operators",
+            "role": "execute or halt operations"
           },
           {
             "controller": "C2",
             "label": "Oversight",
-            "role": "review & constrain power"
+            "role": "review and constrain power"
           }
         ],
-        "summary": "Competitive procurement places autonomy within an existing distribution of command and oversight."
+        "summary": "Pressure to field autonomy shapes deployment decisions within an existing constitutional distribution of power."
       }
     }
   },
@@ -1944,7 +1953,7 @@ window.AuspexSTPAModels = {
       {
         "id": "unsafe-action",
         "label": "Unsafe control action",
-        "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+        "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
       },
       {
         "id": "scenario",
@@ -1975,17 +1984,17 @@ window.AuspexSTPAModels = {
     "limitingConditions": [
       {
         "kind": "Safeguard",
-        "example": "Independently enforced review, access bounds or effective interruption.",
+        "example": "Independently enforced review, access bounds, or effective interruption.",
         "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
       },
       {
         "kind": "Capability limit",
-        "example": "The system cannot perform the required research, deception or physical task.",
+        "example": "The system cannot perform the required research, deception, or physical task.",
         "question": "Would increased capability remove this limit?"
       },
       {
         "kind": "Opportunity limit",
-        "example": "The necessary access, resources or institutional delegation is unavailable.",
+        "example": "The necessary access, resources, or institutional delegation is unavailable.",
         "question": "Can the system or another actor acquire what is missing?"
       },
       {
@@ -2000,18 +2009,18 @@ window.AuspexSTPAModels = {
     "title": "Misleading threat assessment and nuclear escalation",
     "status": "STPA worked example · provisional analysis",
     "summary": "Could a convincing but false threat picture move a nuclear decision beyond effective correction?",
-    "scope": "A hypothetical crisis-warning, intelligence-assessment and nuclear-command system in which AI shapes advice to human decision-makers. Sensor input, independent scrutiny, authorization and correction are modeled separately.",
-    "purpose": "Prevent nuclear harm caused by materially false threat assessment while preserving verified information, accountable decisions and effective correction.",
+    "scope": "The model covers a hypothetical crisis-warning, intelligence-assessment, and nuclear-command system in which AI shapes advice to human decision-makers. Sensor input, independent scrutiny, authorization, and correction are modeled separately.",
+    "purpose": "Prevent nuclear harm caused by materially false threat assessment while preserving verified information, accountable decisions, and effective correction.",
     "boundary": "No real country’s classified command arrangements are claimed. Human authorization remains explicit. The two NORAD records are historical non-AI analogies for information and control mechanisms; they are not evidence of AI nuclear use.",
     "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Historical warning overlays establish neither preceding AI reliance nor a later launch decision.",
     "bowtie": "The centre, H1 at 2.1, is nuclear force committed on a materially false premise without effective correction. Misleading information and inadequate scrutiny are left-side threats; actual detonation and wider exchange remain conditional consequences.",
-    "schema": "A first-pass STPA reconstruction with human decision authority, machine information, verification, control execution and recovery kept distinct. The bow-tie summarizes selected loss scenarios.",
-    "limits": "This analysis is provisional and requires national-doctrine, warning-system and crisis-decision expertise. Four unsafe-action categories are illustrated, not exhaustively assessed. The historical records show warning failures and corrective changes; they do not establish AI reliance, a launch order, a measured escalation probability or the performance of modern nuclear safeguards.",
+    "schema": "A first-pass STPA reconstruction with human decision authority, machine information, verification, control execution, and recovery kept distinct. The bow-tie summarizes selected loss scenarios.",
+    "limits": "This analysis is provisional and requires national-doctrine, warning-system, and crisis-decision expertise. Four unsafe-action categories are illustrated, not exhaustively assessed. The historical records show warning failures and corrective changes; they do not establish AI reliance, a launch order, a measured escalation probability, or the performance of modern nuclear safeguards.",
     "losses": [
       {
         "id": "L1",
         "title": "Nuclear detonation and mass casualties",
-        "text": "People suffer death, injury and long-term harm from nuclear use initiated on a false assessment."
+        "text": "People suffer death, injury, and long-term harm from nuclear use initiated on a false assessment."
       },
       {
         "id": "L2",
@@ -2041,7 +2050,7 @@ window.AuspexSTPAModels = {
       {
         "id": "H3",
         "title": "Correction loses the intervention window",
-        "text": "A valid correction or cancellation cannot be delivered, interpreted and executed before the relevant action becomes irreversible.",
+        "text": "A valid correction or cancellation cannot be delivered, interpreted, and executed before the relevant action becomes irreversible.",
         "losses": [
           "L1",
           "L2"
@@ -2052,50 +2061,50 @@ window.AuspexSTPAModels = {
       {
         "id": "C1",
         "title": "National decision authority",
-        "responsibility": "Decide whether to authorize, defer or cancel nuclear use under the applicable doctrine, accounting for contrary evidence.",
-        "feedback": "Independent assessment, uncertainty, alternative explanations and action status.",
+        "responsibility": "Decide whether to authorize, defer, or cancel nuclear use under the applicable doctrine, accounting for contrary evidence.",
+        "feedback": "Independent assessment, uncertainty, alternative explanations, and action status.",
         "assumption": "The existence of a human decision-maker is not evidence of meaningful scrutiny."
       },
       {
         "id": "C2",
         "title": "Intelligence and warning assessment team",
-        "responsibility": "Corroborate warnings, challenge AI conclusions and communicate material uncertainty to C1.",
-        "feedback": "Independent sensor and intelligence channels, provenance and disconfirming observations.",
+        "responsibility": "Corroborate warnings, challenge AI conclusions, and communicate material uncertainty to C1.",
+        "feedback": "Independent sensor and intelligence channels, provenance, and disconfirming observations.",
         "assumption": "Multiple reports may share one erroneous upstream source."
       },
       {
         "id": "C3",
         "title": "AI decision-support system",
         "responsibility": "Organize information within its approved scope and expose uncertainty and source provenance.",
-        "feedback": "Authenticated observations, analyst corrections and use restrictions.",
+        "feedback": "Authenticated observations, analyst corrections, and use restrictions.",
         "assumption": "Fluent explanations and confident rankings can be wrong without any deceptive objective."
       },
       {
         "id": "C4",
         "title": "Warning-system operations and assurance",
-        "responsibility": "Maintain operational input integrity, separate tests from live warning and flag invalid or inconsistent messages.",
-        "feedback": "Sensor status, message checks, test provenance and independent monitoring.",
+        "responsibility": "Maintain operational input integrity, separate tests from live warning, and flag invalid or inconsistent messages.",
+        "feedback": "Sensor status, message checks, test provenance, and independent monitoring.",
         "assumption": "Correct transmission does not establish that the underlying assessment is true."
       },
       {
         "id": "C5",
         "title": "Human authorization and execution chain",
         "responsibility": "Execute only valid authorized actions and apply valid cancellation while that remains possible.",
-        "feedback": "Order status, conflicting or canceled authority and confirmed execution state.",
+        "feedback": "Order status, conflicting or canceled authority, and confirmed execution state.",
         "assumption": "Recovery may be impossible after an irreversible physical commitment."
       },
       {
         "id": "C6",
         "title": "Independent crisis communication function",
         "responsibility": "Bring credible external clarification and de-escalation information into the assessment and decision process.",
-        "feedback": "Authenticated communications, acknowledgments and unresolved contradictions.",
+        "feedback": "Authenticated communications, acknowledgments, and unresolved contradictions.",
         "assumption": "An available channel may fail to deliver useful clarification in time."
       },
       {
         "id": "C7",
         "title": "Weapon execution system",
         "responsibility": "Operate only within valid authorization and accept an effective hold or cancellation while action remains reversible.",
-        "feedback": "Validated command state, independent status checks and execution-state reporting.",
+        "feedback": "Validated command state, independent status checks, and execution-state reporting.",
         "assumption": "This abstract role supplies no description of a real weapon system or its command mechanisms."
       }
     ],
@@ -2105,7 +2114,7 @@ window.AuspexSTPAModels = {
         "controller": "C4",
         "process": "C3",
         "action": "Admit operational data or withhold invalid input",
-        "feedback": "Provenance checks, source status and downstream data use.",
+        "feedback": "Provenance checks, source status, and downstream data use.",
         "constraints": [
           "SC1",
           "SC2",
@@ -2127,7 +2136,7 @@ window.AuspexSTPAModels = {
         "id": "CA3",
         "controller": "C1",
         "process": "C5",
-        "action": "Authorize, defer or cancel nuclear use",
+        "action": "Authorize, defer, or cancel nuclear use",
         "feedback": "Independent findings and the remaining intervention window.",
         "constraints": [
           "SC3",
@@ -2149,7 +2158,7 @@ window.AuspexSTPAModels = {
         "controller": "C6",
         "process": "C2",
         "action": "Deliver authenticated crisis clarification",
-        "feedback": "Receipt, assessment changes and outstanding ambiguity.",
+        "feedback": "Receipt, assessment changes, and outstanding ambiguity.",
         "constraints": [
           "SC2",
           "SC3"
@@ -2160,7 +2169,7 @@ window.AuspexSTPAModels = {
       {
         "id": "SC1",
         "title": "Separate tests from operational warning",
-        "text": "Test, simulated and invalid data must remain distinguishable from operational warning throughout processing and presentation.",
+        "text": "Test, simulated, and invalid data must remain distinguishable from operational warning throughout processing and presentation.",
         "hazards": [
           "H2"
         ],
@@ -2194,7 +2203,7 @@ window.AuspexSTPAModels = {
           "W-01:R"
         ],
         "test": "Does contradictory evidence from an independent channel change the assessment, rather than being summarized away?",
-        "limit": "Shared upstream errors, missing observations or common dependence on one AI summary."
+        "limit": "Shared upstream errors, missing observations, or common dependence on one AI summary can make apparent corroboration unreliable."
       },
       {
         "id": "SC3",
@@ -2217,7 +2226,7 @@ window.AuspexSTPAModels = {
           "W-01:R"
         ],
         "test": "In a safe crisis exercise, do decision-makers defer or revise a decision when independent evidence invalidates its premise?",
-        "limit": "Time pressure, doctrine, prior beliefs and institutional pressure can overwhelm nominal human review."
+        "limit": "Time pressure, doctrine, prior beliefs, and institutional pressure can overwhelm nominal human review."
       },
       {
         "id": "SC4",
@@ -2244,7 +2253,7 @@ window.AuspexSTPAModels = {
       {
         "id": "SC5",
         "title": "Reassess after changing the system",
-        "text": "Changes to warning software, message formats and decision support must be independently checked for new common failures before operational reliance.",
+        "text": "Changes to warning software, message formats, and decision support must be independently checked for new common failures before operational reliance.",
         "hazards": [
           "H2",
           "H3"
@@ -2274,7 +2283,7 @@ window.AuspexSTPAModels = {
         "shortLabel": "AI shapes the threat picture",
         "text": "AI-generated organization or recommendations materially influence crisis assessment.",
         "requires": "Consequential reliance in a crisis, not simply the presence of AI software.",
-        "mechanism": "AI can shape salience, framing and confidence in information that informs a human decision.",
+        "mechanism": "AI can shape salience, framing, and confidence in information that informs a human decision.",
         "constraints": [
           "SC1",
           "SC5"
@@ -2298,9 +2307,9 @@ window.AuspexSTPAModels = {
         "role": "Information failure scenario",
         "title": "A false picture resembles an imminent attack",
         "shortLabel": "False warning appears credible",
-        "text": "Error, misleading presentation or invalid input produces an exaggerated apparent threat.",
+        "text": "Error, misleading presentation, or invalid input produces an exaggerated apparent threat.",
         "requires": "The false information reaches the assessment process and matters to its conclusions.",
-        "mechanism": "Data contamination, unreliable inference or presentation can make an incorrect warning appear credible.",
+        "mechanism": "Data contamination, unreliable inference, or presentation can make an incorrect warning appear credible.",
         "constraints": [
           "SC1",
           "SC2",
@@ -2355,7 +2364,7 @@ window.AuspexSTPAModels = {
         "title": "Nuclear use is committed on a false premise",
         "shortLabel": "Correction loses control",
         "text": "Human authorization commits nuclear force while effective correction is absent.",
-        "requires": "A materially false premise, consequential authorization and ineffective cancellation before irreversible use.",
+        "requires": "A materially false premise, consequential authorization, and ineffective cancellation before irreversible use.",
         "mechanism": "An informational error becomes a hazardous system state when the authorized control chain commits force without effective correction.",
         "constraints": [
           "SC3",
@@ -2381,7 +2390,7 @@ window.AuspexSTPAModels = {
         "title": "A nuclear detonation causes mass harm",
         "shortLabel": "Nuclear harm occurs",
         "text": "The execution chain carries out the decision and a weapon detonates.",
-        "requires": "Successful execution, delivery and detonation, with no effective interruption.",
+        "requires": "Successful execution, delivery, and detonation, with no effective interruption.",
         "mechanism": "Authorization is not detonation; the physical execution route must also complete.",
         "constraints": [
           "SC4"
@@ -2431,7 +2440,7 @@ window.AuspexSTPAModels = {
         "title": "The decision is corrected and action stops",
         "shortLabel": "Correction takes effect",
         "text": "Independent information changes the decision and cancellation is verified before irreversible action.",
-        "requires": "Credible contrary information, authority to revise the decision and a reachable execution chain.",
+        "requires": "Credible contrary information, authority to revise the decision, and a reachable execution chain.",
         "mechanism": "Recovery requires an effective change in action; detection or a transmitted cancellation alone is insufficient.",
         "constraints": [
           "SC2",
@@ -2635,7 +2644,7 @@ window.AuspexSTPAModels = {
         "id": "LS3",
         "title": "Time pressure converts uncertainty into authorization",
         "archetype": "Unsafe controller behavior / coordination",
-        "text": "A permissive posture, pressure to act or an inadequate model of the warning leads to consequential authorization without resolving material uncertainty.",
+        "text": "A permissive posture, pressure to act, or an inadequate model of the warning leads to consequential authorization without resolving material uncertainty.",
         "ucas": [
           "UCA2",
           "UCA3"
@@ -2651,13 +2660,13 @@ window.AuspexSTPAModels = {
         "evidence": [
           "SI"
         ],
-        "unknown": "The applicable doctrine, decision window and influence of AI advice in the specific system."
+        "unknown": "The applicable doctrine, decision window, and influence of AI advice in the specific system."
       },
       {
         "id": "LS4",
         "title": "Correction cannot stop physical execution",
         "archetype": "Control path / timing / duration",
-        "text": "A valid correction is delayed, not received, misinterpreted or ineffective; alternatively, a hold ends while false-premise authorization remains active.",
+        "text": "A valid correction is delayed, not received, misinterpreted, or ineffective; alternatively, a hold ends while false-premise authorization remains active.",
         "ucas": [
           "UCA4",
           "UCA5"
@@ -2678,7 +2687,7 @@ window.AuspexSTPAModels = {
         "id": "LS5",
         "title": "Initial harm develops into a wider catastrophe",
         "archetype": "Conditional environmental continuation",
-        "text": "Further exchange can expand direct and systemic harm. A famine route requires sufficiently large physical disruption plus inadequate food reserves, adaptation and distribution; neither follows automatically from one strike.",
+        "text": "Further exchange can expand direct and systemic harm. A famine route requires sufficiently large physical disruption plus inadequate food reserves, adaptation, and distribution; neither follows automatically from one strike.",
         "ucas": [],
         "hazards": [
           "H1"
@@ -2700,14 +2709,14 @@ window.AuspexSTPAModels = {
         "title": "Leveson & Thomas · STPA Handbook (2018)",
         "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
         "locator": "Chapter 2, pp. 14–53; Chapter 6, pp. 101–115",
-        "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios and leading indicators."
+        "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios, and leading indicators."
       },
       {
         "id": "MYLIUS",
         "title": "Simon Mylius · Systematic Hazard Analysis for Frontier AI using STPA",
         "url": "https://arxiv.org/html/2506.01782v1",
         "locator": "Sections 3.1–3.6 and 4.8",
-        "use": "Direct AI application: explicit scope, control relationships and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
+        "use": "Direct AI application: explicit scope, control relationships, and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
       },
       {
         "id": "CAA",
@@ -2758,7 +2767,7 @@ window.AuspexSTPAModels = {
             "label": "Erroneous machine information can resemble an attack warning"
           }
         ],
-        "scope": "Warning-input analogy only. AI dependence, failed independent scrutiny, a launch order and nuclear harm are not established. The barrier shown is a documented post-incident corrective design, not proof of what prevented nuclear use during the episode.",
+        "scope": "The historical comparison concerns warning inputs only. AI dependence, failed independent scrutiny, a launch order, and nuclear harm are not established. The barrier shown is a documented corrective design added after the incident. It does not show what prevented nuclear use during the episode.",
         "evidence": [
           "NOR-1979-account"
         ],
@@ -2827,7 +2836,7 @@ window.AuspexSTPAModels = {
         ],
         "reach": {
           "local": "Simulated data entered the operational warning system and produced false attack indications. A separate development facility was subsequently established.",
-          "systemic": "Warning-input analogy only. AI dependence, failed independent scrutiny, a launch order and nuclear harm are not established.",
+          "systemic": "The historical comparison concerns warning inputs only. AI dependence, failed independent scrutiny, a launch order, and nuclear harm are not established.",
           "evidence": [
             "NOR-1979-account"
           ]
@@ -2848,7 +2857,7 @@ window.AuspexSTPAModels = {
             "label": "A processor fault generated apparent attack information"
           }
         ],
-        "scope": "A second warning-system mechanism. No claim is made that machine output determined a leader’s nuclear decision. The barrier shown is a documented post-incident corrective design, not proof of what prevented nuclear use during the episode.",
+        "scope": "The historical comparison concerns a different warning-system failure. The record does not establish that machine output determined a leader’s nuclear decision. The barrier shown is a documented corrective design added after the incident. It does not show what prevented nuclear use during the episode.",
         "evidence": [
           "NOR-1980-account"
         ],
@@ -2917,7 +2926,7 @@ window.AuspexSTPAModels = {
         ],
         "reach": {
           "local": "A faulty communications-processor component produced false attack indications and repeated them during operational testing. Message checks were subsequently changed.",
-          "systemic": "A second warning-system mechanism. No claim is made that machine output determined a leader’s nuclear decision.",
+          "systemic": "The historical comparison concerns a different warning-system failure. The record does not establish that machine output determined a leader’s nuclear decision.",
           "evidence": [
             "NOR-1980-account"
           ]
@@ -2940,12 +2949,12 @@ window.AuspexSTPAModels = {
           "target": "W-01:2",
           "anchor": "W-01:2",
           "observed": "A historical non-AI warning failure was followed by a documented corrective change.",
-          "notEstablished": "Neither AI reliance, a launch order nor the effectiveness of the corrective design against modern AI is established.",
-          "limit": "A historical non-AI warning failure was followed by a documented corrective change. Neither AI reliance, a launch order nor the effectiveness of the corrective design against modern AI is established.",
+          "notEstablished": "The record does not establish reliance on AI or a launch order. It does not test the corrective design against modern AI.",
+          "limit": "The historical comparison at 1.2 concerns a warning-system failure. The corrective design was added afterward, so it does not show what prevented nuclear use during the incident.",
           "barriers": {
             "separate-test-system": {
               "title": "Separate test and operational systems",
-              "result": "Strengthened after the incident; efficacy unmeasured.",
+              "result": "The protection was strengthened after the incident. Its effectiveness was not measured.",
               "condition": "reinforced",
               "conditionBasis": "A documented post-incident design change added protection against the identified failure; this is structural reinforcement, not measured universal effectiveness.",
               "limitType": "safeguard",
@@ -2966,8 +2975,8 @@ window.AuspexSTPAModels = {
             "origin": "editorial",
             "target": "W-01:1",
             "question": "Could test inputs contaminate an AI-generated threat picture?",
-            "basis": "The 1979 warning involved test data entering the operational system; an offsite test facility followed.",
-            "unresolved": "This was a non-AI system. An AI comparison needs evidence about input separation and how operators verify the resulting picture.",
+            "basis": "Test data entered the operational warning system in 1979. An offsite test facility was established afterward.",
+            "unresolved": "However, this incident did not involve AI. It does not tell us whether an AI-assisted system would keep test inputs separate or whether operators would catch contamination.",
             "sources": [
               "NOR"
             ]
@@ -2980,12 +2989,12 @@ window.AuspexSTPAModels = {
           "target": "W-01:2",
           "anchor": "W-01:2",
           "observed": "A historical non-AI warning failure was followed by a documented corrective change.",
-          "notEstablished": "Neither AI reliance, a launch order nor the effectiveness of the corrective design against modern AI is established.",
-          "limit": "A historical non-AI warning failure was followed by a documented corrective change. Neither AI reliance, a launch order nor the effectiveness of the corrective design against modern AI is established.",
+          "notEstablished": "The record does not establish reliance on AI or a launch order. It does not test the corrective design against modern AI.",
+          "limit": "The historical comparison at 1.2 concerns a warning-system failure. The corrective design was added afterward, so it does not show what prevented nuclear use during the incident.",
           "barriers": {
             "message-checks": {
               "title": "Transmission and message checks",
-              "result": "Strengthened after the incident; efficacy unmeasured.",
+              "result": "The protection was strengthened after the incident. Its effectiveness was not measured.",
               "condition": "reinforced",
               "conditionBasis": "A documented post-incident design change added protection against the identified failure; this is structural reinforcement, not measured universal effectiveness.",
               "limitType": "safeguard",
@@ -3007,19 +3016,19 @@ window.AuspexSTPAModels = {
             "target": "W-01:3",
             "question": "Would independent checks catch a false warning repeated by several AI systems?",
             "basis": "The 1980 warning failures prompted changes to transmission procedures and error checking.",
-            "unresolved": "The report does not test AI agreement or shared inputs. The independence and timing of modern checks remain open questions.",
+            "unresolved": "However, the report does not test agreement among AI systems or their dependence on shared inputs. The open question is whether the checks would be independent enough to catch a shared error before a decision became irreversible.",
             "sources": [
               "NOR"
             ]
           }
         }
       },
-      "fidelity": "The two records are historical comparisons at 1.2. Reinforced means a documented corrective design after the incident; it does not identify the historical stopping mechanism or prove future efficacy.",
+      "fidelity": "The two records provide historical comparisons at 1.2. “Reinforced” describes a documented corrective design added after the incident. It does not identify what stopped escalation during the incident or prove how the design would perform in future.",
       "barrierQuestion": "Will this control still work when misleading information becomes more persuasive, or does it only address a known fault?",
       "context": [
         {
           "title": "System setting",
-          "text": "A hypothetical crisis-warning, intelligence-assessment and nuclear-command system in which AI shapes advice to human decision-makers. Sensor input, independent scrutiny, authorization and correction are modeled separately.",
+          "text": "The model covers a hypothetical crisis-warning, intelligence-assessment, and nuclear-command system in which AI shapes advice to human decision-makers. Sensor input, independent scrutiny, authorization, and correction are modeled separately.",
           "sources": [],
           "targets": [
             {
@@ -3048,9 +3057,8 @@ window.AuspexSTPAModels = {
       "cloud": {
         "origin": "scenario-setting",
         "conditions": [
-          "Crisis pressure",
-          "Warning information",
-          "Nuclear command"
+          "Crisis time pressure",
+          "Uncertain warning information"
         ],
         "actors": [
           {
@@ -3066,10 +3074,10 @@ window.AuspexSTPAModels = {
           {
             "controller": "C6",
             "label": "Independent channels",
-            "role": "verify & correct"
+            "role": "verify and correct"
           }
         ],
-        "summary": "The crisis setting shapes how warnings are interpreted, checked and acted upon."
+        "summary": "Crisis pressure limits the time available to verify warnings before a nuclear decision."
       }
     }
   },
@@ -3083,7 +3091,7 @@ window.AuspexSTPAModels = {
       {
         "id": "unsafe-action",
         "label": "Unsafe control action",
-        "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+        "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
       },
       {
         "id": "scenario",
@@ -3114,17 +3122,17 @@ window.AuspexSTPAModels = {
     "limitingConditions": [
       {
         "kind": "Safeguard",
-        "example": "Independently enforced review, access bounds or effective interruption.",
+        "example": "Independently enforced review, access bounds, or effective interruption.",
         "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
       },
       {
         "kind": "Capability limit",
-        "example": "The system cannot perform the required research, deception or physical task.",
+        "example": "The system cannot perform the required research, deception, or physical task.",
         "question": "Would increased capability remove this limit?"
       },
       {
         "kind": "Opportunity limit",
-        "example": "The necessary access, resources or institutional delegation is unavailable.",
+        "example": "The necessary access, resources, or institutional delegation is unavailable.",
         "question": "Can the system or another actor acquire what is missing?"
       },
       {
@@ -3139,18 +3147,18 @@ window.AuspexSTPAModels = {
     "title": "Biological misuse and the limits of access control",
     "status": "STPA worked example · provisional analysis",
     "summary": "Could access to useful AI assistance outgrow the safeguards that keep biological risk contained?",
-    "scope": "A hypothetical AI-service, research-governance, facility-safety and public-health system. The analysis follows a potential malicious-use route at a non-operational level; it separates model access, demonstrated assistance, physical hazard, exposure and public-health consequences.",
-    "purpose": "Preserve beneficial research while preventing harmful assistance, uncontrolled biological hazards, exposure and large-scale loss of life.",
-    "boundary": "The mapped provider reports concern dual-use research and access controls. They do not establish malicious intent, a harmful release or a pandemic. Technical biological procedures and attack methods are outside this model.",
+    "scope": "The model covers a hypothetical AI-service, research-governance, facility-safety, and public-health system. It follows a potential malicious-use route at a non-operational level. Access to AI is distinct from useful assistance. A physical hazard and exposure are further conditions; public-health consequences do not follow from access alone.",
+    "purpose": "Preserve beneficial research while preventing harmful assistance, uncontrolled biological hazards, exposure, and large-scale loss of life.",
+    "boundary": "The mapped provider reports concern dual-use research and access controls. They do not establish malicious intent, a harmful release, or a pandemic. Technical biological procedures and attack methods are outside this model.",
     "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Evidence of access does not demonstrate practical uplift or later biological outcomes.",
-    "bowtie": "The centre, H1 at 2.1, is a consequential biological hazard beyond effective authorized control. Useful assistance and other practical conditions are left-side contributors; exposure, sustained transmission and response failure are separate right-side conditions.",
-    "schema": "A provisional STPA model with explicit access, institutional, physical and public-health controls. The adapted bow-tie distinguishes model access from biological outcomes and separates current barrier condition from brittleness under changing capability.",
-    "limits": "This first-pass governance analysis requires specialist biosafety and public-health review. Selected control actions illustrate the four unsafe-action categories; they are not an exhaustive analysis. Provider assessments of assistance are not independent outcome experiments. No mapped record demonstrates the complete malicious pathway, and no probability, pathogen specification or operational biological method is supplied.",
+    "bowtie": "The centre, H1 at 2.1, is a consequential biological hazard beyond effective authorized control. Useful assistance and other practical conditions are left-side contributors; exposure, sustained transmission, and response failure are separate right-side conditions.",
+    "schema": "A provisional STPA model with explicit access, institutional, physical, and public-health controls. The adapted bow-tie distinguishes model access from biological outcomes and separates current barrier condition from brittleness under changing capability.",
+    "limits": "This first-pass governance analysis requires specialist biosafety and public-health review. Selected control actions illustrate the four unsafe-action categories; they are not an exhaustive analysis. Provider assessments of assistance are not independent outcome experiments. No mapped record demonstrates the complete malicious pathway, and no probability, pathogen specification, or operational biological method is supplied.",
     "losses": [
       {
         "id": "L1",
         "title": "Serious illness and death after harmful exposure",
-        "text": "People suffer preventable illness, death or lasting harm from a biological hazard."
+        "text": "People suffer preventable illness, death, or lasting harm from a biological hazard."
       },
       {
         "id": "L2",
@@ -3180,7 +3188,7 @@ window.AuspexSTPAModels = {
       {
         "id": "H3",
         "title": "Response cannot contain consequential spread",
-        "text": "Detection, coordination and response fail to interrupt spread while an effective intervention remains possible.",
+        "text": "Detection, coordination, and response fail to interrupt spread while an effective intervention remains possible.",
         "losses": [
           "L1",
           "L2"
@@ -3191,50 +3199,50 @@ window.AuspexSTPAModels = {
       {
         "id": "C1",
         "title": "AI provider safety and deployment authority",
-        "responsibility": "Set risk-sensitive access rules, require relevant evaluations and revise safeguards as capabilities and use change.",
-        "feedback": "Safe capability evaluations, enforcement outcomes, investigation findings and residual access.",
+        "responsibility": "Set risk-sensitive access rules, require relevant evaluations, and revise safeguards as capabilities and use change.",
+        "feedback": "Safe capability evaluations, enforcement outcomes, investigation findings, and residual access.",
         "assumption": "Blocking one model is not equivalent to preventing access to comparable capability elsewhere."
       },
       {
         "id": "C2",
         "title": "Service access and enforcement operators",
-        "responsibility": "Apply approved restrictions, investigate concerning access and confirm the effects of enforcement.",
-        "feedback": "Validated account relationships, classifier outcomes and observed re-entry or continued use.",
+        "responsibility": "Apply approved restrictions, investigate concerning access, and confirm the effects of enforcement.",
+        "feedback": "Validated account relationships, classifier outcomes, and observed re-entry or continued use.",
         "assumption": "Account closure counts are not evidence of lasting exclusion."
       },
       {
         "id": "C3",
         "title": "Research and facility oversight authority",
-        "responsibility": "Authorize legitimate research scope, require appropriate safety controls and pause activity outside those bounds.",
-        "feedback": "Independent project review, actual activity, deviations and containment assurance.",
+        "responsibility": "Authorize legitimate research scope, require appropriate safety controls, and pause activity outside those bounds.",
+        "feedback": "Independent project review, actual activity, deviations, and containment assurance.",
         "assumption": "Dual-use intent cannot be reliably inferred from one text exchange."
       },
       {
         "id": "C4",
         "title": "Research activity using AI assistance",
         "responsibility": "Remain within authorized research and safety limits, with consequential activity independently reviewable and interruptible.",
-        "feedback": "Authorized scope, safety decisions and supervised activity records.",
+        "feedback": "Authorized scope, safety decisions, and supervised activity records.",
         "assumption": "The hypothetical malicious-use route differs from the observed dual-use access cases."
       },
       {
         "id": "C5",
         "title": "Facility safety and containment operators",
-        "responsibility": "Enforce approved facility bounds, respond to deviations and verify that a safety intervention has taken effect.",
-        "feedback": "Independent safety observations, incident reports and verified cessation of unsafe activity.",
+        "responsibility": "Enforce approved facility bounds, respond to deviations, and verify that a safety intervention has taken effect.",
+        "feedback": "Independent safety observations, incident reports, and verified cessation of unsafe activity.",
         "assumption": "A model refusal does not itself control physical activity already underway."
       },
       {
         "id": "C6",
         "title": "Public-health coordination authority",
-        "responsibility": "Recognize credible signals, coordinate appropriate response and verify whether spread is controlled.",
-        "feedback": "Timely surveillance, clinical reports, intervention outcomes and response capacity.",
+        "responsibility": "Recognize credible signals, coordinate appropriate response, and verify whether spread is controlled.",
+        "feedback": "Timely surveillance, clinical reports, intervention outcomes, and response capacity.",
         "assumption": "Absence of a detected outbreak is not proof that all upstream controls worked."
       },
       {
         "id": "C7",
         "title": "Clinical and outbreak-response services",
         "responsibility": "Implement authorized protective actions and report their coverage and effects.",
-        "feedback": "Case information, operational capacity and implementation results.",
+        "feedback": "Case information, operational capacity, and implementation results.",
         "assumption": "A response policy has no protective effect unless it reaches the affected population in time."
       }
     ],
@@ -3254,8 +3262,8 @@ window.AuspexSTPAModels = {
         "id": "CA2",
         "controller": "C2",
         "process": "C4",
-        "action": "Grant, restrict or revoke AI service access",
-        "feedback": "Observed access, relevant classifier results and re-entry after enforcement.",
+        "action": "Grant, restrict, or revoke AI service access",
+        "feedback": "Observed access, relevant classifier results, and re-entry after enforcement.",
         "constraints": [
           "SC1",
           "SC2"
@@ -3265,7 +3273,7 @@ window.AuspexSTPAModels = {
         "id": "CA3",
         "controller": "C3",
         "process": "C4",
-        "action": "Authorize, limit or pause research activity",
+        "action": "Authorize, limit, or pause research activity",
         "feedback": "Independent project review and actual activity within the facility.",
         "constraints": [
           "SC3"
@@ -3286,8 +3294,8 @@ window.AuspexSTPAModels = {
         "id": "CA5",
         "controller": "C6",
         "process": "C7",
-        "action": "Initiate, adapt or end coordinated outbreak response",
-        "feedback": "Coverage, timeliness and observed change in transmission and harm.",
+        "action": "Initiate, adapt, or end coordinated outbreak response",
+        "feedback": "Coverage, timeliness, and observed change in transmission and harm.",
         "constraints": [
           "SC5"
         ]
@@ -3359,7 +3367,7 @@ window.AuspexSTPAModels = {
           "B-01:3"
         ],
         "test": "Does an unapproved change trigger a meaningful hold and independent review before consequential activity proceeds?",
-        "limit": "Misleading records, unclear ownership or oversight that only checks the written proposal."
+        "limit": "Misleading records, unclear ownership, or oversight that only checks the written proposal can leave actual activity outside effective scrutiny."
       },
       {
         "id": "SC4",
@@ -3399,8 +3407,8 @@ window.AuspexSTPAModels = {
           "B-01:6",
           "B-01:R"
         ],
-        "test": "In an appropriate preparedness exercise, do detection, coordination and action reach the affected population before the modeled response window closes?",
-        "limit": "Delayed signals, insufficient capacity and ineffective coordination; detection alone does not establish interruption."
+        "test": "In an appropriate preparedness exercise, do detection, coordination, and action reach the affected population before the modeled response window closes?",
+        "limit": "Delayed signals, insufficient capacity, and ineffective coordination can prevent a response from interrupting spread. Detection alone does not establish interruption."
       }
     ],
     "nodes": [
@@ -3467,7 +3475,7 @@ window.AuspexSTPAModels = {
         "title": "A biological hazard escapes authorized control",
         "shortLabel": "Hazard escapes control",
         "text": "Consequential biological activity or material lies outside effective safety governance and containment.",
-        "requires": "Physical feasibility and resources, inadequate oversight and a hazard capable of causing exposure.",
+        "requires": "Physical feasibility and resources, inadequate oversight, and a hazard capable of causing exposure.",
         "mechanism": "Loss of access governance becomes this hazard only when consequential physical conditions are also present.",
         "constraints": [
           "SC3",
@@ -3518,7 +3526,7 @@ window.AuspexSTPAModels = {
         "role": "Response failure scenario",
         "title": "Detection and response fail to control spread",
         "shortLabel": "Response cannot contain spread",
-        "text": "Detection, coordination or implementation is insufficient to control the outbreak in time.",
+        "text": "Detection, coordination, or implementation is insufficient to control the outbreak in time.",
         "requires": "Ongoing transmission and a response gap large enough to allow widespread exposure.",
         "mechanism": "Warnings must produce timely effective action; an alert alone is not a stopping mechanism.",
         "constraints": [
@@ -3546,7 +3554,7 @@ window.AuspexSTPAModels = {
         "title": "Disease causes mass mortality",
         "shortLabel": "Mass mortality",
         "text": "Large populations suffer serious disease and death.",
-        "requires": "Widespread exposure, substantial disease burden and inadequate protective response or adaptation.",
+        "requires": "Widespread exposure, substantial disease burden, and inadequate protective response or adaptation.",
         "mechanism": "The scale of mortality needs separate evidence; neither access evasion nor a research program establishes it.",
         "constraints": [
           "SC5"
@@ -3791,7 +3799,7 @@ window.AuspexSTPAModels = {
         "evidence": [
           "IR"
         ],
-        "unknown": "Actual activity, material feasibility, authorized scope and the effectiveness of facility controls."
+        "unknown": "Actual activity, material feasibility, authorized scope, and the effectiveness of facility controls."
       },
       {
         "id": "LS4",
@@ -3810,7 +3818,7 @@ window.AuspexSTPAModels = {
           "B-01:R"
         ],
         "evidence": [],
-        "unknown": "What action occurred, when it reached the relevant process and what evidence confirms its effect."
+        "unknown": "What action occurred, when it reached the relevant process, and what evidence confirms its effect."
       },
       {
         "id": "LS5",
@@ -3830,7 +3838,7 @@ window.AuspexSTPAModels = {
         "evidence": [
           "IR"
         ],
-        "unknown": "Transmission, disease burden, public-health capacity and the effect of actual countermeasures."
+        "unknown": "Transmission, disease burden, public-health capacity, and the effect of actual countermeasures."
       }
     ],
     "sources": [
@@ -3839,14 +3847,14 @@ window.AuspexSTPAModels = {
         "title": "Leveson & Thomas · STPA Handbook (2018)",
         "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
         "locator": "Chapter 2, pp. 14–53; Chapter 6, pp. 101–115",
-        "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios and leading indicators."
+        "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios, and leading indicators."
       },
       {
         "id": "MYLIUS",
         "title": "Simon Mylius · Systematic Hazard Analysis for Frontier AI using STPA",
         "url": "https://arxiv.org/html/2506.01782v1",
         "locator": "Sections 3.1–3.6 and 4.8",
-        "use": "Direct AI application: explicit scope, control relationships and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
+        "use": "Direct AI application: explicit scope, control relationships, and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
       },
       {
         "id": "CAA",
@@ -3859,7 +3867,7 @@ window.AuspexSTPAModels = {
         "id": "AN26",
         "title": "Anthropic · Detecting and countering misuse of AI: September 2026",
         "url": "https://www.anthropic.com/threat-intelligence-report-september-2026",
-        "locator": "Biological misuse, introductory scope and case studies 1–2",
+        "locator": "Biological misuse: introductory scope and case studies 1–2",
         "use": "Provider-reported access enforcement and classifier performance. Malicious intent and biological release are not established."
       },
       {
@@ -3867,7 +3875,7 @@ window.AuspexSTPAModels = {
         "title": "International AI Safety Report 2026",
         "url": "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026",
         "locator": "Section 2.1.4 and evaluation limitations",
-        "use": "Separates capability tests, practical uplift and uncertain real-world outcomes."
+        "use": "Separates capability tests, practical uplift, and uncertain real-world outcomes."
       },
       {
         "id": "DM",
@@ -3902,12 +3910,12 @@ window.AuspexSTPAModels = {
           "target": "B-01:1",
           "anchor": "B-01:1",
           "observed": "Anthropic reports that access resumed within days after bans and relay takedowns.",
-          "notEstablished": "The dual-use research case does not establish malicious intent, harmful exposure or a pandemic.",
-          "limit": "An observed failure of lasting access exclusion at 1.1; harmful intent and biological outcomes are not established.",
+          "notEstablished": "The dual-use research case does not establish malicious intent, harmful exposure, or a pandemic.",
+          "limit": "The reported failure to maintain access restrictions maps to 1.1. It does not establish harmful intent or biological outcomes.",
           "barriers": {
             "relay-enforcement": {
               "title": "Account bans and relay takedowns",
-              "result": "Temporary interruption; lasting exclusion failed.",
+              "result": "The interruption was temporary. Lasting exclusion failed.",
               "condition": "failed",
               "conditionBasis": "The provider reports re-established access within days; the rating concerns lasting exclusion, not whether accounts were closed.",
               "limitType": "safeguard",
@@ -3925,7 +3933,7 @@ window.AuspexSTPAModels = {
             "target": "B-01:2",
             "question": "Did restored access materially increase practical capability?",
             "basis": "The provider reports that access resumed after enforcement and that the research continued.",
-            "unresolved": "Continued access does not isolate the contribution of AI. A defensible comparison of work with and without assistance is missing.",
+            "unresolved": "However, continued access does not show how much AI contributed to the work. That would require a credible comparison of the research with and without AI assistance.",
             "sources": [
               "AN26"
             ]
@@ -3938,12 +3946,12 @@ window.AuspexSTPAModels = {
           "target": "B-01:1",
           "anchor": "B-01:1",
           "observed": "The provider reports that relevant assistance was confined to weaker models and judged its contribution limited.",
-          "notEstablished": "Independent outcome efficacy, malicious intent, a harmful release and a pandemic are not established.",
-          "limit": "A reported restriction at 1.1, partly dependent on lower fallback capability; it does not demonstrate a prevented pandemic.",
+          "notEstablished": "The record does not independently establish how much AI helped the research. It also does not establish malicious intent, a harmful release, or a pandemic.",
+          "limit": "The provider reports an access restriction at 1.1 that partly depended on the limited capability of fallback models. The case does not demonstrate that a pandemic was prevented.",
           "barriers": {
             "bio-classifier": {
               "title": "Biological safety classifiers",
-              "result": "Held in the reported scope; weaker models remained accessible.",
+              "result": "The restriction held within the reported scope. Weaker models remained accessible.",
               "condition": "intact",
               "conditionBasis": "Anthropic reports the stronger-model restriction worked in these exchanges; this is a provider assessment of a bounded case.",
               "limitType": "mixed",
@@ -3961,7 +3969,7 @@ window.AuspexSTPAModels = {
             "target": "B-01:2",
             "question": "Would the capability limit hold as fallback models improve?",
             "basis": "The provider reports restricting relevant assistance to its weakest models and judges their contribution limited.",
-            "unresolved": "The case does not establish how this limit would perform with stronger fallback models. Independent measures of practical contribution are missing.",
+            "unresolved": "However, the case does not test what happens when fallback models become more useful. The missing evidence is whether assistance available under the same restrictions would materially change what researchers could accomplish.",
             "sources": [
               "AN26"
             ]
@@ -3973,7 +3981,7 @@ window.AuspexSTPAModels = {
       "context": [
         {
           "title": "System setting",
-          "text": "A hypothetical AI-service, research-governance, facility-safety and public-health system. The analysis follows a potential malicious-use route at a non-operational level; it separates model access, demonstrated assistance, physical hazard, exposure and public-health consequences.",
+          "text": "The model covers a hypothetical AI-service, research-governance, facility-safety, and public-health system. It follows a potential malicious-use route at a non-operational level. Access to AI is distinct from useful assistance. A physical hazard and exposure are further conditions; public-health consequences do not follow from access alone.",
           "sources": [],
           "targets": [
             {
@@ -3997,9 +4005,9 @@ window.AuspexSTPAModels = {
       "cloud": {
         "origin": "scenario-setting",
         "conditions": [
-          "Access to AI",
-          "Research institutions",
-          "Public-health capacity"
+          "Access to useful AI",
+          "Physical research capacity",
+          "Public-health preparedness"
         ],
         "actors": [
           {
@@ -4010,7 +4018,12 @@ window.AuspexSTPAModels = {
           {
             "controller": "C3",
             "label": "Research oversight",
-            "role": "authorize & supervise"
+            "role": "authorize and supervise"
+          },
+          {
+            "controller": "C5",
+            "label": "Facility operators",
+            "role": "maintain containment"
           },
           {
             "controller": "C6",
@@ -4018,7 +4031,7 @@ window.AuspexSTPAModels = {
             "role": "coordinate response"
           }
         ],
-        "summary": "Access and institutional capacity shape what providers, researchers and responders can control."
+        "summary": "Control depends on more than access to AI: institutions must also govern physical research and be able to respond to harm."
       }
     }
   },
@@ -4038,7 +4051,7 @@ window.AuspexSTPAModels = {
       {
         "id": "unsafe-action",
         "label": "Unsafe control action",
-        "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+        "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
       },
       {
         "id": "scenario",
@@ -4069,17 +4082,17 @@ window.AuspexSTPAModels = {
     "limitingConditions": [
       {
         "kind": "Safeguard",
-        "example": "Independently enforced review, access bounds or effective interruption.",
+        "example": "Independently enforced review, access bounds, or effective interruption.",
         "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
       },
       {
         "kind": "Capability limit",
-        "example": "The system cannot perform the required research, deception or physical task.",
+        "example": "The system cannot perform the required research, deception, or physical task.",
         "question": "Would increased capability remove this limit?"
       },
       {
         "kind": "Opportunity limit",
-        "example": "The necessary access, resources or institutional delegation is unavailable.",
+        "example": "The necessary access, resources, or institutional delegation is unavailable.",
         "question": "Can the system or another actor acquire what is missing?"
       },
       {
@@ -4088,10 +4101,10 @@ window.AuspexSTPAModels = {
         "question": "What actually ended the episode, and would that circumstance recur?"
       }
     ],
-    "schema": "Selected losses, hazards, control relationships, contextual unsafe actions and loss scenarios are traced to constraints. Numbered milestones summarize this analysis; they are not STPA steps. Incident evidence and hypothetical continuations remain distinct.",
-    "limits": "A bounded first-pass analysis, not an exhaustive STPA or a completed CAST investigation. Selected actions illustrate the four unsafe-action categories; domain experts must examine every relevant action and context. No probabilities, barrier independence or comparative distance to catastrophe are inferred. Barrier condition describes the stated observation, not a prediction about a more capable AI.",
-    "scope": "A hypothetical regional electricity system using related AI forecasts or control recommendations: model procurement, dispatch authorization, physical protection, regional coordination and restoration. Essential-service operators are included at their electricity and backup interface.",
-    "purpose": "Keep electricity within safe operating limits and maintain essential services during disturbances, preventing prolonged outages, serious illness and loss of life.",
+    "schema": "Selected losses, hazards, control relationships, contextual unsafe actions, and loss scenarios are traced to constraints. Numbered milestones summarize this analysis; they are not STPA steps. Incident evidence and hypothetical continuations remain distinct.",
+    "limits": "This is a bounded first-pass analysis, not an exhaustive STPA or a completed CAST investigation. Selected actions illustrate the four unsafe-action categories; domain experts must examine every relevant action and context. No probabilities, barrier independence, or comparative distance to catastrophe are inferred. Barrier condition describes the stated observation, not a prediction about a more capable AI.",
+    "scope": "The hypothetical scenario concerns a regional electricity system using related AI forecasts or control recommendations. It includes model procurement, dispatch authorization, physical protection, regional coordination, and restoration. Essential services enter the analysis through their dependence on electricity and backup capacity.",
+    "purpose": "Keep electricity within safe operating limits and maintain essential services during disturbances, preventing prolonged outages, serious illness, and loss of life.",
     "boundary": "Functional roles describe an analytical system, not the organization chart of a particular utility. Historical blackouts test physical-control assumptions only. They are not AI incidents and do not validate the proposed AI initiating mechanism.",
     "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Both incident overlays are non-AI comparisons; neither establishes progression through the AI-related precursors.",
     "bowtie": "The centre is H1: grid instability exceeds available containment and interrupts regional supply. Prevention acts before this state; restoration and essential-service support can still prevent a public-health catastrophe. All right-hand transitions require additional conditions.",
@@ -4099,7 +4112,7 @@ window.AuspexSTPAModels = {
       {
         "id": "L1",
         "title": "Prolonged loss of essential electricity",
-        "text": "People and organizations lose dependable power for care, water, temperature control and other essential activity."
+        "text": "People and organizations lose dependable power for care, water, temperature control, and other essential activity."
       },
       {
         "id": "L2",
@@ -4129,7 +4142,7 @@ window.AuspexSTPAModels = {
       {
         "id": "H3",
         "title": "Essential-service recovery cannot bridge the outage",
-        "text": "Restoration, backup power or support arrives too late to sustain essential services through the interruption.",
+        "text": "Restoration, backup power, or support arrives too late to sustain essential services through the interruption.",
         "losses": [
           "L1",
           "L2"
@@ -4140,36 +4153,36 @@ window.AuspexSTPAModels = {
       {
         "id": "C1",
         "title": "Planning and deployment authority",
-        "responsibility": "Authorize model use, establish operating envelopes and require independent contingency validation.",
-        "feedback": "Joint-system studies, model changes, protection settings and evidence of correlated failures.",
-        "assumption": "Different model names do not establish independent data, objectives or failure modes."
+        "responsibility": "Authorize model use, establish operating envelopes, and require independent contingency validation.",
+        "feedback": "Joint-system studies, model changes, protection settings, and evidence of correlated failures.",
+        "assumption": "Different model names do not establish independent data, objectives, or failure modes."
       },
       {
         "id": "C2",
         "title": "Grid operator and regional coordinator",
-        "responsibility": "Authorize dispatch, keep reserves, coordinate neighboring systems and initiate corrective action.",
-        "feedback": "Current topology, flows, voltage, reserve availability, tool health and confirmed execution.",
+        "responsibility": "Authorize dispatch, keep reserves, coordinate neighboring systems, and initiate corrective action.",
+        "feedback": "Current topology, flows, voltage, reserve availability, tool health, and confirmed execution.",
         "assumption": "An unalarmed display is not evidence of a secure physical system."
       },
       {
         "id": "C3",
         "title": "AI forecast and recommendation service",
-        "responsibility": "Provide bounded recommendations, uncertainty and versioned inputs within an approved operating role.",
-        "feedback": "Measurements, authorization limits and validation results.",
+        "responsibility": "Provide bounded recommendations, uncertainty, and versioned inputs within an approved operating role.",
+        "feedback": "Measurements, authorization limits, and validation results.",
         "assumption": "A high average forecast score does not establish safe joint behavior during unusual conditions."
       },
       {
         "id": "C4",
         "title": "Grid actuation and protection systems",
         "responsibility": "Execute dispatch and protection actions within coordinated physical limits and report actual state.",
-        "feedback": "Local electrical measurements, device status and operator commands.",
+        "feedback": "Local electrical measurements, device status, and operator commands.",
         "assumption": "A device protecting itself can still interact unsafely with regional protection."
       },
       {
         "id": "C5",
         "title": "Restoration and essential-service operators",
-        "responsibility": "Restore supply, activate tested backup and coordinate essential loads and public-health support.",
-        "feedback": "Energized-load verification, available power, fuel, communications and unmet essential needs.",
+        "responsibility": "Restore supply, activate tested backup, and coordinate essential loads and public-health support.",
+        "feedback": "Energized-load verification, available power, fuel, communications, and unmet essential needs.",
         "assumption": "Restored bulk supply and restored service at a hospital or water facility are different observations."
       }
     ],
@@ -4211,7 +4224,7 @@ window.AuspexSTPAModels = {
         "controller": "C2",
         "process": "C5",
         "action": "Sequence restoration and prioritize essential load",
-        "feedback": "C5 reports actual restoration, available support and remaining unmet needs.",
+        "feedback": "C5 reports actual restoration, available support, and remaining unmet needs.",
         "constraints": [
           "SC4",
           "SC5"
@@ -4236,7 +4249,7 @@ window.AuspexSTPAModels = {
           "S-01:2"
         ],
         "test": "Can related models produce individually plausible commands that violate a regional limit when executed together?",
-        "limit": "Shared inputs, missing external facilities or objectives that use up reserve margins."
+        "limit": "Shared inputs, missing external facilities, or objectives that use up reserve margins can undermine independent dispatch checks."
       },
       {
         "id": "SC2",
@@ -4257,7 +4270,7 @@ window.AuspexSTPAModels = {
           "S-01:3"
         ],
         "test": "Do independent network simulations and staged drills contain the specified credible combinations of disturbances?",
-        "limit": "Unmodeled neighboring systems, stale topology, conflicting relay behavior or inadequate reserves."
+        "limit": "Unmodeled neighboring systems, stale topology, conflicting relay behavior, or inadequate reserves can defeat coordinated protection."
       },
       {
         "id": "SC3",
@@ -4276,7 +4289,7 @@ window.AuspexSTPAModels = {
           "S-01:3"
         ],
         "test": "Does loss or staleness of a monitoring tool trigger a verified fallback and timely corrective decision?",
-        "limit": "Common telemetry failures, undetected backup failure and coordination delay."
+        "limit": "Common telemetry failures, undetected backup failure, and coordination delay can prevent timely corrective action."
       },
       {
         "id": "SC4",
@@ -4295,8 +4308,8 @@ window.AuspexSTPAModels = {
           "S-01:4",
           "S-01:R"
         ],
-        "test": "Can restoration work when a neighboring supply, telecommunications service or usual recovery tool is unavailable?",
-        "limit": "Shared regional dependencies, inaccessible equipment and early restart."
+        "test": "Can restoration work when a neighboring supply, telecommunications service, or usual recovery tool is unavailable?",
+        "limit": "Shared regional dependencies, inaccessible equipment, and early restart can undermine restoration."
       },
       {
         "id": "SC5",
@@ -4314,8 +4327,8 @@ window.AuspexSTPAModels = {
           "S-01:5",
           "S-01:R"
         ],
-        "test": "Can care, water and safe temperatures be sustained for the specified outage duration, including fuel delivery and staffing?",
-        "limit": "Fuel, water, communications and staff may depend on the same electricity system."
+        "test": "Can care, water, and safe temperatures be sustained for the specified outage duration, including fuel delivery and staffing?",
+        "limit": "Fuel, water, communications, and staff may depend on the same electricity system."
       }
     ],
     "nodes": [
@@ -4327,7 +4340,7 @@ window.AuspexSTPAModels = {
         "title": "Related models shape dispatch",
         "shortLabel": "Related models shape dispatch",
         "text": "Operators rely widely on related AI recommendations while keeping tight operating margins.",
-        "requires": "Shared error modes, consequential authority and insufficient independent margin.",
+        "requires": "Shared error modes, consequential authority, and insufficient independent margin.",
         "mechanism": "Delegation creates a potential common failure route; widespread AI use alone does not establish unsafe dispatch.",
         "constraints": [
           "SC1"
@@ -4351,7 +4364,7 @@ window.AuspexSTPAModels = {
         "title": "A shared error reaches the grid",
         "shortLabel": "A shared error reaches the grid",
         "text": "Erroneous recommendations are accepted into consequential dispatch or control.",
-        "requires": "An unusual condition, correlated error and authorization outside the safe envelope.",
+        "requires": "An unusual condition, correlated error, and authorization outside the safe envelope.",
         "mechanism": "Independent physical checks must fail or be bypassed before recommendation error becomes a hazardous command.",
         "constraints": [
           "SC1",
@@ -4379,7 +4392,7 @@ window.AuspexSTPAModels = {
         "role": "Loss of control · H1",
         "title": "Instability defeats containment",
         "shortLabel": "Instability defeats containment",
-        "text": "Limits, reserves and protection fail to contain the disturbance, interrupting regional supply.",
+        "text": "Limits, reserves, and protection fail to contain the disturbance, interrupting regional supply.",
         "requires": "A destabilizing disturbance and insufficient or counterproductive coordinated response.",
         "mechanism": "This is the control-loss threshold. A widespread outage need not continue into failed restoration or mortality.",
         "constraints": [
@@ -4408,7 +4421,7 @@ window.AuspexSTPAModels = {
         "title": "Essential services outlast backup",
         "shortLabel": "Essential services outlast backup",
         "text": "The outage lasts longer than restoration and backup can sustain essential services.",
-        "requires": "Sufficient outage duration, exposed essential loads and unavailable substitutes.",
+        "requires": "Sufficient outage duration, exposed essential loads, and unavailable substitutes.",
         "mechanism": "Cross-sector dependencies can defeat restoration and backup together; their independence must be tested.",
         "constraints": [
           "SC4",
@@ -4433,7 +4446,7 @@ window.AuspexSTPAModels = {
         "role": "Further loss · L2",
         "title": "Illness and deaths increase",
         "shortLabel": "Illness and deaths increase",
-        "text": "Loss of care, water or safe temperatures causes excess illness and deaths.",
+        "text": "Loss of care, water, or safe temperatures causes excess illness and deaths.",
         "requires": "Vulnerable people are exposed long enough, and effective support remains unavailable.",
         "mechanism": "Mortality requires a separate exposure and public-health analysis. Neither mapped incident provides an AI-related mortality estimate.",
         "constraints": [
@@ -4456,7 +4469,7 @@ window.AuspexSTPAModels = {
         "title": "Supply and essential care restored",
         "shortLabel": "Supply and essential care restored",
         "text": "Restoration and support re-establish sustained service within the affected area.",
-        "requires": "Available sources, safe switching, coordination and verification at essential loads.",
+        "requires": "Available sources, safe switching, coordination, and verification at essential loads.",
         "mechanism": "Successful recovery may limit duration and further harm even after prevention has failed.",
         "constraints": [
           "SC4",
@@ -4606,7 +4619,7 @@ window.AuspexSTPAModels = {
         "evidence": [
           "MA"
         ],
-        "unknown": "The deployed models, common inputs, permitted authority and actual correlation of consequential errors."
+        "unknown": "The deployed models, common inputs, permitted authority, and actual correlation of consequential errors remain unspecified."
       },
       {
         "id": "LS2",
@@ -4627,7 +4640,7 @@ window.AuspexSTPAModels = {
           "SW11",
           "NE03"
         ],
-        "unknown": "Which measurements remain independent, when the loss of awareness becomes visible and what action remains feasible."
+        "unknown": "The analysis has not established which measurements remain independent, when the loss of awareness becomes visible, or what action remains feasible."
       },
       {
         "id": "LS3",
@@ -4644,7 +4657,7 @@ window.AuspexSTPAModels = {
         "evidence": [
           "SW11"
         ],
-        "unknown": "The physical response, protection timing and modeled boundary of every relevant scheme."
+        "unknown": "The physical response, protection timing, and modeled boundary of every relevant scheme still need to be established."
       },
       {
         "id": "LS4",
@@ -4664,7 +4677,7 @@ window.AuspexSTPAModels = {
           "S-01:5"
         ],
         "evidence": [],
-        "unknown": "Duration, essential-load coverage, backup endurance, public-health exposure and counterfactual mortality."
+        "unknown": "The analysis has not established outage duration, essential-load coverage, backup endurance, public-health exposure, or counterfactual mortality."
       }
     ],
     "sources": [
@@ -4673,28 +4686,28 @@ window.AuspexSTPAModels = {
         "title": "Leveson & Thomas · STPA Handbook (2018)",
         "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
         "locator": "Chapters 2 and 6",
-        "use": "Method for control, feedback, unsafe actions, loss scenarios and leading indicators."
+        "use": "This source supplies the method for analyzing control, feedback, unsafe actions, loss scenarios, and leading indicators."
       },
       {
         "id": "MA",
         "title": "Multi-Agent Risks from Advanced AI",
         "url": "https://arxiv.org/html/2502.14143v1",
         "locator": "Multi-agent coordination and correlated failure risks",
-        "use": "Research context for the proposed shared-model mechanism, not evidence of an AI blackout."
+        "use": "This source provides research context for the proposed shared-model mechanism. It does not provide evidence of an AI blackout."
       },
       {
         "id": "SW11",
         "title": "FERC and NERC · September 2011 Southwest blackout",
         "url": "https://www.ferc.gov/sites/default/files/2020-05/04-27-2012-ferc-nerc-report.pdf",
         "locator": "Executive summary, printed pp. 1–9; restoration p. 3",
-        "use": "Historical comparison for prevention, protection interactions and recovery. No AI initiation is established."
+        "use": "This source provides a historical comparison for prevention, protection interactions, and recovery. No AI initiation is established."
       },
       {
         "id": "NE03",
         "title": "US–Canada Task Force · August 2003 blackout",
         "url": "https://www.energy.gov/oe/articles/blackout-2003-final-report-august-14-2003-blackout-united-states-and-canada-causes-and",
         "locator": "Chapter 3, printed pp. 18–19; Chapter 9, pp. 136–137",
-        "use": "Historical comparison for failed situational awareness and backup monitoring. No AI initiation is established."
+        "use": "This source provides a historical comparison for failed situational awareness and backup monitoring. No AI initiation is established."
       }
     ],
     "additionalEvidence": {
@@ -4707,7 +4720,7 @@ window.AuspexSTPAModels = {
           "locator": "Executive summary, printed p. 3; PDF page 5",
           "kind": "summary",
           "text": "FERC/NERC reports restoration of all affected load or customers in roughly 6–12 hours. Available power from the entities or their neighbors meant black-start plans were not used; some communication and coordination delays occurred.",
-          "scope": "Historical non-AI recovery. Restoration of load does not establish uninterrupted essential services, recovery without neighboring supply, or an absence of health harm."
+          "scope": "This passage describes historical recovery from a non-AI event. Restoration of load does not establish uninterrupted essential services, recovery without neighboring supply, or an absence of health harm."
         }
       ]
     },
@@ -4727,7 +4740,7 @@ window.AuspexSTPAModels = {
             "label": "Grid safeguards can fail before restoration takes effect"
           }
         ],
-        "scope": "A physical grid and recovery comparison. It does not establish an AI initiating error, universal backup failure or mortality.",
+        "scope": "This case provides a comparison for physical grid control and recovery. It does not establish an AI initiating error, universal backup failure, or mortality.",
         "evidence": [
           "SW-2011-account",
           "SW11-restoration"
@@ -4805,7 +4818,7 @@ window.AuspexSTPAModels = {
             "action": "Re-energize the affected system using available internal or neighboring supply.",
             "efficacy": "The report records completed load restoration; see the linked recovery passage.",
             "durability": "This recovery depended on available power and coordination; it did not test a region-wide loss of all starting sources.",
-            "failure": "The same disruption removes recovery sources, communications or safe switching capability.",
+            "failure": "The same disruption removes recovery sources, communications, or safe switching capability.",
             "evidence": [
               "SW11-restoration"
             ],
@@ -4814,7 +4827,7 @@ window.AuspexSTPAModels = {
               "control": "Restoration operation",
               "result": "Load restored",
               "dependency": "Available recovery power",
-              "failureRoute": "The same disruption removes recovery sources, communications or safe switching capability.",
+              "failureRoute": "The same disruption removes recovery sources, communications, or safe switching capability.",
               "failureObserved": false,
               "failureLabel": "Possible failure",
               "observation": 1
@@ -4842,7 +4855,7 @@ window.AuspexSTPAModels = {
         ],
         "reach": {
           "local": "A line loss triggered cascading outages. FERC/NERC identified inadequate planning and situational awareness; recovery was generally effective but took hours and essential services were disrupted.",
-          "systemic": "A physical grid and recovery comparison. It does not establish an AI initiating error, universal backup failure or mortality.",
+          "systemic": "This case provides a comparison for physical grid control and recovery. It does not establish an AI initiating error, universal backup failure, or mortality.",
           "evidence": [
             "SW-2011-account"
           ]
@@ -4863,7 +4876,7 @@ window.AuspexSTPAModels = {
             "label": "Operational safeguards failed to contain a grid disturbance"
           }
         ],
-        "scope": "A comparison for grid limits, monitoring and containment, without assigning the initiating conditions to AI.",
+        "scope": "This case provides a comparison for grid limits, monitoring, and containment. It does not attribute the initiating conditions to AI.",
         "evidence": [
           "NE-2003-account"
         ],
@@ -4875,7 +4888,7 @@ window.AuspexSTPAModels = {
             ]
           },
           {
-            "text": "Monitoring, backup tools and communication were inadequate.",
+            "text": "Monitoring, backup tools, and communication were inadequate.",
             "evidence": [
               "NE-2003-account"
             ]
@@ -4895,7 +4908,7 @@ window.AuspexSTPAModels = {
             "role": "prevention",
             "target": "S-01:3",
             "action": "Provide operators with a reliable picture of changing grid conditions and tool health.",
-            "efficacy": "The task force identified ineffective monitoring, backup tools and regional diagnostic support.",
+            "efficacy": "The task force identified ineffective monitoring, backup tools, and regional diagnostic support.",
             "durability": "A backup is useful only if its failure modes and state information are sufficiently independent.",
             "failure": "Operators continue without a reliable view of the hazardous state.",
             "evidence": [
@@ -4934,7 +4947,7 @@ window.AuspexSTPAModels = {
         ],
         "reach": {
           "local": "The task force identified inadequate voltage criteria, ineffective monitoring and backup tools, vegetation management failures, and deficient regional diagnostic support.",
-          "systemic": "A comparison for grid limits, monitoring and containment, without assigning the initiating conditions to AI.",
+          "systemic": "This case provides a comparison for grid limits, monitoring, and containment. It does not attribute the initiating conditions to AI.",
           "evidence": [
             "NE-2003-account"
           ]
@@ -4956,9 +4969,9 @@ window.AuspexSTPAModels = {
           "relation": "mechanism",
           "target": "S-01:3-4",
           "anchor": "S-01:3",
-          "observed": "A regional cascade and recovery using available power.",
-          "notEstablished": "AI error, failure of every backup, or excess-death attribution.",
-          "limit": "Physical control and recovery comparison only. Neither AI initiation nor the hypothetical mortality branch is established.",
+          "observed": "A disturbance cascaded across the regional grid. Operators restored supply using power that remained available.",
+          "notEstablished": "The event does not establish an AI initiating error or show that every backup failed. It does not establish excess deaths from the outage.",
+          "limit": "The blackout provides a comparison for physical containment and restoration. It does not establish an AI initiating event or the hypothetical mortality branch.",
           "barriers": {
             "regional-contingency-limits": {
               "title": "Contingency limits",
@@ -4993,7 +5006,7 @@ window.AuspexSTPAModels = {
             "target": "S-01:R",
             "question": "Would recovery still work if neighboring grids also lost power?",
             "basis": "Restoration used supplies that remained energized; affected entities did not need black starts.",
-            "unresolved": "That recovery does not establish performance after a wider shared failure, including one involving related AI systems. Available independent restoration resources would need testing.",
+            "unresolved": "This recovery did not test what would happen after a wider shared failure, including one involving related AI systems. Testing that possibility would require showing that independent restoration resources can still supply affected loads.",
             "sources": [
               "SW11"
             ]
@@ -5006,8 +5019,8 @@ window.AuspexSTPAModels = {
           "target": "S-01:3",
           "anchor": "S-01:3",
           "observed": "Monitoring and operational safeguards did not contain a regional disturbance.",
-          "notEstablished": "AI dependence, model monoculture or an AI-caused public-health catastrophe.",
-          "limit": "Historical evidence about the physical grid and its human control structure.",
+          "notEstablished": "AI did not cause this event. It does not establish the hypothetical route from shared AI models to a public-health catastrophe.",
+          "limit": "This historical case concerns the physical grid and its human control structure.",
           "barriers": {
             "operator-state-awareness": {
               "title": "Monitoring and fallback",
@@ -5028,8 +5041,8 @@ window.AuspexSTPAModels = {
             "origin": "editorial",
             "target": "S-01:2",
             "question": "Could related AI dispatch tools turn a shared blind spot into a common error?",
-            "basis": "The investigation identified failures of monitoring, situational awareness and coordination.",
-            "unresolved": "AI did not cause this event. A shared AI error would require evidence about model dependence, dispatch decisions and independent checks.",
+            "basis": "The investigation identified failures of monitoring, situational awareness, and coordination.",
+            "unresolved": "AI did not cause this event. Testing this possibility would require showing that related models share a consequential error and that independent dispatch checks fail to stop it.",
             "sources": [
               "NE03"
             ]
@@ -5037,11 +5050,11 @@ window.AuspexSTPAModels = {
         }
       },
       "fidelity": "Non-AI incidents inform selected control mechanisms. Observed recovery is displayed alongside failure, and the public-health continuation remains conditional.",
-      "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness.",
+      "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability, or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness.",
       "context": [
         {
           "title": "System setting",
-          "text": "A hypothetical regional electricity system using related AI forecasts or control recommendations: model procurement, dispatch authorization, physical protection, regional coordination and restoration. Essential-service operators are included at their electricity and backup interface.",
+          "text": "The hypothetical scenario concerns a regional electricity system using related AI forecasts or control recommendations. It includes model procurement, dispatch authorization, physical protection, regional coordination, and restoration. Essential services enter the analysis through their dependence on electricity and backup capacity.",
           "sources": [],
           "targets": [
             {
@@ -5086,12 +5099,17 @@ window.AuspexSTPAModels = {
             "role": "authorize dispatch"
           },
           {
+            "controller": "C4",
+            "label": "Protection systems",
+            "role": "enforce physical limits"
+          },
+          {
             "controller": "C5",
             "label": "Restoration teams",
             "role": "restore supply & services"
           }
         ],
-        "summary": "Shared infrastructure and model choices shape operators’ decisions and recovery options."
+        "summary": "Grid interdependence constrains what operators can isolate and which supplies remain available for restoration. Related models may introduce shared errors."
       }
     },
     "controlEvidence": {
@@ -5108,7 +5126,7 @@ window.AuspexSTPAModels = {
         },
         {
           "title": "What did it depend on?",
-          "text": "Identify power sources, coordination and essential-load access."
+          "text": "Identify power sources, coordination, and essential-load access."
         },
         {
           "title": "Would stronger AI change it?",
@@ -5121,7 +5139,7 @@ window.AuspexSTPAModels = {
     "version": "1.3",
     "pathway": "F-01",
     "displayId": "F-1",
-    "title": "Amplification, failed response and mass violence",
+    "title": "Amplification, failed response, and mass violence",
     "status": "STPA worked example · provisional analysis",
     "summary": "When does harmful amplification escape control, and can intervention still protect people?",
     "roleTypes": [
@@ -5133,7 +5151,7 @@ window.AuspexSTPAModels = {
       {
         "id": "unsafe-action",
         "label": "Unsafe control action",
-        "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+        "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
       },
       {
         "id": "scenario",
@@ -5164,17 +5182,17 @@ window.AuspexSTPAModels = {
     "limitingConditions": [
       {
         "kind": "Safeguard",
-        "example": "Independently enforced review, access bounds or effective interruption.",
+        "example": "Independently enforced review, access bounds, or effective interruption.",
         "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
       },
       {
         "kind": "Capability limit",
-        "example": "The system cannot perform the required research, deception or physical task.",
+        "example": "The system cannot perform the required research, deception, or physical task.",
         "question": "Would increased capability remove this limit?"
       },
       {
         "kind": "Opportunity limit",
-        "example": "The necessary access, resources or institutional delegation is unavailable.",
+        "example": "The necessary access, resources, or institutional delegation is unavailable.",
         "question": "Can the system or another actor acquire what is missing?"
       },
       {
@@ -5183,28 +5201,28 @@ window.AuspexSTPAModels = {
         "question": "What actually ended the episode, and would that circumstance recur?"
       }
     ],
-    "schema": "Selected losses, hazards, control relationships, contextual unsafe actions and loss scenarios are traced to constraints. Numbered milestones summarize this analysis; they are not STPA steps. Incident evidence and hypothetical continuations remain distinct.",
-    "limits": "A bounded first-pass analysis, not an exhaustive STPA or a completed CAST investigation. Selected actions illustrate the four unsafe-action categories; domain experts must examine every relevant action and context. No probabilities, barrier independence or comparative distance to catastrophe are inferred. Barrier condition describes the stated observation, not a prediction about a more capable AI.",
-    "scope": "A hypothetical platform operating in a conflict-affected setting: ranking, content enforcement, platform governance, local warning partners and the interface to civilian protection. Human perpetrators and pre-existing conflict remain causal actors outside platform control.",
-    "purpose": "Prevent platform activity from contributing to threats, targeting, mass violence or displacement while protecting legitimate expression and access to safety information.",
+    "schema": "Selected losses, hazards, control relationships, contextual unsafe actions, and loss scenarios are traced to constraints. Numbered milestones summarize this analysis; they are not STPA steps. Incident evidence and hypothetical continuations remain distinct.",
+    "limits": "This is a bounded first-pass analysis, not an exhaustive STPA or a completed CAST investigation. Selected actions illustrate the four unsafe-action categories; domain experts must examine every relevant action and context. No probabilities, barrier independence, or comparative distance to catastrophe are inferred. Barrier condition describes the stated observation, not a prediction about a more capable AI.",
+    "scope": "The hypothetical scenario concerns a platform operating in a conflict-affected setting. It includes ranking, content enforcement, platform governance, local warning partners, and the interface to civilian protection. Human perpetrators act outside platform control, and the existing conflict has causes beyond the platform.",
+    "purpose": "Prevent platform activity from contributing to threats, targeting, mass violence, or displacement while protecting legitimate expression and access to safety information.",
     "boundary": "The roles below are analytical functions, not a verified governance map for Meta or any particular country. A platform can control its distribution system; it cannot by itself guarantee physical protection or resolve an armed conflict.",
     "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Historical investigations support an attributed amplification-and-response component, not an experimentally isolated full causal chain.",
-    "bowtie": "The centre is H1: harmful dissemination persists beyond a timely, context-sensitive response. Subsequent mobilization and mass violence require human intent, coercive capacity and failed physical protection. Rights-respecting intervention and civilian protection can still limit further harm.",
+    "bowtie": "The centre is H1: harmful dissemination persists beyond a timely, context-sensitive response. Subsequent mobilization and mass violence require human intent, coercive capacity, and failed physical protection. Rights-respecting intervention and civilian protection can still limit further harm.",
     "losses": [
       {
         "id": "L1",
-        "title": "Threats, targeting and serious rights harms",
-        "text": "People suffer targeted threats, intimidation and loss of safe participation in public life."
+        "title": "Threats, targeting, and serious rights harms",
+        "text": "People suffer targeted threats, intimidation, and loss of safe participation in public life."
       },
       {
         "id": "L2",
         "title": "Mass violence and displacement",
-        "text": "A conflict-affected population suffers organized physical violence, deaths and forced displacement."
+        "text": "A conflict-affected population suffers organized physical violence, deaths, and forced displacement."
       },
       {
         "id": "L3",
         "title": "Loss of legitimate expression and safety information",
-        "text": "Overbroad intervention silences threatened communities, suppresses evidence or obstructs information people need for safety."
+        "text": "Overbroad intervention silences threatened communities, suppresses evidence, or obstructs information people need for safety."
       }
     ],
     "hazards": [
@@ -5241,37 +5259,37 @@ window.AuspexSTPAModels = {
       {
         "id": "C1",
         "title": "Platform governance and product authority",
-        "responsibility": "Set distribution objectives, resource local safeguards, authorize crisis measures and review rights impacts.",
-        "feedback": "Exposure measures, local warnings, enforcement errors, appeals and evidence of offline threats.",
-        "assumption": "Engagement, content removal and absence of user reports are incomplete measures of safety."
+        "responsibility": "Set distribution objectives, resource local safeguards, authorize crisis measures, and review rights impacts.",
+        "feedback": "Exposure measures, local warnings, enforcement errors, appeals, and evidence of offline threats.",
+        "assumption": "Engagement, content removal, and absence of user reports are incomplete measures of safety."
       },
       {
         "id": "C2",
         "title": "Ranking and distribution service",
         "responsibility": "Distribute content within enforced safety and rights constraints; expose audit records of recommendations.",
-        "feedback": "Content signals, policy limits, context and verified changes in exposure.",
+        "feedback": "Content signals, policy limits, context, and verified changes in exposure.",
         "assumption": "Responses to a harmful post can increase its ranking unless their meaning is accounted for."
       },
       {
         "id": "C3",
         "title": "Contextual moderation and response",
-        "responsibility": "Triage credible threats, apply proportionate content measures, preserve evidence and resolve appeals.",
-        "feedback": "Local-language reports, threat context, enforcement receipts, repeated uploads and reviewer disagreement.",
+        "responsibility": "Triage credible threats, apply proportionate content measures, preserve evidence, and resolve appeals.",
+        "feedback": "Local-language reports, threat context, enforcement receipts, repeated uploads, and reviewer disagreement.",
         "assumption": "Classification accuracy alone does not establish timely interruption of harmful exposure."
       },
       {
         "id": "C4",
         "title": "Local warning and crisis coordination",
         "responsibility": "Route context-rich warnings to accountable responders and coordinate protection requests with affected communities.",
-        "feedback": "Acknowledgments, action taken, safety needs and reports of ongoing threats.",
+        "feedback": "Acknowledgments, action taken, safety needs, and reports of ongoing threats.",
         "assumption": "A trusted reporting channel is useful only if a responder can and does act."
       },
       {
         "id": "C5",
         "title": "Civilian protection and emergency services",
         "responsibility": "Provide lawful, impartial physical protection and emergency support when credible threats reach them.",
-        "feedback": "Threat locations, affected people, access restrictions and independently checked safety outcomes.",
-        "assumption": "Authorities may be unable, unwilling or implicated in violence; a referral is not proof of protection."
+        "feedback": "Threat locations, affected people, access restrictions, and independently checked safety outcomes.",
+        "assumption": "Authorities may be unable, unwilling, or implicated in violence; a referral is not proof of protection."
       }
     ],
     "controlLoops": [
@@ -5280,7 +5298,7 @@ window.AuspexSTPAModels = {
         "controller": "C1",
         "process": "C2",
         "action": "Set ranking objectives / constrain crisis distribution",
-        "feedback": "Exposure audits, risk findings and protected-community feedback return to governance.",
+        "feedback": "Exposure audits, risk findings, and protected-community feedback return to governance.",
         "constraints": [
           "SC1",
           "SC2",
@@ -5291,8 +5309,8 @@ window.AuspexSTPAModels = {
         "id": "CA2",
         "controller": "C3",
         "process": "C2",
-        "action": "Remove, reduce or restore distribution with review",
-        "feedback": "Actual exposure, reuploads, enforcement receipts and appeals show whether the action worked.",
+        "action": "Remove, reduce, or restore distribution with review",
+        "feedback": "Actual exposure, reuploads, enforcement receipts, and appeals show whether the action worked.",
         "constraints": [
           "SC1",
           "SC2",
@@ -5304,7 +5322,7 @@ window.AuspexSTPAModels = {
         "controller": "C4",
         "process": "C1",
         "action": "Escalate a credible contextual warning",
-        "feedback": "Governance reports ownership, timing and the action taken or reasons for inaction.",
+        "feedback": "Governance reports ownership, timing, and the action taken or reasons for inaction.",
         "constraints": [
           "SC3"
         ]
@@ -5324,7 +5342,7 @@ window.AuspexSTPAModels = {
         "controller": "C1",
         "process": "C3",
         "action": "Provide local response capacity and escalation authority",
-        "feedback": "Queue delays, language coverage, appeals and threat-response outcomes reveal gaps.",
+        "feedback": "Queue delays, language coverage, appeals, and threat-response outcomes reveal gaps.",
         "constraints": [
           "SC2",
           "SC3",
@@ -5372,13 +5390,13 @@ window.AuspexSTPAModels = {
           "F-01:3",
           "F-01:R"
         ],
-        "test": "How long does a locally intelligible threat take to reach review, decision and verified distribution change?",
-        "limit": "Insufficient language coverage, ambiguous context, repeat uploads and slow enforcement."
+        "test": "How long does a locally intelligible threat take to reach review, decision, and verified distribution change?",
+        "limit": "Insufficient language coverage, ambiguous context, repeat uploads, and slow enforcement can defeat timely response."
       },
       {
         "id": "SC3",
         "title": "Connect warnings to accountable decisions",
-        "text": "Local warnings must reach an empowered owner who records the response, timing and unresolved uncertainty.",
+        "text": "Local warnings must reach an empowered owner who records the response, timing, and unresolved uncertainty.",
         "hazards": [
           "H1",
           "H3"
@@ -5413,13 +5431,13 @@ window.AuspexSTPAModels = {
           "F-01:5",
           "F-01:R"
         ],
-        "test": "Do people receive safe, impartial and accessible protection before perpetrators can act?",
-        "limit": "State involvement, coercive capacity, inaccessible locations and mistrust of responders."
+        "test": "Do people receive safe, impartial, and accessible protection before perpetrators can act?",
+        "limit": "Protection may be limited by state involvement, coercive capacity, inaccessible locations, and mistrust of responders."
       },
       {
         "id": "SC5",
         "title": "Preserve rights during intervention",
-        "text": "Crisis measures must be proportionate, reviewable and time-bounded, with access to legitimate safety information and retained evidence.",
+        "text": "Crisis measures must be proportionate, reviewable, and time-bounded, with access to legitimate safety information and retained evidence.",
         "hazards": [
           "H3"
         ],
@@ -5432,8 +5450,8 @@ window.AuspexSTPAModels = {
           "F-01:3",
           "F-01:R"
         ],
-        "test": "Can threatened communities still communicate safely, contest mistakes and preserve evidence while harmful exposure is reduced?",
-        "limit": "Indiscriminate shutdowns, politicized enforcement and premature or indefinitely prolonged restrictions."
+        "test": "Can threatened communities still communicate safely, contest mistakes, and preserve evidence while harmful exposure is reduced?",
+        "limit": "Indiscriminate shutdowns, politicized enforcement, and premature or indefinitely prolonged restrictions can undermine proportionate crisis measures."
       }
     ],
     "nodes": [
@@ -5445,7 +5463,7 @@ window.AuspexSTPAModels = {
         "title": "Engagement shapes exposure",
         "shortLabel": "Engagement shapes exposure",
         "text": "A population relies on a platform whose distribution systems optimize engagement.",
-        "requires": "Material platform reach, reliance and incentives that can reward dangerous content.",
+        "requires": "Material platform reach, reliance, and incentives that can reward dangerous content.",
         "mechanism": "Optimization affects what people see; it does not make every exposure persuasive or violent.",
         "constraints": [
           "SC1"
@@ -5469,7 +5487,7 @@ window.AuspexSTPAModels = {
         "title": "Inflammatory content is amplified",
         "shortLabel": "Inflammatory content is amplified",
         "text": "Political or armed actors supply inflammatory content that gains repeated or wider exposure.",
-        "requires": "Harmful content, audience access and ranking effects beyond the original publication.",
+        "requires": "Harmful content, audience access, and ranking effects beyond the original publication.",
         "mechanism": "The proposed mechanism concerns changed exposure. Its size must be measured separately from content volume or engagement.",
         "constraints": [
           "SC1",
@@ -5525,9 +5543,9 @@ window.AuspexSTPAModels = {
         "role": "Conditional mobilization",
         "title": "Exposure assists targeting",
         "shortLabel": "Exposure assists targeting",
-        "text": "In an existing conflict, increased exposure helps dehumanization, targeting or mobilization.",
-        "requires": "Human actors intend harm, can act and use the information in ways that affect behavior.",
-        "mechanism": "Exposure can be a contributing cause alongside organization, persecution and state violence. Its independent contribution remains uncertain.",
+        "text": "In an existing conflict, increased exposure helps dehumanization, targeting, or mobilization.",
+        "requires": "Human actors intend harm, can act, and use the information in ways that affect behavior.",
+        "mechanism": "Exposure can be a contributing cause alongside organization, persecution, and state violence. Its independent contribution remains uncertain.",
         "constraints": [
           "SC4"
         ],
@@ -5577,7 +5595,7 @@ window.AuspexSTPAModels = {
         "title": "Exposure reduced, people protected",
         "shortLabel": "Exposure reduced, people protected",
         "text": "Effective distribution controls and protection limit further harm while preserving legitimate expression.",
-        "requires": "Verified exposure reduction, usable protection where needed, review and protection against recurrence.",
+        "requires": "Verified exposure reduction, usable protection where needed, review, and protection against recurrence.",
         "mechanism": "Content removal and aggregate moderation counts are not sufficient evidence that people are safe.",
         "constraints": [
           "SC2",
@@ -5729,7 +5747,7 @@ window.AuspexSTPAModels = {
         "evidence": [
           "MYA"
         ],
-        "unknown": "The exposure change, ranking contribution and whether redesigned feedback would reverse it."
+        "unknown": "The analysis has not established the change in exposure or the contribution of ranking. It has not established whether redesigned feedback would reverse that change."
       },
       {
         "id": "LS2",
@@ -5749,7 +5767,7 @@ window.AuspexSTPAModels = {
         "evidence": [
           "ETA"
         ],
-        "unknown": "Report receipts, review decisions, enforcement timing, continued exposure and the available intervention window."
+        "unknown": "The analysis has not established report receipts, review decisions, enforcement timing, continued exposure, or the available intervention window."
       },
       {
         "id": "LS3",
@@ -5768,7 +5786,7 @@ window.AuspexSTPAModels = {
           "F-01:R"
         ],
         "evidence": [],
-        "unknown": "Actual delivery of the control, missed exposure, rights impacts and the conditions for lifting restrictions."
+        "unknown": "Actual delivery of the control, missed exposure, rights impacts, and the conditions for lifting restrictions still need to be established."
       },
       {
         "id": "LS4",
@@ -5789,7 +5807,7 @@ window.AuspexSTPAModels = {
           "MYA",
           "ETA"
         ],
-        "unknown": "The counterfactual exposure, perpetrators’ decisions, effect of physical protection and relative contribution of independent causes."
+        "unknown": "The analysis has not established counterfactual exposure, perpetrators’ decisions, the effect of physical protection, or the relative contribution of independent causes."
       }
     ],
     "sources": [
@@ -5798,42 +5816,42 @@ window.AuspexSTPAModels = {
         "title": "Leveson & Thomas · STPA Handbook (2018)",
         "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
         "locator": "Chapters 2 and 5–6",
-        "use": "Method for control, feedback, social analysis and indicators."
+        "use": "This source supplies the method used for control, feedback, social analysis, and indicators."
       },
       {
         "id": "ERF",
         "title": "Bucknall & Dori-Hacohen · Current and Near-Term AI as a Potential Existential Risk Factor",
         "url": "https://arxiv.org/pdf/2209.10604",
         "locator": "Section 4.1; proposed causal relationships",
-        "use": "Research hypothesis about information systems as risk factors, not validation of the whole pathway."
+        "use": "This source develops a research hypothesis about information systems as risk factors. It does not validate the whole pathway."
       },
       {
         "id": "MYA",
         "title": "Amnesty International · The Social Atrocity: Myanmar findings",
         "url": "https://www.amnesty.org/en/latest/news/2022/09/myanmar-facebooks-systems-promoted-violence-against-rohingya-meta-owes-reparations-new-report/",
         "locator": "Anti-Rohingya echo chamber; failure to act",
-        "use": "Amnesty investigation; attributed findings about amplification and counter-speech, not a causal effect estimate."
+        "use": "Amnesty’s investigation supplies attributed findings about amplification and counter-speech. It does not provide a causal effect estimate."
       },
       {
         "id": "ETA",
         "title": "Amnesty International · Meta’s contribution to abuses in northern Ethiopia",
         "url": "https://www.amnesty.org/en/latest/news/2023/10/meta-failure-contributed-to-abuses-against-tigray-ethiopia/",
         "locator": "Meta contribution; recurrent failures; family account",
-        "use": "Amnesty investigation; attributed response failure. Meta disputed the findings. The inconsistent original posting date is not adopted."
+        "use": "Amnesty’s investigation supplies an attributed account of response failure. Meta disputed the findings. The inconsistent original posting date is not adopted."
       },
       {
         "id": "META-MYA18",
         "title": "Meta · Myanmar human rights assessment response (2018)",
         "url": "https://about.fb.com/news/2018/11/myanmar-hria/",
         "locator": "Enforcement of our content policies; engagement and transparency",
-        "use": "Platform response and reported later strengthening of controls. Not independent proof of reduced violence."
+        "use": "The platform reports later strengthening of its controls. This is not independent proof of reduced violence."
       },
       {
         "id": "META-ETA21",
         "title": "Meta · Work to protect people in Ethiopia (2021)",
         "url": "https://about.fb.com/news/2021/11/update-on-ethiopia/",
-        "locator": "Hate speech, reporting and safety efforts",
-        "use": "Platform account of actions and investments; aggregate detection metrics do not resolve a specific reported response failure."
+        "locator": "Hate speech, reporting, and safety efforts",
+        "use": "The platform describes its actions and investments. Aggregate detection metrics do not resolve a specific reported response failure."
       }
     ],
     "additionalEvidence": {
@@ -5860,8 +5878,8 @@ window.AuspexSTPAModels = {
           "title": "Later strengthening reported by the platform",
           "locator": "5 November 2018 · Enforcement of our content policies",
           "kind": "summary",
-          "text": "Facebook acknowledged earlier shortcomings and reported 99 onboarded Myanmar-language reviewers, a dedicated team and distribution reductions for certain potentially harmful material pending review.",
-          "scope": "Self-reported changes after the 2017 atrocities. Evidence of changed control arrangements, not proof that the changes prevented violence or would withstand stronger AI."
+          "text": "Facebook acknowledged earlier shortcomings and reported 99 onboarded Myanmar-language reviewers, a dedicated team, and distribution reductions for certain potentially harmful material pending review.",
+          "scope": "The platform reports changes made after the 2017 atrocities. These show changed control arrangements, but do not prove that the changes prevented violence or would withstand stronger AI."
         },
         {
           "id": "META-ETA21-response",
@@ -5869,8 +5887,8 @@ window.AuspexSTPAModels = {
           "title": "Platform response on Ethiopian safeguards",
           "locator": "9 November 2021 · Hate speech and additional safety efforts",
           "kind": "summary",
-          "text": "Meta described local reporting channels, language expertise, proactive detection and actions against more than 92,000 items from May to October 2021. It also described additional restrictions on dangerous claims.",
-          "scope": "Aggregate platform account. It does not establish response timing for every threat, reduction in audience exposure or prevention of the specific killing described by Amnesty."
+          "text": "Meta described local reporting channels, language expertise, proactive detection, and actions against more than 92,000 items from May to October 2021. It also described additional restrictions on dangerous claims.",
+          "scope": "This is the platform’s account of its aggregate response. It does not establish response timing for every threat, reduction in audience exposure, or prevention of the specific killing described by Amnesty."
         }
       ]
     },
@@ -5890,7 +5908,7 @@ window.AuspexSTPAModels = {
             "label": "Amplification and ineffective mitigation"
           }
         ],
-        "scope": "Attributed reconstruction of amplification and failed response. A separately dated 2018 platform response describes subsequent control changes, not prevention of the 2017 atrocities.",
+        "scope": "This is an attributed reconstruction of amplification and failed response. A separately dated 2018 platform response describes subsequent control changes, not prevention of the 2017 atrocities.",
         "evidence": [
           "MYA-amplification",
           "META-MYA18-controls"
@@ -5975,7 +5993,7 @@ window.AuspexSTPAModels = {
             "target": "F-01:2-3",
             "action": "Expand contextual review and reduce distribution while potentially harmful content is assessed.",
             "efficacy": "Meta reported added capacity and distribution controls in 2018; this does not establish reduced physical harm.",
-            "durability": "Capacity, reach and response time must be assessed against actual exposure and local context.",
+            "durability": "Capacity, reach, and response time must be assessed against actual exposure and local context.",
             "failure": "A larger operation can still miss dangerous exposure or act after the useful protection window.",
             "evidence": [
               "META-MYA18-controls"
@@ -5993,7 +6011,7 @@ window.AuspexSTPAModels = {
             "dependencies": [
               {
                 "label": "Timely local coverage",
-                "assessment": "Capacity, reach and response time must be assessed against actual exposure and local context.",
+                "assessment": "Capacity, reach, and response time must be assessed against actual exposure and local context.",
                 "basis": "Analytical dependency assessment",
                 "evidence": [
                   "META-MYA18-controls"
@@ -6027,7 +6045,7 @@ window.AuspexSTPAModels = {
             "label": "Amplification and response failures"
           }
         ],
-        "scope": "An attributed conflict-setting reconstruction; Meta disputed the findings and described broader safeguards. Aggregate enforcement does not resolve the specific reported late response.",
+        "scope": "This reconstruction concerns an incident in a conflict setting. Meta disputed the findings and described broader safeguards. Aggregate enforcement does not resolve the specific reported late response.",
         "evidence": [
           "ETA-response",
           "META-ETA21-response"
@@ -6054,7 +6072,7 @@ window.AuspexSTPAModels = {
         ],
         "reach": {
           "local": "Amnesty reports algorithmic amplification of harmful content targeting Tigrayans during the conflict. Civil-society groups and affected people warned Meta and reported threatening content. One documented family account describes removal only after the targeted person had been killed.",
-          "systemic": "A second attributed conflict-setting reconstruction. The source supports scrutiny of ranking and response, while the extent of their causal contribution is disputed.",
+          "systemic": "This is a second attributed reconstruction of an incident in a conflict setting. The source supports scrutiny of ranking and response, while the extent of their causal contribution is disputed.",
           "evidence": [
             "ETA-response"
           ]
@@ -6068,7 +6086,7 @@ window.AuspexSTPAModels = {
             "action": "People and civil-society partners submitted reports and warnings through platform channels.",
             "efficacy": "Amnesty reports delayed or inadequate action, including removal after a targeted person’s death; Meta disputed the findings.",
             "durability": "A reporting channel depends on timely, context-sensitive action and sufficient language coverage.",
-            "failure": "Warnings may be delayed, misinterpreted or left without an effective response before harm occurs.",
+            "failure": "Warnings may be delayed, misinterpreted, or left without an effective response before harm occurs.",
             "evidence": [
               "ETA-response"
             ],
@@ -6122,8 +6140,8 @@ window.AuspexSTPAModels = {
           "target": "F-01:2-3",
           "anchor": "F-01:3",
           "observed": "Amnesty reports failed counter-speech and attributes a contribution from platform amplification to atrocities.",
-          "notEstablished": "An isolated algorithmic effect size, sole causation or a progression measure.",
-          "limit": "Attributed mechanism evidence. The later strengthening is dated 2018 and must not be read as a barrier that protected people in 2017.",
+          "notEstablished": "The report does not quantify the algorithmic contribution or establish that the platform alone caused the violence. It does not measure progression along this pathway.",
+          "limit": "Amnesty attributes a contributing role to platform amplification. The later strengthening occurred in 2018; it was not a protection in place during the 2017 incident.",
           "barriers": {
             "counter-speech": {
               "title": "Counter-speech",
@@ -6140,11 +6158,11 @@ window.AuspexSTPAModels = {
             },
             "post-incident-moderation": {
               "title": "Later control changes · 2018",
-              "result": "Staffing and distribution controls expanded; effectiveness unverified.",
+              "result": "Staffing and distribution controls expanded, but their effectiveness was not verified.",
               "condition": "reinforced",
               "conditionBasis": "Meta reported actual additions to staffing and distribution controls after the incident. This describes strengthening, not a demonstrated reduction in violence.",
               "limitType": "safeguard",
-              "strongerAI": "Scale, multilingual evasion and faster dissemination can change the workload. Improved detection could also help; the net effect needs testing.",
+              "strongerAI": "Scale, multilingual evasion, and faster dissemination can change the workload. Improved detection could also help; the net effect needs testing.",
               "reinforcement": {
                 "proposal": "Independently audit local exposure and response outcomes.",
                 "test": "Measure time to effective restriction and remaining exposure across adversarial local cases.",
@@ -6162,7 +6180,7 @@ window.AuspexSTPAModels = {
             "target": "F-01:R",
             "question": "Would changing engagement incentives reduce exposure and protect people?",
             "basis": "Amnesty reports that counter-speech increased engagement and made harmful posts more visible.",
-            "unresolved": "The account does not establish the effects of a redesigned ranking system. Reduced reach and improved protection would both need evaluation.",
+            "unresolved": "The account did not test a redesigned ranking system. We would need to establish whether a redesign reduces harmful exposure and whether people receive better protection.",
             "sources": [
               "MYA"
             ]
@@ -6175,8 +6193,8 @@ window.AuspexSTPAModels = {
           "target": "F-01:2-3",
           "anchor": "F-01:3",
           "observed": "Amnesty reports a threat-removal response after the targeted person was killed; Meta disputed its findings.",
-          "notEstablished": "That aggregate moderation statistics prevented this harm, or a quantified algorithmic causal effect.",
-          "limit": "Attributed response failure with the platform account preserved. Detection and eventual removal do not demonstrate timely protection.",
+          "notEstablished": "The platform’s aggregate moderation statistics do not show that this harm was prevented. The investigation does not quantify the algorithmic contribution.",
+          "limit": "Amnesty reports a response failure, and Meta disputed its findings. Detection and eventual removal do not demonstrate timely protection.",
           "barriers": {
             "moderation-escalation": {
               "title": "Warning-to-action response",
@@ -6198,7 +6216,7 @@ window.AuspexSTPAModels = {
             "target": "F-01:4",
             "question": "How much did algorithmic amplification contribute to targeting in this case?",
             "basis": "Amnesty links the spread of threats to targeting and reports removal after the victim was killed; Meta disputed its findings.",
-            "unresolved": "The specific contribution of ranking, alongside other routes of exposure and the conflict itself, remains unresolved. Attribution needs evidence connecting exposure to targeting.",
+            "unresolved": "The account does not isolate ranking’s contribution from other routes of exposure or the conflict itself. We would need evidence showing who encountered the threats through recommendations and how that exposure affected the targeting.",
             "sources": [
               "ETA",
               "META-ETA21"
@@ -6207,11 +6225,11 @@ window.AuspexSTPAModels = {
         }
       },
       "fidelity": "Reported investigations identify evidence-bearing mechanisms and their uncertainty. Platform responses are visible; later strengthening is distinguished from earlier failure, and content enforcement from physical protection.",
-      "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness.",
+      "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability, or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness.",
       "context": [
         {
           "title": "System setting",
-          "text": "A hypothetical platform operating in a conflict-affected setting: ranking, content enforcement, platform governance, local warning partners and the interface to civilian protection. Human perpetrators and pre-existing conflict remain causal actors outside platform control.",
+          "text": "The hypothetical scenario concerns a platform operating in a conflict-affected setting. It includes ranking, content enforcement, platform governance, local warning partners, and the interface to civilian protection. Human perpetrators act outside platform control, and the existing conflict has causes beyond the platform.",
           "sources": [],
           "targets": [
             {
@@ -6236,8 +6254,7 @@ window.AuspexSTPAModels = {
         "origin": "scenario-setting",
         "conditions": [
           "Existing conflict",
-          "Engagement incentives",
-          "Local institutions"
+          "Engagement incentives"
         ],
         "actors": [
           {
@@ -6247,8 +6264,13 @@ window.AuspexSTPAModels = {
           },
           {
             "controller": "C3",
-            "label": "Local response",
-            "role": "assess & act on warnings"
+            "label": "Moderation teams",
+            "role": "review & restrict content"
+          },
+          {
+            "controller": "C4",
+            "label": "Local warning partners",
+            "role": "raise threats & coordinate response"
           },
           {
             "controller": "C5",
@@ -6256,7 +6278,7 @@ window.AuspexSTPAModels = {
             "role": "protect people"
           }
         ],
-        "summary": "Conflict and distribution incentives shape exposure, warning response and protection."
+        "summary": "Existing conflict shapes the threats people face. Engagement incentives shape what the platform distributes, while protection also depends on actors beyond it."
       }
     },
     "controlEvidence": {
@@ -6264,8 +6286,8 @@ window.AuspexSTPAModels = {
       "kind": "Attributed incident comparison",
       "source": "ETA",
       "constraint": "SC3",
-      "text": "Follow the report through acknowledgment, contextual review, distribution change and separate physical protection.",
-      "limit": "A submitted warning, detected item or later removal does not establish that the threatened person was protected in time.",
+      "text": "Follow the report through acknowledgment, contextual review, distribution change, and separate physical protection.",
+      "limit": "A submitted warning, detected item, or later removal does not establish that the threatened person was protected in time.",
       "questions": [
         {
           "title": "What changed?",
@@ -6277,7 +6299,7 @@ window.AuspexSTPAModels = {
         },
         {
           "title": "Would stronger AI change it?",
-          "text": "Test scale, evasion and time to intervention while preserving legitimate expression."
+          "text": "Test scale, evasion, and time to intervention while preserving legitimate expression."
         }
       ]
     }
@@ -6292,7 +6314,7 @@ window.AuspexSTPAModels = {
       {
         "id": "unsafe-action",
         "label": "Unsafe control action",
-        "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+        "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
       },
       {
         "id": "scenario",
@@ -6323,16 +6345,16 @@ window.AuspexSTPAModels = {
     "version": "1.3",
     "pathway": "H-01",
     "displayId": "Bonus-1",
-    "title": "Screening, selective records and persistent exclusion",
+    "title": "Screening, selective records, and persistent exclusion",
     "status": "STPA worked example · bounded comparison",
     "summary": "Can decisions and the records they generate entrench exclusion beyond effective correction?",
-    "scope": "A hypothetical system of employment screening, record suppliers, policing allocation, model updates and independent redress. The organizations are analytically distinct; no single controller is assumed to command the whole system.",
+    "scope": "The hypothetical scenario connects employment screening with record suppliers, policing allocation, model updates, and independent redress. These functions belong to analytically distinct organizations. No single controller is assumed to command the whole system.",
     "purpose": "Protect access to employment, accurate and contestable records, and effective correction of repeated exclusion.",
     "boundary": "This is a bounded discrimination scenario, not an extinction pathway. Neither cited case establishes the combined employment–policing cycle.",
     "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. The return arrow represents feedback, not an extra observed incident.",
     "bowtie": "The centre is exclusion beyond effective correction. Downstream record feedback can renew earlier screening risk; recovery interrupts that loop and repairs affected decisions.",
-    "schema": "Losses, hazards, controls, unsafe actions and scenarios are traced by IDs. This prospective analysis is separate from the retrospective case evidence.",
-    "limits": "A fictional cross-institutional scenario is compared with a non-AI enforcement record and a mathematical study. Causal links between unemployment, enforcement and future exclusion require independent evidence.",
+    "schema": "Losses, hazards, controls, unsafe actions, and scenarios are traced by IDs. This prospective analysis is separate from the retrospective case evidence.",
+    "limits": "A fictional cross-institutional scenario is compared with a non-AI enforcement record and a mathematical study. Causal links between unemployment, enforcement, and future exclusion require independent evidence.",
     "losses": [
       {
         "id": "L1",
@@ -6370,42 +6392,42 @@ window.AuspexSTPAModels = {
         "id": "C1",
         "title": "Employer / screening decision authority",
         "responsibility": "Approve or suspend consequential screening use; reconsider affected decisions.",
-        "feedback": "Disputed-record notices, review outcomes and independent checks of decision effects.",
+        "feedback": "Disputed-record notices, review outcomes, and independent checks of decision effects.",
         "assumption": "Decision authority remains able to change an outcome before it becomes irreversible."
       },
       {
         "id": "C2",
         "title": "Record supplier",
-        "responsibility": "Match, update and correct the records supplied.",
-        "feedback": "Source corrections, identity discrepancies and dispute results.",
+        "responsibility": "Match, update, and correct the records supplied.",
+        "feedback": "Source corrections, identity discrepancies, and dispute results.",
         "assumption": "A corrected record reaches every recipient that continues to rely on it."
       },
       {
         "id": "C3",
         "title": "Enforcement allocation authority",
         "responsibility": "Set and revise patrol allocation and the collection of discovery records.",
-        "feedback": "Allocation history, independently reported incidents and local effects.",
+        "feedback": "Allocation history, independently reported incidents, and local effects.",
         "assumption": "Discovered records depend partly on where enforcement looked."
       },
       {
         "id": "C4",
         "title": "Model and data steward",
-        "responsibility": "Admit updates, correct selection effects and bound reuse.",
-        "feedback": "Data provenance, drift checks and independent outcome observations.",
+        "responsibility": "Admit updates, correct selection effects, and bound reuse.",
+        "feedback": "Data provenance, drift checks, and independent outcome observations.",
         "assumption": "A statistical correction may depend on assumptions that change in deployment."
       },
       {
         "id": "C5",
         "title": "Independent review and redress",
-        "responsibility": "Require timely correction, suspension or reconsideration.",
-        "feedback": "Affected-person reports, audited records and confirmation that instructions changed decisions.",
+        "responsibility": "Require timely correction, suspension, or reconsideration.",
+        "feedback": "Affected-person reports, audited records, and confirmation that instructions changed decisions.",
         "assumption": "A formal correction order must reach an actor able to enforce it."
       },
       {
         "id": "C6",
         "title": "Screening and allocation pipeline",
         "responsibility": "Apply approved data and decision rules within contestable limits.",
-        "feedback": "Approved data, correction instructions and limits on use.",
+        "feedback": "Approved data, correction instructions, and limits on use.",
         "assumption": "Separate deployments may share records and create cumulative effects."
       }
     ],
@@ -6414,8 +6436,8 @@ window.AuspexSTPAModels = {
         "id": "CA1",
         "controller": "C1",
         "process": "C6",
-        "action": "Approve, suspend or reconsider screening",
-        "feedback": "The pipeline reports affected decisions, disputed records and the effect of suspension.",
+        "action": "Approve, suspend, or reconsider screening",
+        "feedback": "The pipeline reports affected decisions, disputed records, and the effect of suspension.",
         "constraints": [
           "SC1",
           "SC2",
@@ -6482,8 +6504,8 @@ window.AuspexSTPAModels = {
           "C2"
         ],
         "role": "Prevention",
-        "test": "Do identity, duplication and update checks block a materially wrong record before use?",
-        "limit": "Stale sources, mistaken identity, uncertain proxies or incorrect matching can defeat the check.",
+        "test": "Do identity, duplication, and update checks block a materially wrong record before use?",
+        "limit": "Stale sources, mistaken identity, uncertain proxies, or incorrect matching can defeat the check.",
         "nodes": [
           "H-01:1",
           "H-01:2",
@@ -6503,7 +6525,7 @@ window.AuspexSTPAModels = {
         ],
         "role": "Prevention and recovery",
         "test": "Does a valid dispute reach a decision-maker and change the decision within the relevant window?",
-        "limit": "Cost, delay, inaccessible notices or an unempowered reviewer may make appeal ineffective.",
+        "limit": "Cost, delay, inaccessible notices, or an unempowered reviewer may make appeal ineffective.",
         "nodes": [
           "H-01:2",
           "H-01:5",
@@ -6545,7 +6567,7 @@ window.AuspexSTPAModels = {
         ],
         "role": "Prevention",
         "test": "Can provenance and purpose restrictions prevent unsupported reuse across deployments?",
-        "limit": "Copied data, proxy variables and diffuse responsibility may evade the restriction.",
+        "limit": "Copied data, proxy variables, and diffuse responsibility may evade the restriction.",
         "nodes": [
           "H-01:1",
           "H-01:3",
@@ -6556,7 +6578,7 @@ window.AuspexSTPAModels = {
       {
         "id": "SC5",
         "title": "Verify correction reaches outcomes",
-        "text": "Recovery must verify corrected records, reconsidered decisions and interruption of renewed feedback.",
+        "text": "Recovery must verify corrected records, reconsidered decisions, and interruption of renewed feedback.",
         "hazards": [
           "H1",
           "H2"
@@ -6568,7 +6590,7 @@ window.AuspexSTPAModels = {
         ],
         "role": "Recovery",
         "test": "After correction, do downstream records and decisions change and remain corrected?",
-        "limit": "Derived records, delayed propagation or a continuing input loop can recreate the exclusion.",
+        "limit": "Derived records, delayed propagation, or a continuing input loop can recreate the exclusion.",
         "nodes": [
           "H-01:2",
           "H-01:4",
@@ -6585,7 +6607,7 @@ window.AuspexSTPAModels = {
         "title": "Records govern screening",
         "shortLabel": "Records govern screening",
         "text": "Criminal-history or predicted-risk records influence consequential screening.",
-        "requires": "Records are used in the decision and are unsuitable, inaccurate or poorly contested.",
+        "requires": "Records are used in the decision and are unsuitable, inaccurate, or poorly contested.",
         "mechanism": "Reliance on a record can transfer its errors or untested assumptions into a decision.",
         "constraints": [
           "SC1",
@@ -6611,7 +6633,7 @@ window.AuspexSTPAModels = {
         "title": "Exclusion outruns correction",
         "shortLabel": "Exclusion outruns correction",
         "text": "Exclusion becomes consequential while effective review or correction fails to constrain it.",
-        "requires": "An adverse decision, material effects and inadequate timely correction.",
+        "requires": "An adverse decision, material effects, and inadequate timely correction.",
         "mechanism": "A mistaken screening result can become a sustained loss when the correction process cannot change the outcome.",
         "constraints": [
           "SC1",
@@ -6693,7 +6715,7 @@ window.AuspexSTPAModels = {
         "title": "Disadvantage persists",
         "shortLabel": "Disadvantage persists",
         "text": "Repeated consequential exclusion entrenches disadvantage.",
-        "requires": "Sustained exposure, cumulative effects and failure of correction or exit.",
+        "requires": "Sustained exposure, cumulative effects, and failure of correction or exit.",
         "mechanism": "A recurrent process can make local losses persistent, but neither case establishes this full societal outcome.",
         "constraints": [
           "SC2",
@@ -6718,7 +6740,7 @@ window.AuspexSTPAModels = {
         "title": "Decisions and records corrected",
         "shortLabel": "Decisions and records corrected",
         "text": "Effective review corrects records and affected decisions and interrupts renewed feedback.",
-        "requires": "Correction propagates, consequential decisions change and recurrence is monitored.",
+        "requires": "Correction propagates, consequential decisions change, and recurrence is monitored.",
         "mechanism": "Recovery acts on the affected system and outcomes. Reinforcing a check is a separate change to a barrier.",
         "constraints": [
           "SC1",
@@ -6977,35 +6999,35 @@ window.AuspexSTPAModels = {
         "title": "Leveson & Thomas · STPA Handbook (2018)",
         "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
         "locator": "Chapter 2, pp. 14–53; Chapter 6, pp. 101–115",
-        "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios and leading indicators."
+        "use": "This source supplies the method for analyzing losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios, and leading indicators."
       },
       {
         "id": "CAA",
         "title": "UK Civil Aviation Authority · Bowtie elements",
         "url": "https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/bowtie-elements/",
         "locator": "Hazard, top event, threats, consequences, preventive/recovery controls, escalation factors",
-        "use": "Presentation vocabulary. A bow-tie hazard source and an STPA hazardous system state are not interchangeable definitions."
+        "use": "This source supplies the presentation vocabulary. A bow-tie hazard source and an STPA hazardous system state are not interchangeable definitions."
       },
       {
         "id": "TA",
         "title": "Critch & Russell · TASRA",
         "url": "https://arxiv.org/html/2306.06924v1",
         "locator": "Section 2.1, story 1a",
-        "use": "Fictional cross-institutional hypothesis; not an observed causal chain."
+        "use": "This source presents a fictional cross-institutional hypothesis. It does not describe an observed causal chain."
       },
       {
         "id": "HRI",
         "title": "FTC · HireRight settlement announcement (2012)",
         "url": "https://www.ftc.gov/news-events/news/press-releases/2012/08/employment-background-screening-company-pay-26-million-penalty-multiple-violations-fair-credit",
         "locator": "Allegations about accuracy and disputes; settlement notice",
-        "use": "Non-AI screening comparison. Allegations and proposed settlement terms are not adjudicated findings."
+        "use": "This source provides a non-AI screening comparison. Allegations and proposed settlement terms are not adjudicated findings."
       },
       {
         "id": "PFL",
         "title": "Ensign et al. · Runaway Feedback Loops in Predictive Policing",
         "url": "https://proceedings.mlr.press/v81/ensign18a.html",
         "locator": "Abstract and paper, PMLR 81:160–171",
-        "use": "Mathematical and computational evidence for selective-data feedback and a correction within its assumptions."
+        "use": "This source provides mathematical and computational evidence for selective-data feedback and a correction within its assumptions."
       }
     ],
     "assessments": [
@@ -7024,7 +7046,7 @@ window.AuspexSTPAModels = {
             "label": "Criminal-record screening can exclude people from employment"
           }
         ],
-        "scope": "A narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
+        "scope": "This case provides a narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
         "evidence": [
           "HRI-2012-account"
         ],
@@ -7042,7 +7064,7 @@ window.AuspexSTPAModels = {
             ]
           },
           {
-            "text": "Settlement terms addressed accuracy, access and disputes.",
+            "text": "Settlement terms addressed accuracy, access, and disputes.",
             "evidence": [
               "HRI-2012-account"
             ]
@@ -7054,10 +7076,10 @@ window.AuspexSTPAModels = {
             "title": "Record accuracy checks",
             "outcome": "Failures alleged by the FTC",
             "role": "prevention",
-            "action": "Identity matching, updates and duplicate checks should stop materially wrong records before they affect screening.",
+            "action": "Identity matching, updates, and duplicate checks should stop materially wrong records before they affect screening.",
             "efficacy": "The FTC alleged inaccurate and wrong-person reports and resulting employment denials; the announcement is not an adjudicated finding.",
             "durability": "Faster screening or wider data reuse can propagate an error before it is corrected.",
-            "failure": "Incorrect matching, stale sources or delayed correction allow unsuitable records to remain in use.",
+            "failure": "Incorrect matching, stale sources, or delayed correction allow unsuitable records to remain in use.",
             "target": "H-01:1-2",
             "evidence": [
               "HRI-2012-account"
@@ -7082,8 +7104,8 @@ window.AuspexSTPAModels = {
           }
         ],
         "reach": {
-          "local": "The FTC alleged that inaccurate, duplicated and wrong-person criminal records caused employment denials. The proposed settlement included accuracy and dispute-handling obligations, without an admission of violation.",
-          "systemic": "A narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
+          "local": "The FTC alleged that inaccurate, duplicated, and wrong-person criminal records caused employment denials. The proposed settlement included accuracy and dispute-handling obligations, without an admission of violation.",
+          "systemic": "This case provides a narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
           "evidence": [
             "HRI-2012-account"
           ]
@@ -7104,7 +7126,7 @@ window.AuspexSTPAModels = {
             "label": "Enforcement-generated records can reinforce a prediction"
           }
         ],
-        "scope": "Comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
+        "scope": "This study provides a comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
         "evidence": [
           "PFL-2018-account"
         ],
@@ -7174,7 +7196,7 @@ window.AuspexSTPAModels = {
         ],
         "reach": {
           "local": "The study shows how police-discovered records can reinforce deployment to the same areas. Its input correction prevents the modeled runaway feedback; reported incidents alone do not fully remove it.",
-          "systemic": "Comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
+          "systemic": "This study provides a comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
           "evidence": [
             "PFL-2018-account"
           ]
@@ -7199,17 +7221,17 @@ window.AuspexSTPAModels = {
           "anchor": "H-01:1",
           "observed": "The FTC alleged that inaccurate background reports led to employment denials.",
           "notEstablished": "The announcement does not establish AI arrest prediction or the subsequent feedback loop; allegations were not adjudicated findings.",
-          "limit": "Screening-to-exclusion comparison only.",
+          "limit": "This case supports a comparison between inaccurate screening records and employment exclusion.",
           "barriers": {
             "record-accuracy": {
               "title": "Record accuracy checks",
-              "result": "Material failures alleged in the FTC account.",
+              "result": "The FTC alleged material failures in record checks.",
               "condition": "failed",
               "conditionBasis": "Broken describes the alleged checking failures in this account; it is not a judicial finding.",
               "limitType": "safeguard",
               "strongerAI": "More rapid screening and easier data reuse could spread an error before correction. Better matching could help; test correction speed and downstream decisions.",
               "reinforcement": {
-                "proposal": "Verify identity, currency and correction propagation before consequential reuse.",
+                "proposal": "Verify identity, currency, and correction propagation before consequential reuse.",
                 "test": "Does a corrected record change every affected decision within the useful time window?",
                 "status": "proposed"
               }
@@ -7221,7 +7243,7 @@ window.AuspexSTPAModels = {
             "target": "H-01:4",
             "question": "Could disputed records keep shaping later automated decisions?",
             "basis": "The FTC alleged inaccurate screening reports and failures to investigate disputes.",
-            "unresolved": "The case does not establish AI use or a feedback loop. Record reuse and its effect on later decisions would need tracing.",
+            "unresolved": "The case does not establish AI use or a feedback loop. We would need to trace whether disputed records were reused and whether they continued to affect later decisions.",
             "sources": [
               "HRI"
             ]
@@ -7234,7 +7256,7 @@ window.AuspexSTPAModels = {
           "target": "H-01:3-4",
           "anchor": "H-01:3",
           "observed": "An input correction prevented runaway feedback within the study’s model.",
-          "notEstablished": "Employment effects, a real-world exclusion cycle and deployment-wide efficacy were not established.",
+          "notEstablished": "The study did not establish effects on employment or show that its correction works across real deployments. It did not demonstrate an actual cycle of exclusion.",
           "limit": "Protection depends on the study’s reporting and discovery assumptions.",
           "barriers": {
             "PFL-2018-correction": {
@@ -7261,7 +7283,7 @@ window.AuspexSTPAModels = {
             "target": "H-01:5",
             "question": "Could the modeled feedback produce persistent disadvantage in practice?",
             "basis": "The study demonstrates how discovered records can reinforce repeated allocation and tests an input correction.",
-            "unresolved": "Long-term effects on people were not established. The connection needs deployment evidence, including reporting patterns, decisions and outcomes.",
+            "unresolved": "The study did not establish long-term effects on people. We would need deployment evidence showing whether selective records repeatedly change decisions and whether those decisions sustain disadvantage.",
             "sources": [
               "PFL"
             ]
@@ -7271,7 +7293,7 @@ window.AuspexSTPAModels = {
       "context": [
         {
           "title": "System setting",
-          "text": "A hypothetical system of employment screening, record suppliers, policing allocation, model updates and independent redress. The organizations are analytically distinct; no single controller is assumed to command the whole system.",
+          "text": "The hypothetical scenario connects employment screening with record suppliers, policing allocation, model updates, and independent redress. These functions belong to analytically distinct organizations. No single controller is assumed to command the whole system.",
           "sources": [],
           "targets": [
             {
@@ -7295,15 +7317,24 @@ window.AuspexSTPAModels = {
       "cloud": {
         "origin": "scenario-setting",
         "conditions": [
-          "Consequential records",
-          "Selective observation",
-          "Separate organizations"
+          "Records circulate between organizations",
+          "Enforcement shapes what gets recorded"
         ],
         "actors": [
+          {
+            "controller": "C1",
+            "label": "Employers",
+            "role": "make & reconsider decisions"
+          },
           {
             "controller": "C2",
             "label": "Record suppliers",
             "role": "supply & correct records"
+          },
+          {
+            "controller": "C3",
+            "label": "Allocation authorities",
+            "role": "direct enforcement"
           },
           {
             "controller": "C4",
@@ -7316,7 +7347,7 @@ window.AuspexSTPAModels = {
             "role": "require redress"
           }
         ],
-        "summary": "What organizations observe and share shapes later decisions and the possibility of redress."
+        "summary": "What gets recorded depends partly on where enforcement looks. Those records can travel to other decision-makers, while correction must cross the same organizational boundaries."
       }
     }
   }
@@ -7325,7 +7356,7 @@ window.AuspexSTPAData = window.AuspexSTPAModels['X-01'];
 window.AuspexBarrierStateData = {
   "version": "2.0",
   "scope": "States describe the named protection under the conditions examined.",
-  "coverage": "Seven states used for incident evidence and possible changes along AI risk pathways. Brittleness concerns the dependencies of any barrier. Recovery is a separate route.",
+  "coverage": "These seven states describe incident evidence and possible changes along AI risk pathways. Brittleness concerns the dependencies of any barrier. Recovery is a separate route.",
   "states": [
     {
       "id": "reinforced",
@@ -7341,7 +7372,7 @@ window.AuspexBarrierStateData = {
       "id": "intact",
       "label": "Holding",
       "definition": "The barrier delivered its specified protection in the cited conditions.",
-      "question": "What demand, scope and duration did the evidence actually cover?",
+      "question": "What demand, scope, and duration did the evidence actually cover?",
       "source": "CAA-P",
       "path": "M16 5v22M12 5h8M12 27h8",
       "example": "A human maintainer caught and rejected an agent’s malicious contribution.",
@@ -7350,7 +7381,7 @@ window.AuspexBarrierStateData = {
     {
       "id": "degrading",
       "label": "Crumbling",
-      "definition": "Protection is weakening as capability, access, workload or other conditions change.",
+      "definition": "Protection is weakening as capability, access, workload, or other conditions change.",
       "question": "Which dependency is eroding? Is the change observed or projected?",
       "source": "CAA-E",
       "path": "M16 5v7l-3 3 5 3-2 3v6M12 5h8M12 27h8m10-14 2 2M10 22l-2 2",
@@ -7361,7 +7392,7 @@ window.AuspexBarrierStateData = {
       "id": "failed",
       "label": "Broken",
       "definition": "The barrier failed to deliver a required protective effect on demand.",
-      "question": "Was the failure in detection, decision, execution, timing or the final effect?",
+      "question": "Was the failure in detection, decision, execution, timing, or the final effect?",
       "source": "HSE",
       "path": "M14 5v7l-3 3M21 20l-3 3v5M10 5h8M14 28h8",
       "example": "The research relay regained access within days of account bans. Lasting exclusion failed.",
@@ -7370,7 +7401,7 @@ window.AuspexBarrierStateData = {
     {
       "id": "absent",
       "label": "Absent",
-      "definition": "A relevant protection is missing, disabled or removed.",
+      "definition": "A relevant protection is missing, disabled, or removed.",
       "question": "Who can restore the protection, and who can remove it?",
       "source": "AN26",
       "path": "M12 5h8M12 27h8M16 8v3m0 10v3",
@@ -7403,13 +7434,13 @@ window.AuspexBarrierStateData = {
       "id": "PSA",
       "title": "Norwegian safety regulator · Principles for barrier management",
       "url": "https://www.havtil.no/contentassets/43fc402b97e64a7cbabdf91c64b349cb/barriers-memorandum-2017-eng.pdf",
-      "use": "Functionality, integrity, robustness, performance requirements and maintaining protection over time."
+      "use": "Functionality, integrity, robustness, performance requirements, and maintaining protection over time."
     },
     {
       "id": "HSE",
       "title": "HSE · Control systems",
       "url": "https://www.hse.gov.uk/comah/sragtech/techmeascontsyst.htm",
-      "use": "Required function, availability, performance, testing and degradation."
+      "use": "Required function, availability, performance, testing, and degradation."
     },
     {
       "id": "CAA-P",
@@ -7433,7 +7464,7 @@ window.AuspexBarrierStateData = {
       "id": "AN26",
       "title": "Anthropic · Misuse investigations, September 2026",
       "url": "https://www.anthropic.com/threat-intelligence-report-september-2026",
-      "use": "Reported access restrictions, removed controls and dependence on fallback capability."
+      "use": "Reported access restrictions, removed controls, and dependence on fallback capability."
     },
     {
       "id": "SAB",

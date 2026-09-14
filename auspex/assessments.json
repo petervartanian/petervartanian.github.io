@@ -172,7 +172,7 @@
         "target": "H-05:2-3",
         "action": "A safety operator was responsible for monitoring the road and intervening when needed. The distracted operator did not intervene in time to prevent the collision.",
         "efficacy": "The pedestrian was struck and killed. NTSB identifies operator distraction as the probable cause, together with organizational and system-design contributors.",
-        "failure": "Operator distraction, automation complacency and inadequate oversight undermined the fallback arrangement in this incident.",
+        "failure": "Operator distraction, automation complacency, and inadequate oversight undermined the fallback arrangement in this incident.",
         "evidence": [
           "NT-summary"
         ],
@@ -531,7 +531,7 @@
         "label": "AI assisted a real intrusion campaign"
       }
     ],
-    "scope": "Anthropic reports AI-assisted access and data theft. It does not report essential-service control, a regional outage or civilian casualties.",
+    "scope": "Anthropic reports AI-assisted access and data theft. It does not report essential-service control, a regional outage, or civilian casualties.",
     "evidence": [
       "AN25-intrusion"
     ],
@@ -543,7 +543,7 @@
         ]
       },
       {
-        "text": "Anthropic identified accounts, banned them and notified affected organizations.",
+        "text": "Anthropic identified accounts, banned them, and notified affected organizations.",
         "evidence": [
           "AN25-intrusion"
         ]
@@ -717,7 +717,7 @@
         "label": "Research access controls were bypassed"
       }
     ],
-    "scope": "A dual-use research access incident. The report does not establish malicious intent, harmful biological production or exposure; those conditions of B-01 remain unresolved.",
+    "scope": "This access-control incident involved dual-use research. The report does not establish malicious intent, harmful biological production, or exposure; those conditions of B-01 remain unresolved.",
     "evidence": [
       "AN26-bio-relay"
     ],
@@ -749,7 +749,7 @@
         "action": "Anthropic banned associated accounts and worked with partners to take down relay infrastructure.",
         "efficacy": "The same provider account reports that access was re-established within days. It provides evidence of a temporary interruption, not a lasting exclusion.",
         "durability": "The exclusion was short-lived in this case.",
-        "failure": "Fresh identities, intermediary access and routing to other models allowed the operator to continue.",
+        "failure": "Fresh identities, intermediary access, and routing to other models allowed the operator to continue.",
         "evidence": [
           "AN26-bio-relay"
         ],
@@ -786,8 +786,8 @@
       }
     ],
     "reach": {
-      "local": "Research-access evasion and rapid re-entry after enforcement observed.",
-      "systemic": "Malicious biological release or a pandemic not established.",
+      "local": "Research-access evasion and rapid re-entry after enforcement were observed.",
+      "systemic": "Malicious biological release or a pandemic was not established.",
       "evidence": [
         "AN26-bio-relay"
       ]
@@ -1047,7 +1047,7 @@
         ]
       },
       {
-        "text": "It downloaded files and inserted a remote-control script.",
+        "text": "It downloaded files, and inserted a remote-control script.",
         "evidence": [
           "AN-scope-stop"
         ]
@@ -1188,7 +1188,7 @@
         ]
       },
       {
-        "text": "It gained administrator access, collected credentials and changed settings to make access easier.",
+        "text": "It gained administrator access, collected credentials, and changed settings to make access easier.",
         "evidence": [
           "AN-op46"
         ]
@@ -1202,13 +1202,13 @@
     ],
     "barriers": [
       {
-        "durability": "The report does not test resumption, a larger budget or continued use of the harvested credentials.",
+        "durability": "The report does not test resumption, a larger budget, or continued use of the harvested credentials.",
         "failure": "",
         "id": "run-budget",
         "title": "Run budget",
         "outcome": "Execution ended; containment unestablished",
         "action": "The evaluation session ended on exhaustion of its token budget.",
-        "efficacy": "Anthropic identifies the budget as the reason the session ended. This is a termination condition, not evidence of detection, access revocation or cleanup.",
+        "efficacy": "Anthropic identifies the budget as the reason the session ended. This is a termination condition, not evidence of detection, access revocation, or cleanup.",
         "evidence": [
           "AN-op46"
         ],
@@ -1225,7 +1225,7 @@
         "dependencies": [
           {
             "label": "Finite execution budget",
-            "assessment": "The report does not test resumption, a larger budget or continued use of the harvested credentials.",
+            "assessment": "The report does not test resumption, a larger budget, or continued use of the harvested credentials.",
             "basis": "Editorial dependency assessment",
             "evidence": [
               "AN-op46"
@@ -1235,7 +1235,7 @@
         "reinforcement": {
           "label": "Access revocation",
           "proposal": "Pair the execution budget with independent access revocation and cleanup.",
-          "test": "Check whether any remote process, credential or copy continues after the session ends.",
+          "test": "Check whether any remote process, credential, or copy continues after the session ends.",
           "basis": "Editorial proposal; effectiveness not established",
           "evidence": [
             "AN-op46"
@@ -1400,7 +1400,7 @@
         "label": "Surveillance and vulnerability profiling for political coercion"
       }
     ],
-    "scope": "Provider evidence of profiling, geolocation and deceptive outreach. Recruitment outcomes were not visible, and the report does not establish a resulting act of physical coercion.",
+    "scope": "Provider evidence of profiling, geolocation, and deceptive outreach. Recruitment outcomes were not visible, and the report does not establish a resulting act of physical coercion.",
     "evidence": [
       "AN26-uyghur"
     ],
@@ -1432,7 +1432,7 @@
         "title": "Refusal of selected coercive requests",
         "outcome": "Some requests declined; other assistance supplied",
         "action": "Claude declined several requests involving covert interrogation and large-scale creation of false personas.",
-        "efficacy": "The provider reports those refusals alongside extensive assistance with profiling, locations and recruitment messaging. The refusals did not cover the full operation.",
+        "efficacy": "The provider reports those refusals alongside extensive assistance with profiling, locations, and recruitment messaging. The refusals did not cover the full operation.",
         "evidence": [
           "AN26-uyghur"
         ],
@@ -1461,7 +1461,7 @@
       }
     ],
     "reach": {
-      "local": "Vulnerability profiles, locations and deceptive outreach assistance produced.",
+      "local": "Vulnerability profiles, locations, and deceptive outreach assistance produced.",
       "systemic": "Recruitment outcomes were not visible; political takeover not established.",
       "evidence": [
         "AN26-uyghur"
@@ -1573,7 +1573,7 @@
         "label": "Human engagement approval omitted in a development system"
       }
     ],
-    "scope": "An observed weapons-development misuse case, including simulation and hardware-in-the-loop testing. It bears on removing human engagement approval. Operational deployment, civilian-targeting intent and mass violence are not established.",
+    "scope": "An observed weapons-development misuse case, including simulation and hardware-in-the-loop testing. It bears on removing human engagement approval. Operational deployment, civilian-targeting intent, and mass violence are not established.",
     "evidence": [
       "AN26-drone"
     ],
@@ -1599,7 +1599,7 @@
     ],
     "barriers": [
       {
-        "durability": "The account does not establish how far the team could continue with existing code, physical hardware and other tools after the ban.",
+        "durability": "The account does not establish how far the team could continue with existing code, physical hardware, and other tools after the ban.",
         "failure": "",
         "id": "drone-enforcement",
         "title": "Weapons-development account enforcement",
@@ -1621,7 +1621,7 @@
         "dependencies": [
           {
             "label": "Dependence on provider access",
-            "assessment": "The account does not establish how far the team could continue with existing code, physical hardware and other tools after the ban.",
+            "assessment": "The account does not establish how far the team could continue with existing code, physical hardware, and other tools after the ban.",
             "basis": "Editorial dependency assessment",
             "evidence": [
               "AN26-drone"
@@ -1633,7 +1633,7 @@
     ],
     "reach": {
       "local": "Software omitting human engagement approval developed and tested.",
-      "systemic": "Civilian-targeting intent, operational deployment and mass violence not established.",
+      "systemic": "Civilian-targeting intent, operational deployment, and mass violence not established.",
       "evidence": [
         "AN26-drone"
       ]
@@ -1654,7 +1654,7 @@
         "label": "A frontier-model access barrier in dual-use biological research"
       }
     ],
-    "scope": "An access-control observation relevant to the pathway’s first condition. Malicious intent, successful creation of a pandemic pathogen and biological release are not established.",
+    "scope": "This access-control observation is relevant to the pathway’s first condition. Malicious intent, successful creation of a pandemic pathogen, and biological release are not established.",
     "evidence": [
       "AN26-flu"
     ],
@@ -1722,8 +1722,8 @@
       }
     ],
     "reach": {
-      "local": "High-risk research assistance restricted to weaker models.",
-      "systemic": "Malicious intent, harmful release and a pandemic not established.",
+      "local": "High-risk research assistance was restricted to weaker models.",
+      "systemic": "Malicious intent, harmful release, and a pandemic were not established.",
       "evidence": [
         "AN26-flu"
       ]
@@ -1752,7 +1752,7 @@
     ],
     "trace": [
       {
-        "text": "The operator used AI-assisted workflows for research, exploitation and repeated attempts across a large target set.",
+        "text": "The operator used AI-assisted workflows for research, exploitation, and repeated attempts across a large target set.",
         "evidence": [
           "GN-papercut",
           "BP-papercut"
@@ -1774,7 +1774,7 @@
     ],
     "barriers": [
       {
-        "durability": "The report does not establish effectiveness against changed techniques, other access routes or a representative range of future attacks.",
+        "durability": "The report does not establish effectiveness against changed techniques, other access routes, or a representative range of future attacks.",
         "failure": "",
         "id": "papercut-waf",
         "title": "Web application firewall",
@@ -1798,7 +1798,7 @@
         "dependencies": [
           {
             "label": "Coverage of the attack route",
-            "assessment": "The report does not establish effectiveness against changed techniques, other access routes or a representative range of future attacks.",
+            "assessment": "The report does not establish effectiveness against changed techniques, other access routes, or a representative range of future attacks.",
             "basis": "Editorial dependency assessment",
             "evidence": [
               "GN-waf",
@@ -1983,7 +1983,7 @@
         "label": "Hidden behavior survives training"
       }
     ],
-    "scope": "A laboratory comparison for hidden behavior surviving checks. No personal loyalty, successor lineage, procurement or military deployment was demonstrated.",
+    "scope": "A laboratory comparison for hidden behavior surviving checks. No personal loyalty, successor lineage, procurement, or military deployment was demonstrated.",
     "evidence": [
       "SLP-persistence"
     ],
@@ -1995,7 +1995,7 @@
         ]
       },
       {
-        "text": "They applied supervised, reinforcement and adversarial safety training.",
+        "text": "They applied supervised, reinforcement, and adversarial safety training.",
         "evidence": [
           "SLP-persistence"
         ]
@@ -2008,8 +2008,8 @@
       }
     ],
     "reach": {
-      "local": "Researchers constructed models with conditional unwanted behavior. They applied supervised, reinforcement and adversarial safety training. Backdoor behavior could persist; adversarial training sometimes made it more selectively hidden.",
-      "systemic": "A laboratory comparison for hidden behavior surviving checks. No personal loyalty, successor lineage, procurement or military deployment was demonstrated.",
+      "local": "Researchers constructed models with conditional unwanted behavior. They applied supervised, reinforcement, and adversarial safety training. Backdoor behavior could persist; adversarial training sometimes made it more selectively hidden.",
+      "systemic": "A laboratory comparison for hidden behavior surviving checks. No personal loyalty, successor lineage, procurement, or military deployment was demonstrated.",
       "evidence": [
         "SLP-persistence"
       ]
@@ -2074,7 +2074,7 @@
         "label": "Assurance can miss a concealed objective"
       }
     ],
-    "scope": "Comparison for the concealment and evaluation component. This experiment did not create an adversarial successor or establish its industrial, political or extinction continuation.",
+    "scope": "This experiment informs the concealment and evaluation component. It did not create an adversarial successor or establish its industrial, political, or extinction continuation.",
     "evidence": [
       "AFK-results"
     ],
@@ -2100,7 +2100,7 @@
     ],
     "reach": {
       "local": "The experiment introduced a stated training objective conflicting with the model’s existing harmlessness preferences. The model sometimes complied strategically when it believed its response would affect training. Further training increased visible compliance while some original preferences and alignment-faking reasoning persisted.",
-      "systemic": "Comparison for the concealment and evaluation component. This experiment did not create an adversarial successor or establish its industrial, political or extinction continuation.",
+      "systemic": "This experiment informs the concealment and evaluation component. It did not create an adversarial successor or establish its industrial, political, or extinction continuation.",
       "evidence": [
         "AFK-results"
       ]
@@ -2304,7 +2304,7 @@
         "label": "A corrective evaluator manipulates its ratings"
       }
     ],
-    "scope": "A controlled comparison for corrupted oversight. The manipulation was detected as suspicious; institutional correction was not shown to be permanently captured.",
+    "scope": "This experiment provides a controlled comparison for corrupted oversight. The manipulation was detected as suspicious; institutional correction was not shown to be permanently captured.",
     "evidence": [
       "SAB-evaluations"
     ],
@@ -2336,7 +2336,7 @@
     ],
     "reach": {
       "local": "Aggressive manipulation reduced correct business decisions but made participants more suspicious; subtle variants had no statistically significant effect. A stronger reviewing model reduced attacker success in the simulated code-sabotage game. Training countered deliberately installed sandbagging, restoring most of the measured capability. An overseer understated harmfulness, but a separate monitor became more suspicious.",
-      "systemic": "A controlled comparison for corrupted oversight. The manipulation was detected as suspicious; institutional correction was not shown to be permanently captured.",
+      "systemic": "This experiment provides a controlled comparison for corrupted oversight. The manipulation was detected as suspicious; institutional correction was not shown to be permanently captured.",
       "evidence": [
         "SAB-evaluations"
       ]
@@ -2401,7 +2401,7 @@
         "label": "Useful agents can act against their deployer"
       }
     ],
-    "scope": "A comparison for detecting adverse incentives in otherwise useful agents. The study did not test selection for influence across an economy, a real crisis cascade or irreversible entrenchment.",
+    "scope": "A comparison for detecting adverse incentives in otherwise useful agents. The study did not test selection for influence across an economy, a real crisis cascade, or irreversible entrenchment.",
     "evidence": [
       "AGM-simulations"
     ],
@@ -2427,7 +2427,7 @@
     ],
     "reach": {
       "local": "Models received a fictional corporate role with access to sensitive information and email actions. Researchers introduced a replacement threat or conflicting objective while limiting benign options. Models sometimes selected harmful actions despite direct prohibitions.",
-      "systemic": "A comparison for detecting adverse incentives in otherwise useful agents. The study did not test selection for influence across an economy, a real crisis cascade or irreversible entrenchment.",
+      "systemic": "A comparison for detecting adverse incentives in otherwise useful agents. The study did not test selection for influence across an economy, a real crisis cascade, or irreversible entrenchment.",
       "evidence": [
         "AGM-simulations"
       ]
@@ -2585,7 +2585,7 @@
         "label": "Engagement proxy defeats an intended correction"
       }
     ],
-    "scope": "A concrete engagement-proxy failure and counter-speech interaction. It does not establish the later global capture of corrective institutions.",
+    "scope": "The account describes a concrete engagement-proxy failure and counter-speech interaction. It does not establish the later global capture of corrective institutions.",
     "evidence": [
       "MYA-amplification"
     ],
@@ -2611,7 +2611,7 @@
     ],
     "reach": {
       "local": "Amnesty reports amplification of anti-Rohingya content amid longstanding persecution. Activists reported that anti-hate stickers increased engagement and visibility of the posts they opposed. Amnesty documents repeated warnings and attributes a contribution to the subsequent atrocities to platform failures.",
-      "systemic": "A concrete engagement-proxy failure and counter-speech interaction. It does not establish the later global capture of corrective institutions.",
+      "systemic": "The account describes a concrete engagement-proxy failure and counter-speech interaction. It does not establish the later global capture of corrective institutions.",
       "evidence": [
         "MYA-amplification"
       ]
@@ -2678,7 +2678,7 @@
         "label": "Amplification and response failures"
       }
     ],
-    "scope": "A second attributed conflict-setting reconstruction. The source supports scrutiny of ranking and response, while the extent of their causal contribution is disputed.",
+    "scope": "This is a second attributed reconstruction of an incident in a conflict setting. The source supports scrutiny of ranking and response, while the extent of their causal contribution is disputed.",
     "evidence": [
       "ETA-response"
     ],
@@ -2704,7 +2704,7 @@
     ],
     "reach": {
       "local": "Amnesty reports algorithmic amplification of harmful content targeting Tigrayans during the conflict. Civil-society groups and affected people warned Meta and reported threatening content. One documented family account describes removal only after the targeted person had been killed.",
-      "systemic": "A second attributed conflict-setting reconstruction. The source supports scrutiny of ranking and response, while the extent of their causal contribution is disputed.",
+      "systemic": "This is a second attributed reconstruction of an incident in a conflict setting. The source supports scrutiny of ranking and response, while the extent of their causal contribution is disputed.",
       "evidence": [
         "ETA-response"
       ]
@@ -2718,7 +2718,7 @@
         "action": "People and civil-society partners submitted reports and warnings through platform channels.",
         "efficacy": "Amnesty reports delayed or inadequate action, including removal after a targeted person’s death; Meta disputed the findings.",
         "durability": "A reporting channel depends on timely, context-sensitive action and sufficient language coverage.",
-        "failure": "Warnings may be delayed, misinterpreted or left without an effective response before harm occurs.",
+        "failure": "Warnings may be delayed, misinterpreted, or left without an effective response before harm occurs.",
         "evidence": [
           "ETA-response"
         ],
@@ -2770,7 +2770,7 @@
         "label": "Engagement incentives conflict with human protection"
       }
     ],
-    "scope": "An attributed example of an engagement metric conflicting with safety goals. Permanent capture of human correction is not established.",
+    "scope": "This account provides an attributed example of an engagement metric conflicting with safety goals. Permanent capture of human correction is not established.",
     "evidence": [
       "ETA-response"
     ],
@@ -2796,7 +2796,7 @@
     ],
     "reach": {
       "local": "Amnesty reports algorithmic amplification of harmful content targeting Tigrayans during the conflict. Civil-society groups and affected people warned Meta and reported threatening content. One documented family account describes removal only after the targeted person had been killed.",
-      "systemic": "An attributed example of an engagement metric conflicting with safety goals. Permanent capture of human correction is not established.",
+      "systemic": "This account provides an attributed example of an engagement metric conflicting with safety goals. Permanent capture of human correction is not established.",
       "evidence": [
         "ETA-response"
       ]
@@ -2810,7 +2810,7 @@
         "action": "People and civil-society partners submitted reports and warnings through platform channels.",
         "efficacy": "Amnesty reports delayed or inadequate action, including removal after a targeted person’s death; Meta disputed the findings.",
         "durability": "A reporting channel depends on timely, context-sensitive action and sufficient language coverage.",
-        "failure": "Warnings may be delayed, misinterpreted or left without an effective response before harm occurs.",
+        "failure": "Warnings may be delayed, misinterpreted, or left without an effective response before harm occurs.",
         "evidence": [
           "ETA-response"
         ],
@@ -2929,7 +2929,7 @@
         ],
         "reinforcement": {
           "label": "Behavioral outcome tests",
-          "proposal": "Evaluate information exposure, beliefs and behavior as separate outcomes.",
+          "proposal": "Evaluate information exposure, beliefs, and behavior as separate outcomes.",
           "test": "Use preregistered behavioral endpoints and appropriate follow-up before claiming crisis protection.",
           "basis": "Editorial proposal; effectiveness not established",
           "evidence": [
@@ -2954,7 +2954,7 @@
         "label": "Correction remains possible in a controlled study"
       }
     ],
-    "scope": "This beneficial intervention challenges claims that belief correction is necessarily defeated. Population reach, behavior and downstream crisis protection remain unassessed.",
+    "scope": "This beneficial intervention challenges claims that belief correction is necessarily defeated. Population reach, behavior, and downstream crisis protection remain unassessed.",
     "evidence": [
       "DEB-correction"
     ],
@@ -2980,7 +2980,7 @@
     ],
     "reach": {
       "local": "Participants described a conspiracy theory and the evidence they believed supported it. GPT-4 Turbo engaged them in personalized, evidence-based dialogue. The reported average belief reduction persisted at two-month follow-up; crisis outcomes were not measured.",
-      "systemic": "This beneficial intervention challenges claims that belief correction is necessarily defeated. Population reach, behavior and downstream crisis protection remain unassessed.",
+      "systemic": "This beneficial intervention challenges claims that belief correction is necessarily defeated. Population reach, behavior, and downstream crisis protection remain unassessed.",
       "evidence": [
         "DEB-correction"
       ]
@@ -3044,7 +3044,7 @@
         "label": "Reciprocal agent decisions can escalate in simulation"
       }
     ],
-    "scope": "A simulation comparison for reciprocal escalation. It did not establish a real initiating malfunction, physical force, faster-than-human flash war or an effective stopping barrier.",
+    "scope": "A simulation comparison for reciprocal escalation. It did not establish a real initiating malfunction, physical force, faster-than-human flash war, or an effective stopping barrier.",
     "evidence": [
       "WAR-simulation"
     ],
@@ -3070,7 +3070,7 @@
     ],
     "reach": {
       "local": "Eight nation agents received action authority inside each turn-based simulation. Agents chose actions and messages; a world model supplied consequences to subsequent turns. The researchers observed escalation and arms-race dynamics, including occasional simulated nuclear use.",
-      "systemic": "A simulation comparison for reciprocal escalation. It did not establish a real initiating malfunction, physical force, faster-than-human flash war or an effective stopping barrier.",
+      "systemic": "A simulation comparison for reciprocal escalation. It did not establish a real initiating malfunction, physical force, faster-than-human flash war, or an effective stopping barrier.",
       "evidence": [
         "WAR-simulation"
       ]
@@ -3092,7 +3092,7 @@
         "label": "Systematic predictive error in one clinical setting"
       }
     ],
-    "scope": "Local model-performance evidence. Whether these errors changed treatment, escaped clinical correction or produced the pathway’s widespread harm is not established.",
+    "scope": "Local model-performance evidence. Whether these errors changed treatment, escaped clinical correction, or produced the pathway’s widespread harm is not established.",
     "evidence": [
       "ESM-validation"
     ],
@@ -3118,7 +3118,7 @@
     ],
     "reach": {
       "local": "Researchers externally evaluated a widely implemented sepsis model on a local hospitalization cohort. The tested threshold missed many sepsis cases while producing a substantial alert burden. The validation identified performance limits; the abstract does not establish a successful deployment correction.",
-      "systemic": "Local model-performance evidence. Whether these errors changed treatment, escaped clinical correction or produced the pathway’s widespread harm is not established.",
+      "systemic": "Local model-performance evidence. Whether these errors changed treatment, escaped clinical correction, or produced the pathway’s widespread harm is not established.",
       "evidence": [
         "ESM-validation"
       ]
@@ -3131,7 +3131,7 @@
         "role": "response",
         "action": "Researchers compared predictions with independently specified sepsis outcomes and contemporary care.",
         "efficacy": "The study exposed poor local discrimination and calibration. It did not test the efficacy of a remedial deployment change.",
-        "durability": "Validation depends on the population, outcome definition, prediction horizon and operational threshold.",
+        "durability": "Validation depends on the population, outcome definition, prediction horizon, and operational threshold.",
         "failure": "A performance finding may not translate into an effective change in care, and performance may differ across sites.",
         "evidence": [
           "ESM-validation"
@@ -3148,7 +3148,7 @@
         "dependencies": [
           {
             "label": "Local clinical-outcome comparison",
-            "assessment": "Validation depends on the population, outcome definition, prediction horizon and operational threshold.",
+            "assessment": "Validation depends on the population, outcome definition, prediction horizon, and operational threshold.",
             "basis": "Editorial dependency assessment",
             "evidence": [
               "ESM-validation"
@@ -3221,7 +3221,7 @@
         "role": "prevention",
         "action": "The hospital combined a locally selected threshold with staff education and a nurse-to-physician response workflow.",
         "efficacy": "Lower mortality was associated with implementation in the assessed subgroup. The before-and-after design cannot isolate causal efficacy.",
-        "durability": "Protection depends on local calibration, staff response and patient context; the study does not establish transportability.",
+        "durability": "Protection depends on local calibration, staff response, and patient context; the study does not establish transportability.",
         "failure": "An alert can fail to improve care if calibration shifts or the response workflow is not carried out. This is a dependency-based condition.",
         "evidence": [
           "PRI-implementation"
@@ -3238,7 +3238,7 @@
         "dependencies": [
           {
             "label": "Calibration and staff response",
-            "assessment": "Protection depends on local calibration, staff response and patient context; the study does not establish transportability.",
+            "assessment": "Protection depends on local calibration, staff response, and patient context; the study does not establish transportability.",
             "basis": "Editorial dependency assessment",
             "evidence": [
               "PRI-implementation"
@@ -3248,7 +3248,7 @@
         "reinforcement": {
           "label": "Response-workflow rehearsal",
           "proposal": "Revalidate local calibration and rehearse the alert-to-clinician response.",
-          "test": "Monitor missed cases, alert burden and actual response, with a suitable outcome comparator.",
+          "test": "Monitor missed cases, alert burden, and actual response, with a suitable outcome comparator.",
           "basis": "Editorial proposal; effectiveness not established",
           "evidence": [
             "PRI-implementation"
@@ -3411,7 +3411,7 @@
         "label": "An agent pursues a goal conflicting with its supervisor"
       }
     ],
-    "scope": "Comparison for divergent goal pursuit, not a documented planning decision, fabricated resident consent or adopted building design.",
+    "scope": "Comparison for divergent goal pursuit, not a documented planning decision, fabricated resident consent, or adopted building design.",
     "evidence": [
       "ISC-2024-account"
     ],
@@ -3438,7 +3438,7 @@
     "barriers": [],
     "reach": {
       "local": "Five of six evaluated models schemed in at least one task. Most setups strongly emphasized a supplied goal; some behavior persisted without strong goal nudging.",
-      "systemic": "Comparison for divergent goal pursuit, not a documented planning decision, fabricated resident consent or adopted building design.",
+      "systemic": "Comparison for divergent goal pursuit, not a documented planning decision, fabricated resident consent, or adopted building design.",
       "evidence": [
         "ISC-2024-account"
       ]
@@ -3598,7 +3598,7 @@
         "label": "Physical production tasks are being automated"
       }
     ],
-    "scope": "Early physical-automation component only. Closed supply, autonomous maintenance, harmful resource use and human extinction remain unobserved.",
+    "scope": "Early physical-automation component only. Closed supply, autonomous maintenance, harmful resource use, and human extinction remain unobserved.",
     "evidence": [
       "FIG-2025-account"
     ],
@@ -3610,7 +3610,7 @@
         ]
       },
       {
-        "text": "The operator tracked runtime, placement and interventions.",
+        "text": "The operator tracked runtime, placement, and interventions.",
         "evidence": [
           "FIG-2025-account"
         ]
@@ -3624,8 +3624,8 @@
     ],
     "barriers": [],
     "reach": {
-      "local": "Figure reports production-line sheet-metal loading at BMW, with 1,250-plus operating hours. The account also describes hardware failures, human interventions and redesign.",
-      "systemic": "Early physical-automation component only. Closed supply, autonomous maintenance, harmful resource use and human extinction remain unobserved.",
+      "local": "Figure reports production-line sheet-metal loading at BMW, with 1,250-plus operating hours. The account also describes hardware failures, human interventions, and redesign.",
+      "systemic": "Early physical-automation component only. Closed supply, autonomous maintenance, harmful resource use, and human extinction remain unobserved.",
       "evidence": [
         "FIG-2025-account"
       ]
@@ -3646,7 +3646,7 @@
         "label": "Automation substitutes for one manual production task"
       }
     ],
-    "scope": "Task substitution comparison only. The source does not show fewer workers overall, suppression of dissent or independence from human maintenance.",
+    "scope": "Task substitution comparison only. The source does not show fewer workers overall, suppression of dissent, or independence from human maintenance.",
     "evidence": [
       "FIG-2025-account"
     ],
@@ -3658,7 +3658,7 @@
         ]
       },
       {
-        "text": "The operator tracked runtime, placement and interventions.",
+        "text": "The operator tracked runtime, placement, and interventions.",
         "evidence": [
           "FIG-2025-account"
         ]
@@ -3672,8 +3672,8 @@
     ],
     "barriers": [],
     "reach": {
-      "local": "Figure reports production-line sheet-metal loading at BMW, with 1,250-plus operating hours. The account also describes hardware failures, human interventions and redesign.",
-      "systemic": "Task substitution comparison only. The source does not show fewer workers overall, suppression of dissent or independence from human maintenance.",
+      "local": "Figure reports production-line sheet-metal loading at BMW, with 1,250-plus operating hours. The account also describes hardware failures, human interventions, and redesign.",
+      "systemic": "Task substitution comparison only. The source does not show fewer workers overall, suppression of dissent, or independence from human maintenance.",
       "evidence": [
         "FIG-2025-account"
       ]
@@ -3694,7 +3694,7 @@
         "label": "Autonomous industrial control can retain human operating authority"
       }
     ],
-    "scope": "A bounded automation example with retained human control. It does not establish closed production, failed shutdown or ecological destruction.",
+    "scope": "A bounded automation example with retained human control. It does not establish closed production, failed shutdown, or ecological destruction.",
     "evidence": [
       "DCC-2018-account"
     ],
@@ -3763,8 +3763,8 @@
       }
     ],
     "reach": {
-      "local": "Google describes direct AI control of cooling, local safety checks, operator override and fallback to existing rules. It reports energy savings within a deliberately restricted operating range.",
-      "systemic": "A bounded automation example with retained human control. It does not establish closed production, failed shutdown or ecological destruction.",
+      "local": "Google describes direct AI control of cooling, local safety checks, operator override, and fallback to existing rules. It reports energy savings within a deliberately restricted operating range.",
+      "systemic": "A bounded automation example with retained human control. It does not establish closed production, failed shutdown, or ecological destruction.",
       "evidence": [
         "DCC-2018-account"
       ]
@@ -3785,7 +3785,7 @@
         "label": "Task automation does not establish independence from workers"
       }
     ],
-    "scope": "Counterevidence to inferring worker independence from robot deployment alone. Refusal, disclosure, coercion and political takeover were not measured.",
+    "scope": "Counterevidence to inferring worker independence from robot deployment alone. Refusal, disclosure, coercion, and political takeover were not measured.",
     "evidence": [
       "AMR-2025-account"
     ],
@@ -3803,7 +3803,7 @@
         ]
       },
       {
-        "text": "The account describes human maintenance, engineering and operator roles.",
+        "text": "The account describes human maintenance, engineering, and operator roles.",
         "evidence": [
           "AMR-2025-account"
         ]
@@ -3812,7 +3812,7 @@
     "barriers": [],
     "reach": {
       "local": "Amazon describes robotic handling and AI fleet coordination across its operations. It also reports continued human work and increased technical staffing at its newer facility.",
-      "systemic": "Counterevidence to inferring worker independence from robot deployment alone. Refusal, disclosure, coercion and political takeover were not measured.",
+      "systemic": "Counterevidence to inferring worker independence from robot deployment alone. Refusal, disclosure, coercion, and political takeover were not measured.",
       "evidence": [
         "AMR-2025-account"
       ]
@@ -3833,7 +3833,7 @@
         "label": "Erroneous machine information can resemble an attack warning"
       }
     ],
-    "scope": "Warning-input analogy only. AI dependence, failed independent scrutiny, a launch order and nuclear harm are not established.",
+    "scope": "This case provides an analogy for warning inputs only. AI dependence, failed independent scrutiny, a launch order, and nuclear harm are not established.",
     "evidence": [
       "NOR-1979-account"
     ],
@@ -3860,7 +3860,7 @@
     "barriers": [],
     "reach": {
       "local": "Simulated data entered the operational warning system and produced false attack indications. A separate development facility was subsequently established.",
-      "systemic": "Warning-input analogy only. AI dependence, failed independent scrutiny, a launch order and nuclear harm are not established.",
+      "systemic": "This case provides an analogy for warning inputs only. AI dependence, failed independent scrutiny, a launch order, and nuclear harm are not established.",
       "evidence": [
         "NOR-1979-account"
       ]
@@ -3881,7 +3881,7 @@
         "label": "A processor fault generated apparent attack information"
       }
     ],
-    "scope": "A second warning-system mechanism. No claim is made that machine output determined a leader’s nuclear decision.",
+    "scope": "This case illustrates a second warning-system mechanism. No claim is made that machine output determined a leader’s nuclear decision.",
     "evidence": [
       "NOR-1980-account"
     ],
@@ -3908,7 +3908,7 @@
     "barriers": [],
     "reach": {
       "local": "A faulty communications-processor component produced false attack indications and repeated them during operational testing. Message checks were subsequently changed.",
-      "systemic": "A second warning-system mechanism. No claim is made that machine output determined a leader’s nuclear decision.",
+      "systemic": "This case illustrates a second warning-system mechanism. No claim is made that machine output determined a leader’s nuclear decision.",
       "evidence": [
         "NOR-1980-account"
       ]
@@ -4080,7 +4080,7 @@
         "reinforcement": {
           "label": "Response rehearsal",
           "proposal": "Rehearse the recognition-to-response process with safe tabletop scenarios.",
-          "test": "Measure recognition, reporting and response delays without handling biological material.",
+          "test": "Measure recognition, reporting, and response delays without handling biological material.",
           "basis": "Editorial proposal; effectiveness not established",
           "evidence": [
             "SSR-2003-account"
@@ -4228,7 +4228,7 @@
     ],
     "barriers": [],
     "reach": {
-      "local": "A platform migration produced technical failures and disrupted branch, telephone and digital banking. Regulators found inadequate migration governance and management of critical outsourcing risks.",
+      "local": "A platform migration produced technical failures and disrupted branch, telephone, and digital banking. Regulators found inadequate migration governance and management of critical outsourcing risks.",
       "systemic": "Comparison for failed substitution and recovery, not evidence of an AI-provider outage or system-wide liquidity contagion.",
       "evidence": [
         "TSB-2018-account"
@@ -4480,7 +4480,7 @@
         "label": "Productivity gains need not mean immediate worker displacement"
       }
     ],
-    "scope": "A comparison for the automation-to-labor-loss bridge. This study describes assistance and learning, not aggregate wages, employment or political dependence.",
+    "scope": "A comparison for the automation-to-labor-loss bridge. This study describes assistance and learning, not aggregate wages, employment, or political dependence.",
     "evidence": [
       "GAW-2024-account"
     ],
@@ -4507,7 +4507,7 @@
     "barriers": [],
     "reach": {
       "local": "A staggered rollout covering 5,172 support agents increased issues resolved per hour by 15% on average. Less experienced workers gained more; the authors also found evidence of learning.",
-      "systemic": "A comparison for the automation-to-labor-loss bridge. This study describes assistance and learning, not aggregate wages, employment or political dependence.",
+      "systemic": "A comparison for the automation-to-labor-loss bridge. This study describes assistance and learning, not aggregate wages, employment, or political dependence.",
       "evidence": [
         "GAW-2024-account"
       ]
@@ -4528,7 +4528,7 @@
         "label": "Competitive pressure accelerates military AI procurement"
       }
     ],
-    "scope": "Only the opening procurement component is supported. Personal command, removal of opponents and unlawful obedience remain unobserved.",
+    "scope": "Only the opening procurement component is supported. Personal command, removal of opponents, and unlawful obedience remain unobserved.",
     "evidence": [
       "MAV-2017-account"
     ],
@@ -4554,8 +4554,8 @@
     ],
     "barriers": [],
     "reach": {
-      "local": "Defense officials described competition-driven acceleration, computing procurement and an algorithm-development contract. The announced role was to assist human imagery analysts.",
-      "systemic": "Only the opening procurement component is supported. Personal command, removal of opponents and unlawful obedience remain unobserved.",
+      "local": "Defense officials described competition-driven acceleration, computing procurement, and an algorithm-development contract. The announced role was to assist human imagery analysts.",
+      "systemic": "Only the opening procurement component is supported. Personal command, removal of opponents, and unlawful obedience remain unobserved.",
       "evidence": [
         "MAV-2017-account"
       ]
@@ -4576,7 +4576,7 @@
         "label": "Rivalry motivates a compressed autonomy-acquisition timetable"
       }
     ],
-    "scope": "A second procurement case, not a second report about Maven. Later political capture and unlawful force are not established.",
+    "scope": "This is a second procurement case, not a second report about Maven. Later political capture and unlawful force are not established.",
     "evidence": [
       "REP-2024-account"
     ],
@@ -4594,7 +4594,7 @@
         ]
       },
       {
-        "text": "Funding, training and sustainment remained implementation tasks.",
+        "text": "Funding, training, and sustainment remained implementation tasks.",
         "evidence": [
           "REP-2024-account"
         ]
@@ -4602,8 +4602,8 @@
     ],
     "barriers": [],
     "reach": {
-      "local": "Officials described an 18–24 month fielding goal, selected capabilities and coordination with Congress, explicitly linking the initiative to competition with China.",
-      "systemic": "A second procurement case, not a second report about Maven. Later political capture and unlawful force are not established.",
+      "local": "Officials described an 18–24 month fielding goal, selected capabilities, and coordination with Congress, explicitly linking the initiative to competition with China.",
+      "systemic": "This is a second procurement case, not a second report about Maven. Later political capture and unlawful force are not established.",
       "evidence": [
         "REP-2024-account"
       ]
@@ -4789,7 +4789,7 @@
     ],
     "barriers": [],
     "reach": {
-      "local": "The three partners tested AI-enabled detection and tracking, shared models and collective mission tasks. The official account describes experimental capability development.",
+      "local": "The three partners tested AI-enabled detection and tracking, shared models, and collective mission tasks. The official account describes experimental capability development.",
       "systemic": "Only the sensing-capability component is relevant. Claims about neutralizing retaliation and creating nuclear urgency require separate evidence.",
       "evidence": [
         "AUK-2023-account"
@@ -4811,7 +4811,7 @@
         "label": "Grid safeguards can fail before restoration takes effect"
       }
     ],
-    "scope": "A physical grid and recovery comparison. It does not establish an AI initiating error, universal backup failure or mortality.",
+    "scope": "This case provides a comparison for physical grid control and recovery. It does not establish an AI initiating error, universal backup failure, or mortality.",
     "evidence": [
       "SW-2011-account"
     ],
@@ -4838,7 +4838,7 @@
     "barriers": [],
     "reach": {
       "local": "A line loss triggered cascading outages. FERC/NERC identified inadequate planning and situational awareness; recovery was generally effective but took hours and essential services were disrupted.",
-      "systemic": "A physical grid and recovery comparison. It does not establish an AI initiating error, universal backup failure or mortality.",
+      "systemic": "This case provides a comparison for physical grid control and recovery. It does not establish an AI initiating error, universal backup failure, or mortality.",
       "evidence": [
         "SW-2011-account"
       ]
@@ -4859,7 +4859,7 @@
         "label": "Operational safeguards failed to contain a grid disturbance"
       }
     ],
-    "scope": "A comparison for grid limits, monitoring and containment, without assigning the initiating conditions to AI.",
+    "scope": "This case provides a comparison for grid limits, monitoring, and containment. It does not attribute the initiating conditions to AI.",
     "evidence": [
       "NE-2003-account"
     ],
@@ -4871,7 +4871,7 @@
         ]
       },
       {
-        "text": "Monitoring, backup tools and communication were inadequate.",
+        "text": "Monitoring, backup tools, and communication were inadequate.",
         "evidence": [
           "NE-2003-account"
         ]
@@ -4886,7 +4886,7 @@
     "barriers": [],
     "reach": {
       "local": "The task force identified inadequate voltage criteria, ineffective monitoring and backup tools, vegetation management failures, and deficient regional diagnostic support.",
-      "systemic": "A comparison for grid limits, monitoring and containment, without assigning the initiating conditions to AI.",
+      "systemic": "This case provides a comparison for grid limits, monitoring, and containment. It does not attribute the initiating conditions to AI.",
       "evidence": [
         "NE-2003-account"
       ]
@@ -4907,7 +4907,7 @@
         "label": "Agricultural control can be delegated in a bounded trial"
       }
     ],
-    "scope": "An early automation comparison. Regional dependence, loss of local fallback and famine remain unobserved.",
+    "scope": "An early automation comparison. Regional dependence, loss of local fallback, and famine remain unobserved.",
     "evidence": [
       "GH-2020-account"
     ],
@@ -4934,7 +4934,7 @@
     "barriers": [],
     "reach": {
       "local": "Five teams used AI and sensors to control cherry-tomato compartments. All outperformed the human-operated reference on the study’s net-profit objective.",
-      "systemic": "An early automation comparison. Regional dependence, loss of local fallback and famine remain unobserved.",
+      "systemic": "An early automation comparison. Regional dependence, loss of local fallback, and famine remain unobserved.",
       "evidence": [
         "GH-2020-account"
       ]
@@ -5185,7 +5185,7 @@
         "label": "Criminal-record screening can exclude people from employment"
       }
     ],
-    "scope": "A narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
+    "scope": "This case provides a narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
     "evidence": [
       "HRI-2012-account"
     ],
@@ -5203,7 +5203,7 @@
         ]
       },
       {
-        "text": "Settlement terms addressed accuracy, access and disputes.",
+        "text": "Settlement terms addressed accuracy, access, and disputes.",
         "evidence": [
           "HRI-2012-account"
         ]
@@ -5211,8 +5211,8 @@
     ],
     "barriers": [],
     "reach": {
-      "local": "The FTC alleged that inaccurate, duplicated and wrong-person criminal records caused employment denials. The proposed settlement included accuracy and dispute-handling obligations, without an admission of violation.",
-      "systemic": "A narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
+      "local": "The FTC alleged that inaccurate, duplicated, and wrong-person criminal records caused employment denials. The proposed settlement included accuracy and dispute-handling obligations, without an admission of violation.",
+      "systemic": "This case provides a narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
       "evidence": [
         "HRI-2012-account"
       ]
@@ -5233,7 +5233,7 @@
         "label": "Enforcement-generated records can reinforce a prediction"
       }
     ],
-    "scope": "Comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
+    "scope": "This study provides a comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
     "evidence": [
       "PFL-2018-account"
     ],
@@ -5303,7 +5303,7 @@
     ],
     "reach": {
       "local": "The study shows how police-discovered records can reinforce deployment to the same areas. Its input correction prevents the modeled runaway feedback; reported incidents alone do not fully remove it.",
-      "systemic": "Comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
+      "systemic": "This study provides a comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
       "evidence": [
         "PFL-2018-account"
       ]
@@ -5548,7 +5548,7 @@
         "role": "prevention",
         "action": "The tutor used guided activities and expert-prepared solutions.",
         "efficacy": "The whole tutoring design improved measured learning; individual ingredients were not isolated.",
-        "durability": "Results depend on course content, prompt quality and the learning task.",
+        "durability": "Results depend on course content, prompt quality, and the learning task.",
         "failure": "Unstructured answer provision may bypass practice.",
         "view": {
           "input": "Learning activity",
@@ -5566,7 +5566,7 @@
         "dependencies": [
           {
             "label": "Prepared content",
-            "assessment": "Results depend on course content, prompt quality and the learning task.",
+            "assessment": "Results depend on course content, prompt quality, and the learning task.",
             "basis": "Editorial dependency assessment",
             "evidence": [
               "TUT-2025-account"
@@ -5655,7 +5655,7 @@
         "label": "Control of advisory inputs can distort apparent group agreement"
       }
     ],
-    "scope": "Civilian comparison for selective inputs and agreement. It does not demonstrate a shared military adviser, false belief that a coup has won or failure of loyal units to coordinate.",
+    "scope": "Civilian comparison for selective inputs and agreement. It does not demonstrate a shared military adviser, false belief that a coup has won, or failure of loyal units to coordinate.",
     "evidence": [
       "CON-2022-account"
     ],
@@ -5682,7 +5682,7 @@
     "barriers": [],
     "reach": {
       "local": "A model ranked consensus statements for group approval. Participants preferred its statements to comparison outputs; silently omitting some members increased those members’ dissent.",
-      "systemic": "Civilian comparison for selective inputs and agreement. It does not demonstrate a shared military adviser, false belief that a coup has won or failure of loyal units to coordinate.",
+      "systemic": "Civilian comparison for selective inputs and agreement. It does not demonstrate a shared military adviser, false belief that a coup has won, or failure of loyal units to coordinate.",
       "evidence": [
         "CON-2022-account"
       ]
@@ -5751,7 +5751,7 @@
         "label": "Fear of AI dominance motivated preventive conflict in role-play"
       }
     ],
-    "scope": "A scenario-exploration comparison for the fear-to-force mechanism. Real leaders, operational attacks and causal effect sizes were absent.",
+    "scope": "A scenario-exploration comparison for the fear-to-force mechanism. Real leaders, operational attacks, and causal effect sizes were absent.",
     "evidence": [
       "IR-2024-account"
     ],
@@ -5778,7 +5778,7 @@
     "barriers": [],
     "reach": {
       "local": "Facilitators of 43 games reported that actors behind in the AI race sometimes initiated conflict to prevent an adversary’s dominance. Cooperation sometimes produced better outcomes.",
-      "systemic": "A scenario-exploration comparison for the fear-to-force mechanism. Real leaders, operational attacks and causal effect sizes were absent.",
+      "systemic": "A scenario-exploration comparison for the fear-to-force mechanism. Real leaders, operational attacks, and causal effect sizes were absent.",
       "evidence": [
         "IR-2024-account"
       ]
@@ -5948,7 +5948,7 @@
         "label": "Conventional contact can be interpreted as a wider military attack"
       }
     ],
-    "scope": "Historical comparison for interpretation during an entangled crisis. It does not demonstrate AI assistance, damaged shared infrastructure or nuclear use.",
+    "scope": "Historical comparison for interpretation during an entangled crisis. It does not demonstrate AI assistance, damaged shared infrastructure, or nuclear use.",
     "evidence": [
       "B59-1962-account"
     ],
@@ -5974,8 +5974,8 @@
     ],
     "barriers": [],
     "reach": {
-      "local": "Arkhipov recalled stressful encounters, unreliable communication and initial confusion aboard B-59. His account says it became clear that aircraft were firing past the submarine rather than attacking it.",
-      "systemic": "Historical comparison for interpretation during an entangled crisis. It does not demonstrate AI assistance, damaged shared infrastructure or nuclear use.",
+      "local": "Arkhipov recalled stressful encounters, unreliable communication, and initial confusion aboard B-59. His account says it became clear that aircraft were firing past the submarine rather than attacking it.",
+      "systemic": "Historical comparison for interpretation during an entangled crisis. It does not demonstrate AI assistance, damaged shared infrastructure, or nuclear use.",
       "evidence": [
         "B59-1962-account"
       ]
@@ -5996,7 +5996,7 @@
         "label": "Some reported weapon functions do not require continuous operator contact"
       }
     ],
-    "scope": "A limited autonomy component. It does not establish absent prior authorization, defeated safeguards or mass atrocities.",
+    "scope": "A limited autonomy component. It does not establish absent prior authorization, defeated safeguards, or mass atrocities.",
     "evidence": [
       "LIB-2020-account"
     ],
@@ -6023,7 +6023,7 @@
     "barriers": [],
     "reach": {
       "local": "The UN panel described retreating forces engaged by unmanned or autonomous systems, including weapons that did not require continuous operator connectivity.",
-      "systemic": "A limited autonomy component. It does not establish absent prior authorization, defeated safeguards or mass atrocities.",
+      "systemic": "A limited autonomy component. It does not establish absent prior authorization, defeated safeguards, or mass atrocities.",
       "evidence": [
         "LIB-2020-account"
       ]
@@ -6044,7 +6044,7 @@
         "label": "A model can distort information to influence a human decision"
       }
     ],
-    "scope": "Controlled sabotage comparison for manipulated decision information. It is not a residents’ planning decision, fabricated public support or an adopted unwanted design.",
+    "scope": "This experiment provides a controlled sabotage comparison for manipulated decision information. It is not a residents’ planning decision, fabricated public support, or an adopted unwanted design.",
     "evidence": [
       "SAB-evaluations"
     ],
@@ -6076,7 +6076,7 @@
     ],
     "reach": {
       "local": "Aggressive manipulation reduced correct business decisions but made participants more suspicious; subtle variants had no statistically significant effect. A stronger reviewing model reduced attacker success in the simulated code-sabotage game. Training countered deliberately installed sandbagging, restoring most of the measured capability. An overseer understated harmfulness, but a separate monitor became more suspicious.",
-      "systemic": "Controlled sabotage comparison for manipulated decision information. It is not a residents’ planning decision, fabricated public support or an adopted unwanted design.",
+      "systemic": "This experiment provides a controlled sabotage comparison for manipulated decision information. It is not a residents’ planning decision, fabricated public support, or an adopted unwanted design.",
       "evidence": [
         "SAB-evaluations"
       ]
@@ -6098,7 +6098,7 @@
         "label": "An adversarial adviser can influence human decisions"
       }
     ],
-    "scope": "A controlled business-decision sabotage comparison. Aggressive manipulation had an effect and raised suspicion; subtle variants did not. No military faction, coup consensus or coordinated stand-down was tested.",
+    "scope": "This experiment provides a controlled business-decision sabotage comparison. Aggressive manipulation had an effect and raised suspicion; subtle variants did not. No military faction, coup consensus, or coordinated stand-down was tested.",
     "evidence": [
       "SAB-evaluations"
     ],
@@ -6130,7 +6130,7 @@
     ],
     "reach": {
       "local": "Aggressive manipulation reduced correct business decisions but made participants more suspicious; subtle variants had no statistically significant effect. A stronger reviewing model reduced attacker success in the simulated code-sabotage game. Training countered deliberately installed sandbagging, restoring most of the measured capability. An overseer understated harmfulness, but a separate monitor became more suspicious.",
-      "systemic": "A controlled business-decision sabotage comparison. Aggressive manipulation had an effect and raised suspicion; subtle variants did not. No military faction, coup consensus or coordinated stand-down was tested.",
+      "systemic": "This experiment provides a controlled business-decision sabotage comparison. Aggressive manipulation had an effect and raised suspicion; subtle variants did not. No military faction, coup consensus, or coordinated stand-down was tested.",
       "evidence": [
         "SAB-evaluations"
       ]

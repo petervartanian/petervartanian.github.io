@@ -167,10 +167,11 @@
 .a1-cloud-wisps { fill: none; stroke: var(--accent,#617080); stroke-width: 1; opacity: .16; }
 .a1-cloud-wisps .a1-cloud-drift { opacity: .55; }
 .a1-cloud-title { display: flex; align-items: baseline; justify-content: center; gap: 6px; color: var(--accent); font: 10px/1.2 var(--sans); margin-bottom: 13px; }
-.a1-cloud-title > span { font: 39px/1 Auspex,Georgia,serif; }
-.a1-cloud-conditions, .a1-cloud-actors { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 13px; }
+.a1-cloud-title > span { font: 16px/1 Auspex,Georgia,serif; }
+.a1-cloud-conditions, .a1-cloud-actors { display: flex; flex-wrap: wrap; justify-content: center; gap: 13px 18px; }
+.a1-cloud-conditions > span { flex: 0 1 120px; }
+.a1-cloud-actors > div { flex: 0 1 112px; min-width: 0; }
 .a1-cloud-conditions { align-items: center; color: #596773; font: italic 13px/1.35 Auspex,Georgia,serif; text-wrap: balance; }
-.a1-cloud-conditions > span:nth-child(2) { transform: translateY(-5px); }
 .a1-cloud-actors { margin-top: 27px; align-items: start; }
 .a1-cloud-actors strong { display: block; color: var(--ink); font: 500 11px/1.45 var(--sans); }
 .a1-cloud-actors span { display: block; margin-top: 3px; color: #596773; font: 10px/1.5 var(--sans); text-wrap: balance; }
@@ -232,6 +233,20 @@
 .a1-proposed-register strong { font-weight: 500; margin-right: 7px; }
 .a1-route-symbol.is-recovery { color: #6d8976; }
 .a1-route-symbol .route-tip { fill: currentColor; stroke: none; }
+.stpa-barrier-controls { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+#pathway-map .a1-route-barrier { position: absolute; transform: translate(-50%,-50%); width: 28px; height: 28px; min-height: 28px; padding: 0; border: 0; background: transparent; box-shadow: none; pointer-events: auto; cursor: pointer; border-radius: 2px; }
+#pathway-map .a1-route-barrier:hover, #pathway-map .a1-route-barrier[aria-pressed='true'] { background: color-mix(in srgb,var(--accent) 9%,transparent); }
+#pathway-map .a1-route-barrier:focus-visible { outline: 1.5px solid var(--accent); outline-offset: 2px; }
+.a1-proposed-status { font: 11px/1.6 var(--sans); color: var(--muted); margin: -6px 0 18px; }
+.a1-proposed-status button, .a1-related-barrier { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; min-height: 28px; padding: 2px 0; font: inherit; }
+.a1-proposed-study > section + section { margin-top: 22px; padding-top: 17px; border-top: 1px solid var(--line); }
+.a1-proposed-study h4 { margin: 0 0 9px; font: 500 14px/1.5 var(--sans); }
+.a1-proposed-study p { font: 13px/1.7 var(--sans); margin: 7px 0; }
+.a1-proposed-study .a1-evidence-boundary { font-size: 11px; color: var(--muted); }
+.a1-control-owners { margin: 15px 0 0; font: 11px/1.65 var(--sans); }
+.a1-control-owners > div + div { margin-top: 10px; }
+.a1-control-owners dt { font-weight: 500; }
+.a1-control-owners dd { margin: 2px 0 0; color: var(--muted); }
 
 .a1-overlay { position: relative; margin: -1px 0 0; padding: 14px 13px 12px; border: 1px solid color-mix(in srgb,var(--accent) 30%,var(--line)); border-left: 3px solid var(--accent); border-radius: 0 0 3px 3px; background: color-mix(in srgb,var(--tint) 62%,var(--page)); color: var(--ink); }
 .a1-cell.is-overlaid .a1-step { border-color: color-mix(in srgb,var(--accent) 50%,var(--line)); border-bottom-right-radius: 0; border-bottom-left-radius: 0; background: var(--tint); }
@@ -331,9 +346,8 @@
 #app[data-blank='true'] #pathway-endpoint { display: none !important; }
 #app[data-blank='true'] #selected-pathway { min-height: 45vh; }
 .a1-overlay-barriers { border-top: 0; padding-top: 0; margin-top: 0; }
-.a1-case-evidence { margin: 12px 0 0; border: 0; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); }
-.a1-case-evidence > summary { min-height: 34px; font: 11px/1.5 var(--sans); padding: 7px 0; }
-.a1-case-evidence p { font: 11px/1.6 var(--sans); color: var(--muted); margin: 8px 0; }
+.a1-case-evidence { margin: 12px 0 0; padding-top: 10px; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); font: 11px/1.6 var(--sans); color: var(--muted); }
+.a1-case-evidence > strong { font-weight: 500; color: var(--ink); }
 .a1-state-buttons { display: flex; flex-wrap: wrap; gap: 5px 12px; margin-bottom: 6px; }
 .a1-state-buttons button { min-height: 30px; text-align: left; font: 500 12px/1.5 var(--sans); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: color-mix(in srgb,currentColor 40%,transparent); }
 .a1-state-buttons button:hover { text-decoration-color: currentColor; }

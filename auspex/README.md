@@ -1,6 +1,6 @@
 # Auspex
 
-Choose a pathway → Trace the incidents → Inspect the barrier.
+Choose a pathway and inspect its barriers. Add an incident to examine case evidence.
 
 Serve the repository root and open `/auspex/`. The interface also works directly from
 `index.html`, using local assets and a bundled data file. No runtime dependencies.
@@ -8,14 +8,14 @@ Serve the repository root and open `/auspex/`. The interface also works directly
 
 ## Seven STPA worked examples
 
-A-1, B-1, C-1, D-1, E-1, F-1 and Bonus-1 use the models in `stpa-[a-fh]1.json`.
+A-1, B-1, C-1, D-1, E-1, F-1, and Bonus-1 use the models in `stpa-[a-fh]1.json`.
 I selects a pathway; II places dated incident evidence on its relevant component;
 III inspects the barrier. The dated choices are always visible. Select a case to add
 its card, another to switch, or the selected case / × to clear it. There are no
 No / Maybe / Yes modes.
 
 Each incident card keeps its observed or reported finding, barrier assessments,
-sources and scope note together. Its open question expands in the same card,
+sources, and scope note together. Its open question expands in the same card,
 with the cited basis and what remains unknown. The related component is highlighted;
 the evidence and barrier states remain at the original assessed component. There
 is no second incident card. The fourteen questions are editorial proposals and
@@ -27,15 +27,28 @@ Visible dates use quarters where the month is known, and preserve multi-year ran
 Full date labels, including publication and investigation qualifiers, remain in
 tooltips and accessible names.
 
-0 is a cloud portrait of the scenario setting. Three upstream conditions sit above
-three roles drawn from the model’s controllers, with a short account of how the
-setting shapes their decisions. It is always readable and has no extra selector.
+0 is a cloud portrait of the scenario setting, with a small numeral. The conditions
+and controller roles are selected for each case; their counts are not fixed. A short
+account explains how the setting shapes decisions. It is always readable and has no extra selector.
 The original system scope and warning-sign notes remain in the research reader.
 The cloud is a presentation of the assumed setting, not a new causal stage or a
 substitute for the STPA control structure. Feedback can reshape upstream conditions.
 
+All 42 proposed-barrier marks across the seven maps are native buttons with larger
+transparent hit areas. They open III without requiring an incident. Mechanism shows
+the constraints and their responsible controllers; Evidence shows only explicitly
+linked comparisons; Brittleness gives failure conditions; Tests gives proposed checks.
+A mark may cover more than one constraint, each of which is named in the inspector.
+Proposed performance remains Unassessed. Source comparisons are not inherited ratings.
+
+Proposed selections use `s=<route-id>`; incident assessments retain `b=<barrier-id>`.
+Clearing or switching a dated case preserves an independently open route inspector.
+Opening an incident barrier or changing pathways clears the proposed selection.
+Close and Escape restore focus to the mark. Evidence limits use a compact bold label
+followed by a slash and the visible text. Scope footnotes contain complete sentences.
+
 Every model contains losses, hazards, control and feedback relationships, constraints,
-contextual unsafe control actions, causal scenarios and a conditional recovery route.
+contextual unsafe control actions, causal scenarios, and a conditional recovery route.
 The bow-tie map summarizes this provisional analysis; the four UCA categories are
 represented across selected actions, not exhaustively assessed for every action.
 
@@ -63,17 +76,17 @@ The other 30 entries show their titles and no case content, in both the applicat
 static reader. Their underlying catalogue records are retained for future work.
 
 `barrier-states.json` defines seven symbols: Reinforced, Holding, Crumbling, Broken,
-Absent, Backfiring and Unassessed. Only applicable states appear on a selected barrier.
+Absent, Backfiring, and Unassessed. Only applicable states appear on a selected barrier.
 Their buttons open definitions and source examples. Brittleness asks which changes in
 capability or conditions would defeat the protection; observed and projected erosion
 must remain distinguishable. Recovery is a separate route, whose controls can themselves
-hold, fail or be reinforced. These are editorial labels, not an STPA rating scale.
+hold, fail, or be reinforced. These are editorial labels, not an STPA rating scale.
 
 Recovery uses two fine parallel lines and one filled arrowhead; feedback uses a squared, dotted
 return loop and double chevrons. Matching symbols in the key distinguish the routes
 without relying on color. The proposed barrier stays perpendicular to the route.
 
-Source references use filled circles in case overlays, barrier explanations and the
+Source references use filled circles in case overlays, barrier explanations, and the
 recovery card, with small i/ii/iii labels within each source group. Ordinary pathway
 boxes omit repeated source circles; their citations remain in the full research notes.
 Each circle retains its source title and keyboard access; case evidence opens the
@@ -358,3 +371,7 @@ full ink extent, including p/y tails, would put the badge lower. Older browsers 
 capital-height/baseline fallback. Pixel screenshots independently verify the chosen
 reference; geometric SVG equality alone is not treated as proof of visual alignment.
 At widths below 350px, the chooser context can wrap to avoid crowding the section heading.
+
+`validate-interactions.mjs` checks application state and accessible control markup in
+an isolated harness. Its authored rectangles check route/target alignment; they do
+not measure a browser page or establish actual responsive layout.

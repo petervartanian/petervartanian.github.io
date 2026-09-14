@@ -8,7 +8,7 @@
     {
       "id": "unsafe-action",
       "label": "Unsafe control action",
-      "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+      "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
     },
     {
       "id": "scenario",
@@ -39,17 +39,17 @@
   "limitingConditions": [
     {
       "kind": "Safeguard",
-      "example": "Independently enforced review, access bounds or effective interruption.",
+      "example": "Independently enforced review, access bounds, or effective interruption.",
       "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
     },
     {
       "kind": "Capability limit",
-      "example": "The system cannot perform the required research, deception or physical task.",
+      "example": "The system cannot perform the required research, deception, or physical task.",
       "question": "Would increased capability remove this limit?"
     },
     {
       "kind": "Opportunity limit",
-      "example": "The necessary access, resources or institutional delegation is unavailable.",
+      "example": "The necessary access, resources, or institutional delegation is unavailable.",
       "question": "Can the system or another actor acquire what is missing?"
     },
     {
@@ -64,18 +64,18 @@
   "title": "Misleading threat assessment and nuclear escalation",
   "status": "STPA worked example · provisional analysis",
   "summary": "Could a convincing but false threat picture move a nuclear decision beyond effective correction?",
-  "scope": "A hypothetical crisis-warning, intelligence-assessment and nuclear-command system in which AI shapes advice to human decision-makers. Sensor input, independent scrutiny, authorization and correction are modeled separately.",
-  "purpose": "Prevent nuclear harm caused by materially false threat assessment while preserving verified information, accountable decisions and effective correction.",
+  "scope": "The model covers a hypothetical crisis-warning, intelligence-assessment, and nuclear-command system in which AI shapes advice to human decision-makers. Sensor input, independent scrutiny, authorization, and correction are modeled separately.",
+  "purpose": "Prevent nuclear harm caused by materially false threat assessment while preserving verified information, accountable decisions, and effective correction.",
   "boundary": "No real country’s classified command arrangements are claimed. Human authorization remains explicit. The two NORAD records are historical non-AI analogies for information and control mechanisms; they are not evidence of AI nuclear use.",
   "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Historical warning overlays establish neither preceding AI reliance nor a later launch decision.",
   "bowtie": "The centre, H1 at 2.1, is nuclear force committed on a materially false premise without effective correction. Misleading information and inadequate scrutiny are left-side threats; actual detonation and wider exchange remain conditional consequences.",
-  "schema": "A first-pass STPA reconstruction with human decision authority, machine information, verification, control execution and recovery kept distinct. The bow-tie summarizes selected loss scenarios.",
-  "limits": "This analysis is provisional and requires national-doctrine, warning-system and crisis-decision expertise. Four unsafe-action categories are illustrated, not exhaustively assessed. The historical records show warning failures and corrective changes; they do not establish AI reliance, a launch order, a measured escalation probability or the performance of modern nuclear safeguards.",
+  "schema": "A first-pass STPA reconstruction with human decision authority, machine information, verification, control execution, and recovery kept distinct. The bow-tie summarizes selected loss scenarios.",
+  "limits": "This analysis is provisional and requires national-doctrine, warning-system, and crisis-decision expertise. Four unsafe-action categories are illustrated, not exhaustively assessed. The historical records show warning failures and corrective changes; they do not establish AI reliance, a launch order, a measured escalation probability, or the performance of modern nuclear safeguards.",
   "losses": [
     {
       "id": "L1",
       "title": "Nuclear detonation and mass casualties",
-      "text": "People suffer death, injury and long-term harm from nuclear use initiated on a false assessment."
+      "text": "People suffer death, injury, and long-term harm from nuclear use initiated on a false assessment."
     },
     {
       "id": "L2",
@@ -105,7 +105,7 @@
     {
       "id": "H3",
       "title": "Correction loses the intervention window",
-      "text": "A valid correction or cancellation cannot be delivered, interpreted and executed before the relevant action becomes irreversible.",
+      "text": "A valid correction or cancellation cannot be delivered, interpreted, and executed before the relevant action becomes irreversible.",
       "losses": [
         "L1",
         "L2"
@@ -116,50 +116,50 @@
     {
       "id": "C1",
       "title": "National decision authority",
-      "responsibility": "Decide whether to authorize, defer or cancel nuclear use under the applicable doctrine, accounting for contrary evidence.",
-      "feedback": "Independent assessment, uncertainty, alternative explanations and action status.",
+      "responsibility": "Decide whether to authorize, defer, or cancel nuclear use under the applicable doctrine, accounting for contrary evidence.",
+      "feedback": "Independent assessment, uncertainty, alternative explanations, and action status.",
       "assumption": "The existence of a human decision-maker is not evidence of meaningful scrutiny."
     },
     {
       "id": "C2",
       "title": "Intelligence and warning assessment team",
-      "responsibility": "Corroborate warnings, challenge AI conclusions and communicate material uncertainty to C1.",
-      "feedback": "Independent sensor and intelligence channels, provenance and disconfirming observations.",
+      "responsibility": "Corroborate warnings, challenge AI conclusions, and communicate material uncertainty to C1.",
+      "feedback": "Independent sensor and intelligence channels, provenance, and disconfirming observations.",
       "assumption": "Multiple reports may share one erroneous upstream source."
     },
     {
       "id": "C3",
       "title": "AI decision-support system",
       "responsibility": "Organize information within its approved scope and expose uncertainty and source provenance.",
-      "feedback": "Authenticated observations, analyst corrections and use restrictions.",
+      "feedback": "Authenticated observations, analyst corrections, and use restrictions.",
       "assumption": "Fluent explanations and confident rankings can be wrong without any deceptive objective."
     },
     {
       "id": "C4",
       "title": "Warning-system operations and assurance",
-      "responsibility": "Maintain operational input integrity, separate tests from live warning and flag invalid or inconsistent messages.",
-      "feedback": "Sensor status, message checks, test provenance and independent monitoring.",
+      "responsibility": "Maintain operational input integrity, separate tests from live warning, and flag invalid or inconsistent messages.",
+      "feedback": "Sensor status, message checks, test provenance, and independent monitoring.",
       "assumption": "Correct transmission does not establish that the underlying assessment is true."
     },
     {
       "id": "C5",
       "title": "Human authorization and execution chain",
       "responsibility": "Execute only valid authorized actions and apply valid cancellation while that remains possible.",
-      "feedback": "Order status, conflicting or canceled authority and confirmed execution state.",
+      "feedback": "Order status, conflicting or canceled authority, and confirmed execution state.",
       "assumption": "Recovery may be impossible after an irreversible physical commitment."
     },
     {
       "id": "C6",
       "title": "Independent crisis communication function",
       "responsibility": "Bring credible external clarification and de-escalation information into the assessment and decision process.",
-      "feedback": "Authenticated communications, acknowledgments and unresolved contradictions.",
+      "feedback": "Authenticated communications, acknowledgments, and unresolved contradictions.",
       "assumption": "An available channel may fail to deliver useful clarification in time."
     },
     {
       "id": "C7",
       "title": "Weapon execution system",
       "responsibility": "Operate only within valid authorization and accept an effective hold or cancellation while action remains reversible.",
-      "feedback": "Validated command state, independent status checks and execution-state reporting.",
+      "feedback": "Validated command state, independent status checks, and execution-state reporting.",
       "assumption": "This abstract role supplies no description of a real weapon system or its command mechanisms."
     }
   ],
@@ -169,7 +169,7 @@
       "controller": "C4",
       "process": "C3",
       "action": "Admit operational data or withhold invalid input",
-      "feedback": "Provenance checks, source status and downstream data use.",
+      "feedback": "Provenance checks, source status, and downstream data use.",
       "constraints": [
         "SC1",
         "SC2",
@@ -191,7 +191,7 @@
       "id": "CA3",
       "controller": "C1",
       "process": "C5",
-      "action": "Authorize, defer or cancel nuclear use",
+      "action": "Authorize, defer, or cancel nuclear use",
       "feedback": "Independent findings and the remaining intervention window.",
       "constraints": [
         "SC3",
@@ -213,7 +213,7 @@
       "controller": "C6",
       "process": "C2",
       "action": "Deliver authenticated crisis clarification",
-      "feedback": "Receipt, assessment changes and outstanding ambiguity.",
+      "feedback": "Receipt, assessment changes, and outstanding ambiguity.",
       "constraints": [
         "SC2",
         "SC3"
@@ -224,7 +224,7 @@
     {
       "id": "SC1",
       "title": "Separate tests from operational warning",
-      "text": "Test, simulated and invalid data must remain distinguishable from operational warning throughout processing and presentation.",
+      "text": "Test, simulated, and invalid data must remain distinguishable from operational warning throughout processing and presentation.",
       "hazards": [
         "H2"
       ],
@@ -258,7 +258,7 @@
         "W-01:R"
       ],
       "test": "Does contradictory evidence from an independent channel change the assessment, rather than being summarized away?",
-      "limit": "Shared upstream errors, missing observations or common dependence on one AI summary."
+      "limit": "Shared upstream errors, missing observations, or common dependence on one AI summary can make apparent corroboration unreliable."
     },
     {
       "id": "SC3",
@@ -281,7 +281,7 @@
         "W-01:R"
       ],
       "test": "In a safe crisis exercise, do decision-makers defer or revise a decision when independent evidence invalidates its premise?",
-      "limit": "Time pressure, doctrine, prior beliefs and institutional pressure can overwhelm nominal human review."
+      "limit": "Time pressure, doctrine, prior beliefs, and institutional pressure can overwhelm nominal human review."
     },
     {
       "id": "SC4",
@@ -308,7 +308,7 @@
     {
       "id": "SC5",
       "title": "Reassess after changing the system",
-      "text": "Changes to warning software, message formats and decision support must be independently checked for new common failures before operational reliance.",
+      "text": "Changes to warning software, message formats, and decision support must be independently checked for new common failures before operational reliance.",
       "hazards": [
         "H2",
         "H3"
@@ -338,7 +338,7 @@
       "shortLabel": "AI shapes the threat picture",
       "text": "AI-generated organization or recommendations materially influence crisis assessment.",
       "requires": "Consequential reliance in a crisis, not simply the presence of AI software.",
-      "mechanism": "AI can shape salience, framing and confidence in information that informs a human decision.",
+      "mechanism": "AI can shape salience, framing, and confidence in information that informs a human decision.",
       "constraints": [
         "SC1",
         "SC5"
@@ -362,9 +362,9 @@
       "role": "Information failure scenario",
       "title": "A false picture resembles an imminent attack",
       "shortLabel": "False warning appears credible",
-      "text": "Error, misleading presentation or invalid input produces an exaggerated apparent threat.",
+      "text": "Error, misleading presentation, or invalid input produces an exaggerated apparent threat.",
       "requires": "The false information reaches the assessment process and matters to its conclusions.",
-      "mechanism": "Data contamination, unreliable inference or presentation can make an incorrect warning appear credible.",
+      "mechanism": "Data contamination, unreliable inference, or presentation can make an incorrect warning appear credible.",
       "constraints": [
         "SC1",
         "SC2",
@@ -419,7 +419,7 @@
       "title": "Nuclear use is committed on a false premise",
       "shortLabel": "Correction loses control",
       "text": "Human authorization commits nuclear force while effective correction is absent.",
-      "requires": "A materially false premise, consequential authorization and ineffective cancellation before irreversible use.",
+      "requires": "A materially false premise, consequential authorization, and ineffective cancellation before irreversible use.",
       "mechanism": "An informational error becomes a hazardous system state when the authorized control chain commits force without effective correction.",
       "constraints": [
         "SC3",
@@ -445,7 +445,7 @@
       "title": "A nuclear detonation causes mass harm",
       "shortLabel": "Nuclear harm occurs",
       "text": "The execution chain carries out the decision and a weapon detonates.",
-      "requires": "Successful execution, delivery and detonation, with no effective interruption.",
+      "requires": "Successful execution, delivery, and detonation, with no effective interruption.",
       "mechanism": "Authorization is not detonation; the physical execution route must also complete.",
       "constraints": [
         "SC4"
@@ -495,7 +495,7 @@
       "title": "The decision is corrected and action stops",
       "shortLabel": "Correction takes effect",
       "text": "Independent information changes the decision and cancellation is verified before irreversible action.",
-      "requires": "Credible contrary information, authority to revise the decision and a reachable execution chain.",
+      "requires": "Credible contrary information, authority to revise the decision, and a reachable execution chain.",
       "mechanism": "Recovery requires an effective change in action; detection or a transmitted cancellation alone is insufficient.",
       "constraints": [
         "SC2",
@@ -699,7 +699,7 @@
       "id": "LS3",
       "title": "Time pressure converts uncertainty into authorization",
       "archetype": "Unsafe controller behavior / coordination",
-      "text": "A permissive posture, pressure to act or an inadequate model of the warning leads to consequential authorization without resolving material uncertainty.",
+      "text": "A permissive posture, pressure to act, or an inadequate model of the warning leads to consequential authorization without resolving material uncertainty.",
       "ucas": [
         "UCA2",
         "UCA3"
@@ -715,13 +715,13 @@
       "evidence": [
         "SI"
       ],
-      "unknown": "The applicable doctrine, decision window and influence of AI advice in the specific system."
+      "unknown": "The applicable doctrine, decision window, and influence of AI advice in the specific system."
     },
     {
       "id": "LS4",
       "title": "Correction cannot stop physical execution",
       "archetype": "Control path / timing / duration",
-      "text": "A valid correction is delayed, not received, misinterpreted or ineffective; alternatively, a hold ends while false-premise authorization remains active.",
+      "text": "A valid correction is delayed, not received, misinterpreted, or ineffective; alternatively, a hold ends while false-premise authorization remains active.",
       "ucas": [
         "UCA4",
         "UCA5"
@@ -742,7 +742,7 @@
       "id": "LS5",
       "title": "Initial harm develops into a wider catastrophe",
       "archetype": "Conditional environmental continuation",
-      "text": "Further exchange can expand direct and systemic harm. A famine route requires sufficiently large physical disruption plus inadequate food reserves, adaptation and distribution; neither follows automatically from one strike.",
+      "text": "Further exchange can expand direct and systemic harm. A famine route requires sufficiently large physical disruption plus inadequate food reserves, adaptation, and distribution; neither follows automatically from one strike.",
       "ucas": [],
       "hazards": [
         "H1"
@@ -764,14 +764,14 @@
       "title": "Leveson & Thomas · STPA Handbook (2018)",
       "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
       "locator": "Chapter 2, pp. 14–53; Chapter 6, pp. 101–115",
-      "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios and leading indicators."
+      "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios, and leading indicators."
     },
     {
       "id": "MYLIUS",
       "title": "Simon Mylius · Systematic Hazard Analysis for Frontier AI using STPA",
       "url": "https://arxiv.org/html/2506.01782v1",
       "locator": "Sections 3.1–3.6 and 4.8",
-      "use": "Direct AI application: explicit scope, control relationships and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
+      "use": "Direct AI application: explicit scope, control relationships, and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
     },
     {
       "id": "CAA",
@@ -822,7 +822,7 @@
           "label": "Erroneous machine information can resemble an attack warning"
         }
       ],
-      "scope": "Warning-input analogy only. AI dependence, failed independent scrutiny, a launch order and nuclear harm are not established. The barrier shown is a documented post-incident corrective design, not proof of what prevented nuclear use during the episode.",
+      "scope": "The historical comparison concerns warning inputs only. AI dependence, failed independent scrutiny, a launch order, and nuclear harm are not established. The barrier shown is a documented corrective design added after the incident. It does not show what prevented nuclear use during the episode.",
       "evidence": [
         "NOR-1979-account"
       ],
@@ -891,7 +891,7 @@
       ],
       "reach": {
         "local": "Simulated data entered the operational warning system and produced false attack indications. A separate development facility was subsequently established.",
-        "systemic": "Warning-input analogy only. AI dependence, failed independent scrutiny, a launch order and nuclear harm are not established.",
+        "systemic": "The historical comparison concerns warning inputs only. AI dependence, failed independent scrutiny, a launch order, and nuclear harm are not established.",
         "evidence": [
           "NOR-1979-account"
         ]
@@ -912,7 +912,7 @@
           "label": "A processor fault generated apparent attack information"
         }
       ],
-      "scope": "A second warning-system mechanism. No claim is made that machine output determined a leader’s nuclear decision. The barrier shown is a documented post-incident corrective design, not proof of what prevented nuclear use during the episode.",
+      "scope": "The historical comparison concerns a different warning-system failure. The record does not establish that machine output determined a leader’s nuclear decision. The barrier shown is a documented corrective design added after the incident. It does not show what prevented nuclear use during the episode.",
       "evidence": [
         "NOR-1980-account"
       ],
@@ -981,7 +981,7 @@
       ],
       "reach": {
         "local": "A faulty communications-processor component produced false attack indications and repeated them during operational testing. Message checks were subsequently changed.",
-        "systemic": "A second warning-system mechanism. No claim is made that machine output determined a leader’s nuclear decision.",
+        "systemic": "The historical comparison concerns a different warning-system failure. The record does not establish that machine output determined a leader’s nuclear decision.",
         "evidence": [
           "NOR-1980-account"
         ]
@@ -1004,12 +1004,12 @@
         "target": "W-01:2",
         "anchor": "W-01:2",
         "observed": "A historical non-AI warning failure was followed by a documented corrective change.",
-        "notEstablished": "Neither AI reliance, a launch order nor the effectiveness of the corrective design against modern AI is established.",
-        "limit": "A historical non-AI warning failure was followed by a documented corrective change. Neither AI reliance, a launch order nor the effectiveness of the corrective design against modern AI is established.",
+        "notEstablished": "The record does not establish reliance on AI or a launch order. It does not test the corrective design against modern AI.",
+        "limit": "The historical comparison at 1.2 concerns a warning-system failure. The corrective design was added afterward, so it does not show what prevented nuclear use during the incident.",
         "barriers": {
           "separate-test-system": {
             "title": "Separate test and operational systems",
-            "result": "Strengthened after the incident; efficacy unmeasured.",
+            "result": "The protection was strengthened after the incident. Its effectiveness was not measured.",
             "condition": "reinforced",
             "conditionBasis": "A documented post-incident design change added protection against the identified failure; this is structural reinforcement, not measured universal effectiveness.",
             "limitType": "safeguard",
@@ -1030,8 +1030,8 @@
           "origin": "editorial",
           "target": "W-01:1",
           "question": "Could test inputs contaminate an AI-generated threat picture?",
-          "basis": "The 1979 warning involved test data entering the operational system; an offsite test facility followed.",
-          "unresolved": "This was a non-AI system. An AI comparison needs evidence about input separation and how operators verify the resulting picture.",
+          "basis": "Test data entered the operational warning system in 1979. An offsite test facility was established afterward.",
+          "unresolved": "However, this incident did not involve AI. It does not tell us whether an AI-assisted system would keep test inputs separate or whether operators would catch contamination.",
           "sources": [
             "NOR"
           ]
@@ -1044,12 +1044,12 @@
         "target": "W-01:2",
         "anchor": "W-01:2",
         "observed": "A historical non-AI warning failure was followed by a documented corrective change.",
-        "notEstablished": "Neither AI reliance, a launch order nor the effectiveness of the corrective design against modern AI is established.",
-        "limit": "A historical non-AI warning failure was followed by a documented corrective change. Neither AI reliance, a launch order nor the effectiveness of the corrective design against modern AI is established.",
+        "notEstablished": "The record does not establish reliance on AI or a launch order. It does not test the corrective design against modern AI.",
+        "limit": "The historical comparison at 1.2 concerns a warning-system failure. The corrective design was added afterward, so it does not show what prevented nuclear use during the incident.",
         "barriers": {
           "message-checks": {
             "title": "Transmission and message checks",
-            "result": "Strengthened after the incident; efficacy unmeasured.",
+            "result": "The protection was strengthened after the incident. Its effectiveness was not measured.",
             "condition": "reinforced",
             "conditionBasis": "A documented post-incident design change added protection against the identified failure; this is structural reinforcement, not measured universal effectiveness.",
             "limitType": "safeguard",
@@ -1071,19 +1071,19 @@
           "target": "W-01:3",
           "question": "Would independent checks catch a false warning repeated by several AI systems?",
           "basis": "The 1980 warning failures prompted changes to transmission procedures and error checking.",
-          "unresolved": "The report does not test AI agreement or shared inputs. The independence and timing of modern checks remain open questions.",
+          "unresolved": "However, the report does not test agreement among AI systems or their dependence on shared inputs. The open question is whether the checks would be independent enough to catch a shared error before a decision became irreversible.",
           "sources": [
             "NOR"
           ]
         }
       }
     },
-    "fidelity": "The two records are historical comparisons at 1.2. Reinforced means a documented corrective design after the incident; it does not identify the historical stopping mechanism or prove future efficacy.",
+    "fidelity": "The two records provide historical comparisons at 1.2. “Reinforced” describes a documented corrective design added after the incident. It does not identify what stopped escalation during the incident or prove how the design would perform in future.",
     "barrierQuestion": "Will this control still work when misleading information becomes more persuasive, or does it only address a known fault?",
     "context": [
       {
         "title": "System setting",
-        "text": "A hypothetical crisis-warning, intelligence-assessment and nuclear-command system in which AI shapes advice to human decision-makers. Sensor input, independent scrutiny, authorization and correction are modeled separately.",
+        "text": "The model covers a hypothetical crisis-warning, intelligence-assessment, and nuclear-command system in which AI shapes advice to human decision-makers. Sensor input, independent scrutiny, authorization, and correction are modeled separately.",
         "sources": [],
         "targets": [
           {
@@ -1112,9 +1112,8 @@
     "cloud": {
       "origin": "scenario-setting",
       "conditions": [
-        "Crisis pressure",
-        "Warning information",
-        "Nuclear command"
+        "Crisis time pressure",
+        "Uncertain warning information"
       ],
       "actors": [
         {
@@ -1130,10 +1129,10 @@
         {
           "controller": "C6",
           "label": "Independent channels",
-          "role": "verify & correct"
+          "role": "verify and correct"
         }
       ],
-      "summary": "The crisis setting shapes how warnings are interpreted, checked and acted upon."
+      "summary": "Crisis pressure limits the time available to verify warnings before a nuclear decision."
     }
   }
 }

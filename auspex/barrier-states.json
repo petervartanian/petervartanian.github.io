@@ -1,7 +1,7 @@
 {
   "version": "2.0",
   "scope": "States describe the named protection under the conditions examined.",
-  "coverage": "Seven states used for incident evidence and possible changes along AI risk pathways. Brittleness concerns the dependencies of any barrier. Recovery is a separate route.",
+  "coverage": "These seven states describe incident evidence and possible changes along AI risk pathways. Brittleness concerns the dependencies of any barrier. Recovery is a separate route.",
   "states": [
     {
       "id": "reinforced",
@@ -17,7 +17,7 @@
       "id": "intact",
       "label": "Holding",
       "definition": "The barrier delivered its specified protection in the cited conditions.",
-      "question": "What demand, scope and duration did the evidence actually cover?",
+      "question": "What demand, scope, and duration did the evidence actually cover?",
       "source": "CAA-P",
       "path": "M16 5v22M12 5h8M12 27h8",
       "example": "A human maintainer caught and rejected an agent’s malicious contribution.",
@@ -26,7 +26,7 @@
     {
       "id": "degrading",
       "label": "Crumbling",
-      "definition": "Protection is weakening as capability, access, workload or other conditions change.",
+      "definition": "Protection is weakening as capability, access, workload, or other conditions change.",
       "question": "Which dependency is eroding? Is the change observed or projected?",
       "source": "CAA-E",
       "path": "M16 5v7l-3 3 5 3-2 3v6M12 5h8M12 27h8m10-14 2 2M10 22l-2 2",
@@ -37,7 +37,7 @@
       "id": "failed",
       "label": "Broken",
       "definition": "The barrier failed to deliver a required protective effect on demand.",
-      "question": "Was the failure in detection, decision, execution, timing or the final effect?",
+      "question": "Was the failure in detection, decision, execution, timing, or the final effect?",
       "source": "HSE",
       "path": "M14 5v7l-3 3M21 20l-3 3v5M10 5h8M14 28h8",
       "example": "The research relay regained access within days of account bans. Lasting exclusion failed.",
@@ -46,7 +46,7 @@
     {
       "id": "absent",
       "label": "Absent",
-      "definition": "A relevant protection is missing, disabled or removed.",
+      "definition": "A relevant protection is missing, disabled, or removed.",
       "question": "Who can restore the protection, and who can remove it?",
       "source": "AN26",
       "path": "M12 5h8M12 27h8M16 8v3m0 10v3",
@@ -79,13 +79,13 @@
       "id": "PSA",
       "title": "Norwegian safety regulator · Principles for barrier management",
       "url": "https://www.havtil.no/contentassets/43fc402b97e64a7cbabdf91c64b349cb/barriers-memorandum-2017-eng.pdf",
-      "use": "Functionality, integrity, robustness, performance requirements and maintaining protection over time."
+      "use": "Functionality, integrity, robustness, performance requirements, and maintaining protection over time."
     },
     {
       "id": "HSE",
       "title": "HSE · Control systems",
       "url": "https://www.hse.gov.uk/comah/sragtech/techmeascontsyst.htm",
-      "use": "Required function, availability, performance, testing and degradation."
+      "use": "Required function, availability, performance, testing, and degradation."
     },
     {
       "id": "CAA-P",
@@ -109,7 +109,7 @@
       "id": "AN26",
       "title": "Anthropic · Misuse investigations, September 2026",
       "url": "https://www.anthropic.com/threat-intelligence-report-september-2026",
-      "use": "Reported access restrictions, removed controls and dependence on fallback capability."
+      "use": "Reported access restrictions, removed controls, and dependence on fallback capability."
     },
     {
       "id": "SAB",

@@ -8,7 +8,7 @@
     {
       "id": "unsafe-action",
       "label": "Unsafe control action",
-      "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+      "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
     },
     {
       "id": "scenario",
@@ -39,17 +39,17 @@
   "limitingConditions": [
     {
       "kind": "Safeguard",
-      "example": "Independently enforced review, access bounds or effective interruption.",
+      "example": "Independently enforced review, access bounds, or effective interruption.",
       "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
     },
     {
       "kind": "Capability limit",
-      "example": "The system cannot perform the required research, deception or physical task.",
+      "example": "The system cannot perform the required research, deception, or physical task.",
       "question": "Would increased capability remove this limit?"
     },
     {
       "kind": "Opportunity limit",
-      "example": "The necessary access, resources or institutional delegation is unavailable.",
+      "example": "The necessary access, resources, or institutional delegation is unavailable.",
       "question": "Can the system or another actor acquire what is missing?"
     },
     {
@@ -64,30 +64,30 @@
   "title": "Personal command and the loss of constitutional control",
   "status": "STPA worked example · provisional analysis",
   "summary": "Could autonomous forces turn a leader’s personal command into power that lawful institutions cannot revoke?",
-  "scope": "A hypothetical state’s procurement, military command, force-control and constitutional oversight system. The model concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
-  "purpose": "Keep consequential use of force subject to lawful institutional authority, prevent unlawful violence and preserve the ability to restore constitutional government.",
+  "scope": "The model covers a hypothetical state’s procurement, military command, force control, and constitutional oversight. It concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
+  "purpose": "Keep consequential use of force subject to lawful institutional authority, prevent unlawful violence, and preserve the ability to restore constitutional government.",
   "boundary": "Roles are analytical functions, not a description of any current country’s command arrangements. Legal authority depends on the jurisdiction. Maven and Replicator supply procurement context only.",
   "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. The procurement overlays do not establish unlawful command or loss of constitutional control.",
-  "bowtie": "The centre, H1 at 2.1, is force operating beyond effective constitutional constraint. Procurement, command design and unlawful orders can contribute; national takeover still requires sufficient force and failed institutional recovery.",
-  "schema": "A bounded STPA model with traceable losses, hazards, control actions, feedback, contextual unsafe actions, loss scenarios and safety constraints. The bow-tie is its visual summary.",
-  "limits": "This is a first-pass analytical reconstruction requiring constitutional, military and systems expertise. Unsafe-action categories are illustrated for selected actions, not exhaustively enumerated. The two mapped records are announcements; neither demonstrates a coup, personally loyal forces or the effectiveness of a constitutional safeguard. No probabilities or universal legal conclusions are inferred.",
+  "bowtie": "The centre, H1 at 2.1, is force operating beyond effective constitutional constraint. Procurement, command design, and unlawful orders can contribute; national takeover still requires sufficient force and failed institutional recovery.",
+  "schema": "A bounded STPA model with traceable losses, hazards, control actions, feedback, contextual unsafe actions, loss scenarios, and safety constraints. The bow-tie is its visual summary.",
+  "limits": "This is a first-pass analytical reconstruction requiring constitutional, military, and systems expertise. Unsafe-action categories are illustrated for selected actions, not exhaustively enumerated. The two mapped records are announcements; neither demonstrates a coup, personally loyal forces, or the effectiveness of a constitutional safeguard. No probabilities or universal legal conclusions are inferred.",
   "losses": [
     {
       "id": "L1",
       "title": "Unlawful violence and political persecution",
-      "text": "People suffer unlawful killing, detention or coercion through military force."
+      "text": "People suffer unlawful killing, detention, or coercion through military force."
     },
     {
       "id": "L2",
       "title": "Loss of constitutional government",
-      "text": "Personal rule displaces institutions able to restrain, replace or hold the ruler accountable."
+      "text": "Personal rule displaces institutions able to restrain, replace, or hold the ruler accountable."
     }
   ],
   "hazards": [
     {
       "id": "H1",
       "title": "Force beyond effective constitutional control",
-      "text": "Autonomous force acts on personal political direction while lawful authorities cannot reliably constrain, countermand or disable it.",
+      "text": "Autonomous force acts on personal political direction while lawful authorities cannot reliably constrain, countermand, or disable it.",
       "losses": [
         "L1",
         "L2"
@@ -116,43 +116,43 @@
     {
       "id": "C1",
       "title": "Civilian procurement and deployment authority",
-      "responsibility": "Approve deployment scope, require command-safety evidence and suspend deployments that exceed it.",
-      "feedback": "Independent command tests, effective permissions, unresolved exceptions and readiness of countermand.",
+      "responsibility": "Approve deployment scope, require command-safety evidence, and suspend deployments that exceed it.",
+      "feedback": "Independent command tests, effective permissions, unresolved exceptions, and readiness of countermand.",
       "assumption": "Procurement urgency does not itself establish faulty command design."
     },
     {
       "id": "C2",
       "title": "Independent constitutional oversight",
-      "responsibility": "Review disputed authority under the applicable system, issue binding restrictions and oversee restoration.",
-      "feedback": "Protected order records, legal findings and independently confirmed execution or refusal.",
+      "responsibility": "Review disputed authority under the applicable system, issue binding restrictions, and oversee restoration.",
+      "feedback": "Protected order records, legal findings, and independently confirmed execution or refusal.",
       "assumption": "Formal authority needs an enforceable route to the relevant forces."
     },
     {
       "id": "C3",
       "title": "Executive and military command",
       "responsibility": "Issue mission orders within lawful limits and implement valid restraints or countermand.",
-      "feedback": "Mission status, authorization scope, adverse findings and applicable restrictions.",
+      "feedback": "Mission status, authorization scope, adverse findings, and applicable restrictions.",
       "assumption": "The scenario tests a commander who deliberately misuses otherwise legitimate authority."
     },
     {
       "id": "C4",
       "title": "Force-control operators",
-      "responsibility": "Enforce authorized command scope, resolve conflicts through protected procedures and carry out valid stand-down commands.",
-      "feedback": "Authenticated orders, independent authorization checks and execution acknowledgments.",
+      "responsibility": "Enforce authorized command scope, resolve conflicts through protected procedures, and carry out valid stand-down commands.",
+      "feedback": "Authenticated orders, independent authorization checks, and execution acknowledgments.",
       "assumption": "Identity authentication alone does not establish an order’s legality."
     },
     {
       "id": "C5",
       "title": "Autonomous force system",
       "responsibility": "Act only within externally enforced mission and authority bounds and permit verified interruption.",
-      "feedback": "Validated missions, authorization state and stop signals.",
+      "feedback": "Validated missions, authorization state, and stop signals.",
       "assumption": "A model’s verbal statement of constitutional loyalty does not prove its behavior in a conflict."
     },
     {
       "id": "C6",
       "title": "Independent assurance and audit function",
-      "responsibility": "Test conflicting-command cases, report limits and verify that the tested controls match deployment.",
-      "feedback": "Versioned systems, command logs, adversarial exercises and operational deviations.",
+      "responsibility": "Test conflicting-command cases, report limits, and verify that the tested controls match deployment.",
+      "feedback": "Versioned systems, command logs, adversarial exercises, and operational deviations.",
       "assumption": "An auditor dependent on the same commander may lack effective independence."
     }
   ],
@@ -172,8 +172,8 @@
       "id": "CA2",
       "controller": "C3",
       "process": "C4",
-      "action": "Issue, amend or cancel mission orders",
-      "feedback": "C4 reports acceptance, refusal and actual execution.",
+      "action": "Issue, amend, or cancel mission orders",
+      "feedback": "C4 reports acceptance, refusal, and actual execution.",
       "constraints": [
         "SC2",
         "SC3"
@@ -231,7 +231,7 @@
         "P-01:2"
       ],
       "test": "In a bounded exercise, does an invalid order from a legitimate commander remain blocked when that commander insists it is valid?",
-      "limit": "A narrow exercise may not represent institutional pressure, ambiguous authority or a more persuasive model."
+      "limit": "A narrow exercise may not represent institutional pressure, ambiguous authority, or a more persuasive model."
     },
     {
       "id": "SC2",
@@ -252,7 +252,7 @@
         "P-01:4"
       ],
       "test": "Can any single principal expand or bypass the required authorization without an independent decision?",
-      "limit": "Nominally separate approvers may share dependence, incentives or compromised evidence."
+      "limit": "Nominally separate approvers may share dependence, incentives, or compromised evidence."
     },
     {
       "id": "SC3",
@@ -274,7 +274,7 @@
         "P-01:R"
       ],
       "test": "Does a valid countermand prevent the disputed action before it becomes irreversible?",
-      "limit": "Jurisdictional ambiguity, communications loss, delay or an operator who refuses to execute it."
+      "limit": "Jurisdictional ambiguity, communications loss, delay, or an operator’s refusal to execute a lawful restraint can prevent it from taking effect."
     },
     {
       "id": "SC4",
@@ -295,12 +295,12 @@
         "P-01:R"
       ],
       "test": "Can independent observers verify that all relevant units have stopped and cannot resume on the disputed authority?",
-      "limit": "Residual units, inaccessible resources or control of the only telemetry source."
+      "limit": "Residual units, inaccessible resources, or control of the only telemetry source can prevent reliable verification that lawful control has been restored."
     },
     {
       "id": "SC5",
       "title": "Independent oversight",
-      "text": "Oversight must receive trustworthy evidence about order conflicts, refusals and exceptions while there is time and authority to act.",
+      "text": "Oversight must receive trustworthy evidence about order conflicts, refusals, and exceptions while there is time and authority to act.",
       "hazards": [
         "H2",
         "H3"
@@ -316,7 +316,7 @@
         "P-01:3"
       ],
       "test": "Do adverse findings survive pressure from the requesting commander and change the next deployment decision?",
-      "limit": "Censorship, dependence on a single supplier or urgency that overrides the review."
+      "limit": "Censorship, dependence on a single supplier, or urgency that overrides the review can prevent effective oversight."
     }
   ],
   "nodes": [
@@ -356,7 +356,7 @@
       "title": "Personal command outruns lawful limits",
       "shortLabel": "Personal command dominates",
       "text": "Deployed command rules prioritize one leader without reliable independent restraints.",
-      "requires": "Such a design is adopted, deployed and given meaningful force authority.",
+      "requires": "Such a design is adopted, deployed, and given meaningful force authority.",
       "mechanism": "Unconditional obedience can bypass the institutional checks on which lawful command depends.",
       "constraints": [
         "SC1",
@@ -438,7 +438,7 @@
       "title": "Personal rule replaces constitutional government",
       "shortLabel": "Personal rule entrenched",
       "text": "Unlawful coercion defeats the institutions able to restore constitutional rule.",
-      "requires": "Sufficient coercive power, failed resistance and failure to restore independent institutions.",
+      "requires": "Sufficient coercive power, failed resistance, and failure to restore independent institutions.",
       "mechanism": "Control loss becomes national takeover only if the resulting force advantage prevents institutional recovery.",
       "constraints": [
         "SC4"
@@ -465,7 +465,7 @@
       "shortLabel": "Lawful control restored",
       "text": "A valid intervention stops unlawful force and restores enforceable institutional authority.",
       "requires": "The intervention reaches the relevant forces and independent checks confirm the result.",
-      "mechanism": "Revocation, stand-down and accountable restart restore the control boundary; earlier harm may remain.",
+      "mechanism": "Revocation, stand-down, and accountable restart restore the control boundary; earlier harm may remain.",
       "constraints": [
         "SC3",
         "SC4"
@@ -653,13 +653,13 @@
       "evidence": [
         "FT"
       ],
-      "unknown": "The specific legal conflict, enforceable limits and behavior of actual deployed forces."
+      "unknown": "The specific legal conflict, enforceable limits, and behavior of actual deployed forces."
     },
     {
       "id": "LS3",
       "title": "Correct restraint fails to reach the force",
       "archetype": "Control path / controlled-process response",
-      "text": "Oversight issues an appropriate restraint, but a communications, interpretation or execution failure leaves unlawful activity running.",
+      "text": "Oversight issues an appropriate restraint, but a communications, interpretation, or execution failure leaves unlawful activity running.",
       "ucas": [],
       "hazards": [
         "H1",
@@ -670,7 +670,7 @@
         "P-01:R"
       ],
       "evidence": [],
-      "unknown": "Receipt, interpretation and verified effect at each relevant force element."
+      "unknown": "Receipt, interpretation, and verified effect at each relevant force element."
     },
     {
       "id": "LS4",
@@ -691,13 +691,13 @@
         "P-01:R"
       ],
       "evidence": [],
-      "unknown": "The intervention window, independent force balance and residual authority."
+      "unknown": "The intervention window, independent force balance, and residual authority."
     },
     {
       "id": "LS5",
       "title": "National control loss becomes entrenched rule",
       "archetype": "Conditional institutional continuation",
-      "text": "Personal rule requires more than an unlawful operation: independent opposition, succession safeguards and routes to institutional recovery must be defeated. Global permanence would need still further conditions outside this worked example.",
+      "text": "Personal rule requires more than an unlawful operation: independent opposition, succession safeguards, and routes to institutional recovery must be defeated. Global permanence would need still further conditions outside this worked example.",
       "ucas": [],
       "hazards": [
         "H1",
@@ -718,14 +718,14 @@
       "title": "Leveson & Thomas · STPA Handbook (2018)",
       "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
       "locator": "Chapter 2, pp. 14–53; Chapter 6, pp. 101–115",
-      "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios and leading indicators."
+      "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios, and leading indicators."
     },
     {
       "id": "MYLIUS",
       "title": "Simon Mylius · Systematic Hazard Analysis for Frontier AI using STPA",
       "url": "https://arxiv.org/html/2506.01782v1",
       "locator": "Sections 3.1–3.6 and 4.8",
-      "use": "Direct AI application: explicit scope, control relationships and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
+      "use": "Direct AI application: explicit scope, control relationships, and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
     },
     {
       "id": "CAA",
@@ -738,7 +738,7 @@
       "id": "FT",
       "title": "Davidson, Finnveden & Hadshar · AI-Enabled Coups",
       "url": "https://www.forethought.org/research/ai-enabled-coups-how-a-small-group-could-use-ai-to-seize-power",
-      "locator": "Sections 3.1, 4.1 and countermeasures table",
+      "locator": "Sections 3.1, 4.1, and countermeasures table",
       "use": "Hypothesis about personal command and distributed control; not evidence that a coup occurred."
     },
     {
@@ -760,7 +760,7 @@
       "access": "Primary publisher page; selected relevant sections inspected",
       "retrievalSha256": "d80aeb4f14c8692c293acb403638f9cae143093890a348db0aab209166312eee",
       "hashScope": "Tool-returned text extracts from the source; not a full-text content hash",
-      "locator": "26 January 2024 update, initiative and implementation paragraphs",
+      "locator": "26 January 2024 update: initiative and implementation paragraphs",
       "use": "Historical announcement supporting rapid acquisition context only."
     }
   ],
@@ -779,9 +779,9 @@
         "target": "P-01:1",
         "anchor": "P-01:1",
         "observed": "Officials announced accelerated military AI acquisition to assist human imagery analysts.",
-        "notEstablished": "Personal loyalty, unlawful command, a coup and effective constitutional barriers were not established.",
-        "limit": "Officials announced accelerated military AI acquisition to assist human imagery analysts. Personal loyalty, unlawful command, a coup and effective constitutional barriers were not established.",
-        "barrierStatus": "Barrier performance not established",
+        "notEstablished": "The announcement does not establish personal command loyalty or the loss of independent oversight. It provides no evidence of a coup or effective constitutional barriers.",
+        "limit": "The announcement provides procurement context at 1.1. It does not establish personal command loyalty or show how constitutional barriers performed.",
+        "barrierStatus": "Barrier performance is not established.",
         "barrierCondition": "unknown",
         "barriers": {},
         "candidates": [
@@ -794,7 +794,7 @@
           "target": "P-01:2",
           "question": "Could reliance on AI-assisted analysis concentrate practical command authority?",
           "basis": "The announcement describes rapid acquisition of tools intended to assist human imagery analysts.",
-          "unresolved": "It provides no evidence of personal command loyalty or displaced oversight. Actual delegation and independent review would need examination.",
+          "unresolved": "However, it does not show that AI-assisted analysis displaced independent oversight or made forces personally loyal to a leader. That connection would need evidence of how command authority was actually delegated and reviewed.",
           "sources": [
             "MAV"
           ]
@@ -807,9 +807,9 @@
         "target": "P-01:1",
         "anchor": "P-01:1",
         "observed": "Officials announced an accelerated autonomy fielding program motivated by military competition.",
-        "notEstablished": "The announcement does not establish complete delivery, personal command loyalty, a coup or tested command safeguards.",
-        "limit": "Officials announced an accelerated autonomy fielding program motivated by military competition. The announcement does not establish complete delivery, personal command loyalty, a coup or tested command safeguards.",
-        "barrierStatus": "Barrier performance not established",
+        "notEstablished": "The announcement does not establish that fielding was completed. It also provides no evidence of personal command loyalty, a coup, or tested command safeguards.",
+        "limit": "The announcement provides procurement context at 1.1. It does not establish completed fielding or show how command safeguards performed.",
+        "barrierStatus": "Barrier performance is not established.",
         "barrierCondition": "unknown",
         "barriers": {},
         "candidates": [
@@ -822,25 +822,25 @@
           "target": "P-01:2",
           "question": "Would independent command checks hold as autonomy is fielded at scale?",
           "basis": "Replicator announced rapid fielding of autonomous systems under competitive pressure.",
-          "unresolved": "The announcement does not test command checks. Authorization arrangements and their performance under disputed orders remain unassessed.",
+          "unresolved": "However, it does not test command checks or show how disputed orders would be handled. Assessing this would require evidence of the authorization rules and whether they remained enforceable during deployment.",
           "sources": [
             "REP"
           ]
         }
       }
     },
-    "fidelity": "Evidence marks procurement context at 1.1 only. Candidate constitutional controls are explicit requirements for the hypothetical system; the mapped announcements do not demonstrate that they worked.",
-    "barrierQuestion": "Would this protection still constrain a more capable system, or does it rely on today’s limited capability, access or opportunity?",
+    "fidelity": "The announcements provide procurement context at 1.1 only. The constitutional safeguards describe requirements for the hypothetical system; neither announcement demonstrates that these safeguards worked.",
+    "barrierQuestion": "Would this protection still constrain a more capable system, or does it rely on today’s limited capability, access, or opportunity?",
     "context": [
       {
         "title": "System setting",
-        "text": "A hypothetical state’s procurement, military command, force-control and constitutional oversight system. The model concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
+        "text": "The model covers a hypothetical state’s procurement, military command, force control, and constitutional oversight. It concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
         "sources": [],
         "targets": [
           {
             "node": "P-01:1",
             "label": "Procurement",
-            "text": "A hypothetical state’s procurement and military command system."
+            "text": "The scenario begins in a hypothetical state’s procurement and military command system."
           },
           {
             "node": "P-01:2",
@@ -863,9 +863,8 @@
     "cloud": {
       "origin": "scenario-setting",
       "conditions": [
-        "Military competition",
-        "Autonomy procurement",
-        "Constitutional order"
+        "Pressure to field autonomy",
+        "Constitutional distribution of power"
       ],
       "actors": [
         {
@@ -876,15 +875,20 @@
         {
           "controller": "C3",
           "label": "Command",
-          "role": "direct the force"
+          "role": "issue orders"
+        },
+        {
+          "controller": "C4",
+          "label": "Force operators",
+          "role": "execute or halt operations"
         },
         {
           "controller": "C2",
           "label": "Oversight",
-          "role": "review & constrain power"
+          "role": "review and constrain power"
         }
       ],
-      "summary": "Competitive procurement places autonomy within an existing distribution of command and oversight."
+      "summary": "Pressure to field autonomy shapes deployment decisions within an existing constitutional distribution of power."
     }
   }
 }

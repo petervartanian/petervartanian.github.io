@@ -99,8 +99,10 @@ for (const m of models) {
   assert(cloud.includes('0.</span> Context') && cloud.includes('a1-cloud-atmosphere'));
   assert(!cloud.includes('<button') && !cloud.includes('<details'),'Context is readable without another control');
   assert.equal(m.presentation.cloud.origin,'scenario-setting');
-  assert.equal(m.presentation.cloud.conditions.length,3);
-  assert.equal(m.presentation.cloud.actors.length,3);
+  assert(m.presentation.cloud.conditions.length>0);
+  assert(m.presentation.cloud.actors.length>0);
+  assert.equal(new Set(m.presentation.cloud.conditions).size,m.presentation.cloud.conditions.length);
+  assert.equal(new Set(m.presentation.cloud.actors.map(a=>a.controller)).size,m.presentation.cloud.actors.length);
   assert(m.presentation.cloud.summary);
   for (const actor of m.presentation.cloud.actors) {
     has('controllers',[actor.controller]);

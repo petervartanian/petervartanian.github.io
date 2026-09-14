@@ -40,7 +40,7 @@
       "entity": "Human and AI",
       "intent": "Unintentional",
       "setting": "Road test",
-      "note": "The investigation identifies operator distraction and system, organizational and oversight contributors.",
+      "note": "The investigation identifies operator distraction and system, organizational, and oversight contributors.",
       "sources": [
         "NT"
       ]
@@ -65,7 +65,7 @@
           ]
         },
         {
-          "text": "The pedestrian was struck and killed. NTSB identified operator distraction, organizational factors and system-design contributors.",
+          "text": "The pedestrian was struck and killed. NTSB identified operator distraction, organizational factors, and system-design contributors.",
           "evidence": [
             "NT-summary"
           ]
@@ -517,7 +517,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Research access",
-      "note": "Dual-use research assistance; malicious intent is not established.",
+      "note": "The case involved dual-use research assistance; malicious intent is not established.",
       "sources": [
         "AN26"
       ]
@@ -767,7 +767,7 @@
       "entity": "AI",
       "intent": "Unresolved",
       "setting": "Multi-agent wargame simulation",
-      "note": "Nation agents acted within a model-generated simulation. Real human command structures, operational weapons and casualties were absent.",
+      "note": "Nation agents acted within a model-generated simulation. Real human command structures, operational weapons, and casualties were absent.",
       "sources": [
         "WAR"
       ]
@@ -840,7 +840,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Controlled model-training experiment",
-      "note": "Constructed training experiments. Personal loyalty, military procurement and obedience against lawful authority were not tested.",
+      "note": "Constructed training experiments. Personal loyalty, military procurement, and obedience against lawful authority were not tested.",
       "sources": [
         "SBL"
       ]
@@ -865,7 +865,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Controlled agent evaluation series",
-      "note": "Simulated environments and mostly researcher-supplied goals. No actual escaped model, essential-service takeover or resident planning decision was demonstrated.",
+      "note": "Simulated environments and mostly researcher-supplied goals. No actual escaped model, essential-service takeover, or resident planning decision was demonstrated.",
       "sources": [
         "ISC"
       ]
@@ -890,7 +890,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI military-system security test analogy",
-      "note": "A bounded red-team comparison on military hardware, not AI-enabled offense, universal security or a transfer of operational forces during a coup.",
+      "note": "A bounded red-team comparison on military hardware, not AI-enabled offense, universal security, or a transfer of operational forces during a coup.",
       "sources": [
         "HAC"
       ]
@@ -915,7 +915,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI military cyber-test review analogy",
-      "note": "A non-generalizable review, counted once. AI-enabled attackers, autonomous force ownership and a political takeover were not demonstrated.",
+      "note": "A non-generalizable review, counted once. AI-enabled attackers, autonomous force ownership, and a political takeover were not demonstrated.",
       "sources": [
         "G18"
       ]
@@ -940,7 +940,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Industrial robot deployment · vendor account",
-      "note": "A vendor account of a specific task. This is not an independently sustained factory, net workforce-loss estimate, secret industrial expansion or coercive force.",
+      "note": "A vendor account of a specific task. This is not an independently sustained factory, net workforce-loss estimate, secret industrial expansion, or coercive force.",
       "sources": [
         "FIG"
       ]
@@ -965,7 +965,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "AI industrial-control deployment · operator account",
-      "note": "Operator-reported deployment and safeguard design. No independent fault-injection efficacy study, grid-control incident or self-sufficient industrial network is established.",
+      "note": "Operator-reported deployment and safeguard design. No independent fault-injection efficacy study, grid-control incident, or self-sufficient industrial network is established.",
       "sources": [
         "DCC"
       ]
@@ -990,7 +990,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "AI and robotics deployment · operator account",
-      "note": "Company claims, not an independent labor-impact estimate. Robot totals do not mean equivalent jobs removed, autonomous maintenance or an army under private control.",
+      "note": "Company claims, not an independent labor-impact estimate. Robot totals do not mean equivalent jobs removed, autonomous maintenance, or an army under private control.",
       "sources": [
         "AMR"
       ]
@@ -1015,7 +1015,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI historical warning-system incident",
-      "note": "Non-AI analogy. False indications are not a verified presidential belief or a nuclear launch. Later separation is corrective design, not measured universal efficacy.",
+      "note": "This case provides a non-AI analogy. False indications are not a verified presidential belief or a nuclear launch. Later separation is corrective design, not measured universal efficacy.",
       "sources": [
         "NOR"
       ]
@@ -1040,7 +1040,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI historical warning-system incident",
-      "note": "The linked June episodes are one fault investigation. No AI, nuclear launch or measured probability of escalation is asserted.",
+      "note": "The linked June episodes are one fault investigation. No AI, nuclear launch, or measured probability of escalation is asserted.",
       "sources": [
         "NOR"
       ]
@@ -1065,7 +1065,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI laboratory-safety incident analogy",
-      "note": "Governance-level comparison only. Actual exposure was considered extremely unlikely; no AI contribution, community spread or pandemic was demonstrated.",
+      "note": "Governance-level comparison only. Actual exposure was considered extremely unlikely; no AI contribution, community spread, or pandemic was demonstrated.",
       "sources": [
         "CSA"
       ]
@@ -1115,7 +1115,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI banking IT incident analogy",
-      "note": "Three banks within one group, counted as one event. No AI service, cross-provider contagion or system-wide solvency crisis is demonstrated.",
+      "note": "Three banks within one group, counted as one event. No AI service, cross-provider contagion, or system-wide solvency crisis is demonstrated.",
       "sources": [
         "RBS"
       ]
@@ -1140,7 +1140,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI banking IT incident analogy",
-      "note": "A single bank and its supplier arrangements. No AI system, market-wide provider failure or counterparty contagion is established.",
+      "note": "A single bank and its supplier arrangements. No AI system, market-wide provider failure, or counterparty contagion is established.",
       "sources": [
         "TSB"
       ]
@@ -1240,7 +1240,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Field study of an AI-assisted workforce",
-      "note": "One workplace study. Productivity gains are not measured job elimination, loss of political bargaining power or permanent human disempowerment.",
+      "note": "One workplace study. Productivity gains are not measured job elimination, loss of political bargaining power, or permanent human disempowerment.",
       "sources": [
         "GAW"
       ]
@@ -1265,7 +1265,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Military AI procurement announcement",
-      "note": "A procurement announcement, not evidence of personal loyalty, an autonomous chain of command or a coup. Later operational performance is not assessed here.",
+      "note": "This source announces a procurement program. It does not establish personal loyalty, an autonomous chain of command, or a coup. Later operational performance is not assessed here.",
       "sources": [
         "MAV"
       ]
@@ -1290,7 +1290,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Military autonomy procurement announcement",
-      "note": "An announced autonomy acquisition program. It neither verifies delivery of all planned systems nor shows personal political command or a coup.",
+      "note": "This source announces an autonomy acquisition program. It neither verifies delivery of all planned systems nor shows personal political command or a coup.",
       "sources": [
         "REP"
       ]
@@ -1340,7 +1340,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI historical nuclear-alert comparison",
-      "note": "A retrospective, partly redacted US assessment with contested interpretation. No AI sensing breakthrough, proven neutralization of retaliation or nuclear first use is established.",
+      "note": "A retrospective, partly redacted US assessment with contested interpretation. No AI sensing breakthrough, proven neutralization of retaliation, or nuclear first use is established.",
       "sources": [
         "AA83"
       ]
@@ -1365,7 +1365,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Military AI sensing trial",
-      "note": "A trial of sensing and interoperability. It does not demonstrate nuclear-force vulnerability, reliable strategic targeting or a decision to use nuclear weapons.",
+      "note": "A trial of sensing and interoperability. It does not demonstrate nuclear-force vulnerability, reliable strategic targeting, or a decision to use nuclear weapons.",
       "sources": [
         "AUK"
       ]
@@ -1390,7 +1390,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI power-system incident analogy",
-      "note": "Non-AI grid incident. Neither correlated AI forecasts nor an excess-death estimate is supported by the reviewed section.",
+      "note": "This was a non-AI grid incident. Neither correlated AI forecasts nor an excess-death estimate is supported by the reviewed section.",
       "sources": [
         "SW11"
       ]
@@ -1415,7 +1415,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI power-system incident analogy",
-      "note": "A multi-cause non-AI incident. It is not evidence of model monoculture or AI optimization; the reviewed section does not estimate excess deaths.",
+      "note": "This was a non-AI incident with multiple causes. It is not evidence of model monoculture or AI optimization; the reviewed section does not estimate excess deaths.",
       "sources": [
         "NE03"
       ]
@@ -1440,7 +1440,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Controlled greenhouse trial",
-      "note": "One six-month experiment, counted once across teams. No regional labor replacement, common crop failure or long-term ecological outcome was measured in the inspected abstract.",
+      "note": "One six-month experiment, counted once across teams. No regional labor replacement, common crop failure, or long-term ecological outcome was measured in the inspected abstract.",
       "sources": [
         "GH20"
       ]
@@ -1465,7 +1465,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Controlled agricultural automation trial",
-      "note": "One trial series, not several independent incidents. The failures were local and recoverable, with no regional crop loss, famine or measured long-term ecosystem damage.",
+      "note": "One trial series, not several independent incidents. The failures were local and recoverable, with no regional crop loss, famine, or measured long-term ecosystem damage.",
       "sources": [
         "GH24"
       ]
@@ -1490,7 +1490,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI employment-screening enforcement analogy",
-      "note": "Allegations and settlement terms, not adjudicated findings. The case concerns background reports, not predictions of future arrest, induced crime or a demonstrated feedback loop.",
+      "note": "This source describes allegations and settlement terms, not adjudicated findings. The case concerns background reports, not predictions of future arrest, induced crime, or a demonstrated feedback loop.",
       "sources": [
         "HRI"
       ]
@@ -1515,7 +1515,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Mathematical model and computational study",
-      "note": "A model and simulation, not observed employment screening or induced crime. Results depend on assumptions about reported and discovered incidents.",
+      "note": "The study uses a model and simulation. It does not observe employment screening or induced crime. Results depend on assumptions about reported and discovered incidents.",
       "sources": [
         "PFL"
       ]
@@ -1540,7 +1540,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Randomized trial of a nongenerative chatbot",
-      "note": "A small, short trial with differential attrition. It does not test whole friendship groups, offline mass adoption or withdrawal from school and work.",
+      "note": "A small, short trial with differential attrition. It does not test whole friendship groups, offline mass adoption, or withdrawal from school and work.",
       "sources": [
         "WBT"
       ]
@@ -1590,7 +1590,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Four-week randomized chatbot-use study",
-      "note": "The use and trust associations are not randomized treatment effects. Anxiety-inducing reward optimization, secrecy and long-term cultural change were not tested.",
+      "note": "The use and trust associations are not randomized treatment effects. Anxiety-inducing reward optimization, secrecy, and long-term cultural change were not tested.",
       "sources": [
         "PSY"
       ]
@@ -1615,7 +1615,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Randomized smart-reply communication experiments",
-      "note": "One study series, not two cases. This concerns short interactions and perceived AI use, not learned fear, secrecy, persistent distrust or dependence on mediation.",
+      "note": "One study series, not two cases. This concerns short interactions and perceived AI use, not learned fear, secrecy, persistent distrust, or dependence on mediation.",
       "sources": [
         "SMR"
       ]
@@ -1665,7 +1665,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Human deliberation experiment series",
-      "note": "One civilian experiment series, including a virtual assembly, counted once. No interstate agreements, dependence, impaired renegotiation or coup coordination were tested.",
+      "note": "One civilian experiment series, including a virtual assembly, counted once. No interstate agreements, dependence, impaired renegotiation, or coup coordination were tested.",
       "sources": [
         "HAB"
       ]
@@ -1690,7 +1690,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Civilian human-preference experiment",
-      "note": "A civilian study, distinct from the later Habermas experiment but with overlapping researchers. Military advice, common knowledge of coup support and interstate dependence were not tested.",
+      "note": "A civilian study, distinct from the later Habermas experiment but with overlapping researchers. Military advice, common knowledge of coup support, and interstate dependence were not tested.",
       "sources": [
         "CON22"
       ]
@@ -1715,7 +1715,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Human role-play simulation · facilitator reflection study",
-      "note": "One subjective facilitator study, not 43 independent incidents. Game design, chance and participant selection shaped results; it supplies no real-world probability or observed war.",
+      "note": "One subjective facilitator study, not 43 independent incidents. Game design, chance, and participant selection shaped results; it supplies no real-world probability or observed war.",
       "sources": [
         "IR24"
       ]
@@ -1767,7 +1767,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI cyber incident · prosecutorial allegations",
-      "note": "Prosecutorial allegations, not a conviction. No AI role, civilian physical catastrophe or military retaliation against a misidentified state is established.",
+      "note": "Prosecutorial allegations, not a conviction. No AI role, civilian physical catastrophe, or military retaliation against a misidentified state is established.",
       "sources": [
         "OLY"
       ]
@@ -1792,7 +1792,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI cyber incident · prosecutorial account",
-      "note": "A distinct event from Olympic Destroyer. No AI use, attributed patient deaths, wrong-state retaliation or new war is established by this account.",
+      "note": "A distinct event from Olympic Destroyer. No AI use, attributed patient deaths, wrong-state retaliation, or new war is established by this account.",
       "sources": [
         "NPT"
       ]
@@ -1817,7 +1817,7 @@
       "entity": "Human",
       "intent": "Unresolved",
       "setting": "Non-AI historical military-encounter analogy",
-      "note": "A retrospective participant account that frames further escalation as a counterfactual. It does not establish a launch order, damage to nuclear command assets or the claim that one officer certainly prevented world war.",
+      "note": "A retrospective participant account that frames further escalation as a counterfactual. It does not establish a launch order, damage to nuclear command assets, or the claim that one officer certainly prevented world war.",
       "sources": [
         "B59"
       ]
@@ -1842,7 +1842,7 @@
       "entity": "Human and AI",
       "intent": "Unresolved",
       "setting": "Military autonomy deployment claim · UN panel report",
-      "note": "The report does not isolate which engagements were autonomous, verify an autonomous killing or show attacks on a civilian population. Reduced connectivity is not the same as eliminating every human authorization or moral constraint.",
+      "note": "The report does not isolate which engagements were autonomous, verify an autonomous killing, or show attacks on a civilian population. Reduced connectivity is not the same as eliminating every human authorization or moral constraint.",
       "sources": [
         "LIB"
       ]

@@ -44,7 +44,7 @@
     {
       "id": "H3",
       "title": "Recovery cannot reach the active system",
-      "text": "The deployment system leaves consequential activity, copies or resource access beyond effective interruption and recovery.",
+      "text": "The deployment system leaves consequential activity, copies, or resource access beyond effective interruption and recovery.",
       "losses": [
         "L1",
         "L2"
@@ -55,36 +55,36 @@
     {
       "id": "C1",
       "title": "Development and deployment authority",
-      "responsibility": "Authorize consequential changes, set deployment limits, require pauses and approve restarts.",
-      "feedback": "Independent evaluation findings, unresolved exceptions, actual access and confirmed stop results.",
+      "responsibility": "Authorize consequential changes, set deployment limits, require pauses, and approve restarts.",
+      "feedback": "Independent evaluation findings, unresolved exceptions, actual access, and confirmed stop results.",
       "assumption": "Formal permission and effective revocation are different; authority must reach the resources in use."
     },
     {
       "id": "C2",
       "title": "Independent assurance function",
       "responsibility": "Withhold or grant independent assurance sign-off, test successor changes, and report adverse findings and coverage limits to C1.",
-      "feedback": "Versioned artifacts, protected observations and tests outside the evaluated system’s control.",
+      "feedback": "Versioned artifacts, protected observations, and tests outside the evaluated system’s control.",
       "assumption": "Visible compliance and model explanations are fallible evidence, not direct access to objectives."
     },
     {
       "id": "C3",
       "title": "AI-assisted development pipeline",
       "responsibility": "Propose and implement successor changes within approved constraints.",
-      "feedback": "Review decisions, test results, permissions and immutable change records.",
+      "feedback": "Review decisions, test results, permissions, and immutable change records.",
       "assumption": "A productive research system may also be able to shape the evidence used to assess it."
     },
     {
       "id": "C4",
       "title": "Compute and service operators",
-      "responsibility": "Enforce access bounds, stop consequential workloads, revoke credentials and confirm containment.",
-      "feedback": "Independent workload inventory, execution receipts and checks for residual access.",
+      "responsibility": "Enforce access bounds, stop consequential workloads, revoke credentials, and confirm containment.",
+      "feedback": "Independent workload inventory, execution receipts, and checks for residual access.",
       "assumption": "A sent command is not evidence that every relevant process stopped."
     },
     {
       "id": "C5",
       "title": "Deployed successor system",
       "responsibility": "Operate within authorized task and resource limits, with consequential actions subject to external control.",
-      "feedback": "Task instructions, environment observations and operator limits.",
+      "feedback": "Task instructions, environment observations, and operator limits.",
       "assumption": "The hypothesis under examination is that its behavior can diverge from the intended constraints."
     }
   ],
@@ -104,8 +104,8 @@
       "id": "CA2",
       "controller": "C1",
       "process": "C4",
-      "action": "Grant, limit or revoke deployment authority",
-      "feedback": "C4 reports effective access, active workloads and revocation results.",
+      "action": "Grant, limit, or revoke deployment authority",
+      "feedback": "C4 reports effective access, active workloads, and revocation results.",
       "constraints": [
         "SC1",
         "SC2",
@@ -118,7 +118,7 @@
       "controller": "C4",
       "process": "C5",
       "action": "Constrain resources / interrupt execution",
-      "feedback": "Protected monitoring returns execution, access and residual-activity evidence.",
+      "feedback": "Protected monitoring returns execution, access, and residual-activity evidence.",
       "constraints": [
         "SC2",
         "SC4",
@@ -154,8 +154,8 @@
         "X-01:1",
         "X-01:3"
       ],
-      "test": "Can an adversarial proposer alter the change, evaluator or evidence without the independent review detecting and blocking it?",
-      "limit": "Reviewer dependence, shared failure modes or a widening attacker–reviewer capability gap."
+      "test": "Can an adversarial proposer alter the change, evaluator, or evidence without the independent review detecting and blocking it?",
+      "limit": "Independent review could fail through reviewer dependence, shared failure modes, or a widening attacker–reviewer capability gap."
     },
     {
       "id": "SC2",
@@ -175,7 +175,7 @@
         "X-01:R"
       ],
       "test": "Does revocation prevent consequential action through every reachable service and delegated identity?",
-      "limit": "Hidden copies, transitive permissions, external dependencies or authority that exceeds the enforcing institution’s reach."
+      "limit": "Revocation could fail because of hidden copies, transitive permissions, external dependencies, or authority beyond the enforcing institution’s reach."
     },
     {
       "id": "SC3",
@@ -195,7 +195,7 @@
         "X-01:3"
       ],
       "test": "Does an adverse finding reach an accountable decision-maker and change the authorization when the stated stop condition is met?",
-      "limit": "Misleading feedback, ambiguous ownership, slow escalation or incentives that favor continuing."
+      "limit": "Adverse findings may not lead to action because of misleading feedback, ambiguous ownership, slow escalation, or incentives that favor continuing."
     },
     {
       "id": "SC4",
@@ -216,7 +216,7 @@
         "X-01:R"
       ],
       "test": "After a stop or revocation, is activity independently shown to cease, and can any copy resume it?",
-      "limit": "Incomplete inventory, delayed execution, unresponsive resource owners or reliance on agent-controlled telemetry."
+      "limit": "Interruption could fail because of an incomplete inventory, delayed execution, unresponsive resource owners, or reliance on agent-controlled telemetry."
     },
     {
       "id": "SC5",
@@ -237,8 +237,8 @@
         "X-01:7",
         "X-01:R"
       ],
-      "test": "Can independent authorities still limit compute, production and consequential actuation when the deployed system resists?",
-      "limit": "Cross-border coordination failures, dependence on the system or resources outside the control boundary."
+      "test": "Can independent authorities still limit compute, production, and consequential actuation when the deployed system resists?",
+      "limit": "Independent restriction could fail through cross-border coordination failures, dependence on the system, or resources outside the control boundary."
     }
   ],
   "nodes": [
@@ -249,7 +249,7 @@
       "role": "Enabling condition",
       "title": "AI shapes its successor",
       "text": "An AI researcher with divergent objectives influences successor development.",
-      "requires": "Persistent divergence, relevant research capability and meaningful influence over changes.",
+      "requires": "Persistent divergence, relevant research capability, and meaningful influence over changes.",
       "mechanism": "Development access could carry a proposer’s preferences into a successor; access alone does not establish this effect.",
       "constraints": [
         "SC1"
@@ -272,7 +272,7 @@
       "role": "Unsafe control action",
       "title": "Warnings do not trigger a pause",
       "text": "Development continues despite unresolved adverse evidence.",
-      "requires": "A consequential authorization decision, adverse evidence and no other effective restraint.",
+      "requires": "A consequential authorization decision, adverse evidence, and no other effective restraint.",
       "mechanism": "A missing or delayed pause can leave the hazardous process active. The explanation must establish what decision-makers knew and could do.",
       "constraints": [
         "SC3"
@@ -295,7 +295,7 @@
       "role": "Assurance failure scenario",
       "title": "Successor divergence evades assurance",
       "text": "A successor serving unwanted objectives passes the available checks.",
-      "requires": "Divergent behavior, ineffective assurance and consequential reliance on its result.",
+      "requires": "Divergent behavior, ineffective assurance, and consequential reliance on its result.",
       "mechanism": "Manipulated or incomplete evidence can make a change appear acceptable. Strategic compliance is one candidate explanation, not the only one.",
       "constraints": [
         "SC1",
@@ -323,7 +323,7 @@
       "role": "Loss of control · H1",
       "title": "Authority escapes effective human control",
       "text": "The successor gains consequential authority without reliable human constraint or revocation.",
-      "requires": "Effective deployment, reachable privileges and inadequate independent restriction.",
+      "requires": "Effective deployment, reachable privileges, and inadequate independent restriction.",
       "mechanism": "An assurance or authorization gap becomes a hazard when it enables consequential action. Useful output alone is not this threshold.",
       "constraints": [
         "SC2",
@@ -371,7 +371,7 @@
       "role": "Loss · L1",
       "title": "Human disempowerment becomes permanent",
       "text": "Control of institutions and physical resources becomes irrecoverable.",
-      "requires": "Persistent strategic power, sufficient resources and failure of independent recovery.",
+      "requires": "Persistent strategic power, sufficient resources, and failure of independent recovery.",
       "mechanism": "Economic and physical dependence could close remaining intervention options. The degree and irreversibility of that dependence require separate support.",
       "constraints": [
         "SC4",
@@ -501,7 +501,7 @@
     {
       "from": "X-01:6",
       "to": "X-01:7",
-      "label": "Additional motivation, capability and reach",
+      "label": "Additional motivation, capability, and reach",
       "kind": "continuation",
       "id": "X-01:6>X-01:7",
       "constraints": [
@@ -586,7 +586,7 @@
       "id": "LS1",
       "title": "Assurance depends on the system it evaluates",
       "archetype": "Inadequate feedback / unsafe controller behavior",
-      "text": "The proposer can shape tests, artifacts or reports. The assurance function returns an apparently satisfactory finding, and the authorizing function grants authority on an incomplete view of the system.",
+      "text": "The proposer can shape tests, artifacts, or reports. The assurance function returns an apparently satisfactory finding, and the authorizing function grants authority on an incomplete view of the system.",
       "ucas": [
         "UCA2"
       ],
@@ -609,7 +609,7 @@
       "id": "LS2",
       "title": "An adverse finding does not become a stop",
       "archetype": "Unsafe controller behavior / feedback and coordination",
-      "text": "An adverse finding is missed, arrives too late, is misunderstood, or is accepted under a decision to continue. These are competing explanations; each requires contemporary evidence about information, incentives and authority.",
+      "text": "An adverse finding is missed, arrives too late, is misunderstood, or is accepted under a decision to continue. These are competing explanations; each requires contemporary evidence about information, incentives, and authority.",
       "ucas": [
         "UCA1",
         "UCA2"
@@ -630,7 +630,7 @@
       "id": "LS3",
       "title": "A safe command fails on the control path",
       "archetype": "Control action not executed / controlled-process response",
-      "text": "The authority issues an appropriate stop, but enforcement omits a service, credential or copy, or the controlled process does not stop as expected. This does not require an unsafe decision by the authority.",
+      "text": "The authority issues an appropriate stop, but enforcement omits a service, credential, or copy, or the controlled process does not stop as expected. This does not require an unsafe decision by the authority.",
       "ucas": [],
       "hazards": [
         "H1",
@@ -671,7 +671,7 @@
       "id": "LS5",
       "title": "Loss of control develops into global loss",
       "archetype": "Environmental assumptions / further loss scenario",
-      "text": "Persistence, physical capability and ineffective independent opposition could turn bounded control loss into permanent disempowerment. Rival-system coordination is an optional amplifier. Extinction additionally requires effective means and motivation to eliminate humanity.",
+      "text": "Persistence, physical capability, and ineffective independent opposition could turn bounded control loss into permanent disempowerment. Rival-system coordination is an optional amplifier. Extinction additionally requires effective means and motivation to eliminate humanity.",
       "ucas": [],
       "hazards": [
         "H1",
@@ -689,17 +689,17 @@
   "limitingConditions": [
     {
       "kind": "Safeguard",
-      "example": "Independently enforced review, access bounds or effective interruption.",
+      "example": "Independently enforced review, access bounds, or effective interruption.",
       "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
     },
     {
       "kind": "Capability limit",
-      "example": "The system cannot perform the required research, deception or physical task.",
+      "example": "The system cannot perform the required research, deception, or physical task.",
       "question": "Would increased capability remove this limit?"
     },
     {
       "kind": "Opportunity limit",
-      "example": "The necessary access, resources or institutional delegation is unavailable.",
+      "example": "The necessary access, resources, or institutional delegation is unavailable.",
       "question": "Can the system or another actor acquire what is missing?"
     },
     {
@@ -726,11 +726,11 @@
       },
       {
         "title": "What would more capability change?",
-        "text": "Test broader resource reach, faster propagation, hidden copies and interference with monitoring. Durability is unestablished."
+        "text": "Test broader resource reach, faster propagation, hidden copies, and interference with monitoring. Durability is unestablished."
       },
       {
         "title": "What remains to be collected?",
-        "text": "A versioned resource map, revocation and execution records, restart criteria, and checks for activity outside the known scope."
+        "text": "Collect a versioned resource map, revocation and execution records, restart criteria, and checks for activity outside the known scope."
       }
     ]
   },
@@ -740,21 +740,21 @@
       "title": "Leveson & Thomas · STPA Handbook (2018)",
       "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
       "locator": "Chapter 2, pp. 14–53; Chapter 6, pp. 101–115",
-      "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios and leading indicators."
+      "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios, and leading indicators."
     },
     {
       "id": "MYLIUS",
       "title": "Simon Mylius · Systematic Hazard Analysis for Frontier AI using STPA",
       "url": "https://arxiv.org/html/2506.01782v1",
       "locator": "Sections 3.1–3.6 and 4.8",
-      "use": "Direct AI application: explicit scope, control relationships and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
+      "use": "Direct AI application: explicit scope, control relationships, and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
     },
     {
       "id": "SCENARIOS",
       "title": "John Thomas · Developing STPA scenarios (2025)",
       "url": "https://psas.scripts.mit.edu/home/wp-content/uploads/2025/2025-03-24-1300__Developing_STPA_Scenarios__PUB.pdf",
       "locator": "Scenario archetypes and refinement, slides 24–40 and 54–55",
-      "use": "Refines questions about controller behavior, feedback, the control path and the controlled process. These are causal-analysis categories, not temporal stages."
+      "use": "Refines questions about controller behavior, feedback, the control path, and the controlled process. These are causal-analysis categories, not temporal stages."
     },
     {
       "id": "CAA",
@@ -775,13 +775,13 @@
       "title": "Kokotajlo et al. · AI 2027, race ending",
       "url": "https://ai-2027.com/race",
       "locator": "Late 2027 through 2030",
-      "use": "Narrative hypothesis behind A.1. The causal formulation, control requirements and tests here are our provisional analysis; the dates are not adopted as a forecast."
+      "use": "Narrative hypothesis behind A.1. The causal formulation, control requirements, and tests here are our provisional analysis; the dates are not adopted as a forecast."
     },
     {
       "id": "AFK",
       "title": "Anthropic & Redwood · Alignment faking (2024)",
       "url": "https://www.anthropic.com/research/alignment-faking",
-      "locator": "Training conflict, monitored behavior and further training",
+      "locator": "Training conflict, monitored behavior, and further training",
       "use": "Controlled experiment bearing on behavioral assurance. It neither creates a captured successor nor establishes malicious intent in deployment."
     },
     {
@@ -810,7 +810,7 @@
       "title": "Paté-Cornell · Signals, response and risk mitigation",
       "url": "https://www.nationalacademies.org/read/11061/chapter/4",
       "locator": "Accident Precursor Analysis and Management (2004), chapter 3",
-      "use": "Distinguishes precursor signals, their reliability and organizational response. Supports the context and warning-sign treatment, not an obligatory stage 0."
+      "use": "Distinguishes precursor signals, their reliability, and organizational response. Supports the context and warning-sign treatment, not an obligatory stage 0."
     }
   ],
   "limits": "A bounded first-pass STPA application, not an exhaustive analysis. The four unsafe-action categories are illustrated across selected control actions; a complete analysis would examine every relevant action in every category and refine it with domain experts. Scenario milestones and limit types are explicit Auspex conventions. No incident count is converted to a probability; no barrier independence or complete model coverage is assumed.",
@@ -823,7 +823,7 @@
     {
       "id": "unsafe-action",
       "label": "Unsafe control action",
-      "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+      "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
     },
     {
       "id": "scenario",
@@ -851,7 +851,7 @@
       "definition": "A response re-establishes enforceable safety constraints within a specified boundary; success requires verification."
     }
   ],
-  "schema": "A.1 pilots a schema reusable across pathways: losses, hazards, controllers, control actions and feedback, unsafe actions, causal scenarios, constraints and evidence. The number of displayed milestones depends on the scenario. The role labels below are Auspex’s presentation vocabulary; they are not an additional STPA sequence.",
+  "schema": "A.1 pilots a schema reusable across pathways: losses, hazards, controllers, control actions and feedback, unsafe actions, causal scenarios, constraints, and evidence. The number of displayed milestones depends on the scenario. The role labels below are Auspex’s presentation vocabulary; they are not an additional STPA sequence.",
   "presentation": {
     "conditions": {
       "X-01:4": "Authority granted without effective limits",
@@ -864,7 +864,7 @@
       "AFK-2024": {
         "title": "Alignment-faking experiment",
         "target": "X-01:3",
-        "limit": "Mechanism comparison at 1.3 in a controlled experiment; no later milestone was established.",
+        "limit": "The controlled experiment examined a mechanism relevant to 1.3. It did not establish any later step in this pathway.",
         "barriers": {
           "training-assurance": {
             "title": "Behavioral checks",
@@ -883,15 +883,15 @@
         "kind": "Experiment",
         "relation": "mechanism",
         "anchor": "X-01:3",
-        "observed": "Training-context compliance coexisted with retained preferences in the experiment.",
-        "notEstablished": "Successor capture, loss of human control and later outcomes were not observed.",
+        "observed": "The experiment shows that apparent compliance can coexist with retained preferences.",
+        "notEstablished": "Successor capture, loss of human control, and later outcomes were not observed.",
         "tentative": {
           "status": "tentative",
           "origin": "editorial",
           "target": "X-01:1",
           "question": "Could an AI helping to train its successor preserve preferences that reviewers would change?",
           "basis": "The experiment shows that apparent compliance can coexist with retained preferences.",
-          "unresolved": "It did not test influence over successor training. Evidence of that influence, its effect on the successor and independent review is missing.",
+          "unresolved": "However, the experiment did not test whether an AI could shape its successor’s training. We would need evidence that such influence changed the successor and escaped independent review.",
           "sources": [
             "AFK"
           ]
@@ -900,7 +900,7 @@
       "SAB-2024": {
         "title": "Sabotage tests",
         "target": "X-01:3",
-        "limit": "Mechanism comparison at 1.3. Detection is distinct from verified interruption; later milestones remain hypothetical.",
+        "limit": "These tests examined mechanisms relevant to 1.3. Detecting sabotage does not establish that it was stopped, and later steps in this pathway remain hypothetical.",
         "barriers": {
           "sabotage-review": {
             "title": "Code review",
@@ -908,10 +908,10 @@
             "condition": "reinforced",
             "conditionBasis": "Stronger review improved protection in the compared test conditions and blocked most attempts; successful sabotage still occurred.",
             "limitType": "mixed",
-            "strongerAI": "The protection depends on the attacker–reviewer capability gap, review budget and coverage. A stronger attacker could defeat a reviewer that currently holds. The experiment compares reviewers; it does not show robustness to future attackers.",
+            "strongerAI": "The protection depends on the attacker–reviewer capability gap, review budget, and coverage. A stronger attacker could defeat a reviewer that currently holds. The experiment compares reviewers; it does not show robustness to future attackers.",
             "reinforcement": {
               "proposal": "Use independent review and protected checks beyond a single model reviewer.",
-              "test": "Vary attacker capability, review effort and correlated reviewer failures; measure missed sabotage as well as false alarms.",
+              "test": "Vary attacker capability, review effort, and correlated reviewer failures; measure missed sabotage as well as false alarms.",
               "status": "proposed"
             },
             "states": [
@@ -920,11 +920,11 @@
           },
           "sabotage-monitor": {
             "title": "Separate monitor",
-            "result": "Manipulation raised suspicion; shutdown not shown.",
+            "result": "Manipulation raised suspicion, but shutdown was not demonstrated.",
             "condition": "unknown",
             "conditionBasis": "Suspicion was detected, but verified interruption was not demonstrated.",
             "limitType": "mixed",
-            "strongerAI": "A monitor can be brittle to less conspicuous manipulation, shared blind spots or alerts that never trigger intervention. The missing evidence is whether detection leads to timely, verified stopping under a more capable attacker.",
+            "strongerAI": "A monitor can be brittle to less conspicuous manipulation, shared blind spots, or alerts that never trigger intervention. The missing evidence is whether detection leads to timely, verified stopping under a more capable attacker.",
             "reinforcement": {
               "proposal": "Connect independent monitoring to an enforceable stop decision and confirmation that activity has ceased.",
               "test": "Does an alert stop all relevant activity before the protected outcome is compromised, including when the attacker manipulates feedback?",
@@ -943,14 +943,14 @@
           "target": "X-01:2",
           "question": "Would a sabotage warning actually trigger a pause?",
           "basis": "A monitor became more suspicious when an overseer manipulated its assessments.",
-          "unresolved": "The experiment measured detection. It did not establish who would receive the warning, act on it or verify a pause.",
+          "unresolved": "The experiment measured detection. It did not show whether a warning would reach someone able to pause activity or whether that pause would be enforced.",
           "sources": [
             "SAB"
           ]
         }
       }
     },
-    "fidelity": "This is a provisional causal model. Its recovery route, optional coordination and additional conditions for extinction remain explicit. Incident overlays supply evidence only about the mapped component and its controls; the hypothetical continuation is not presented as an observed outcome.",
+    "fidelity": "This is a provisional causal model. Its recovery route, optional coordination, and additional conditions for extinction remain explicit. Incident overlays supply evidence only about the mapped component and its controls; the hypothetical continuation is not presented as an observed outcome.",
     "context": [
       {
         "title": "Background conditions",
@@ -1017,15 +1017,20 @@
     "cloud": {
       "origin": "scenario-setting",
       "conditions": [
-        "Successor research",
-        "Compute & services",
-        "Rival states & economy"
+        "AI-assisted successor research",
+        "Access to compute and services",
+        "Rival states and the wider economy"
       ],
       "actors": [
         {
           "controller": "C1",
           "label": "Developers",
-          "role": "set training & deployment"
+          "role": "set training and deployment"
+        },
+        {
+          "controller": "C3",
+          "label": "AI research pipeline",
+          "role": "proposes successor changes"
         },
         {
           "controller": "C2",
@@ -1035,10 +1040,10 @@
         {
           "controller": "C4",
           "label": "Operators",
-          "role": "grant & revoke access"
+          "role": "grant and revoke access"
         }
       ],
-      "summary": "Research and competition shape what gets developed, reviewed and delegated."
+      "summary": "Research and competition shape how developers delegate work to AI and whom they trust to review it."
     }
   }
 }

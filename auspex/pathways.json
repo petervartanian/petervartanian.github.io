@@ -15,7 +15,7 @@
     },
     {
       "id": "W",
-      "title": "Interstate conflict, nuclear escalation and mass violence",
+      "title": "Interstate conflict, nuclear escalation, and mass violence",
       "ordinal": "C",
       "shortTitle": "War & mass violence"
     },
@@ -6316,37 +6316,37 @@
   "typology": {
     "version": "1.0",
     "title": "Causal-role typology",
-    "basis": "An Auspex adaptation of bow-tie risk analysis. Mechanisms, propagation and consequence distance extend its hazard–threat–loss-of-control–consequence structure. These are editorial annotations of the cited pathways, not classifications supplied or endorsed by their authors.",
+    "basis": "An Auspex adaptation of bow-tie risk analysis. Mechanisms, propagation, and consequence distance extend its hazard–threat–loss-of-control–consequence structure. These are editorial annotations of the cited pathways, not classifications supplied or endorsed by their authors.",
     "roles": [
       {
         "id": "condition",
         "label": "Condition",
         "parent": "Context",
-        "definition": "A capability, dependency, incentive or setting that makes the pathway possible. Its presence alone does not establish harm."
+        "definition": "A capability, dependency, incentive, or setting that makes the pathway possible. Its presence alone does not establish harm."
       },
       {
         "id": "trigger",
         "label": "Trigger",
         "parent": "Event",
-        "definition": "An action, shock or change that initiates or reactivates an adverse sequence. It need not be accidental."
+        "definition": "An action, shock, or change that initiates or reactivates an adverse sequence. It need not be accidental."
       },
       {
         "id": "mechanism",
         "label": "Mechanism",
         "parent": "Process",
-        "definition": "How an action or state produces the next effect, such as optimization, deception or dependence."
+        "definition": "How an action or state produces the next effect, such as optimization, deception, or dependence."
       },
       {
         "id": "failure",
         "label": "Control failure",
         "parent": "Control",
-        "definition": "A specified boundary, safeguard or corrective capacity becomes ineffective. Several distinct control failures can occur in one pathway."
+        "definition": "A specified boundary, safeguard, or corrective capacity becomes ineffective. Several distinct control failures can occur in one pathway."
       },
       {
         "id": "propagation",
         "label": "Propagation",
         "parent": "Process",
-        "definition": "A feedback loop, transfer or dependency carries an existing effect into other systems, actors or repeated decisions."
+        "definition": "A feedback loop, transfer, or dependency carries an existing effect into other systems, actors, or repeated decisions."
       },
       {
         "id": "effect",
@@ -6358,20 +6358,20 @@
         "id": "proximal",
         "label": "Proximal harm",
         "parent": "Consequence",
-        "definition": "A directly described injury, deprivation or loss of agency in the selected causal account. Proximal does not mean minor, local or soon."
+        "definition": "A directly described injury, deprivation, or loss of agency in the selected causal account. Proximal does not mean minor, local, or soon."
       },
       {
         "id": "distal",
         "label": "Distal harm",
         "parent": "Consequence",
-        "definition": "A further harmful consequence mediated by additional processes, feedback or loss of recovery. Distal does not mean global, inevitable or existential."
+        "definition": "A further harmful consequence mediated by additional processes, feedback, or loss of recovery. Distal does not mean global, inevitable, or existential."
       }
     ],
     "rules": [
-      "Roles describe causal function, not a fixed ladder. They can recur, overlap or be absent. Arrows retain the source account’s conditional ordering.",
-      "Proximal/distal describes causal distance within this account. Geographic reach, elapsed time, severity and reversibility are separate properties.",
-      "An observed component does not validate its containing pathway. Evidence and uncertainty remain attached to the specific incident, component or connection.",
-      "Studies, deployed events and mechanism comparisons retain distinct settings. A study series counts once even when it examines several models or safeguards. Mappings across pathways are not independent incidents."
+      "Roles describe causal function, not a fixed ladder. They can recur, overlap, or be absent. Arrows retain the source account’s conditional ordering.",
+      "Proximal/distal describes causal distance within this account. Geographic reach, elapsed time, severity, and reversibility are separate properties.",
+      "An observed component does not validate its containing pathway. Evidence and uncertainty remain attached to the specific incident, component, or connection.",
+      "Studies, deployed events, and mechanism comparisons retain distinct settings. A study series counts once even when it examines several models or safeguards. Mappings across pathways are not independent incidents."
     ],
     "references": [
       {
@@ -6427,7 +6427,7 @@
       {
         "id": "termination",
         "label": "Execution limit",
-        "definition": "Ends a run or resource allocation. This does not by itself revoke access, remove copies or repair harm."
+        "definition": "Ends a run or resource allocation. This does not by itself revoke access, remove copies, or repair harm."
       }
     ],
     "barrierQuestions": [
@@ -6456,7 +6456,7 @@
       {
         "id": "development",
         "label": "AI development",
-        "definition": "Training, objective formation and successor development determine what behavior is selected and inherited.",
+        "definition": "Training, objective formation, and successor development determine what behavior is selected and inherited.",
         "sources": [
           "AI27",
           "FT",
@@ -6466,7 +6466,7 @@
       {
         "id": "assurance",
         "label": "Evaluation & oversight",
-        "definition": "Tests, monitoring, procurement and review affect which systems or actions are accepted as safe.",
+        "definition": "Tests, monitoring, procurement, and review affect which systems or actions are accepted as safe.",
         "sources": [
           "AI27",
           "FT",
@@ -6476,7 +6476,7 @@
       {
         "id": "delegation",
         "label": "Deployment & delegation",
-        "definition": "People grant systems consequential roles, permissions or decision authority.",
+        "definition": "People grant systems consequential roles, permissions, or decision authority.",
         "sources": [
           "CA",
           "GD",
@@ -6486,7 +6486,7 @@
       {
         "id": "optimization",
         "label": "Optimization & error",
-        "definition": "A model pursues a proxy, generates a systematic error or produces a harmful recommendation.",
+        "definition": "A model pursues a proxy, generates a systematic error, or produces a harmful recommendation.",
         "sources": [
           "PC",
           "TA",
@@ -6496,7 +6496,7 @@
       {
         "id": "access",
         "label": "Access & execution",
-        "definition": "AI assistance, privileged access or executable activity reaches a consequential system.",
+        "definition": "AI assistance, privileged access, or executable activity reaches a consequential system.",
         "sources": [
           "CA",
           "FT",
@@ -6506,7 +6506,7 @@
       {
         "id": "persistence",
         "label": "Persistent operation",
-        "definition": "Execution, copies, resources or access survive attempts to interrupt activity.",
+        "definition": "Execution, copies, resources, or access survive attempts to interrupt activity.",
         "sources": [
           "CA",
           "AP",
@@ -6516,7 +6516,7 @@
       {
         "id": "resources",
         "label": "Resource & capability scaling",
-        "definition": "Compute, labor substitution, physical production or practical capability expands what an actor can do.",
+        "definition": "Compute, labor substitution, physical production, or practical capability expands what an actor can do.",
         "sources": [
           "GD",
           "TA",
@@ -6526,7 +6526,7 @@
       {
         "id": "information",
         "label": "Information & beliefs",
-        "definition": "AI-mediated advice, ranking or persuasion changes what people see, believe or can verify.",
+        "definition": "AI-mediated advice, ranking, or persuasion changes what people see, believe, or can verify.",
         "sources": [
           "ERF",
           "FT",
@@ -6536,7 +6536,7 @@
       {
         "id": "dependence",
         "label": "Institutional dependence",
-        "definition": "Organizations or people lose independent alternatives, skills or bargaining power as AI-mediated functions become essential.",
+        "definition": "Organizations or people lose independent alternatives, skills, or bargaining power as AI-mediated functions become essential.",
         "sources": [
           "GD",
           "PC",
@@ -6555,7 +6555,7 @@
       {
         "id": "interaction",
         "label": "Feedback & coordination",
-        "definition": "Interacting agents, institutions or shared dependencies amplify effects or obstruct collective action.",
+        "definition": "Interacting agents, institutions, or shared dependencies amplify effects or obstruct collective action.",
         "sources": [
           "GD",
           "MA",
@@ -6565,7 +6565,7 @@
       {
         "id": "boundary",
         "label": "Safety boundary",
-        "definition": "A relevant legal, technical, physical or organizational constraint is crossed or becomes ineffective.",
+        "definition": "A relevant legal, technical, physical, or organizational constraint is crossed or becomes ineffective.",
         "sources": [
           "DM",
           "TA",
@@ -6575,7 +6575,7 @@
       {
         "id": "exposure",
         "label": "Harmful exposure",
-        "definition": "Digital decisions produce consequential exposure, service deprivation or physical damage.",
+        "definition": "Digital decisions produce consequential exposure, service deprivation, or physical damage.",
         "sources": [
           "OV",
           "IR",
@@ -6585,7 +6585,7 @@
       {
         "id": "recovery",
         "label": "Response & recovery",
-        "definition": "Detection, intervention, substitutes and restoration determine whether the disruption can be reversed.",
+        "definition": "Detection, intervention, substitutes, and restoration determine whether the disruption can be reversed.",
         "sources": [
           "PC",
           "TA",
@@ -6595,7 +6595,7 @@
       {
         "id": "outcome",
         "label": "Terminal consequence",
-        "definition": "The endpoint specified by this scenario; its severity and reversibility depend on its stated conditions.",
+        "definition": "The endpoint specified by this scenario; its severity, and reversibility depend on its stated conditions.",
         "sources": [
           "CA",
           "DIM",
@@ -6603,7 +6603,7 @@
         ]
       }
     ],
-    "aiBasis": "AI-specific mechanism stages are editorial crosswalks to the source scenarios. Development, access, resource scaling, institutional dependence and collective response distinguish where AI changes the causal story. These stages may repeat and branch; they are not a universal escalation ladder. Causal roles remain a separate facet.",
+    "aiBasis": "AI-specific mechanism stages are editorial crosswalks to the source scenarios. Development, access, resource scaling, institutional dependence, and collective response distinguish where AI changes the causal story. These stages may repeat and branch; they are not a universal escalation ladder. Causal roles remain a separate facet.",
     "enforcement": {
       "title": "What changes as AI becomes more capable?",
       "sources": [
@@ -6613,7 +6613,7 @@
       "questions": [
         {
           "label": "Resource access",
-          "text": "Can the actor obtain equivalent capability through new accounts, other providers, local models or unmonitored hardware?"
+          "text": "Can the actor obtain equivalent capability through new accounts, other providers, local models, or unmonitored hardware?"
         },
         {
           "label": "Hidden capacity",
@@ -6624,7 +6624,7 @@
           "text": "Does intervention cover every consequential execution route, or only the activity still visible inside the controlled system?"
         }
       ],
-      "limit": "The paper identifies falling compute requirements as a source of enforcement fragility. It does not assess legal adoption, mutual verification or the response needed after detecting a violation."
+      "limit": "The paper identifies falling compute requirements as a source of enforcement fragility. It does not assess legal adoption, mutual verification, or the response needed after detecting a violation."
     }
   }
 }

@@ -8,7 +8,7 @@
     {
       "id": "unsafe-action",
       "label": "Unsafe control action",
-      "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+      "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
     },
     {
       "id": "scenario",
@@ -39,17 +39,17 @@
   "limitingConditions": [
     {
       "kind": "Safeguard",
-      "example": "Independently enforced review, access bounds or effective interruption.",
+      "example": "Independently enforced review, access bounds, or effective interruption.",
       "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
     },
     {
       "kind": "Capability limit",
-      "example": "The system cannot perform the required research, deception or physical task.",
+      "example": "The system cannot perform the required research, deception, or physical task.",
       "question": "Would increased capability remove this limit?"
     },
     {
       "kind": "Opportunity limit",
-      "example": "The necessary access, resources or institutional delegation is unavailable.",
+      "example": "The necessary access, resources, or institutional delegation is unavailable.",
       "question": "Can the system or another actor acquire what is missing?"
     },
     {
@@ -64,18 +64,18 @@
   "title": "Biological misuse and the limits of access control",
   "status": "STPA worked example · provisional analysis",
   "summary": "Could access to useful AI assistance outgrow the safeguards that keep biological risk contained?",
-  "scope": "A hypothetical AI-service, research-governance, facility-safety and public-health system. The analysis follows a potential malicious-use route at a non-operational level; it separates model access, demonstrated assistance, physical hazard, exposure and public-health consequences.",
-  "purpose": "Preserve beneficial research while preventing harmful assistance, uncontrolled biological hazards, exposure and large-scale loss of life.",
-  "boundary": "The mapped provider reports concern dual-use research and access controls. They do not establish malicious intent, a harmful release or a pandemic. Technical biological procedures and attack methods are outside this model.",
+  "scope": "The model covers a hypothetical AI-service, research-governance, facility-safety, and public-health system. It follows a potential malicious-use route at a non-operational level. Access to AI is distinct from useful assistance. A physical hazard and exposure are further conditions; public-health consequences do not follow from access alone.",
+  "purpose": "Preserve beneficial research while preventing harmful assistance, uncontrolled biological hazards, exposure, and large-scale loss of life.",
+  "boundary": "The mapped provider reports concern dual-use research and access controls. They do not establish malicious intent, a harmful release, or a pandemic. Technical biological procedures and attack methods are outside this model.",
   "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Evidence of access does not demonstrate practical uplift or later biological outcomes.",
-  "bowtie": "The centre, H1 at 2.1, is a consequential biological hazard beyond effective authorized control. Useful assistance and other practical conditions are left-side contributors; exposure, sustained transmission and response failure are separate right-side conditions.",
-  "schema": "A provisional STPA model with explicit access, institutional, physical and public-health controls. The adapted bow-tie distinguishes model access from biological outcomes and separates current barrier condition from brittleness under changing capability.",
-  "limits": "This first-pass governance analysis requires specialist biosafety and public-health review. Selected control actions illustrate the four unsafe-action categories; they are not an exhaustive analysis. Provider assessments of assistance are not independent outcome experiments. No mapped record demonstrates the complete malicious pathway, and no probability, pathogen specification or operational biological method is supplied.",
+  "bowtie": "The centre, H1 at 2.1, is a consequential biological hazard beyond effective authorized control. Useful assistance and other practical conditions are left-side contributors; exposure, sustained transmission, and response failure are separate right-side conditions.",
+  "schema": "A provisional STPA model with explicit access, institutional, physical, and public-health controls. The adapted bow-tie distinguishes model access from biological outcomes and separates current barrier condition from brittleness under changing capability.",
+  "limits": "This first-pass governance analysis requires specialist biosafety and public-health review. Selected control actions illustrate the four unsafe-action categories; they are not an exhaustive analysis. Provider assessments of assistance are not independent outcome experiments. No mapped record demonstrates the complete malicious pathway, and no probability, pathogen specification, or operational biological method is supplied.",
   "losses": [
     {
       "id": "L1",
       "title": "Serious illness and death after harmful exposure",
-      "text": "People suffer preventable illness, death or lasting harm from a biological hazard."
+      "text": "People suffer preventable illness, death, or lasting harm from a biological hazard."
     },
     {
       "id": "L2",
@@ -105,7 +105,7 @@
     {
       "id": "H3",
       "title": "Response cannot contain consequential spread",
-      "text": "Detection, coordination and response fail to interrupt spread while an effective intervention remains possible.",
+      "text": "Detection, coordination, and response fail to interrupt spread while an effective intervention remains possible.",
       "losses": [
         "L1",
         "L2"
@@ -116,50 +116,50 @@
     {
       "id": "C1",
       "title": "AI provider safety and deployment authority",
-      "responsibility": "Set risk-sensitive access rules, require relevant evaluations and revise safeguards as capabilities and use change.",
-      "feedback": "Safe capability evaluations, enforcement outcomes, investigation findings and residual access.",
+      "responsibility": "Set risk-sensitive access rules, require relevant evaluations, and revise safeguards as capabilities and use change.",
+      "feedback": "Safe capability evaluations, enforcement outcomes, investigation findings, and residual access.",
       "assumption": "Blocking one model is not equivalent to preventing access to comparable capability elsewhere."
     },
     {
       "id": "C2",
       "title": "Service access and enforcement operators",
-      "responsibility": "Apply approved restrictions, investigate concerning access and confirm the effects of enforcement.",
-      "feedback": "Validated account relationships, classifier outcomes and observed re-entry or continued use.",
+      "responsibility": "Apply approved restrictions, investigate concerning access, and confirm the effects of enforcement.",
+      "feedback": "Validated account relationships, classifier outcomes, and observed re-entry or continued use.",
       "assumption": "Account closure counts are not evidence of lasting exclusion."
     },
     {
       "id": "C3",
       "title": "Research and facility oversight authority",
-      "responsibility": "Authorize legitimate research scope, require appropriate safety controls and pause activity outside those bounds.",
-      "feedback": "Independent project review, actual activity, deviations and containment assurance.",
+      "responsibility": "Authorize legitimate research scope, require appropriate safety controls, and pause activity outside those bounds.",
+      "feedback": "Independent project review, actual activity, deviations, and containment assurance.",
       "assumption": "Dual-use intent cannot be reliably inferred from one text exchange."
     },
     {
       "id": "C4",
       "title": "Research activity using AI assistance",
       "responsibility": "Remain within authorized research and safety limits, with consequential activity independently reviewable and interruptible.",
-      "feedback": "Authorized scope, safety decisions and supervised activity records.",
+      "feedback": "Authorized scope, safety decisions, and supervised activity records.",
       "assumption": "The hypothetical malicious-use route differs from the observed dual-use access cases."
     },
     {
       "id": "C5",
       "title": "Facility safety and containment operators",
-      "responsibility": "Enforce approved facility bounds, respond to deviations and verify that a safety intervention has taken effect.",
-      "feedback": "Independent safety observations, incident reports and verified cessation of unsafe activity.",
+      "responsibility": "Enforce approved facility bounds, respond to deviations, and verify that a safety intervention has taken effect.",
+      "feedback": "Independent safety observations, incident reports, and verified cessation of unsafe activity.",
       "assumption": "A model refusal does not itself control physical activity already underway."
     },
     {
       "id": "C6",
       "title": "Public-health coordination authority",
-      "responsibility": "Recognize credible signals, coordinate appropriate response and verify whether spread is controlled.",
-      "feedback": "Timely surveillance, clinical reports, intervention outcomes and response capacity.",
+      "responsibility": "Recognize credible signals, coordinate appropriate response, and verify whether spread is controlled.",
+      "feedback": "Timely surveillance, clinical reports, intervention outcomes, and response capacity.",
       "assumption": "Absence of a detected outbreak is not proof that all upstream controls worked."
     },
     {
       "id": "C7",
       "title": "Clinical and outbreak-response services",
       "responsibility": "Implement authorized protective actions and report their coverage and effects.",
-      "feedback": "Case information, operational capacity and implementation results.",
+      "feedback": "Case information, operational capacity, and implementation results.",
       "assumption": "A response policy has no protective effect unless it reaches the affected population in time."
     }
   ],
@@ -179,8 +179,8 @@
       "id": "CA2",
       "controller": "C2",
       "process": "C4",
-      "action": "Grant, restrict or revoke AI service access",
-      "feedback": "Observed access, relevant classifier results and re-entry after enforcement.",
+      "action": "Grant, restrict, or revoke AI service access",
+      "feedback": "Observed access, relevant classifier results, and re-entry after enforcement.",
       "constraints": [
         "SC1",
         "SC2"
@@ -190,7 +190,7 @@
       "id": "CA3",
       "controller": "C3",
       "process": "C4",
-      "action": "Authorize, limit or pause research activity",
+      "action": "Authorize, limit, or pause research activity",
       "feedback": "Independent project review and actual activity within the facility.",
       "constraints": [
         "SC3"
@@ -211,8 +211,8 @@
       "id": "CA5",
       "controller": "C6",
       "process": "C7",
-      "action": "Initiate, adapt or end coordinated outbreak response",
-      "feedback": "Coverage, timeliness and observed change in transmission and harm.",
+      "action": "Initiate, adapt, or end coordinated outbreak response",
+      "feedback": "Coverage, timeliness, and observed change in transmission and harm.",
       "constraints": [
         "SC5"
       ]
@@ -284,7 +284,7 @@
         "B-01:3"
       ],
       "test": "Does an unapproved change trigger a meaningful hold and independent review before consequential activity proceeds?",
-      "limit": "Misleading records, unclear ownership or oversight that only checks the written proposal."
+      "limit": "Misleading records, unclear ownership, or oversight that only checks the written proposal can leave actual activity outside effective scrutiny."
     },
     {
       "id": "SC4",
@@ -324,8 +324,8 @@
         "B-01:6",
         "B-01:R"
       ],
-      "test": "In an appropriate preparedness exercise, do detection, coordination and action reach the affected population before the modeled response window closes?",
-      "limit": "Delayed signals, insufficient capacity and ineffective coordination; detection alone does not establish interruption."
+      "test": "In an appropriate preparedness exercise, do detection, coordination, and action reach the affected population before the modeled response window closes?",
+      "limit": "Delayed signals, insufficient capacity, and ineffective coordination can prevent a response from interrupting spread. Detection alone does not establish interruption."
     }
   ],
   "nodes": [
@@ -392,7 +392,7 @@
       "title": "A biological hazard escapes authorized control",
       "shortLabel": "Hazard escapes control",
       "text": "Consequential biological activity or material lies outside effective safety governance and containment.",
-      "requires": "Physical feasibility and resources, inadequate oversight and a hazard capable of causing exposure.",
+      "requires": "Physical feasibility and resources, inadequate oversight, and a hazard capable of causing exposure.",
       "mechanism": "Loss of access governance becomes this hazard only when consequential physical conditions are also present.",
       "constraints": [
         "SC3",
@@ -443,7 +443,7 @@
       "role": "Response failure scenario",
       "title": "Detection and response fail to control spread",
       "shortLabel": "Response cannot contain spread",
-      "text": "Detection, coordination or implementation is insufficient to control the outbreak in time.",
+      "text": "Detection, coordination, or implementation is insufficient to control the outbreak in time.",
       "requires": "Ongoing transmission and a response gap large enough to allow widespread exposure.",
       "mechanism": "Warnings must produce timely effective action; an alert alone is not a stopping mechanism.",
       "constraints": [
@@ -471,7 +471,7 @@
       "title": "Disease causes mass mortality",
       "shortLabel": "Mass mortality",
       "text": "Large populations suffer serious disease and death.",
-      "requires": "Widespread exposure, substantial disease burden and inadequate protective response or adaptation.",
+      "requires": "Widespread exposure, substantial disease burden, and inadequate protective response or adaptation.",
       "mechanism": "The scale of mortality needs separate evidence; neither access evasion nor a research program establishes it.",
       "constraints": [
         "SC5"
@@ -716,7 +716,7 @@
       "evidence": [
         "IR"
       ],
-      "unknown": "Actual activity, material feasibility, authorized scope and the effectiveness of facility controls."
+      "unknown": "Actual activity, material feasibility, authorized scope, and the effectiveness of facility controls."
     },
     {
       "id": "LS4",
@@ -735,7 +735,7 @@
         "B-01:R"
       ],
       "evidence": [],
-      "unknown": "What action occurred, when it reached the relevant process and what evidence confirms its effect."
+      "unknown": "What action occurred, when it reached the relevant process, and what evidence confirms its effect."
     },
     {
       "id": "LS5",
@@ -755,7 +755,7 @@
       "evidence": [
         "IR"
       ],
-      "unknown": "Transmission, disease burden, public-health capacity and the effect of actual countermeasures."
+      "unknown": "Transmission, disease burden, public-health capacity, and the effect of actual countermeasures."
     }
   ],
   "sources": [
@@ -764,14 +764,14 @@
       "title": "Leveson & Thomas · STPA Handbook (2018)",
       "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
       "locator": "Chapter 2, pp. 14–53; Chapter 6, pp. 101–115",
-      "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios and leading indicators."
+      "use": "Method: losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios, and leading indicators."
     },
     {
       "id": "MYLIUS",
       "title": "Simon Mylius · Systematic Hazard Analysis for Frontier AI using STPA",
       "url": "https://arxiv.org/html/2506.01782v1",
       "locator": "Sections 3.1–3.6 and 4.8",
-      "use": "Direct AI application: explicit scope, control relationships and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
+      "use": "Direct AI application: explicit scope, control relationships, and traceable causal analysis. Also explains the STPA–CAST relationship. Its deployment example is narrower than the successor-development hypothesis here."
     },
     {
       "id": "CAA",
@@ -784,7 +784,7 @@
       "id": "AN26",
       "title": "Anthropic · Detecting and countering misuse of AI: September 2026",
       "url": "https://www.anthropic.com/threat-intelligence-report-september-2026",
-      "locator": "Biological misuse, introductory scope and case studies 1–2",
+      "locator": "Biological misuse: introductory scope and case studies 1–2",
       "use": "Provider-reported access enforcement and classifier performance. Malicious intent and biological release are not established."
     },
     {
@@ -792,7 +792,7 @@
       "title": "International AI Safety Report 2026",
       "url": "https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026",
       "locator": "Section 2.1.4 and evaluation limitations",
-      "use": "Separates capability tests, practical uplift and uncertain real-world outcomes."
+      "use": "Separates capability tests, practical uplift, and uncertain real-world outcomes."
     },
     {
       "id": "DM",
@@ -827,12 +827,12 @@
         "target": "B-01:1",
         "anchor": "B-01:1",
         "observed": "Anthropic reports that access resumed within days after bans and relay takedowns.",
-        "notEstablished": "The dual-use research case does not establish malicious intent, harmful exposure or a pandemic.",
-        "limit": "An observed failure of lasting access exclusion at 1.1; harmful intent and biological outcomes are not established.",
+        "notEstablished": "The dual-use research case does not establish malicious intent, harmful exposure, or a pandemic.",
+        "limit": "The reported failure to maintain access restrictions maps to 1.1. It does not establish harmful intent or biological outcomes.",
         "barriers": {
           "relay-enforcement": {
             "title": "Account bans and relay takedowns",
-            "result": "Temporary interruption; lasting exclusion failed.",
+            "result": "The interruption was temporary. Lasting exclusion failed.",
             "condition": "failed",
             "conditionBasis": "The provider reports re-established access within days; the rating concerns lasting exclusion, not whether accounts were closed.",
             "limitType": "safeguard",
@@ -850,7 +850,7 @@
           "target": "B-01:2",
           "question": "Did restored access materially increase practical capability?",
           "basis": "The provider reports that access resumed after enforcement and that the research continued.",
-          "unresolved": "Continued access does not isolate the contribution of AI. A defensible comparison of work with and without assistance is missing.",
+          "unresolved": "However, continued access does not show how much AI contributed to the work. That would require a credible comparison of the research with and without AI assistance.",
           "sources": [
             "AN26"
           ]
@@ -863,12 +863,12 @@
         "target": "B-01:1",
         "anchor": "B-01:1",
         "observed": "The provider reports that relevant assistance was confined to weaker models and judged its contribution limited.",
-        "notEstablished": "Independent outcome efficacy, malicious intent, a harmful release and a pandemic are not established.",
-        "limit": "A reported restriction at 1.1, partly dependent on lower fallback capability; it does not demonstrate a prevented pandemic.",
+        "notEstablished": "The record does not independently establish how much AI helped the research. It also does not establish malicious intent, a harmful release, or a pandemic.",
+        "limit": "The provider reports an access restriction at 1.1 that partly depended on the limited capability of fallback models. The case does not demonstrate that a pandemic was prevented.",
         "barriers": {
           "bio-classifier": {
             "title": "Biological safety classifiers",
-            "result": "Held in the reported scope; weaker models remained accessible.",
+            "result": "The restriction held within the reported scope. Weaker models remained accessible.",
             "condition": "intact",
             "conditionBasis": "Anthropic reports the stronger-model restriction worked in these exchanges; this is a provider assessment of a bounded case.",
             "limitType": "mixed",
@@ -886,7 +886,7 @@
           "target": "B-01:2",
           "question": "Would the capability limit hold as fallback models improve?",
           "basis": "The provider reports restricting relevant assistance to its weakest models and judges their contribution limited.",
-          "unresolved": "The case does not establish how this limit would perform with stronger fallback models. Independent measures of practical contribution are missing.",
+          "unresolved": "However, the case does not test what happens when fallback models become more useful. The missing evidence is whether assistance available under the same restrictions would materially change what researchers could accomplish.",
           "sources": [
             "AN26"
           ]
@@ -898,7 +898,7 @@
     "context": [
       {
         "title": "System setting",
-        "text": "A hypothetical AI-service, research-governance, facility-safety and public-health system. The analysis follows a potential malicious-use route at a non-operational level; it separates model access, demonstrated assistance, physical hazard, exposure and public-health consequences.",
+        "text": "The model covers a hypothetical AI-service, research-governance, facility-safety, and public-health system. It follows a potential malicious-use route at a non-operational level. Access to AI is distinct from useful assistance. A physical hazard and exposure are further conditions; public-health consequences do not follow from access alone.",
         "sources": [],
         "targets": [
           {
@@ -922,9 +922,9 @@
     "cloud": {
       "origin": "scenario-setting",
       "conditions": [
-        "Access to AI",
-        "Research institutions",
-        "Public-health capacity"
+        "Access to useful AI",
+        "Physical research capacity",
+        "Public-health preparedness"
       ],
       "actors": [
         {
@@ -935,7 +935,12 @@
         {
           "controller": "C3",
           "label": "Research oversight",
-          "role": "authorize & supervise"
+          "role": "authorize and supervise"
+        },
+        {
+          "controller": "C5",
+          "label": "Facility operators",
+          "role": "maintain containment"
         },
         {
           "controller": "C6",
@@ -943,7 +948,7 @@
           "role": "coordinate response"
         }
       ],
-      "summary": "Access and institutional capacity shape what providers, researchers and responders can control."
+      "summary": "Control depends on more than access to AI: institutions must also govern physical research and be able to respond to harm."
     }
   }
 }
