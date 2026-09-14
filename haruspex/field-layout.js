@@ -93,11 +93,11 @@
   /**
    * A single inexpensive pass. ids is an optional Set of filter-matching IDs.
    * Clock coordinates preserve source instants. Uncertain points reuse their
-   * cached fraction within the current source-window intersection. That moving
-   * position is layout, never a source timestamp. yWorld never changes on pan,
+   * cached position within the full source window. That position is layout,
+   * never a source timestamp. Both time and yWorld stay fixed on pan,
    * zoom or filtering. Open intervals remain in layout.unplaced.
    */
-  function project(layout, { range, vertical = [0, 1], rect = layout.geometry, ids = null, clipY = true, magnify = true } = {}) {
+  function project(layout, { range, vertical = [0, 1], rect = layout.geometry, ids = null, clipY = true, clipX = true, magnify = true } = {}) {
     validateCamera(range, vertical, rect);
     const xFactor = (rect.right - rect.left) / (range[1] - range[0]);
     const yFactor = (rect.bottom - rect.top) / (vertical[1] - vertical[0]);
@@ -105,12 +105,10 @@
     const points = [];
     for (const point of layout.points) {
       if (ids && !ids.has(point.id)) continue;
-      if (!intersects(point, range)) continue;
+      if (clipX && (point.time < range[0] || point.time >= range[1])) continue;
       const y = rect.top + (point.yWorld - vertical[0]) * yFactor;
       if (clipY && (y < rect.top || y > rect.bottom)) continue;
-      const start = Math.max(point.start, range[0]);
-      const end = Math.min(point.end, range[1]);
-      const time = point.kind === 'clock' ? point.start : start + point.fraction * (end - start);
+      const time = point.time;
       points.push({ event: point.event, id: point.id, x: rect.left + (time - range[0]) * xFactor, y, radius: point.radius * magnification, time, fraction: point.fraction, yWorld: point.yWorld, kind: point.kind, bandKey: point.bandKey, windowStart: point.start, windowEnd: point.end });
     }
     return points;
@@ -196,14 +194,17 @@
     }
     return points;
   }
-  function calendarTime(point, range) {
+  function calendarTime(point) {
+    if (finite(point.time)) return point.time;
     const { start, end, kind } = point.event._time;
     if (kind === 'clock') return start;
     if (start === null) return end;
     if (end === null) return start;
-    let a = Math.max(start, range[0]), b = Math.min(end, range[1]);
-    if (b < a) { a = start; b = end; }
-    return a + (point.fraction ?? .5) * (b - a);
+    return start + (point.fraction ?? .5) * (end - start);
+  }
+  function swarmScale(range, vertical, packingRange) {
+    const zoom = (packingRange[1]-packingRange[0])/(range[1]-range[0])/(vertical[1]-vertical[0]);
+    return Math.min(1.8,Math.pow(Math.max(1,zoom),.12));
   }
   function calendarPlan(from, to) {
     validateCamera(from.range, [0, 1], from.geometry);
@@ -239,18 +240,39 @@
     const range = dateCamera.range;
     const geometry = { ...plan.to.geometry };
     for (const key of ['left', 'right', 'top', 'bottom']) geometry[key] = blend(plan.from.geometry[key], plan.to.geometry[key]).value;
+    const worldCamera = plan.from.vertical && plan.to.vertical;
+    const heightCamera = worldCamera ? rangeFrame(plan.from.vertical,plan.to.vertical,plan.from.verticalVelocity,t,duration) : null;
+    const vertical = heightCamera?.range;
+    if (worldCamera) {
+      geometry.lanes = (geometry.lanes || []).map(lane=>({...lane,
+        y:geometry.top+((lane.start+lane.end)/2-vertical[0])/(vertical[1]-vertical[0])*(geometry.bottom-geometry.top),
+        height:(lane.end-lane.start)/(vertical[1]-vertical[0])*(geometry.bottom-geometry.top),
+      }));
+    }
+    const scale = worldCamera ? swarmScale(range,vertical,plan.to.packingRange) : 1;
     const points = plan.pairs.map(({ start, end }) => {
       const fraction = blend(start.fraction ?? .5, end.fraction ?? .5).value;
-      const time = calendarTime({ ...end, fraction }, range);
-      const y = blend(start.y, end.y, start.vy || 0);
-      return { ...end, fraction, time, bend: blend(start.bend || 0, end.bend || 0).value,
-        x: geometry.left + (time - range[0]) / (range[1] - range[0]) * (geometry.right - geometry.left),
-        y: y.value, vx: 0, vy: y.velocity,
-        radius: blend(start.radius, end.radius).value,
-        paintRadius: Math.max(start.paintRadius || start.radius, end.paintRadius || end.radius), alpha: 1 };
-    }).filter(p => p.time !== null);
-    return { range, rangeVelocity: dateCamera.velocity, geometry, points };
+      const time = calendarTime({ ...end, fraction });
+      const worldY = blend(start.yWorld ?? 0,end.yWorld ?? 0).value;
+      const y = worldCamera ? {
+        value:geometry.top+(worldY-vertical[0])/(vertical[1]-vertical[0])*(geometry.bottom-geometry.top),
+        velocity:-(geometry.bottom-geometry.top)*(heightCamera.velocity[0]+(worldY-vertical[0])/(vertical[1]-vertical[0])*(heightCamera.velocity[1]-heightCamera.velocity[0]))/(vertical[1]-vertical[0]),
+      } : blend(start.y,end.y,start.vy || 0);
+      const u = (time-range[0])/(range[1]-range[0]);
+      const radius = worldCamera ? Math.max(end.minimumRadius || 0,(end.baseRadius || end.radius)*scale) : blend(start.radius,end.radius).value;
+      const bend = worldCamera && end.event._time.openStart
+        ? Math.min(34,(end.bandHeight || 0)/(vertical[1]-vertical[0])*(geometry.bottom-geometry.top)*.32)*(end.event._index%2?1:-1)
+        : blend(start.bend || 0,end.bend || 0).value;
+      return { ...end, fraction, time, yWorld:worldY, bend,
+        x:geometry.left+u*(geometry.right-geometry.left), y:y.value,
+        vx:-(geometry.right-geometry.left)*(dateCamera.velocity[0]+u*(dateCamera.velocity[1]-dateCamera.velocity[0]))/(range[1]-range[0]),
+        vy:y.velocity, radius,
+        paintRadius:worldCamera ? Math.max(end.minimumRadius || 0,(end.baseRadius || end.radius)*1.8) : Math.max(start.paintRadius || start.radius,end.paintRadius || end.radius),
+        alpha:blend(start.alpha ?? 1,end.alpha ?? 1).value };
+    }).filter(p=>p.time!==null);
+    return { range,rangeVelocity:dateCamera.velocity,vertical,verticalVelocity:heightCamera?.velocity,geometry,points };
   }
+
   // These windows are positions within one schematic bow-tie, never dates.
   function bowtieWindow(phase = 'all') {
     return { ...({
@@ -298,5 +320,5 @@
     for (let time = Math.ceil(range[0] / step) * step; time <= range[1]; time += step) ticks.push(time);
     return ticks;
   }
-  root.HaruspexLayout = Object.freeze({ create, project, bowtie, calendarTime, calendarPlan, calendarFrame, bowtieWindow, bowtieProject, bowtieFrame, timeTicks });
+  root.HaruspexLayout = Object.freeze({ create, project, bowtie, calendarTime, swarmScale, calendarPlan, calendarFrame, bowtieWindow, bowtieProject, bowtieFrame, timeTicks });
 })(typeof window === 'undefined' ? globalThis : window);

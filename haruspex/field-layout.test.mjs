@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import './field-layout.js';
-const { create, project, bowtie, calendarTime, calendarPlan, calendarFrame, bowtieWindow, bowtieProject, bowtieFrame, timeTicks } = globalThis.HaruspexLayout;
+const { create, project, bowtie, calendarTime, swarmScale, calendarPlan, calendarFrame, bowtieWindow, bowtieProject, bowtieFrame, timeTicks } = globalThis.HaruspexLayout;
 const DAY = 86400000;
 const rect = { left: 40, right: 1240, top: 80, bottom: 700 };
 const event = (id, time) => ({ id, _time: time });
@@ -153,6 +153,45 @@ const during=phaseSnapshot('during',true), after=phaseSnapshot('after',true);
 const sharedDate=Date.UTC(2026,6,15);
 assert(Math.abs(xAt(sharedDate,during.range)-xAt(sharedDate,after.range)) < (rect.right-rect.left)*.2, 'II to III should only shift a July date a small distance');
 assert.equal(JSON.stringify(events), untouched, 'Animation must not modify source records');
+// Fit and zoom keep the entire scene. Crossing a camera edge is not deletion.
+function scene(range, vertical) {
+  const marks=project(layout,{range,vertical,rect,clipX:false,clipY:false,magnify:false}).map(p=>({
+    ...p,baseRadius:3,radius:3*swarmScale(range,vertical,fullRange),alpha:1,
+  }));
+  return Object.assign(marks,{range,vertical,geometry:rect,packingRange:fullRange,rangeVelocity:[0,0],verticalVelocity:[0,0]});
+}
+const wideScene=scene(fullRange,[0,1]);
+const narrowRange=[Date.UTC(2026,6,10),Date.UTC(2026,6,14)];
+const tightScene=scene(narrowRange,[.3,.55]);
+assert.equal(wideScene.length,tightScene.length,'Changing Fit must retain the whole scene, including offscreen marks');
+const zoomPlan2=calendarPlan(wideScene,tightScene);
+for (const t of [0,.1,.3,.6,.9,1]) {
+  const f=calendarFrame(zoomPlan2,t,850);
+  assert.equal(f.points.length,wideScene.length);
+  assert(f.points.every(p=>p.radius>=3 && p.alpha===1),'Fit and zoom must not shrink or fade any event away');
+  for (const p of f.points) {
+    close(p.time,wideScene.find(q=>q.event.id===p.event.id).time,'Zoom must not relocate uncertain dates');
+    close(p.x,xAt(p.time,f.range),'Horizontal zoom must use the displayed camera');
+    close(p.y,rect.top+(p.yWorld-f.vertical[0])/(f.vertical[1]-f.vertical[0])*(rect.bottom-rect.top),'Vertical Fit must zoom the field');
+  }
+}
+const zoomEnd=calendarFrame(zoomPlan2,1,850);
+assert(zoomEnd.points.some(p=>p.x<rect.left || p.x>rect.right),'Zoomed-out points must continue beyond the side edges');
+assert(zoomEnd.points.some(p=>p.y<rect.top || p.y>rect.bottom),'Vertical zoom must carry points past the top or bottom');
+for (const p of tightScene) {
+  const q=zoomEnd.points.find(q=>q.event.id===p.event.id);
+  close(p.x,q.x,'Zoom endpoint x must match static projection');close(p.y,q.y,'Zoom endpoint y must match');close(p.radius,q.radius,'Zoom must settle without a size jump');
+}
+const zoomMiddle=calendarFrame(zoomPlan2,.45,850);
+const zoomInterrupted=Object.assign(zoomMiddle.points,{range:zoomMiddle.range,vertical:zoomMiddle.vertical,rangeVelocity:zoomMiddle.rangeVelocity,verticalVelocity:zoomMiddle.verticalVelocity,geometry:zoomMiddle.geometry,packingRange:fullRange});
+const zoomRestart=calendarFrame(calendarPlan(zoomInterrupted,wideScene),0,850);
+for (const p of zoomMiddle.points) {
+  const q=zoomRestart.points.find(q=>q.event.id===p.event.id);
+  close(p.x,q.x,'Reversing Fit must continue from current x');close(p.y,q.y,'Reversing Fit must continue from current y');
+}
+const dimScene=Object.assign(tightScene.map(p=>({...p,alpha:.12})),{range:tightScene.range,vertical:tightScene.vertical,geometry:rect,packingRange:fullRange});
+const dimEnd=calendarFrame(calendarPlan(tightScene,dimScene),1,700);
+assert(dimEnd.points.every(p=>p.radius>0 && p.alpha===.12),'Surrounding phases remain as a visible reference');
 // Bow-tie focus is a camera over one stable role-based form. It never assigns
 // source times to its schematic positions, including the unknown-start cases.
 const boxes = {before:[.025,.30,.08,.92],during:[.365,.635,.255,.745],after:[.70,.975,.08,.92]};
@@ -198,4 +237,4 @@ const ticks = timeTicks(range);
 const shifted = timeTicks(range.map(t => t + DAY));
 assert(ticks.filter(t => shifted.includes(t)).length >= ticks.length - 1, 'Calendar tick identities must persist during a pan.');
 assert(ticks.every((t, i) => !i || t > ticks[i - 1]));
-console.log(`Passed: source bounds, stable schematic placement across widths, no serial-ID patterns, calendar-aligned phase overlap, interruption continuity, positive zoom ranges, source-anchored open bounds, stable bow-tie focus and reversals, scattered open starts, and no final-frame jumps.`);
+console.log(`Passed: source bounds, stable schematic placement across widths, no serial-ID patterns, calendar-aligned phase overlap, interruption continuity, positive zoom ranges, source-anchored open bounds, persistent scene Fit/zoom with edge exits, stable bow-tie focus and reversals, scattered open starts, and no final-frame jumps.`);
