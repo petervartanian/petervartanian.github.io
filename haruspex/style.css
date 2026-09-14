@@ -1091,9 +1091,9 @@ body{overflow:hidden}
 #egg-message .egg-link:hover{color:#b9f1d2}
 
 /* Title screen: one viewport, sized by height as well as width */
-.intro{display:flex;flex-direction:column;height:100svh;min-height:0;padding:clamp(16px,2.6svh,28px) 48px clamp(14px,2.2svh,24px);overflow:auto}
-.intro-header{flex:none}
-.intro-main{flex:none;margin:auto 0 0;padding:clamp(10px,2.4svh,28px) 0;max-width:1240px}
+.intro{display:grid;grid-template-rows:auto minmax(0,2fr) auto minmax(0,1fr) auto minmax(0,1fr);height:100svh;min-height:0;padding:clamp(16px,2.6svh,28px) 48px clamp(14px,2.2svh,24px);overflow:auto}
+.intro-header{grid-row:1}
+.intro-main{grid-row:3;margin:0;padding:clamp(10px,2.4svh,28px) 0;max-width:1240px}
 .intro h1{font-size:clamp(38px,min(6.6vw,11svh),104px);line-height:1.04;letter-spacing:-.032em;max-width:1150px}
 .quote-credit{margin-top:clamp(12px,2.2svh,24px)}
 .intro-story{max-width:660px;margin-top:clamp(14px,3svh,30px);font-family:var(--serif);font-size:clamp(13px,min(1.22vw,2.05svh),17px);line-height:1.7;color:#a5b9bf}
@@ -1105,9 +1105,9 @@ body{overflow:hidden}
 .intro-choice{font-size:10px;letter-spacing:.14em;color:#6f858d}
 .intro-cast{min-height:0;padding:0;font:clamp(14px,min(1.2vw,2.05svh),17px)/1.4 var(--serif);color:#9fb0bb;text-decoration:underline;text-decoration-color:#9fb0bb44;text-underline-offset:5px}
 .intro-cast:hover{color:#d5e1e6}
-.intro-foot{flex:none;margin-bottom:auto;padding-top:clamp(10px,1.8svh,18px)}
+.intro-foot{grid-row:5;padding-top:clamp(10px,1.8svh,18px)}
 @media(max-width:780px){.intro{padding-left:32px;padding-right:32px}}
-@media(max-width:560px){.intro{padding-left:23px;padding-right:23px}.intro-main{margin:0}.intro-actions{flex-direction:column;align-items:flex-start;gap:14px}}
+@media(max-width:560px){.intro{grid-template-rows:auto auto auto minmax(0,1fr);padding-left:23px;padding-right:23px}.intro-main{grid-row:2}.intro-foot{grid-row:3}.intro-actions{flex-direction:column;align-items:flex-start;gap:14px}}
 
 /* Field chrome: legend beside the plot, tools, banner, search, filters, list */
 /* 1 · a wheel gesture on the title nudges the only way forward */
