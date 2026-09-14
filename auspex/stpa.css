@@ -489,6 +489,18 @@
 .a1-change-sheet { position: relative; padding: 16px 18px; border-left: 2px solid color-mix(in srgb,var(--accent) 48%,var(--line)); background: linear-gradient(115deg,color-mix(in srgb,var(--tint) 70%,var(--page)),color-mix(in srgb,var(--tint) 18%,var(--page))); }
 .a1-change-sheet::after { content: ''; position: absolute; top: 0; right: 0; width: 12px; height: 12px; background: linear-gradient(45deg,color-mix(in srgb,var(--accent) 14%,var(--page)) 48%,var(--page) 51%); }
 .a1-change-sheet .a1-change-label { margin: 0 0 5px; color: var(--muted); font: 10px/1.5 var(--sans); }
+.a1-change-topline { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: -7px 0 3px; }
+.a1-change-topline .a1-change-label { margin: 0; }
+.a1-barrier-build { display: block; flex: 0 0 138px; width: 138px; height: 46px; color: var(--accent); overflow: visible; }
+.a1-build-route { fill: none; stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; opacity: .35; }
+.a1-build-body { fill: currentColor; transform-origin: 80px 26px; }
+.a1-build-caps { fill: none; stroke: currentColor; stroke-width: 1.2; transform-origin: 80px 26px; }
+#barrier-panel [data-strengthening='true'] .a1-build-body { animation: a1-thicken-barrier 850ms cubic-bezier(.2,.7,.2,1) both; }
+#barrier-panel [data-strengthening='true'] .a1-build-caps { animation: a1-widen-barrier-caps 850ms cubic-bezier(.2,.7,.2,1) both; }
+@keyframes a1-thicken-barrier { 0%, 12% { transform: scaleX(.15); } 78% { transform: scaleX(1.08); } 100% { transform: scaleX(1); } }
+@keyframes a1-widen-barrier-caps { 0%, 12% { transform: scaleX(.4); } 78% { transform: scaleX(1.04); } 100% { transform: scaleX(1); } }
+@media (max-width: 500px) { .a1-barrier-build { flex-basis: 112px; width: 112px; height: 40px; } }
+@media (prefers-reduced-motion: reduce) { #barrier-panel [data-strengthening='true'] .a1-build-body, #barrier-panel [data-strengthening='true'] .a1-build-caps { animation: none; } }
 .a1-change-sheet h5 { margin: 0 0 8px; font: italic 19px/1.4 var(--serif); color: var(--accent); text-wrap: pretty; }
 .a1-change-sheet .a1-change-proposal { margin: 0; font: 13px/1.7 var(--sans); }
 .a1-change-check { margin-top: 14px; padding-top: 3px; border-top: 1px solid color-mix(in srgb,var(--accent) 16%,transparent); }

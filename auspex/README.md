@@ -45,7 +45,9 @@ remaining vulnerability. A short line names the responsible controllers. Inciden
 barriers use their existing improvement proposals, while unassessed candidate barriers
 use the corresponding model constraint. “Back to assessment” restores the original
 reading. There is no supporting disclosure, simulated success, or new assessed state.
-The original state glyph and source evidence remain visible throughout.
+The original state glyph and source evidence remain visible throughout. A small
+illustration in the proposal sheet thickens its barrier once on opening. Reduced-motion
+preferences and the static reader show the finished illustration without animation.
 
 Proposed selections use `s=<route-id>&c=<constraint-id>`. Incident assessments retain
 `b=<barrier-id>`. `strengthen=1` opens the proposed change and supports browser history

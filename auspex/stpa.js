@@ -263,7 +263,7 @@
   function improvementReading(change, owners = []) {
     if (!change) return '';
     const names=joinNames(owners.map(owner=>controller(owner).title));
-    return `<section class="a1-change-sheet"><p class="a1-change-label">Proposed change</p>${change.title?`<h5>${esc(change.title)}</h5>`:''}<p class="a1-change-proposal">${esc(change.proposal)}</p><div class="a1-change-check"><p><strong>Try it /</strong> ${esc(change.test)}</p>${change.remaining?`<p><strong>Still vulnerable /</strong> ${esc(change.remaining)}</p>`:''}</div>${names?`<p class="a1-change-owners"><strong>Who could make this change</strong><span>${esc(names)}</span></p>`:''}</section>`;
+    return `<section class="a1-change-sheet"><div class="a1-change-topline"><p class="a1-change-label">Proposed change</p><svg class="a1-barrier-build" viewBox="0 0 156 52" role="img" aria-label="Illustration of the proposed barrier becoming thicker"><path class="a1-build-route" d="M4 26H148m-6-4 6 4-6 4"/><rect class="a1-build-body" x="75" y="10" width="10" height="32" rx=".5"/><path class="a1-build-caps" d="M64 10H96M64 42H96" vector-effect="non-scaling-stroke"/></svg></div>${change.title?`<h5>${esc(change.title)}</h5>`:''}<p class="a1-change-proposal">${esc(change.proposal)}</p><div class="a1-change-check"><p><strong>Try it /</strong> ${esc(change.test)}</p>${change.remaining?`<p><strong>Still vulnerable /</strong> ${esc(change.remaining)}</p>`:''}</div>${names?`<p class="a1-change-owners"><strong>Who could make this change</strong><span>${esc(names)}</span></p>`:''}</section>`;
   }
   function strengthenButton(active) {
     const symbol=active?'<path d="M12 8H3m4-4L3 8l4 4"/>':'<path d="m3 10 7-7 3 3-7 7-4 1 1-4Zm6-6 3 3M2 16c4-2 6 2 12-1"/>';
