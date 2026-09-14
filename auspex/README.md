@@ -20,6 +20,12 @@ Every model contains losses, hazards, control and feedback relationships, constr
 contextual unsafe control actions, causal scenarios and a conditional recovery route.
 The bow-tie map summarizes the provisional analysis.
 
+0 is a shared background across each worked diagram. Short context excerpts sit
+beside the components they inform, with no separate opening list or disclosure.
+Selecting a component brings its contextual text into the pathway color. The original
+scope and context paragraphs remain in the research reader. Warning-sign caveats
+retain small linked asterisks. Context adds no causal nodes or arrows.
+
 The map uses **0. Context**, **1. Precursors**, **2. Event**, **3. Consequences**,
 with components numbered within their region (1.1, 1.2, 2.1, 3.1…). Recovery retains R.
 A-1 includes the original background conditions, developing danger and warning signs

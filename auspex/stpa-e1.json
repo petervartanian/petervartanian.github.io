@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "pathway": "S-01",
   "displayId": "E-1",
   "title": "Correlated grid control and loss of essential power",
@@ -991,7 +991,36 @@
       }
     },
     "fidelity": "Non-AI incidents inform selected control mechanisms. Observed recovery is displayed alongside failure, and the public-health continuation remains conditional.",
-    "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness."
+    "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness.",
+    "context": [
+      {
+        "title": "System setting",
+        "text": "A hypothetical regional electricity system using related AI forecasts or control recommendations: model procurement, dispatch authorization, physical protection, regional coordination and restoration. Essential-service operators are included at their electricity and backup interface.",
+        "sources": [],
+        "targets": [
+          {
+            "node": "S-01:1",
+            "label": "Dispatch",
+            "text": "A regional grid uses related AI forecasts or control recommendations."
+          },
+          {
+            "node": "S-01:3",
+            "label": "Containment",
+            "text": "Physical protection and regional coordination surround dispatch decisions."
+          },
+          {
+            "node": "S-01:4",
+            "label": "Essential services",
+            "text": "Essential services depend on electricity and backup capacity."
+          },
+          {
+            "node": "S-01:R",
+            "label": "Restoration",
+            "text": "Grid restoration and essential-service operators are included in the system."
+          }
+        ]
+      }
+    ]
   },
   "controlEvidence": {
     "title": "What kept a blackout from lasting longer?",

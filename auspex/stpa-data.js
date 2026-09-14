@@ -1,7 +1,7 @@
 // Generated from STPA models and barrier-states.json by build-stpa.mjs.
 window.AuspexSTPAModels = {
   "X-01": {
-    "version": "1.5",
+    "version": "1.6",
     "pathway": "X-01",
     "displayId": "A-1",
     "title": "Successor capture and the loss of human control",
@@ -942,11 +942,13 @@ window.AuspexSTPAModels = {
           "targets": [
             {
               "node": "X-01:1",
-              "label": "Development"
+              "label": "Development",
+              "text": "AI contributes to successor development."
             },
             {
               "node": "X-01:4",
-              "label": "Authority"
+              "label": "Authority",
+              "text": "People can grant consequential authority over compute and services."
             }
           ]
         },
@@ -959,11 +961,13 @@ window.AuspexSTPAModels = {
           "targets": [
             {
               "node": "X-01:3",
-              "label": "Assurance"
+              "label": "Assurance",
+              "text": "Successor changes escape independent review."
             },
             {
               "node": "X-01:4",
-              "label": "Control limits"
+              "label": "Control limits",
+              "text": "Access expands beyond what humans can reliably revoke."
             }
           ]
         },
@@ -979,11 +983,13 @@ window.AuspexSTPAModels = {
           "targets": [
             {
               "node": "X-01:2",
-              "label": "Pause decision"
+              "label": "Pause decision",
+              "text": "Behavior differs between monitored and unmonitored settings."
             },
             {
               "node": "X-01:R",
-              "label": "Recovery check"
+              "label": "Recovery check",
+              "text": "An interruption cannot be verified."
             }
           ]
         }
@@ -1050,7 +1056,7 @@ window.AuspexSTPAModels = {
         "question": "What actually ended the episode, and would that circumstance recur?"
       }
     ],
-    "version": "1.2",
+    "version": "1.3",
     "pathway": "P-01",
     "displayId": "B-1",
     "title": "Personal command and the loss of constitutional control",
@@ -1800,7 +1806,36 @@ window.AuspexSTPAModels = {
         }
       },
       "fidelity": "Evidence marks procurement context at 1.1 only. Candidate constitutional controls are explicit requirements for the hypothetical system; the mapped announcements do not demonstrate that they worked.",
-      "barrierQuestion": "Would this protection still constrain a more capable system, or does it rely on today’s limited capability, access or opportunity?"
+      "barrierQuestion": "Would this protection still constrain a more capable system, or does it rely on today’s limited capability, access or opportunity?",
+      "context": [
+        {
+          "title": "System setting",
+          "text": "A hypothetical state’s procurement, military command, force-control and constitutional oversight system. The model concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
+          "sources": [],
+          "targets": [
+            {
+              "node": "P-01:1",
+              "label": "Procurement",
+              "text": "A hypothetical state’s procurement and military command system."
+            },
+            {
+              "node": "P-01:2",
+              "label": "Command loyalty",
+              "text": "The route concerns personal command loyalty."
+            },
+            {
+              "node": "P-01:4",
+              "label": "Oversight",
+              "text": "Force control and constitutional oversight are distinct functions."
+            },
+            {
+              "node": "P-01:5",
+              "label": "Boundary",
+              "text": "Covert developer loyalty and hostile takeover are separate routes."
+            }
+          ]
+        }
+      ]
     }
   },
   "W-01": {
@@ -1863,7 +1898,7 @@ window.AuspexSTPAModels = {
         "question": "What actually ended the episode, and would that circumstance recur?"
       }
     ],
-    "version": "1.1",
+    "version": "1.2",
     "pathway": "W-01",
     "displayId": "C-1",
     "title": "Misleading threat assessment and nuclear escalation",
@@ -2862,7 +2897,36 @@ window.AuspexSTPAModels = {
         }
       },
       "fidelity": "The two records are historical comparisons at 1.2. Reinforced means a documented corrective design after the incident; it does not identify the historical stopping mechanism or prove future efficacy.",
-      "barrierQuestion": "Will this control still work when misleading information becomes more persuasive, or does it only address a known fault?"
+      "barrierQuestion": "Will this control still work when misleading information becomes more persuasive, or does it only address a known fault?",
+      "context": [
+        {
+          "title": "System setting",
+          "text": "A hypothetical crisis-warning, intelligence-assessment and nuclear-command system in which AI shapes advice to human decision-makers. Sensor input, independent scrutiny, authorization and correction are modeled separately.",
+          "sources": [],
+          "targets": [
+            {
+              "node": "W-01:1",
+              "label": "Crisis advice",
+              "text": "AI shapes advice to human decision-makers in a crisis."
+            },
+            {
+              "node": "W-01:3",
+              "label": "Scrutiny",
+              "text": "Sensor input and independent scrutiny are modeled separately."
+            },
+            {
+              "node": "W-01:4",
+              "label": "Authorization",
+              "text": "Authorization is a distinct part of the command system."
+            },
+            {
+              "node": "W-01:R",
+              "label": "Correction",
+              "text": "Correction is modeled separately from authorization."
+            }
+          ]
+        }
+      ]
     }
   },
   "B-01": {
@@ -2925,7 +2989,7 @@ window.AuspexSTPAModels = {
         "question": "What actually ended the episode, and would that circumstance recur?"
       }
     ],
-    "version": "1.1",
+    "version": "1.2",
     "pathway": "B-01",
     "displayId": "D-1",
     "title": "Biological misuse and the limits of access control",
@@ -3739,11 +3803,35 @@ window.AuspexSTPAModels = {
         }
       },
       "fidelity": "Current condition and brittleness are separate. Relay exclusion failed; the classifier held within the provider’s reported scope but partly relied on lower fallback capability. Neither observation establishes a biological outcome.",
-      "barrierQuestion": "Does the barrier work because it is enforced, or because the assistance still available is too weak—and what happens when that changes?"
+      "barrierQuestion": "Does the barrier work because it is enforced, or because the assistance still available is too weak—and what happens when that changes?",
+      "context": [
+        {
+          "title": "System setting",
+          "text": "A hypothetical AI-service, research-governance, facility-safety and public-health system. The analysis follows a potential malicious-use route at a non-operational level; it separates model access, demonstrated assistance, physical hazard, exposure and public-health consequences.",
+          "sources": [],
+          "targets": [
+            {
+              "node": "B-01:1",
+              "label": "Access",
+              "text": "AI services operate within research governance."
+            },
+            {
+              "node": "B-01:3",
+              "label": "Physical control",
+              "text": "Model assistance and physical hazard are distinct parts of the analysis."
+            },
+            {
+              "node": "B-01:4",
+              "label": "Public health",
+              "text": "Exposure and public-health consequences are considered separately."
+            }
+          ]
+        }
+      ]
     }
   },
   "S-01": {
-    "version": "1.1",
+    "version": "1.2",
     "pathway": "S-01",
     "displayId": "E-1",
     "title": "Correlated grid control and loss of essential power",
@@ -4735,7 +4823,36 @@ window.AuspexSTPAModels = {
         }
       },
       "fidelity": "Non-AI incidents inform selected control mechanisms. Observed recovery is displayed alongside failure, and the public-health continuation remains conditional.",
-      "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness."
+      "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness.",
+      "context": [
+        {
+          "title": "System setting",
+          "text": "A hypothetical regional electricity system using related AI forecasts or control recommendations: model procurement, dispatch authorization, physical protection, regional coordination and restoration. Essential-service operators are included at their electricity and backup interface.",
+          "sources": [],
+          "targets": [
+            {
+              "node": "S-01:1",
+              "label": "Dispatch",
+              "text": "A regional grid uses related AI forecasts or control recommendations."
+            },
+            {
+              "node": "S-01:3",
+              "label": "Containment",
+              "text": "Physical protection and regional coordination surround dispatch decisions."
+            },
+            {
+              "node": "S-01:4",
+              "label": "Essential services",
+              "text": "Essential services depend on electricity and backup capacity."
+            },
+            {
+              "node": "S-01:R",
+              "label": "Restoration",
+              "text": "Grid restoration and essential-service operators are included in the system."
+            }
+          ]
+        }
+      ]
     },
     "controlEvidence": {
       "title": "What kept a blackout from lasting longer?",
@@ -4761,7 +4878,7 @@ window.AuspexSTPAModels = {
     }
   },
   "F-01": {
-    "version": "1.1",
+    "version": "1.2",
     "pathway": "F-01",
     "displayId": "F-1",
     "title": "Amplification, failed response and mass violence",
@@ -5827,7 +5944,31 @@ window.AuspexSTPAModels = {
         }
       },
       "fidelity": "Reported investigations identify evidence-bearing mechanisms and their uncertainty. Platform responses are visible; later strengthening is distinguished from earlier failure, and content enforcement from physical protection.",
-      "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness."
+      "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness.",
+      "context": [
+        {
+          "title": "System setting",
+          "text": "A hypothetical platform operating in a conflict-affected setting: ranking, content enforcement, platform governance, local warning partners and the interface to civilian protection. Human perpetrators and pre-existing conflict remain causal actors outside platform control.",
+          "sources": [],
+          "targets": [
+            {
+              "node": "F-01:1",
+              "label": "Conflict setting",
+              "text": "A platform operates in a conflict-affected setting."
+            },
+            {
+              "node": "F-01:3",
+              "label": "Local warnings",
+              "text": "Local warning partners connect with platform governance and content enforcement."
+            },
+            {
+              "node": "F-01:4",
+              "label": "Perpetrators",
+              "text": "Human perpetrators and pre-existing conflict remain causal actors outside platform control."
+            }
+          ]
+        }
+      ]
     },
     "controlEvidence": {
       "title": "Did a warning become protection?",
@@ -5890,7 +6031,7 @@ window.AuspexSTPAModels = {
         "definition": "A response re-establishes enforceable safety constraints within a specified boundary; success requires verification."
       }
     ],
-    "version": "1.1",
+    "version": "1.2",
     "pathway": "H-01",
     "displayId": "Bonus-1",
     "title": "Screening, selective records and persistent exclusion",
@@ -6815,7 +6956,31 @@ window.AuspexSTPAModels = {
             }
           }
         }
-      }
+      },
+      "context": [
+        {
+          "title": "System setting",
+          "text": "A hypothetical system of employment screening, record suppliers, policing allocation, model updates and independent redress. The organizations are analytically distinct; no single controller is assumed to command the whole system.",
+          "sources": [],
+          "targets": [
+            {
+              "node": "H-01:1",
+              "label": "Records",
+              "text": "Employment screening depends on record suppliers."
+            },
+            {
+              "node": "H-01:3",
+              "label": "Allocation",
+              "text": "Policing allocation and model updates are analytically distinct functions."
+            },
+            {
+              "node": "H-01:R",
+              "label": "Redress",
+              "text": "Independent redress spans organizations; no single controller commands the whole system."
+            }
+          ]
+        }
+      ]
     }
   }
 };

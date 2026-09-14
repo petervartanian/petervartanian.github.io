@@ -58,7 +58,7 @@
       "question": "What actually ended the episode, and would that circumstance recur?"
     }
   ],
-  "version": "1.1",
+  "version": "1.2",
   "pathway": "W-01",
   "displayId": "C-1",
   "title": "Misleading threat assessment and nuclear escalation",
@@ -1057,6 +1057,35 @@
       }
     },
     "fidelity": "The two records are historical comparisons at 1.2. Reinforced means a documented corrective design after the incident; it does not identify the historical stopping mechanism or prove future efficacy.",
-    "barrierQuestion": "Will this control still work when misleading information becomes more persuasive, or does it only address a known fault?"
+    "barrierQuestion": "Will this control still work when misleading information becomes more persuasive, or does it only address a known fault?",
+    "context": [
+      {
+        "title": "System setting",
+        "text": "A hypothetical crisis-warning, intelligence-assessment and nuclear-command system in which AI shapes advice to human decision-makers. Sensor input, independent scrutiny, authorization and correction are modeled separately.",
+        "sources": [],
+        "targets": [
+          {
+            "node": "W-01:1",
+            "label": "Crisis advice",
+            "text": "AI shapes advice to human decision-makers in a crisis."
+          },
+          {
+            "node": "W-01:3",
+            "label": "Scrutiny",
+            "text": "Sensor input and independent scrutiny are modeled separately."
+          },
+          {
+            "node": "W-01:4",
+            "label": "Authorization",
+            "text": "Authorization is a distinct part of the command system."
+          },
+          {
+            "node": "W-01:R",
+            "label": "Correction",
+            "text": "Correction is modeled separately from authorization."
+          }
+        ]
+      }
+    ]
   }
 }

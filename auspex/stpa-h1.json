@@ -36,7 +36,7 @@
       "definition": "A response re-establishes enforceable safety constraints within a specified boundary; success requires verification."
     }
   ],
-  "version": "1.1",
+  "version": "1.2",
   "pathway": "H-01",
   "displayId": "Bonus-1",
   "title": "Screening, selective records and persistent exclusion",
@@ -961,6 +961,30 @@
           }
         }
       }
-    }
+    },
+    "context": [
+      {
+        "title": "System setting",
+        "text": "A hypothetical system of employment screening, record suppliers, policing allocation, model updates and independent redress. The organizations are analytically distinct; no single controller is assumed to command the whole system.",
+        "sources": [],
+        "targets": [
+          {
+            "node": "H-01:1",
+            "label": "Records",
+            "text": "Employment screening depends on record suppliers."
+          },
+          {
+            "node": "H-01:3",
+            "label": "Allocation",
+            "text": "Policing allocation and model updates are analytically distinct functions."
+          },
+          {
+            "node": "H-01:R",
+            "label": "Redress",
+            "text": "Independent redress spans organizations; no single controller commands the whole system."
+          }
+        ]
+      }
+    ]
   }
 }

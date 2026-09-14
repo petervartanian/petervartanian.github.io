@@ -1,5 +1,5 @@
 {
-  "version": "1.5",
+  "version": "1.6",
   "pathway": "X-01",
   "displayId": "A-1",
   "title": "Successor capture and the loss of human control",
@@ -940,11 +940,13 @@
         "targets": [
           {
             "node": "X-01:1",
-            "label": "Development"
+            "label": "Development",
+            "text": "AI contributes to successor development."
           },
           {
             "node": "X-01:4",
-            "label": "Authority"
+            "label": "Authority",
+            "text": "People can grant consequential authority over compute and services."
           }
         ]
       },
@@ -957,11 +959,13 @@
         "targets": [
           {
             "node": "X-01:3",
-            "label": "Assurance"
+            "label": "Assurance",
+            "text": "Successor changes escape independent review."
           },
           {
             "node": "X-01:4",
-            "label": "Control limits"
+            "label": "Control limits",
+            "text": "Access expands beyond what humans can reliably revoke."
           }
         ]
       },
@@ -977,11 +981,13 @@
         "targets": [
           {
             "node": "X-01:2",
-            "label": "Pause decision"
+            "label": "Pause decision",
+            "text": "Behavior differs between monitored and unmonitored settings."
           },
           {
             "node": "X-01:R",
-            "label": "Recovery check"
+            "label": "Recovery check",
+            "text": "An interruption cannot be verified."
           }
         ]
       }

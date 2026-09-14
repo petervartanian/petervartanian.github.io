@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "pathway": "F-01",
   "displayId": "F-1",
   "title": "Amplification, failed response and mass violence",
@@ -1065,7 +1065,31 @@
       }
     },
     "fidelity": "Reported investigations identify evidence-bearing mechanisms and their uncertainty. Platform responses are visible; later strengthening is distinguished from earlier failure, and content enforcement from physical protection.",
-    "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness."
+    "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness.",
+    "context": [
+      {
+        "title": "System setting",
+        "text": "A hypothetical platform operating in a conflict-affected setting: ranking, content enforcement, platform governance, local warning partners and the interface to civilian protection. Human perpetrators and pre-existing conflict remain causal actors outside platform control.",
+        "sources": [],
+        "targets": [
+          {
+            "node": "F-01:1",
+            "label": "Conflict setting",
+            "text": "A platform operates in a conflict-affected setting."
+          },
+          {
+            "node": "F-01:3",
+            "label": "Local warnings",
+            "text": "Local warning partners connect with platform governance and content enforcement."
+          },
+          {
+            "node": "F-01:4",
+            "label": "Perpetrators",
+            "text": "Human perpetrators and pre-existing conflict remain causal actors outside platform control."
+          }
+        ]
+      }
+    ]
   },
   "controlEvidence": {
     "title": "Did a warning become protection?",

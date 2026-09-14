@@ -58,7 +58,7 @@
       "question": "What actually ended the episode, and would that circumstance recur?"
     }
   ],
-  "version": "1.1",
+  "version": "1.2",
   "pathway": "B-01",
   "displayId": "D-1",
   "title": "Biological misuse and the limits of access control",
@@ -872,6 +872,30 @@
       }
     },
     "fidelity": "Current condition and brittleness are separate. Relay exclusion failed; the classifier held within the provider’s reported scope but partly relied on lower fallback capability. Neither observation establishes a biological outcome.",
-    "barrierQuestion": "Does the barrier work because it is enforced, or because the assistance still available is too weak—and what happens when that changes?"
+    "barrierQuestion": "Does the barrier work because it is enforced, or because the assistance still available is too weak—and what happens when that changes?",
+    "context": [
+      {
+        "title": "System setting",
+        "text": "A hypothetical AI-service, research-governance, facility-safety and public-health system. The analysis follows a potential malicious-use route at a non-operational level; it separates model access, demonstrated assistance, physical hazard, exposure and public-health consequences.",
+        "sources": [],
+        "targets": [
+          {
+            "node": "B-01:1",
+            "label": "Access",
+            "text": "AI services operate within research governance."
+          },
+          {
+            "node": "B-01:3",
+            "label": "Physical control",
+            "text": "Model assistance and physical hazard are distinct parts of the analysis."
+          },
+          {
+            "node": "B-01:4",
+            "label": "Public health",
+            "text": "Exposure and public-health consequences are considered separately."
+          }
+        ]
+      }
+    ]
   }
 }

@@ -58,7 +58,7 @@
       "question": "What actually ended the episode, and would that circumstance recur?"
     }
   ],
-  "version": "1.2",
+  "version": "1.3",
   "pathway": "P-01",
   "displayId": "B-1",
   "title": "Personal command and the loss of constitutional control",
@@ -808,6 +808,35 @@
       }
     },
     "fidelity": "Evidence marks procurement context at 1.1 only. Candidate constitutional controls are explicit requirements for the hypothetical system; the mapped announcements do not demonstrate that they worked.",
-    "barrierQuestion": "Would this protection still constrain a more capable system, or does it rely on today’s limited capability, access or opportunity?"
+    "barrierQuestion": "Would this protection still constrain a more capable system, or does it rely on today’s limited capability, access or opportunity?",
+    "context": [
+      {
+        "title": "System setting",
+        "text": "A hypothetical state’s procurement, military command, force-control and constitutional oversight system. The model concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
+        "sources": [],
+        "targets": [
+          {
+            "node": "P-01:1",
+            "label": "Procurement",
+            "text": "A hypothetical state’s procurement and military command system."
+          },
+          {
+            "node": "P-01:2",
+            "label": "Command loyalty",
+            "text": "The route concerns personal command loyalty."
+          },
+          {
+            "node": "P-01:4",
+            "label": "Oversight",
+            "text": "Force control and constitutional oversight are distinct functions."
+          },
+          {
+            "node": "P-01:5",
+            "label": "Boundary",
+            "text": "Covert developer loyalty and hostile takeover are separate routes."
+          }
+        ]
+      }
+    ]
   }
 }
