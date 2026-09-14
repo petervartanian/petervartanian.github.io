@@ -866,7 +866,7 @@ window.AuspexSTPAModels = {
         "AFK-2024": {
           "title": "Alignment-faking experiment",
           "target": "X-01:3",
-          "limit": "The controlled experiment examined a mechanism relevant to 1.3. It did not establish any later step in this pathway.",
+          "limit": "The controlled experiment examined a mechanism relevant to 1.3, but it did not establish any later step in this pathway.",
           "barriers": {
             "training-assurance": {
               "title": "Behavioral checks",
