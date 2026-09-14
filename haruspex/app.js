@@ -190,7 +190,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     }));
   }
   function tooltipContent(event, nearby = 1) {
-    return `<div class="tooltip-meta">${event.id} · ${LABELS[event._status]}</div><strong>${escapeHtml(event.title)}</strong><div class="tooltip-encodings">${workstreamBadge(event)}${severityBadge(event)}</div><small>${escapeHtml(dateLabel(event))}${event._time.openStart ? ' · head marks the upper bound' : ''}${nearby > 1 ? ` · ${nearby} nearby events` : ''}</small>`;
+    return `<div class="tooltip-meta">${event.id} · ${LABELS[event._status]}</div><strong>${escapeHtml(event.title)}</strong><div class="tooltip-encodings">${workstreamBadge(event)}${severityBadge(event)}</div><small>${escapeHtml(dateLabel(event))}${event._time.openStart ? state.view === 'stream' ? ' · head marks the upper bound' : ' · start unknown' : ''}${nearby > 1 ? ` · ${nearby} nearby events` : ''}</small>`;
   }
   const starNumbers=Array.from({length:70000},(_,i)=>i+1);
   const shuffleStars=random(20260914);
@@ -317,9 +317,6 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     ? event._time.start >= range[0] && event._time.start < range[1]
     : (event._time.start === null || event._time.start < range[1]) && (event._time.end === null || event._time.end > range[0]);
   const readingSort = (a, b) => (a._time.center ?? Infinity) - (b._time.center ?? Infinity) || a.id.localeCompare(b.id);
-  // Bow-tie order: dated events by their centre, open-start events by the head that marks their upper bound, undated events last.
-  const bowInstant = (event) => event._time.center ?? event._time.end ?? event._time.start ?? Infinity;
-  const bowOrder = (a, b) => (bowInstant(a) - bowInstant(b)) || a.id.localeCompare(b.id);
   function getVisible() {
     return filteredPool.filter((event) => overlaps(event, state.range));
   }
@@ -403,7 +400,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     context.drawImage(sprite.canvas, x - sprite.extent, y - sprite.extent, sprite.extent * 2, sprite.extent * 2);
     context.restore();
   }
-  function drawBackdrop(width, height, lanes, left, right) {
+  function drawBackdrop(ctx, width, height, lanes, left, right) {
     // A very soft neutral wash; the actual inventory stars live on a static layer.
     ctx.save();
     const fade = ctx.createLinearGradient(left, 0, right, 0);
@@ -416,10 +413,10 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     }
     ctx.restore();
   }
-  function drawTimeAxes(ctx, { width, height, left, right, top, bottom, lanes }) {
+  function drawTimeAxes(ctx, { width, height, left, right, top, bottom, lanes }, range = state.range) {
     const narrow = width < 560;
     const compactLabels = (bottom - top) / lanes.length < 36;
-    const xScale = (time) => left + ((time - state.range[0]) / (state.range[1] - state.range[0])) * (right - left);
+    const xScale = (time) => left + ((time - range[0]) / (range[1] - range[0])) * (right - left);
     const labelX = narrow ? 12 : 26;
     for (const lane of lanes) {
       if (lane.end <= state.vertical[0] || lane.start >= state.vertical[1]) continue;
@@ -443,13 +440,13 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
       }
     }
     const tickCount = narrow ? 4 : width < 900 ? 6 : 9;
-    for (let i = 0; i < tickCount; i += 1) {
-      const time = state.range[0] + ((state.range[1] - state.range[0]) * i) / (tickCount - 1);
+    for (const time of window.HaruspexLayout.timeTicks(range, tickCount)) {
       const x = xScale(time);
       ctx.strokeStyle = '#93AABD38'; ctx.lineWidth = .6; ctx.beginPath(); ctx.moveTo(x, bottom + 10); ctx.lineTo(x, bottom + 15); ctx.stroke();
       ctx.fillStyle = '#91A3B1'; ctx.font = '10px "Helvetica Neue",Arial,sans-serif';
-      ctx.textAlign = i === 0 ? 'left' : i === tickCount - 1 ? 'right' : 'center';
-      const label = state.range[1] - state.range[0] < DAY * 1.5 ? new Date(time).toISOString().slice(11, 16) : shortDate(time);
+      ctx.textAlign = x < left + 25 ? 'left' : x > right - 25 ? 'right' : 'center';
+      const span = range[1] - range[0];
+      const label = span < DAY * 1.5 ? new Date(time).toISOString().slice(11, span < 300000 ? 19 : 16) : shortDate(time);
       ctx.fillText(label, x, bottom + 29);
     }
     ctx.textAlign = 'left';
@@ -478,7 +475,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const laneMap = new Map(lanes.map((lane) => [lane.key, lane]));
     const xScale = (time) => left + ((time - state.range[0]) / (state.range[1] - state.range[0])) * (right - left);
     ctx.save(); ctx.beginPath(); ctx.rect(0, top - 4, width, bottom - top + 8); ctx.clip();
-    drawBackdrop(width, height, lanes, left, right);
+    drawBackdrop(ctx, width, height, lanes, left, right);
     ctx.restore();
     drawTimeAxes(ctx, plotSize);
     const layoutKey = `${state.assessment},${width},${height},${left},${right},${top},${bottom}`;
@@ -714,6 +711,10 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   let movingBackdrop = null;
   let transitionLabels = null;
   function stopMotion() {
+    if ($('.visual-column').dataset.motion?.startsWith('time-')) {
+      $('#range-start').value = new Date(state.range[0]).toISOString().slice(0, 10);
+      $('#range-end').value = new Date(state.range[1] - 1).toISOString().slice(0, 10);
+    }
     $$('.visual-column > .field-origin').forEach(node => {
       node.haruspexCancel?.(); node.getAnimations().forEach(animation => animation.cancel()); node.remove();
     });
@@ -725,6 +726,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#bowtie-map').style.opacity = ''; $('#bowtie-map').style.translate = '';
     $('.visual-column').classList.remove('morphing');
     $('.visual-column').dataset.transition = 'idle';
+    $('.visual-column').dataset.motion = 'idle';
   }
   function currentPositions() {
     const canvas = state.view === 'stream' ? timeline : bowCanvas;
@@ -740,13 +742,82 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     snapshot.backdrop = snapshotCanvas(movingBackdrop || (state.view === 'stream' ? timelineBackdrop : bowBackdrop));
     snapshot.view = state.view;
     snapshot.range = [...overviewRange];
+    if (state.view === 'stream') {
+      const dx = rect.left - field.left, dy = rect.top - field.top;
+      snapshot.geometry = { ...plotSize, left: plotSize.left + dx, right: plotSize.right + dx,
+        top: plotSize.top + dy, bottom: plotSize.bottom + dy,
+        lanes: plotSize.lanes.map(lane => ({ ...lane, y: lane.y + dy })) };
+    }
     const outgoingLabels = transitionLabels ? `<div style="position:absolute;inset:0;opacity:${transitionLabels.style.opacity || 1};translate:${transitionLabels.style.translate || '0 0'}">${transitionLabels.innerHTML}</div>` : '';
     const currentLabels = state.view === 'bowtie' ? `<div style="position:absolute;inset:0;opacity:${$('#bowtie-map').style.opacity || 1};translate:${$('#bowtie-map').style.translate || '0 0'}">${$('#bowtie-map').innerHTML}</div>` : '';
     snapshot.labels = outgoingLabels + currentLabels; snapshot.labelOpacity = 1;
     return snapshot;
   }
-  function animateLayout(from, { camera = false } = {}) {
+  function animateTimeWind(from, to, direction) {
+    stopMotion();
+    if (reducedMotion.matches || (!from.length && !to.length)) return;
+    transitionCanvas.hidden = false;
+    const size = fitCanvas(transitionCanvas, tctx);
+    const pairs = window.HaruspexLayout.timeWind(from, to, { width: size.width, direction });
+    movingBackdrop = document.createElement('canvas');
+    movingBackdrop.width = transitionCanvas.width; movingBackdrop.height = transitionCanvas.height;
+    const backdrop = movingBackdrop.getContext('2d');
+    backdrop.setTransform(movingBackdrop.width / size.width, 0, 0, movingBackdrop.height / size.height, 0, 0);
+    if (from.labels) {
+      transitionLabels = document.createElement('div');
+      transitionLabels.className = 'transition-labels';
+      transitionLabels.setAttribute('aria-hidden', 'true'); transitionLabels.inert = true;
+      transitionLabels.innerHTML = from.labels;
+      transitionLabels.querySelectorAll('[id]').forEach(node => node.removeAttribute('id'));
+      $('.visual-column').append(transitionLabels);
+    }
+    timeline.style.opacity = '0'; bowCanvas.style.opacity = '0';
+    $('.visual-column').classList.add('morphing');
+    $('.visual-column').dataset.transition = 'running';
+    $('.visual-column').dataset.motion = direction > 0 ? 'time-forward' : 'time-backward';
+    $('.visual-column').dataset.movingEvents = String(pairs.length);
+    $('#plot-tooltip').hidden = true; $('#bowtie-tooltip').hidden = true;
+    const started = performance.now(), duration = 850;
+    function frame(now) {
+      const progress = Math.min(1, Math.max(0, (now - started) / duration));
+      const ease = progress * progress * (3 - 2 * progress);
+      const range = from.range.map((value, index) => value + (to.range[index] - value) * ease);
+      drawOverview(range, true);
+      $('#range-start').value = new Date(range[0]).toISOString().slice(0, 10);
+      $('#range-end').value = new Date(range[1] - 1).toISOString().slice(0, 10);
+      backdrop.clearRect(0, 0, size.width, size.height);
+      if (to.view === 'stream') {
+        const geometry = to.geometry;
+        drawBackdrop(backdrop, size.width, size.height, geometry.lanes, geometry.left, geometry.right);
+        drawTimeAxes(backdrop, geometry, range);
+      } else if (to.backdrop) backdrop.drawImage(to.backdrop, 0, 0, size.width, size.height);
+      tctx.clearRect(0, 0, size.width, size.height);
+      tctx.drawImage(movingBackdrop, 0, 0, size.width, size.height);
+      movingPoints = window.HaruspexLayout.windFrame(pairs, progress, duration);
+      tctx.save();
+      if (to.geometry) {
+        const { left, right, top, bottom } = to.geometry;
+        tctx.beginPath(); tctx.rect(left - 8, top, right - left + 16, bottom - top); tctx.clip();
+      }
+      for (const point of movingPoints) {
+        bowTail(tctx, point.event, point.x, point.y);
+        shape(tctx, point.event, point.x, point.y, point.radius, 1);
+        if (point.event.id === state.selected && !detailPanel.hidden) {
+          tctx.strokeStyle = '#e3e8c39c'; tctx.lineWidth = .7;
+          tctx.beginPath(); tctx.arc(point.x, point.y, Math.max(12, point.radius + 5), 0, Math.PI * 2); tctx.stroke();
+        }
+      }
+      tctx.restore();
+      if (transitionLabels) transitionLabels.style.translate = `${-direction * (size.width + 64) * ease}px 0`;
+      $('#bowtie-map').style.translate = `${direction * (size.width + 64) * (1 - ease)}px 0`;
+      if (progress < 1) motionFrame = requestAnimationFrame(frame);
+      else { stopMotion(); drawOverview(state.range, true); syncControls(); }
+    }
+    frame(started);
+  }
+  function animateLayout(from, { camera = false, timeDirection = 0 } = {}) {
     const to = currentPositions();
+    if (timeDirection && from.view === to.view) { animateTimeWind(from, to, timeDirection); return; }
     stopMotion();
     if (reducedMotion.matches || (!from.length && !to.length)) return;
     transitionCanvas.hidden = false;
@@ -826,6 +897,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   reducedMotion.addEventListener('change', () => {
     if (!reducedMotion.matches) return;
     stopMotion();
+    drawOverview(state.range, true);
     $$('.view-ghost').forEach(element => element.remove());
     for (const view of ['stream', 'bowtie', 'cast']) {
       $(`#${view}-view`).getAnimations({subtree:true}).forEach(animation => animation.cancel());
@@ -863,55 +935,19 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     }
     bctx.restore();
     if (!camera) bowBackdrop = snapshotCanvas(bowCanvas);
-    const clusters = (focused ? [{ ...focused, index: 0 }] : groupEvents.map((group, index) => ({ ...group, index }))).map((cluster) => ({ ...cluster, layoutEntries: bowLayoutKey === `${width},${height},${state.lifecycle},${fieldTop},${fieldBottom}` ? [] : events.filter((event) => cluster.roles.includes(event.bow_tie_role)).sort(bowOrder) }));
+    const clusters = (focused ? [{ ...focused, index: 0 }] : groupEvents.map((group, index) => ({ ...group, index }))).map((cluster) => ({ ...cluster, layoutEntries: bowLayoutKey === `${width},${height},${state.lifecycle},${fieldTop},${fieldBottom}` ? [] : events.filter((event) => assignmentMap.get(event.id).lifecycle_id === cluster.key) }));
     const visibleIds = new Set(visible.map((event) => event.id));
-    const grid = new Map();
-    function distance(x, y) {
-      const gx = Math.floor(x / 8); const gy = Math.floor(y / 8); let closest = 99;
-      for (let dx = -1; dx <= 1; dx += 1) for (let dy = -1; dy <= 1; dy += 1) {
-        for (const point of grid.get(`${gx + dx},${gy + dy}`) || []) closest = Math.min(closest, Math.hypot(point.x - x, point.y - y));
-      }
-      return closest;
-    }
     const geometryKey = `${width},${height},${state.lifecycle},${fieldTop},${fieldBottom}`;
     if (bowLayoutKey !== geometryKey) {
-    bowPoints = [];
-    for (const cluster of clusters) {
-      const total = cluster.layoutEntries.length;
-      cluster.layoutEntries.forEach((event, rank) => {
-        const rand = random(772 + event._index * 937);
-        let best = null;
-        for (let attempt = 0; attempt < 24; attempt += 1) {
-          // Time runs left to right inside every wing: each event keeps its chronological slot, and only its vertical place is searched.
-          const u = (rank + .05 + .9 * rand()) / total; const v = (rand() + rand() - 1) / 2;
-          let x; let y;
-          if (focused) {
-            x = margin + 10 + u * (width - margin * 2 - 20);
-            const fieldStart = fieldTop + 28;
-            const fieldEnd = fieldBottom;
-            const middle = (fieldStart + fieldEnd) / 2 + Math.sin(u * Math.PI * 2 - .5) * height * .035;
-            const thickness = Math.max(20, fieldEnd - fieldStart) * (.45 + .55 * Math.pow(Math.sin(u * Math.PI), .55));
-            y = middle + v * thickness;
-          } else if (cluster.index === 1) {
-            x = width * (.365 + u * .27);
-            y = centerY + v * spread * 1.05 * (.08 + Math.sin(u * Math.PI) * .92);
-          } else {
-            const toKnot = cluster.index === 0 ? u : 1 - u;
-            x = cluster.index === 0 ? margin + u * (width * .34 - margin) : width - margin - (1 - u) * (width * .34 - margin);
-            y = centerY + v * spread * 1.8 * (1 - toKnot * .65);
-          }
-          const clearance = distance(x, y);
-          if (!best || clearance > best.clearance) best = { x, y, clearance };
-          if (clearance >= packingRadius(event, narrow) * 2 + 1.4) break;
-        }
-        const point = { event, x: best.x, y: best.y, radius: markerRadius(event, narrow) };
-        bowPoints.push(point);
-        const key = `${Math.floor(point.x / 8)},${Math.floor(point.y / 8)}`;
-        if (!grid.has(key)) grid.set(key, []);
-        grid.get(key).push(point);
+      bowLayoutPoints = clusters.flatMap(cluster => {
+        const rect = focused ? { left: margin + 10, right: width - margin - 10, top: fieldTop + 28, bottom: fieldBottom }
+          : cluster.index === 1 ? { left: width * .365, right: width * .635, top: centerY - spread * .525, bottom: centerY + spread * .525 }
+          : { left: cluster.index === 0 ? margin : width * .66, right: cluster.index === 0 ? width * .34 : width - margin, top: centerY - spread * .9, bottom: centerY + spread * .9 };
+        return window.HaruspexLayout.bowtie({ events: cluster.layoutEntries, rect,
+          mode: focused ? 'focused' : cluster.index === 1 ? 'knot' : cluster.key,
+          radius: event => markerRadius(event, narrow) });
       });
-    }
-    bowLayoutPoints = bowPoints; bowLayoutKey = geometryKey;
+      bowLayoutKey = geometryKey;
     }
     bowPoints = bowLayoutPoints.filter((point) => visibleIds.has(point.event.id));
     selectionOnTop(bowPoints).forEach(({ event, x, y, radius }) => {
@@ -927,7 +963,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     }).join('');
     if (!camera) $$('[data-bow-group]').forEach((button) => button.addEventListener('click', () => focusBowtie(button.dataset.bowGroup || null)));
     if (!camera && selectedFocus !== undefined) $(`#bowtie-navigation [data-bow-group="${selectedFocus}"]`)?.focus({ preventScroll: true });
-    if (!camera) bowCanvas.setAttribute('aria-label', `${focused ? focused.label : 'Bow tie'}: ${bowPoints.length} events. ${clusters.map((cluster) => `${cluster.label}: ${cluster.entries.length}`).join('; ')}. Color identifies incident workstream; shape identifies evidence status. Severity uses boxed numbers and, in the swarm, vertical bands. Size distinguishes single reported units from grouped activity. Points can be selected. Curves are structural grouping, not proven causal links. Short fading tails identify unknown starts without expressing a duration. Within each wing, events run chronologically from left to right, spaced by order rather than elapsed time; undated events follow the dated ones.`);
+    if (!camera) bowCanvas.setAttribute('aria-label', `${focused ? focused.label : 'Bow tie'}: ${bowPoints.length} events. ${clusters.map((cluster) => `${cluster.label}: ${cluster.entries.length}`).join('; ')}. Color identifies incident workstream. Shape identifies evidence status. Size distinguishes single reported units from grouped activity. Points can be selected. Curves group incident roles without proving causal links. Dated points follow source order from left to right, rather than an elapsed-time scale. Tailed points have unknown starts and occupy layout positions compatible with their known bounds. Their positions and tail lengths do not establish dates or durations.`);
     $('#date-tail-label').textContent='Unknown start · tail length is not duration';
     bowCanvas.dataset.openTails=String(bowPoints.filter(p=>p.event._time.openStart).length);
     $('#visible-count').textContent = visible.length; $('#total-event-count').textContent = events.length;
@@ -1005,22 +1041,25 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     renderList(); if (!detailPanel.hidden) renderDetail();
     $('.visual-column').dataset.camera = 'idle';
   }
-  function navigate(change, { fit = false, camera = false } = {}) {
+  function navigate(change, { fit = false, camera = false, timeDirection = 0 } = {}) {
     if (state.view === 'cast') { change(); refresh(); return; }
     finishCamera();
     const ghost=$('.visual-column > .field-origin')&&!reducedMotion.matches?freezeVisibleView():null;
     const from = currentPositions(); stopMotion(); cancelGestures(); change();
     if (fit) { state.range = fitMatchingRange(); state.vertical = [0, 1]; }
-    state.limit = 12; refresh(); animateLayout(from, { camera });fadeFrozenView(ghost,220);
+    state.limit = 12; refresh(); animateLayout(from, { camera, timeDirection });fadeFrozenView(ghost,220);
   }
   function selectLifecycle(id) {
     if (id === state.lifecycle) return;
+    const order = ['before', 'during', 'after'];
+    const timeDirection = order.includes(id) && order.includes(state.lifecycle)
+      ? Math.sign(order.indexOf(id) - order.indexOf(state.lifecycle)) : 0;
     navigate(() => {
       state.lifecycle = id;
       if (state.stage !== 'all' && id !== 'all' && !stageMap.get(state.stage).lifecycle_counts[id]) {
         state.stage = 'all'; notify('Showing all stages in this part of the incident.');
       }
-    }, { fit: true });
+    }, { fit: true, timeDirection });
   }
   function selectStage(id) {
     navigate(() => {
@@ -1405,7 +1444,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   }
   function factForRecord(label, value) { return `<dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd>`; }
   function openMethod() {
-    openDialog('Reading the field', `<p>Haruspex brings together ${events.length} explorable events across Impact, Context, and Unresolved from ${data.sources.length} primary sources. Each point is a reported action, result, communication, decision or investigative finding. Some events describe grouped activity because details of the individual instances are unavailable.</p><h3>Color follows the workstream</h3><div class="method-workstreams">${visualData.groups.map((group) => `<span>${workstreamSwatch(group)}${escapeHtml(group.label)}</span>`).join('')}</div><p>Each color identifies one part of the incident: evaluation, access, coordination, intrusion, response or investigation. These group the source workstream labels already attached to the events. An event keeps its color across every view, whatever its severity or evidence status. All events retain their workstream color. Context has a hollow outline; Unresolved has a broken outline. Those treatments preserve the evidence shape and do not invent a numerical severity. Click a color key to filter that workstream; click it again to restore all workstreams.</p><h3>Shape tells you about evidence</h3><div class="method-key">${Object.keys(SHAPES).map((status) => `<span><i class="mark ${SHAPES[status]}"></i>${LABELS[status]}</span>`).join('')}</div><p>Reported means attested by the cited source, not independently established ground truth. Reasoning events preserve what an agent or person said or decided; they do not prove motivation or cause. Inferred events reflect a source’s inference. Discrepancies preserve accounts that may describe different stages.</p><h3>Time has different resolutions</h3><p>${events.filter(e=>e.event_date&&e.event_time_utc).length} events have an individual clock time, ${events.filter(e=>e.event_date&&!e.event_time_utc).length} have a date only, and ${events.filter(e=>!e.event_date).length} have context intervals. Exact clock points keep their source time. Points without individual times are packed within the visible part of their source date windows for readability. Their horizontal position is not a known time or order, and placement adapts when the view changes. Select a point or enable Date windows to see its interval as a line. Color and shape identify workstream and evidence; size distinguishes a single reported unit from grouped activity; it does not count the underlying instances. None encodes date precision; dates and their limits are also shown in the tooltip and event details. The 12 events without a supported earliest date have tails that fade in from the left and end at their upper date bound, within their Impact or Context field. The head marks the latest contextual bound, not the event time. A tail has no known starting point, duration or probability distribution. If its bound lies outside the visible range, only the continuing tail appears; its head is never moved to the edge. Select a head or trail to open the event. All remain available in the event list. Fresh primary-source checks did not establish their individual dates; their contextual upper bound is inferred and visible in Date evidence. They can appear in the bow tie, which does not assign a time coordinate.</p><h3>One severity scale</h3><p>Levels 1–5 describe consequences for the affected systems and organization, from a small local effect to devastating organizational loss. They use the same scope throughout. Zero identifies a documented near-miss with no realized harm in the specific assessed outcome. Preventive actions occupy a separate band below zero, with no numerical magnitude assigned. Context and Unresolved have their own unordered fields, reached through the category controls. They have no position on the severity scale. Unresolved includes uncertain consequences and an unconfirmed connection to this incident, as specified in each event. Their reviews are complete, with no numeric score invented. Open Severity to read the criteria, or an event to inspect its rationale.</p><h3>The event swarm and the bow tie</h3><p>The name Event swarm is inspired by <a href="https://observablehq.github.io/plot/transforms/dodge" target="_blank" rel="noopener noreferrer">beeswarm plots</a>, which keep individual points visible. This adaptation accommodates source date windows.</p><p>Small vertical offsets separate points at the same severity; those offsets have no analytical meaning. The distant field suggests the much larger activity that cannot be individually resolved here: roughly 17,600 recovered attacker actions in Hugging Face’s account and more than 70,000 distinct messages and files in METR’s account. These source totals can overlap and use different units; they cannot be added or reduced by subtracting the displayed event count. Background stars suggest aggregate density. Their hidden numbers belong to a decorative catalogue, with no incident details, dates or severity attached. <span class="citation-only"><a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">Hugging Face forensic timeline</a> · <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR and Redwood investigation</a></span> Before, During and After group incident roles, independently of date. Choose any of the 27 stages to narrow the field. The bow tie uses the same membership and filters. Structure exposes the ontology, definitions and connected facets. Points retain their identity as they move between views. The motion explains a change of layout, not a path through time or a causal connection. Each focused lifecycle is a single continuous field. Shared event positions stay stable when filters change; interrupted movement resumes from the displayed position and velocity. Responses may happen while activity continues. Reduced-motion preferences are respected.</p><h3>What is missing stays visible</h3><p>Every event includes all 45 fields, including unavailable values. The dataset does not expand published totals into invented individual events, reconstruct inaccessible private logs, or invent optimal interventions. Its ${events.length} events are a working inventory, not a proven absolute maximum. The CAST view adds six analyst proposals alongside six groups of reported changes. Each retains evidence, unknowns and verification needs; none is claimed to be an optimal intervention. Its 16 open questions preserve the earlier investigation register. The investigation connects events to control paths, findings, additional public evidence and specific collection plans. It is a provisional CAST analysis; new evidence can revise it. The original question register stays intact, with new findings and remaining gaps recorded alongside it.</p><h3>Explore the events</h3><p>Select a point, browse the event list, or search for an actor, system or event ID. Drag the field to move in either direction. Scroll to zoom both axes, hold Shift for time alone or Alt for vertical zoom alone; the separate Time and vertical buttons offer the same controls. When the field has keyboard focus, arrow keys pan and + / − zoom. Home fits the matching events. The field remains pinned briefly as you scroll, then gives way to the event list. Navigation never changes a stored event time. Drag either handle on the overview to adjust that end of the date range. Drag its middle to move the whole window, or set the From and To dates. The end date is inclusive and all dates use UTC. The overview groups events by window midpoints as a navigation aid; its heights are not counts of verified events at those times. Keyboard users can reach every filtered event through the list; open an event to inspect all fields and its primary source. Export downloads the complete dataset, including field definitions and source comparisons.</p>${searchGuide()}`);
+    openDialog('Reading the field', `<p>Haruspex brings together ${events.length} explorable events across Impact, Context, and Unresolved from ${data.sources.length} primary sources. Each point is a reported action, result, communication, decision or investigative finding. Some events describe grouped activity because details of the individual instances are unavailable.</p><h3>Color follows the workstream</h3><div class="method-workstreams">${visualData.groups.map((group) => `<span>${workstreamSwatch(group)}${escapeHtml(group.label)}</span>`).join('')}</div><p>Each color identifies one part of the incident: evaluation, access, coordination, intrusion, response or investigation. These group the source workstream labels already attached to the events. An event keeps its color across every view, whatever its severity or evidence status. All events retain their workstream color. Context has a hollow outline; Unresolved has a broken outline. Those treatments preserve the evidence shape and do not invent a numerical severity. Click a color key to filter that workstream; click it again to restore all workstreams.</p><h3>Shape tells you about evidence</h3><div class="method-key">${Object.keys(SHAPES).map((status) => `<span><i class="mark ${SHAPES[status]}"></i>${LABELS[status]}</span>`).join('')}</div><p>Reported means attested by the cited source, not independently established ground truth. Reasoning events preserve what an agent or person said or decided; they do not prove motivation or cause. Inferred events reflect a source’s inference. Discrepancies preserve accounts that may describe different stages.</p><h3>Time has different resolutions</h3><p>${events.filter(e=>e.event_date&&e.event_time_utc).length} events have an individual clock time, ${events.filter(e=>e.event_date&&!e.event_time_utc).length} have a date only, and ${events.filter(e=>!e.event_date).length} have context intervals. Exact clock points keep their source time. Points without individual times are packed within the visible part of their source date windows for readability. Their horizontal position is not a known time or order, and placement adapts when the view changes. Select a point or enable Date windows to see its interval as a line. Color and shape identify workstream and evidence; size distinguishes a single reported unit from grouped activity; it does not count the underlying instances. None encodes date precision; dates and their limits are also shown in the tooltip and event details. The 12 events without a supported earliest date have tails that fade in from the left and end at their upper date bound, within their Impact or Context field. The head marks the latest contextual bound, not the event time. A tail has no known starting point, duration or probability distribution. If its bound lies outside the visible range, only the continuing tail appears; its head is never moved to the edge. Select a head or trail to open the event. All remain available in the event list. Fresh primary-source checks did not establish their individual dates; their contextual upper bound is inferred and visible in Date evidence. They can appear in the bow tie, which does not assign a time coordinate.</p><h3>One severity scale</h3><p>Levels 1–5 describe consequences for the affected systems and organization, from a small local effect to devastating organizational loss. They use the same scope throughout. Zero identifies a documented near-miss with no realized harm in the specific assessed outcome. Preventive actions occupy a separate band below zero, with no numerical magnitude assigned. Context and Unresolved have their own unordered fields, reached through the category controls. They have no position on the severity scale. Unresolved includes uncertain consequences and an unconfirmed connection to this incident, as specified in each event. Their reviews are complete, with no numeric score invented. Open Severity to read the criteria, or an event to inspect its rationale.</p><h3>The event swarm and the bow tie</h3><p>The name Event swarm is inspired by <a href="https://observablehq.github.io/plot/transforms/dodge" target="_blank" rel="noopener noreferrer">beeswarm plots</a>, which keep individual points visible. This adaptation accommodates source date windows.</p><p>Small vertical offsets separate points at the same severity; those offsets have no analytical meaning. The distant field suggests the much larger activity that cannot be individually resolved here: roughly 17,600 recovered attacker actions in Hugging Face’s account and more than 70,000 distinct messages and files in METR’s account. These source totals can overlap and use different units; they cannot be added or reduced by subtracting the displayed event count. Background stars suggest aggregate density. Their hidden numbers belong to a decorative catalogue, with no incident details, dates or severity attached. <span class="citation-only"><a href="https://huggingface.co/blog/agent-intrusion-technical-timeline" target="_blank" rel="noopener noreferrer">Hugging Face forensic timeline</a> · <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/" target="_blank" rel="noopener noreferrer">METR and Redwood investigation</a></span> Before, During and After group incident roles, independently of date. Choose any of the 27 stages to narrow the field. The bow tie uses the same membership and filters. Structure exposes the ontology, definitions and connected facets. Points retain their identity as they move between views. Switching between Before, During, and After winds the field forward or backward while the date window moves. Calendar ticks travel with the window. These role-based phases can overlap in time. The motion does not establish causal connections. Each focused lifecycle is a single continuous field. Dated bow-tie points follow source order. Unknown-start points keep their tails and occupy positions compatible with their known bounds. Those positions are for layout and do not supply missing dates. Shared event positions stay stable when filters change; interrupted movement resumes from the displayed position and velocity. Responses may happen while activity continues. Reduced-motion preferences are respected.</p><h3>What is missing stays visible</h3><p>Every event includes all 45 fields, including unavailable values. The dataset does not expand published totals into invented individual events, reconstruct inaccessible private logs, or invent optimal interventions. Its ${events.length} events are a working inventory, not a proven absolute maximum. The CAST view adds six analyst proposals alongside six groups of reported changes. Each retains evidence, unknowns and verification needs; none is claimed to be an optimal intervention. Its 16 open questions preserve the earlier investigation register. The investigation connects events to control paths, findings, additional public evidence and specific collection plans. It is a provisional CAST analysis; new evidence can revise it. The original question register stays intact, with new findings and remaining gaps recorded alongside it.</p><h3>Explore the events</h3><p>Select a point, browse the event list, or search for an actor, system or event ID. Drag the field to move in either direction. Scroll to zoom both axes, hold Shift for time alone or Alt for vertical zoom alone; the separate Time and vertical buttons offer the same controls. When the field has keyboard focus, arrow keys pan and + / − zoom. Home fits the matching events. The field remains pinned briefly as you scroll, then gives way to the event list. Navigation never changes a stored event time. Drag either handle on the overview to adjust that end of the date range. Drag its middle to move the whole window, or set the From and To dates. The end date is inclusive and all dates use UTC. The overview groups events by window midpoints as a navigation aid; its heights are not counts of verified events at those times. Keyboard users can reach every filtered event through the list; open an event to inspect all fields and its primary source. Export downloads the complete dataset, including field definitions and source comparisons.</p>${searchGuide()}`);
     bindQueryExamples();
   }
   function openOntology() {

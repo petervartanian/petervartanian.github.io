@@ -119,5 +119,109 @@
     }
     return points;
   }
-  root.HaruspexLayout = Object.freeze({ create, project });
+  // Mixing each identifier before sampling avoids the diagonal bands produced
+  // by feeding consecutive event numbers into a linear generator.
+  function eventRandom(id) {
+    let value = identifierSeed(id);
+    return () => {
+      value = (value + 0x6d2b79f5) | 0;
+      let mixed = Math.imul(value ^ value >>> 15, 1 | value);
+      mixed ^= mixed + Math.imul(mixed ^ mixed >>> 7, 61 | mixed);
+      return ((mixed ^ mixed >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  /** Ordered, dated marks share a wing with visibly tailed unknown-start marks.
+   * Uncertain marks occupy a stable layout slot compatible with their bounds.
+   * A slot is never returned as a timestamp or written into the source record.
+   */
+  function bowtie({ events, rect, mode = 'focused', radius = () => 2.3 }) {
+    const width = rect.right - rect.left, height = rect.bottom - rect.top;
+    if (!(width > 0 && height > 0)) throw new Error('A nonempty bow-tie rectangle is required.');
+    const center = event => event._time.center;
+    const ordered = events.filter(event => finite(center(event))).sort((a, b) => center(a) - center(b) || a.id.localeCompare(b.id));
+    const uncertain = events.filter(event => !finite(center(event))).sort((a, b) => a.id.localeCompare(b.id));
+    const slots = ordered.map((event, index) => ({ event, low: index / ordered.length, high: (index + 1) / ordered.length }));
+    for (const event of uncertain) {
+      if (!ordered.length) { slots.push({ event, low: 0, high: 1 }); continue; }
+      const start = event._time.start, end = event._time.end;
+      const low = finite(start) ? ordered.filter(item => center(item) < start).length / Math.max(1, ordered.length) : 0;
+      const high = finite(end) ? ordered.filter(item => center(item) <= end).length / Math.max(1, ordered.length) : 1;
+      slots.push({ event, low, high: Math.max(low, high) });
+    }
+    const points = [], grid = new Map();
+    const largest = Math.max(2.3, ...events.map(radius));
+    const cell = largest * 3.2 + 3;
+    const separation = (x, y, r) => {
+      const gx = Math.floor(x / cell), gy = Math.floor(y / cell);
+      let nearest = Infinity;
+      for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+        for (const other of grid.get(`${gx + dx},${gy + dy}`) || []) {
+          nearest = Math.min(nearest, Math.hypot(x - other.x, y - other.y) - (r + other.radius) * 1.56);
+        }
+      }
+      return nearest;
+    };
+    for (const { event, low, high } of slots) {
+      const random = eventRandom(event.id), r = radius(event);
+      const inset = Math.min(.025, (r * 1.6 + 2) / width);
+      const fraction = low + (.05 + random() * .9) * (high - low);
+      const u = inset + fraction * (1 - inset * 2);
+      const x = rect.left + u * width;
+      const envelope = mode === 'knot' ? .08 + Math.sin(u * Math.PI) * .92
+        : mode === 'before' ? 1 - u * .65 : mode === 'after' ? .35 + u * .65
+        : .55 + .45 * Math.pow(Math.sin(u * Math.PI), .55);
+      const extent = Math.max(0, height / 2 - r * 1.6 - 2) * envelope;
+      let best;
+      for (let attempt = 0; attempt < 40; attempt++) {
+        const v = (random() + random() - 1);
+        const y = (rect.top + rect.bottom) / 2 + v * extent;
+        const clearance = separation(x, y, r);
+        if (!best || clearance > best.clearance) best = { x, y, clearance };
+        if (clearance >= 2) break;
+      }
+      const point = { event, x, y: best.y, radius: r };
+      points.push(point);
+      const key = `${Math.floor(x / cell)},${Math.floor(best.y / cell)}`;
+      if (!grid.has(key)) grid.set(key, []);
+      grid.get(key).push(point);
+    }
+    return points;
+  }
+  function timeWind(from, to, { width, direction }) {
+    if (!(width > 0) || ![-1, 1].includes(direction)) throw new Error('Time winding requires a width and direction.');
+    const previous = new Map(from.map(point => [point.event.id, point]));
+    const next = new Map(to.map(point => [point.event.id, point]));
+    const distance = width + 64;
+    return [...new Set([...previous.keys(), ...next.keys()])].map(id => {
+      const old = previous.get(id), target = next.get(id);
+      return {
+        start: old || { ...target, x: target.x + direction * distance, vx: 0, vy: 0 },
+        end: target || { ...old, x: old.x - direction * distance },
+      };
+    });
+  }
+  function windFrame(pairs, progress, duration) {
+    const t = Math.max(0, Math.min(1, progress)), ease = t * t * (3 - 2 * t);
+    const seconds = duration / 1000;
+    const axis = (a, b, velocity = 0) => ({
+      value: a + (b - a) * ease + velocity * seconds * t * (1 - t) ** 2,
+      velocity: (b - a) * 6 * t * (1 - t) / seconds + velocity * (1 - 4 * t + 3 * t * t),
+    });
+    return pairs.map(({ start, end }) => {
+      const x = axis(start.x, end.x, start.vx), y = axis(start.y, end.y, start.vy);
+      return { ...end, x: x.value, y: y.value, vx: x.velocity, vy: y.velocity,
+        radius: start.radius + (end.radius - start.radius) * ease, alpha: 1 };
+    });
+  }
+  // Fixed calendar ticks travel across the screen during a pan. They do not
+  // stay at fixed pixels while their printed dates change underneath them.
+  function timeTicks(range, targetCount = 8) {
+    const day = 86400000;
+    const steps = [1000, 5000, 15000, 60000, 300000, 900000, 3600000, 10800000, 21600000, 43200000, day, day * 2, day * 7, day * 14, day * 28, day * 56];
+    const step = steps.find(value => value >= (range[1] - range[0]) / targetCount) || steps.at(-1);
+    const ticks = [];
+    for (let time = Math.ceil(range[0] / step) * step; time <= range[1]; time += step) ticks.push(time);
+    return ticks;
+  }
+  root.HaruspexLayout = Object.freeze({ create, project, bowtie, timeWind, windFrame, timeTicks });
 })(typeof window === 'undefined' ? globalThis : window);

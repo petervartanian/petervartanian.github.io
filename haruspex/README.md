@@ -8,6 +8,14 @@ The navigation reads **View #1: Event-swarm**, **View #2: Bow-tie**, and **Bonus
 
 The header and Event-swarm brand use the saved three-form Haruspex mark: a solid blue-gray lobe, hollow purple wedge and folded green loop. `build.mjs` embeds the unchanged SVG in the self-contained page; desktop and phone sizes follow the existing layout.
 
+## Phase movement and uncertain dates
+
+Switching between I, II, and III moves the field horizontally in the selected direction, with no point-opacity fade. The date window moves continuously, and fixed calendar ticks travel across the event-swarm. The lifecycle roles can overlap in time. Reversing a transition starts from its displayed point positions and velocities. Reduced-motion preferences skip the movement.
+
+Dated bow-tie marks retain source order. Unknown-start marks are spread through layout positions compatible with their known bounds, with their tails retained. A shared upper bound no longer forces them into a group at the end. These positions do not assign dates or durations. Per-event mixing removes the periodic diagonal patterns caused by sampling consecutive event numbers.
+
+Run `node haruspex/field-layout.test.mjs` from the repository root to check date-bound preservation, placement stability, the actual event inventory, periodic-pattern regressions, motion reversal, constant opacity, and calendar ticks.
+
 ## Severity
 
 | Symbol | Label | Meaning |
