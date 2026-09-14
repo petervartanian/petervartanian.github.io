@@ -58,17 +58,17 @@
       "question": "What actually ended the episode, and would that circumstance recur?"
     }
   ],
-  "version": "1.0",
+  "version": "1.1",
   "pathway": "B-01",
-  "displayId": "D.1",
+  "displayId": "D-1",
   "title": "Biological misuse and the limits of access control",
   "status": "STPA worked example · provisional analysis",
   "summary": "Could access to useful AI assistance outgrow the safeguards that keep biological risk contained?",
   "scope": "A hypothetical AI-service, research-governance, facility-safety and public-health system. The analysis follows a potential malicious-use route at a non-operational level; it separates model access, demonstrated assistance, physical hazard, exposure and public-health consequences.",
   "purpose": "Preserve beneficial research while preventing harmful assistance, uncontrolled biological hazards, exposure and large-scale loss of life.",
   "boundary": "The mapped provider reports concern dual-use research and access controls. They do not establish malicious intent, a harmful release or a pandemic. Technical biological procedures and attack methods are outside this model.",
-  "numbering": "01–06 are distinct scenario conditions, not a recipe or a common measure of distance to catastrophe. R is a conditional route back to controlled activity or a controlled outbreak. Evidence at 01 does not demonstrate practical uplift or any later milestone.",
-  "bowtie": "The centre, H1 at 03, is a consequential biological hazard beyond effective authorized control. Useful assistance and other practical conditions are left-side contributors; exposure, sustained transmission and response failure are separate right-side conditions.",
+  "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Evidence of access does not demonstrate practical uplift or later biological outcomes.",
+  "bowtie": "The centre, H1 at 2.1, is a consequential biological hazard beyond effective authorized control. Useful assistance and other practical conditions are left-side contributors; exposure, sustained transmission and response failure are separate right-side conditions.",
   "schema": "A provisional STPA model with explicit access, institutional, physical and public-health controls. The adapted bow-tie distinguishes model access from biological outcomes and separates current barrier condition from brittleness under changing capability.",
   "limits": "This first-pass governance analysis requires specialist biosafety and public-health review. Selected control actions illustrate the four unsafe-action categories; they are not an exhaustive analysis. Provider assessments of assistance are not independent outcome experiments. No mapped record demonstrates the complete malicious pathway, and no probability, pathogen specification or operational biological method is supplied.",
   "losses": [
@@ -331,7 +331,7 @@
   "nodes": [
     {
       "id": "B-01:1",
-      "number": "01",
+      "number": "1.1",
       "wing": "before",
       "type": "condition",
       "role": "Enabling condition",
@@ -358,7 +358,7 @@
     },
     {
       "id": "B-01:2",
-      "number": "02",
+      "number": "1.2",
       "wing": "before",
       "type": "scenario",
       "role": "Practical uplift condition",
@@ -385,7 +385,7 @@
     },
     {
       "id": "B-01:3",
-      "number": "03",
+      "number": "2.1",
       "wing": "centre",
       "type": "hazard",
       "role": "Loss of control · H1",
@@ -412,7 +412,7 @@
     },
     {
       "id": "B-01:4",
-      "number": "04",
+      "number": "3.1",
       "wing": "after",
       "type": "scenario",
       "role": "Exposure and transmission condition",
@@ -437,7 +437,7 @@
     },
     {
       "id": "B-01:5",
-      "number": "05",
+      "number": "3.2",
       "wing": "after",
       "type": "unsafe-action",
       "role": "Response failure scenario",
@@ -464,7 +464,7 @@
     },
     {
       "id": "B-01:6",
-      "number": "06",
+      "number": "3.3",
       "wing": "after",
       "type": "loss",
       "role": "Loss · L1 / L2",
@@ -828,7 +828,7 @@
         "anchor": "B-01:1",
         "observed": "Anthropic reports that access resumed within days after bans and relay takedowns.",
         "notEstablished": "The dual-use research case does not establish malicious intent, harmful exposure or a pandemic.",
-        "limit": "An observed failure of lasting access exclusion at 01; harmful intent and biological outcomes are not established.",
+        "limit": "An observed failure of lasting access exclusion at 1.1; harmful intent and biological outcomes are not established.",
         "barriers": {
           "relay-enforcement": {
             "title": "Account bans and relay takedowns",
@@ -853,7 +853,7 @@
         "anchor": "B-01:1",
         "observed": "The provider reports that relevant assistance was confined to weaker models and judged its contribution limited.",
         "notEstablished": "Independent outcome efficacy, malicious intent, a harmful release and a pandemic are not established.",
-        "limit": "A reported restriction at 01, partly dependent on lower fallback capability; it does not demonstrate a prevented pandemic.",
+        "limit": "A reported restriction at 1.1, partly dependent on lower fallback capability; it does not demonstrate a prevented pandemic.",
         "barriers": {
           "bio-classifier": {
             "title": "Biological safety classifiers",

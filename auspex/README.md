@@ -8,16 +8,25 @@ Serve the repository root and open `/auspex/`. The interface also works directly
 
 ## Seven STPA worked examples
 
-A.1, B.1, C.1, D.1, E.1, F.1 and Bonus.1 use the models in `stpa-[a-fh]1.json`.
+A-1, B-1, C-1, D-1, E-1, F-1 and Bonus-1 use the models in `stpa-[a-fh]1.json`.
 I selects a pathway; II overlays a case at its assessed component; III inspects a barrier.
 Every model contains losses, hazards, control and feedback relationships, constraints,
 contextual unsafe control actions, causal scenarios and a conditional recovery route.
 The bow-tie map summarizes the provisional analysis.
 
-A.1 restores the compact “00 · Context & warning signs” disclosure from its original
-prototype: background conditions, developing danger and warning signs. It stays open
-when switching incident overlays. Its content is also in the static research reader;
-00 is outside the causal graph and does not change the numbered milestones.
+The map uses **0. Context**, **1. Precursors**, **2. Event**, **3. Consequences**,
+with components numbered within their region (1.1, 1.2, 2.1, 3.1…). Recovery retains R.
+A-1 includes the original background conditions, developing danger and warning signs
+as an always-visible prelude. Its numbered links select the relevant diagram component.
+The other worked examples show their existing system scope at 0. Context. Context
+is outside the causal graph; its links are navigation, not additional causal arrows.
+
+Pathway labels use A-1 / Bonus-1 throughout the catalogue. Old A.1 / Bonus.1 links and
+searches remain supported; internal component addresses and evidence anchors are stable.
+Every map has a clickable key for path types, all seven barrier modes, and recovery
+versus reinforcement. It includes conditional consequences and feedback, even when
+those marks are absent from the currently selected map. The static reader includes
+the same definitions at `pathways.html#map-key`.
 
 The other 30 entries show their titles and no case content, in both the application and
 static reader. Their underlying catalogue records are retained for future work.
@@ -46,7 +55,7 @@ Maven and Replicator expose proposed safeguards with unassessed performance and 
 questions. Their announcements remain contextual evidence. Later corrective changes are
 dated; new reinforcement proposals are identified as proposals. Scope notes use paired
 asterisks and smaller text. The Myanmar counter-speech intervention is Backfiring in
-the attributed account. Bonus.1 separates the FTC allegations from the mathematical
+the attributed account. Bonus-1 separates the FTC allegations from the mathematical
 predictive-policing comparison and includes the latter’s feedback loop and correction.
 
 Models may override assessments and add evidence by stable ID. Build and validate:
@@ -64,13 +73,13 @@ The catalogue below describes retained source data, including unworked entries.
 The register contains 31 catastrophe pathway hypotheses and six bounded-harm comparisons.
 Visible IDs follow the family letters; canonical evidence addresses remain stable:
 
-- A.1–A.6 (X-01–X-06): extinction and permanent global disempowerment.
-- B.1–B.6 (P-01–P-06): human political takeover.
-- C.1–C.8 (W-01–W-08): interstate conflict, nuclear escalation and mass violence.
-- D.1–D.2 (B-01–B-02): pandemics.
-- E.1–E.7 (S-01–S-07): sectoral and cross-sector catastrophes.
-- F.1–F.2 (F-01–F-02): informational ecosystems and collective response.
-- Bonus.1–Bonus.6 (H-01–H-06): comparison cases.
+- A-1–A-6 (X-01–X-06): extinction and permanent global disempowerment.
+- B-1–B-6 (P-01–P-06): human political takeover.
+- C-1–C-8 (W-01–W-08): interstate conflict, nuclear escalation and mass violence.
+- D-1–D-2 (B-01–B-02): pandemics.
+- E-1–E-7 (S-01–S-07): sectoral and cross-sector catastrophes.
+- F-1–F-2 (F-01–F-02): informational ecosystems and collective response.
+- Bonus-1–Bonus-6 (H-01–H-06): comparison cases.
 
 Each pathway preserves the register's causal steps, required conditions, source basis,
 candidate barriers, variants and weakest bridge. Political lock-in and nuclear famine
@@ -276,7 +285,7 @@ locally hosted Space Grotesk (`assets/FONT-LICENSES.txt`), with system sans-seri
 - URL parameters `p`, `t`, `i`, `b`, `o` and `q` restore pathway, target, incident, barrier,
   observation and question. Browser Back restores
   previous selections. Incompatible IDs are normalized to the selected pathway's records.
-  `p` writes visible IDs such as `A.2`; legacy IDs such as `X-02` remain valid aliases.
+  `p` writes visible IDs such as `A-2`; legacy IDs such as `X-02` remain valid aliases.
   `t` retains canonical component addresses to preserve existing evidence links.
 - On narrow screens, selecting a map target reveals its reading. The pathway return control
   opens the causal argument and restores that target. Selecting an observation expands it

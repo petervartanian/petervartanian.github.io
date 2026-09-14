@@ -46,10 +46,13 @@ for (const model of models) {
   const nextArticle = /<article id="[^"]+" data-group="[^"]+"[^>]*>/.exec(html.slice(start + 1));
   if (!nextArticle) throw new Error(`Missing next static article after ${model.pathway}`);
   const next = start + 1 + nextArticle.index;
-  const marker = model.displayId.replace('.','');
+  const marker = model.displayId.replace(/[-.]/g,'');
   const article = `<article id="${model.pathway}" data-group="${pathway.group}"><p class="eyebrow">${model.displayId} · Pathway</p>${presentation.staticPage()}<!-- ${marker}-EVIDENCE-START -->${mappedEvidence(model)}<!-- ${marker}-EVIDENCE-END --><a href="./?p=${model.displayId}">Explore ${model.displayId} in Auspex ↗</a></article>`;
   html = html.slice(0,start) + article + html.slice(next);
   html = html.replace(new RegExp(`(<a href="#${model.pathway}">)[^<]*(</a>)`), `$1${model.displayId} — ${esc(model.title)}$2`);
+}
+for (const p of catalogue.pathways) {
+  html = html.replace(new RegExp(`(<a href="#${p.id}">)[^<]*(</a>)`), `$1${p.displayId} — ${esc(registry[p.id]?.title || p.title)}$2`);
 }
 // Keep unworked titles addressable while leaving their content blank.
 const starts = [...html.matchAll(/<article id="([^"]+)" data-group="([^"]+)"[^>]*>/g)];
@@ -61,6 +64,10 @@ for (let i = starts.length - 1; i >= 0; i--) {
   if (end < 0) throw new Error(`Missing reader boundary ${p.id}`);
   html = html.slice(0, match.index) + `<article id="${p.id}" data-group="${p.group}" data-unworked="true"><p class="eyebrow">${p.displayId} · Pathway</p><h2>${esc(p.title)}</h2></article>` + html.slice(end);
 }
-html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=24.5"');
+html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=25.1"');
+const key=`<!-- MAP-KEY-START --><section id="map-key" class="a1-static-key"><h2>Path & barrier key</h2>${presentation.pathsGuide(true)}</section><!-- MAP-KEY-END -->`;
+if (html.includes('<!-- MAP-KEY-START -->')) html=html.replace(/<!-- MAP-KEY-START -->[\s\S]*?<!-- MAP-KEY-END -->/,key);
+else html=html.replace('</nav>',`</nav>${key}`);
+if (!html.includes('href="#map-key"')) html=html.replace('<h1>Choose a pathway</h1>','<h1>Choose a pathway</h1><p><a href="#map-key">Path & barrier key ↗</a></p>');
 await writeFile(new URL('pathways.html', import.meta.url), html);
 console.log('Built seven worked examples, barrier states and matching readers; other entries are blank.');

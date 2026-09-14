@@ -58,17 +58,17 @@
       "question": "What actually ended the episode, and would that circumstance recur?"
     }
   ],
-  "version": "1.1",
+  "version": "1.2",
   "pathway": "P-01",
-  "displayId": "B.1",
+  "displayId": "B-1",
   "title": "Personal command and the loss of constitutional control",
   "status": "STPA worked example · provisional analysis",
   "summary": "Could autonomous forces turn a leader’s personal command into power that lawful institutions cannot revoke?",
   "scope": "A hypothetical state’s procurement, military command, force-control and constitutional oversight system. The model concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
   "purpose": "Keep consequential use of force subject to lawful institutional authority, prevent unlawful violence and preserve the ability to restore constitutional government.",
   "boundary": "Roles are analytical functions, not a description of any current country’s command arrangements. Legal authority depends on the jurisdiction. Maven and Replicator supply procurement context only.",
-  "numbering": "01–05 are scenario milestones, not a coup checklist or STPA method steps. R is a conditional recovery route. An overlay at 01 does not show that the episode approached 04.",
-  "bowtie": "The centre, H1 at 04, is force operating beyond effective constitutional constraint. Procurement, command design and unlawful orders can contribute; national takeover still requires sufficient force and failed institutional recovery.",
+  "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. The procurement overlays do not establish unlawful command or loss of constitutional control.",
+  "bowtie": "The centre, H1 at 2.1, is force operating beyond effective constitutional constraint. Procurement, command design and unlawful orders can contribute; national takeover still requires sufficient force and failed institutional recovery.",
   "schema": "A bounded STPA model with traceable losses, hazards, control actions, feedback, contextual unsafe actions, loss scenarios and safety constraints. The bow-tie is its visual summary.",
   "limits": "This is a first-pass analytical reconstruction requiring constitutional, military and systems expertise. Unsafe-action categories are illustrated for selected actions, not exhaustively enumerated. The two mapped records are announcements; neither demonstrates a coup, personally loyal forces or the effectiveness of a constitutional safeguard. No probabilities or universal legal conclusions are inferred.",
   "losses": [
@@ -322,7 +322,7 @@
   "nodes": [
     {
       "id": "P-01:1",
-      "number": "01",
+      "number": "1.1",
       "wing": "before",
       "type": "condition",
       "role": "Enabling context",
@@ -349,7 +349,7 @@
     },
     {
       "id": "P-01:2",
-      "number": "02",
+      "number": "1.2",
       "wing": "before",
       "type": "scenario",
       "role": "Command-design failure scenario",
@@ -377,7 +377,7 @@
     },
     {
       "id": "P-01:3",
-      "number": "03",
+      "number": "1.3",
       "wing": "before",
       "type": "unsafe-action",
       "role": "Unsafe control action",
@@ -403,7 +403,7 @@
     },
     {
       "id": "P-01:4",
-      "number": "04",
+      "number": "2.1",
       "wing": "centre",
       "type": "hazard",
       "role": "Loss of control · H1",
@@ -431,7 +431,7 @@
     },
     {
       "id": "P-01:5",
-      "number": "05",
+      "number": "3.1",
       "wing": "after",
       "type": "loss",
       "role": "Loss · L1 / L2",
@@ -807,7 +807,7 @@
         ]
       }
     },
-    "fidelity": "Evidence marks procurement context at 01 only. Candidate constitutional controls are explicit requirements for the hypothetical system; the mapped announcements do not demonstrate that they worked.",
+    "fidelity": "Evidence marks procurement context at 1.1 only. Candidate constitutional controls are explicit requirements for the hypothetical system; the mapped announcements do not demonstrate that they worked.",
     "barrierQuestion": "Would this protection still constrain a more capable system, or does it rely on today’s limited capability, access or opportunity?"
   }
 }

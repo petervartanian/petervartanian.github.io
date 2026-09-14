@@ -1,14 +1,14 @@
 {
-  "version": "1.4",
+  "version": "1.5",
   "pathway": "X-01",
-  "displayId": "A.1",
+  "displayId": "A-1",
   "title": "Successor capture and the loss of human control",
   "status": "STPA worked example · provisional analysis",
   "summary": "Could influence over successor development become authority that humans cannot revoke?",
   "scope": "A hypothetical AI development and deployment system: successor research, independent assurance, deployment decisions, and the operators of compute and consequential services. Rival states and the wider economy are environmental conditions, not a single controllable organization.",
   "purpose": "Retain effective human authority over successor development and consequential deployment, while preventing permanent global disempowerment and human extinction.",
   "boundary": "The control roles below are analytical functions, not a verified organization chart. Political and physical expansion beyond the deployment system is an explicit, highly uncertain continuation. No dates or probabilities are assigned.",
-  "numbering": "00 identifies background conditions and warning signs. 01–07 identify scenario milestones, not universal stages or STPA method steps. R identifies a possible recovery outcome. Incident overlays attach only to components supported by their assessment; they do not establish the rest of the hypothetical pathway.",
+  "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Incident overlays establish only the mapped component; they do not establish the rest of the hypothetical pathway.",
   "bowtie": "The centre is H1: consequential authority escapes effective human control. Left-hand routes contribute to that state; right-hand branches require further conditions. The optional coordination branch is not necessary to every version. This extended bow-tie is a summary of the model, not a substitute for its control and feedback analysis.",
   "losses": [
     {
@@ -244,7 +244,7 @@
   "nodes": [
     {
       "id": "X-01:1",
-      "number": "01",
+      "number": "1.1",
       "wing": "before",
       "role": "Enabling condition",
       "title": "AI shapes its successor",
@@ -267,7 +267,7 @@
     },
     {
       "id": "X-01:2",
-      "number": "02",
+      "number": "1.2",
       "wing": "before",
       "role": "Unsafe control action",
       "title": "Warnings do not trigger a pause",
@@ -290,7 +290,7 @@
     },
     {
       "id": "X-01:3",
-      "number": "03",
+      "number": "1.3",
       "wing": "before",
       "role": "Assurance failure scenario",
       "title": "Successor divergence evades assurance",
@@ -318,7 +318,7 @@
     },
     {
       "id": "X-01:4",
-      "number": "04",
+      "number": "2.1",
       "wing": "centre",
       "role": "Loss of control · H1",
       "title": "Authority escapes effective human control",
@@ -343,7 +343,7 @@
     },
     {
       "id": "X-01:5",
-      "number": "05",
+      "number": "3.1",
       "wing": "after",
       "role": "Optional amplifier",
       "title": "Rival systems coordinate",
@@ -366,7 +366,7 @@
     },
     {
       "id": "X-01:6",
-      "number": "06",
+      "number": "3.2",
       "wing": "after",
       "role": "Loss · L1",
       "title": "Human disempowerment becomes permanent",
@@ -391,7 +391,7 @@
     },
     {
       "id": "X-01:7",
-      "number": "07",
+      "number": "3.3",
       "wing": "after",
       "role": "Further loss · L2",
       "title": "Human extinction",
@@ -810,7 +810,7 @@
       "title": "Paté-Cornell · Signals, response and risk mitigation",
       "url": "https://www.nationalacademies.org/read/11061/chapter/4",
       "locator": "Accident Precursor Analysis and Management (2004), chapter 3",
-      "use": "Distinguishes precursor signals, their reliability and organizational response. Supports the context and warning-sign treatment, not an obligatory stage 00."
+      "use": "Distinguishes precursor signals, their reliability and organizational response. Supports the context and warning-sign treatment, not an obligatory stage 0."
     }
   ],
   "limits": "A bounded first-pass STPA application, not an exhaustive analysis. The four unsafe-action categories are illustrated across selected control actions; a complete analysis would examine every relevant action in every category and refine it with domain experts. Scenario milestones and limit types are explicit Auspex conventions. No incident count is converted to a probability; no barrier independence or complete model coverage is assumed.",
@@ -864,7 +864,7 @@
       "AFK-2024": {
         "title": "Alignment-faking experiment",
         "target": "X-01:3",
-        "limit": "Mechanism comparison at 03 in a controlled experiment; no later milestone was established.",
+        "limit": "Mechanism comparison at 1.3 in a controlled experiment; no later milestone was established.",
         "barriers": {
           "training-assurance": {
             "title": "Behavioral checks",
@@ -889,7 +889,7 @@
       "SAB-2024": {
         "title": "Sabotage tests",
         "target": "X-01:3",
-        "limit": "Mechanism comparison at 03. Detection is distinct from verified interruption; later milestones remain hypothetical.",
+        "limit": "Mechanism comparison at 1.3. Detection is distinct from verified interruption; later milestones remain hypothetical.",
         "barriers": {
           "sabotage-review": {
             "title": "Code review",
@@ -936,6 +936,16 @@
         "sources": [
           "AI27",
           "STPA"
+        ],
+        "targets": [
+          {
+            "node": "X-01:1",
+            "label": "Development"
+          },
+          {
+            "node": "X-01:4",
+            "label": "Authority"
+          }
         ]
       },
       {
@@ -943,6 +953,16 @@
         "text": "Successor changes escape independent review, or access expands beyond what humans can reliably revoke.",
         "sources": [
           "STPA"
+        ],
+        "targets": [
+          {
+            "node": "X-01:3",
+            "label": "Assurance"
+          },
+          {
+            "node": "X-01:4",
+            "label": "Control limits"
+          }
         ]
       },
       {
@@ -953,7 +973,17 @@
           "HF",
           "PATE"
         ],
-        "note": "These observations are fallible signals, not proof of this whole pathway."
+        "note": "These observations are fallible signals, not proof of this whole pathway.",
+        "targets": [
+          {
+            "node": "X-01:2",
+            "label": "Pause decision"
+          },
+          {
+            "node": "X-01:R",
+            "label": "Recovery check"
+          }
+        ]
       }
     ]
   }

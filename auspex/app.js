@@ -30,7 +30,7 @@
   };
   const icon = (name, className = '') => `<svg class="ui-icon ${className}" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="${icons[name]}"/></svg>`;
   const pathways = new Map(data.pathways.map((p) => [p.id, p]));
-  const aliases = new Map(data.pathways.map((p) => [p.displayId.toLowerCase(), p.id]));
+  const aliases = new Map(data.pathways.flatMap((p) => [p.displayId, p.displayId.replace('-', '.')].map(label => [label.toLowerCase(), p.id])));
   const incidents = new Map(data.incidents.map((i) => [i.id, i]));
   const sources = new Map(data.evidence.sources.map((s) => [s.id, s]));
   const passages = new Map(data.evidence.passages.map((p) => [p.id, p]));
@@ -469,7 +469,7 @@
 
   const searchable = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   const searchIndex = new Map(data.pathways.map((p) => [p.id, searchable([
-    p.id, p.displayId, pathwayTitle(p), data.groups.find(g=>g.id===p.group).title,
+    p.id, p.displayId, p.displayId.replace('-', '.'), pathwayTitle(p), data.groups.find(g=>g.id===p.group).title,
     ...(isSTPA(p.id) ? [p.title, p.endpoint, p.conditions, p.basis, p.variants,
     p.reach.local, p.reach.systemic || '', p.steps.flatMap((s) => [...s.roles.map((id) => roles.get(id).label), ...s.aiStages.map((id) => aiStages.get(id).label)]).join(' '),
     data.groups.find((g) => g.id === p.group).title,
@@ -485,12 +485,12 @@
   function renderOverview() {
     const terms = searchable($('#overview-search').value.trim()).split(/\s+/).filter(Boolean);
     const results = matchingPathways(terms);
-    $('#overview-count').textContent = terms.length ? `${results.length} pathways` : '';
+    $('#overview-count').textContent = terms.length ? `${results.length} pathway${results.length===1?'':'s'}` : '';
     $('#overview-incidents').innerHTML = incidentResults(terms);
     $('#overview-groups').innerHTML = results.length ? data.groups.map((group) => {
       const members = results.filter((p) => p.group === group.id);
       if (!members.length) return '';
-      return `<details class="overview-group${group.id === 'H' ? ' comparisons' : ''}" data-group="${group.id}"${terms.length ? ' open' : ''}><summary><span class="cluster-index">${group.ordinal}</span><span class="cluster-text">${escape(group.shortTitle)}</span>${familyMotif(group.id)}<small class="cluster-count">${members.length} ${group.id === 'H' ? 'comparisons' : 'pathways'}</small></summary><ul>${members.map((p) => {
+      return `<details class="overview-group${group.id === 'H' ? ' comparisons' : ''}" data-group="${group.id}"${terms.length ? ' open' : ''}><summary><span class="cluster-index">${group.ordinal}</span><span class="cluster-text">${escape(group.shortTitle)}</span>${familyMotif(group.id)}<small class="cluster-count">${members.length} ${group.id === 'H' ? 'comparison' : 'pathway'}${members.length===1?'':'s'}</small></summary><ul>${members.map((p) => {
         const count = isSTPA(p.id) ? data.assessments.filter((a) => a.pathway === p.id).length : 0;
         return `<li><button class="overview-pathway" data-overview-pathway="${p.id}"><span class="code">${p.displayId}</span><span>${escape(pathwayTitle(p))}${count ? `<small class="pathway-coverage">${countLabel(count)}</small>` : ''}</span>${icon('right', 'choice-icon')}</button></li>`;
       }).join('')}</ul></details>`;
@@ -704,6 +704,15 @@
     announce(inspection.incidents[state.incident]?.labels[state.observation] || 'Incident observation selected');
   });
   $('#pathway-map').addEventListener('click', (event) => {
+    const contextLink = event.target.closest('[data-context-target]');
+    if (contextLink && isSTPA()) {
+      state.target = contextLink.dataset.contextTarget;
+      normalize(); renderMap(); renderStepDetail(); renderIncidents(); renderBarrier(); writeLocation();
+      const target = window.AuspexSTPA.targetButton(state.target);
+      focusAndReveal(target);
+      announce(target.getAttribute('aria-label'));
+      return;
+    }
     const overlayBarrier = event.target.closest('[data-overlay-barrier]');
     if (overlayBarrier && isSTPA()) {
       state.barrier = overlayBarrier.dataset.overlayBarrier;
@@ -807,13 +816,6 @@
       : (current + (['ArrowRight', 'ArrowDown'].includes(event.key) ? 1 : 3)) % 4;
     $(`[data-question="${next}"]`).click();
   });
-  document.addEventListener('toggle', (event) => {
-    const panel=event.target;
-    if (panel.isConnected && panel.matches?.('[data-context-pathway]')) {
-      window.AuspexSTPA.setContextOpen(panel.dataset.contextPathway,panel.open);
-    }
-  }, true);
-
   document.addEventListener('click', (event) => {
     const footnote = event.target.closest('a[href^="#a1-"]');
     if (footnote && (footnote.classList.contains('a1-note-reference') || footnote.closest('.a1-footnote'))) {
@@ -823,19 +825,25 @@
     }
     const stateInfo = event.target.closest('[data-state-info]');
     const recoveryInfo = event.target.closest('[data-recovery-info]');
+    const mapInfo = event.target.closest('[data-map-guide]');
     const exploreState = event.target.closest('[data-explore-state]');
     if (exploreState) {
-      $('#method-reading').innerHTML = window.AuspexSTPA.stateGuide(exploreState.dataset.exploreState);
+      $('#method-reading').innerHTML = window.AuspexSTPA.mapGuide('barriers',exploreState.dataset.exploreState);
       $(`[data-explore-state="${exploreState.dataset.exploreState}"]`).focus({ preventScroll: true });
       return;
     }
-    if (stateInfo || recoveryInfo) {
-      methodReturn = stateInfo || recoveryInfo;
-      methodReturn.focus({ preventScroll: true });
-      $('#method-title').textContent = stateInfo ? 'Barrier states' : 'Recovery & reinforcement';
-      $('#method-reading').innerHTML = stateInfo ? window.AuspexSTPA.stateGuide(stateInfo.dataset.stateInfo) : window.AuspexSTPA.recoveryGuide();
+    if (stateInfo || recoveryInfo || mapInfo) {
+      const wasOpen = $('#method-dialog').open;
+      const section = mapInfo?.dataset.mapGuide || (stateInfo ? 'barriers' : 'recovery');
+      if (!wasOpen) {
+        methodReturn = stateInfo || recoveryInfo || mapInfo;
+        methodReturn.focus({ preventScroll: true });
+      }
+      $('#method-title').textContent = 'Path & barrier key';
+      $('#method-reading').innerHTML = window.AuspexSTPA.mapGuide(section,stateInfo?.dataset.stateInfo);
       $('#method-dialog').dataset.group = $('#app').dataset.group || '';
-      $('#method-dialog').showModal();
+      if (!wasOpen) $('#method-dialog').showModal();
+      else $(`#method-reading [data-map-guide="${section}"]`).focus({ preventScroll: true });
       return;
     }
     if (event.target.closest('[data-show-cases]')) {

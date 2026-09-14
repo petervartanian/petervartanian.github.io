@@ -36,7 +36,7 @@ assert.equal(catalogue.pathways.filter((p) => p.comparison).length, 6);
 assert.equal(catalogue.pathways.filter((p) => p.endpoint.startsWith('human extinction') || p.endpoint.startsWith('extinction of')).length, 2);
 for (const p of pathways.values()) {
   assert(groups.has(p.group), p.id);
-  assert.equal(p.displayId, `${groups.get(p.group).ordinal}.${Number(p.id.split('-')[1])}`);
+  assert.equal(p.displayId, `${groups.get(p.group).ordinal}-${Number(p.id.split('-')[1])}`);
   assert.equal(p.comparison, p.group === 'H');
   assert.equal(p.version, catalogue.version);
   assert(p.reach.local.trim(), `${p.id}: local effects`);

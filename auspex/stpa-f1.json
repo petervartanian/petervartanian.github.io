@@ -1,7 +1,7 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "pathway": "F-01",
-  "displayId": "F.1",
+  "displayId": "F-1",
   "title": "Amplification, failed response and mass violence",
   "status": "STPA worked example · provisional analysis",
   "summary": "When does harmful amplification escape control, and can intervention still protect people?",
@@ -69,7 +69,7 @@
   "scope": "A hypothetical platform operating in a conflict-affected setting: ranking, content enforcement, platform governance, local warning partners and the interface to civilian protection. Human perpetrators and pre-existing conflict remain causal actors outside platform control.",
   "purpose": "Prevent platform activity from contributing to threats, targeting, mass violence or displacement while protecting legitimate expression and access to safety information.",
   "boundary": "The roles below are analytical functions, not a verified governance map for Meta or any particular country. A platform can control its distribution system; it cannot by itself guarantee physical protection or resolve an armed conflict.",
-  "numbering": "01–05 identify scenario milestones and R a recovery route. Historical investigations support an attributed amplification-and-response component, not an experimentally isolated full causal chain.",
+  "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Historical investigations support an attributed amplification-and-response component, not an experimentally isolated full causal chain.",
   "bowtie": "The centre is H1: harmful dissemination persists beyond a timely, context-sensitive response. Subsequent mobilization and mass violence require human intent, coercive capacity and failed physical protection. Rights-respecting intervention and civilian protection can still limit further harm.",
   "losses": [
     {
@@ -320,7 +320,7 @@
   "nodes": [
     {
       "id": "F-01:1",
-      "number": "01",
+      "number": "1.1",
       "wing": "before",
       "role": "Enabling condition",
       "title": "Engagement shapes exposure",
@@ -344,7 +344,7 @@
     },
     {
       "id": "F-01:2",
-      "number": "02",
+      "number": "1.2",
       "wing": "before",
       "role": "Amplification mechanism",
       "title": "Inflammatory content is amplified",
@@ -371,7 +371,7 @@
     },
     {
       "id": "F-01:3",
-      "number": "03",
+      "number": "2.1",
       "wing": "centre",
       "role": "Loss of control · H1",
       "title": "Warnings fail to interrupt spread",
@@ -401,7 +401,7 @@
     },
     {
       "id": "F-01:4",
-      "number": "04",
+      "number": "3.1",
       "wing": "after",
       "role": "Conditional mobilization",
       "title": "Exposure assists targeting",
@@ -427,7 +427,7 @@
     },
     {
       "id": "F-01:5",
-      "number": "05",
+      "number": "3.2",
       "wing": "after",
       "role": "Further loss · L2",
       "title": "Mass violence and displacement",

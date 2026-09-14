@@ -21,14 +21,16 @@
     const words=String(title).match(/^(.*\s)?(\S+)$/) || ['', '', title];
     return `${esc(words[1] || '')}<span class="a1-noted-word">${esc(words[2])}<sup><a class="a1-note-reference" id="${esc(id)}" href="#${esc(note)}" aria-label="${esc(label)}">*</a></sup></span>`;
   };
-  const contextOpen = new Map();
-  const setContextOpen = (pathway,open) => contextOpen.set(pathway,Boolean(open));
   function contextPanel(staticMode=false) {
     const items=list(model.presentation?.context);
-    if (!items.length) return '';
     const prefix=staticMode?`${model.pathway}-context`:'a1-context';
-    const body=`<div class="a1-context-body">${items.map((item,index)=>`<div class="a1-context-item"><h4>${esc(item.title)}</h4><p>${item.note?notedTitle(item.text,`${prefix}-${index}-reference`,`${prefix}-${index}-footnote`,'Scope of these warning signs'):esc(item.text)}${staticMode?` ${cite(item.sources)}`:''}</p></div>`).join('')}${items.map((item,index)=>item.note?`<p class="a1-footnote" id="${prefix}-${index}-footnote" tabindex="-1"><a href="#${prefix}-${index}-reference" aria-label="Return to warning signs">*</a> ${esc(item.note)}</p>`:'').join('')}</div>`;
-    return staticMode?`<section class="a1-context-reading"><h3>00 · Context & warning signs</h3>${body}</section>`:`<details class="a1-context" data-context-pathway="${esc(model.pathway)}"${contextOpen.get(model.pathway)?' open':''}><summary><span class="a1-number">00</span><span>Context & warning signs</span></summary>${body}</details>`;
+    const targets=item=>list(item.targets).map(t=>{
+      const n=node(t.node);
+      const label=`<span class="a1-context-ref">${esc(n.number)}</span>${esc(t.label)}`;
+      return staticMode?`<a href="#${esc(n.id)}" class="a1-context-link">${label}</a>`:`<button class="a1-context-link" data-context-target="${esc(n.id)}" aria-label="Go to ${esc(n.number)}: ${esc(n.shortLabel || n.title)}">${label}</button>`;
+    }).join('');
+    const body=items.length?`<div class="a1-context-body">${items.map((item,index)=>`<div class="a1-context-item"><h4>${esc(item.title)}</h4><p>${item.note?notedTitle(item.text,`${prefix}-${index}-reference`,`${prefix}-${index}-footnote`,'Scope of these warning signs'):esc(item.text)}${staticMode?` ${cite(item.sources)}`:''}</p>${item.targets?.length?`<div class="a1-context-targets">${targets(item)}</div>`:''}</div>`).join('')}${items.map((item,index)=>item.note?`<p class="a1-footnote" id="${prefix}-${index}-footnote" tabindex="-1"><a href="#${prefix}-${index}-reference" aria-label="Return to warning signs">*</a> ${esc(item.note)}</p>`:'').join('')}</div>`:`<p class="a1-context-scope">${esc(model.scope)}</p>`;
+    return `<section class="${staticMode?'a1-context-reading':'a1-context'}${items.length?' has-signals':''}" aria-labelledby="${prefix}-title"><h3 class="a1-context-heading" id="${prefix}-title"><span>0.</span> ${items.length?'Context & warning signs':'Context'}</h3>${body}</section>`;
   }
   const tag = s => `<span class="stpa-id">${esc(s)}</span>`;
   const refs = ids => list(ids).map(tag).join(' ');
@@ -108,8 +110,25 @@
   function routeSymbol(kind) {
     const path=kind==='recovery'
       ? '<path d="M2 16C14 16 10 4 27 4"/><path class="route-tip" d="M24 1l6 3-6 3z"/>'
-      : '<path d="M29 16H5V4H26"/><path d="m21 1 4 3-4 3m5-6 4 3-4 3"/>';
+      : kind==='feedback'?'<path d="M29 16H5V4H26"/><path d="m21 1 4 3-4 3m5-6 4 3-4 3"/>'
+      : kind==='safeguard'?'<path d="M2 10H31"/><path class="route-crossbar" d="M17 2V18"/>'
+      : '<path d="M2 10H30"/><path d="m25 6 5 4-5 4"/>';
     return `<svg class="a1-route-symbol is-${kind}" viewBox="0 0 34 20" aria-hidden="true" focusable="false">${path}</svg>`;
+  }
+  const routeDefinitions=[
+    {id:'contribution',label:'Possible contribution',definition:'A condition or action may help bring about the next component. The arrow does not establish causation or assign a probability.'},
+    {id:'continuation',label:'Conditional consequence',definition:'A possible progression after the loss-of-control event. The stated conditions must also hold. This uses the same solid arrow as a contribution.'},
+    {id:'optional',label:'Optional route',definition:'A branch that applies only under its stated conditions. The pathway can also proceed through other branches.'},
+    {id:'recovery',label:'Recovery',definition:'An intervention may stop escalation, limit harm or restore control. The green curve leads to the model’s recovery outcome.'},
+    {id:'feedback',label:'Feedback',definition:'An outcome changes an earlier input or decision, which can affect later outcomes. The squared return loop is dashed and ends in two open chevrons.'}
+  ];
+  function pathsGuide(staticMode=false) {
+    return `<div class="a1-path-guide"><div class="a1-stage-guide"><span><b>0.</b> Context</span><span><b>1.</b> Precursors</span><span><b>2.</b> Event</span><span><b>3.</b> Consequences</span><span class="is-recovery"><b>R</b> Recovery</span></div><p>Precursors can lead to the central loss-of-control event. Consequences depend on what follows; recovery may interrupt that progression. Context and warning signs help interpret the pathway.</p><dl class="a1-path-definitions">${routeDefinitions.map(r=>`<div>${routeSymbol(r.id)}<dt>${esc(r.label)}</dt><dd>${esc(r.definition)}</dd></div>`).join('')}<div class="a1-safeguard-definition">${routeSymbol('safeguard')}<dt>Proposed safeguard</dt><dd>A dotted crossbar marks a proposed control on a route. Its effectiveness has not been demonstrated here. Observed barrier modes are shown with the incident evidence.</dd></div></dl><p class="a1-guide-source">The solid, dashed and curved lines are this site’s drawing conventions. <a href="https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/about-bowtie/how-does-bowtie-work/" target="_blank" rel="noopener noreferrer">Bow-tie structure: UK CAA ↗</a></p>${staticMode?`<h3>Barrier modes</h3><dl class="a1-path-definitions">${stateDefinitions.map(s=>`<div>${barrierGlyph(s.id)}<dt>${esc(s.label)}</dt><dd>${esc(s.definition)}</dd></div>`).join('')}</dl>${recoveryGuide()}`:''}</div>`;
+  }
+  function mapGuide(mode='paths',selected='unknown') {
+    const tabs=[['paths','Path types'],['barriers','Barrier modes'],['recovery','Recovery & reinforcement']];
+    const active=tabs.some(([id])=>id===mode)?mode:'paths';
+    return `<nav class="a1-guide-tabs" aria-label="Map key sections">${tabs.map(([id,label])=>`<button data-map-guide="${id}" aria-pressed="${id===active}" aria-controls="a1-guide-content">${label}</button>`).join('')}</nav><div id="a1-guide-content">${active==='barriers'?stateGuide(selected):active==='recovery'?recoveryGuide():pathsGuide()}</div>`;
   }
   function renderMap(selected, a, inspectedBarrier, evidenceMarks = () => '') {
     const groups={before:[],centre:[],after:[],recovery:[]};
@@ -129,10 +148,11 @@
         ${mapped?overlay(a,inspectedBarrier,evidenceMarks):''}
       </div>`;
     };
-    const headings={before:'Contributing conditions',centre:'Loss of control',after:'Conditional consequences',recovery:'Recovery route'};
+    const headings={before:'1. Precursors',centre:'2. Event',after:'3. Consequences',recovery:'R. Recovery'};
+    const kinds=new Set(projectedLinks().map(l=>l.kind || l.type));
     return `${contextPanel()}<div id="a1-route" class="a1-route${config?' has-overlay':''}" data-model-pathway="${esc(model.pathway)}" aria-label="Hypothetical pathway: contributing conditions, loss of control, conditional consequences and recovery">${['before','centre','after','recovery'].map(wing=>groups[wing].length?`<section class="a1-region a1-region-${wing}" data-wing="${wing}" aria-label="${headings[wing]}"><h3 class="a1-region-heading">${headings[wing]}</h3>${groups[wing].map(cell).join('')}</section>`:'').join('')}</div>
     <p class="a1-node-note" id="a1-node-note" tabindex="-1"${config && selected===anchor?' hidden':''}>${esc(node(selected)?.text || model.summary)}</p>${config?`<p class="a1-footnote" id="a1-case-footnote" tabindex="-1"><a href="#a1-case-reference" aria-label="Return to case title">*</a> ${esc(config.limit)}</p>`:''}${node(selected)?.type==='recovery'?'<button class="a1-recovery-link" data-recovery-info>Recovery & reinforcement ↗</button>':''}
-    <div class="a1-map-key"><span><i aria-hidden="true"></i>Possible contribution</span>${projectedLinks().some(l=>(l.kind || l.type)==='optional')?'<span><i class="is-optional" aria-hidden="true"></i>Optional route</span>':''}<span>${routeSymbol('recovery')}Recovery</span>${projectedLinks().some(l=>l.kind==='feedback')?`<span>${routeSymbol('feedback')}Feedback</span>`:''}<span><i class="is-proposed" aria-hidden="true"></i>Proposed safeguard · untested</span></div>
+    <div class="a1-map-key" role="group" aria-label="Path and barrier key">${routeDefinitions.filter(r=>kinds.has(r.id)).map(r=>`<button data-map-guide="paths" aria-haspopup="dialog" aria-label="Explain ${esc(r.label.toLowerCase())}">${routeSymbol(r.id)}<span>${esc(r.label)}</span></button>`).join('')}<button data-map-guide="paths" aria-haspopup="dialog" aria-label="Explain proposed safeguards">${routeSymbol('safeguard')}<span>Proposed safeguard</span></button><button class="a1-barrier-key" data-map-guide="barriers" aria-haspopup="dialog">${barrierGlyph('intact')}<span>Barrier modes ↗</span></button></div>
     `;
   }
   function targetButton(id) { return Array.from(document.querySelectorAll('#a1-route [data-node]')).find(el=>el.dataset.node===id); }
@@ -175,7 +195,7 @@
     return `<ul class="a1-sources">${model.sources.map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ↗</a></li>`).join('')}</ul><p><a href="pathways.html#${esc(model.pathway)}">Full research notes ↗</a></p>`;
   }
   function staticPage() {
-    return `<section class="stpa-static"><h2>${esc(model.title)}</h2><p>${esc(model.status)}</p><p>${esc(model.summary)}</p><p>${esc(model.numbering)}</p><p>${esc(model.presentation.fidelity)}</p>${contextPanel(true)}${model.nodes.map(n=>`<section><h4>${esc(n.number)} · ${esc(n.title)}</h4><p>${esc(n.role)}. ${esc(n.text)}</p><p><strong>Mechanism:</strong> ${esc(n.mechanism)}</p><p><strong>Requires:</strong> ${esc(n.requires)}</p><p>Controls: ${refs(n.constraints)} ${cite(n.sources)}</p></section>`).join('')}${analysis()}</section>`.replace(/(id="|href="#)stpa-/g, `$1${model.pathway}-stpa-`).replace(/[ \t]+\n/g, '\n');
+    return `<section class="stpa-static"><h2>${esc(model.title)}</h2><p>${esc(model.status)}</p><p>${esc(model.summary)}</p><p>${esc(model.numbering)}</p><p>${esc(model.presentation.fidelity)}</p>${contextPanel(true)}${model.nodes.map(n=>`<section id="${esc(n.id)}"><h4>${esc(n.number)} · ${esc(n.title)}</h4><p>${esc(n.role)}. ${esc(n.text)}</p><p><strong>Mechanism:</strong> ${esc(n.mechanism)}</p><p><strong>Requires:</strong> ${esc(n.requires)}</p><p>Controls: ${refs(n.constraints)} ${cite(n.sources)}</p></section>`).join('')}${analysis()}</section>`.replace(/(id="|href="#)stpa-/g, `$1${model.pathway}-stpa-`).replace(/[ \t]+\n/g, '\n');
   }
   function roundedPath(points, radius=7) {
     const clean=points.filter((point,index)=>!index || point[0]!==points[index-1][0] || point[1]!==points[index-1][1]);
@@ -301,5 +321,5 @@
     const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="11" refY="4" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
     svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${recoveryMarker}${feedbackMarker}</defs>${paths}`;
   }
-  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle,setContextOpen};
+  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle,mapGuide,pathsGuide,routeDefinitions};
 })();

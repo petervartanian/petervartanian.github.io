@@ -1,16 +1,16 @@
 // Generated from STPA models and barrier-states.json by build-stpa.mjs.
 window.AuspexSTPAModels = {
   "X-01": {
-    "version": "1.4",
+    "version": "1.5",
     "pathway": "X-01",
-    "displayId": "A.1",
+    "displayId": "A-1",
     "title": "Successor capture and the loss of human control",
     "status": "STPA worked example · provisional analysis",
     "summary": "Could influence over successor development become authority that humans cannot revoke?",
     "scope": "A hypothetical AI development and deployment system: successor research, independent assurance, deployment decisions, and the operators of compute and consequential services. Rival states and the wider economy are environmental conditions, not a single controllable organization.",
     "purpose": "Retain effective human authority over successor development and consequential deployment, while preventing permanent global disempowerment and human extinction.",
     "boundary": "The control roles below are analytical functions, not a verified organization chart. Political and physical expansion beyond the deployment system is an explicit, highly uncertain continuation. No dates or probabilities are assigned.",
-    "numbering": "00 identifies background conditions and warning signs. 01–07 identify scenario milestones, not universal stages or STPA method steps. R identifies a possible recovery outcome. Incident overlays attach only to components supported by their assessment; they do not establish the rest of the hypothetical pathway.",
+    "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Incident overlays establish only the mapped component; they do not establish the rest of the hypothetical pathway.",
     "bowtie": "The centre is H1: consequential authority escapes effective human control. Left-hand routes contribute to that state; right-hand branches require further conditions. The optional coordination branch is not necessary to every version. This extended bow-tie is a summary of the model, not a substitute for its control and feedback analysis.",
     "losses": [
       {
@@ -246,7 +246,7 @@ window.AuspexSTPAModels = {
     "nodes": [
       {
         "id": "X-01:1",
-        "number": "01",
+        "number": "1.1",
         "wing": "before",
         "role": "Enabling condition",
         "title": "AI shapes its successor",
@@ -269,7 +269,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "X-01:2",
-        "number": "02",
+        "number": "1.2",
         "wing": "before",
         "role": "Unsafe control action",
         "title": "Warnings do not trigger a pause",
@@ -292,7 +292,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "X-01:3",
-        "number": "03",
+        "number": "1.3",
         "wing": "before",
         "role": "Assurance failure scenario",
         "title": "Successor divergence evades assurance",
@@ -320,7 +320,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "X-01:4",
-        "number": "04",
+        "number": "2.1",
         "wing": "centre",
         "role": "Loss of control · H1",
         "title": "Authority escapes effective human control",
@@ -345,7 +345,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "X-01:5",
-        "number": "05",
+        "number": "3.1",
         "wing": "after",
         "role": "Optional amplifier",
         "title": "Rival systems coordinate",
@@ -368,7 +368,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "X-01:6",
-        "number": "06",
+        "number": "3.2",
         "wing": "after",
         "role": "Loss · L1",
         "title": "Human disempowerment becomes permanent",
@@ -393,7 +393,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "X-01:7",
-        "number": "07",
+        "number": "3.3",
         "wing": "after",
         "role": "Further loss · L2",
         "title": "Human extinction",
@@ -812,7 +812,7 @@ window.AuspexSTPAModels = {
         "title": "Paté-Cornell · Signals, response and risk mitigation",
         "url": "https://www.nationalacademies.org/read/11061/chapter/4",
         "locator": "Accident Precursor Analysis and Management (2004), chapter 3",
-        "use": "Distinguishes precursor signals, their reliability and organizational response. Supports the context and warning-sign treatment, not an obligatory stage 00."
+        "use": "Distinguishes precursor signals, their reliability and organizational response. Supports the context and warning-sign treatment, not an obligatory stage 0."
       }
     ],
     "limits": "A bounded first-pass STPA application, not an exhaustive analysis. The four unsafe-action categories are illustrated across selected control actions; a complete analysis would examine every relevant action in every category and refine it with domain experts. Scenario milestones and limit types are explicit Auspex conventions. No incident count is converted to a probability; no barrier independence or complete model coverage is assumed.",
@@ -866,7 +866,7 @@ window.AuspexSTPAModels = {
         "AFK-2024": {
           "title": "Alignment-faking experiment",
           "target": "X-01:3",
-          "limit": "Mechanism comparison at 03 in a controlled experiment; no later milestone was established.",
+          "limit": "Mechanism comparison at 1.3 in a controlled experiment; no later milestone was established.",
           "barriers": {
             "training-assurance": {
               "title": "Behavioral checks",
@@ -891,7 +891,7 @@ window.AuspexSTPAModels = {
         "SAB-2024": {
           "title": "Sabotage tests",
           "target": "X-01:3",
-          "limit": "Mechanism comparison at 03. Detection is distinct from verified interruption; later milestones remain hypothetical.",
+          "limit": "Mechanism comparison at 1.3. Detection is distinct from verified interruption; later milestones remain hypothetical.",
           "barriers": {
             "sabotage-review": {
               "title": "Code review",
@@ -938,6 +938,16 @@ window.AuspexSTPAModels = {
           "sources": [
             "AI27",
             "STPA"
+          ],
+          "targets": [
+            {
+              "node": "X-01:1",
+              "label": "Development"
+            },
+            {
+              "node": "X-01:4",
+              "label": "Authority"
+            }
           ]
         },
         {
@@ -945,6 +955,16 @@ window.AuspexSTPAModels = {
           "text": "Successor changes escape independent review, or access expands beyond what humans can reliably revoke.",
           "sources": [
             "STPA"
+          ],
+          "targets": [
+            {
+              "node": "X-01:3",
+              "label": "Assurance"
+            },
+            {
+              "node": "X-01:4",
+              "label": "Control limits"
+            }
           ]
         },
         {
@@ -955,7 +975,17 @@ window.AuspexSTPAModels = {
             "HF",
             "PATE"
           ],
-          "note": "These observations are fallible signals, not proof of this whole pathway."
+          "note": "These observations are fallible signals, not proof of this whole pathway.",
+          "targets": [
+            {
+              "node": "X-01:2",
+              "label": "Pause decision"
+            },
+            {
+              "node": "X-01:R",
+              "label": "Recovery check"
+            }
+          ]
         }
       ]
     }
@@ -1020,17 +1050,17 @@ window.AuspexSTPAModels = {
         "question": "What actually ended the episode, and would that circumstance recur?"
       }
     ],
-    "version": "1.1",
+    "version": "1.2",
     "pathway": "P-01",
-    "displayId": "B.1",
+    "displayId": "B-1",
     "title": "Personal command and the loss of constitutional control",
     "status": "STPA worked example · provisional analysis",
     "summary": "Could autonomous forces turn a leader’s personal command into power that lawful institutions cannot revoke?",
     "scope": "A hypothetical state’s procurement, military command, force-control and constitutional oversight system. The model concerns personal command loyalty; covert developer loyalty and hostile takeover of systems are separate routes.",
     "purpose": "Keep consequential use of force subject to lawful institutional authority, prevent unlawful violence and preserve the ability to restore constitutional government.",
     "boundary": "Roles are analytical functions, not a description of any current country’s command arrangements. Legal authority depends on the jurisdiction. Maven and Replicator supply procurement context only.",
-    "numbering": "01–05 are scenario milestones, not a coup checklist or STPA method steps. R is a conditional recovery route. An overlay at 01 does not show that the episode approached 04.",
-    "bowtie": "The centre, H1 at 04, is force operating beyond effective constitutional constraint. Procurement, command design and unlawful orders can contribute; national takeover still requires sufficient force and failed institutional recovery.",
+    "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. The procurement overlays do not establish unlawful command or loss of constitutional control.",
+    "bowtie": "The centre, H1 at 2.1, is force operating beyond effective constitutional constraint. Procurement, command design and unlawful orders can contribute; national takeover still requires sufficient force and failed institutional recovery.",
     "schema": "A bounded STPA model with traceable losses, hazards, control actions, feedback, contextual unsafe actions, loss scenarios and safety constraints. The bow-tie is its visual summary.",
     "limits": "This is a first-pass analytical reconstruction requiring constitutional, military and systems expertise. Unsafe-action categories are illustrated for selected actions, not exhaustively enumerated. The two mapped records are announcements; neither demonstrates a coup, personally loyal forces or the effectiveness of a constitutional safeguard. No probabilities or universal legal conclusions are inferred.",
     "losses": [
@@ -1284,7 +1314,7 @@ window.AuspexSTPAModels = {
     "nodes": [
       {
         "id": "P-01:1",
-        "number": "01",
+        "number": "1.1",
         "wing": "before",
         "type": "condition",
         "role": "Enabling context",
@@ -1311,7 +1341,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "P-01:2",
-        "number": "02",
+        "number": "1.2",
         "wing": "before",
         "type": "scenario",
         "role": "Command-design failure scenario",
@@ -1339,7 +1369,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "P-01:3",
-        "number": "03",
+        "number": "1.3",
         "wing": "before",
         "type": "unsafe-action",
         "role": "Unsafe control action",
@@ -1365,7 +1395,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "P-01:4",
-        "number": "04",
+        "number": "2.1",
         "wing": "centre",
         "type": "hazard",
         "role": "Loss of control · H1",
@@ -1393,7 +1423,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "P-01:5",
-        "number": "05",
+        "number": "3.1",
         "wing": "after",
         "type": "loss",
         "role": "Loss · L1 / L2",
@@ -1769,7 +1799,7 @@ window.AuspexSTPAModels = {
           ]
         }
       },
-      "fidelity": "Evidence marks procurement context at 01 only. Candidate constitutional controls are explicit requirements for the hypothetical system; the mapped announcements do not demonstrate that they worked.",
+      "fidelity": "Evidence marks procurement context at 1.1 only. Candidate constitutional controls are explicit requirements for the hypothetical system; the mapped announcements do not demonstrate that they worked.",
       "barrierQuestion": "Would this protection still constrain a more capable system, or does it rely on today’s limited capability, access or opportunity?"
     }
   },
@@ -1833,17 +1863,17 @@ window.AuspexSTPAModels = {
         "question": "What actually ended the episode, and would that circumstance recur?"
       }
     ],
-    "version": "1.0",
+    "version": "1.1",
     "pathway": "W-01",
-    "displayId": "C.1",
+    "displayId": "C-1",
     "title": "Misleading threat assessment and nuclear escalation",
     "status": "STPA worked example · provisional analysis",
     "summary": "Could a convincing but false threat picture move a nuclear decision beyond effective correction?",
     "scope": "A hypothetical crisis-warning, intelligence-assessment and nuclear-command system in which AI shapes advice to human decision-makers. Sensor input, independent scrutiny, authorization and correction are modeled separately.",
     "purpose": "Prevent nuclear harm caused by materially false threat assessment while preserving verified information, accountable decisions and effective correction.",
     "boundary": "No real country’s classified command arrangements are claimed. Human authorization remains explicit. The two NORAD records are historical non-AI analogies for information and control mechanisms; they are not evidence of AI nuclear use.",
-    "numbering": "01–06 identify scenario milestones, not STPA steps or measured proximity to nuclear war. R is an intervention before irreversible nuclear use. Historical overlays at 02 establish neither the preceding AI reliance nor the later decision.",
-    "bowtie": "The centre, H1 at 04, is nuclear force committed on a materially false premise without effective correction. Misleading information and inadequate scrutiny are left-side threats; actual detonation and wider exchange remain conditional consequences.",
+    "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Historical warning overlays establish neither preceding AI reliance nor a later launch decision.",
+    "bowtie": "The centre, H1 at 2.1, is nuclear force committed on a materially false premise without effective correction. Misleading information and inadequate scrutiny are left-side threats; actual detonation and wider exchange remain conditional consequences.",
     "schema": "A first-pass STPA reconstruction with human decision authority, machine information, verification, control execution and recovery kept distinct. The bow-tie summarizes selected loss scenarios.",
     "limits": "This analysis is provisional and requires national-doctrine, warning-system and crisis-decision expertise. Four unsafe-action categories are illustrated, not exhaustively assessed. The historical records show warning failures and corrective changes; they do not establish AI reliance, a launch order, a measured escalation probability or the performance of modern nuclear safeguards.",
     "losses": [
@@ -2105,7 +2135,7 @@ window.AuspexSTPAModels = {
     "nodes": [
       {
         "id": "W-01:1",
-        "number": "01",
+        "number": "1.1",
         "wing": "before",
         "type": "condition",
         "role": "Enabling condition",
@@ -2131,7 +2161,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "W-01:2",
-        "number": "02",
+        "number": "1.2",
         "wing": "before",
         "type": "scenario",
         "role": "Information failure scenario",
@@ -2159,7 +2189,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "W-01:3",
-        "number": "03",
+        "number": "1.3",
         "wing": "before",
         "type": "unsafe-action",
         "role": "Unsafe control action",
@@ -2187,7 +2217,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "W-01:4",
-        "number": "04",
+        "number": "2.1",
         "wing": "centre",
         "type": "hazard",
         "role": "Loss of control · H1",
@@ -2213,7 +2243,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "W-01:5",
-        "number": "05",
+        "number": "3.1",
         "wing": "after",
         "type": "loss",
         "role": "Loss · L1",
@@ -2237,7 +2267,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "W-01:6",
-        "number": "06",
+        "number": "3.2",
         "wing": "after",
         "type": "loss",
         "role": "Further loss · L2",
@@ -2831,7 +2861,7 @@ window.AuspexSTPAModels = {
           }
         }
       },
-      "fidelity": "The two records are historical comparisons at 02. Reinforced means a documented corrective design after the incident; it does not identify the historical stopping mechanism or prove future efficacy.",
+      "fidelity": "The two records are historical comparisons at 1.2. Reinforced means a documented corrective design after the incident; it does not identify the historical stopping mechanism or prove future efficacy.",
       "barrierQuestion": "Will this control still work when misleading information becomes more persuasive, or does it only address a known fault?"
     }
   },
@@ -2895,17 +2925,17 @@ window.AuspexSTPAModels = {
         "question": "What actually ended the episode, and would that circumstance recur?"
       }
     ],
-    "version": "1.0",
+    "version": "1.1",
     "pathway": "B-01",
-    "displayId": "D.1",
+    "displayId": "D-1",
     "title": "Biological misuse and the limits of access control",
     "status": "STPA worked example · provisional analysis",
     "summary": "Could access to useful AI assistance outgrow the safeguards that keep biological risk contained?",
     "scope": "A hypothetical AI-service, research-governance, facility-safety and public-health system. The analysis follows a potential malicious-use route at a non-operational level; it separates model access, demonstrated assistance, physical hazard, exposure and public-health consequences.",
     "purpose": "Preserve beneficial research while preventing harmful assistance, uncontrolled biological hazards, exposure and large-scale loss of life.",
     "boundary": "The mapped provider reports concern dual-use research and access controls. They do not establish malicious intent, a harmful release or a pandemic. Technical biological procedures and attack methods are outside this model.",
-    "numbering": "01–06 are distinct scenario conditions, not a recipe or a common measure of distance to catastrophe. R is a conditional route back to controlled activity or a controlled outbreak. Evidence at 01 does not demonstrate practical uplift or any later milestone.",
-    "bowtie": "The centre, H1 at 03, is a consequential biological hazard beyond effective authorized control. Useful assistance and other practical conditions are left-side contributors; exposure, sustained transmission and response failure are separate right-side conditions.",
+    "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Evidence of access does not demonstrate practical uplift or later biological outcomes.",
+    "bowtie": "The centre, H1 at 2.1, is a consequential biological hazard beyond effective authorized control. Useful assistance and other practical conditions are left-side contributors; exposure, sustained transmission and response failure are separate right-side conditions.",
     "schema": "A provisional STPA model with explicit access, institutional, physical and public-health controls. The adapted bow-tie distinguishes model access from biological outcomes and separates current barrier condition from brittleness under changing capability.",
     "limits": "This first-pass governance analysis requires specialist biosafety and public-health review. Selected control actions illustrate the four unsafe-action categories; they are not an exhaustive analysis. Provider assessments of assistance are not independent outcome experiments. No mapped record demonstrates the complete malicious pathway, and no probability, pathogen specification or operational biological method is supplied.",
     "losses": [
@@ -3168,7 +3198,7 @@ window.AuspexSTPAModels = {
     "nodes": [
       {
         "id": "B-01:1",
-        "number": "01",
+        "number": "1.1",
         "wing": "before",
         "type": "condition",
         "role": "Enabling condition",
@@ -3195,7 +3225,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "B-01:2",
-        "number": "02",
+        "number": "1.2",
         "wing": "before",
         "type": "scenario",
         "role": "Practical uplift condition",
@@ -3222,7 +3252,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "B-01:3",
-        "number": "03",
+        "number": "2.1",
         "wing": "centre",
         "type": "hazard",
         "role": "Loss of control · H1",
@@ -3249,7 +3279,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "B-01:4",
-        "number": "04",
+        "number": "3.1",
         "wing": "after",
         "type": "scenario",
         "role": "Exposure and transmission condition",
@@ -3274,7 +3304,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "B-01:5",
-        "number": "05",
+        "number": "3.2",
         "wing": "after",
         "type": "unsafe-action",
         "role": "Response failure scenario",
@@ -3301,7 +3331,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "B-01:6",
-        "number": "06",
+        "number": "3.3",
         "wing": "after",
         "type": "loss",
         "role": "Loss · L1 / L2",
@@ -3665,7 +3695,7 @@ window.AuspexSTPAModels = {
           "anchor": "B-01:1",
           "observed": "Anthropic reports that access resumed within days after bans and relay takedowns.",
           "notEstablished": "The dual-use research case does not establish malicious intent, harmful exposure or a pandemic.",
-          "limit": "An observed failure of lasting access exclusion at 01; harmful intent and biological outcomes are not established.",
+          "limit": "An observed failure of lasting access exclusion at 1.1; harmful intent and biological outcomes are not established.",
           "barriers": {
             "relay-enforcement": {
               "title": "Account bans and relay takedowns",
@@ -3690,7 +3720,7 @@ window.AuspexSTPAModels = {
           "anchor": "B-01:1",
           "observed": "The provider reports that relevant assistance was confined to weaker models and judged its contribution limited.",
           "notEstablished": "Independent outcome efficacy, malicious intent, a harmful release and a pandemic are not established.",
-          "limit": "A reported restriction at 01, partly dependent on lower fallback capability; it does not demonstrate a prevented pandemic.",
+          "limit": "A reported restriction at 1.1, partly dependent on lower fallback capability; it does not demonstrate a prevented pandemic.",
           "barriers": {
             "bio-classifier": {
               "title": "Biological safety classifiers",
@@ -3713,9 +3743,9 @@ window.AuspexSTPAModels = {
     }
   },
   "S-01": {
-    "version": "1.0",
+    "version": "1.1",
     "pathway": "S-01",
-    "displayId": "E.1",
+    "displayId": "E-1",
     "title": "Correlated grid control and loss of essential power",
     "status": "STPA worked example · provisional analysis",
     "summary": "Could a shared control error outrun grid protection and essential-service recovery?",
@@ -3783,7 +3813,7 @@ window.AuspexSTPAModels = {
     "scope": "A hypothetical regional electricity system using related AI forecasts or control recommendations: model procurement, dispatch authorization, physical protection, regional coordination and restoration. Essential-service operators are included at their electricity and backup interface.",
     "purpose": "Keep electricity within safe operating limits and maintain essential services during disturbances, preventing prolonged outages, serious illness and loss of life.",
     "boundary": "Functional roles describe an analytical system, not the organization chart of a particular utility. Historical blackouts test physical-control assumptions only. They are not AI incidents and do not validate the proposed AI initiating mechanism.",
-    "numbering": "01–05 are scenario milestones. R is successful recovery. Both incident overlays are non-AI comparisons attached to the grid failure or recovery component; neither establishes a progression through the AI-related milestones.",
+    "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Both incident overlays are non-AI comparisons; neither establishes progression through the AI-related precursors.",
     "bowtie": "The centre is H1: grid instability exceeds available containment and interrupts regional supply. Prevention acts before this state; restoration and essential-service support can still prevent a public-health catastrophe. All right-hand transitions require additional conditions.",
     "losses": [
       {
@@ -4011,7 +4041,7 @@ window.AuspexSTPAModels = {
     "nodes": [
       {
         "id": "S-01:1",
-        "number": "01",
+        "number": "1.1",
         "wing": "before",
         "role": "Enabling condition",
         "title": "Related models shape dispatch",
@@ -4035,7 +4065,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "S-01:2",
-        "number": "02",
+        "number": "1.2",
         "wing": "before",
         "role": "Unsafe control action",
         "title": "A shared error reaches the grid",
@@ -4064,7 +4094,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "S-01:3",
-        "number": "03",
+        "number": "2.1",
         "wing": "centre",
         "role": "Loss of control · H1",
         "title": "Instability defeats containment",
@@ -4092,7 +4122,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "S-01:4",
-        "number": "04",
+        "number": "3.1",
         "wing": "after",
         "role": "Recovery failure scenario",
         "title": "Essential services outlast backup",
@@ -4118,7 +4148,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "S-01:5",
-        "number": "05",
+        "number": "3.2",
         "wing": "after",
         "role": "Further loss · L2",
         "title": "Illness and deaths increase",
@@ -4731,9 +4761,9 @@ window.AuspexSTPAModels = {
     }
   },
   "F-01": {
-    "version": "1.0",
+    "version": "1.1",
     "pathway": "F-01",
-    "displayId": "F.1",
+    "displayId": "F-1",
     "title": "Amplification, failed response and mass violence",
     "status": "STPA worked example · provisional analysis",
     "summary": "When does harmful amplification escape control, and can intervention still protect people?",
@@ -4801,7 +4831,7 @@ window.AuspexSTPAModels = {
     "scope": "A hypothetical platform operating in a conflict-affected setting: ranking, content enforcement, platform governance, local warning partners and the interface to civilian protection. Human perpetrators and pre-existing conflict remain causal actors outside platform control.",
     "purpose": "Prevent platform activity from contributing to threats, targeting, mass violence or displacement while protecting legitimate expression and access to safety information.",
     "boundary": "The roles below are analytical functions, not a verified governance map for Meta or any particular country. A platform can control its distribution system; it cannot by itself guarantee physical protection or resolve an armed conflict.",
-    "numbering": "01–05 identify scenario milestones and R a recovery route. Historical investigations support an attributed amplification-and-response component, not an experimentally isolated full causal chain.",
+    "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Historical investigations support an attributed amplification-and-response component, not an experimentally isolated full causal chain.",
     "bowtie": "The centre is H1: harmful dissemination persists beyond a timely, context-sensitive response. Subsequent mobilization and mass violence require human intent, coercive capacity and failed physical protection. Rights-respecting intervention and civilian protection can still limit further harm.",
     "losses": [
       {
@@ -5052,7 +5082,7 @@ window.AuspexSTPAModels = {
     "nodes": [
       {
         "id": "F-01:1",
-        "number": "01",
+        "number": "1.1",
         "wing": "before",
         "role": "Enabling condition",
         "title": "Engagement shapes exposure",
@@ -5076,7 +5106,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "F-01:2",
-        "number": "02",
+        "number": "1.2",
         "wing": "before",
         "role": "Amplification mechanism",
         "title": "Inflammatory content is amplified",
@@ -5103,7 +5133,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "F-01:3",
-        "number": "03",
+        "number": "2.1",
         "wing": "centre",
         "role": "Loss of control · H1",
         "title": "Warnings fail to interrupt spread",
@@ -5133,7 +5163,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "F-01:4",
-        "number": "04",
+        "number": "3.1",
         "wing": "after",
         "role": "Conditional mobilization",
         "title": "Exposure assists targeting",
@@ -5159,7 +5189,7 @@ window.AuspexSTPAModels = {
       },
       {
         "id": "F-01:5",
-        "number": "05",
+        "number": "3.2",
         "wing": "after",
         "role": "Further loss · L2",
         "title": "Mass violence and displacement",
@@ -5860,16 +5890,16 @@ window.AuspexSTPAModels = {
         "definition": "A response re-establishes enforceable safety constraints within a specified boundary; success requires verification."
       }
     ],
-    "version": "1.0",
+    "version": "1.1",
     "pathway": "H-01",
-    "displayId": "Bonus.1",
+    "displayId": "Bonus-1",
     "title": "Screening, selective records and persistent exclusion",
     "status": "STPA worked example · bounded comparison",
     "summary": "Can decisions and the records they generate entrench exclusion beyond effective correction?",
     "scope": "A hypothetical system of employment screening, record suppliers, policing allocation, model updates and independent redress. The organizations are analytically distinct; no single controller is assumed to command the whole system.",
     "purpose": "Protect access to employment, accurate and contestable records, and effective correction of repeated exclusion.",
     "boundary": "This is a bounded discrimination scenario, not an extinction pathway. Neither cited case establishes the combined employment–policing cycle.",
-    "numbering": "01–05 identify scenario components. R identifies a possible recovery outcome. The return arrow represents feedback, not an extra observed incident.",
+    "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. The return arrow represents feedback, not an extra observed incident.",
     "bowtie": "The centre is exclusion beyond effective correction. Downstream record feedback can renew earlier screening risk; recovery interrupts that loop and repairs affected decisions.",
     "schema": "Losses, hazards, controls, unsafe actions and scenarios are traced by IDs. This prospective analysis is separate from the retrospective case evidence.",
     "limits": "A fictional cross-institutional scenario is compared with a non-AI enforcement record and a mathematical study. Causal links between unemployment, enforcement and future exclusion require independent evidence.",
@@ -6119,7 +6149,7 @@ window.AuspexSTPAModels = {
     ],
     "nodes": [
       {
-        "number": "01",
+        "number": "1.1",
         "wing": "before",
         "role": "Condition",
         "title": "Records govern screening",
@@ -6145,7 +6175,7 @@ window.AuspexSTPAModels = {
         "id": "H-01:1"
       },
       {
-        "number": "02",
+        "number": "2.1",
         "wing": "centre",
         "role": "Loss of control · H1",
         "title": "Exclusion outruns correction",
@@ -6173,7 +6203,7 @@ window.AuspexSTPAModels = {
         "id": "H-01:2"
       },
       {
-        "number": "03",
+        "number": "3.1",
         "wing": "after",
         "role": "Conditional feedback mechanism",
         "title": "Selective enforcement shapes records",
@@ -6199,7 +6229,7 @@ window.AuspexSTPAModels = {
         "id": "H-01:3"
       },
       {
-        "number": "04",
+        "number": "3.2",
         "wing": "after",
         "role": "Feedback",
         "title": "Records reinforce future decisions",
@@ -6227,7 +6257,7 @@ window.AuspexSTPAModels = {
         "id": "H-01:4"
       },
       {
-        "number": "05",
+        "number": "3.3",
         "wing": "after",
         "role": "Loss · L2",
         "title": "Disadvantage persists",

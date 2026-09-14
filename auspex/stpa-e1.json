@@ -1,7 +1,7 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "pathway": "S-01",
-  "displayId": "E.1",
+  "displayId": "E-1",
   "title": "Correlated grid control and loss of essential power",
   "status": "STPA worked example · provisional analysis",
   "summary": "Could a shared control error outrun grid protection and essential-service recovery?",
@@ -69,7 +69,7 @@
   "scope": "A hypothetical regional electricity system using related AI forecasts or control recommendations: model procurement, dispatch authorization, physical protection, regional coordination and restoration. Essential-service operators are included at their electricity and backup interface.",
   "purpose": "Keep electricity within safe operating limits and maintain essential services during disturbances, preventing prolonged outages, serious illness and loss of life.",
   "boundary": "Functional roles describe an analytical system, not the organization chart of a particular utility. Historical blackouts test physical-control assumptions only. They are not AI incidents and do not validate the proposed AI initiating mechanism.",
-  "numbering": "01–05 are scenario milestones. R is successful recovery. Both incident overlays are non-AI comparisons attached to the grid failure or recovery component; neither establishes a progression through the AI-related milestones.",
+  "numbering": "0 gives the context; 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components; they are not STPA method steps or a measure of proximity to catastrophe. Both incident overlays are non-AI comparisons; neither establishes progression through the AI-related precursors.",
   "bowtie": "The centre is H1: grid instability exceeds available containment and interrupts regional supply. Prevention acts before this state; restoration and essential-service support can still prevent a public-health catastrophe. All right-hand transitions require additional conditions.",
   "losses": [
     {
@@ -297,7 +297,7 @@
   "nodes": [
     {
       "id": "S-01:1",
-      "number": "01",
+      "number": "1.1",
       "wing": "before",
       "role": "Enabling condition",
       "title": "Related models shape dispatch",
@@ -321,7 +321,7 @@
     },
     {
       "id": "S-01:2",
-      "number": "02",
+      "number": "1.2",
       "wing": "before",
       "role": "Unsafe control action",
       "title": "A shared error reaches the grid",
@@ -350,7 +350,7 @@
     },
     {
       "id": "S-01:3",
-      "number": "03",
+      "number": "2.1",
       "wing": "centre",
       "role": "Loss of control · H1",
       "title": "Instability defeats containment",
@@ -378,7 +378,7 @@
     },
     {
       "id": "S-01:4",
-      "number": "04",
+      "number": "3.1",
       "wing": "after",
       "role": "Recovery failure scenario",
       "title": "Essential services outlast backup",
@@ -404,7 +404,7 @@
     },
     {
       "id": "S-01:5",
-      "number": "05",
+      "number": "3.2",
       "wing": "after",
       "role": "Further loss · L2",
       "title": "Illness and deaths increase",

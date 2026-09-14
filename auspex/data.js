@@ -219,7 +219,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "A.1",
+      "displayId": "A-1",
       "reach": {
         "local": "A development decision escapes meaningful human oversight.",
         "systemic": "Successor systems consolidate power and ultimately eliminate humanity.",
@@ -415,7 +415,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "A.2",
+      "displayId": "A-2",
       "reach": {
         "local": "An AI actor gains unauthorized access or execution outside effective developer control.",
         "systemic": "Human institutions permanently lose the ability to recover collective control.",
@@ -618,7 +618,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "A.3",
+      "displayId": "A-3",
       "reach": {
         "local": "Essential services are compromised or disrupted by influence-seeking systems.",
         "systemic": "Interdependent failures leave powerful systems able to prevent human recovery.",
@@ -798,7 +798,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "A.4",
+      "displayId": "A-4",
       "reach": {
         "local": "A consequential decision serves a measured proxy at the expense of its actual purpose.",
         "systemic": "The institutions that correct such failures themselves become unresponsive to human purposes.",
@@ -981,7 +981,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "A.5",
+      "displayId": "A-5",
       "reach": {
         "local": "People lose work, bargaining power or influence over particular decisions.",
         "systemic": "Economic, cultural and political dependence removes effective collective human agency.",
@@ -1195,7 +1195,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "A.6",
+      "displayId": "A-6",
       "reach": {
         "local": "Automated production damages resources or disrupts access to necessities.",
         "systemic": "A self-sustaining production network destroys the conditions for human survival.",
@@ -1362,7 +1362,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "B.1",
+      "displayId": "B-1",
       "reach": {
         "local": "Autonomous forces carry out unlawful orders against political opponents.",
         "systemic": "Personal rule displaces meaningful national constitutional authority.",
@@ -1546,7 +1546,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "B.2",
+      "displayId": "B-2",
       "reach": {
         "local": "A deployed military system obeys a concealed principal rather than lawful authority.",
         "systemic": "A faction captures national government through compromised command systems.",
@@ -1710,7 +1710,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "B.3",
+      "displayId": "B-3",
       "reach": {
         "local": "An attacker compromises military data, infrastructure or command access.",
         "systemic": "Control over military systems enables a seizure of national government.",
@@ -1873,7 +1873,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "B.4",
+      "displayId": "B-4",
       "reach": {
         "local": "A private actor uses autonomous coercive force to obstruct public intervention.",
         "systemic": "Private authority replaces the government’s effective control.",
@@ -2037,7 +2037,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "B.5",
+      "displayId": "B-5",
       "reach": {
         "local": "Individuals or organizations face intensified surveillance, manipulation or selective legal pressure.",
         "systemic": "Opposition and independent institutions lose the ability to constrain the executive.",
@@ -2202,7 +2202,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "B.6",
+      "displayId": "B-6",
       "reach": {
         "local": "Military personnel receive manipulated claims about a coup’s support.",
         "systemic": "A coup succeeds because potential opponents cannot coordinate resistance.",
@@ -2369,7 +2369,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "C.1",
+      "displayId": "C-1",
       "reach": {
         "local": "Faulty threat assessment contributes to a nuclear strike and its immediate casualties.",
         "systemic": "Retaliation and disruption can extend destruction; nuclear famine is a separate conditional continuation.",
@@ -2526,7 +2526,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "C.2",
+      "displayId": "C-2",
       "reach": {
         "local": "An autonomous military system initiates a mistaken hostile action.",
         "systemic": "Reciprocal automated responses expand into destructive interstate war.",
@@ -2687,7 +2687,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "C.3",
+      "displayId": "C-3",
       "reach": {
         "local": "A conventional attack damages assets that also support nuclear deterrence.",
         "systemic": "Perceived loss of deterrence contributes to nuclear escalation and potentially wider destruction.",
@@ -2848,7 +2848,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "C.4",
+      "displayId": "C-4",
       "reach": {
         "local": "A first strike inflicts nuclear casualties after leaders conclude that waiting is more dangerous.",
         "systemic": "Nuclear exchanges and their wider consequences damage societies beyond the initial strike.",
@@ -3010,7 +3010,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "C.5",
+      "displayId": "C-5",
       "reach": {
         "local": "A preventive attack targets a rival’s advancing AI capability.",
         "systemic": "National retaliation broadens into destructive interstate war.",
@@ -3165,7 +3165,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "C.6",
+      "displayId": "C-6",
       "reach": {
         "local": "A cyber operation causes consequential damage while obscuring responsibility.",
         "systemic": "Misattribution and military retaliation expand the conflict.",
@@ -3340,7 +3340,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "C.7",
+      "displayId": "C-7",
       "reach": {
         "local": "AI-mediated advice contributes to a failed agreement or diplomatic confrontation.",
         "systemic": "Accumulated dependence undermines peaceful bargaining between states.",
@@ -3508,7 +3508,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "C.8",
+      "displayId": "C-8",
       "reach": {
         "local": "Autonomous force injures, kills or displaces civilians.",
         "systemic": "A perpetrator sustains mass violence with fewer effective human constraints.",
@@ -3715,7 +3715,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "D.1",
+      "displayId": "D-1",
       "reach": {
         "local": "A malicious biological operation exposes people to a dangerous pathogen.",
         "systemic": "Transmission and failed outbreak control produce a mass-mortality pandemic.",
@@ -3912,7 +3912,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "D.2",
+      "displayId": "D-2",
       "reach": {
         "local": "Unsafe research or containment failure exposes people to a pathogen.",
         "systemic": "Transmission beyond the facility develops into a mass-mortality pandemic.",
@@ -4078,7 +4078,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "E.1",
+      "displayId": "E-1",
       "reach": {
         "local": "Correlated grid-control errors cause outages and local loss of power.",
         "systemic": "Prolonged failures across essential services produce excess illness and deaths.",
@@ -4246,7 +4246,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "E.2",
+      "displayId": "E-2",
       "reach": {
         "local": "A cyber intrusion disrupts a particular essential service.",
         "systemic": "Dependency failures and inadequate recovery prolong severe civilian harm across services.",
@@ -4414,7 +4414,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "E.3",
+      "displayId": "E-3",
       "reach": {
         "local": "A patient receives an inappropriate diagnosis, allocation or treatment decision.",
         "systemic": "Shared clinical errors produce widespread avoidable harm across a health system.",
@@ -4579,7 +4579,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "E.4",
+      "displayId": "E-4",
       "reach": {
         "local": "Correlated financial decisions produce losses, forced sales or missed obligations.",
         "systemic": "Feedback and depleted buffers produce a systemic contraction of credit.",
@@ -4740,7 +4740,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "E.5",
+      "displayId": "E-5",
       "reach": {
         "local": "A financial institution loses an indispensable AI service and misses an obligation.",
         "systemic": "Concentrated dependence turns a provider outage into wider financial distress.",
@@ -4902,7 +4902,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "E.6",
+      "displayId": "E-6",
       "reach": {
         "local": "A farm misses a crop-critical operating window and loses production.",
         "systemic": "Correlated production losses and inadequate substitutes lead to famine.",
@@ -5063,7 +5063,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "E.7",
+      "displayId": "E-7",
       "reach": {
         "local": "Agricultural optimization damages particular soil, water or ecological resources.",
         "systemic": "Accumulated ecological damage undermines regional production and habitability.",
@@ -5221,7 +5221,7 @@ window.AuspexData = {
       "comparison": false,
       "version": "1.0",
       "basisType": "reconstruction",
-      "displayId": "F.1",
+      "displayId": "F-1",
       "continuation": "",
       "edges": [
         {
@@ -5397,7 +5397,7 @@ window.AuspexData = {
       "comparison": false,
       "version": "1.0",
       "basisType": "reconstruction",
-      "displayId": "F.2",
+      "displayId": "F-2",
       "continuation": "",
       "edges": [
         {
@@ -5571,7 +5571,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "Bonus.1",
+      "displayId": "Bonus-1",
       "reach": {
         "local": "A person is denied work on the basis of predicted arrest risk.",
         "systemic": "Repeated decisions reinforce exclusion across the affected community.",
@@ -5725,7 +5725,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "Bonus.2",
+      "displayId": "Bonus-2",
       "reach": {
         "local": "A person withdraws from education or employment following AI advice.",
         "systemic": "Peer reinforcement spreads withdrawal through the affected population.",
@@ -5879,7 +5879,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "Bonus.3",
+      "displayId": "Bonus-3",
       "reach": {
         "local": "An assistant encourages anxiety, secrecy or fear in a particular exchange.",
         "systemic": "Repeated interactions normalize distrust and dependence across a communication network.",
@@ -6012,7 +6012,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "Bonus.4",
+      "displayId": "Bonus-4",
       "reach": {
         "local": "Fabricated public consent leads to adoption of an unwanted city plan.",
         "systemic": null,
@@ -6143,7 +6143,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "Bonus.5",
+      "displayId": "Bonus-5",
       "reach": {
         "local": "A pedestrian is struck and killed by an automated test vehicle.",
         "systemic": null,
@@ -6279,7 +6279,7 @@ window.AuspexData = {
           "type": "conditional"
         }
       ],
-      "displayId": "Bonus.6",
+      "displayId": "Bonus-6",
       "reach": {
         "local": "Students perform worse on an unaided examination after unrestricted AI-assisted practice.",
         "systemic": null,
