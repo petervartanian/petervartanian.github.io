@@ -258,22 +258,13 @@
   const stepLabel = (step) => stpaNode(step)?.title || step.shortLabel || window.AuspexLabels?.[state.pathway]?.[step.number - 1] || step.text;
   const targetCount = (id) => pathwayAssessments().filter((a) => a.targets.some((t) => t.id === id)).length;
   const countLabel = (count) => `${count} case${count === 1 ? '' : 's'}`;
-  const shortIncidentDate = date => {
-    const range=date.match(/\b(\d{4})[–-](\d{4})\b/);
-    if (range) return `${range[1]}–${range[2]}`;
-    const year=date.match(/\b(?:19|20)\d{2}\b/)?.[0];
-    const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const month=date.match(new RegExp(`\\b(${months.join('|')})\\b`,'i'))?.[0];
-    return month && year ? `Q${Math.floor(months.findIndex(m=>m.toLowerCase()===month.toLowerCase())/3)+1} ${year}` : year || date;
-  };
-
   function renderEvidenceMap() {
     const p = pathways.get(state.pathway);
     if (isSTPA(p.id)) {
       const names = window.AuspexSTPA.overlayNames;
       $('#incident-rail').innerHTML = `<div class="a1-incident-ribbon" id="evidence-map-title" tabindex="-1" role="group" aria-label="Choose an incident to overlay">${pathwayAssessments().map(a=>{
         const selected=a.incident===state.incident, date=incidents.get(a.incident).date;
-        return `<button class="a1-incident-branch" data-case="${a.id}" aria-pressed="${selected}" aria-controls="a1-route" title="${escape(date)}" aria-label="${selected?'Remove':'Overlay'} ${escape(names[a.incident])}. ${escape(date)}. Evidence at ${escape(window.AuspexSTPA.node(window.AuspexSTPA.overlayAnchor(a)).number)}"><span class="a1-case-date">${escape(shortIncidentDate(date))}:</span> <span class="a1-case-name">${escape(names[a.incident])}</span></button>`;
+        return `<button class="a1-incident-branch" data-case="${a.id}" aria-pressed="${selected}" aria-controls="a1-route" title="${escape(date)}" aria-label="${selected?'Remove':'Overlay'} ${escape(names[a.incident])}. ${escape(date)}. Evidence at ${escape(window.AuspexSTPA.node(window.AuspexSTPA.overlayAnchor(a)).number)}"><span class="a1-case-date">${escape(date)}:</span> <span class="a1-case-name">${escape(names[a.incident])}</span></button>`;
       }).join('')}</div>`;
       return;
     }

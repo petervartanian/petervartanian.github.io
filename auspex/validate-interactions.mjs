@@ -81,6 +81,8 @@ for(const m of models) {
  assert(!map().includes('id="a1-overlay"'));
  const configs=Object.entries(m.presentation.overlays);
  for(const [incident,config] of configs) {
+  const originalDate=context.window.AuspexData.incidents.find(i=>i.id===incident).date;
+  assert(rail().includes(`<span class="a1-case-date">${escaped(originalDate)}:</span>`),`${m.displayId} ${incident}: original date is visibly preserved`);
   const a=context.window.AuspexData.assessments.find(a=>a.pathway===m.pathway&&a.incident===incident);
   click('#incident-rail','case',a.id);
   assert.equal(test.state.target,config.anchor);

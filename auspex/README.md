@@ -23,9 +23,9 @@ do not establish another pathway component.
 
 Open questions use `explore=1`. Older `overlay=maybe&i=…` links open that question
 inside the selected case. An old chooser-only link simply shows the dated choices.
-Visible dates use quarters where the month is known, and preserve multi-year ranges.
-Full date labels, including publication and investigation qualifiers, remain in
-tooltips and accessible names.
+Visible dates retain the original recorded dates and ranges, including publication,
+announcement, and investigation qualifiers. The same labels appear in tooltips and
+accessible names. Long dates wrap within the petite incident choices.
 
 0 is a cloud portrait of the scenario setting, with a small numeral. The conditions
 and controller roles are selected for each case; their counts are not fixed. A short

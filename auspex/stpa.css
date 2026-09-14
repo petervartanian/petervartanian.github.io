@@ -144,7 +144,7 @@
 .a1-incident-branch::before { content: ''; position: absolute; left: -18px; top: 15px; width: 13px; height: 1px; background: var(--line); }
 .a1-incident-branch { position: relative; min-width: 0; max-width: 100%; min-height: 30px; padding: 4px 0; border: 0; border-radius: 0; box-shadow: none; background: transparent; text-align: left; font: 10.5px/1.55 var(--sans); }
 .a1-case-name { font: inherit; color: var(--ink); }
-.a1-case-date { font: inherit; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.a1-case-date { font: inherit; color: var(--muted); font-variant-numeric: tabular-nums; }
 .a1-incident-branch:hover .a1-case-name, .a1-incident-branch[aria-pressed='true'] .a1-case-name { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
 .a1-incident-branch[aria-pressed='true']::after { content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 18px; background: var(--accent); }
 .a1-incident-hint { margin: 2px 0 0; color: var(--muted); font: 10px/1.5 var(--sans); }
