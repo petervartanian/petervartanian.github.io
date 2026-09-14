@@ -69,9 +69,10 @@
   const use = id => { const next=registry()[id]; if (!next) return false; model=next; return true; };
   const has = id => Boolean(registry()[id]);
   function overlayConfig(a) { return a && model.presentation?.overlays?.[a.incident]; }
-  function overlayAnchor(a) {
+  function overlayAnchor(a, tentative = false) {
     const config=overlayConfig(a);
     if (!config) return null;
+    if (tentative) return node(config.tentative?.target)?.id || null;
     if (node(config.anchor)) return config.anchor;
     if (node(config.target)) return config.target;
     const edge=projectedLinks().find(l=>l.id===config.target);
@@ -100,9 +101,29 @@
     const result=b.id==='training-assurance'?'Compliance without preference change':v.result;
     return `<figure class="a1-barrier-study${b.candidate?' is-candidate':''}" data-condition="${esc(b.condition)}" aria-label="${esc(v.input)}; ${esc(v.control)}; ${esc(result)}"><div class="a1-study-flow"><span>${esc(v.input)}</span><i aria-hidden="true"></i><span class="a1-study-control">${barrierGlyph(b.condition)}<strong>${esc(v.control)}</strong></span><i aria-hidden="true"></i><span class="a1-study-result">${esc(result)}</span></div>${question===2 && v.dependency?`<figcaption class="a1-study-dependency"><span>Depends on</span>${esc(v.dependency)}</figcaption>`:''}</figure>`;
   }
-  function overlay(a, inspectedBarrier, evidenceMarks) {
+  function tentativeConnection(config, staticMode = false) {
+    const link=config.tentative;
+    if (!link) return '';
+    const target=node(link.target);
+    return `<div class="a1-tentative-connection" data-tentative-target="${esc(link.target)}">
+      ${staticMode?`<p class="a1-overlay-kicker">Tentative connection to ${esc(target.number)}</p>`:''}
+      <p class="a1-connection-question">${esc(link.question)}</p>
+      <dl class="a1-connection-reason"><dt>Why it may fit</dt><dd>${esc(link.basis)}${cite(link.sources)}</dd><dt>Still missing</dt><dd>${esc(link.unresolved)}</dd></dl>
+    </div>`;
+  }
+  function overlay(a, inspectedBarrier, evidenceMarks, tentative = false) {
     const config=overlayConfig(a);
     if (!config) return '';
+    if (tentative) {
+      const anchor=node(overlayAnchor(a,true)), sourceAnchor=node(overlayAnchor(a));
+      if (!anchor) return '';
+      return `<section class="a1-overlay is-tentative" id="a1-overlay" data-overlay-incident="${esc(a.incident)}" data-overlay-target="${esc(config.tentative.target)}" data-evidence-target="${esc(config.target)}" data-overlay-anchor="${esc(anchor.id)}" aria-label="${esc(config.title)}: tentative connection to ${esc(anchor.title)}">
+        <p class="a1-overlay-kicker">Tentative connection to ${esc(anchor.number)}</p>
+        <h4 class="a1-overlay-title">${notedTitle(config.title,'a1-case-reference','a1-case-footnote','Scope of this tentative connection')}</h4>
+        ${tentativeConnection(config)}
+        <button class="a1-source-connection" data-source-connection aria-controls="a1-route" title="Show the source case and its barriers at their assessed component">Source evidence at ${esc(sourceAnchor.number)} ↗</button>
+      </section>`;
+    }
     const anchor=node(overlayAnchor(a)), items=barriers(a);
     const kind=config.kind || 'Source evidence';
     return `<section class="a1-overlay" id="a1-overlay" data-overlay-incident="${esc(a.incident)}" data-overlay-target="${esc(config.target)}" data-overlay-anchor="${esc(anchor?.id)}" aria-label="${esc(config.title)}: evidence relevant to ${esc(anchor?.title)}">
@@ -135,21 +156,24 @@
     {id:'recovery',label:'Recovery',definition:'An intervention may stop escalation, limit harm or restore control. The green curve leads to the model’s recovery outcome.'},
     {id:'feedback',label:'Feedback',definition:'An outcome changes an earlier input or decision, which can affect later outcomes. The squared return loop is dashed and ends in two open chevrons.'}
   ];
+  function overlayGuide() {
+    return '<h3>Incident connections</h3><dl class="a1-overlay-definitions"><dt>No</dt><dd>Show the pathway alone.</dd><dt>Maybe</dt><dd>Explore a tentative connection to the indicated component. Each question states its source basis and missing evidence. These are analyst proposals.</dd><dt>Yes</dt><dd>Read the source case at its assessed component, including its experimental, historical or reported scope. This does not establish the whole component or pathway.</dd></dl><p>The same incident can support one scoped comparison and raise a tentative question elsewhere. Switching modes changes the connection being examined. Barrier assessments belong to the source case; tentative connections have no assigned barrier state or probability.</p>';
+  }
   function pathsGuide(staticMode=false) {
-    return `<div class="a1-path-guide"><div class="a1-stage-guide"><span><b>0.</b> Context</span><span><b>1.</b> Precursors</span><span><b>2.</b> Event</span><span><b>3.</b> Consequences</span><span class="is-recovery"><b>R</b> Recovery</span></div><p>Precursors can lead to the central loss-of-control event. Consequences depend on what follows; recovery may interrupt that progression. The shaded field is 0: context throughout the pathway. Its unboxed notes sit beside the components they inform.</p><dl class="a1-path-definitions">${routeDefinitions.map(r=>`<div>${routeSymbol(r.id)}<dt>${esc(r.label)}</dt><dd>${esc(r.definition)}</dd></div>`).join('')}<div class="a1-safeguard-definition">${routeSymbol('safeguard')}<dt>Proposed safeguard</dt><dd>A dotted crossbar marks a proposed control on a route. Its effectiveness has not been demonstrated here. Observed barrier modes are shown with the incident evidence.</dd></div></dl><p class="a1-guide-source">The solid, dashed and curved lines are this site’s drawing conventions. <a href="https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/about-bowtie/how-does-bowtie-work/" target="_blank" rel="noopener noreferrer">Bow-tie structure: UK CAA ↗</a></p>${staticMode?`<h3>Barrier modes</h3><dl class="a1-path-definitions">${stateDefinitions.map(s=>`<div>${barrierGlyph(s.id)}<dt>${esc(s.label)}</dt><dd>${esc(s.definition)}</dd></div>`).join('')}</dl>${recoveryGuide()}`:''}</div>`;
+    return `<div class="a1-path-guide"><div class="a1-stage-guide"><span><b>0.</b> Context</span><span><b>1.</b> Precursors</span><span><b>2.</b> Event</span><span><b>3.</b> Consequences</span><span class="is-recovery"><b>R</b> Recovery</span></div><p>Precursors can lead to the central loss-of-control event. Consequences depend on what follows; recovery may interrupt that progression. The shaded field is 0: context throughout the pathway. Its unboxed notes sit beside the components they inform.</p><dl class="a1-path-definitions">${routeDefinitions.map(r=>`<div>${routeSymbol(r.id)}<dt>${esc(r.label)}</dt><dd>${esc(r.definition)}</dd></div>`).join('')}<div class="a1-safeguard-definition">${routeSymbol('safeguard')}<dt>Proposed safeguard</dt><dd>A dotted crossbar marks a proposed control on a route. Its effectiveness has not been demonstrated here. Observed barrier modes are shown with the incident evidence.</dd></div></dl>${overlayGuide()}<p class="a1-guide-source">The solid, dashed and curved lines are this site’s drawing conventions. <a href="https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/about-bowtie/how-does-bowtie-work/" target="_blank" rel="noopener noreferrer">Bow-tie structure: UK CAA ↗</a></p>${staticMode?`<h3>Barrier modes</h3><dl class="a1-path-definitions">${stateDefinitions.map(s=>`<div>${barrierGlyph(s.id)}<dt>${esc(s.label)}</dt><dd>${esc(s.definition)}</dd></div>`).join('')}</dl>${recoveryGuide()}`:''}</div>`;
   }
   function mapGuide(mode='paths',selected='unknown') {
     const tabs=[['paths','Path types'],['barriers','Barrier modes'],['recovery','Recovery & reinforcement']];
     const active=tabs.some(([id])=>id===mode)?mode:'paths';
     return `<nav class="a1-guide-tabs" aria-label="Map key sections">${tabs.map(([id,label])=>`<button data-map-guide="${id}" aria-pressed="${id===active}" aria-controls="a1-guide-content">${label}</button>`).join('')}</nav><div id="a1-guide-content">${active==='barriers'?stateGuide(selected):active==='recovery'?recoveryGuide():pathsGuide()}</div>`;
   }
-  function renderMap(selected, a, inspectedBarrier, evidenceMarks = () => '') {
+  function renderMap(selected, a, inspectedBarrier, evidenceMarks = () => '', tentative = false) {
     const groups={before:[],centre:[],after:[],recovery:[]};
     for (const n of model.nodes) {
       const wing=n.type==='recovery' ? 'recovery' : (groups[n.wing] ? n.wing : 'after');
       groups[wing].push(n);
     }
-    const anchor=overlayAnchor(a), config=overlayConfig(a);
+    const anchor=overlayAnchor(a,tentative), config=anchor?overlayConfig(a):null;
     const cell=n=>{
       const optional=n.type==='amplifier', mapped=config && anchor===n.id;
       const condition=model.presentation?.conditions?.[n.id];
@@ -159,13 +183,13 @@
         ${contextThread(n)}
         ${condition?`<p class="a1-condition">${esc(condition)}</p>`:''}
         <div class="a1-step-box${shownSources.length?' has-sources':''}"><button class="a1-step" data-node="${esc(n.id)}" data-target="${esc(n.id)}" aria-pressed="${selected===n.id}" aria-controls="a1-node-note"${contextAt(n.id).length?` aria-describedby="${contextId(n.id)}"`:''} aria-label="${esc(n.number)}. ${esc(label)}${optional?' (optional)':''}"><span class="a1-number">${esc(n.number)}</span><strong>${esc(label)}${optional?'<span class="a1-optional-label">optional</span>':''}</strong></button>${shownSources.length?`<div class="a1-step-sources">${cite(shownSources)}</div>`:''}</div>
-        ${mapped?overlay(a,inspectedBarrier,evidenceMarks):''}
+        ${mapped?overlay(a,inspectedBarrier,evidenceMarks,tentative):''}
       </div>`;
     };
     const headings={before:'1. Precursors',centre:'2. Event',after:'3. Consequences',recovery:'R. Recovery'};
     const kinds=new Set(projectedLinks().map(l=>l.kind || l.type));
     return `<section class="a1-context-field" aria-label="0. Context throughout the pathway"><p class="sr-only">${esc(model.scope)}</p><div id="a1-route" class="a1-route${config?' has-overlay':''}" data-model-pathway="${esc(model.pathway)}" aria-label="Hypothetical pathway: contributing conditions, loss of control, conditional consequences and recovery">${['before','centre','after','recovery'].map(wing=>groups[wing].length?`<section class="a1-region a1-region-${wing}" data-wing="${wing}" aria-label="${headings[wing]}"><h3 class="a1-region-heading">${headings[wing]}</h3>${groups[wing].map(cell).join('')}</section>`:'').join('')}</div><footer class="a1-context-footing"><span class="a1-field-label"><span>0.</span> Context</span>${contextFootnotes()}</footer></section>
-    <p class="a1-node-note" id="a1-node-note" tabindex="-1"${config && selected===anchor?' hidden':''}>${esc(node(selected)?.text || model.summary)}</p>${config?`<p class="a1-footnote" id="a1-case-footnote" tabindex="-1"><a href="#a1-case-reference" aria-label="Return to case title">*</a> ${esc(config.limit)}</p>`:''}${node(selected)?.type==='recovery'?'<button class="a1-recovery-link" data-recovery-info>Recovery & reinforcement ↗</button>':''}
+    <p class="a1-node-note" id="a1-node-note" tabindex="-1"${config && selected===anchor?' hidden':''}>${esc(node(selected)?.text || model.summary)}</p>${config?`<p class="a1-footnote" id="a1-case-footnote" tabindex="-1"><a href="#a1-case-reference" aria-label="Return to case title">*</a> ${esc(tentative?'Analyst-proposed connection. The cited source supports the stated basis; this question remains unresolved. '+config.limit:config.limit)}</p>`:''}${node(selected)?.type==='recovery'?'<button class="a1-recovery-link" data-recovery-info>Recovery & reinforcement ↗</button>':''}
     <div class="a1-map-key" role="group" aria-label="Path and barrier key">${routeDefinitions.filter(r=>kinds.has(r.id)).map(r=>`<button data-map-guide="paths" aria-haspopup="dialog" aria-label="Explain ${esc(r.label.toLowerCase())}">${routeSymbol(r.id)}<span>${esc(r.label)}</span></button>`).join('')}<button data-map-guide="paths" aria-haspopup="dialog" aria-label="Explain proposed safeguards">${routeSymbol('safeguard')}<span>Proposed safeguard</span></button><button class="a1-barrier-key" data-map-guide="barriers" aria-haspopup="dialog">${barrierGlyph('intact')}<span>Barrier modes ↗</span></button></div>
     `;
   }
@@ -335,5 +359,5 @@
     const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="11" refY="4" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
     svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${recoveryMarker}${feedbackMarker}</defs>${paths}`;
   }
-  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle,mapGuide,pathsGuide,routeDefinitions};
+  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle,mapGuide,pathsGuide,routeDefinitions,overlayAnchor,tentativeConnection,overlayGuide};
 })();

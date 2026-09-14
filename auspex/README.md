@@ -11,11 +11,19 @@ Serve the repository root and open `/auspex/`. The interface also works directly
 A-1, B-1, C-1, D-1, E-1, F-1 and Bonus-1 use the models in `stpa-[a-fh]1.json`.
 I selects a pathway; II offers No / Maybe / Yes for an incident overlay; III inspects a barrier.
 The three controls progress from light to medium to dark, with an underline marking
-which is selected. Maybe opens the petite dated choices and lets a chosen incident
-appear as a lighter, dashed preview. Yes applies the full overlay; it also opens the
-chooser directly. Switching between Maybe and Yes keeps the selected incident.
-No clears both the overlay and inspector. Previewing changes presentation only, not
-the incident’s evidence or barrier assessment.
+which is selected. No clears the overlay and inspector. Yes opens the existing source
+case at its assessed component, preserving its experimental, historical or reported
+scope; it does not establish the whole component or pathway.
+Maybe opens explicitly authored tentative connections. Each has a component, a question,
+a cited basis and a statement of the missing evidence. The fourteen initial questions
+are editorial proposals across the seven worked examples. They are distinct from the
+source mappings; selecting Yes never promotes a tentative connection to established fact.
+Switching Maybe/Yes keeps the incident but selects the corresponding component and
+closes the inspector. A source-evidence link in each tentative card returns to the scoped
+case and its barriers. Barrier states and efficacy are never transferred to the tentative
+component. Dotted card borders distinguish tentative connections; source circles and
+small paired scope notes remain inside or linked to the card. The map key and static
+reader explain and include both kinds of connection.
 An open Yes chooser without a selection uses `overlay=1`; Maybe uses `overlay=maybe`
 with or without an `i=` incident. Existing incident links continue to open Yes.
 Visible dates use quarters where the month is known, and preserve multi-year ranges.

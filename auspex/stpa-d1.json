@@ -58,7 +58,7 @@
       "question": "What actually ended the episode, and would that circumstance recur?"
     }
   ],
-  "version": "1.2",
+  "version": "1.3",
   "pathway": "B-01",
   "displayId": "D-1",
   "title": "Biological misuse and the limits of access control",
@@ -843,6 +843,17 @@
               "status": "proposed"
             }
           }
+        },
+        "tentative": {
+          "status": "tentative",
+          "origin": "editorial",
+          "target": "B-01:2",
+          "question": "Did restored access materially increase practical capability?",
+          "basis": "The provider reports that access resumed after enforcement and that the research continued.",
+          "unresolved": "Continued access does not isolate the contribution of AI. A defensible comparison of work with and without assistance is missing.",
+          "sources": [
+            "AN26"
+          ]
         }
       },
       "FLU-2026": {
@@ -868,6 +879,17 @@
               "status": "proposed"
             }
           }
+        },
+        "tentative": {
+          "status": "tentative",
+          "origin": "editorial",
+          "target": "B-01:2",
+          "question": "Would the capability limit hold as fallback models improve?",
+          "basis": "The provider reports restricting relevant assistance to its weakest models and judges their contribution limited.",
+          "unresolved": "The case does not establish how this limit would perform with stronger fallback models. Independent measures of practical contribution are missing.",
+          "sources": [
+            "AN26"
+          ]
         }
       }
     },

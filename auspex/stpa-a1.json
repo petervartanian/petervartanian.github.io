@@ -1,5 +1,5 @@
 {
-  "version": "1.6",
+  "version": "1.7",
   "pathway": "X-01",
   "displayId": "A-1",
   "title": "Successor capture and the loss of human control",
@@ -884,7 +884,18 @@
         "relation": "mechanism",
         "anchor": "X-01:3",
         "observed": "Training-context compliance coexisted with retained preferences in the experiment.",
-        "notEstablished": "Successor capture, loss of human control and later outcomes were not observed."
+        "notEstablished": "Successor capture, loss of human control and later outcomes were not observed.",
+        "tentative": {
+          "status": "tentative",
+          "origin": "editorial",
+          "target": "X-01:1",
+          "question": "Could an AI helping to train its successor preserve preferences that reviewers would change?",
+          "basis": "The experiment shows that apparent compliance can coexist with retained preferences.",
+          "unresolved": "It did not test influence over successor training. Evidence of that influence, its effect on the successor and independent review is missing.",
+          "sources": [
+            "AFK"
+          ]
+        }
       },
       "SAB-2024": {
         "title": "Sabotage tests",
@@ -925,7 +936,18 @@
         "relation": "mechanism",
         "anchor": "X-01:3",
         "observed": "Stronger code review reduced sabotage success; monitoring detected suspicious manipulation.",
-        "notEstablished": "These tests did not establish successor capture or operational shutdown."
+        "notEstablished": "These tests did not establish successor capture or operational shutdown.",
+        "tentative": {
+          "status": "tentative",
+          "origin": "editorial",
+          "target": "X-01:2",
+          "question": "Would a sabotage warning actually trigger a pause?",
+          "basis": "A monitor became more suspicious when an overseer manipulated its assessments.",
+          "unresolved": "The experiment measured detection. It did not establish who would receive the warning, act on it or verify a pause.",
+          "sources": [
+            "SAB"
+          ]
+        }
       }
     },
     "fidelity": "This is a provisional causal model. Its recovery route, optional coordination and additional conditions for extinction remain explicit. Incident overlays supply evidence only about the mapped component and its controls; the hypothetical continuation is not presented as an observed outcome.",

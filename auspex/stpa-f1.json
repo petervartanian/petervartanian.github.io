@@ -1,5 +1,5 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "pathway": "F-01",
   "displayId": "F-1",
   "title": "Amplification, failed response and mass violence",
@@ -1036,6 +1036,17 @@
               "unknown"
             ]
           }
+        },
+        "tentative": {
+          "status": "tentative",
+          "origin": "editorial",
+          "target": "F-01:R",
+          "question": "Would changing engagement incentives reduce exposure and protect people?",
+          "basis": "Amnesty reports that counter-speech increased engagement and made harmful posts more visible.",
+          "unresolved": "The account does not establish the effects of a redesigned ranking system. Reduced reach and improved protection would both need evaluation.",
+          "sources": [
+            "MYA"
+          ]
         }
       },
       "ETA-2021": {
@@ -1061,6 +1072,18 @@
               "status": "proposed"
             }
           }
+        },
+        "tentative": {
+          "status": "tentative",
+          "origin": "editorial",
+          "target": "F-01:4",
+          "question": "How much did algorithmic amplification contribute to targeting in this case?",
+          "basis": "Amnesty links the spread of threats to targeting and reports removal after the victim was killed; Meta disputed its findings.",
+          "unresolved": "The specific contribution of ranking, alongside other routes of exposure and the conflict itself, remains unresolved. Attribution needs evidence connecting exposure to targeting.",
+          "sources": [
+            "ETA",
+            "META-ETA21"
+          ]
         }
       }
     },

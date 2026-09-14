@@ -27,7 +27,7 @@ function mappedEvidence(model) {
     const overlay = model.presentation.overlays[a.incident];
     const incident = incidents.find(i => i.id === a.incident);
     const barriers = presentation.barriers(a);
-    return `<section class="stpa-mapped-case"><h4>${presentation.notedTitle(overlay.title,`case-${a.id}-reference`,`case-${a.id}-footnote`,'Scope of this case')}</h4><p>${esc(incident.date)} · ${esc(overlay.kind)}</p><p>${esc(overlay.observed)}</p><p class="a1-footnote" id="case-${a.id}-footnote"><a href="#case-${a.id}-reference" aria-label="Return to case title">*</a> ${esc(overlay.limit)}</p>${barriers.length ? barriers.map(b => {
+    return `<section class="stpa-mapped-case"><h4>${presentation.notedTitle(overlay.title,`case-${a.id}-reference`,`case-${a.id}-footnote`,'Scope of this case')}</h4><p>${esc(incident.date)} · ${esc(overlay.kind)}</p><p>${esc(overlay.observed)}</p><p class="a1-footnote" id="case-${a.id}-footnote"><a href="#case-${a.id}-reference" aria-label="Return to case title">*</a> ${esc(overlay.limit)}</p>${presentation.tentativeConnection(overlay,true)}${barriers.length ? barriers.map(b => {
       const detail = b;
       return `<details><summary>${esc(detail.title)} · ${esc(presentation.barrierStates(detail).map(presentation.conditionLabel).join(" · "))}</summary><p class="a1-footnote">${esc(detail.conditionBasis)}</p><dl><dt>Mechanism</dt><dd>${esc(b.action)}</dd><dt>Evidence</dt><dd>${esc(b.efficacy)}</dd><dt>Brittleness</dt><dd>${esc(detail.strongerAI)}</dd><dt>Failure</dt><dd>${esc(b.failure)}</dd></dl>${detail.reinforcement ? `<p><strong>Proposed reinforcement</strong> · ${esc(detail.reinforcement.proposal)}</p><p><strong>Test</strong> · ${esc(detail.reinforcement.test)}</p>` : ''}<p>${sourceLinks(b.evidence)}</p></details>`;
     }).join('') : '<p>Barrier performance not established.</p>'}<details><summary>Case observations & evidence</summary>${(a.trace || []).map(t => `<p>${esc(t.text)}</p><p>${sourceLinks(t.evidence)}</p>`).join('')}${[...new Set([...a.evidence,...a.barriers.flatMap(b=>b.evidence)])].map(id => {
@@ -64,7 +64,7 @@ for (let i = starts.length - 1; i >= 0; i--) {
   if (end < 0) throw new Error(`Missing reader boundary ${p.id}`);
   html = html.slice(0, match.index) + `<article id="${p.id}" data-group="${p.group}" data-unworked="true"><p class="eyebrow">${p.displayId} · Pathway</p><h2>${esc(p.title)}</h2></article>` + html.slice(end);
 }
-html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=28.0"');
+html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=29.0"');
 const key=`<!-- MAP-KEY-START --><section id="map-key" class="a1-static-key"><h2>Path & barrier key</h2>${presentation.pathsGuide(true)}</section><!-- MAP-KEY-END -->`;
 if (html.includes('<!-- MAP-KEY-START -->')) html=html.replace(/<!-- MAP-KEY-START -->[\s\S]*?<!-- MAP-KEY-END -->/,key);
 else html=html.replace('</nav>',`</nav>${key}`);

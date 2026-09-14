@@ -58,7 +58,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const narrow = matchMedia('(max-width: 800px)');
   const compactMap = matchMedia('(max-width: 700px)');
-  const state = { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayPreview: false, inspect: false };
+  const state = { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayTentative: false, inspect: false };
   const isSTPA = (id = state.pathway) => !!window.AuspexSTPA?.has(id);
   const pathwayTitle = p => window.AuspexSTPAModels?.[p.id]?.title || p.title;
   const overlayConfig = () => window.AuspexSTPA?.model?.presentation.overlays[state.incident];
@@ -92,6 +92,7 @@
 
   const announce = (message) => { $('#announcement').textContent = message; };
   const pathwayAssessments = () => isSTPA() ? data.assessments.filter((a) => a.pathway === state.pathway) : [];
+  const overlayChoices = () => pathwayAssessments().filter(a => !state.overlayTentative || window.AuspexSTPA.model.presentation.overlays[a.incident]?.tentative);
   const localAssessments = () => pathwayAssessments().filter((a) => a.targets.some((t) => t.id === state.target));
   const assessment = () => (isSTPA() ? pathwayAssessments() : localAssessments()).find((a) => a.incident === state.incident);
   const localBarriers = () => isSTPA() ? window.AuspexSTPA.barriers(assessment()) : [];
@@ -117,14 +118,14 @@
 
   function normalize() {
     if (!pathways.has(state.pathway)) {
-      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayPreview: false, inspect: false });
+      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayTentative: false, inspect: false });
       window.AuspexSTPA?.use('');
       readingKey = '';
       return;
     }
     const p = pathways.get(state.pathway);
     if (!isSTPA(p.id)) {
-      Object.assign(state, { target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayPreview: false, inspect: false });
+      Object.assign(state, { target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayTentative: false, inspect: false });
       readingKey = '';
       return;
     }
@@ -137,8 +138,10 @@
         || initial?.targets[0]?.id || p.steps[0].id;
     }
     state.target = modelTarget(state.target);
-    const choices = isSTPA(p.id) ? (state.overlay ? pathwayAssessments() : []) : localAssessments();
+    const choices = isSTPA(p.id) ? (state.overlay ? overlayChoices() : []) : localAssessments();
     if (!choices.some((a) => a.incident === state.incident)) state.incident = choices[0]?.incident || '';
+    state.overlay = Boolean(state.incident);
+    if (state.overlayTentative) state.inspect = false;
     const barriers = localBarriers();
     if (!barriers.some((b) => b.id === state.barrier)) state.barrier = barriers[0]?.id || '';
     const key = [state.pathway, state.target, state.incident, state.barrier].join('|');
@@ -158,7 +161,7 @@
     if (state.pathway) url.searchParams.set('p', pathways.get(state.pathway).displayId);
     if (state.target) url.searchParams.set('t', state.target);
     if (state.incident) url.searchParams.set('i', state.incident);
-    if (state.overlayEnabled && state.overlayPreview) url.searchParams.set('overlay', 'maybe');
+    if (state.overlayEnabled && state.overlayTentative) url.searchParams.set('overlay', 'maybe');
     else if (state.overlayEnabled && !state.incident) url.searchParams.set('overlay', '1');
     if (state.barrier && (!isSTPA() || state.inspect)) url.searchParams.set('b', state.barrier);
     if (!isSTPA() && state.incident && state.observation >= 0) url.searchParams.set('o', String(state.observation));
@@ -175,8 +178,8 @@
     state.pathway = aliases.get((params.get('p') || '').toLowerCase()) || params.get('p') || '';
     state.target = params.get('t') || '';
     state.overlay = isSTPA() && params.has('i');
-    state.overlayPreview = isSTPA() && params.get('overlay') === 'maybe';
-    state.overlayEnabled = isSTPA() && (state.overlay || state.overlayPreview || params.get('overlay') === '1');
+    state.overlayTentative = isSTPA() && params.get('overlay') === 'maybe';
+    state.overlayEnabled = isSTPA() && (state.overlay || state.overlayTentative || params.get('overlay') === '1');
     state.inspect = state.overlay && (params.get('inspect') === '1' || params.has('b'));
     state.incident = params.get('i') || '';
     state.barrier = params.get('b') || '';
@@ -254,7 +257,7 @@
     const p = pathways.get(state.pathway);
     if (isSTPA(p.id)) {
       const names = window.AuspexSTPA.overlayNames;
-      $('#incident-rail').innerHTML = `<div class="a1-overlay-choice" id="evidence-map-title"><div class="a1-overlay-switch" role="group" aria-label="Overlay an incident"><button data-clear-overlay aria-pressed="${!state.overlayEnabled}" aria-controls="a1-incident-branches a1-route">No</button><button data-preview-overlay aria-pressed="${state.overlayEnabled && state.overlayPreview}" aria-expanded="${state.overlayEnabled && state.overlayPreview}" aria-controls="a1-incident-branches a1-route" title="Preview an incident">Maybe</button><button data-enable-overlay aria-pressed="${state.overlayEnabled && !state.overlayPreview}" aria-expanded="${state.overlayEnabled && !state.overlayPreview}" aria-controls="a1-incident-branches a1-route" title="Apply an incident overlay">Yes</button></div><svg class="a1-choice-lines" aria-hidden="true" focusable="false"></svg><div id="a1-incident-branches" class="a1-incident-branches" role="group" aria-label="Choose an incident"${state.overlayEnabled?'':' hidden'}>${pathwayAssessments().map(a=>`<button class="a1-incident-branch" data-case="${a.id}" aria-pressed="${state.overlay && a.incident===state.incident}" aria-controls="a1-route" title="${escape(incidents.get(a.incident).date)}" aria-label="${escape(names[a.incident])}. ${escape(incidents.get(a.incident).date)}"><span class="a1-case-date">${escape(shortIncidentDate(incidents.get(a.incident).date))}:</span> <span class="a1-case-name">${escape(names[a.incident])}</span></button>`).join('')}</div></div>`;
+      $('#incident-rail').innerHTML = `<div class="a1-overlay-choice" id="evidence-map-title"><div class="a1-overlay-switch" role="group" aria-label="Overlay an incident"><button data-clear-overlay aria-pressed="${!state.overlayEnabled}" aria-controls="a1-incident-branches a1-route">No</button><button data-tentative-overlay aria-pressed="${state.overlayEnabled && state.overlayTentative}" aria-expanded="${state.overlayEnabled && state.overlayTentative}" aria-controls="a1-incident-branches a1-route" title="Explore tentative connections">Maybe</button><button data-enable-overlay aria-pressed="${state.overlayEnabled && !state.overlayTentative}" aria-expanded="${state.overlayEnabled && !state.overlayTentative}" aria-controls="a1-incident-branches a1-route" title="Read evidence at its assessed component">Yes</button></div><svg class="a1-choice-lines" aria-hidden="true" focusable="false"></svg><div id="a1-incident-branches" class="a1-incident-branches" role="group" aria-label="Choose an incident"${state.overlayEnabled?'':' hidden'}>${overlayChoices().map(a=>`<button class="a1-incident-branch" data-case="${a.id}" aria-pressed="${state.overlay && a.incident===state.incident}" aria-controls="a1-route" title="${escape(incidents.get(a.incident).date)}" aria-label="${escape(names[a.incident])}. ${escape(incidents.get(a.incident).date)}. ${state.overlayTentative?'Tentative connection':'Source evidence'} at ${escape(window.AuspexSTPA.node(window.AuspexSTPA.overlayAnchor(a,state.overlayTentative)).number)}"><span class="a1-case-date">${escape(shortIncidentDate(incidents.get(a.incident).date))}:</span> <span class="a1-case-name">${escape(names[a.incident])}</span></button>`).join('')}</div></div>${state.overlayEnabled?`<p class="a1-mode-note">${state.overlayTentative?'Explore a tentative connection.':'Read evidence at its assessed component.'}</p>`:''}`;
       return;
     }
     const targets = p.steps.flatMap((s) => [s, ...p.edges.filter((e) => e.from === s.id)]);
@@ -271,13 +274,7 @@
     const useSTPA = isSTPA(p.id);
     $('#pathway-map').classList.toggle('stpa-active', useSTPA);
     if (useSTPA) {
-      $('#map-nodes').innerHTML = window.AuspexSTPA.renderMap(state.target, state.overlay ? assessment() : null, state.inspect ? state.barrier : '', evidenceButtons);
-      if (state.overlayPreview && $('#a1-overlay')) {
-        const label = document.createElement('span');
-        label.className = 'a1-preview-label';
-        label.textContent = 'Preview';
-        $('#a1-overlay .a1-overlay-kicker').append(label);
-      }
+      $('#map-nodes').innerHTML = window.AuspexSTPA.renderMap(state.target, state.overlay ? assessment() : null, state.inspect ? state.barrier : '', evidenceButtons, state.overlayTentative);
       $('#map-connections').innerHTML = '';
       renderEvidenceMap();
       requestAnimationFrame(drawConnections);
@@ -435,7 +432,7 @@
     $('#app').dataset.pathway = p?.id || '';
     const enhanced = !!p && isSTPA(p.id);
     $('#app').dataset.stpa = String(enhanced);
-    $('#app').dataset.overlayMode = state.overlayEnabled ? (state.overlayPreview ? 'maybe' : 'yes') : 'no';
+    $('#app').dataset.overlayMode = state.overlayEnabled ? (state.overlayTentative ? 'maybe' : 'yes') : 'no';
     $('#app').dataset.blank = String(!!p && !enhanced);
     $('#causal-argument').hidden = !!p && !enhanced;
     a1ResearchLink.href = `pathways.html#${p?.id || 'X-01'}`;
@@ -491,7 +488,7 @@
     state.pathway = id;
     state.overlay = false;
     state.overlayEnabled = false;
-    state.overlayPreview = false;
+    state.overlayTentative = false;
     state.inspect = false;
     state.target = '';
     state.incident = '';
@@ -566,7 +563,7 @@
     state.pathway = a.pathway;
     state.overlay = isSTPA(a.pathway);
     state.overlayEnabled = state.overlay;
-    state.overlayPreview = false;
+    state.overlayTentative = false;
     state.inspect = false;
     state.target = a.targets[0].id;
     state.incident = a.incident;
@@ -683,18 +680,20 @@
   });
 
   $('#incident-rail').addEventListener('click', (event) => {
-    const modeButton = event.target.closest('[data-preview-overlay], [data-enable-overlay]');
+    const modeButton = event.target.closest('[data-tentative-overlay], [data-enable-overlay]');
     if (isSTPA() && modeButton) {
-      const preview = modeButton.hasAttribute('data-preview-overlay');
+      const tentative = modeButton.hasAttribute('data-tentative-overlay');
       state.overlayEnabled = true;
-      state.overlayPreview = preview;
+      state.overlayTentative = tentative;
+      state.inspect = false;
+      if (state.overlay) state.target = window.AuspexSTPA.overlayAnchor(assessment(), tentative) || state.target;
       normalize(); render(); writeLocation();
-      $(preview ? '[data-preview-overlay]' : '[data-enable-overlay]').focus({ preventScroll: true });
-      announce(state.overlay ? (preview ? 'Incident preview. Choose Yes to apply it.' : 'Incident overlay applied.') : (preview ? 'Choose an incident to preview.' : 'Choose an incident to overlay.'));
+      $(tentative ? '[data-tentative-overlay]' : '[data-enable-overlay]').focus({ preventScroll: true });
+      announce(state.overlay ? (tentative ? 'Tentative connection selected. Read why it may fit and what remains missing.' : 'Source evidence shown at its assessed component.') : (tentative ? 'Choose a case to explore a tentative connection.' : 'Choose a case to read its scoped evidence.'));
       return;
     }
     if (isSTPA() && event.target.closest('[data-clear-overlay]')) {
-      state.overlay = false; state.overlayEnabled = false; state.overlayPreview = false; state.inspect = false;
+      state.overlay = false; state.overlayEnabled = false; state.overlayTentative = false; state.inspect = false;
       normalize(); render(); writeLocation();
       $('[data-clear-overlay]').focus({ preventScroll: true });
       announce('Incident overlay removed');
@@ -724,12 +723,12 @@
       state.overlay = true;
       state.overlayEnabled = true;
       state.inspect = false;
-      state.target = a.targets[0].id;
+      state.target = window.AuspexSTPA.overlayAnchor(a,state.overlayTentative);
       state.incident = a.incident;
       state.barrier = '';
       normalize(); render(); writeLocation();
       $(`[data-case="${a.id}"]`).focus({ preventScroll: true });
-      announce(`${window.AuspexSTPA.overlayNames[a.incident]} ${state.overlayPreview ? 'previewed. Choose Yes to apply it.' : 'overlaid on its assessed component.'}${localBarriers().length ? ' Select a barrier to explore it.' : ''}`);
+      announce(`${window.AuspexSTPA.overlayNames[a.incident]} ${state.overlayTentative ? 'selected for a tentative connection.' : 'overlaid on its assessed component.'}${!state.overlayTentative && localBarriers().length ? ' Select a barrier to explore it.' : ''}`);
       return;
     }
     state.target = a.targets[0].id;
@@ -755,6 +754,17 @@
     announce(inspection.incidents[state.incident]?.labels[state.observation] || 'Incident observation selected');
   });
   $('#pathway-map').addEventListener('click', (event) => {
+    if (isSTPA() && event.target.closest('[data-source-connection]')) {
+      state.overlayTentative = false;
+      state.inspect = false;
+      state.target = window.AuspexSTPA.overlayAnchor(assessment());
+      normalize(); render(); writeLocation();
+      const sourceCard = $('#a1-overlay');
+      sourceCard.tabIndex = -1;
+      focusAndReveal(sourceCard);
+      announce('Source evidence and barriers at their assessed component. The tentative connection remains unresolved.');
+      return;
+    }
     const contextLink = event.target.closest('[data-context-target]');
     if (contextLink && isSTPA()) {
       state.target = contextLink.dataset.contextTarget;

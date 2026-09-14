@@ -36,7 +36,7 @@
       "definition": "A response re-establishes enforceable safety constraints within a specified boundary; success requires verification."
     }
   ],
-  "version": "1.2",
+  "version": "1.3",
   "pathway": "H-01",
   "displayId": "Bonus-1",
   "title": "Screening, selective records and persistent exclusion",
@@ -930,6 +930,17 @@
               "status": "proposed"
             }
           }
+        },
+        "tentative": {
+          "status": "tentative",
+          "origin": "editorial",
+          "target": "H-01:4",
+          "question": "Could disputed records keep shaping later automated decisions?",
+          "basis": "The FTC alleged inaccurate screening reports and failures to investigate disputes.",
+          "unresolved": "The case does not establish AI use or a feedback loop. Record reuse and its effect on later decisions would need tracing.",
+          "sources": [
+            "HRI"
+          ]
         }
       },
       "PFL-2018": {
@@ -959,6 +970,17 @@
               "status": "proposed"
             }
           }
+        },
+        "tentative": {
+          "status": "tentative",
+          "origin": "editorial",
+          "target": "H-01:5",
+          "question": "Could the modeled feedback produce persistent disadvantage in practice?",
+          "basis": "The study demonstrates how discovered records can reinforce repeated allocation and tests an input correction.",
+          "unresolved": "Long-term effects on people were not established. The connection needs deployment evidence, including reporting patterns, decisions and outcomes.",
+          "sources": [
+            "PFL"
+          ]
         }
       }
     },

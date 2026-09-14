@@ -1,5 +1,5 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "pathway": "S-01",
   "displayId": "E-1",
   "title": "Correlated grid control and loss of essential power",
@@ -962,6 +962,17 @@
               "status": "proposed"
             }
           }
+        },
+        "tentative": {
+          "status": "tentative",
+          "origin": "editorial",
+          "target": "S-01:R",
+          "question": "Would recovery still work if neighboring grids also lost power?",
+          "basis": "Restoration used supplies that remained energized; affected entities did not need black starts.",
+          "unresolved": "That recovery does not establish performance after a wider shared failure, including one involving related AI systems. Available independent restoration resources would need testing.",
+          "sources": [
+            "SW11"
+          ]
         }
       },
       "NE-2003": {
@@ -987,6 +998,17 @@
               "status": "proposed"
             }
           }
+        },
+        "tentative": {
+          "status": "tentative",
+          "origin": "editorial",
+          "target": "S-01:2",
+          "question": "Could related AI dispatch tools turn a shared blind spot into a common error?",
+          "basis": "The investigation identified failures of monitoring, situational awareness and coordination.",
+          "unresolved": "AI did not cause this event. A shared AI error would require evidence about model dependence, dispatch decisions and independent checks.",
+          "sources": [
+            "NE03"
+          ]
         }
       }
     },

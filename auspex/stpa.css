@@ -142,7 +142,7 @@
 .a1-overlay-choice { position: relative; display: flex; align-items: center; gap: 24px; min-width: 0; }
 .a1-overlay-switch { display: inline-flex; flex-shrink: 0; position: relative; z-index: 1; border: 1px solid var(--line); border-radius: 3px; background: var(--page); }
 .a1-overlay-switch button { position: relative; width: 48px; min-height: 40px; padding: 8px 0; border: 0; border-radius: 0; box-shadow: none; background: #f1f3f6; font: 12px/1.5 var(--sans); color: #485665; --choice-mark: #485665; }
-.a1-overlay-switch [data-preview-overlay] { width: 58px; background: #bdc6d0; color: #283747; --choice-mark: #283747; }
+.a1-overlay-switch [data-tentative-overlay] { width: 58px; background: #bdc6d0; color: #283747; --choice-mark: #283747; }
 .a1-overlay-switch [data-enable-overlay] { background: #465361; color: #fff; --choice-mark: #fff; }
 .a1-overlay-switch button + button { border-left: 1px solid var(--line); }
 .a1-overlay-switch button[aria-pressed='true'] { font-weight: 600; }
@@ -155,6 +155,7 @@
 .a1-incident-branch { position: relative; min-width: 0; max-width: 100%; min-height: 24px; padding: 3px 2px; border: 0; border-radius: 0; box-shadow: none; background: transparent; text-align: left; font: 10.5px/1.55 var(--sans); }
 .a1-case-name { font: inherit; color: var(--ink); }
 .a1-case-date { font: inherit; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.a1-mode-note { margin: 6px 0 0; color: var(--muted); font: 10px/1.5 var(--sans); }
 .a1-incident-branch:hover .a1-case-name, .a1-incident-branch[aria-pressed='true'] .a1-case-name { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 .a1-context { margin: 0 35px 8px; padding: 15px 0 20px; border-bottom: 1px solid var(--line); }
 .a1-context-heading { display: flex; align-items: baseline; gap: 8px; margin: 0 0 15px; font: 500 13px/1.5 var(--sans); }
@@ -228,9 +229,21 @@
 .a1-cell.is-overlaid .a1-step { border-color: color-mix(in srgb,var(--accent) 50%,var(--line)); border-bottom-right-radius: 0; border-bottom-left-radius: 0; background: var(--tint); }
 .a1-overlay-kicker { font: 9px/1.5 var(--sans); letter-spacing: .04em; color: var(--muted); margin: 0 0 4px; }
 .a1-overlay-title { font: 500 13px/1.45 var(--sans); margin: 0 0 12px; color: var(--accent); }
-.a1-preview-label { display: inline-block; margin-left: 10px; font-style: italic; }
-#app[data-overlay-mode='maybe'] .a1-cell.is-overlaid .a1-step { background: color-mix(in srgb,var(--tint) 35%,var(--page)); border-style: dashed; }
-#app[data-overlay-mode='maybe'] .a1-overlay { background: color-mix(in srgb,var(--tint) 22%,var(--page)); border-style: dashed; border-left-width: 1px; }
+#app[data-overlay-mode='maybe'] .a1-cell.is-overlaid .a1-step { background: color-mix(in srgb,var(--tint) 35%,var(--page)); border-style: dotted; }
+.a1-overlay.is-tentative { background: color-mix(in srgb,var(--tint) 22%,var(--page)); border-style: dotted; border-left-width: 1px; }
+.a1-connection-question { margin: 0 0 12px; font: italic 14px/1.5 Georgia,serif; color: var(--accent); text-wrap: pretty; }
+.a1-connection-reason { margin: 0; font: 11px/1.55 var(--sans); }
+.a1-connection-reason dt { font-size: 9px; font-weight: 500; color: var(--muted); margin-top: 10px; }
+.a1-connection-reason dd { margin: 3px 0 0; }
+.a1-source-connection { display: block; margin: 14px 0 0; padding: 5px 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; font: 10px/1.5 var(--sans); color: var(--accent); text-align: left; }
+.a1-source-connection:hover { text-decoration: underline; text-underline-offset: 3px; }
+#app[data-overlay-mode='maybe'] .a1-cell.is-overlaid.is-recovery .a1-step,
+.a1-cell.is-recovery .a1-overlay.is-tentative { background: #f1f6f1; border-color: #b7cbbd; }
+.a1-cell.is-recovery .a1-connection-question { color: #425b49; }
+.a1-overlay-definitions { display: grid; grid-template-columns: max-content 1fr; gap: 9px 20px; }
+.a1-overlay-definitions dt { font-weight: 500; }
+.a1-overlay-definitions dd { margin: 0; }
+.stpa-mapped-case .a1-tentative-connection { margin: 20px 0; padding: 14px; border: 1px dotted var(--line); }
 .a1-overlay-observed, .a1-overlay-unestablished { font: 11px/1.55 var(--sans); margin: 9px 0; }
 .a1-overlay-observed > span, .a1-overlay-unestablished > span { display: block; font-size: 9px; font-weight: 500; letter-spacing: .025em; margin-bottom: 2px; }
 .a1-overlay-unestablished { color: var(--muted); }

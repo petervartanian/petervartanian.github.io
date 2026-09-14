@@ -1,7 +1,7 @@
 // Generated from STPA models and barrier-states.json by build-stpa.mjs.
 window.AuspexSTPAModels = {
   "X-01": {
-    "version": "1.6",
+    "version": "1.7",
     "pathway": "X-01",
     "displayId": "A-1",
     "title": "Successor capture and the loss of human control",
@@ -886,7 +886,18 @@ window.AuspexSTPAModels = {
           "relation": "mechanism",
           "anchor": "X-01:3",
           "observed": "Training-context compliance coexisted with retained preferences in the experiment.",
-          "notEstablished": "Successor capture, loss of human control and later outcomes were not observed."
+          "notEstablished": "Successor capture, loss of human control and later outcomes were not observed.",
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "X-01:1",
+            "question": "Could an AI helping to train its successor preserve preferences that reviewers would change?",
+            "basis": "The experiment shows that apparent compliance can coexist with retained preferences.",
+            "unresolved": "It did not test influence over successor training. Evidence of that influence, its effect on the successor and independent review is missing.",
+            "sources": [
+              "AFK"
+            ]
+          }
         },
         "SAB-2024": {
           "title": "Sabotage tests",
@@ -927,7 +938,18 @@ window.AuspexSTPAModels = {
           "relation": "mechanism",
           "anchor": "X-01:3",
           "observed": "Stronger code review reduced sabotage success; monitoring detected suspicious manipulation.",
-          "notEstablished": "These tests did not establish successor capture or operational shutdown."
+          "notEstablished": "These tests did not establish successor capture or operational shutdown.",
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "X-01:2",
+            "question": "Would a sabotage warning actually trigger a pause?",
+            "basis": "A monitor became more suspicious when an overseer manipulated its assessments.",
+            "unresolved": "The experiment measured detection. It did not establish who would receive the warning, act on it or verify a pause.",
+            "sources": [
+              "SAB"
+            ]
+          }
         }
       },
       "fidelity": "This is a provisional causal model. Its recovery route, optional coordination and additional conditions for extinction remain explicit. Incident overlays supply evidence only about the mapped component and its controls; the hypothetical continuation is not presented as an observed outcome.",
@@ -1056,7 +1078,7 @@ window.AuspexSTPAModels = {
         "question": "What actually ended the episode, and would that circumstance recur?"
       }
     ],
-    "version": "1.3",
+    "version": "1.4",
     "pathway": "P-01",
     "displayId": "B-1",
     "title": "Personal command and the loss of constitutional control",
@@ -1785,7 +1807,18 @@ window.AuspexSTPAModels = {
           "candidates": [
             "SC1",
             "SC5"
-          ]
+          ],
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "P-01:2",
+            "question": "Could reliance on AI-assisted analysis concentrate practical command authority?",
+            "basis": "The announcement describes rapid acquisition of tools intended to assist human imagery analysts.",
+            "unresolved": "It provides no evidence of personal command loyalty or displaced oversight. Actual delegation and independent review would need examination.",
+            "sources": [
+              "MAV"
+            ]
+          }
         },
         "REP-2024": {
           "title": "Replicator acquisition program",
@@ -1802,7 +1835,18 @@ window.AuspexSTPAModels = {
           "candidates": [
             "SC1",
             "SC5"
-          ]
+          ],
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "P-01:2",
+            "question": "Would independent command checks hold as autonomy is fielded at scale?",
+            "basis": "Replicator announced rapid fielding of autonomous systems under competitive pressure.",
+            "unresolved": "The announcement does not test command checks. Authorization arrangements and their performance under disputed orders remain unassessed.",
+            "sources": [
+              "REP"
+            ]
+          }
         }
       },
       "fidelity": "Evidence marks procurement context at 1.1 only. Candidate constitutional controls are explicit requirements for the hypothetical system; the mapped announcements do not demonstrate that they worked.",
@@ -1898,7 +1942,7 @@ window.AuspexSTPAModels = {
         "question": "What actually ended the episode, and would that circumstance recur?"
       }
     ],
-    "version": "1.2",
+    "version": "1.3",
     "pathway": "W-01",
     "displayId": "C-1",
     "title": "Misleading threat assessment and nuclear escalation",
@@ -2864,6 +2908,17 @@ window.AuspexSTPAModels = {
                 "unknown"
               ]
             }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "W-01:1",
+            "question": "Could test inputs contaminate an AI-generated threat picture?",
+            "basis": "The 1979 warning involved test data entering the operational system; an offsite test facility followed.",
+            "unresolved": "This was a non-AI system. An AI comparison needs evidence about input separation and how operators verify the resulting picture.",
+            "sources": [
+              "NOR"
+            ]
           }
         },
         "NOR-1980": {
@@ -2893,6 +2948,17 @@ window.AuspexSTPAModels = {
                 "unknown"
               ]
             }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "W-01:3",
+            "question": "Would independent checks catch a false warning repeated by several AI systems?",
+            "basis": "The 1980 warning failures prompted changes to transmission procedures and error checking.",
+            "unresolved": "The report does not test AI agreement or shared inputs. The independence and timing of modern checks remain open questions.",
+            "sources": [
+              "NOR"
+            ]
           }
         }
       },
@@ -2989,7 +3055,7 @@ window.AuspexSTPAModels = {
         "question": "What actually ended the episode, and would that circumstance recur?"
       }
     ],
-    "version": "1.2",
+    "version": "1.3",
     "pathway": "B-01",
     "displayId": "D-1",
     "title": "Biological misuse and the limits of access control",
@@ -3774,6 +3840,17 @@ window.AuspexSTPAModels = {
                 "status": "proposed"
               }
             }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "B-01:2",
+            "question": "Did restored access materially increase practical capability?",
+            "basis": "The provider reports that access resumed after enforcement and that the research continued.",
+            "unresolved": "Continued access does not isolate the contribution of AI. A defensible comparison of work with and without assistance is missing.",
+            "sources": [
+              "AN26"
+            ]
           }
         },
         "FLU-2026": {
@@ -3799,6 +3876,17 @@ window.AuspexSTPAModels = {
                 "status": "proposed"
               }
             }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "B-01:2",
+            "question": "Would the capability limit hold as fallback models improve?",
+            "basis": "The provider reports restricting relevant assistance to its weakest models and judges their contribution limited.",
+            "unresolved": "The case does not establish how this limit would perform with stronger fallback models. Independent measures of practical contribution are missing.",
+            "sources": [
+              "AN26"
+            ]
           }
         }
       },
@@ -3831,7 +3919,7 @@ window.AuspexSTPAModels = {
     }
   },
   "S-01": {
-    "version": "1.2",
+    "version": "1.3",
     "pathway": "S-01",
     "displayId": "E-1",
     "title": "Correlated grid control and loss of essential power",
@@ -4794,6 +4882,17 @@ window.AuspexSTPAModels = {
                 "status": "proposed"
               }
             }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "S-01:R",
+            "question": "Would recovery still work if neighboring grids also lost power?",
+            "basis": "Restoration used supplies that remained energized; affected entities did not need black starts.",
+            "unresolved": "That recovery does not establish performance after a wider shared failure, including one involving related AI systems. Available independent restoration resources would need testing.",
+            "sources": [
+              "SW11"
+            ]
           }
         },
         "NE-2003": {
@@ -4819,6 +4918,17 @@ window.AuspexSTPAModels = {
                 "status": "proposed"
               }
             }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "S-01:2",
+            "question": "Could related AI dispatch tools turn a shared blind spot into a common error?",
+            "basis": "The investigation identified failures of monitoring, situational awareness and coordination.",
+            "unresolved": "AI did not cause this event. A shared AI error would require evidence about model dependence, dispatch decisions and independent checks.",
+            "sources": [
+              "NE03"
+            ]
           }
         }
       },
@@ -4878,7 +4988,7 @@ window.AuspexSTPAModels = {
     }
   },
   "F-01": {
-    "version": "1.2",
+    "version": "1.3",
     "pathway": "F-01",
     "displayId": "F-1",
     "title": "Amplification, failed response and mass violence",
@@ -5915,6 +6025,17 @@ window.AuspexSTPAModels = {
                 "unknown"
               ]
             }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "F-01:R",
+            "question": "Would changing engagement incentives reduce exposure and protect people?",
+            "basis": "Amnesty reports that counter-speech increased engagement and made harmful posts more visible.",
+            "unresolved": "The account does not establish the effects of a redesigned ranking system. Reduced reach and improved protection would both need evaluation.",
+            "sources": [
+              "MYA"
+            ]
           }
         },
         "ETA-2021": {
@@ -5940,6 +6061,18 @@ window.AuspexSTPAModels = {
                 "status": "proposed"
               }
             }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "F-01:4",
+            "question": "How much did algorithmic amplification contribute to targeting in this case?",
+            "basis": "Amnesty links the spread of threats to targeting and reports removal after the victim was killed; Meta disputed its findings.",
+            "unresolved": "The specific contribution of ranking, alongside other routes of exposure and the conflict itself, remains unresolved. Attribution needs evidence connecting exposure to targeting.",
+            "sources": [
+              "ETA",
+              "META-ETA21"
+            ]
           }
         }
       },
@@ -6031,7 +6164,7 @@ window.AuspexSTPAModels = {
         "definition": "A response re-establishes enforceable safety constraints within a specified boundary; success requires verification."
       }
     ],
-    "version": "1.2",
+    "version": "1.3",
     "pathway": "H-01",
     "displayId": "Bonus-1",
     "title": "Screening, selective records and persistent exclusion",
@@ -6925,6 +7058,17 @@ window.AuspexSTPAModels = {
                 "status": "proposed"
               }
             }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "H-01:4",
+            "question": "Could disputed records keep shaping later automated decisions?",
+            "basis": "The FTC alleged inaccurate screening reports and failures to investigate disputes.",
+            "unresolved": "The case does not establish AI use or a feedback loop. Record reuse and its effect on later decisions would need tracing.",
+            "sources": [
+              "HRI"
+            ]
           }
         },
         "PFL-2018": {
@@ -6954,6 +7098,17 @@ window.AuspexSTPAModels = {
                 "status": "proposed"
               }
             }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "H-01:5",
+            "question": "Could the modeled feedback produce persistent disadvantage in practice?",
+            "basis": "The study demonstrates how discovered records can reinforce repeated allocation and tests an input correction.",
+            "unresolved": "Long-term effects on people were not established. The connection needs deployment evidence, including reporting patterns, decisions and outcomes.",
+            "sources": [
+              "PFL"
+            ]
           }
         }
       },
