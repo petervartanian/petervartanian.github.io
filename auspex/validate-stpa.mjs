@@ -28,7 +28,7 @@ for (const s of stateModel.states) {
   assert(guide.includes(`data-explore-state="${s.id}" aria-pressed="true"`));
   assert(s.example && stateModel.sources.some(x=>x.id===s.exampleSource));
 }
-assert.deepEqual(Array.from(presentation.routeDefinitions,r=>r.id),['contribution','continuation','optional','recovery','feedback']);
+assert.deepEqual(Array.from(presentation.routeDefinitions,r=>r.id),['contribution','optional','recovery','feedback']);
 for (const section of ['paths','barriers','recovery']) {
   const guide=presentation.mapGuide(section);
   assert(guide.includes(`data-map-guide="${section}" aria-pressed="true"`));
@@ -94,10 +94,23 @@ for (const m of models) {
   const cases=assessments.filter(a=>a.pathway===m.pathway).map(a=>overrides.get(a.id)||a);
   assert.equal(Object.keys(m.presentation.overlays).length,cases.length);
   const base=presentation.renderMap(m.nodes[0].id,null,'');
-  assert(base.includes('0.</span>') && base.includes('class="a1-context-field"') && !base.includes('class="a1-context"'));
-  for (const item of m.presentation.context || []) for (const target of item.targets) {
-    assert(base.includes(`data-context-for="${target.node}"`),`Context remains visible at ${target.node}`);
+  assert(base.includes('class="a1-map-field"') && !base.includes('a1-context-thread'));
+  const cloud=presentation.contextCloud();
+  assert(cloud.includes('0.</span> Context') && cloud.includes('a1-cloud-atmosphere'));
+  assert(!cloud.includes('<button') && !cloud.includes('<details'),'Context is readable without another control');
+  assert.equal(m.presentation.cloud.origin,'scenario-setting');
+  assert.equal(m.presentation.cloud.conditions.length,3);
+  assert.equal(m.presentation.cloud.actors.length,3);
+  assert(m.presentation.cloud.summary);
+  for (const actor of m.presentation.cloud.actors) {
+    has('controllers',[actor.controller]);
+    assert(actor.label && actor.role);
+    assert(cloud.includes(`data-controller="${actor.controller}"`));
   }
+  for (const condition of m.presentation.cloud.conditions) assert(cloud.includes(condition.replaceAll('&','&amp;')));
+  assert(cloud.indexOf('a1-cloud-conditions') < cloud.indexOf('a1-cloud-actors'));
+  assert(!/undefined|NaN/.test(cloud));
+  assert(staticHTML.includes(presentation.contextCloud(m.pathway)));
   for (const heading of ['1. Precursors','2. Event','3. Consequences','R. Recovery']) assert(base.includes(heading));
   for (const [wing,prefix] of [['before','1.'],['centre','2.'],['after','3.']]) {
     assert(m.nodes.filter(n=>n.wing===wing).every((n,i)=>n.number===prefix+(i+1)));
@@ -115,19 +128,26 @@ for (const m of models) {
     has('nodes',[tentative.target]); has('sources',tentative.sources);
     assert(tentative.question.endsWith('?') && tentative.basis && tentative.unresolved && tentative.sources.length);
     const sourceSnapshot=JSON.stringify({assessment:a,config,links:m.links});
-    const maybe=presentation.renderMap(centre.id,a,a.barriers[0]?.id,()=>'',true);
-    assert(maybe.includes(`data-overlay-target="${tentative.target}"`));
-    assert(maybe.includes(`data-overlay-anchor="${tentative.target}"`));
-    assert(maybe.includes(`data-evidence-target="${config.target}"`));
-    assert(maybe.includes(tentative.question) && maybe.includes('Still missing'));
-    assert(maybe.includes('data-source-connection') && maybe.includes('Analyst-proposed connection'));
-    assert(!maybe.includes('data-overlay-barrier='),'A tentative connection must not inherit source-case barrier states');
-    assert(!maybe.includes('Preview') && !/undefined|NaN/.test(maybe));
+    const expanded=presentation.renderMap(centre.id,a,a.barriers[0]?.id,()=>'',true);
+    assert(expanded.includes(`data-overlay-target="${config.target}"`));
+    assert(expanded.includes(`data-overlay-anchor="${config.anchor}"`));
+    assert(!expanded.includes('id="a1-tentative-overlay"'),'Exploration never duplicates or moves the incident');
+    assert.equal((expanded.match(/id="a1-overlay"/g)||[]).length,1);
+    assert(expanded.includes(tentative.question) && expanded.includes(tentative.unresolved));
+    assert(expanded.includes('data-explore-connection aria-expanded="true"'));
+    assert(expanded.includes('id="a1-question-detail"><p>'));
+    assert(!expanded.includes('a1-connection-footnote') && !expanded.includes('Analyst question.'));
+    const questionCell=expanded.match(new RegExp(`<div class="a1-cell[^"]*has-question[^"]*" data-cell="([^"]+)"`));
+    assert.equal(questionCell?.[1],tentative.target);
+    for (const b of presentation.barriers(a)) assert(expanded.includes(`data-overlay-barrier="${b.id}"`),'Source barriers remain available');
+    const detail=expanded.split('id="a1-question-detail">')[1].split('</div>')[0];
+    assert(!detail.includes('data-overlay-barrier='),'The question does not acquire a barrier assessment');
+    assert(!/undefined|NaN/.test(expanded));
     assert(staticHTML.includes(presentation.tentativeConnection(config,true)),'The reader preserves tentative questions and their basis');
     assert.equal(JSON.stringify({assessment:a,config,links:m.links}),sourceSnapshot,'Exploration cannot mutate evidence, assessments or causal routes');
     assert.deepEqual(Object.keys(config.barriers).sort(),a.barriers.map(b=>b.id).sort());
     const html=presentation.renderMap(centre.id,a,'');
-    assert(!html.includes('data-tentative-target='),'Yes returns to the source mapping without promoting a tentative connection');
+    assert(html.includes('id="a1-question-detail" hidden'),'The open question starts collapsed');
     for (const n of m.nodes) assert(html.includes(`data-node="${n.id}"`),'Overlay preserves all scenario nodes');
     assert(html.includes(`data-overlay-target="${config.target}"`),'Selecting another node does not move the evidence');
     assert(html.includes(`data-overlay-anchor="${config.anchor}"`),'Evidence anchor remains explicit');
@@ -165,7 +185,8 @@ const a=models[0];
 assert.equal(a.presentation.context.length,3);
 assert(presentation.use(a.pathway));
 const aMap=presentation.renderMap(a.nodes[0].id,null,'');
-for (const item of a.presentation.context) for (const target of item.targets) assert(aMap.includes(`data-context-for="${target.node}"`));
+assert(!aMap.includes('data-context-for='));
+assert(presentation.staticPage().includes('Scope of these warning signs'),'Original warning-sign notes remain in the reader');
 assert.deepEqual(a.nodes.map(n=>n.number),['1.1','1.2','1.3','2.1','3.1','3.2','3.3','R']);
 assert(reaches(a.links.filter(l=>l.from!=='X-01:5' && l.to!=='X-01:5'),'X-01:4','X-01:6'));
 assert(a.links.filter(l=>l.from==='X-01:5'||l.to==='X-01:5').every(l=>l.kind==='optional'));
@@ -177,3 +198,18 @@ console.log(`Validated seven STPA models and ${barriers} barriers: traceability,
 
 const catalogue = await parse('pathways.json');
 for (const p of catalogue.pathways.filter(p=>!models.some(m=>m.pathway===p.id))) assert(staticHTML.includes(`id="${p.id}" data-group="${p.group}" data-unworked="true"`));
+
+// Line meaning does not depend on color; recovery alone uses a curve.
+const points=[[0,0],[30,0],[30,80],[60,80]];
+for (const kind of ['contribution','continuation','optional','feedback','recovery']) {
+  const geometry=presentation.connectionGeometry(kind,points);
+  assert.equal(geometry.d.includes(' C'),kind==='recovery');
+  assert(!/undefined|NaN/.test(geometry.d));
+  assert(geometry.tangent.some(value=>value!==0));
+}
+const css=await read('stpa.css');
+assert(css.includes('path.is-feedback { stroke-dasharray: .1 4.8'));
+assert(css.includes('path.is-optional { stroke-dasharray: 7 5'));
+assert(presentation.routeSymbol('safeguard').includes('a1-gate-leaf'));
+assert(!css.includes('route-crossbar') && !css.includes('a1-possible-barrier'));
+assert(presentation.pathsGuide().includes('Conditional names what else must hold'));

@@ -30,20 +30,22 @@
       return staticMode?`<a href="#${esc(n.id)}" class="a1-context-link">${label}</a>`:`<button class="a1-context-link" data-context-target="${esc(n.id)}" aria-label="Go to ${esc(n.number)}: ${esc(n.shortLabel || n.title)}">${label}</button>`;
     }).join('');
     const body=items.length?`<div class="a1-context-body">${items.map((item,index)=>`<div class="a1-context-item"><h4>${esc(item.title)}</h4><p>${item.note?notedTitle(item.text,`${prefix}-${index}-reference`,`${prefix}-${index}-footnote`,'Scope of these warning signs'):esc(item.text)}${staticMode?` ${cite(item.sources)}`:''}</p>${item.targets?.length?`<div class="a1-context-targets">${targets(item)}</div>`:''}</div>`).join('')}${items.map((item,index)=>item.note?`<p class="a1-footnote" id="${prefix}-${index}-footnote" tabindex="-1"><a href="#${prefix}-${index}-reference" aria-label="Return to warning signs">*</a> ${esc(item.note)}</p>`:'').join('')}</div>`:`<p class="a1-context-scope">${esc(model.scope)}</p>`;
-    return `<section class="${staticMode?'a1-context-reading':'a1-context'}${items.length?' has-signals':''}" aria-labelledby="${prefix}-title"><h3 class="a1-context-heading" id="${prefix}-title"><span>0.</span> ${items.some(item=>item.note)?'Context & warning signs':'Context'}</h3>${body}</section>`;
+    return `<section class="${staticMode?'a1-context-reading':'a1-context'}${items.length?' has-signals':''}" aria-labelledby="${prefix}-title"><h3 class="a1-context-heading" id="${prefix}-title">${staticMode?'':'<span>0.</span> '}${items.some(item=>item.note)?'Background & warning signs':'System scope'}</h3>${body}</section>`;
   }
-  const contextAt = id => list(model.presentation?.context).flatMap((item,index)=>list(item.targets)
-    .filter(target=>target.node===id)
-    .map(target=>({text:target.text || item.text,title:item.title,note:item.note,index})));
-  const contextId = id => `a1-context-${id.replace(/[^a-z0-9]/gi,'-')}`;
-  function contextThread(n) {
-    const items=contextAt(n.id);
-    if (!items.length) return '';
-    const label=items.map(item=>item.title).join('; ');
-    return `<aside class="a1-context-thread" id="${contextId(n.id)}" data-context-for="${esc(n.id)}" aria-label="${esc(label)} for ${esc(n.number)}" title="${esc(label)}">${items.map(item=>`<p>${item.note?notedTitle(item.text,`${contextId(n.id)}-${item.index}-reference`,`a1-context-${item.index}-footnote`,'Scope of this warning sign'):esc(item.text)}</p>`).join('')}</aside>`;
-  }
-  function contextFootnotes() {
-    return list(model.presentation?.context).map((item,index)=>item.note?`<p class="a1-footnote" id="a1-context-${index}-footnote" tabindex="-1"><a href="#${contextId(item.targets[0].node)}-${index}-reference" aria-label="Return to warning sign">*</a> ${esc(item.note)}</p>`:'').join('');
+  function contextCloud(prefix = 'a1') {
+    const setting=model.presentation.cloud, id=prefix+'-cloud';
+    if (!setting) return '';
+    return `<figure class="a1-context-cloud" aria-labelledby="${id}-title" aria-describedby="${id}-caption">
+      <svg class="a1-cloud-atmosphere" viewBox="0 0 600 250" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <defs><radialGradient id="${id}-mist"><stop stop-color="var(--accent)" stop-opacity=".13"/><stop offset=".64" stop-color="var(--accent)" stop-opacity=".055"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></radialGradient></defs>
+        <ellipse cx="196" cy="106" rx="195" ry="101" fill="url(#${id}-mist)"/><ellipse cx="380" cy="113" rx="211" ry="110" fill="url(#${id}-mist)"/><ellipse cx="300" cy="69" rx="137" ry="68" fill="url(#${id}-mist)"/>
+        <g class="a1-cloud-wisps"><path d="M38 117C17 79 68 53 106 65C120 17 196 18 225 49C264 9 340 18 357 47C413 8 480 45 474 75C534 48 588 103 554 133"/><path d="M60 166C30 140 62 111 97 122M502 148C558 135 578 168 539 188M126 202C174 224 221 204 247 209C287 229 352 226 385 207C426 226 478 212 491 194"/><path class="a1-cloud-drift" d="M155 83C123 105 196 114 169 139M321 66C363 98 282 115 302 141M460 96C436 118 478 126 456 149"/></g>
+      </svg>
+      <div class="a1-cloud-title" id="${id}-title"><span>0.</span> Context</div>
+      <div class="a1-cloud-conditions" aria-label="Upstream conditions">${setting.conditions.map(label=>`<span>${esc(label)}</span>`).join('')}</div>
+      <div class="a1-cloud-actors" aria-label="Authority and control within this setting">${setting.actors.map(actor=>`<div data-controller="${esc(actor.controller)}" title="${esc(controller(actor.controller).responsibility)}"><strong>${esc(actor.label)}</strong><span>${esc(actor.role)}</span></div>`).join('')}</div>
+      <figcaption id="${id}-caption">${esc(setting.summary)}</figcaption>
+    </figure>`;
   }
   const tag = s => `<span class="stpa-id">${esc(s)}</span>`;
   const refs = ids => list(ids).map(tag).join(' ');
@@ -106,31 +108,24 @@
     if (!link) return '';
     const target=node(link.target);
     return `<div class="a1-tentative-connection" data-tentative-target="${esc(link.target)}">
-      ${staticMode?`<p class="a1-overlay-kicker">Tentative connection to ${esc(target.number)}</p>`:''}
+      ${staticMode?`<p class="a1-overlay-kicker">Open question for ${esc(target.number)}</p>`:''}
       <p class="a1-connection-question">${esc(link.question)}</p>
-      <dl class="a1-connection-reason"><dt>Why it may fit</dt><dd>${esc(link.basis)}${cite(link.sources)}</dd><dt>Still missing</dt><dd>${esc(link.unresolved)}</dd></dl>
+      <dl class="a1-connection-reason"><dt>Why ask?</dt><dd>${esc(link.basis)}${cite(link.sources)}</dd><dt>What remains unknown</dt><dd>${esc(link.unresolved)}</dd></dl>
     </div>`;
   }
-  function overlay(a, inspectedBarrier, evidenceMarks, tentative = false) {
+  function overlay(a, inspectedBarrier, evidenceMarks, exploration = false) {
     const config=overlayConfig(a);
     if (!config) return '';
-    if (tentative) {
-      const anchor=node(overlayAnchor(a,true)), sourceAnchor=node(overlayAnchor(a));
-      if (!anchor) return '';
-      return `<section class="a1-overlay is-tentative" id="a1-overlay" data-overlay-incident="${esc(a.incident)}" data-overlay-target="${esc(config.tentative.target)}" data-evidence-target="${esc(config.target)}" data-overlay-anchor="${esc(anchor.id)}" aria-label="${esc(config.title)}: tentative connection to ${esc(anchor.title)}">
-        <p class="a1-overlay-kicker">Tentative connection to ${esc(anchor.number)}</p>
-        <h4 class="a1-overlay-title">${notedTitle(config.title,'a1-case-reference','a1-case-footnote','Scope of this tentative connection')}</h4>
-        ${tentativeConnection(config)}
-        <button class="a1-source-connection" data-source-connection aria-controls="a1-route" title="Show the source case and its barriers at their assessed component">Source evidence at ${esc(sourceAnchor.number)} ↗</button>
-      </section>`;
-    }
     const anchor=node(overlayAnchor(a)), items=barriers(a);
     const kind=config.kind || 'Source evidence';
-    return `<section class="a1-overlay" id="a1-overlay" data-overlay-incident="${esc(a.incident)}" data-overlay-target="${esc(config.target)}" data-overlay-anchor="${esc(anchor?.id)}" aria-label="${esc(config.title)}: evidence relevant to ${esc(anchor?.title)}">
-      <p class="a1-overlay-kicker">${esc(kind)}</p>
+    return `<section class="a1-overlay" id="a1-overlay" tabindex="-1" data-overlay-incident="${esc(a.incident)}" data-overlay-target="${esc(config.target)}" data-overlay-anchor="${esc(anchor?.id)}" aria-label="${esc(config.title)}: evidence relevant to ${esc(anchor?.title)}">
+      <button class="a1-overlay-close" data-clear-incident aria-label="Remove the incident overlay">×</button>
+      <p class="a1-overlay-kicker">${esc(kind)} at ${esc(anchor.number)}</p>
       <h4 class="a1-overlay-title">${notedTitle(config.title,'a1-case-reference','a1-case-footnote','Scope of this case')}<span class="source-dots">${evidenceMarks(a.evidence)}</span></h4>
+      <p class="a1-overlay-observed">${esc(config.observed)}</p>
       ${items.length?`<div class="a1-overlay-barriers">${items.map(b=>`<div class="a1-observed-control"><button data-overlay-barrier="${esc(b.id)}" aria-label="Inspect ${esc(b.title)}: ${esc(barrierStates(b).map(conditionLabel).join(', '))}" aria-pressed="${inspectedBarrier===b.id}" aria-controls="workspace">${barrierGlyph(b.condition)}<span><strong>${esc(b.title)}</strong><small class="a1-barrier-condition">${esc(barrierStates(b).map(conditionLabel).join(' · '))}</small></span><span class="a1-inspect-arrow" aria-hidden="true">↗</span></button><p>${esc(b.result || b.conditionBasis || '')}</p></div>`).join('')}</div>`:''}
-      <details class="a1-case-evidence"><summary>Case evidence</summary><p>${esc(config.observed)}</p><p>${esc(config.notEstablished)}</p></details>
+      <details class="a1-case-evidence"><summary>Evidence limits</summary><p>${esc(config.notEstablished)}</p></details>
+      ${config.tentative?`<div class="a1-open-question"><span>Open question for ${esc(node(config.tentative.target).number)}</span><button data-explore-connection aria-expanded="${exploration}" aria-controls="a1-question-detail">${esc(config.tentative.question)}<span class="a1-question-toggle" aria-hidden="true">${exploration?'−':'+'}</span></button><div class="a1-question-detail" id="a1-question-detail"${exploration?'':' hidden'}><p>${esc(config.tentative.basis)}${cite(config.tentative.sources)}</p><p>${esc(config.tentative.unresolved)}</p></div></div>`:''}
     </section>`;
   }
   function stateGuide(selected = 'unknown') {
@@ -141,57 +136,56 @@
   function recoveryGuide() {
     return `<div class="stpa-recovery-guide"><div class="stpa-change-flow"><span>Hazardous situation</span><span aria-hidden="true">→</span><strong>Recovery</strong><span aria-hidden="true">→</span><span>Escalation stopped, harm limited or control restored</span></div><p>Recovery acts on the affected system after the loss-of-control event. It can prevent a consequence, reduce its severity or restore effective control.</p><div class="stpa-change-flow"><span>Existing protection</span><span aria-hidden="true">→</span><strong>Reinforcement</strong><span aria-hidden="true">→</span><span>Strengthened barrier</span></div><p>Reinforcement changes a barrier relative to a baseline. A recovery barrier can be reinforced too. Repair restores a defective barrier’s intended function; reinforcement improves the protection.</p><p>The curved route on this map shows the model’s stated recovery outcome. It remains conditional on an effective intervention.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">UK CAA · Recovery controls ↗</a></p></div>`;
   }
+  const gateShape = '<path class="a1-gate-sweep" d="M0-10Q10-8 11 2"/><path class="a1-gate-leaf" d="M-2 8L3-10L6-9L1 9Z"/><path class="a1-gate-foot" d="M-5 10H4M0 8V12"/>';
   function routeSymbol(kind) {
     const path=kind==='recovery'
       ? '<path d="M2 16C14 16 10 4 27 4"/><path class="route-tip" d="M24 1l6 3-6 3z"/>'
-      : kind==='feedback'?'<path d="M29 16H5V4H26"/><path d="m21 1 4 3-4 3m5-6 4 3-4 3"/>'
-      : kind==='safeguard'?'<path d="M2 10H31"/><path class="route-crossbar" d="M17 2V18"/>'
-      : '<path d="M2 10H30"/><path d="m25 6 5 4-5 4"/>';
-    return `<svg class="a1-route-symbol is-${kind}" viewBox="0 0 34 20" aria-hidden="true" focusable="false">${path}</svg>`;
+      : kind==='feedback'?'<path class="route-line" d="M29 17H5V4H26"/><path d="m21 1 4 3-4 3m5-6 4 3-4 3"/>'
+      : kind==='safeguard'?`<path d="M2 12H31"/><g transform="translate(17 12) scale(.8)">${gateShape}</g>`
+      : '<path class="route-line" d="M2 10H30"/><path d="m25 6 5 4-5 4"/>';
+    return `<svg class="a1-route-symbol is-${kind}" viewBox="0 0 34 24" aria-hidden="true" focusable="false">${path}</svg>`;
   }
   const routeDefinitions=[
-    {id:'contribution',label:'Possible contribution',definition:'A condition or action may help bring about the next component. The arrow does not establish causation or assign a probability.'},
-    {id:'continuation',label:'Conditional consequence',definition:'A possible progression after the loss-of-control event. The stated conditions must also hold. This uses the same solid arrow as a contribution.'},
-    {id:'optional',label:'Optional route',definition:'A branch that applies only under its stated conditions. The pathway can also proceed through other branches.'},
-    {id:'recovery',label:'Recovery',definition:'An intervention may stop escalation, limit harm or restore control. The green curve leads to the model’s recovery outcome.'},
-    {id:'feedback',label:'Feedback',definition:'An outcome changes an earlier input or decision, which can affect later outcomes. The squared return loop is dashed and ends in two open chevrons.'}
+    {id:'contribution',label:'Possible progression',definition:'One component may contribute to another. Any stated conditions must also hold. These arrows cover both contributing causes and possible consequences; they do not assign a probability.'},
+    {id:'optional',label:'Optional route',definition:'A dashed branch can be bypassed. The pathway can continue through another route; taking this branch can still depend on stated conditions.'},
+    {id:'recovery',label:'Recovery',definition:'A green curve leads toward containing harm or restoring control. Its filled arrowhead marks the direction; success depends on the intervention working.'},
+    {id:'feedback',label:'Feedback',definition:'A dotted return line with two arrowheads shows how an outcome changes an earlier input or decision. It can amplify harm or help correct it.'}
   ];
   function overlayGuide() {
-    return '<h3>Incident connections</h3><dl class="a1-overlay-definitions"><dt>No</dt><dd>Show the pathway alone.</dd><dt>Maybe</dt><dd>Explore a tentative connection to the indicated component. Each question states its source basis and missing evidence. These are analyst proposals.</dd><dt>Yes</dt><dd>Read the source case at its assessed component, including its experimental, historical or reported scope. This does not establish the whole component or pathway.</dd></dl><p>The same incident can support one scoped comparison and raise a tentative question elsewhere. Switching modes changes the connection being examined. Barrier assessments belong to the source case; tentative connections have no assigned barrier state or probability.</p>';
+    return '<h3>Incidents on the map</h3><p>Select a dated case to see what happened at the relevant component, then inspect a barrier. Select another case to switch, or close the card to clear it.</p><p>An open question stays inside the incident card. Open it to read why it matters and what the case leaves unanswered. The related component is highlighted; the incident evidence and barrier assessments stay at their original location.</p>';
   }
   function pathsGuide(staticMode=false) {
-    return `<div class="a1-path-guide"><div class="a1-stage-guide"><span><b>0.</b> Context</span><span><b>1.</b> Precursors</span><span><b>2.</b> Event</span><span><b>3.</b> Consequences</span><span class="is-recovery"><b>R</b> Recovery</span></div><p>Precursors can lead to the central loss-of-control event. Consequences depend on what follows; recovery may interrupt that progression. The shaded field is 0: context throughout the pathway. Its unboxed notes sit beside the components they inform.</p><dl class="a1-path-definitions">${routeDefinitions.map(r=>`<div>${routeSymbol(r.id)}<dt>${esc(r.label)}</dt><dd>${esc(r.definition)}</dd></div>`).join('')}<div class="a1-safeguard-definition">${routeSymbol('safeguard')}<dt>Proposed safeguard</dt><dd>A dotted crossbar marks a proposed control on a route. Its effectiveness has not been demonstrated here. Observed barrier modes are shown with the incident evidence.</dd></div></dl>${overlayGuide()}<p class="a1-guide-source">The solid, dashed and curved lines are this site’s drawing conventions. <a href="https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/about-bowtie/how-does-bowtie-work/" target="_blank" rel="noopener noreferrer">Bow-tie structure: UK CAA ↗</a></p>${staticMode?`<h3>Barrier modes</h3><dl class="a1-path-definitions">${stateDefinitions.map(s=>`<div>${barrierGlyph(s.id)}<dt>${esc(s.label)}</dt><dd>${esc(s.definition)}</dd></div>`).join('')}</dl>${recoveryGuide()}`:''}</div>`;
+    return `<div class="a1-path-guide"><div class="a1-stage-guide"><span><b>0.</b> Context</span><span><b>1.</b> Precursors</span><span><b>2.</b> Event</span><span><b>3.</b> Consequences</span><span class="is-recovery"><b>R</b> Recovery</span></div><p>The cloud at 0 shows the assumed upstream conditions and the authority exercised within them. Those conditions shape decisions and controls; feedback can change the setting in turn. The full STPA analysis examines the control actions, feedback, responsibilities and constraints behind this view.</p><p>Precursors may lead to the central loss-of-control event. Consequences depend on what follows, and recovery may interrupt that progression.</p><dl class="a1-path-definitions">${routeDefinitions.map(r=>`<div>${routeSymbol(r.id)}<dt>${esc(r.label)}</dt><dd>${esc(r.definition)}</dd></div>`).join('')}<div class="a1-safeguard-definition">${routeSymbol('safeguard')}<dt>Proposed safeguard</dt><dd>A small hinged gate marks a suggested protection on the route. The open leaf shows that it is a proposal; effectiveness has not been established. Actual barrier states belong to the cited incident.</dd></div></dl><p>Possible means a transition could happen. Conditional names what else must hold. Both use the forward arrow, with the condition retained beside the relevant component or in the route description. Optional means the pathway can bypass that branch.</p>${staticMode?'':`<details class="a1-proposed-register"><summary>Safeguards in this pathway</summary>${projectedLinks().filter(l=>proposedSafeguard(l)).map(l=>`<p><strong>${esc(node(l.from).number)} → ${esc(node(l.to).number)}</strong> ${esc(proposedSafeguard(l))}</p>`).join('')}</details>`}${overlayGuide()}<p class="a1-guide-source">Drawing conventions are specific to this site. <a href="https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/about-bowtie/how-does-bowtie-work/" target="_blank" rel="noopener noreferrer">Bow-tie structure ↗</a> · <a href="https://psas.scripts.mit.edu/home/get_file.php?name=STPA_Handbook.pdf" target="_blank" rel="noopener noreferrer">STPA handbook ↗</a></p>${staticMode?`<h3>Barrier modes</h3><dl class="a1-path-definitions">${stateDefinitions.map(s=>`<div>${barrierGlyph(s.id)}<dt>${esc(s.label)}</dt><dd>${esc(s.definition)}</dd></div>`).join('')}</dl>${recoveryGuide()}`:''}</div>`;
   }
   function mapGuide(mode='paths',selected='unknown') {
     const tabs=[['paths','Path types'],['barriers','Barrier modes'],['recovery','Recovery & reinforcement']];
     const active=tabs.some(([id])=>id===mode)?mode:'paths';
     return `<nav class="a1-guide-tabs" aria-label="Map key sections">${tabs.map(([id,label])=>`<button data-map-guide="${id}" aria-pressed="${id===active}" aria-controls="a1-guide-content">${label}</button>`).join('')}</nav><div id="a1-guide-content">${active==='barriers'?stateGuide(selected):active==='recovery'?recoveryGuide():pathsGuide()}</div>`;
   }
-  function renderMap(selected, a, inspectedBarrier, evidenceMarks = () => '', tentative = false) {
+  function renderMap(selected, a, inspectedBarrier, evidenceMarks = () => '', exploration = false) {
     const groups={before:[],centre:[],after:[],recovery:[]};
     for (const n of model.nodes) {
       const wing=n.type==='recovery' ? 'recovery' : (groups[n.wing] ? n.wing : 'after');
       groups[wing].push(n);
     }
-    const anchor=overlayAnchor(a,tentative), config=anchor?overlayConfig(a):null;
+    const anchor=overlayAnchor(a), config=anchor?overlayConfig(a):null;
+    const tentativeAnchor=exploration?overlayAnchor(a,true):null;
     const cell=n=>{
-      const optional=n.type==='amplifier', mapped=config && anchor===n.id;
+      const optional=n.type==='amplifier', mapped=config && anchor===n.id, tentative=config && tentativeAnchor===n.id;
       const condition=model.presentation?.conditions?.[n.id];
       const label=n.shortLabel || n.title;
       const shownSources=n.type==='recovery'?list(n.sources):[];
-      return `<div class="a1-cell${optional?' is-optional':''}${mapped?' is-overlaid':''}${n.wing==='centre'?' is-centre':''}${n.type==='recovery'?' is-recovery':''}" data-cell="${esc(n.id)}">
-        ${contextThread(n)}
+      return `<div class="a1-cell${optional?' is-optional':''}${mapped?' is-overlaid':''}${tentative?' has-question':''}${n.wing==='centre'?' is-centre':''}${n.type==='recovery'?' is-recovery':''}" data-cell="${esc(n.id)}">
         ${condition?`<p class="a1-condition">${esc(condition)}</p>`:''}
-        <div class="a1-step-box${shownSources.length?' has-sources':''}"><button class="a1-step" data-node="${esc(n.id)}" data-target="${esc(n.id)}" aria-pressed="${selected===n.id}" aria-controls="a1-node-note"${contextAt(n.id).length?` aria-describedby="${contextId(n.id)}"`:''} aria-label="${esc(n.number)}. ${esc(label)}${optional?' (optional)':''}"><span class="a1-number">${esc(n.number)}</span><strong>${esc(label)}${optional?'<span class="a1-optional-label">optional</span>':''}</strong></button>${shownSources.length?`<div class="a1-step-sources">${cite(shownSources)}</div>`:''}</div>
-        ${mapped?overlay(a,inspectedBarrier,evidenceMarks,tentative):''}
+        <div class="a1-step-box${shownSources.length?' has-sources':''}"><button class="a1-step" data-node="${esc(n.id)}" data-target="${esc(n.id)}" aria-pressed="${selected===n.id}" aria-controls="a1-node-note" aria-label="${esc(n.number)}. ${esc(label)}${optional?' (optional)':''}"><span class="a1-number">${esc(n.number)}</span><strong>${esc(label)}${optional?'<span class="a1-optional-label">optional</span>':''}</strong></button>${shownSources.length?`<div class="a1-step-sources">${cite(shownSources)}</div>`:''}</div>
+        ${mapped?overlay(a,inspectedBarrier,evidenceMarks,Boolean(tentativeAnchor)):''}
       </div>`;
     };
     const headings={before:'1. Precursors',centre:'2. Event',after:'3. Consequences',recovery:'R. Recovery'};
-    const kinds=new Set(projectedLinks().map(l=>l.kind || l.type));
-    return `<section class="a1-context-field" aria-label="0. Context throughout the pathway"><p class="sr-only">${esc(model.scope)}</p><div id="a1-route" class="a1-route${config?' has-overlay':''}" data-model-pathway="${esc(model.pathway)}" aria-label="Hypothetical pathway: contributing conditions, loss of control, conditional consequences and recovery">${['before','centre','after','recovery'].map(wing=>groups[wing].length?`<section class="a1-region a1-region-${wing}" data-wing="${wing}" aria-label="${headings[wing]}"><h3 class="a1-region-heading">${headings[wing]}</h3>${groups[wing].map(cell).join('')}</section>`:'').join('')}</div><footer class="a1-context-footing"><span class="a1-field-label"><span>0.</span> Context</span>${contextFootnotes()}</footer></section>
-    <p class="a1-node-note" id="a1-node-note" tabindex="-1"${config && selected===anchor?' hidden':''}>${esc(node(selected)?.text || model.summary)}</p>${config?`<p class="a1-footnote" id="a1-case-footnote" tabindex="-1"><a href="#a1-case-reference" aria-label="Return to case title">*</a> ${esc(tentative?'Analyst-proposed connection. The cited source supports the stated basis; this question remains unresolved. '+config.limit:config.limit)}</p>`:''}${node(selected)?.type==='recovery'?'<button class="a1-recovery-link" data-recovery-info>Recovery & reinforcement ↗</button>':''}
-    <div class="a1-map-key" role="group" aria-label="Path and barrier key">${routeDefinitions.filter(r=>kinds.has(r.id)).map(r=>`<button data-map-guide="paths" aria-haspopup="dialog" aria-label="Explain ${esc(r.label.toLowerCase())}">${routeSymbol(r.id)}<span>${esc(r.label)}</span></button>`).join('')}<button data-map-guide="paths" aria-haspopup="dialog" aria-label="Explain proposed safeguards">${routeSymbol('safeguard')}<span>Proposed safeguard</span></button><button class="a1-barrier-key" data-map-guide="barriers" aria-haspopup="dialog">${barrierGlyph('intact')}<span>Barrier modes ↗</span></button></div>
-    `;
+    const kinds=new Set(projectedLinks().map(l=>(l.kind || l.type)==='continuation'?'contribution':l.kind || l.type));
+    return `<section class="a1-map-field"><div id="a1-route" class="a1-route${config?' has-overlay':''}" data-model-pathway="${esc(model.pathway)}" aria-label="Hypothetical pathway: contributing conditions, loss of control, conditional consequences and recovery">${['before','centre','after','recovery'].map(wing=>groups[wing].length?`<section class="a1-region a1-region-${wing}" data-wing="${wing}" aria-label="${headings[wing]}"><h3 class="a1-region-heading">${headings[wing]}</h3>${groups[wing].map(cell).join('')}</section>`:'').join('')}</div></section>
+    <p class="a1-node-note" id="a1-node-note" tabindex="-1"${config && (selected===anchor || selected===tentativeAnchor)?' hidden':''}>${esc(node(selected)?.text || model.summary)}</p>${config?`<p class="a1-footnote" id="a1-case-footnote" tabindex="-1"><a href="#a1-case-reference" aria-label="Return to case title">*</a> ${esc(config.limit)}</p>`:''}${node(selected)?.type==='recovery'?'<button class="a1-recovery-link" data-recovery-info>Recovery & reinforcement ↗</button>':''}
+    <div class="a1-map-key" role="group" aria-label="Path and barrier key">${routeDefinitions.filter(r=>kinds.has(r.id)).map(r=>`<button data-map-guide="paths" aria-haspopup="dialog" aria-label="Explain ${esc(r.label.toLowerCase())}">${routeSymbol(r.id)}<span>${esc(r.label)}</span></button>`).join('')}<button data-map-guide="paths" aria-haspopup="dialog" aria-label="Explain proposed safeguards">${routeSymbol('safeguard')}<span>Proposed safeguard</span></button><button class="a1-barrier-key" data-map-guide="barriers" aria-haspopup="dialog">${barrierGlyph('intact')}<span>Barrier modes ↗</span></button></div>`;
   }
   function targetButton(id) { return Array.from(document.querySelectorAll('#a1-route [data-node]')).find(el=>el.dataset.node===id); }
   function analysis() {
@@ -233,19 +227,7 @@
     return `<ul class="a1-sources">${model.sources.map(s=>`<li><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ↗</a></li>`).join('')}</ul><p><a href="pathways.html#${esc(model.pathway)}">Full research notes ↗</a></p>`;
   }
   function staticPage() {
-    return `<section class="stpa-static"><h2>${esc(model.title)}</h2><p>${esc(model.status)}</p><p>${esc(model.summary)}</p><p>${esc(model.numbering)}</p><p>${esc(model.presentation.fidelity)}</p>${contextPanel(true)}${model.nodes.map(n=>`<section id="${esc(n.id)}"><h4>${esc(n.number)} · ${esc(n.title)}</h4><p>${esc(n.role)}. ${esc(n.text)}</p><p><strong>Mechanism:</strong> ${esc(n.mechanism)}</p><p><strong>Requires:</strong> ${esc(n.requires)}</p><p>Controls: ${refs(n.constraints)} ${cite(n.sources)}</p></section>`).join('')}${analysis()}</section>`.replace(/(id="|href="#)stpa-/g, `$1${model.pathway}-stpa-`).replace(/[ \t]+\n/g, '\n');
-  }
-  function roundedPath(points, radius=7) {
-    const clean=points.filter((point,index)=>!index || point[0]!==points[index-1][0] || point[1]!==points[index-1][1]);
-    const point=p=>`${p[0].toFixed(1)},${p[1].toFixed(1)}`;
-    let d=`M${point(clean[0])}`;
-    for (let i=1;i<clean.length-1;i++) {
-      const a=clean[i-1],b=clean[i],c=clean[i+1],ab=Math.hypot(b[0]-a[0],b[1]-a[1]),bc=Math.hypot(c[0]-b[0],c[1]-b[1]);
-      const r=Math.min(radius,ab/2,bc/2);
-      const enter=[b[0]+(a[0]-b[0])*r/ab,b[1]+(a[1]-b[1])*r/ab],leave=[b[0]+(c[0]-b[0])*r/bc,b[1]+(c[1]-b[1])*r/bc];
-      d+=` L${point(enter)} Q${point(b)} ${point(leave)}`;
-    }
-    return `${d} L${point(clean[clean.length-1])}`;
+    return `<section class="stpa-static"><h2>${esc(model.title)}</h2><p>${esc(model.status)}</p><p>${esc(model.summary)}</p><p>${esc(model.numbering)}</p><p>${esc(model.presentation.fidelity)}</p>${contextCloud(model.pathway)}${contextPanel(true)}${model.nodes.map(n=>`<section id="${esc(n.id)}"><h4>${esc(n.number)} · ${esc(n.title)}</h4><p>${esc(n.role)}. ${esc(n.text)}</p><p><strong>Mechanism:</strong> ${esc(n.mechanism)}</p><p><strong>Requires:</strong> ${esc(n.requires)}</p><p>Controls: ${refs(n.constraints)} ${cite(n.sources)}</p></section>`).join('')}${analysis()}</section>`.replace(/(id="|href="#)stpa-/g, `$1${model.pathway}-stpa-`).replace(/[ \t]+\n/g, '\n');
   }
   function proposedSafeguard(link) {
     if (link.safeguard) return link.safeguard;
@@ -264,7 +246,7 @@
     const segments=points.slice(1).map((b,i)=>({a:points[i],b,length:Math.hypot(b[0]-points[i][0],b[1]-points[i][1])}));
     const segment=segments.reduce((longest,current)=>current.length>longest.length?current:longest,segments[0]);
     return {
-      d:kind==='feedback'?points.map((p,i)=>`${i?'L':'M'}${point(p)}`).join(' '):roundedPath(points),
+      d:points.map((p,i)=>`${i?'L':'M'}${point(p)}`).join(' '),
       midpoint:[(segment.a[0]+segment.b[0])/2,(segment.a[1]+segment.b[1])/2],
       tangent:[segment.b[0]-segment.a[0],segment.b[1]-segment.a[1]]
     };
@@ -349,8 +331,8 @@
         }
       }
       const {d,midpoint:[x,y],tangent:[dx,dy]}=connectionGeometry(kind,points),safeguard=proposedSafeguard(link);
-      const length=Math.hypot(dx,dy),nx=length?-dy/length*7:0,ny=length?dx/length*7:0;
-      const crossbar=safeguard && length>27?`<path class="a1-possible-barrier" d="M${(x-nx).toFixed(1)},${(y-ny).toFixed(1)}L${(x+nx).toFixed(1)},${(y+ny).toFixed(1)}"><title>Proposed safeguard, not demonstrated by this pathway: ${esc(safeguard)}</title></path>`:'';
+      const length=Math.hypot(dx,dy),angle=Math.atan2(dy,dx)*180/Math.PI;
+      const crossbar=safeguard && length>27?`<g class="a1-proposed-gate" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${angle.toFixed(1)})" role="img" aria-label="Proposed safeguard: ${esc(safeguard)}"><title>Proposed safeguard: ${esc(safeguard)}</title>${gateShape}</g>`:'';
       const marker=kind==='recovery'?'stpa-arrow-recovery':kind==='feedback'?'stpa-arrow-feedback':'stpa-arrow';
       return `<path class="stpa-connection${kind==='optional'?' is-optional':''}${kind==='feedback'?' is-feedback':''}${kind==='recovery'?' is-recovery':''}" data-link="${esc(link.id || link.from+'→'+link.to)}" data-from="${esc(link.from)}" data-to="${esc(link.to)}" d="${d}" marker-end="url(#${marker})"><title>${esc(link.label || 'Possible contribution')}</title></path>${crossbar}`;
     }).join('');
@@ -359,5 +341,5 @@
     const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="11" refY="4" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
     svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${recoveryMarker}${feedbackMarker}</defs>${paths}`;
   }
-  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle,mapGuide,pathsGuide,routeDefinitions,overlayAnchor,tentativeConnection,overlayGuide};
+  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle,mapGuide,pathsGuide,routeDefinitions,overlayAnchor,tentativeConnection,overlayGuide,contextCloud,connectionGeometry,routeSymbol};
 })();

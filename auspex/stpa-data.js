@@ -1015,7 +1015,33 @@ window.AuspexSTPAModels = {
             }
           ]
         }
-      ]
+      ],
+      "cloud": {
+        "origin": "scenario-setting",
+        "conditions": [
+          "Successor research",
+          "Compute & services",
+          "Rival states & economy"
+        ],
+        "actors": [
+          {
+            "controller": "C1",
+            "label": "Developers",
+            "role": "set training & deployment"
+          },
+          {
+            "controller": "C2",
+            "label": "Reviewers",
+            "role": "assess the evidence"
+          },
+          {
+            "controller": "C4",
+            "label": "Operators",
+            "role": "grant & revoke access"
+          }
+        ],
+        "summary": "Research and competition shape what gets developed, reviewed and delegated."
+      }
     }
   },
   "P-01": {
@@ -1879,7 +1905,33 @@ window.AuspexSTPAModels = {
             }
           ]
         }
-      ]
+      ],
+      "cloud": {
+        "origin": "scenario-setting",
+        "conditions": [
+          "Military competition",
+          "Autonomy procurement",
+          "Constitutional order"
+        ],
+        "actors": [
+          {
+            "controller": "C1",
+            "label": "Civilian authorities",
+            "role": "authorize deployment"
+          },
+          {
+            "controller": "C3",
+            "label": "Command",
+            "role": "direct the force"
+          },
+          {
+            "controller": "C2",
+            "label": "Oversight",
+            "role": "review & constrain power"
+          }
+        ],
+        "summary": "Competitive procurement places autonomy within an existing distribution of command and oversight."
+      }
     }
   },
   "W-01": {
@@ -2992,7 +3044,33 @@ window.AuspexSTPAModels = {
             }
           ]
         }
-      ]
+      ],
+      "cloud": {
+        "origin": "scenario-setting",
+        "conditions": [
+          "Crisis pressure",
+          "Warning information",
+          "Nuclear command"
+        ],
+        "actors": [
+          {
+            "controller": "C2",
+            "label": "Assessment teams",
+            "role": "interpret warnings"
+          },
+          {
+            "controller": "C1",
+            "label": "Decision-makers",
+            "role": "authorize action"
+          },
+          {
+            "controller": "C6",
+            "label": "Independent channels",
+            "role": "verify & correct"
+          }
+        ],
+        "summary": "The crisis setting shapes how warnings are interpreted, checked and acted upon."
+      }
     }
   },
   "B-01": {
@@ -3915,7 +3993,33 @@ window.AuspexSTPAModels = {
             }
           ]
         }
-      ]
+      ],
+      "cloud": {
+        "origin": "scenario-setting",
+        "conditions": [
+          "Access to AI",
+          "Research institutions",
+          "Public-health capacity"
+        ],
+        "actors": [
+          {
+            "controller": "C2",
+            "label": "Providers",
+            "role": "enforce access limits"
+          },
+          {
+            "controller": "C3",
+            "label": "Research oversight",
+            "role": "authorize & supervise"
+          },
+          {
+            "controller": "C6",
+            "label": "Public health",
+            "role": "coordinate response"
+          }
+        ],
+        "summary": "Access and institutional capacity shape what providers, researchers and responders can control."
+      }
     }
   },
   "S-01": {
@@ -4962,7 +5066,33 @@ window.AuspexSTPAModels = {
             }
           ]
         }
-      ]
+      ],
+      "cloud": {
+        "origin": "scenario-setting",
+        "conditions": [
+          "Interconnected grids",
+          "Related AI models",
+          "Essential-service dependence"
+        ],
+        "actors": [
+          {
+            "controller": "C1",
+            "label": "Planning authorities",
+            "role": "choose & deploy models"
+          },
+          {
+            "controller": "C2",
+            "label": "Grid operators",
+            "role": "authorize dispatch"
+          },
+          {
+            "controller": "C5",
+            "label": "Restoration teams",
+            "role": "restore supply & services"
+          }
+        ],
+        "summary": "Shared infrastructure and model choices shape operators’ decisions and recovery options."
+      }
     },
     "controlEvidence": {
       "title": "What kept a blackout from lasting longer?",
@@ -6101,7 +6231,33 @@ window.AuspexSTPAModels = {
             }
           ]
         }
-      ]
+      ],
+      "cloud": {
+        "origin": "scenario-setting",
+        "conditions": [
+          "Existing conflict",
+          "Engagement incentives",
+          "Local institutions"
+        ],
+        "actors": [
+          {
+            "controller": "C1",
+            "label": "Platform governance",
+            "role": "set distribution objectives"
+          },
+          {
+            "controller": "C3",
+            "label": "Local response",
+            "role": "assess & act on warnings"
+          },
+          {
+            "controller": "C5",
+            "label": "Protection services",
+            "role": "protect people"
+          }
+        ],
+        "summary": "Conflict and distribution incentives shape exposure, warning response and protection."
+      }
     },
     "controlEvidence": {
       "title": "Did a warning become protection?",
@@ -7135,7 +7291,33 @@ window.AuspexSTPAModels = {
             }
           ]
         }
-      ]
+      ],
+      "cloud": {
+        "origin": "scenario-setting",
+        "conditions": [
+          "Consequential records",
+          "Selective observation",
+          "Separate organizations"
+        ],
+        "actors": [
+          {
+            "controller": "C2",
+            "label": "Record suppliers",
+            "role": "supply & correct records"
+          },
+          {
+            "controller": "C4",
+            "label": "Data stewards",
+            "role": "govern updates & reuse"
+          },
+          {
+            "controller": "C5",
+            "label": "Independent review",
+            "role": "require redress"
+          }
+        ],
+        "summary": "What organizations observe and share shapes later decisions and the possibility of redress."
+      }
     }
   }
 };

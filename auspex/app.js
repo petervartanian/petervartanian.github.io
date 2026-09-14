@@ -58,7 +58,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const narrow = matchMedia('(max-width: 800px)');
   const compactMap = matchMedia('(max-width: 700px)');
-  const state = { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayTentative: false, inspect: false };
+  const state = { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false };
   const isSTPA = (id = state.pathway) => !!window.AuspexSTPA?.has(id);
   const pathwayTitle = p => window.AuspexSTPAModels?.[p.id]?.title || p.title;
   const overlayConfig = () => window.AuspexSTPA?.model?.presentation.overlays[state.incident];
@@ -73,6 +73,11 @@
   a1Tools.className = 'a1-overlay-tools';
   a1Tools.hidden = true;
   $('#causal-argument').insertBefore(a1Tools, $('#pathway-map'));
+  const a1Context = document.createElement('section');
+  a1Context.id = 'a1-context-panel';
+  a1Context.className = 'a1-context-panel';
+  a1Context.setAttribute('aria-label', '0. Context');
+  $('.pathway-heading').append(a1Context);
   const a1ResearchLink = document.createElement('a');
   a1ResearchLink.className = 'a1-research-link';
   a1ResearchLink.href = 'pathways.html#X-01';
@@ -92,7 +97,6 @@
 
   const announce = (message) => { $('#announcement').textContent = message; };
   const pathwayAssessments = () => isSTPA() ? data.assessments.filter((a) => a.pathway === state.pathway) : [];
-  const overlayChoices = () => pathwayAssessments().filter(a => !state.overlayTentative || window.AuspexSTPA.model.presentation.overlays[a.incident]?.tentative);
   const localAssessments = () => pathwayAssessments().filter((a) => a.targets.some((t) => t.id === state.target));
   const assessment = () => (isSTPA() ? pathwayAssessments() : localAssessments()).find((a) => a.incident === state.incident);
   const localBarriers = () => isSTPA() ? window.AuspexSTPA.barriers(assessment()) : [];
@@ -118,14 +122,14 @@
 
   function normalize() {
     if (!pathways.has(state.pathway)) {
-      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayTentative: false, inspect: false });
+      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false });
       window.AuspexSTPA?.use('');
       readingKey = '';
       return;
     }
     const p = pathways.get(state.pathway);
     if (!isSTPA(p.id)) {
-      Object.assign(state, { target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayTentative: false, inspect: false });
+      Object.assign(state, { target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false });
       readingKey = '';
       return;
     }
@@ -138,10 +142,11 @@
         || initial?.targets[0]?.id || p.steps[0].id;
     }
     state.target = modelTarget(state.target);
-    const choices = isSTPA(p.id) ? (state.overlay ? overlayChoices() : []) : localAssessments();
-    if (!choices.some((a) => a.incident === state.incident)) state.incident = choices[0]?.incident || '';
+    const choices = isSTPA(p.id) ? (state.overlay ? pathwayAssessments() : []) : localAssessments();
+    if (!choices.some((a) => a.incident === state.incident)) state.incident = '';
     state.overlay = Boolean(state.incident);
-    if (state.overlayTentative) state.inspect = false;
+    state.exploration = Boolean(state.incident && overlayConfig()?.tentative && state.exploration);
+    if (!state.incident) state.inspect = false;
     const barriers = localBarriers();
     if (!barriers.some((b) => b.id === state.barrier)) state.barrier = barriers[0]?.id || '';
     const key = [state.pathway, state.target, state.incident, state.barrier].join('|');
@@ -161,8 +166,7 @@
     if (state.pathway) url.searchParams.set('p', pathways.get(state.pathway).displayId);
     if (state.target) url.searchParams.set('t', state.target);
     if (state.incident) url.searchParams.set('i', state.incident);
-    if (state.overlayEnabled && state.overlayTentative) url.searchParams.set('overlay', 'maybe');
-    else if (state.overlayEnabled && !state.incident) url.searchParams.set('overlay', '1');
+    if (state.incident && state.exploration) url.searchParams.set('explore', '1');
     if (state.barrier && (!isSTPA() || state.inspect)) url.searchParams.set('b', state.barrier);
     if (!isSTPA() && state.incident && state.observation >= 0) url.searchParams.set('o', String(state.observation));
     if (state.question && (!isSTPA() || state.inspect)) url.searchParams.set('q', questionNames[state.question]);
@@ -178,8 +182,7 @@
     state.pathway = aliases.get((params.get('p') || '').toLowerCase()) || params.get('p') || '';
     state.target = params.get('t') || '';
     state.overlay = isSTPA() && params.has('i');
-    state.overlayTentative = isSTPA() && params.get('overlay') === 'maybe';
-    state.overlayEnabled = isSTPA() && (state.overlay || state.overlayTentative || params.get('overlay') === '1');
+    state.exploration = isSTPA() && (params.get('explore') === '1' || params.get('overlay') === 'maybe');
     state.inspect = state.overlay && (params.get('inspect') === '1' || params.has('b'));
     state.incident = params.get('i') || '';
     state.barrier = params.get('b') || '';
@@ -257,7 +260,10 @@
     const p = pathways.get(state.pathway);
     if (isSTPA(p.id)) {
       const names = window.AuspexSTPA.overlayNames;
-      $('#incident-rail').innerHTML = `<div class="a1-overlay-choice" id="evidence-map-title"><div class="a1-overlay-switch" role="group" aria-label="Overlay an incident"><button data-clear-overlay aria-pressed="${!state.overlayEnabled}" aria-controls="a1-incident-branches a1-route">No</button><button data-tentative-overlay aria-pressed="${state.overlayEnabled && state.overlayTentative}" aria-expanded="${state.overlayEnabled && state.overlayTentative}" aria-controls="a1-incident-branches a1-route" title="Explore tentative connections">Maybe</button><button data-enable-overlay aria-pressed="${state.overlayEnabled && !state.overlayTentative}" aria-expanded="${state.overlayEnabled && !state.overlayTentative}" aria-controls="a1-incident-branches a1-route" title="Read evidence at its assessed component">Yes</button></div><svg class="a1-choice-lines" aria-hidden="true" focusable="false"></svg><div id="a1-incident-branches" class="a1-incident-branches" role="group" aria-label="Choose an incident"${state.overlayEnabled?'':' hidden'}>${overlayChoices().map(a=>`<button class="a1-incident-branch" data-case="${a.id}" aria-pressed="${state.overlay && a.incident===state.incident}" aria-controls="a1-route" title="${escape(incidents.get(a.incident).date)}" aria-label="${escape(names[a.incident])}. ${escape(incidents.get(a.incident).date)}. ${state.overlayTentative?'Tentative connection':'Source evidence'} at ${escape(window.AuspexSTPA.node(window.AuspexSTPA.overlayAnchor(a,state.overlayTentative)).number)}"><span class="a1-case-date">${escape(shortIncidentDate(incidents.get(a.incident).date))}:</span> <span class="a1-case-name">${escape(names[a.incident])}</span></button>`).join('')}</div></div>${state.overlayEnabled?`<p class="a1-mode-note">${state.overlayTentative?'Explore a tentative connection.':'Read evidence at its assessed component.'}</p>`:''}`;
+      $('#incident-rail').innerHTML = `<div class="a1-incident-ribbon" id="evidence-map-title" tabindex="-1" role="group" aria-label="Choose an incident to overlay">${pathwayAssessments().map(a=>{
+        const selected=a.incident===state.incident, date=incidents.get(a.incident).date;
+        return `<button class="a1-incident-branch" data-case="${a.id}" aria-pressed="${selected}" aria-controls="a1-route" title="${escape(date)}" aria-label="${selected?'Remove':'Overlay'} ${escape(names[a.incident])}. ${escape(date)}. Evidence at ${escape(window.AuspexSTPA.node(window.AuspexSTPA.overlayAnchor(a)).number)}"><span class="a1-case-date">${escape(shortIncidentDate(date))}:</span> <span class="a1-case-name">${escape(names[a.incident])}</span></button>`;
+      }).join('')}</div>${state.incident?'':'<p class="a1-incident-hint">Select a case to place its evidence on the map.</p>'}`;
       return;
     }
     const targets = p.steps.flatMap((s) => [s, ...p.edges.filter((e) => e.from === s.id)]);
@@ -274,7 +280,7 @@
     const useSTPA = isSTPA(p.id);
     $('#pathway-map').classList.toggle('stpa-active', useSTPA);
     if (useSTPA) {
-      $('#map-nodes').innerHTML = window.AuspexSTPA.renderMap(state.target, state.overlay ? assessment() : null, state.inspect ? state.barrier : '', evidenceButtons, state.overlayTentative);
+      $('#map-nodes').innerHTML = window.AuspexSTPA.renderMap(state.target, state.overlay ? assessment() : null, state.inspect ? state.barrier : '', evidenceButtons, state.exploration);
       $('#map-connections').innerHTML = '';
       renderEvidenceMap();
       requestAnimationFrame(drawConnections);
@@ -296,24 +302,7 @@
     requestAnimationFrame(drawConnections);
   }
 
-  function drawIncidentBranches() {
-    const root=$('.a1-overlay-choice'), svg=$('.a1-choice-lines'), choice=$('.a1-overlay-switch');
-    if (!root || !svg || !choice || !root.offsetWidth) return;
-    if (!state.overlayEnabled) { svg.innerHTML=''; return; }
-    const bounds=root.getBoundingClientRect(), origin=choice.getBoundingClientRect();
-    const x=origin.right-bounds.left, y=origin.top+origin.height/2-bounds.top;
-    svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
-    svg.innerHTML=Array.from(root.querySelectorAll('[data-case]')).map(button=>{
-      const b=button.getBoundingClientRect();
-      const endX=b.left-bounds.left, endY=b.top+b.height/2-bounds.top;
-      const bend=(endX-x)/2;
-      const d=`M${x},${y}C${x+bend},${y} ${endX-bend},${endY} ${endX},${endY}`;
-      return `<path d="${d}"${button.getAttribute('aria-pressed')==='true'?' class="is-selected"':''}/>`;
-    }).join('');
-  }
-
   function drawConnections() {
-    drawIncidentBranches();
     const p = pathways.get(state.pathway);
     const map = $('#pathway-map');
     if (!p || !map.offsetWidth) return;
@@ -432,7 +421,9 @@
     $('#app').dataset.pathway = p?.id || '';
     const enhanced = !!p && isSTPA(p.id);
     $('#app').dataset.stpa = String(enhanced);
-    $('#app').dataset.overlayMode = state.overlayEnabled ? (state.overlayTentative ? 'maybe' : 'yes') : 'no';
+    $('#app').dataset.incidentSelected = String(Boolean(state.incident));
+    a1Context.hidden = !enhanced;
+    if (enhanced) a1Context.innerHTML = window.AuspexSTPA.contextCloud();
     $('#app').dataset.blank = String(!!p && !enhanced);
     $('#causal-argument').hidden = !!p && !enhanced;
     a1ResearchLink.href = `pathways.html#${p?.id || 'X-01'}`;
@@ -487,8 +478,7 @@
     const enteringPathway = !state.pathway;
     state.pathway = id;
     state.overlay = false;
-    state.overlayEnabled = false;
-    state.overlayTentative = false;
+    state.exploration = false;
     state.inspect = false;
     state.target = '';
     state.incident = '';
@@ -562,8 +552,7 @@
     const enteringPathway = !state.pathway;
     state.pathway = a.pathway;
     state.overlay = isSTPA(a.pathway);
-    state.overlayEnabled = state.overlay;
-    state.overlayTentative = false;
+    state.exploration = false;
     state.inspect = false;
     state.target = a.targets[0].id;
     state.incident = a.incident;
@@ -679,26 +668,18 @@
     }
   });
 
+  function clearIncident() {
+    const previous = assessment()?.id;
+    state.overlay = false;
+    state.incident = '';
+    state.barrier = '';
+    state.exploration = false;
+    state.inspect = false;
+    normalize(); render(); writeLocation();
+    focusAndReveal(previous ? $(`[data-case="${previous}"]`) : $('#evidence-map-title'));
+    announce('Incident overlay cleared.');
+  }
   $('#incident-rail').addEventListener('click', (event) => {
-    const modeButton = event.target.closest('[data-tentative-overlay], [data-enable-overlay]');
-    if (isSTPA() && modeButton) {
-      const tentative = modeButton.hasAttribute('data-tentative-overlay');
-      state.overlayEnabled = true;
-      state.overlayTentative = tentative;
-      state.inspect = false;
-      if (state.overlay) state.target = window.AuspexSTPA.overlayAnchor(assessment(), tentative) || state.target;
-      normalize(); render(); writeLocation();
-      $(tentative ? '[data-tentative-overlay]' : '[data-enable-overlay]').focus({ preventScroll: true });
-      announce(state.overlay ? (tentative ? 'Tentative connection selected. Read why it may fit and what remains missing.' : 'Source evidence shown at its assessed component.') : (tentative ? 'Choose a case to explore a tentative connection.' : 'Choose a case to read its scoped evidence.'));
-      return;
-    }
-    if (isSTPA() && event.target.closest('[data-clear-overlay]')) {
-      state.overlay = false; state.overlayEnabled = false; state.overlayTentative = false; state.inspect = false;
-      normalize(); render(); writeLocation();
-      $('[data-clear-overlay]').focus({ preventScroll: true });
-      announce('Incident overlay removed');
-      return;
-    }
     const target = event.target.closest('[data-evidence-target]');
     if (target) {
       $(`#map-nodes [data-target="${target.dataset.evidenceTarget}"]`).click();
@@ -720,15 +701,16 @@
     if (!button) return;
     const a = pathwayAssessments().find((item) => item.id === button.dataset.case);
     if (isSTPA()) {
+      if (state.incident === a.incident) { clearIncident(); return; }
       state.overlay = true;
-      state.overlayEnabled = true;
+      state.exploration = false;
       state.inspect = false;
-      state.target = window.AuspexSTPA.overlayAnchor(a,state.overlayTentative);
+      state.target = window.AuspexSTPA.overlayAnchor(a);
       state.incident = a.incident;
       state.barrier = '';
       normalize(); render(); writeLocation();
       $(`[data-case="${a.id}"]`).focus({ preventScroll: true });
-      announce(`${window.AuspexSTPA.overlayNames[a.incident]} ${state.overlayTentative ? 'selected for a tentative connection.' : 'overlaid on its assessed component.'}${!state.overlayTentative && localBarriers().length ? ' Select a barrier to explore it.' : ''}`);
+      announce(`${window.AuspexSTPA.overlayNames[a.incident]} overlaid at its assessed component.${localBarriers().length ? ' Select a barrier to explore it.' : ''}`);
       return;
     }
     state.target = a.targets[0].id;
@@ -754,24 +736,14 @@
     announce(inspection.incidents[state.incident]?.labels[state.observation] || 'Incident observation selected');
   });
   $('#pathway-map').addEventListener('click', (event) => {
-    if (isSTPA() && event.target.closest('[data-source-connection]')) {
-      state.overlayTentative = false;
+    if (isSTPA() && event.target.closest('[data-clear-incident]')) { clearIncident(); return; }
+    if (isSTPA() && event.target.closest('[data-explore-connection]')) {
+      state.exploration = !state.exploration;
       state.inspect = false;
-      state.target = window.AuspexSTPA.overlayAnchor(assessment());
+      state.target = window.AuspexSTPA.overlayAnchor(assessment(), state.exploration);
       normalize(); render(); writeLocation();
-      const sourceCard = $('#a1-overlay');
-      sourceCard.tabIndex = -1;
-      focusAndReveal(sourceCard);
-      announce('Source evidence and barriers at their assessed component. The tentative connection remains unresolved.');
-      return;
-    }
-    const contextLink = event.target.closest('[data-context-target]');
-    if (contextLink && isSTPA()) {
-      state.target = contextLink.dataset.contextTarget;
-      normalize(); renderMap(); renderStepDetail(); renderIncidents(); renderBarrier(); writeLocation();
-      const target = window.AuspexSTPA.targetButton(state.target);
-      focusAndReveal(target);
-      announce(target.getAttribute('aria-label'));
+      $('[data-explore-connection]').focus({ preventScroll: true });
+      announce(state.exploration ? 'Open question expanded. Its related component is highlighted.' : 'Open question collapsed.');
       return;
     }
     const overlayBarrier = event.target.closest('[data-overlay-barrier]');
@@ -981,7 +953,6 @@
   $('#app').hidden = false;
   $('#fallback').hidden = true;
   new ResizeObserver(drawConnections).observe($('#pathway-map'));
-  new ResizeObserver(drawIncidentBranches).observe($('#incident-rail'));
   document.fonts.ready.then(drawConnections);
   // Fit the headline to the copy's measured height, retaining the type proportions.
   const openingColumns = window.matchMedia('(min-width: 701px)');

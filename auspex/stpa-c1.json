@@ -1108,6 +1108,32 @@
           }
         ]
       }
-    ]
+    ],
+    "cloud": {
+      "origin": "scenario-setting",
+      "conditions": [
+        "Crisis pressure",
+        "Warning information",
+        "Nuclear command"
+      ],
+      "actors": [
+        {
+          "controller": "C2",
+          "label": "Assessment teams",
+          "role": "interpret warnings"
+        },
+        {
+          "controller": "C1",
+          "label": "Decision-makers",
+          "role": "authorize action"
+        },
+        {
+          "controller": "C6",
+          "label": "Independent channels",
+          "role": "verify & correct"
+        }
+      ],
+      "summary": "The crisis setting shapes how warnings are interpreted, checked and acted upon."
+    }
   }
 }

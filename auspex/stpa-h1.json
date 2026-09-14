@@ -1007,6 +1007,32 @@
           }
         ]
       }
-    ]
+    ],
+    "cloud": {
+      "origin": "scenario-setting",
+      "conditions": [
+        "Consequential records",
+        "Selective observation",
+        "Separate organizations"
+      ],
+      "actors": [
+        {
+          "controller": "C2",
+          "label": "Record suppliers",
+          "role": "supply & correct records"
+        },
+        {
+          "controller": "C4",
+          "label": "Data stewards",
+          "role": "govern updates & reuse"
+        },
+        {
+          "controller": "C5",
+          "label": "Independent review",
+          "role": "require redress"
+        }
+      ],
+      "summary": "What organizations observe and share shapes later decisions and the possibility of redress."
+    }
   }
 }

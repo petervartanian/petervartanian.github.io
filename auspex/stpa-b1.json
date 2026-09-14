@@ -859,6 +859,32 @@
           }
         ]
       }
-    ]
+    ],
+    "cloud": {
+      "origin": "scenario-setting",
+      "conditions": [
+        "Military competition",
+        "Autonomy procurement",
+        "Constitutional order"
+      ],
+      "actors": [
+        {
+          "controller": "C1",
+          "label": "Civilian authorities",
+          "role": "authorize deployment"
+        },
+        {
+          "controller": "C3",
+          "label": "Command",
+          "role": "direct the force"
+        },
+        {
+          "controller": "C2",
+          "label": "Oversight",
+          "role": "review & constrain power"
+        }
+      ],
+      "summary": "Competitive procurement places autonomy within an existing distribution of command and oversight."
+    }
   }
 }

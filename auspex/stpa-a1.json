@@ -1013,6 +1013,32 @@
           }
         ]
       }
-    ]
+    ],
+    "cloud": {
+      "origin": "scenario-setting",
+      "conditions": [
+        "Successor research",
+        "Compute & services",
+        "Rival states & economy"
+      ],
+      "actors": [
+        {
+          "controller": "C1",
+          "label": "Developers",
+          "role": "set training & deployment"
+        },
+        {
+          "controller": "C2",
+          "label": "Reviewers",
+          "role": "assess the evidence"
+        },
+        {
+          "controller": "C4",
+          "label": "Operators",
+          "role": "grant & revoke access"
+        }
+      ],
+      "summary": "Research and competition shape what gets developed, reviewed and delegated."
+    }
   }
 }

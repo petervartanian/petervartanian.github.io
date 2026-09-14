@@ -1112,7 +1112,33 @@
           }
         ]
       }
-    ]
+    ],
+    "cloud": {
+      "origin": "scenario-setting",
+      "conditions": [
+        "Existing conflict",
+        "Engagement incentives",
+        "Local institutions"
+      ],
+      "actors": [
+        {
+          "controller": "C1",
+          "label": "Platform governance",
+          "role": "set distribution objectives"
+        },
+        {
+          "controller": "C3",
+          "label": "Local response",
+          "role": "assess & act on warnings"
+        },
+        {
+          "controller": "C5",
+          "label": "Protection services",
+          "role": "protect people"
+        }
+      ],
+      "summary": "Conflict and distribution incentives shape exposure, warning response and protection."
+    }
   },
   "controlEvidence": {
     "title": "Did a warning become protection?",

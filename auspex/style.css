@@ -83,12 +83,12 @@ h1, h2, h3 { font-weight: 400; }
 .opening-display > .headline-line { display: block; white-space: nowrap; }
 .opening-display > .headline-line:first-child { transform: scaleY(1.35); transform-origin: left top; }
 .opening-display > .headline-risk { display: flex; align-items: center; gap: .14em; }
-.headline-plus { display: block; flex: 0 0 auto; width: .38em; height: .38em; transform: translateY(.015em) scaleY(.8); }
-.headline-plus svg { display: block; width: 100%; height: 100%; overflow: visible; fill: none; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
-.headline-plus .plus-across { stroke: #53606e; }
-.headline-plus .plus-through { stroke: #82634e; }
-.headline-plus .plus-underpass { stroke: var(--page); stroke-width: 8; }
-.headline-plus .plus-branch { stroke: #82634e; stroke-width: 1.7; opacity: .65; }
+.headline-plus { display: block; flex: 0 0 auto; width: .38em; height: .38em; transform: translateY(.015em) scaleY(.8) rotate(-7deg); }
+.headline-plus svg { display: block; width: 100%; height: 100%; overflow: visible; stroke: none; }
+.headline-plus .plus-ink-warm { fill: #b97961; }
+.headline-plus .plus-ink-cool { fill: #9386aa; }
+.headline-plus .plus-face { fill: #353943; }
+.headline-plus .plus-cut { fill: var(--page); }
 .headline-risk { align-self: flex-end; font: italic 400 1.5em/.95 Auspex, Georgia, serif; letter-spacing: -.055em; color: var(--brand-accent); padding-right: .04em; transform: scaleY(1.25); transform-origin: right bottom; }
 /* Include the italic k's overhang in the painted gradient. */
 .risk-spectrum { padding-right: .18em; margin-right: -.18em; }

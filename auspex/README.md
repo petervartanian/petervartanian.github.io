@@ -9,42 +9,47 @@ Serve the repository root and open `/auspex/`. The interface also works directly
 ## Seven STPA worked examples
 
 A-1, B-1, C-1, D-1, E-1, F-1 and Bonus-1 use the models in `stpa-[a-fh]1.json`.
-I selects a pathway; II offers No / Maybe / Yes for an incident overlay; III inspects a barrier.
-The three controls progress from light to medium to dark, with an underline marking
-which is selected. No clears the overlay and inspector. Yes opens the existing source
-case at its assessed component, preserving its experimental, historical or reported
-scope; it does not establish the whole component or pathway.
-Maybe opens explicitly authored tentative connections. Each has a component, a question,
-a cited basis and a statement of the missing evidence. The fourteen initial questions
-are editorial proposals across the seven worked examples. They are distinct from the
-source mappings; selecting Yes never promotes a tentative connection to established fact.
-Switching Maybe/Yes keeps the incident but selects the corresponding component and
-closes the inspector. A source-evidence link in each tentative card returns to the scoped
-case and its barriers. Barrier states and efficacy are never transferred to the tentative
-component. Dotted card borders distinguish tentative connections; source circles and
-small paired scope notes remain inside or linked to the card. The map key and static
-reader explain and include both kinds of connection.
-An open Yes chooser without a selection uses `overlay=1`; Maybe uses `overlay=maybe`
-with or without an `i=` incident. Existing incident links continue to open Yes.
+I selects a pathway; II places dated incident evidence on its relevant component;
+III inspects the barrier. The dated choices are always visible. Select a case to add
+its card, another to switch, or the selected case / × to clear it. There are no
+No / Maybe / Yes modes.
+
+Each incident card keeps its observed or reported finding, barrier assessments,
+sources and scope note together. Its open question expands in the same card,
+with the cited basis and what remains unknown. The related component is highlighted;
+the evidence and barrier states remain at the original assessed component. There
+is no second incident card. The fourteen questions are editorial proposals and
+do not establish another pathway component.
+
+Open questions use `explore=1`. Older `overlay=maybe&i=…` links open that question
+inside the selected case. An old chooser-only link simply shows the dated choices.
 Visible dates use quarters where the month is known, and preserve multi-year ranges.
-Full date labels, including publication and investigation qualifiers, remain in tooltips
-and accessible names.
+Full date labels, including publication and investigation qualifiers, remain in
+tooltips and accessible names.
+
+0 is a cloud portrait of the scenario setting. Three upstream conditions sit above
+three roles drawn from the model’s controllers, with a short account of how the
+setting shapes their decisions. It is always readable and has no extra selector.
+The original system scope and warning-sign notes remain in the research reader.
+The cloud is a presentation of the assumed setting, not a new causal stage or a
+substitute for the STPA control structure. Feedback can reshape upstream conditions.
+
 Every model contains losses, hazards, control and feedback relationships, constraints,
 contextual unsafe control actions, causal scenarios and a conditional recovery route.
-The bow-tie map summarizes the provisional analysis.
-
-0 is a shared background across each worked diagram. Short context excerpts sit
-beside the components they inform, with no separate opening list or disclosure.
-Selecting a component brings its contextual text into the pathway color. The original
-scope and context paragraphs remain in the research reader. Warning-sign caveats
-retain small linked asterisks. Context adds no causal nodes or arrows.
+The bow-tie map summarizes this provisional analysis; the four UCA categories are
+represented across selected actions, not exhaustively assessed for every action.
 
 The map uses **0. Context**, **1. Precursors**, **2. Event**, **3. Consequences**,
 with components numbered within their region (1.1, 1.2, 2.1, 3.1…). Recovery retains R.
-A-1 includes the original background conditions, developing danger and warning signs
-as an always-visible prelude. Its numbered links select the relevant diagram component.
-The other worked examples show their existing system scope at 0. Context. Context
-is outside the causal graph; its links are navigation, not additional causal arrows.
+Possible progression uses solid angular arrows, optional branches long dashes,
+feedback round dots and double chevrons, and recovery a green curve with a filled
+arrowhead. Possible contribution and conditional consequence keep their data meanings
+but share the forward-arrow style. Conditions remain in component text and route
+descriptions; the key explains their difference from an optional branch.
+
+Proposed safeguards use a hinged gate with an open leaf, rather than dashed marks.
+Its orientation follows the route; the key includes the named safeguards for the
+current pathway. Actual barrier states stay attached to incident evidence.
 
 Pathway labels use A-1 / Bonus-1 throughout the catalogue. Old A.1 / Bonus.1 links and
 searches remain supported; internal component addresses and evidence anchors are stable.
@@ -63,9 +68,9 @@ capability or conditions would defeat the protection; observed and projected ero
 must remain distinguishable. Recovery is a separate route, whose controls can themselves
 hold, fail or be reinforced. These are editorial labels, not an STPA rating scale.
 
-Recovery uses a smooth curve and filled arrowhead; feedback uses a squared, dashed
+Recovery uses a smooth curve and filled arrowhead; feedback uses a squared, dotted
 return loop and double chevrons. Matching symbols in the key distinguish the routes
-without relying on color. Proposed safeguard marks follow each route’s direction.
+without relying on color. The proposed gate follows each route’s direction.
 
 Source references use filled circles in case overlays, barrier explanations and the
 recovery card, with small i/ii/iii labels within each source group. Ordinary pathway

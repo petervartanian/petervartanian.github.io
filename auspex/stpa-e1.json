@@ -1042,7 +1042,33 @@
           }
         ]
       }
-    ]
+    ],
+    "cloud": {
+      "origin": "scenario-setting",
+      "conditions": [
+        "Interconnected grids",
+        "Related AI models",
+        "Essential-service dependence"
+      ],
+      "actors": [
+        {
+          "controller": "C1",
+          "label": "Planning authorities",
+          "role": "choose & deploy models"
+        },
+        {
+          "controller": "C2",
+          "label": "Grid operators",
+          "role": "authorize dispatch"
+        },
+        {
+          "controller": "C5",
+          "label": "Restoration teams",
+          "role": "restore supply & services"
+        }
+      ],
+      "summary": "Shared infrastructure and model choices shape operators’ decisions and recovery options."
+    }
   },
   "controlEvidence": {
     "title": "What kept a blackout from lasting longer?",

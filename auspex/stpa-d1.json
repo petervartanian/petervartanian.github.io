@@ -918,6 +918,32 @@
           }
         ]
       }
-    ]
+    ],
+    "cloud": {
+      "origin": "scenario-setting",
+      "conditions": [
+        "Access to AI",
+        "Research institutions",
+        "Public-health capacity"
+      ],
+      "actors": [
+        {
+          "controller": "C2",
+          "label": "Providers",
+          "role": "enforce access limits"
+        },
+        {
+          "controller": "C3",
+          "label": "Research oversight",
+          "role": "authorize & supervise"
+        },
+        {
+          "controller": "C6",
+          "label": "Public health",
+          "role": "coordinate response"
+        }
+      ],
+      "summary": "Access and institutional capacity shape what providers, researchers and responders can control."
+    }
   }
 }
