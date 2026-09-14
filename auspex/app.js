@@ -923,17 +923,6 @@
   document.fonts.ready.then(drawConnections);
   // Fit the headline to the copy's measured height, retaining the type proportions.
   const openingColumns = window.matchMedia('(min-width: 701px)');
-  const placeOpeningPlus = () => {
-    const plus = $('.headline-plus');
-    plus.style.removeProperty('--plus-x');
-    plus.style.removeProperty('--plus-y');
-    const symbol = plus.getBoundingClientRect();
-    const first = $('.opening-display > .headline-line:first-child').getBoundingClientRect();
-    const risk = $('.headline-risk').getBoundingClientRect();
-    // Keep the entire symbol clear of both stretched words, including after resizing.
-    plus.style.setProperty('--plus-x', `${Math.min(0, risk.left - 8 - symbol.right)}px`);
-    plus.style.setProperty('--plus-y', `${Math.max(0, first.bottom + 4 - symbol.top)}px`);
-  };
   const fitOpening = () => {
     const title = $('#opening-title');
     const display = $('.opening-display');
@@ -941,7 +930,7 @@
     display.style.height = 'auto';
     display.style.fontSize = '';
     const height = $('.opening-copy > p').getBoundingClientRect().height;
-    if (!openingColumns.matches) { placeOpeningPlus(); return; }
+    if (!openingColumns.matches) return;
     const naturalHeight = display.getBoundingClientRect().height;
     const fontSize = parseFloat(getComputedStyle(display).fontSize);
     if (!height || !naturalHeight) return;
@@ -949,7 +938,6 @@
     display.style.fontSize = `${fontSize * scale}px`;
     title.style.height = `${height}px`;
     display.style.height = '100%';
-    placeOpeningPlus();
   };
   new ResizeObserver(fitOpening).observe($('.opening-copy > p'));
   new ResizeObserver(() => {
