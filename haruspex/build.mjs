@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = new URL('./', import.meta.url);
 const datasetPath = new URL('../outputs/haruspex-2026-09-09/haruspex-dataset.json', root);
-const [template, styles, app, dataset, severity, visuals, ontology, query, temporal, fieldLayout, cast, castView, research, quotations, collectionMethod, airiLogo, arrival, haruspexMark] = await Promise.all([
+const [template, styles, app, dataset, severity, visuals, ontology, query, temporal, fieldLayout, cast, castView, research, quotations, collectionMethod, airiLogo, arrival, haruspexMark, castWorkbench] = await Promise.all([
   readFile(new URL('index.template.html', root), 'utf8'),
   readFile(new URL('style.css', root), 'utf8'),
   readFile(new URL('app.js', root), 'utf8'),
@@ -22,6 +22,7 @@ const [template, styles, app, dataset, severity, visuals, ontology, query, tempo
   readFile(new URL('assets/mit-airi-official.svg', root), 'utf8'),
   readFile(new URL('arrival.js', root), 'utf8'),
   readFile(new URL('assets/haruspex-mark.svg', root), 'utf8'),
+  readFile(new URL('cast-workbench.js', root), 'utf8'),
 ]);
 const fontsDir = new URL('assets/fonts/', root);
 const fontFiles = (await readdir(fontsDir)).filter((name) => /^spectral-\d+-(normal|italic)\.woff2$/.test(name)).sort();
@@ -210,7 +211,7 @@ const html = template
   .replace('/* CAST */', () => JSON.stringify(castAnalysis).replace(/</g, '\\u003c'))
   .replace('/* RESEARCH */', () => JSON.stringify(researchExpansion).replace(/</g, '\\u003c'))
   .replace('/* QUOTATIONS */', () => JSON.stringify(openingQuotations).replace(/</g, '\\u003c'))
-  .replace('/* QUERY */', () => `${query}\n${fieldLayout}\n${castView}\n${arrival}`)
+  .replace('/* QUERY */', () => `${query}\n${fieldLayout}\n${castWorkbench}\n${castView}\n${arrival}`)
   .replace('/* APP */', () => app.replace(/<\/script/gi, '<\\/script'));
 const output = new URL('index.html', root);
 await writeFile(output, html);

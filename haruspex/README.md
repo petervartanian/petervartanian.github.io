@@ -217,3 +217,12 @@ Ordinary prose and primary-source links remain direct links. Roman endnotes are 
 The six workstream colors remain consistent. Marker halos and white sheen are reduced, with atmospheric depth coming mainly from faint dust and distant points. Source scope retains distinct sizes: one event (2.3px radius) and grouped activity (4.4px radius), with responsive and zoom adjustments. Context remains hollow and Unresolved keeps a broken outline. Colors do not encode severity or evidentiality.
 
 Terminology: plural attacks can form one wider incident. Twenty source-supported wiki actions and findings are included in Unresolved and discussed in the investigation. The full raw wiki corpus has not been imported or independently validated. The opening form is illustrative, not an additional event or a claim that all activities share one proven cause.
+
+
+## Interactive CAST investigation
+
+`cast-workbench.js` provides the default investigation reader. Its ten topics connect source-linked findings to the relevant control relationships, competing explanations, and evidence questions. Proposed safety requirements link to the hazards and losses they address. Reported changes remain separate from proposals and their verification questions. The full written analysis and original records remain available through `cast-view.js`.
+
+The focused diagrams are selections from the analytical control structure. They do not turn documented interactions into proven causal links or put all episodes in the same historical configuration. The prospective durability questions are explicit analytical questions, not assessed barrier performance. See `research/cast-method-notes.md` for scope and source limits.
+
+Run `node haruspex/cast-workbench.test.mjs` to check the ten diagrams for box-boundary endpoints, unrelated-box crossings, bounds, and source-data preservation. The existing build validates ledger references. Browser checks cover the topic selectors, source records, event round trips, and responsive layout.

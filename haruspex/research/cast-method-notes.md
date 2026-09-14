@@ -68,3 +68,14 @@ HF describes a loss of response time, but a precise delay and the additional act
 The generation check validates unique analysis IDs; every linked event against the canonical 832 IDs; every relationship endpoint; hazard/loss, constraint/hazard, finding/controller/constraint, and improvement/finding references; and Q01–Q16 identity and original fields, except the documented Q16 privacy edit. The canonical dataset SHA-256 is stored in the sidecar and verified before and after generation.
 
 The source dataset remains unchanged. No severity assignment, date bound, epistemic status, phase, or source record is modified by this layer. The JSON’s coverage is a selection count, not evidence completeness or the number of independent observations. Future updates should attach newly received artifacts to the existing question IDs, revise the relevant observation separately from interpretation, and retain the reasons for any change.
+
+
+## Interactive investigation reader
+
+The default investigation now opens a finding-led CAST reader. Ten topics connect the existing findings to focused control diagrams, alternative explanations, and open evidence questions. Readers can inspect a role or relationship without opening another disclosure, then follow the proposed safety requirements to their hazardous conditions and losses. The original written analysis, full control structure, and source records remain accessible.
+
+The diagrams show selected relationships across the relevant episodes, not a single contemporaneous configuration or a chain of proven causes. The later monitoring relation R23 appears only in the changes topic. The proposed acknowledgement relation R24 remains outside the historical diagrams. CT14 retains its unresolved authority status. The focused changes diagram selects five roles, while the full structure retains all fourteen.
+
+A separate question asks whether each protection could hold under stronger AI or changed conditions. This is forward-looking analysis, not an assessed historical barrier state. Reported changes and analytical proposals retain distinct labels. The small thickening barrier illustrates the aim of a proposal and does not certify improved performance. Its motion stops when reduced motion is requested.
+
+Reader-facing paraphrases clarify the evidence requests and improvements without changing their ledger entries. The full records retain the original text. No additional evidence collection, deployment, or successful intervention is implied. The page continues to distinguish a public-source CAST analysis from a completed investigation supported by newly obtained operational records.
