@@ -106,10 +106,10 @@ h1, h2, h3 { font-weight: 400; }
 .opening-sources { display: inline-flex; gap: 0; height: 24px; margin-inline: 3px -4.5px; vertical-align: middle; font: inherit; line-height: 1; white-space: nowrap; text-indent: 0; }
 .opening-sources .source-dot { width: 24px; height: 24px; min-width: 24px; min-height: 24px; color: var(--ink); }
 .opening-sources .source-disc { background: var(--intro-source-colors) #e4e5e7; color: var(--ink); }
-.opening-sources a:nth-child(1) { --intro-source-colors: linear-gradient(125deg,rgb(200 106 141 / 8%),rgb(219 165 88 / 8%)); }
-.opening-sources a:nth-child(2) { --intro-source-colors: linear-gradient(125deg,rgb(204 176 82 / 8%),rgb(136 173 116 / 8%)); }
-.opening-sources a:nth-child(3) { --intro-source-colors: linear-gradient(125deg,rgb(97 172 152 / 8%),rgb(109 159 201 / 8%)); }
-.opening-sources a:nth-child(4) { --intro-source-colors: linear-gradient(125deg,rgb(132 155 201 / 8%),rgb(173 138 189 / 8%)); }
+.opening-sources a:nth-child(1) { --intro-source-colors: linear-gradient(125deg,#e5d6df,#ebe9e8 48%,#e9dfcc); }
+.opening-sources a:nth-child(2) { --intro-source-colors: linear-gradient(125deg,#e7dfc8,#e8ebe4 48%,#d5e2d5); }
+.opening-sources a:nth-child(3) { --intro-source-colors: linear-gradient(125deg,#d1e1da,#e4e9e9 48%,#d1dfe9); }
+.opening-sources a:nth-child(4) { --intro-source-colors: linear-gradient(125deg,#d5dfed,#e9e8ec 48%,#e3d6e8); }
 .opening-sources .source-dot:hover { background: transparent; text-decoration: none; }
 .opening-sources .source-dot:hover .source-disc { outline: 1px solid color-mix(in srgb,var(--ink) 25%,transparent); outline-offset: 1px; }
 
