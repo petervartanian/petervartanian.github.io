@@ -28,6 +28,10 @@ Recovery uses a smooth curve and filled arrowhead; feedback uses a squared, dash
 return loop and double chevrons. Matching symbols in the key distinguish the routes
 without relying on color. Proposed safeguard marks follow each route’s direction.
 
+Source references use filled circles inside pathway cards, case overlays and barrier
+explanations. Each circle retains its source title and keyboard access; case evidence
+opens the existing passage reader. Asterisks still refer to short scope notes.
+
 Maven and Replicator expose proposed safeguards with unassessed performance and test
 questions. Their announcements remain contextual evidence. Later corrective changes are
 dated; new reinforcement proposals are identified as proposals. Scope notes use paired

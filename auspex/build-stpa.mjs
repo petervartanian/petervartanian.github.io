@@ -19,7 +19,7 @@ for (const model of models) {
   for (const p of model.additionalEvidence?.passages || []) passages.set(p.id,p);
 }
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const sourceLinks = ids => [...new Set(ids.map(id => passages.get(id)?.source))].filter(Boolean).map(id => `<a href="${esc(sources.get(id).url)}" target="_blank" rel="noopener noreferrer">${esc(sources.get(id).title)} ↗</a>`).join(' · ');
+const sourceLinks = ids => [...new Set(ids.map(id => passages.get(id)?.source))].filter(Boolean).map(id => `<a class="source-dot" href="${esc(sources.get(id).url)}" target="_blank" rel="noopener noreferrer" title="${esc(sources.get(id).title)}" aria-label="Open source: ${esc(sources.get(id).title)}"><span class="source-disc" aria-hidden="true"></span></a>`).join('');
 function mappedEvidence(model) {
   const overrides = new Map((model.assessments || []).map(a => [a.id,a]));
   const cases = assessments.filter(a => a.pathway === model.pathway).map(a => overrides.get(a.id) || a);
@@ -61,6 +61,6 @@ for (let i = starts.length - 1; i >= 0; i--) {
   if (end < 0) throw new Error(`Missing reader boundary ${p.id}`);
   html = html.slice(0, match.index) + `<article id="${p.id}" data-group="${p.group}" data-unworked="true"><p class="eyebrow">${p.displayId} · Pathway</p><h2>${esc(p.title)}</h2></article>` + html.slice(end);
 }
-html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=24.1"');
+html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=24.2"');
 await writeFile(new URL('pathways.html', import.meta.url), html);
 console.log('Built seven worked examples, barrier states and matching readers; other entries are blank.');

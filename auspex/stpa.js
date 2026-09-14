@@ -8,7 +8,8 @@
   const byId = (items, id) => list(items).find(x => x.id === id);
   const node = id => byId(model.nodes, id);
   const source = id => byId(model.sources, id);
-  const cite = ids => `<span class="stpa-citations">${list(ids).map(id => source(id) ? `<a href="${esc(source(id).url)}" target="_blank" rel="noopener noreferrer" title="${esc(source(id).title)}">${esc(id)} ↗</a>` : '').join('')}</span>`;
+  const sourceMark = s => `<a class="source-dot" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" title="${esc(s.title)}" aria-label="Open source: ${esc(s.title)}"><span class="source-disc" aria-hidden="true"></span></a>`;
+  const cite = ids => `<span class="stpa-citations" role="group" aria-label="Sources">${list(ids).map(id => source(id) ? sourceMark(source(id)) : '').join('')}</span>`;
   const tag = s => `<span class="stpa-id">${esc(s)}</span>`;
   const refs = ids => list(ids).map(tag).join(' ');
   const control = id => byId(model.constraints,id);
@@ -64,14 +65,14 @@
     const result=b.id==='training-assurance'?'Compliance without preference change':v.result;
     return `<figure class="a1-barrier-study${b.candidate?' is-candidate':''}" data-condition="${esc(b.condition)}" aria-label="${esc(v.input)}; ${esc(v.control)}; ${esc(result)}"><div class="a1-study-flow"><span>${esc(v.input)}</span><i aria-hidden="true"></i><span class="a1-study-control">${barrierGlyph(b.condition)}<strong>${esc(v.control)}</strong></span><i aria-hidden="true"></i><span class="a1-study-result">${esc(result)}</span></div>${question===2 && v.dependency?`<figcaption class="a1-study-dependency"><span>Depends on</span>${esc(v.dependency)}</figcaption>`:''}</figure>`;
   }
-  function overlay(a, inspectedBarrier) {
+  function overlay(a, inspectedBarrier, evidenceMarks) {
     const config=overlayConfig(a);
     if (!config) return '';
     const anchor=node(overlayAnchor(a)), items=barriers(a);
     const kind=config.kind || 'Source evidence';
     return `<section class="a1-overlay" id="a1-overlay" data-overlay-incident="${esc(a.incident)}" data-overlay-target="${esc(config.target)}" data-overlay-anchor="${esc(anchor?.id)}" aria-label="${esc(config.title)}: evidence relevant to ${esc(anchor?.title)}">
       <p class="a1-overlay-kicker">${esc(kind)}</p>
-      <h4 class="a1-overlay-title">${esc(config.title)}<sup><a class="a1-note-reference" id="a1-case-reference" href="#a1-case-footnote" aria-label="Scope of this case">*</a></sup></h4>
+      <h4 class="a1-overlay-title">${esc(config.title)}<sup><a class="a1-note-reference" id="a1-case-reference" href="#a1-case-footnote" aria-label="Scope of this case">*</a></sup><span class="source-dots">${evidenceMarks(a.evidence)}</span></h4>
       ${items.length?`<div class="a1-overlay-barriers">${items.map(b=>`<div class="a1-observed-control"><button data-overlay-barrier="${esc(b.id)}" aria-label="Inspect ${esc(b.title)}: ${esc(barrierStates(b).map(conditionLabel).join(', '))}" aria-pressed="${inspectedBarrier===b.id}" aria-controls="workspace">${barrierGlyph(b.condition)}<span><strong>${esc(b.title)}</strong><small class="a1-barrier-condition">${esc(barrierStates(b).map(conditionLabel).join(' · '))}</small></span><span class="a1-inspect-arrow" aria-hidden="true">↗</span></button><p>${esc(b.result || b.conditionBasis || '')}</p></div>`).join('')}</div>`:''}
       <details class="a1-case-evidence"><summary>Case evidence</summary><p>${esc(config.observed)}</p><p>${esc(config.notEstablished)}</p></details>
     </section>`;
@@ -79,7 +80,7 @@
   function stateGuide(selected = 'unknown') {
     const current=byId(stateDefinitions,selected) || byId(stateDefinitions,'unknown');
     const exampleSource=byId(stateModel.sources,current.exampleSource);
-    return `<div class="stpa-state-explorer"><div class="stpa-state-menu" role="group" aria-label="Explore barrier states">${stateDefinitions.map(s=>`<button data-explore-state="${s.id}" aria-pressed="${s.id===current.id}" aria-controls="state-definition">${barrierGlyph(s.id)}<span>${esc(s.label)}</span></button>`).join('')}</div><section id="state-definition" class="stpa-state-definition" aria-live="polite">${barrierGlyph(current.id)}<div><h3>${esc(current.label)}</h3><p>${esc(current.definition)}</p><p class="stpa-state-question">${esc(current.question)}</p><p class="stpa-state-example">${esc(current.example)} <a href="${esc(exampleSource.url)}" target="_blank" rel="noopener noreferrer">Source ↗</a></p></div></section><details><summary>Brittleness & recovery</summary><p>A barrier can hold in one incident and still be brittle. Ask which change in capability, access, timing or operating conditions would defeat it.</p><p>Recovery stops escalation, limits harm or restores control after the loss-of-control event. Reinforcement strengthens a barrier.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">Recovery controls ↗</a></p></details></div>`;
+    return `<div class="stpa-state-explorer"><div class="stpa-state-menu" role="group" aria-label="Explore barrier states">${stateDefinitions.map(s=>`<button data-explore-state="${s.id}" aria-pressed="${s.id===current.id}" aria-controls="state-definition">${barrierGlyph(s.id)}<span>${esc(s.label)}</span></button>`).join('')}</div><section id="state-definition" class="stpa-state-definition" aria-live="polite">${barrierGlyph(current.id)}<div><h3>${esc(current.label)}</h3><p>${esc(current.definition)}</p><p class="stpa-state-question">${esc(current.question)}</p><p class="stpa-state-example">${esc(current.example)} ${sourceMark(exampleSource)}</p></div></section><details><summary>Brittleness & recovery</summary><p>A barrier can hold in one incident and still be brittle. Ask which change in capability, access, timing or operating conditions would defeat it.</p><p>Recovery stops escalation, limits harm or restores control after the loss-of-control event. Reinforcement strengthens a barrier.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">Recovery controls ↗</a></p></details></div>`;
   }
   function recoveryGuide() {
     return `<div class="stpa-recovery-guide"><div class="stpa-change-flow"><span>Hazardous situation</span><span aria-hidden="true">→</span><strong>Recovery</strong><span aria-hidden="true">→</span><span>Escalation stopped, harm limited or control restored</span></div><p>Recovery acts on the affected system after the loss-of-control event. It can prevent a consequence, reduce its severity or restore effective control.</p><div class="stpa-change-flow"><span>Existing protection</span><span aria-hidden="true">→</span><strong>Reinforcement</strong><span aria-hidden="true">→</span><span>Strengthened barrier</span></div><p>Reinforcement changes a barrier relative to a baseline. A recovery barrier can be reinforced too. Repair restores a defective barrier’s intended function; reinforcement improves the protection.</p><p>The green route on this map shows the model’s stated recovery outcome. It remains conditional on an effective intervention.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">UK CAA · Recovery controls ↗</a></p></div>`;
@@ -90,7 +91,7 @@
       : '<path d="M29 16H5V4H26"/><path d="m21 1 4 3-4 3m5-6 4 3-4 3"/>';
     return `<svg class="a1-route-symbol is-${kind}" viewBox="0 0 34 20" aria-hidden="true" focusable="false">${path}</svg>`;
   }
-  function renderMap(selected, a, inspectedBarrier) {
+  function renderMap(selected, a, inspectedBarrier, evidenceMarks = () => '') {
     const groups={before:[],centre:[],after:[],recovery:[]};
     for (const n of model.nodes) {
       const wing=n.type==='recovery' ? 'recovery' : (groups[n.wing] ? n.wing : 'after');
@@ -103,8 +104,8 @@
       const label=n.shortLabel || n.title;
       return `<div class="a1-cell${optional?' is-optional':''}${mapped?' is-overlaid':''}${n.wing==='centre'?' is-centre':''}${n.type==='recovery'?' is-recovery':''}" data-cell="${esc(n.id)}">
         ${condition?`<p class="a1-condition">${esc(condition)}</p>`:''}
-        <button class="a1-step" data-node="${esc(n.id)}" data-target="${esc(n.id)}" aria-pressed="${selected===n.id}" aria-controls="a1-node-note" aria-label="${esc(n.number)}. ${esc(label)}${optional?' (optional)':''}"><span class="a1-number">${esc(n.number)}</span><strong>${esc(label)}${optional?'<span class="a1-optional-label">optional</span>':''}</strong></button>
-        ${mapped?overlay(a,inspectedBarrier):''}
+        <div class="a1-step-box${list(n.sources).length?' has-sources':''}"><button class="a1-step" data-node="${esc(n.id)}" data-target="${esc(n.id)}" aria-pressed="${selected===n.id}" aria-controls="a1-node-note" aria-label="${esc(n.number)}. ${esc(label)}${optional?' (optional)':''}"><span class="a1-number">${esc(n.number)}</span><strong>${esc(label)}${optional?'<span class="a1-optional-label">optional</span>':''}</strong></button>${list(n.sources).length?`<div class="a1-step-sources">${cite(n.sources)}</div>`:''}</div>
+        ${mapped?overlay(a,inspectedBarrier,evidenceMarks):''}
       </div>`;
     };
     const headings={before:'Contributing conditions',centre:'Loss of control',after:'Conditional consequences',recovery:'Recovery route'};

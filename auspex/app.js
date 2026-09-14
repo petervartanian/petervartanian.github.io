@@ -231,7 +231,7 @@
 
   function evidenceButtons(ids) {
     const groups = [...new Set(ids.map((id) => passages.get(id).source))];
-    return groups.map((id) => `<button class="source-note" data-passages="${ids.filter((p) => passages.get(p).source === id).join(' ')}" aria-haspopup="dialog" aria-controls="source-dialog" aria-label="Read source evidence: ${escape(sources.get(id).title)}">${id}${icon('external')}</button>`).join('');
+    return groups.map((id) => `<button class="source-dot" data-passages="${ids.filter((p) => passages.get(p).source === id).join(' ')}" aria-haspopup="dialog" aria-controls="source-dialog" title="${escape(sources.get(id).title)}" aria-label="Read source evidence: ${escape(sources.get(id).title)}"><span class="source-disc" aria-hidden="true"></span></button>`).join('');
   }
 
   const stepLabel = (step) => stpaNode(step)?.title || step.shortLabel || window.AuspexLabels?.[state.pathway]?.[step.number - 1] || step.text;
@@ -259,7 +259,7 @@
     const useSTPA = isSTPA(p.id);
     $('#pathway-map').classList.toggle('stpa-active', useSTPA);
     if (useSTPA) {
-      $('#map-nodes').innerHTML = window.AuspexSTPA.renderMap(state.target, state.overlay ? assessment() : null, state.inspect ? state.barrier : '');
+      $('#map-nodes').innerHTML = window.AuspexSTPA.renderMap(state.target, state.overlay ? assessment() : null, state.inspect ? state.barrier : '', evidenceButtons);
       $('#map-connections').innerHTML = '';
       renderEvidenceMap();
       requestAnimationFrame(drawConnections);
@@ -362,7 +362,7 @@
         <p class="a1-inspector-case">${escape(window.AuspexSTPA.overlayNames[a.incident])}${selected.candidate?' · Proposed safeguard':selected.role==='recovery'?' · Recovery':''}</p>
         <div class="a1-barrier-condition" data-condition="${escape(detail.condition)}">${window.AuspexSTPA.barrierGlyph(detail.condition)}<span><span class="a1-state-buttons">${window.AuspexSTPA.barrierStates(detail).map(id=>`<button data-state-info="${id}" aria-haspopup="dialog" aria-controls="method-dialog" aria-label="Explore the ${escape(window.AuspexSTPA.conditionLabel(id))} state">${escape(window.AuspexSTPA.conditionLabel(id))}</button>`).join('')}<sup><a class="a1-note-reference" id="a1-state-reference" href="#a1-state-footnote" aria-label="Evidence for this state">*</a></sup></span></span></div>
         <div class="question-lenses" role="tablist" aria-label="Barrier questions">${questions.map((question,index)=>`<button role="tab" id="question-${index}" data-question="${index}" aria-selected="${index===state.question}" tabindex="${index===state.question?0:-1}" aria-controls="barrier-lens" aria-label="${labels[index]}: ${index===0 && selected.candidate ? 'How would this safeguard work?' : question}">${labels[index]}</button>`).join('')}</div>
-        <div id="barrier-lens" class="barrier-lens" role="tabpanel" aria-labelledby="question-${state.question}" tabindex="0">${window.AuspexSTPA.barrierView(detail,state.question)}${state.question === 2 ? `<p class="a1-brittleness-kind">${escape(kind)}</p>` : ''}<p class="lens-answer">${escape(answers[state.question])}</p>${state.question === 2 && reinforcement ? `<details class="reinforcement"><summary>${selected.candidate ? 'Test this safeguard' : 'Reinforce this barrier'}</summary><p class="proposal-status">Proposed</p><p>${escape(reinforcement.proposal)}</p><h5>What to test</h5><p>${escape(reinforcement.test)}</p></details>` : ''}<div class="source-notes">${evidenceButtons(selected.evidence)}</div></div><p class="a1-footnote" id="a1-state-footnote" tabindex="-1"><a href="#a1-state-reference" aria-label="Return to barrier state">*</a> ${escape(detail.conditionBasis)}</p>`;
+        <div id="barrier-lens" class="barrier-lens" role="tabpanel" aria-labelledby="question-${state.question}" tabindex="0">${window.AuspexSTPA.barrierView(detail,state.question)}<div class="a1-answer-box">${state.question === 2 ? `<p class="a1-brittleness-kind">${escape(kind)}</p>` : ''}<p class="lens-answer">${escape(answers[state.question])}<span class="source-dots">${evidenceButtons(selected.evidence)}</span></p>${state.question === 2 && reinforcement ? `<details class="reinforcement"><summary>${selected.candidate ? 'Test this safeguard' : 'Reinforce this barrier'}</summary><p class="proposal-status">Proposed</p><p>${escape(reinforcement.proposal)}</p><h5>What to test</h5><p>${escape(reinforcement.test)}</p></details>` : ''}</div></div><p class="a1-footnote" id="a1-state-footnote" tabindex="-1"><a href="#a1-state-reference" aria-label="Return to barrier state">*</a> ${escape(detail.conditionBasis)}</p>`;
       return;
     }
     if (!selected) {
