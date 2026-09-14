@@ -26,7 +26,7 @@ const history={pushState(a,b,next){url=String(next)},replaceState(a,b,next){url=
 const context=vm.createContext({window:{matchMedia,scrollTo(){}},document,location,history,URL,URLSearchParams,matchMedia,requestAnimationFrame(){},addEventListener(type,fn){windowListeners[type]=fn},console});
 for(const file of ['data.js','stpa-data.js','inspection.js','stpa.js']) vm.runInContext(await read(file),context);
 let app=await read('app.js');
-app=app.slice(0,app.lastIndexOf('\n  readLocation();'))+'\nwindow.test={state,readLocation,selectPathway,selectIncident,showOverview,renderEvidenceMap};})();';
+app=app.slice(0,app.lastIndexOf('\n  readLocation();'))+'\nwindow.test={state,readLocation,selectPathway,selectIncident,showOverview,renderEvidenceMap,incidentChoiceDate};})();';
 vm.runInContext(app,context);
 const {test,AuspexSTPA:stpa}=context.window;
 const matchesSelector=(target,selector)=>selector.split(',').some(part=>{
@@ -57,6 +57,25 @@ const cloud=()=>elements.get('created-section').innerHTML;
 const panel=()=>elements.get('#barrier-panel').innerHTML;
 const escaped=text=>String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const models=Object.values(context.window.AuspexSTPAModels);
+const incidentLabels={
+ 'AFK-2024':['Alignment-faking experiment','December 18th 2024'],
+ 'SAB-2024':['Sabotage tests','October 18th 2024'],
+ 'MAV-2017':['Project Maven procurement','July 21st 2017'],
+ 'REP-2024':['Replicator acquisition program','January 26th 2024'],
+ 'NOR-1979':['NORAD 1979 false warning','November 9th 1979'],
+ 'NOR-1980':['NORAD 1980 false warning','June 3rd and 6th 1980'],
+ 'BIO-2026':['Research relay access enforcement','May 2026'],
+ 'FLU-2026':['Frontier-model classifiers and weaker fallback models','May 2026'],
+ 'SW-2011':['Southwest blackout','September 8th 2011'],
+ 'NE-2003':['Northeast blackout','August 14th 2003'],
+ 'MYA-2017':['Myanmar investigation','2014–2017'],
+ 'ETA-2021':['Ethiopia investigation','2020–2022'],
+ 'HRI-2012':['HireRight screening case','August 2012'],
+ 'PFL-2018':['Predictive-policing feedback study','February 2018'],
+};
+for(const [day,ordinal] of [[1,'1st'],[2,'2nd'],[3,'3rd'],[4,'4th'],[11,'11th'],[12,'12th'],[13,'13th'],[21,'21st'],[22,'22nd'],[23,'23rd'],[31,'31st']]) {
+ assert.equal(test.incidentChoiceDate(`Published ${day} January 2024`),`January ${ordinal} 2024`,'US date ordinal');
+}
 let count=0;
 function singleCase(config) {
  assert.equal((map().match(/id="a1-overlay"/g)||[]).length,1,'One incident card');
@@ -81,8 +100,9 @@ for(const m of models) {
  assert(!map().includes('id="a1-overlay"'));
  const configs=Object.entries(m.presentation.overlays);
  for(const [incident,config] of configs) {
-  const originalDate=context.window.AuspexData.incidents.find(i=>i.id===incident).date;
-  assert(rail().includes(`<span class="a1-case-date">${escaped(originalDate)}:</span>`),`${m.displayId} ${incident}: original date is visibly preserved`);
+  const [name,date]=incidentLabels[incident];
+  assert(rail().includes(`<strong class="a1-case-name">${escaped(name)}</strong> <span class="a1-case-date">(${date})</span>`),`${m.displayId} ${incident}: bold name precedes a plain US date`);
+  assert(!/announcement|update|investigated|Published|reported|·/.test(rail()),`${m.displayId}: no date metadata or midpoint separators in the choices`);
   const a=context.window.AuspexData.assessments.find(a=>a.pathway===m.pathway&&a.incident===incident);
   click('#incident-rail','case',a.id);
   assert.equal(test.state.target,config.anchor);

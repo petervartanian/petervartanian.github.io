@@ -23,9 +23,11 @@ do not establish another pathway component.
 
 Open questions use `explore=1`. Older `overlay=maybe&i=…` links open that question
 inside the selected case. An old chooser-only link simply shows the dated choices.
-Visible dates retain the original recorded dates and ranges, including publication,
-announcement, and investigation qualifiers. The same labels appear in tooltips and
-accessible names. Long dates wrap within the petite incident choices.
+Incident choices show a bold name followed by an unbolded date in parentheses.
+Dates use month-first order and ordinal days, such as September 8th 2011. Paired
+dates and year ranges remain intact. Month-only records retain their known precision.
+Reporting qualifiers and midpoint separators are omitted from these petite labels.
+The original date records remain unchanged in the source data.
 
 0 is a cloud portrait of the scenario setting, with a small numeral. The conditions
 and controller roles are selected for each case; their counts are not fixed. A short

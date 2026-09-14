@@ -258,13 +258,30 @@
   const stepLabel = (step) => stpaNode(step)?.title || step.shortLabel || window.AuspexLabels?.[state.pathway]?.[step.number - 1] || step.text;
   const targetCount = (id) => pathwayAssessments().filter((a) => a.targets.some((t) => t.id === id)).length;
   const countLabel = (count) => `${count} case${count === 1 ? '' : 's'}`;
+  const incidentChoiceDate = date => {
+    const months = '(January|February|March|April|May|June|July|August|September|October|November|December)';
+    const ordinal = value => {
+      const day = Number(value), lastTwo = day % 100;
+      const suffix = lastTwo >= 11 && lastTwo <= 13 ? 'th' : ({1:'st',2:'nd',3:'rd'}[day % 10] || 'th');
+      return `${day}${suffix}`;
+    };
+    const range = date.match(/\b((?:19|20)\d{2})[–-]((?:19|20)\d{2})\b/);
+    if (range) return `${range[1]}–${range[2]}`;
+    const paired = date.match(new RegExp(`\\b(\\d{1,2}) and (\\d{1,2}) ${months} ((?:19|20)\\d{2})\\b`));
+    if (paired) return `${paired[3]} ${ordinal(paired[1])} and ${ordinal(paired[2])} ${paired[4]}`;
+    const full = date.match(new RegExp(`\\b(\\d{1,2}) ${months} ((?:19|20)\\d{2})\\b`));
+    if (full) return `${full[2]} ${ordinal(full[1])} ${full[3]}`;
+    const month = date.match(new RegExp(`\\b${months} ((?:19|20)\\d{2})\\b`));
+    return month ? `${month[1]} ${month[2]}` : date.match(/\b(?:19|20)\d{2}\b/)?.[0] || '';
+  };
   function renderEvidenceMap() {
     const p = pathways.get(state.pathway);
     if (isSTPA(p.id)) {
       const names = window.AuspexSTPA.overlayNames;
       $('#incident-rail').innerHTML = `<div class="a1-incident-ribbon" id="evidence-map-title" tabindex="-1" role="group" aria-label="Choose an incident to overlay">${pathwayAssessments().map(a=>{
-        const selected=a.incident===state.incident, date=incidents.get(a.incident).date;
-        return `<button class="a1-incident-branch" data-case="${a.id}" aria-pressed="${selected}" aria-controls="a1-route" title="${escape(date)}" aria-label="${selected?'Remove':'Overlay'} ${escape(names[a.incident])}. ${escape(date)}. Evidence at ${escape(window.AuspexSTPA.node(window.AuspexSTPA.overlayAnchor(a)).number)}"><span class="a1-case-date">${escape(date)}:</span> <span class="a1-case-name">${escape(names[a.incident])}</span></button>`;
+        const selected=a.incident===state.incident, date=incidentChoiceDate(incidents.get(a.incident).date);
+        const name=names[a.incident].replace(/\s*·\s*\d{4}\b/g,'').replace(/\s*·\s*/g,' ');
+        return `<button class="a1-incident-branch" data-case="${a.id}" aria-pressed="${selected}" aria-controls="a1-route" aria-label="${selected?'Remove':'Overlay'} ${escape(name)} (${escape(date)}). Evidence at ${escape(window.AuspexSTPA.node(window.AuspexSTPA.overlayAnchor(a)).number)}"><strong class="a1-case-name">${escape(name)}</strong> <span class="a1-case-date">(${escape(date)})</span></button>`;
       }).join('')}</div>`;
       return;
     }
