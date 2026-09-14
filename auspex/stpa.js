@@ -36,13 +36,13 @@
     const setting=model.presentation.cloud, id=prefix+'-cloud';
     if (!setting) return '';
     return `<div class="a1-context-cloud">
-      <h3 class="a1-cloud-title" id="${id}-title"><span class="a1-cloud-label"><span class="a1-cloud-number">0.</span> Context</span></h3>
       <figure class="a1-cloud-body" aria-labelledby="${id}-title" aria-describedby="${id}-caption">
       <svg class="a1-cloud-atmosphere" viewBox="0 0 600 250" preserveAspectRatio="none" aria-hidden="true" focusable="false">
         <defs><radialGradient id="${id}-mist"><stop stop-color="var(--accent)" stop-opacity=".13"/><stop offset=".64" stop-color="var(--accent)" stop-opacity=".055"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></radialGradient></defs>
         <ellipse cx="196" cy="106" rx="195" ry="101" fill="url(#${id}-mist)"/><ellipse cx="380" cy="113" rx="211" ry="110" fill="url(#${id}-mist)"/><ellipse cx="300" cy="69" rx="137" ry="68" fill="url(#${id}-mist)"/>
         <g class="a1-cloud-wisps"><path d="M38 117C17 79 68 53 106 65C120 17 196 18 225 49C264 9 340 18 357 47C413 8 480 45 474 75C534 48 588 103 554 133"/><path d="M60 166C30 140 62 111 97 122M502 148C558 135 578 168 539 188M126 202C174 224 221 204 247 209C287 229 352 226 385 207C426 226 478 212 491 194"/><path class="a1-cloud-drift" d="M155 83C123 105 196 114 169 139M321 66C363 98 282 115 302 141M460 96C436 118 478 126 456 149"/></g>
       </svg>
+      <h3 class="a1-cloud-title" id="${id}-title"><span class="a1-cloud-label"><span class="a1-cloud-number">0.</span> Context</span></h3>
       <div class="a1-cloud-conditions" aria-label="Upstream conditions">${setting.conditions.map(label=>`<span>${esc(label)}</span>`).join('')}</div>
       <div class="a1-cloud-actors" aria-label="Authority and control within this setting">${setting.actors.map(actor=>`<div data-controller="${esc(actor.controller)}" title="${esc(controller(actor.controller).responsibility)}"><strong>${esc(actor.label)}</strong><span>${esc(actor.role)}</span></div>`).join('')}</div>
       <figcaption id="${id}-caption">${esc(setting.summary)}</figcaption>
