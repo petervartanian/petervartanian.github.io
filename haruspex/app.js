@@ -1271,8 +1271,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   function enterField() {
     $('#explorer').scrollTop = 0;
     changeView('stream');finishCamera();stopMotion();
-    if(scrollGateway)scrollGateway.show({behavior:'instant'});
-    else $('#scene').scrollIntoView({behavior:'instant'});
+    const behavior=reducedMotion.matches?'instant':'smooth';
+    if(scrollGateway)scrollGateway.show({behavior});
+    else $('#scene').scrollIntoView({behavior});
   }
   const roman = value => {let n=value,out='';for(const[v,s]of [[1000,'m'],[900,'cm'],[500,'d'],[400,'cd'],[100,'c'],[90,'xc'],[50,'l'],[40,'xl'],[10,'x'],[9,'ix'],[5,'v'],[4,'iv'],[1,'i']])while(n>=v){out+=s;n-=v;}return out;};
   let noteSerial=0;

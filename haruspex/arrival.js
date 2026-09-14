@@ -39,6 +39,7 @@
     function marbleSprite(color){let sprite=marbleSprites.get(color);if(sprite)return sprite;const S=96;sprite=document.createElement('canvas');sprite.width=sprite.height=S;const c=sprite.getContext('2d'),g=c.createRadialGradient(S/2,S/2,0,S/2,S/2,S/2);g.addColorStop(0,dustColors[color]+'ff');g.addColorStop(.45,dustColors[color]+'66');g.addColorStop(1,dustColors[color]+'00');c.fillStyle=g;c.fillRect(0,0,S,S);marbleSprites.set(color,sprite);return sprite;}
     function prepare(){
       size=sizeCanvas(canvas);const source=getPoints();backdrop=source.backdrop;center={x:size.width/2,y:size.height/2};radius=Math.min(330,size.width*.36,size.height*.4);
+      sizeKey=`${Math.round(size.width)}x${Math.round(size.height)}`;
       dustColors=colors.slice();marbleSprites.clear();
       glow=document.createElement('canvas');glow.width=size.width;glow.height=size.height;const gc=glow.getContext('2d');
       const halo=gc.createRadialGradient(center.x,center.y,radius*.6,center.x,center.y,radius*1.6);halo.addColorStop(0,'#7cdbcf1c');halo.addColorStop(.5,'#c28abb10');halo.addColorStop(1,'#0b0f1000');gc.fillStyle=halo;gc.fillRect(0,0,size.width,size.height);glowBmp=null;bitmap(glow,b=>{glowBmp=b;});
@@ -107,13 +108,24 @@
       if(key!==sizeKey){sizeKey=key;dirty=true;}
       if(dirty){const wasPopping=popping;prepare();if(wasPopping){settle();return;}}
       if(popping){const p=Math.min(1,(now-popping.start)/POP_MS);scene.style.setProperty('--gateway-reveal',String(ease((p-.4)/.6)));paintPop(p);if(p>=1){settle();return;}}
-      else{if(warmIndex<endpoints.length){const stop=Math.min(endpoints.length,warmIndex+40);for(;warmIndex<stop;warmIndex++){const g=endpoints[warmIndex];for(let r=1.5;r<=9;r+=.5)paintPoint(warmCtx,{...g,radius:r},20,20,1);}warmCtx.clearRect(0,0,40,40);}
-        if(rect.bottom>0&&rect.top<innerHeight&&now-lastPaint>=28){lastPaint=now;paintGlobe(now);}}
+      else{
+        if(rect.bottom>0&&rect.top<innerHeight&&now-lastPaint>=28){lastPaint=now;paintGlobe(now);}
+        // Populate event sprites in small slices, after the globe has been drawn.
+        const until=performance.now()+2,stop=Math.min(endpoints.length,warmIndex+4);
+        for(;warmIndex<stop&&performance.now()<until;warmIndex++){const g=endpoints[warmIndex];for(let r=1.5;r<=9;r+=.5)paintPoint(warmCtx,{...g,radius:r},20,20,1);}
+        warmCtx.clearRect(0,0,40,40);
+      }
       frame=requestAnimationFrame(tick);
     }
     function start(){if(frame===null&&!popped)frame=requestAnimationFrame(tick);}
     function stop(){if(frame!==null){cancelAnimationFrame(frame);frame=null;}}
-    function reform(){popped=false;popping=null;dirty=true;host.hidden=false;button.disabled=false;scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);gate(true);rotationAt=performance.now();start();}
+    function reform(){
+      popped=false;popping=null;host.hidden=false;button.disabled=false;scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);gate(true);rotationAt=performance.now();
+      const rect=canvas.getBoundingClientRect(),key=`${Math.round(rect.width)}x${Math.round(rect.height)}`;
+      if(dirty||key!==sizeKey)prepare();
+      // Paint before navigation, including when the sphere is still offscreen.
+      paintGlobe(rotationAt);lastPaint=rotationAt;start();
+    }
     function sync(){
       if(popped)return;
       if(isReading()){pop({instant:true});return;}
@@ -122,7 +134,7 @@
       start();
     }
     function enter({behavior='smooth'}={}){window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});if(!popped)pop({instant:isReading()});}
-    function show({behavior='smooth'}={}){reform();window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});}
+    function show({behavior='smooth'}={}){reform();window.scrollTo({top:bounds().top,behavior:reduced.matches?'instant':behavior});button.focus({preventScroll:true});}
     button.addEventListener('click',()=>pop());
     scene.addEventListener('wheel',()=>{if(!popped&&!popping){nudgeAt=performance.now();start();}},{passive:true});
     button.addEventListener('pointerenter',()=>{hover=true;});button.addEventListener('pointerleave',()=>{hover=false;});
