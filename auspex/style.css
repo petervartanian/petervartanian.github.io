@@ -91,23 +91,27 @@ h1, h2, h3 { font-weight: 400; }
 /* Include the italic k's overhang in the painted gradient. */
 .risk-spectrum { padding-right: .18em; margin-right: -.18em; }
 @supports (background-clip: text) {
-  .risk-spectrum, .opening-sources { background: var(--risk-spectrum); background-clip: text; -webkit-background-clip: text; color: transparent; }
+  .risk-spectrum { background: var(--risk-spectrum); background-clip: text; -webkit-background-clip: text; color: transparent; }
 }
 .opening-copy { min-width: 0; width: 100%; max-width: 660px; justify-self: end; }
-.opening-copy > p { margin: 0; font: 400 clamp(18px, 1.5vw, 22px)/1.5 var(--sans); text-align: justify; text-align-last: left; text-wrap: pretty; }
+.opening-copy > p { margin: 0; font: 400 clamp(18px, 1.5vw, 22px)/1.5 var(--sans); text-align: justify; text-align-last: justify; text-wrap: balance; }
 @supports (text-box-trim: trim-both) {
   .opening-display > .headline-line, .opening-copy > p { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 }
-.opening-premise { color: var(--ink); }
+.opening-premise { display: block; width: 100%; color: var(--ink); }
 .opening-tail { display: inline-flex; align-items: center; white-space: nowrap; vertical-align: baseline; }
 .premise-terminal { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
-.opening-question { display: block; margin-top: 1em; color: var(--brand-accent); font-style: italic; }
-.opening-sources { display: inline-flex; gap: 0; height: 1cap; margin-inline: .15em .1em; vertical-align: baseline; font: inherit; line-height: 1; white-space: nowrap; text-indent: 0; border: 1px solid var(--brand-accent); border-image: var(--risk-spectrum) 1; }
-.opening-sources a { display: inline-flex; align-items: center; justify-content: center; height: 100%; padding-inline: 2px; color: inherit; font: 500 .6em/1 var(--sans); text-decoration: none; }
-.opening-sources a:nth-child(1) { border-right: 1px solid #923630; }
-.opening-sources a:nth-child(2) { border-right: 1px solid #805c0d; }
-.opening-sources a:nth-child(3) { border-right: 1px solid color-mix(in srgb, #397038, #23678b); }
-.opening-sources a:hover, .opening-sources a:focus-visible { color: var(--ink); text-decoration: underline; }
+.opening-question { display: block; width: 100%; margin-top: 1em; color: var(--brand-accent); font-style: italic; }
+/* Align the last visible circle with the shared text edge. */
+.opening-sources { display: inline-flex; gap: 0; height: 24px; margin-inline: 3px -4.5px; vertical-align: middle; font: inherit; line-height: 1; white-space: nowrap; text-indent: 0; }
+.opening-sources .source-dot { width: 24px; height: 24px; min-width: 24px; min-height: 24px; color: var(--ink); }
+.opening-sources .source-disc { background: var(--intro-source-colors); color: var(--ink); }
+.opening-sources a:nth-child(1) { --intro-source-colors: linear-gradient(125deg,#e9bdce,#f3d3b6); }
+.opening-sources a:nth-child(2) { --intro-source-colors: linear-gradient(125deg,#f0dfaa,#d2e3bc); }
+.opening-sources a:nth-child(3) { --intro-source-colors: linear-gradient(125deg,#c0e1cc,#b7ddea); }
+.opening-sources a:nth-child(4) { --intro-source-colors: linear-gradient(125deg,#c5d3ed,#d9c5e9); }
+.opening-sources .source-dot:hover { background: transparent; text-decoration: none; }
+.opening-sources .source-dot:hover .source-disc { outline: 1px solid color-mix(in srgb,var(--ink) 25%,transparent); outline-offset: 1px; }
 
 main { max-width: 1600px; margin: 0 auto; padding: 0 var(--edge) 60px; }
 .section-heading { display: flex; min-height: 24px; gap: 14px; align-items: center; font: 14px/1.5 var(--sans); margin: 0; white-space: nowrap; }
