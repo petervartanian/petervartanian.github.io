@@ -58,7 +58,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const narrow = matchMedia('(max-width: 800px)');
   const compactMap = matchMedia('(max-width: 700px)');
-  const state = { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, inspect: false };
+  const state = { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayPreview: false, inspect: false };
   const isSTPA = (id = state.pathway) => !!window.AuspexSTPA?.has(id);
   const pathwayTitle = p => window.AuspexSTPAModels?.[p.id]?.title || p.title;
   const overlayConfig = () => window.AuspexSTPA?.model?.presentation.overlays[state.incident];
@@ -117,14 +117,14 @@
 
   function normalize() {
     if (!pathways.has(state.pathway)) {
-      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, inspect: false });
+      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayPreview: false, inspect: false });
       window.AuspexSTPA?.use('');
       readingKey = '';
       return;
     }
     const p = pathways.get(state.pathway);
     if (!isSTPA(p.id)) {
-      Object.assign(state, { target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, inspect: false });
+      Object.assign(state, { target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, overlayPreview: false, inspect: false });
       readingKey = '';
       return;
     }
@@ -158,7 +158,8 @@
     if (state.pathway) url.searchParams.set('p', pathways.get(state.pathway).displayId);
     if (state.target) url.searchParams.set('t', state.target);
     if (state.incident) url.searchParams.set('i', state.incident);
-    else if (state.overlayEnabled) url.searchParams.set('overlay', '1');
+    if (state.overlayEnabled && state.overlayPreview) url.searchParams.set('overlay', 'maybe');
+    else if (state.overlayEnabled && !state.incident) url.searchParams.set('overlay', '1');
     if (state.barrier && (!isSTPA() || state.inspect)) url.searchParams.set('b', state.barrier);
     if (!isSTPA() && state.incident && state.observation >= 0) url.searchParams.set('o', String(state.observation));
     if (state.question && (!isSTPA() || state.inspect)) url.searchParams.set('q', questionNames[state.question]);
@@ -174,7 +175,8 @@
     state.pathway = aliases.get((params.get('p') || '').toLowerCase()) || params.get('p') || '';
     state.target = params.get('t') || '';
     state.overlay = isSTPA() && params.has('i');
-    state.overlayEnabled = isSTPA() && (state.overlay || params.get('overlay') === '1');
+    state.overlayPreview = isSTPA() && params.get('overlay') === 'maybe';
+    state.overlayEnabled = isSTPA() && (state.overlay || state.overlayPreview || params.get('overlay') === '1');
     state.inspect = state.overlay && (params.get('inspect') === '1' || params.has('b'));
     state.incident = params.get('i') || '';
     state.barrier = params.get('b') || '';
@@ -252,7 +254,7 @@
     const p = pathways.get(state.pathway);
     if (isSTPA(p.id)) {
       const names = window.AuspexSTPA.overlayNames;
-      $('#incident-rail').innerHTML = `<div class="a1-overlay-choice" id="evidence-map-title"><div class="a1-overlay-switch" role="group" aria-label="Overlay an incident"><button data-clear-overlay aria-pressed="${!state.overlayEnabled}" aria-controls="a1-incident-branches a1-route">No</button><button data-enable-overlay aria-pressed="${state.overlayEnabled}" aria-expanded="${state.overlayEnabled}" aria-controls="a1-incident-branches">Yes</button></div><svg class="a1-choice-lines" aria-hidden="true" focusable="false"></svg><div id="a1-incident-branches" class="a1-incident-branches" role="group" aria-label="Choose an incident"${state.overlayEnabled?'':' hidden'}>${pathwayAssessments().map(a=>`<button class="a1-incident-branch" data-case="${a.id}" aria-pressed="${state.overlay && a.incident===state.incident}" aria-controls="a1-route" title="${escape(incidents.get(a.incident).date)}" aria-label="${escape(names[a.incident])}. ${escape(incidents.get(a.incident).date)}"><span class="a1-case-date">${escape(shortIncidentDate(incidents.get(a.incident).date))}:</span> <span class="a1-case-name">${escape(names[a.incident])}</span></button>`).join('')}</div></div>`;
+      $('#incident-rail').innerHTML = `<div class="a1-overlay-choice" id="evidence-map-title"><div class="a1-overlay-switch" role="group" aria-label="Overlay an incident"><button data-clear-overlay aria-pressed="${!state.overlayEnabled}" aria-controls="a1-incident-branches a1-route">No</button><button data-preview-overlay aria-pressed="${state.overlayEnabled && state.overlayPreview}" aria-expanded="${state.overlayEnabled && state.overlayPreview}" aria-controls="a1-incident-branches a1-route" title="Preview an incident">Maybe</button><button data-enable-overlay aria-pressed="${state.overlayEnabled && !state.overlayPreview}" aria-expanded="${state.overlayEnabled && !state.overlayPreview}" aria-controls="a1-incident-branches a1-route" title="Apply an incident overlay">Yes</button></div><svg class="a1-choice-lines" aria-hidden="true" focusable="false"></svg><div id="a1-incident-branches" class="a1-incident-branches" role="group" aria-label="Choose an incident"${state.overlayEnabled?'':' hidden'}>${pathwayAssessments().map(a=>`<button class="a1-incident-branch" data-case="${a.id}" aria-pressed="${state.overlay && a.incident===state.incident}" aria-controls="a1-route" title="${escape(incidents.get(a.incident).date)}" aria-label="${escape(names[a.incident])}. ${escape(incidents.get(a.incident).date)}"><span class="a1-case-date">${escape(shortIncidentDate(incidents.get(a.incident).date))}:</span> <span class="a1-case-name">${escape(names[a.incident])}</span></button>`).join('')}</div></div>`;
       return;
     }
     const targets = p.steps.flatMap((s) => [s, ...p.edges.filter((e) => e.from === s.id)]);
@@ -270,6 +272,12 @@
     $('#pathway-map').classList.toggle('stpa-active', useSTPA);
     if (useSTPA) {
       $('#map-nodes').innerHTML = window.AuspexSTPA.renderMap(state.target, state.overlay ? assessment() : null, state.inspect ? state.barrier : '', evidenceButtons);
+      if (state.overlayPreview && $('#a1-overlay')) {
+        const label = document.createElement('span');
+        label.className = 'a1-preview-label';
+        label.textContent = 'Preview';
+        $('#a1-overlay .a1-overlay-kicker').append(label);
+      }
       $('#map-connections').innerHTML = '';
       renderEvidenceMap();
       requestAnimationFrame(drawConnections);
@@ -292,10 +300,10 @@
   }
 
   function drawIncidentBranches() {
-    const root=$('.a1-overlay-choice'), svg=$('.a1-choice-lines'), yes=$('[data-enable-overlay]');
-    if (!root || !svg || !yes || !root.offsetWidth) return;
+    const root=$('.a1-overlay-choice'), svg=$('.a1-choice-lines'), choice=$('.a1-overlay-switch');
+    if (!root || !svg || !choice || !root.offsetWidth) return;
     if (!state.overlayEnabled) { svg.innerHTML=''; return; }
-    const bounds=root.getBoundingClientRect(), origin=yes.getBoundingClientRect();
+    const bounds=root.getBoundingClientRect(), origin=choice.getBoundingClientRect();
     const x=origin.right-bounds.left, y=origin.top+origin.height/2-bounds.top;
     svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
     svg.innerHTML=Array.from(root.querySelectorAll('[data-case]')).map(button=>{
@@ -427,6 +435,7 @@
     $('#app').dataset.pathway = p?.id || '';
     const enhanced = !!p && isSTPA(p.id);
     $('#app').dataset.stpa = String(enhanced);
+    $('#app').dataset.overlayMode = state.overlayEnabled ? (state.overlayPreview ? 'maybe' : 'yes') : 'no';
     $('#app').dataset.blank = String(!!p && !enhanced);
     $('#causal-argument').hidden = !!p && !enhanced;
     a1ResearchLink.href = `pathways.html#${p?.id || 'X-01'}`;
@@ -482,6 +491,7 @@
     state.pathway = id;
     state.overlay = false;
     state.overlayEnabled = false;
+    state.overlayPreview = false;
     state.inspect = false;
     state.target = '';
     state.incident = '';
@@ -556,6 +566,7 @@
     state.pathway = a.pathway;
     state.overlay = isSTPA(a.pathway);
     state.overlayEnabled = state.overlay;
+    state.overlayPreview = false;
     state.inspect = false;
     state.target = a.targets[0].id;
     state.incident = a.incident;
@@ -672,17 +683,18 @@
   });
 
   $('#incident-rail').addEventListener('click', (event) => {
-    if (isSTPA() && event.target.closest('[data-enable-overlay]')) {
-      if (!state.overlayEnabled) {
-        state.overlayEnabled = true;
-        normalize(); render(); writeLocation();
-      }
-      $('[data-enable-overlay]').focus({ preventScroll: true });
-      announce('Choose an incident to overlay');
+    const modeButton = event.target.closest('[data-preview-overlay], [data-enable-overlay]');
+    if (isSTPA() && modeButton) {
+      const preview = modeButton.hasAttribute('data-preview-overlay');
+      state.overlayEnabled = true;
+      state.overlayPreview = preview;
+      normalize(); render(); writeLocation();
+      $(preview ? '[data-preview-overlay]' : '[data-enable-overlay]').focus({ preventScroll: true });
+      announce(state.overlay ? (preview ? 'Incident preview. Choose Yes to apply it.' : 'Incident overlay applied.') : (preview ? 'Choose an incident to preview.' : 'Choose an incident to overlay.'));
       return;
     }
     if (isSTPA() && event.target.closest('[data-clear-overlay]')) {
-      state.overlay = false; state.overlayEnabled = false; state.inspect = false;
+      state.overlay = false; state.overlayEnabled = false; state.overlayPreview = false; state.inspect = false;
       normalize(); render(); writeLocation();
       $('[data-clear-overlay]').focus({ preventScroll: true });
       announce('Incident overlay removed');
@@ -717,7 +729,7 @@
       state.barrier = '';
       normalize(); render(); writeLocation();
       $(`[data-case="${a.id}"]`).focus({ preventScroll: true });
-      announce(`${window.AuspexSTPA.overlayNames[a.incident]} overlaid on its assessed component.${localBarriers().length ? ' Select a barrier to explore it.' : ''}`);
+      announce(`${window.AuspexSTPA.overlayNames[a.incident]} ${state.overlayPreview ? 'previewed. Choose Yes to apply it.' : 'overlaid on its assessed component.'}${localBarriers().length ? ' Select a barrier to explore it.' : ''}`);
       return;
     }
     state.target = a.targets[0].id;

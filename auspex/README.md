@@ -9,11 +9,16 @@ Serve the repository root and open `/auspex/`. The interface also works directly
 ## Seven STPA worked examples
 
 A-1, B-1, C-1, D-1, E-1, F-1 and Bonus-1 use the models in `stpa-[a-fh]1.json`.
-I selects a pathway; II offers No / Yes for an incident overlay; III inspects a barrier.
-Yes reveals petite, inline date-and-name choices on two branching lines. Selecting a case applies its
-overlay at the assessed component. No clears the overlay and inspector. The open
-chooser without a selection is addressable with `overlay=1`; an existing `i=` link
-opens Yes with its case selected. Visible dates use quarters where the month is known, and preserve multi-year ranges.
+I selects a pathway; II offers No / Maybe / Yes for an incident overlay; III inspects a barrier.
+The three controls progress from light to medium to dark, with an underline marking
+which is selected. Maybe opens the petite dated choices and lets a chosen incident
+appear as a lighter, dashed preview. Yes applies the full overlay; it also opens the
+chooser directly. Switching between Maybe and Yes keeps the selected incident.
+No clears both the overlay and inspector. Previewing changes presentation only, not
+the incident’s evidence or barrier assessment.
+An open Yes chooser without a selection uses `overlay=1`; Maybe uses `overlay=maybe`
+with or without an `i=` incident. Existing incident links continue to open Yes.
+Visible dates use quarters where the month is known, and preserve multi-year ranges.
 Full date labels, including publication and investigation qualifiers, remain in tooltips
 and accessible names.
 Every model contains losses, hazards, control and feedback relationships, constraints,
