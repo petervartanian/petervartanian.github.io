@@ -3,10 +3,6 @@
   'use strict';
   const finite = Number.isFinite;
   const KIND_ORDER = { clock: 0, day: 1, window: 2 };
-  function seeded(seed) {
-    let value = seed >>> 0;
-    return () => { value = (1664525 * value + 1013904223) >>> 0; return value / 4294967296; };
-  }
   function identifierSeed(id) {
     let seed = 2166136261;
     for (let i = 0; i < id.length; i += 1) seed = Math.imul(seed ^ id.charCodeAt(i), 16777619);
@@ -71,7 +67,7 @@
     const points = [];
     let attempts = 0;
     for (const candidate of candidates) {
-      const random = seeded(identifierSeed(candidate.id));
+      const random = eventRandom(candidate.id);
       const { band } = candidate;
       let best;
       for (let i = 0; i < 30; i += 1) {
@@ -115,7 +111,7 @@
       const start = Math.max(point.start, range[0]);
       const end = Math.min(point.end, range[1]);
       const time = point.kind === 'clock' ? point.start : start + point.fraction * (end - start);
-      points.push({ event: point.event, id: point.id, x: rect.left + (time - range[0]) * xFactor, y, radius: point.radius * magnification, time, yWorld: point.yWorld, kind: point.kind, bandKey: point.bandKey, windowStart: point.start, windowEnd: point.end });
+      points.push({ event: point.event, id: point.id, x: rect.left + (time - range[0]) * xFactor, y, radius: point.radius * magnification, time, fraction: point.fraction, yWorld: point.yWorld, kind: point.kind, bandKey: point.bandKey, windowStart: point.start, windowEnd: point.end });
     }
     return points;
   }
@@ -187,31 +183,54 @@
     }
     return points;
   }
-  function timeWind(from, to, { width, direction }) {
-    if (!(width > 0) || ![-1, 1].includes(direction)) throw new Error('Time winding requires a width and direction.');
+  function calendarTime(point, range) {
+    const { start, end, kind } = point.event._time;
+    if (kind === 'clock') return start;
+    if (start === null) return end;
+    if (end === null) return start;
+    let a = Math.max(start, range[0]), b = Math.min(end, range[1]);
+    if (b < a) { a = start; b = end; }
+    return a + (point.fraction ?? .5) * (b - a);
+  }
+  function calendarPlan(from, to) {
+    validateCamera(from.range, [0, 1], from.geometry);
+    validateCamera(to.range, [0, 1], to.geometry);
     const previous = new Map(from.map(point => [point.event.id, point]));
     const next = new Map(to.map(point => [point.event.id, point]));
-    const distance = width + 64;
-    return [...new Set([...previous.keys(), ...next.keys()])].map(id => {
+    return { from, to, pairs: [...new Set([...previous.keys(), ...next.keys()])].map(id => {
       const old = previous.get(id), target = next.get(id);
-      return {
-        start: old || { ...target, x: target.x + direction * distance, vx: 0, vy: 0 },
-        end: target || { ...old, x: old.x - direction * distance },
-      };
-    });
+      return { start: old || { ...target, radius: 0, vy: 0 },
+        end: target || { ...old, radius: 0, vy: 0 } };
+    }) };
   }
-  function windFrame(pairs, progress, duration) {
+  function calendarFrame(plan, progress, duration) {
     const t = Math.max(0, Math.min(1, progress)), ease = t * t * (3 - 2 * t);
     const seconds = duration / 1000;
-    const axis = (a, b, velocity = 0) => ({
+    const blend = (a, b, velocity = 0) => ({
       value: a + (b - a) * ease + velocity * seconds * t * (1 - t) ** 2,
       velocity: (b - a) * 6 * t * (1 - t) / seconds + velocity * (1 - 4 * t + 3 * t * t),
     });
-    return pairs.map(({ start, end }) => {
-      const x = axis(start.x, end.x, start.vx), y = axis(start.y, end.y, start.vy);
-      return { ...end, x: x.value, y: y.value, vx: x.velocity, vy: y.velocity,
-        radius: start.radius + (end.radius - start.radius) * ease, alpha: 1 };
-    });
+    // Interpolate the camera, then project every event through that same camera.
+    // A logarithmic span stays positive even when a fast zoom is interrupted.
+    const [a, b] = plan.from.range, [c, d] = plan.to.range;
+    const [va, vb] = plan.from.rangeVelocity || [0, 0];
+    const center = blend((a + b) / 2, (c + d) / 2, (va + vb) / 2);
+    const logSpan = blend(Math.log(b - a), Math.log(d - c), (vb - va) / (b - a));
+    const span = Math.exp(logSpan.value), spanVelocity = span * logSpan.velocity;
+    const range = t === 0 ? [...plan.from.range] : t === 1 ? [...plan.to.range] : [center.value - span / 2, center.value + span / 2];
+    const geometry = { ...plan.to.geometry };
+    for (const key of ['left', 'right', 'top', 'bottom']) geometry[key] = blend(plan.from.geometry[key], plan.to.geometry[key]).value;
+    const points = plan.pairs.map(({ start, end }) => {
+      const fraction = blend(start.fraction ?? .5, end.fraction ?? .5).value;
+      const time = calendarTime({ ...end, fraction }, range);
+      const y = blend(start.y, end.y, start.vy || 0);
+      return { ...end, fraction, time, bend: blend(start.bend || 0, end.bend || 0).value,
+        x: geometry.left + (time - range[0]) / (range[1] - range[0]) * (geometry.right - geometry.left),
+        y: y.value, vx: 0, vy: y.velocity,
+        radius: blend(start.radius, end.radius).value,
+        paintRadius: Math.max(start.paintRadius || start.radius, end.paintRadius || end.radius), alpha: 1 };
+    }).filter(p => p.time !== null);
+    return { range, rangeVelocity: [center.velocity - spanVelocity / 2, center.velocity + spanVelocity / 2], geometry, points };
   }
   // Fixed calendar ticks travel across the screen during a pan. They do not
   // stay at fixed pixels while their printed dates change underneath them.
@@ -223,5 +242,5 @@
     for (let time = Math.ceil(range[0] / step) * step; time <= range[1]; time += step) ticks.push(time);
     return ticks;
   }
-  root.HaruspexLayout = Object.freeze({ create, project, bowtie, timeWind, windFrame, timeTicks });
+  root.HaruspexLayout = Object.freeze({ create, project, bowtie, calendarTime, calendarPlan, calendarFrame, timeTicks });
 })(typeof window === 'undefined' ? globalThis : window);

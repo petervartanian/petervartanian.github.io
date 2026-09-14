@@ -10,11 +10,13 @@ The header and Event-swarm brand use the saved three-form Haruspex mark: a solid
 
 ## Phase movement and uncertain dates
 
-Switching between I, II, and III moves the field horizontally in the selected direction, with no point-opacity fade. The date window moves continuously, and fixed calendar ticks travel across the event-swarm. The lifecycle roles can overlap in time. Reversing a transition starts from its displayed point positions and velocities. Reduced-motion preferences skip the movement.
+Switching between I, II, and III pans or zooms the calendar to the selected records. Every animation frame projects source timestamps through the same date range used by the axis. Equal dates retain equal horizontal positions across phases, including their overlap. Incoming and outgoing records grow or shrink at their calendar positions, with no artificial offscreen travel. Reversals preserve the displayed camera and its velocity. Reduced-motion preferences skip the movement.
 
-Dated bow-tie marks retain source order. Unknown-start marks are spread through layout positions compatible with their known bounds, with their tails retained. A shared upper bound no longer forces them into a group at the end. These positions do not assign dates or durations. Per-event mixing removes the periodic diagonal patterns caused by sampling consecutive event numbers.
+The focused Bow-tie views use the same calendar principle. Its full overview remains a schematic grouping of incident roles, where horizontal distance does not represent elapsed time. View changes between calendar layouts keep time coordinates aligned while their vertical organization changes. The transition to or from the schematic overview is a short layout morph.
 
-Run `node haruspex/field-layout.test.mjs` from the repository root to check date-bound preservation, placement stability, the actual event inventory, periodic-pattern regressions, motion reversal, constant opacity, and calendar ticks.
+Exact clock records retain their source timestamps. Bounded uncertainty stays within the source window, and a tailed head stays at its known upper bound. An unknown start is not assigned a fabricated timestamp. The static layout and final animation frame use the same projection.
+
+Run `node haruspex/field-layout.test.mjs` to check source bounds, schematic placement, actual phase overlap, same-time alignment, reversal continuity, positive zoom ranges, and final-frame agreement.
 
 ## Severity
 
@@ -96,11 +98,11 @@ The 12 open-left training records appear inside their Impact or Context field as
 
 A head beyond the current time viewport stays outside; it is not moved to the viewport edge. Only the head is selectable on the canvas; the trail itself is not. A record whose head lies outside the time viewport is reached through the register. There is no extra undated row or separate comet-button collection. No finite display window is fabricated for these records.
 
-Clock points retain their source coordinates. Records with uncertain dates are packed within source date windows; their exact horizontal placement is not an observed time or order. Date-window marks, tooltips and attached event information communicate that uncertainty independently of fill, shape and size. The overview uses interval midpoints only as a navigation aid, not as a count of verified events at those times. The Bow-tie does not assign a time coordinate.
+Clock points retain their source coordinates. Records with uncertain dates are packed within source date windows; their exact horizontal placement is not an observed time or order. Date-window marks, tooltips and attached event information communicate that uncertainty independently of fill, shape and size. The overview uses interval midpoints only as a navigation aid, not as a count of verified events at those times. The full Bow-tie overview is schematic. Its focused phase views use calendar coordinates.
 
 ## Lifecycle and stages
 
-Full shows every lifecycle role admitted by the active category and other filters. The following totals span all three categories; each category shows its own subset. I. Before contains the 83 precursor records; II. During contains 577 incident-activity and decision/coordination records; III. After contains 172 response, mitigation, investigation, and aftermath records. These are mappings of existing `bow_tie_role` values, not strict date windows. Within each wing, events run chronologically from left to right, spaced by order rather than elapsed time; undated events follow the dated ones. Response and investigation can overlap ongoing incident activity. During and After each remain a single field while their stages and filters narrow the same inventory.
+Full shows every lifecycle role admitted by the active category and other filters. The following totals span all three categories; each category shows its own subset. I. Before contains the 83 precursor records; II. During contains 577 incident-activity and decision/coordination records; III. After contains 172 response, mitigation, investigation, and aftermath records. These are mappings of existing `bow_tie_role` values, not strict date windows. The overview wings arrange records schematically by source order. Focusing a phase switches to elapsed time, with tailed heads at their known upper bounds. Response and investigation can overlap ongoing incident activity. During and After each remain a single field while their stages and filters narrow the same inventory.
 
 Each of the 27 stage filters corresponds exactly to one original `phase`, using a shorter display label. Stages can cross lifecycle views. For example, Investigation & disclosure includes both During and After records, while the five Termination & access loss records remain in During under their existing incident-activity role even though their workstream is Response. Stage, lifecycle, workstream, evidence, severity and time are independent facets of the same records.
 
@@ -156,7 +158,7 @@ The timeline overview has two range handles: drag the left or right handle to re
 
 With the field focused, arrow keys pan and ordinary `+` or `-` zoom both axes. Alt limits keyboard zoom to severity. Fit returns the field to the relevant extent. Returning to the swarm restores its prior timeline range.
 
-Swarm/bow-tie, category, lifecycle, stage, filter and fit transitions use continuous spring motion. Entering or leaving CAST uses a short crossfade that preserves the outgoing layout and reading position; its subviews fade without shifting the text. CAST is a separate control model, so its components do not pretend to be the event points. A change made during movement starts from each visible point’s current position and velocity. Backgrounds and labels transition with the field, while event identity is preserved. The motion explains a change of layout, not a historical trajectory, duration or causal connection. Reduced-motion preferences are respected.
+Calendar layouts animate the displayed date range and reproject every event through it. Movement reflects the real difference between the selected ranges, including overlap. Point identity, source dates, and uncertainty bounds remain intact. The full schematic Bow-tie overview uses a short layout morph. Entering or leaving CAST uses a short crossfade that preserves the outgoing layout and reading position. CAST is a separate control model, so its components do not pretend to be event points. Reduced-motion preferences are respected.
 
 Pan and wheel updates reuse cached geometry and are combined into animation-frame updates. The detail panel and register commit after the gesture settles instead of rebuilding on every pointer or wheel event. `field-layout.js` keeps the shared layout and coordinate calculations separate from interface updates. Performance measurements and interaction results belong in the accompanying validation record; this document does not claim a measured speedup.
 
