@@ -4,6 +4,18 @@
   const data = window.AuspexData;
   if (!data?.pathways?.length) return;
 
+  // Worked examples carry their own source-scoped assessments alongside the catalogue.
+  for (const model of Object.values(window.AuspexSTPAModels || {})) {
+    for (const assessment of model.assessments || []) {
+      const index = data.assessments.findIndex((item) => item.id === assessment.id);
+      if (index >= 0) data.assessments[index] = assessment;
+      else data.assessments.push(assessment);
+    }
+    for (const key of ['sources', 'passages']) for (const item of model.additionalEvidence?.[key] || []) {
+      if (!data.evidence[key].some((existing) => existing.id === item.id)) data.evidence[key].push(item);
+    }
+  }
+
   const $ = (selector) => document.querySelector(selector);
   const escape = (value) => String(value).replace(/[&<>"']/g, (char) => ({
     '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
@@ -47,6 +59,14 @@
   const narrow = matchMedia('(max-width: 800px)');
   const compactMap = matchMedia('(max-width: 700px)');
   const state = { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, inspect: false };
+  const isSTPA = (id = state.pathway) => !!window.AuspexSTPA?.has(id);
+  const overlayConfig = () => window.AuspexSTPA?.model?.presentation.overlays[state.incident];
+  const modelTarget = (id) => {
+    if (!isSTPA()) return id;
+    const config = overlayConfig();
+    if (id === config?.target) return config.anchor;
+    return window.AuspexSTPA.node(id)?.id || pathways.get(state.pathway)?.edges.find((edge) => edge.id === id)?.from || id;
+  };
   const a1Tools = document.createElement('div');
   a1Tools.id = 'a1-overlay-tools';
   a1Tools.className = 'a1-overlay-tools';
@@ -64,7 +84,7 @@
   for (const incident of data.incidents) if (incident.view) inspection.incidents[incident.id] = incident.view;
   for (const a of data.assessments) for (const b of a.barriers) if (b.view) inspection.barriers[b.id] = b.view;
   const questionNames = ['mechanism', 'evidence', 'durability', 'failure'];
-  const questions = ['(How) did the barrier work?', 'What makes us think so?', 'How durable is that protection?', 'What could make it fail?'];
+  const questions = ['(How) did the barrier work?', 'What makes us think so?', 'How brittle is that protection?', 'What could make it fail?'];
   let readingKey = '';
   let sourceReturn;
   let methodReturn;
@@ -72,8 +92,8 @@
   const announce = (message) => { $('#announcement').textContent = message; };
   const pathwayAssessments = () => data.assessments.filter((a) => a.pathway === state.pathway);
   const localAssessments = () => pathwayAssessments().filter((a) => a.targets.some((t) => t.id === state.target));
-  const assessment = () => (state.pathway === 'X-01' ? pathwayAssessments() : localAssessments()).find((a) => a.incident === state.incident);
-  const localBarriers = () => (assessment()?.barriers || []).filter((b) => state.pathway === 'X-01' || b.target === state.target);
+  const assessment = () => (isSTPA() ? pathwayAssessments() : localAssessments()).find((a) => a.incident === state.incident);
+  const localBarriers = () => (assessment()?.barriers || []).filter((b) => isSTPA() || b.target === state.target);
   const barrier = () => localBarriers().find((b) => b.id === state.barrier);
   const observationEntries = () => assessment()?.trace?.length ? assessment().trace : inspection.incidents[state.incident]?.observations || [];
   const sourceLink = (source, text = source.title, fragment = '') => `<a href="${escape(source.url)}${fragment ? `#${escape(fragment)}` : ''}" target="_blank" rel="noopener noreferrer">${escape(text)} ${icon('external')}</a>`;
@@ -91,26 +111,27 @@
   const focusAndReveal = (element, returnToTop = false) => {
     element.focus({ preventScroll: true });
     if (returnToTop) window.scrollTo({ top: 0, behavior: 'instant' });
-    else element.scrollIntoView({ block: 'start', behavior: reduced.matches || state.pathway === 'X-01' ? 'instant' : 'smooth' });
+    else element.scrollIntoView({ block: 'start', behavior: reduced.matches || isSTPA() ? 'instant' : 'smooth' });
   };
 
   function normalize() {
     if (!pathways.has(state.pathway)) {
-      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0 });
+      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, inspect: false });
+      window.AuspexSTPA?.use('');
       readingKey = '';
       return;
     }
     const p = pathways.get(state.pathway);
-    // Preserve old A.1 edge links by opening their source milestone in the new model.
-    if (p.id === 'X-01' && window.AuspexSTPA) {
-      state.target = p.edges.find((edge) => edge.id === state.target)?.from || state.target;
-    }
-    if (![...p.steps, ...p.edges, ...(p.id === 'X-01' ? window.AuspexSTPA?.model.nodes || [] : [])].some((target) => target.id === state.target)) {
+    window.AuspexSTPA?.use(p.id);
+    // Edge evidence keeps its assessed target; the card is positioned at an explicit anchor.
+    state.target = modelTarget(state.target);
+    if (!(isSTPA(p.id) ? window.AuspexSTPA.model.nodes : [...p.steps, ...p.edges]).some((target) => target.id === state.target)) {
       const initial = pathwayAssessments().find((a) => a.incident === state.incident) || pathwayAssessments()[0];
       state.target = initial?.barriers.find((b) => b.id === state.barrier)?.target
         || initial?.targets[0]?.id || p.steps[0].id;
     }
-    const choices = p.id === 'X-01' ? (state.overlay ? pathwayAssessments() : []) : localAssessments();
+    state.target = modelTarget(state.target);
+    const choices = isSTPA(p.id) ? (state.overlay ? pathwayAssessments() : []) : localAssessments();
     if (!choices.some((a) => a.incident === state.incident)) state.incident = choices[0]?.incident || '';
     const barriers = localBarriers();
     if (!barriers.some((b) => b.id === state.barrier)) state.barrier = barriers[0]?.id || '';
@@ -131,10 +152,10 @@
     if (state.pathway) url.searchParams.set('p', pathways.get(state.pathway).displayId);
     if (state.target) url.searchParams.set('t', state.target);
     if (state.incident) url.searchParams.set('i', state.incident);
-    if (state.barrier && (state.pathway !== 'X-01' || state.inspect)) url.searchParams.set('b', state.barrier);
-    if (state.pathway !== 'X-01' && state.incident && state.observation >= 0) url.searchParams.set('o', String(state.observation));
-    if (state.question && (state.pathway !== 'X-01' || state.inspect)) url.searchParams.set('q', questionNames[state.question]);
-    if (state.pathway === 'X-01' && state.inspect) url.searchParams.set('inspect', '1');
+    if (state.barrier && (!isSTPA() || state.inspect)) url.searchParams.set('b', state.barrier);
+    if (!isSTPA() && state.incident && state.observation >= 0) url.searchParams.set('o', String(state.observation));
+    if (state.question && (!isSTPA() || state.inspect)) url.searchParams.set('q', questionNames[state.question]);
+    if (isSTPA() && state.inspect) url.searchParams.set('inspect', '1');
     // The interface also works when opened directly from disk.
     try {
       if (url.href !== location.href) history[replace ? 'replaceState' : 'pushState'](null, '', url);
@@ -145,8 +166,8 @@
     const params = new URLSearchParams(location.search);
     state.pathway = aliases.get((params.get('p') || '').toLowerCase()) || params.get('p') || '';
     state.target = params.get('t') || '';
-    state.overlay = state.pathway === 'X-01' && params.has('i');
-    state.inspect = state.overlay && params.get('inspect') === '1';
+    state.overlay = isSTPA() && params.has('i');
+    state.inspect = state.overlay && (params.get('inspect') === '1' || params.has('b'));
     state.incident = params.get('i') || '';
     state.barrier = params.get('b') || '';
     const requested = [state.pathway, state.incident, state.barrier].join('|');
@@ -181,7 +202,7 @@
   function renderIncidents() {
     const active = assessment();
     const incident = incidents.get(state.incident);
-    const simplePathway = state.pathway === 'X-01' && !!window.AuspexSTPA;
+    const simplePathway = isSTPA() && !!window.AuspexSTPA;
     if (simplePathway) {
       $('#workspace').hidden = !state.inspect || !barrier();
       $('.incident-section').hidden = $('#workspace').hidden;
@@ -213,7 +234,7 @@
 
   function renderEvidenceMap() {
     const p = pathways.get(state.pathway);
-    if (p.id === 'X-01' && window.AuspexSTPA) {
+    if (isSTPA(p.id)) {
       const names = window.AuspexSTPA.overlayNames;
       $('#incident-rail').innerHTML = `<div class="a1-case-links" id="evidence-map-title" role="group" aria-label="Incident overlay"><button data-clear-overlay aria-pressed="${!state.overlay}" aria-controls="a1-route">None</button>${pathwayAssessments().map(a=>`<button data-case="${a.id}" aria-pressed="${state.overlay && a.incident===state.incident}" aria-controls="a1-route">${escape(names[a.incident])}</button>`).join('')}</div>`;
       return;
@@ -229,7 +250,7 @@
 
   function renderMap() {
     const p = pathways.get(state.pathway);
-    const useSTPA = p.id === 'X-01' && !!window.AuspexSTPA;
+    const useSTPA = isSTPA(p.id);
     $('#pathway-map').classList.toggle('stpa-active', useSTPA);
     if (useSTPA) {
       $('#map-nodes').innerHTML = window.AuspexSTPA.renderMap(state.target, state.overlay ? assessment() : null, state.inspect ? state.barrier : '');
@@ -258,7 +279,7 @@
     const p = pathways.get(state.pathway);
     const map = $('#pathway-map');
     if (!p || !map.offsetWidth) return;
-    if (p.id === 'X-01' && window.AuspexSTPA) return window.AuspexSTPA.draw();
+    if (isSTPA(p.id)) return window.AuspexSTPA.draw();
     const bounds = map.getBoundingClientRect();
     const svg = $('#map-connections');
     svg.setAttribute('viewBox', `0 0 ${bounds.width} ${bounds.height}`);
@@ -292,7 +313,7 @@
 
   function renderStepDetail() {
     const p = pathways.get(state.pathway);
-    const selected = p.id === 'X-01' && window.AuspexSTPA?.node(state.target);
+    const selected = isSTPA(p.id) && window.AuspexSTPA.node(state.target);
     if (selected) {
       $('#step-detail').innerHTML = `<h3 id="selection-title" class="sr-only" tabindex="-1">${selected.number} · ${escape(selected.title)}</h3>`;
       return;
@@ -307,7 +328,7 @@
 
   function renderPathwayDetails() {
     const p = pathways.get(state.pathway);
-    if (p.id === 'X-01' && window.AuspexSTPA) {
+    if (isSTPA(p.id)) {
       $('#pathway-details').innerHTML = window.AuspexSTPA.research();
       return;
     }
@@ -324,13 +345,18 @@
     const p = pathways.get(state.pathway);
     const a = assessment();
     const selected = barrier();
-    if (p.id === 'X-01') {
+    if (isSTPA(p.id)) {
       if (!state.inspect || !selected) { $('#barrier-panel').innerHTML = ''; return; }
-      const answers = [selected.action, selected.efficacy, selected.durability, selected.failure];
-      $('#barrier-panel').innerHTML = `<div class="a1-inspector-heading"><h3>${escape(selected.title)}</h3><button class="a1-close-inspector" data-close-inspector>Close</button></div>
+      const detail = overlayConfig().barriers[selected.id];
+      const answers = [selected.action, selected.efficacy, detail.strongerAI || selected.durability, selected.failure];
+      const labels = ['Mechanism', 'Evidence', 'Brittleness', 'Failure'];
+      const kind = { safeguard: 'Safeguard', capability: 'Capability limit', opportunity: 'Limited opportunity', contingency: 'Contingent circumstance', mixed: 'Safeguard + contingent limits', unknown: 'Basis unassessed' }[detail.limitType] || 'Basis unassessed';
+      const reinforcement = detail.reinforcement;
+      $('#barrier-panel').innerHTML = `<div class="a1-inspector-heading"><h3>${escape(detail.title || selected.title)}</h3><button class="a1-close-inspector" data-close-inspector>Close</button></div>
         <p class="a1-inspector-case">${escape(window.AuspexSTPA.overlayNames[a.incident])} · ${escape(selected.outcome)}</p>
-        <div class="question-lenses" role="tablist" aria-label="Barrier questions">${questions.map((question,index)=>`<button role="tab" id="question-${index}" data-question="${index}" aria-selected="${index===state.question}" tabindex="${index===state.question?0:-1}" aria-controls="barrier-lens" aria-label="${data.typology.barrierQuestions[index].label}: ${question}">${data.typology.barrierQuestions[index].label}</button>`).join('')}</div>
-        <div id="barrier-lens" class="barrier-lens" role="tabpanel" aria-labelledby="question-${state.question}" tabindex="0"><p class="lens-answer">${escape(answers[state.question])}</p><div class="source-notes">${evidenceButtons(selected.evidence)}</div></div>`;
+        <div class="a1-barrier-condition" data-condition="${escape(detail.condition)}">${window.AuspexSTPA.barrierGlyph(detail.condition)}<span><strong>${escape(window.AuspexSTPA.conditionLabel(detail.condition))}</strong><span>${escape(detail.conditionBasis)}</span></span></div>
+        <div class="question-lenses" role="tablist" aria-label="Barrier questions">${questions.map((question,index)=>`<button role="tab" id="question-${index}" data-question="${index}" aria-selected="${index===state.question}" tabindex="${index===state.question?0:-1}" aria-controls="barrier-lens" aria-label="${labels[index]}: ${question}">${labels[index]}</button>`).join('')}</div>
+        <div id="barrier-lens" class="barrier-lens" role="tabpanel" aria-labelledby="question-${state.question}" tabindex="0">${state.question === 2 ? `<p class="a1-brittleness-kind">${escape(kind)} · current performance does not establish future robustness</p>` : ''}<p class="lens-answer">${escape(answers[state.question])}</p>${state.question === 2 && reinforcement ? `<details class="reinforcement"><summary>Possible reinforcement</summary><p class="proposal-status">Proposed · not demonstrated by this case</p><p>${escape(reinforcement.proposal)}</p><h5>What to test</h5><p>${escape(reinforcement.test)}</p></details>` : ''}<div class="source-notes">${evidenceButtons(selected.evidence)}</div></div>`;
       return;
     }
     if (!selected) {
@@ -366,24 +392,26 @@
     $('.opening-shell').inert = !!p;
     $('.opening-shell').setAttribute('aria-hidden', String(!!p));
     $('#app').dataset.pathway = p?.id || '';
-    const isA1 = p?.id === 'X-01';
-    a1Tools.hidden = !isA1;
-    a1ResearchLink.hidden = !isA1;
-    if (isA1) a1Tools.append($('#incidents-title'), $('#incident-rail'));
+    const enhanced = !!p && isSTPA(p.id);
+    $('#app').dataset.stpa = String(enhanced);
+    a1ResearchLink.href = `pathways.html#${p?.id || 'X-01'}`;
+    a1Tools.hidden = !enhanced;
+    a1ResearchLink.hidden = !enhanced;
+    if (enhanced) a1Tools.append($('#incidents-title'), $('#incident-rail'));
     else {
       $('.incident-section').prepend($('#incidents-title'));
       $('#causal-argument').append($('#incident-rail'));
     }
-    $('#incidents-title .section-label').textContent = isA1 ? 'Overlay an incident' : 'Trace the incidents';
-    $('.incident-section').setAttribute('aria-labelledby', isA1 ? 'barrier-section-title' : 'incidents-title');
-    if (p?.id === 'X-01') $('#causal-argument').open = true;
-    $('.research-details > summary').textContent = p?.id === 'X-01' ? 'Sources' : 'Assumptions & sources';
+    $('#incidents-title .section-label').textContent = enhanced ? 'Overlay an incident' : 'Trace the incidents';
+    $('.incident-section').setAttribute('aria-labelledby', enhanced ? 'barrier-section-title' : 'incidents-title');
+    if (isSTPA(p?.id)) $('#causal-argument').open = true;
+    $('.research-details > summary').textContent = isSTPA(p?.id) ? 'Sources' : 'Assumptions & sources';
     $('#pathway-overview').hidden = !!p;
     $('#selected-pathway').hidden = !p;
     $('#all-pathways').hidden = !p;
     $('#app').dataset.group = p?.group || '';
-    $('.skip').href = isA1 ? '#incidents-title' : p ? '#workspace' : '#choose-title';
-    $('.skip').textContent = isA1 ? 'Overlay an incident' : p ? 'Trace the incidents' : 'Choose a pathway';
+    $('.skip').href = enhanced ? '#incidents-title' : p ? '#workspace' : '#choose-title';
+    $('.skip').textContent = enhanced ? 'Overlay an incident' : p ? 'Trace the incidents' : 'Choose a pathway';
     if (!p) {
       document.title = 'Auspex';
       $('#pathway-family').textContent = '';
@@ -393,13 +421,13 @@
       return;
     }
     $('#selected-code').textContent = p.displayId;
-    const selectedTitle = p.id === 'X-01' && window.AuspexSTPA ? window.AuspexSTPA.model.title : p.title;
+    const selectedTitle = isSTPA(p.id) ? window.AuspexSTPA.model.title : p.title;
     $('#selected-name').textContent = selectedTitle;
     $('#choose-pathway').setAttribute('aria-label', `Choose a pathway: ${p.displayId} · ${selectedTitle}`);
     $('#pathway-family').innerHTML = `${familyMotif(p.group)}<span>${escape(groupLabel(p.group))}</span>`;
     const endpoint = p.endpoint.split(';')[0];
     $('#pathway-endpoint').textContent = endpoint.charAt(0).toUpperCase() + endpoint.slice(1);
-    $('#pathway-endpoint').hidden = p.id === 'X-01' && !!window.AuspexSTPA;
+    $('#pathway-endpoint').hidden = isSTPA(p.id);
     document.title = `Auspex · ${p.displayId}`;
     renderStepDetail();
     renderIncidents();
@@ -484,7 +512,7 @@
     if (!a) return;
     const enteringPathway = !state.pathway;
     state.pathway = a.pathway;
-    state.overlay = a.pathway === 'X-01';
+    state.overlay = isSTPA(a.pathway);
     state.inspect = false;
     state.target = a.targets[0].id;
     state.incident = a.incident;
@@ -494,7 +522,7 @@
     normalize();
     render();
     writeLocation();
-    focusAndReveal(a.pathway === 'X-01' ? $('#incidents-title') : $(`#incident-${a.incident}`), enteringPathway);
+    focusAndReveal(isSTPA(a.pathway) ? $('#incidents-title') : $(`#incident-${a.incident}`), enteringPathway);
     announce(incidents.get(a.incident).title);
   }
   $('#overview-incidents').addEventListener('click', (event) => {
@@ -601,7 +629,7 @@
   });
 
   $('#incident-rail').addEventListener('click', (event) => {
-    if (state.pathway === 'X-01' && event.target.closest('[data-clear-overlay]')) {
+    if (isSTPA() && event.target.closest('[data-clear-overlay]')) {
       state.overlay = false; state.inspect = false;
       normalize(); render(); writeLocation();
       $('[data-clear-overlay]').focus({ preventScroll: true });
@@ -628,7 +656,7 @@
     const button = event.target.closest('[data-case]');
     if (!button) return;
     const a = pathwayAssessments().find((item) => item.id === button.dataset.case);
-    if (state.pathway === 'X-01') {
+    if (isSTPA()) {
       state.overlay = true;
       state.inspect = false;
       state.target = a.targets[0].id;
@@ -636,7 +664,7 @@
       state.barrier = '';
       normalize(); render(); writeLocation();
       $(`[data-case="${a.id}"]`).focus({ preventScroll: true });
-      announce(`${window.AuspexSTPA.overlayNames[a.incident]} overlaid on step 03. Select a dotted barrier to inspect it.`);
+      announce(`${window.AuspexSTPA.overlayNames[a.incident]} overlaid on its assessed component.${a.barriers.length ? ' Select a barrier to inspect it.' : ' Barrier performance is not established.'}`);
       return;
     }
     state.target = a.targets[0].id;
@@ -663,7 +691,7 @@
   });
   $('#pathway-map').addEventListener('click', (event) => {
     const overlayBarrier = event.target.closest('[data-overlay-barrier]');
-    if (overlayBarrier && state.pathway === 'X-01') {
+    if (overlayBarrier && isSTPA()) {
       state.barrier = overlayBarrier.dataset.overlayBarrier;
       state.target = localBarriers().find(b=>b.id===state.barrier).target;
       state.inspect = true;
@@ -687,7 +715,7 @@
   $('#pathway-map').addEventListener('keydown', (event) => {
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
     const p = pathways.get(state.pathway);
-    const order = p.id === 'X-01' && window.AuspexSTPA ? [...document.querySelectorAll('#a1-route [data-target]')].map(button => button.dataset.target)
+    const order = isSTPA(p.id) ? [...document.querySelectorAll('#a1-route [data-target]')].map(button => button.dataset.target)
       : p.steps.flatMap((step) => [step.id, ...p.edges.filter((edge) => edge.from === step.id).map((edge) => edge.id)]);
     const current = order.indexOf(event.target.closest('[data-target]')?.dataset.target);
     if (current < 0) return;
@@ -699,7 +727,7 @@
   function revealMap() {
     $('#causal-argument').open = true;
     drawConnections();
-    focusAndReveal((state.pathway === 'X-01' && window.AuspexSTPA?.targetButton(state.target)) || $(`#pathway-map [data-target="${state.target}"]`));
+    focusAndReveal((isSTPA() && window.AuspexSTPA?.targetButton(state.target)) || $(`#pathway-map [data-target="${state.target}"]`));
   }
   $('#causal-argument').addEventListener('toggle', () => {
     if ($('#causal-argument').open) drawConnections();
@@ -742,7 +770,7 @@
     if (event.target.closest('[data-return-incident]')) returnToObservation();
   });
   function returnToObservation() {
-    if (state.pathway === 'X-01') { closeA1Inspector(); return; }
+    if (isSTPA()) { closeA1Inspector(); return; }
     focusAndReveal($(`[data-observation="${state.observation}"]`) || $(`#incident-${state.incident}`));
   }
   function closeA1Inspector() {
@@ -789,7 +817,7 @@
       method.focus({ preventScroll: true });
       const definitions = (items) => `<dl class="role-definitions">${items.map((r) => `<div><dt>${escape(r.label)}${r.parent ? `<small>${escape(r.parent)}</small>` : ''}</dt><dd>${escape(r.definition)}${r.sources ? `<p>${r.sources.map((id) => sourceLink(sources.get(id), id)).join(' · ')}</p>` : ''}</dd></div>`).join('')}</dl>`;
       const enforcement = data.typology.enforcement;
-      $('#method-reading').innerHTML = state.pathway === 'X-01' && window.AuspexSTPA ? window.AuspexSTPA.guide() : `<p class="method-intro">Trace what AI changes, what the evidence reaches, and what each barrier depends on.</p><h3>AI-specific stages</h3><p>${escape(data.typology.aiBasis)}</p>${definitions(data.typology.aiStages)}<details><summary>Causal roles</summary><p>${escape(data.typology.basis)}</p>${definitions(data.typology.roles)}</details><h3>Evidence and scope</h3>${data.typology.rules.map((rule) => `<p>${escape(rule)}</p>`).join('')}<p>Case records include incidents, experiments, deployment and procurement reports, and historical non-AI comparisons, with settings shown beside each case. Counts describe component coverage, not independent replication or proof of a complete causal chain. “Mechanism comparison” means the mechanism was examined in a different setting. “Evidence challenging the link” and “Countermeasure evidence” can constrain a pathway rather than support its progression. The paired-bar mark locates an assessed control; its adjacent text states the outcome. Neither line thickness nor color encodes a probability or strength score.</p><h3>Barrier roles</h3>${definitions(data.typology.barrierRoles)}<h3>${escape(enforcement.title)}</h3><p>${escape(enforcement.scope)}</p><dl class="role-definitions">${enforcement.questions.map((q) => `<div><dt>${escape(q.label)}</dt><dd>${escape(q.text)}</dd></div>`).join('')}</dl><p>${escape(enforcement.limit)}</p><p>${enforcement.sources.map((id) => sourceLink(sources.get(id))).join('')}</p><h3>Entity, intent and setting</h3><p>Incident factors adapt the MIT Risk Repository’s entity, intent and timing dimensions. Setting records the activity actually reported; it does not assume that an evaluation model was pre-deployment. “Unresolved” preserves uncertainty about intent. These factors describe the incident, not the hypothetical catastrophe.</p><h3>Method & sources</h3><ul>${data.typology.references.map((ref) => `<li>${sourceLink(ref)}${ref.note ? `<p>${escape(ref.note)}</p>` : ''}</li>`).join('')}</ul>`;
+      $('#method-reading').innerHTML = isSTPA() && window.AuspexSTPA ? window.AuspexSTPA.guide() : `<p class="method-intro">Trace what AI changes, what the evidence reaches, and what each barrier depends on.</p><h3>AI-specific stages</h3><p>${escape(data.typology.aiBasis)}</p>${definitions(data.typology.aiStages)}<details><summary>Causal roles</summary><p>${escape(data.typology.basis)}</p>${definitions(data.typology.roles)}</details><h3>Evidence and scope</h3>${data.typology.rules.map((rule) => `<p>${escape(rule)}</p>`).join('')}<p>Case records include incidents, experiments, deployment and procurement reports, and historical non-AI comparisons, with settings shown beside each case. Counts describe component coverage, not independent replication or proof of a complete causal chain. “Mechanism comparison” means the mechanism was examined in a different setting. “Evidence challenging the link” and “Countermeasure evidence” can constrain a pathway rather than support its progression. The paired-bar mark locates an assessed control; its adjacent text states the outcome. Neither line thickness nor color encodes a probability or strength score.</p><h3>Barrier roles</h3>${definitions(data.typology.barrierRoles)}<h3>${escape(enforcement.title)}</h3><p>${escape(enforcement.scope)}</p><dl class="role-definitions">${enforcement.questions.map((q) => `<div><dt>${escape(q.label)}</dt><dd>${escape(q.text)}</dd></div>`).join('')}</dl><p>${escape(enforcement.limit)}</p><p>${enforcement.sources.map((id) => sourceLink(sources.get(id))).join('')}</p><h3>Entity, intent and setting</h3><p>Incident factors adapt the MIT Risk Repository’s entity, intent and timing dimensions. Setting records the activity actually reported; it does not assume that an evaluation model was pre-deployment. “Unresolved” preserves uncertainty about intent. These factors describe the incident, not the hypothetical catastrophe.</p><h3>Method & sources</h3><ul>${data.typology.references.map((ref) => `<li>${sourceLink(ref)}${ref.note ? `<p>${escape(ref.note)}</p>` : ''}</li>`).join('')}</ul>`;
       $('#method-dialog').dataset.group = $('#app').dataset.group || '';
       $('#method-dialog').showModal();
       return;

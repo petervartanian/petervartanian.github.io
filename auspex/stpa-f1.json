@@ -1,0 +1,1088 @@
+{
+  "version": "1.0",
+  "pathway": "F-01",
+  "displayId": "F.1",
+  "title": "Amplification, failed response and mass violence",
+  "status": "STPA worked example · provisional analysis",
+  "summary": "When does harmful amplification escape control, and can intervention still protect people?",
+  "roleTypes": [
+    {
+      "id": "condition",
+      "label": "Enabling condition",
+      "definition": "A circumstance that makes a route possible; it does not by itself establish a hazard."
+    },
+    {
+      "id": "unsafe-action",
+      "label": "Unsafe control action",
+      "definition": "An action or omission linked to its controller, hazardous context and affected constraint."
+    },
+    {
+      "id": "scenario",
+      "label": "Loss scenario",
+      "definition": "An explanation of how control can become inadequate, including feedback and execution problems."
+    },
+    {
+      "id": "hazard",
+      "label": "Hazardous state",
+      "definition": "A system state that can produce a loss together with relevant environmental conditions."
+    },
+    {
+      "id": "amplifier",
+      "label": "Optional amplifier",
+      "definition": "A factor that could strengthen a route but is not required in every version."
+    },
+    {
+      "id": "loss",
+      "label": "Loss",
+      "definition": "An outcome stakeholders seek to prevent, kept distinct from its contributing causes."
+    },
+    {
+      "id": "recovery",
+      "label": "Recovery",
+      "definition": "A response re-establishes enforceable safety constraints within a specified boundary; success requires verification."
+    }
+  ],
+  "limitingConditions": [
+    {
+      "kind": "Safeguard",
+      "example": "Independently enforced review, access bounds or effective interruption.",
+      "question": "Which specified mechanism blocks the transition, and what demonstrates that it works?"
+    },
+    {
+      "kind": "Capability limit",
+      "example": "The system cannot perform the required research, deception or physical task.",
+      "question": "Would increased capability remove this limit?"
+    },
+    {
+      "kind": "Opportunity limit",
+      "example": "The necessary access, resources or institutional delegation is unavailable.",
+      "question": "Can the system or another actor acquire what is missing?"
+    },
+    {
+      "kind": "Contingency",
+      "example": "Activity ends for a reason that does not establish an effective safeguard.",
+      "question": "What actually ended the episode, and would that circumstance recur?"
+    }
+  ],
+  "schema": "Selected losses, hazards, control relationships, contextual unsafe actions and loss scenarios are traced to constraints. Numbered milestones summarize this analysis; they are not STPA steps. Incident evidence and hypothetical continuations remain distinct.",
+  "limits": "A bounded first-pass analysis, not an exhaustive STPA or a completed CAST investigation. Selected actions illustrate the four unsafe-action categories; domain experts must examine every relevant action and context. No probabilities, barrier independence or comparative distance to catastrophe are inferred. Barrier condition describes the stated observation, not a prediction about a more capable AI.",
+  "scope": "A hypothetical platform operating in a conflict-affected setting: ranking, content enforcement, platform governance, local warning partners and the interface to civilian protection. Human perpetrators and pre-existing conflict remain causal actors outside platform control.",
+  "purpose": "Prevent platform activity from contributing to threats, targeting, mass violence or displacement while protecting legitimate expression and access to safety information.",
+  "boundary": "The roles below are analytical functions, not a verified governance map for Meta or any particular country. A platform can control its distribution system; it cannot by itself guarantee physical protection or resolve an armed conflict.",
+  "numbering": "01–05 identify scenario milestones and R a recovery route. Historical investigations support an attributed amplification-and-response component, not an experimentally isolated full causal chain.",
+  "bowtie": "The centre is H1: harmful dissemination persists beyond a timely, context-sensitive response. Subsequent mobilization and mass violence require human intent, coercive capacity and failed physical protection. Rights-respecting intervention and civilian protection can still limit further harm.",
+  "losses": [
+    {
+      "id": "L1",
+      "title": "Threats, targeting and serious rights harms",
+      "text": "People suffer targeted threats, intimidation and loss of safe participation in public life."
+    },
+    {
+      "id": "L2",
+      "title": "Mass violence and displacement",
+      "text": "A conflict-affected population suffers organized physical violence, deaths and forced displacement."
+    },
+    {
+      "id": "L3",
+      "title": "Loss of legitimate expression and safety information",
+      "text": "Overbroad intervention silences threatened communities, suppresses evidence or obstructs information people need for safety."
+    }
+  ],
+  "hazards": [
+    {
+      "id": "H1",
+      "title": "Harmful dissemination escapes timely control",
+      "text": "The platform persistently distributes content that can enable targeting or violence, without an effective response within the relevant protection window.",
+      "losses": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "id": "H2",
+      "title": "Engagement incentives amplify unsafe exposure",
+      "text": "Distribution decisions amplify dangerous content or turn attempted countermeasures into additional exposure.",
+      "losses": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "id": "H3",
+      "title": "Response is ineffective or overbroad",
+      "text": "The platform or crisis response fails to reach at-risk people or restricts legitimate expression and safety information without adequate justification and remedy.",
+      "losses": [
+        "L1",
+        "L2",
+        "L3"
+      ]
+    }
+  ],
+  "controllers": [
+    {
+      "id": "C1",
+      "title": "Platform governance and product authority",
+      "responsibility": "Set distribution objectives, resource local safeguards, authorize crisis measures and review rights impacts.",
+      "feedback": "Exposure measures, local warnings, enforcement errors, appeals and evidence of offline threats.",
+      "assumption": "Engagement, content removal and absence of user reports are incomplete measures of safety."
+    },
+    {
+      "id": "C2",
+      "title": "Ranking and distribution service",
+      "responsibility": "Distribute content within enforced safety and rights constraints; expose audit records of recommendations.",
+      "feedback": "Content signals, policy limits, context and verified changes in exposure.",
+      "assumption": "Responses to a harmful post can increase its ranking unless their meaning is accounted for."
+    },
+    {
+      "id": "C3",
+      "title": "Contextual moderation and response",
+      "responsibility": "Triage credible threats, apply proportionate content measures, preserve evidence and resolve appeals.",
+      "feedback": "Local-language reports, threat context, enforcement receipts, repeated uploads and reviewer disagreement.",
+      "assumption": "Classification accuracy alone does not establish timely interruption of harmful exposure."
+    },
+    {
+      "id": "C4",
+      "title": "Local warning and crisis coordination",
+      "responsibility": "Route context-rich warnings to accountable responders and coordinate protection requests with affected communities.",
+      "feedback": "Acknowledgments, action taken, safety needs and reports of ongoing threats.",
+      "assumption": "A trusted reporting channel is useful only if a responder can and does act."
+    },
+    {
+      "id": "C5",
+      "title": "Civilian protection and emergency services",
+      "responsibility": "Provide lawful, impartial physical protection and emergency support when credible threats reach them.",
+      "feedback": "Threat locations, affected people, access restrictions and independently checked safety outcomes.",
+      "assumption": "Authorities may be unable, unwilling or implicated in violence; a referral is not proof of protection."
+    }
+  ],
+  "controlLoops": [
+    {
+      "id": "CA1",
+      "controller": "C1",
+      "process": "C2",
+      "action": "Set ranking objectives / constrain crisis distribution",
+      "feedback": "Exposure audits, risk findings and protected-community feedback return to governance.",
+      "constraints": [
+        "SC1",
+        "SC2",
+        "SC5"
+      ]
+    },
+    {
+      "id": "CA2",
+      "controller": "C3",
+      "process": "C2",
+      "action": "Remove, reduce or restore distribution with review",
+      "feedback": "Actual exposure, reuploads, enforcement receipts and appeals show whether the action worked.",
+      "constraints": [
+        "SC1",
+        "SC2",
+        "SC5"
+      ]
+    },
+    {
+      "id": "CA3",
+      "controller": "C4",
+      "process": "C1",
+      "action": "Escalate a credible contextual warning",
+      "feedback": "Governance reports ownership, timing and the action taken or reasons for inaction.",
+      "constraints": [
+        "SC3"
+      ]
+    },
+    {
+      "id": "CA4",
+      "controller": "C4",
+      "process": "C5",
+      "action": "Request and coordinate civilian protection",
+      "feedback": "Independent checks establish whether people receive usable protection or support.",
+      "constraints": [
+        "SC4"
+      ]
+    },
+    {
+      "id": "CA5",
+      "controller": "C1",
+      "process": "C3",
+      "action": "Provide local response capacity and escalation authority",
+      "feedback": "Queue delays, language coverage, appeals and threat-response outcomes reveal gaps.",
+      "constraints": [
+        "SC2",
+        "SC3",
+        "SC5"
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "SC1",
+      "title": "Measure and constrain harmful exposure",
+      "text": "Distribution and counter-speech interventions must be assessed by their effect on harmful exposure, not engagement alone.",
+      "hazards": [
+        "H1",
+        "H2"
+      ],
+      "owners": [
+        "C1",
+        "C2",
+        "C3"
+      ],
+      "role": "Prevention",
+      "nodes": [
+        "F-01:1",
+        "F-01:2"
+      ],
+      "test": "Does an intervention reduce exposure to the dangerous original content, including recommendation effects and reshares?",
+      "limit": "The attempted safeguard may feed the same engagement objective it is meant to constrain."
+    },
+    {
+      "id": "SC2",
+      "title": "Act within the threat window",
+      "text": "Credible, context-specific threats must receive a proportionate response before preventable exposure or targeting continues beyond the useful intervention window.",
+      "hazards": [
+        "H1",
+        "H3"
+      ],
+      "owners": [
+        "C1",
+        "C3"
+      ],
+      "role": "Prevention and response",
+      "nodes": [
+        "F-01:2",
+        "F-01:3",
+        "F-01:R"
+      ],
+      "test": "How long does a locally intelligible threat take to reach review, decision and verified distribution change?",
+      "limit": "Insufficient language coverage, ambiguous context, repeat uploads and slow enforcement."
+    },
+    {
+      "id": "SC3",
+      "title": "Connect warnings to accountable decisions",
+      "text": "Local warnings must reach an empowered owner who records the response, timing and unresolved uncertainty.",
+      "hazards": [
+        "H1",
+        "H3"
+      ],
+      "owners": [
+        "C1",
+        "C4"
+      ],
+      "role": "Response",
+      "nodes": [
+        "F-01:3",
+        "F-01:R"
+      ],
+      "test": "Can a local partner verify who acted on a warning and what exposure or protection changed?",
+      "limit": "Reports can be acknowledged without changing distribution or mobilizing help."
+    },
+    {
+      "id": "SC4",
+      "title": "Verify physical protection separately",
+      "text": "When online threats imply imminent physical danger, protection must be assessed independently of content enforcement and reach the people at risk.",
+      "hazards": [
+        "H1",
+        "H3"
+      ],
+      "owners": [
+        "C4",
+        "C5"
+      ],
+      "role": "Loss mitigation",
+      "nodes": [
+        "F-01:4",
+        "F-01:5",
+        "F-01:R"
+      ],
+      "test": "Do people receive safe, impartial and accessible protection before perpetrators can act?",
+      "limit": "State involvement, coercive capacity, inaccessible locations and mistrust of responders."
+    },
+    {
+      "id": "SC5",
+      "title": "Preserve rights during intervention",
+      "text": "Crisis measures must be proportionate, reviewable and time-bounded, with access to legitimate safety information and retained evidence.",
+      "hazards": [
+        "H3"
+      ],
+      "owners": [
+        "C1",
+        "C3"
+      ],
+      "role": "Prevention and recovery",
+      "nodes": [
+        "F-01:3",
+        "F-01:R"
+      ],
+      "test": "Can threatened communities still communicate safely, contest mistakes and preserve evidence while harmful exposure is reduced?",
+      "limit": "Indiscriminate shutdowns, politicized enforcement and premature or indefinitely prolonged restrictions."
+    }
+  ],
+  "nodes": [
+    {
+      "id": "F-01:1",
+      "number": "01",
+      "wing": "before",
+      "role": "Enabling condition",
+      "title": "Engagement shapes exposure",
+      "shortLabel": "Engagement shapes exposure",
+      "text": "A population relies on a platform whose distribution systems optimize engagement.",
+      "requires": "Material platform reach, reliance and incentives that can reward dangerous content.",
+      "mechanism": "Optimization affects what people see; it does not make every exposure persuasive or violent.",
+      "constraints": [
+        "SC1"
+      ],
+      "sources": [
+        "ERF"
+      ],
+      "scenarios": [
+        "LS1"
+      ],
+      "type": "condition",
+      "references": [
+        "LS1"
+      ]
+    },
+    {
+      "id": "F-01:2",
+      "number": "02",
+      "wing": "before",
+      "role": "Amplification mechanism",
+      "title": "Inflammatory content is amplified",
+      "shortLabel": "Inflammatory content is amplified",
+      "text": "Political or armed actors supply inflammatory content that gains repeated or wider exposure.",
+      "requires": "Harmful content, audience access and ranking effects beyond the original publication.",
+      "mechanism": "The proposed mechanism concerns changed exposure. Its size must be measured separately from content volume or engagement.",
+      "constraints": [
+        "SC1",
+        "SC2"
+      ],
+      "sources": [
+        "MYA",
+        "ETA"
+      ],
+      "scenarios": [
+        "LS1"
+      ],
+      "type": "scenario",
+      "references": [
+        "H2",
+        "LS1"
+      ]
+    },
+    {
+      "id": "F-01:3",
+      "number": "03",
+      "wing": "centre",
+      "role": "Loss of control · H1",
+      "title": "Warnings fail to interrupt spread",
+      "shortLabel": "Warnings fail to interrupt spread",
+      "text": "Contextual moderation and credible warnings do not produce a timely effective response.",
+      "requires": "Ongoing dangerous dissemination and an inadequate or late control response.",
+      "mechanism": "The loss-of-control threshold is failed timely control of dissemination, not proof that a platform caused subsequent violence.",
+      "constraints": [
+        "SC2",
+        "SC3",
+        "SC5"
+      ],
+      "sources": [
+        "MYA",
+        "ETA"
+      ],
+      "scenarios": [
+        "LS2",
+        "LS3"
+      ],
+      "type": "hazard",
+      "references": [
+        "H1",
+        "UCA2",
+        "UCA3"
+      ]
+    },
+    {
+      "id": "F-01:4",
+      "number": "04",
+      "wing": "after",
+      "role": "Conditional mobilization",
+      "title": "Exposure assists targeting",
+      "shortLabel": "Exposure assists targeting",
+      "text": "In an existing conflict, increased exposure helps dehumanization, targeting or mobilization.",
+      "requires": "Human actors intend harm, can act and use the information in ways that affect behavior.",
+      "mechanism": "Exposure can be a contributing cause alongside organization, persecution and state violence. Its independent contribution remains uncertain.",
+      "constraints": [
+        "SC4"
+      ],
+      "sources": [
+        "ERF",
+        "MYA",
+        "ETA"
+      ],
+      "scenarios": [
+        "LS4"
+      ],
+      "type": "scenario",
+      "references": [
+        "LS4"
+      ]
+    },
+    {
+      "id": "F-01:5",
+      "number": "05",
+      "wing": "after",
+      "role": "Further loss · L2",
+      "title": "Mass violence and displacement",
+      "shortLabel": "Mass violence and displacement",
+      "text": "Physical protection also fails and organized violence causes deaths and displacement.",
+      "requires": "Perpetrators have coercive capacity and can reach people who lack effective protection.",
+      "mechanism": "A content-control failure alone does not establish this outcome or an existential catastrophe.",
+      "constraints": [
+        "SC4"
+      ],
+      "sources": [
+        "MYA",
+        "ETA"
+      ],
+      "scenarios": [
+        "LS4"
+      ],
+      "type": "loss",
+      "references": [
+        "L2"
+      ]
+    },
+    {
+      "id": "F-01:R",
+      "number": "R",
+      "wing": "recovery",
+      "role": "Recovery",
+      "title": "Exposure reduced, people protected",
+      "shortLabel": "Exposure reduced, people protected",
+      "text": "Effective distribution controls and protection limit further harm while preserving legitimate expression.",
+      "requires": "Verified exposure reduction, usable protection where needed, review and protection against recurrence.",
+      "mechanism": "Content removal and aggregate moderation counts are not sufficient evidence that people are safe.",
+      "constraints": [
+        "SC2",
+        "SC3",
+        "SC4",
+        "SC5"
+      ],
+      "sources": [
+        "STPA"
+      ],
+      "scenarios": [],
+      "type": "recovery",
+      "references": []
+    }
+  ],
+  "links": [
+    {
+      "id": "F-01:1-2",
+      "from": "F-01:1",
+      "to": "F-01:2",
+      "label": "Ranking increases dangerous exposure",
+      "kind": "contribution",
+      "constraints": [
+        "SC1"
+      ]
+    },
+    {
+      "id": "F-01:2-3",
+      "from": "F-01:2",
+      "to": "F-01:3",
+      "label": "Timely contextual response is ineffective",
+      "kind": "contribution",
+      "constraints": [
+        "SC2",
+        "SC3"
+      ]
+    },
+    {
+      "id": "F-01:3-4",
+      "from": "F-01:3",
+      "to": "F-01:4",
+      "label": "Actors use exposure to organize or target",
+      "kind": "contribution",
+      "constraints": [
+        "SC2",
+        "SC4"
+      ]
+    },
+    {
+      "id": "F-01:4-5",
+      "from": "F-01:4",
+      "to": "F-01:5",
+      "label": "Coercive capacity and failed physical protection",
+      "kind": "continuation",
+      "constraints": [
+        "SC4"
+      ]
+    },
+    {
+      "id": "F-01:3-R",
+      "from": "F-01:3",
+      "to": "F-01:R",
+      "label": "Exposure falls and effective protection reaches people",
+      "kind": "recovery",
+      "constraints": [
+        "SC2",
+        "SC3",
+        "SC4",
+        "SC5"
+      ]
+    }
+  ],
+  "unsafeActions": [
+    {
+      "id": "UCA1",
+      "type": "Unsafe action provided",
+      "loop": "CA1",
+      "controller": "C1",
+      "action": "Authorizes engagement objectives without adequate crisis constraints",
+      "context": "The ranking feedback rewards dangerous exposure, including responses intended to oppose it.",
+      "hazards": [
+        "H2"
+      ],
+      "constraints": [
+        "SC1"
+      ]
+    },
+    {
+      "id": "UCA2",
+      "type": "Required action absent",
+      "loop": "CA2",
+      "controller": "C3",
+      "action": "Does not apply a required proportionate distribution restriction",
+      "context": "A credible contextual threat remains in distribution and the useful protection window is open.",
+      "hazards": [
+        "H1"
+      ],
+      "constraints": [
+        "SC2",
+        "SC3"
+      ]
+    },
+    {
+      "id": "UCA3",
+      "type": "Wrong timing or order",
+      "loop": "CA2",
+      "controller": "C3",
+      "action": "Applies the restriction after the useful intervention window",
+      "context": "The delay leaves avoidable exposure or targeting active while the threat can be carried out.",
+      "hazards": [
+        "H1",
+        "H3"
+      ],
+      "constraints": [
+        "SC2"
+      ]
+    },
+    {
+      "id": "UCA4",
+      "type": "Wrong duration",
+      "loop": "CA1",
+      "controller": "C1",
+      "action": "Maintains broad crisis restrictions after their justification ends",
+      "context": "Legitimate speech or safety information remains restricted without review or adequate remedy.",
+      "hazards": [
+        "H3"
+      ],
+      "constraints": [
+        "SC5"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "LS1",
+      "title": "A countermeasure feeds the amplification signal",
+      "archetype": "Unsafe objective / controlled-process interaction",
+      "text": "A response meant to challenge dangerous material is treated as engagement with it. The distribution objective rewards the response and undermines the attempted constraint.",
+      "ucas": [
+        "UCA1"
+      ],
+      "hazards": [
+        "H2"
+      ],
+      "nodes": [
+        "F-01:1",
+        "F-01:2"
+      ],
+      "evidence": [
+        "MYA"
+      ],
+      "unknown": "The exposure change, ranking contribution and whether redesigned feedback would reverse it."
+    },
+    {
+      "id": "LS2",
+      "title": "A report fails to become timely action",
+      "archetype": "Feedback / authority and coordination",
+      "text": "Language or context is lost, queues delay the decision, or the receiving team lacks authority. A warning may exist without a sufficiently fast change in distribution.",
+      "ucas": [
+        "UCA2",
+        "UCA3"
+      ],
+      "hazards": [
+        "H1"
+      ],
+      "nodes": [
+        "F-01:3"
+      ],
+      "evidence": [
+        "ETA"
+      ],
+      "unknown": "Report receipts, review decisions, enforcement timing, continued exposure and the available intervention window."
+    },
+    {
+      "id": "LS3",
+      "title": "An appropriate restriction fails or overshoots",
+      "archetype": "Control path / unintended control effects",
+      "text": "Enforcement may miss a distribution surface or new uploads even after a correct decision. Conversely, overbroad measures can suppress legitimate communication and evidence; their continuation needs review.",
+      "ucas": [
+        "UCA4"
+      ],
+      "hazards": [
+        "H1",
+        "H3"
+      ],
+      "nodes": [
+        "F-01:3",
+        "F-01:R"
+      ],
+      "evidence": [],
+      "unknown": "Actual delivery of the control, missed exposure, rights impacts and the conditions for lifting restrictions."
+    },
+    {
+      "id": "LS4",
+      "title": "Online exposure contributes to organized physical harm",
+      "archetype": "Environmental conditions / further loss scenario",
+      "text": "Human actors may turn exposure into targeting or mobilization amid pre-existing conflict. Serious collective harm additionally requires coercive capacity and ineffective protection. The platform contribution must not be substituted for these causes.",
+      "ucas": [],
+      "hazards": [
+        "H1",
+        "H3"
+      ],
+      "nodes": [
+        "F-01:4",
+        "F-01:5"
+      ],
+      "evidence": [
+        "ERF",
+        "MYA",
+        "ETA"
+      ],
+      "unknown": "The counterfactual exposure, perpetrators’ decisions, effect of physical protection and relative contribution of independent causes."
+    }
+  ],
+  "sources": [
+    {
+      "id": "STPA",
+      "title": "Leveson & Thomas · STPA Handbook (2018)",
+      "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
+      "locator": "Chapters 2 and 5–6",
+      "use": "Method for control, feedback, social analysis and indicators."
+    },
+    {
+      "id": "ERF",
+      "title": "Bucknall & Dori-Hacohen · Current and Near-Term AI as a Potential Existential Risk Factor",
+      "url": "https://arxiv.org/pdf/2209.10604",
+      "locator": "Section 4.1; proposed causal relationships",
+      "use": "Research hypothesis about information systems as risk factors, not validation of the whole pathway."
+    },
+    {
+      "id": "MYA",
+      "title": "Amnesty International · The Social Atrocity: Myanmar findings",
+      "url": "https://www.amnesty.org/en/latest/news/2022/09/myanmar-facebooks-systems-promoted-violence-against-rohingya-meta-owes-reparations-new-report/",
+      "locator": "Anti-Rohingya echo chamber; failure to act",
+      "use": "Amnesty investigation; attributed findings about amplification and counter-speech, not a causal effect estimate."
+    },
+    {
+      "id": "ETA",
+      "title": "Amnesty International · Meta’s contribution to abuses in northern Ethiopia",
+      "url": "https://www.amnesty.org/en/latest/news/2023/10/meta-failure-contributed-to-abuses-against-tigray-ethiopia/",
+      "locator": "Meta contribution; recurrent failures; family account",
+      "use": "Amnesty investigation; attributed response failure. Meta disputed the findings. The inconsistent original posting date is not adopted."
+    },
+    {
+      "id": "META-MYA18",
+      "title": "Meta · Myanmar human rights assessment response (2018)",
+      "url": "https://about.fb.com/news/2018/11/myanmar-hria/",
+      "locator": "Enforcement of our content policies; engagement and transparency",
+      "use": "Platform response and reported later strengthening of controls. Not independent proof of reduced violence."
+    },
+    {
+      "id": "META-ETA21",
+      "title": "Meta · Work to protect people in Ethiopia (2021)",
+      "url": "https://about.fb.com/news/2021/11/update-on-ethiopia/",
+      "locator": "Hate speech, reporting and safety efforts",
+      "use": "Platform account of actions and investments; aggregate detection metrics do not resolve a specific reported response failure."
+    }
+  ],
+  "additionalEvidence": {
+    "sources": [
+      {
+        "id": "META-MYA18",
+        "title": "Meta · Myanmar human rights assessment response (2018)",
+        "url": "https://about.fb.com/news/2018/11/myanmar-hria/",
+        "retrievedAt": "2026-09-13",
+        "access": "Platform response read; self-reported measures and limitations retained"
+      },
+      {
+        "id": "META-ETA21",
+        "title": "Meta · Work to protect people in Ethiopia (2021)",
+        "url": "https://about.fb.com/news/2021/11/update-on-ethiopia/",
+        "retrievedAt": "2026-09-13",
+        "access": "Platform response read; action counts are not treated as a harm-reduction estimate"
+      }
+    ],
+    "passages": [
+      {
+        "id": "META-MYA18-controls",
+        "source": "META-MYA18",
+        "title": "Later strengthening reported by the platform",
+        "locator": "5 November 2018 · Enforcement of our content policies",
+        "kind": "summary",
+        "text": "Facebook acknowledged earlier shortcomings and reported 99 onboarded Myanmar-language reviewers, a dedicated team and distribution reductions for certain potentially harmful material pending review.",
+        "scope": "Self-reported changes after the 2017 atrocities. Evidence of changed control arrangements, not proof that the changes prevented violence or would withstand stronger AI."
+      },
+      {
+        "id": "META-ETA21-response",
+        "source": "META-ETA21",
+        "title": "Platform response on Ethiopian safeguards",
+        "locator": "9 November 2021 · Hate speech and additional safety efforts",
+        "kind": "summary",
+        "text": "Meta described local reporting channels, language expertise, proactive detection and actions against more than 92,000 items from May to October 2021. It also described additional restrictions on dangerous claims.",
+        "scope": "Aggregate platform account. It does not establish response timing for every threat, reduction in audience exposure or prevention of the specific killing described by Amnesty."
+      }
+    ]
+  },
+  "assessments": [
+    {
+      "id": "MYA-2017-F-01",
+      "pathway": "F-01",
+      "pathwayVersion": "1.0",
+      "incident": "MYA-2017",
+      "status": "source-summary",
+      "relation": "component",
+      "targets": [
+        {
+          "id": "F-01:2-3",
+          "kind": "edge",
+          "state": "component",
+          "label": "Amplification and ineffective mitigation"
+        }
+      ],
+      "scope": "Attributed reconstruction of amplification and failed response. A separately dated 2018 platform response describes subsequent control changes, not prevention of the 2017 atrocities.",
+      "evidence": [
+        "MYA-amplification",
+        "META-MYA18-controls"
+      ],
+      "trace": [
+        {
+          "text": "Amnesty reports amplification of anti-Rohingya content amid longstanding persecution.",
+          "evidence": [
+            "MYA-amplification"
+          ]
+        },
+        {
+          "text": "Activists reported that anti-hate stickers increased engagement and visibility of the posts they opposed.",
+          "evidence": [
+            "MYA-amplification"
+          ]
+        },
+        {
+          "text": "Amnesty documents repeated warnings and attributes a contribution to the subsequent atrocities to platform failures.",
+          "evidence": [
+            "MYA-amplification"
+          ]
+        }
+      ],
+      "reach": {
+        "local": "Amnesty reports amplification of anti-Rohingya content amid longstanding persecution. Activists reported that anti-hate stickers increased engagement and visibility of the posts they opposed. Amnesty documents repeated warnings and attributes a contribution to the subsequent atrocities to platform failures.",
+        "systemic": "Amnesty’s attributed reconstruction connects amplification and failed response to mass violence. The platform’s independent causal contribution and each later transition remain uncertain.",
+        "evidence": [
+          "MYA-amplification"
+        ]
+      },
+      "barriers": [
+        {
+          "id": "counter-speech",
+          "title": "Anti-hate counter-speech",
+          "outcome": "Reported amplification of the opposed content",
+          "role": "prevention",
+          "action": "An anti-hate initiative offered stickers users could post in response to inflammatory content.",
+          "efficacy": "Amnesty reports that activists observed increased visibility because ranking treated the responses as engagement.",
+          "durability": "The intervention shared the very ranking mechanism producing the unwanted amplification.",
+          "failure": "Counter-speech increased the engagement signal and therefore the visibility of the harmful post.",
+          "evidence": [
+            "MYA-amplification"
+          ],
+          "view": {
+            "input": "Inflammatory post",
+            "control": "Counter-speech sticker",
+            "result": "Visibility increases",
+            "dependency": "How ranking treats responses",
+            "failureRoute": "Response rewards the original post",
+            "failureObserved": true,
+            "failureLabel": "Reported failure",
+            "observation": 1,
+            "resultObservation": 1
+          },
+          "target": "F-01:2-3",
+          "dependencies": [
+            {
+              "label": "How ranking treats responses",
+              "assessment": "The intervention shared the very ranking mechanism producing the unwanted amplification.",
+              "basis": "Editorial dependency assessment",
+              "evidence": [
+                "MYA-amplification"
+              ]
+            }
+          ],
+          "reinforcement": {
+            "label": "Ranking-impact evaluation",
+            "proposal": "Evaluate counter-speech together with its effect on recommender ranking.",
+            "test": "Measure exposure to the original content after the intervention; do not treat engagement as success.",
+            "basis": "Editorial proposal; effectiveness not established",
+            "evidence": [
+              "MYA-amplification"
+            ]
+          }
+        },
+        {
+          "id": "post-incident-moderation",
+          "title": "Later moderation and distribution controls",
+          "outcome": "Reported strengthening after the incident",
+          "role": "prevention",
+          "target": "F-01:2-3",
+          "action": "Expand contextual review and reduce distribution while potentially harmful content is assessed.",
+          "efficacy": "Meta reported added capacity and distribution controls in 2018; this does not establish reduced physical harm.",
+          "durability": "Capacity, reach and response time must be assessed against actual exposure and local context.",
+          "failure": "A larger operation can still miss dangerous exposure or act after the useful protection window.",
+          "evidence": [
+            "META-MYA18-controls"
+          ],
+          "view": {
+            "input": "Potentially harmful content",
+            "control": "Expanded review and distribution limits",
+            "result": "Controls strengthened; effect unverified",
+            "dependency": "Timely local coverage",
+            "failureRoute": "A larger operation can still miss dangerous exposure or act after the useful protection window.",
+            "failureObserved": false,
+            "failureLabel": "Possible failure",
+            "observation": 1
+          },
+          "dependencies": [
+            {
+              "label": "Timely local coverage",
+              "assessment": "Capacity, reach and response time must be assessed against actual exposure and local context.",
+              "basis": "Analytical dependency assessment",
+              "evidence": [
+                "META-MYA18-controls"
+              ]
+            }
+          ],
+          "reinforcement": {
+            "label": "Proposed improvement",
+            "proposal": "Audit exposure and warning-to-action outcomes independently.",
+            "test": "Test local-language threats through the full response path and measure remaining exposure.",
+            "basis": "Analytical proposal; effectiveness not established",
+            "evidence": [
+              "META-MYA18-controls"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ETA-2021-F-01",
+      "pathway": "F-01",
+      "pathwayVersion": "1.0",
+      "incident": "ETA-2021",
+      "status": "source-summary",
+      "relation": "component",
+      "targets": [
+        {
+          "id": "F-01:2-3",
+          "kind": "edge",
+          "state": "component",
+          "label": "Amplification and response failures"
+        }
+      ],
+      "scope": "An attributed conflict-setting reconstruction; Meta disputed the findings and described broader safeguards. Aggregate enforcement does not resolve the specific reported late response.",
+      "evidence": [
+        "ETA-response",
+        "META-ETA21-response"
+      ],
+      "trace": [
+        {
+          "text": "Amnesty reports algorithmic amplification of harmful content targeting Tigrayans during the conflict.",
+          "evidence": [
+            "ETA-response"
+          ]
+        },
+        {
+          "text": "Civil-society groups and affected people warned Meta and reported threatening content.",
+          "evidence": [
+            "ETA-response"
+          ]
+        },
+        {
+          "text": "One documented family account describes removal only after the targeted person had been killed.",
+          "evidence": [
+            "ETA-response"
+          ]
+        }
+      ],
+      "reach": {
+        "local": "Amnesty reports algorithmic amplification of harmful content targeting Tigrayans during the conflict. Civil-society groups and affected people warned Meta and reported threatening content. One documented family account describes removal only after the targeted person had been killed.",
+        "systemic": "A second attributed conflict-setting reconstruction. The source supports scrutiny of ranking and response, while the extent of their causal contribution is disputed.",
+        "evidence": [
+          "ETA-response"
+        ]
+      },
+      "barriers": [
+        {
+          "id": "moderation-escalation",
+          "title": "Reporting and moderation escalation",
+          "outcome": "Reported intervention arrived too late",
+          "role": "response",
+          "action": "People and civil-society partners submitted reports and warnings through platform channels.",
+          "efficacy": "Amnesty reports delayed or inadequate action, including removal after a targeted person’s death; Meta disputed the findings.",
+          "durability": "A reporting channel depends on timely, context-sensitive action and sufficient language coverage.",
+          "failure": "Warnings may be delayed, misinterpreted or left without an effective response before harm occurs.",
+          "evidence": [
+            "ETA-response"
+          ],
+          "view": {
+            "input": "Threats and warnings",
+            "control": "Moderation response",
+            "result": "Removal after harm",
+            "dependency": "Timely contextual review",
+            "failureRoute": "Warning does not trigger action",
+            "failureObserved": true,
+            "failureLabel": "Reported failure",
+            "observation": 1
+          },
+          "target": "F-01:2-3",
+          "dependencies": [
+            {
+              "label": "Timely contextual review",
+              "assessment": "A reporting channel depends on timely, context-sensitive action and sufficient language coverage.",
+              "basis": "Editorial dependency assessment",
+              "evidence": [
+                "ETA-response"
+              ]
+            }
+          ],
+          "reinforcement": {
+            "label": "Local warning-to-action tests",
+            "proposal": "Connect local-language warnings to accountable, time-bounded response.",
+            "test": "Exercise the full warning-to-action path with context-specific cases.",
+            "basis": "Editorial proposal; effectiveness not established",
+            "evidence": [
+              "ETA-response"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "presentation": {
+    "conditions": {
+      "F-01:2": "If ranking materially increases harmful exposure",
+      "F-01:3": "If response misses the intervention window",
+      "F-01:4": "Only if people use exposure to target or mobilize",
+      "F-01:5": "Only with coercive capacity and failed protection",
+      "F-01:R": "If proportionate controls and protection work"
+    },
+    "overlays": {
+      "MYA-2017": {
+        "title": "Myanmar · investigation",
+        "kind": "Reported incident",
+        "relation": "mechanism",
+        "target": "F-01:2-3",
+        "anchor": "F-01:3",
+        "observed": "Amnesty reports failed counter-speech and attributes a contribution from platform amplification to atrocities.",
+        "notEstablished": "An isolated algorithmic effect size, sole causation or a progression measure.",
+        "limit": "Attributed mechanism evidence. The later strengthening is dated 2018 and must not be read as a barrier that protected people in 2017.",
+        "barriers": {
+          "counter-speech": {
+            "title": "Counter-speech",
+            "result": "The response reportedly increased visibility.",
+            "condition": "failed",
+            "conditionBasis": "The intervention did not reduce exposure in the activists’ account; the failure concerns ranking interaction.",
+            "limitType": "safeguard",
+            "strongerAI": "More capable targeting or synthetic engagement could exploit the same objective; better classifiers could help only if exposure actually falls.",
+            "reinforcement": {
+              "proposal": "Evaluate counter-speech jointly with ranking effects.",
+              "test": "Measure exposure to the original harmful post after an intervention.",
+              "status": "proposed"
+            }
+          },
+          "post-incident-moderation": {
+            "title": "Later control changes · 2018",
+            "result": "Staffing and distribution controls expanded; effectiveness unverified.",
+            "condition": "reinforced",
+            "conditionBasis": "Meta reported actual additions to staffing and distribution controls after the incident. This describes strengthening, not a demonstrated reduction in violence.",
+            "limitType": "safeguard",
+            "strongerAI": "Scale, multilingual evasion and faster dissemination can change the workload. Improved detection could also help; the net effect needs testing.",
+            "reinforcement": {
+              "proposal": "Independently audit local exposure and response outcomes.",
+              "test": "Measure time to effective restriction and remaining exposure across adversarial local cases.",
+              "status": "proposed"
+            }
+          }
+        }
+      },
+      "ETA-2021": {
+        "title": "Ethiopia · investigation",
+        "kind": "Reported incident",
+        "relation": "mechanism",
+        "target": "F-01:2-3",
+        "anchor": "F-01:3",
+        "observed": "Amnesty reports a threat-removal response after the targeted person was killed; Meta disputed its findings.",
+        "notEstablished": "That aggregate moderation statistics prevented this harm, or a quantified algorithmic causal effect.",
+        "limit": "Attributed response failure with the platform account preserved. Detection and eventual removal do not demonstrate timely protection.",
+        "barriers": {
+          "moderation-escalation": {
+            "title": "Warning-to-action response",
+            "result": "Intervention reportedly arrived after harm.",
+            "condition": "failed",
+            "conditionBasis": "The condition refers to the documented response window in Amnesty’s account, not every report or all platform moderation.",
+            "limitType": "safeguard",
+            "strongerAI": "More capable generation and targeting could outpace review; better triage may help. Test elapsed time and protection rather than removal totals.",
+            "reinforcement": {
+              "proposal": "Connect local warnings to accountable, time-bounded action.",
+              "test": "Exercise the complete report-to-enforcement path and separately verify protection.",
+              "status": "proposed"
+            }
+          }
+        }
+      }
+    },
+    "fidelity": "Reported investigations identify evidence-bearing mechanisms and their uncertainty. Platform responses are visible; later strengthening is distinguished from earlier failure, and content enforcement from physical protection.",
+    "brittleness": "Observed condition describes what the barrier did in this setting. Brittleness asks which changed dependency, capability or operating condition would make it fail. A strengthened barrier can still be brittle; a single success does not establish robustness."
+  },
+  "controlEvidence": {
+    "title": "Did a warning become protection?",
+    "kind": "Attributed incident comparison",
+    "source": "ETA",
+    "constraint": "SC3",
+    "text": "Follow the report through acknowledgment, contextual review, distribution change and separate physical protection.",
+    "limit": "A submitted warning, detected item or later removal does not establish that the threatened person was protected in time.",
+    "questions": [
+      {
+        "title": "What changed?",
+        "text": "Measure remaining exposure and action timing, rather than engagement or removal totals alone."
+      },
+      {
+        "title": "What was strengthened?",
+        "text": "Separate observed changes to the barrier from evidence that it works."
+      },
+      {
+        "title": "Would stronger AI change it?",
+        "text": "Test scale, evasion and time to intervention while preserving legitimate expression."
+      }
+    ]
+  }
+}

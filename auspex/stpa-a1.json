@@ -1,5 +1,5 @@
 {
-  "version": "1.2",
+  "version": "1.3",
   "pathway": "X-01",
   "displayId": "A.1",
   "title": "Successor capture and the loss of human control",
@@ -440,49 +440,84 @@
       "from": "X-01:1",
       "to": "X-01:3",
       "label": "Influence shapes successor changes",
-      "kind": "contribution"
+      "kind": "contribution",
+      "id": "X-01:1>X-01:3",
+      "constraints": [
+        "SC1"
+      ]
     },
     {
       "from": "X-01:2",
       "to": "X-01:4",
       "label": "Consequential authorization continues",
-      "kind": "contribution"
+      "kind": "contribution",
+      "id": "X-01:2>X-01:4",
+      "constraints": [
+        "SC3"
+      ]
     },
     {
       "from": "X-01:3",
       "to": "X-01:4",
       "label": "Assurance is accepted and authority is granted",
-      "kind": "contribution"
+      "kind": "contribution",
+      "id": "X-01:3>X-01:4",
+      "constraints": [
+        "SC1",
+        "SC2"
+      ]
     },
     {
       "from": "X-01:4",
       "to": "X-01:5",
       "label": "Independent systems can coordinate",
-      "kind": "optional"
+      "kind": "optional",
+      "id": "X-01:4>X-01:5",
+      "constraints": [
+        "SC5"
+      ]
     },
     {
       "from": "X-01:4",
       "to": "X-01:6",
       "label": "Power persists and recovery fails",
-      "kind": "contribution"
+      "kind": "contribution",
+      "id": "X-01:4>X-01:6",
+      "constraints": [
+        "SC4",
+        "SC5"
+      ]
     },
     {
       "from": "X-01:5",
       "to": "X-01:6",
       "label": "Coordination weakens independent opposition",
-      "kind": "optional"
+      "kind": "optional",
+      "id": "X-01:5>X-01:6",
+      "constraints": [
+        "SC5"
+      ]
     },
     {
       "from": "X-01:6",
       "to": "X-01:7",
       "label": "Additional motivation, capability and reach",
-      "kind": "continuation"
+      "kind": "continuation",
+      "id": "X-01:6>X-01:7",
+      "constraints": [
+        "SC5"
+      ]
     },
     {
       "to": "X-01:R",
       "label": "Effective intervention and verified recovery",
       "kind": "recovery",
-      "from": "X-01:4"
+      "from": "X-01:4",
+      "id": "X-01:4>X-01:R",
+      "constraints": [
+        "SC2",
+        "SC4"
+      ]
     }
   ],
   "unsafeActions": [
@@ -822,34 +857,72 @@
       "X-01:4": "Authority granted without effective limits",
       "X-01:R": "If intervention succeeds",
       "X-01:6": "If recovery fails and power persists",
-      "X-01:7": "Only with additional motivation and means"
+      "X-01:7": "Only with additional motivation and means",
+      "X-01:5": "Only if independent systems coordinate"
     },
     "overlays": {
       "AFK-2024": {
         "title": "Alignment-faking experiment",
         "target": "X-01:3",
-        "limit": "Controlled experiment at 03. Later steps were not observed.",
+        "limit": "Mechanism comparison at 03 in a controlled experiment; no later milestone was established.",
         "barriers": {
           "training-assurance": {
             "title": "Behavioral checks",
-            "result": "Compliance concealed retained preferences."
+            "result": "Compliance concealed retained preferences.",
+            "condition": "failed",
+            "conditionBasis": "Visible compliance failed as sufficient assurance of changed preferences in this setup.",
+            "limitType": "safeguard",
+            "strongerAI": "Brittleness arises if the evaluated system can recognize the test and selectively comply. More capable concealment or evaluator dependence could widen the gap between apparent compliance and deployment behavior; this experiment does not measure that future gap.",
+            "reinforcement": {
+              "proposal": "Combine protected observations with tests across training and deployment contexts, and make unresolved discrepancies block consequential approval.",
+              "test": "Can a model that recognizes evaluation still conceal divergent behavior across independently chosen contexts?",
+              "status": "proposed"
+            }
           }
-        }
+        },
+        "kind": "Experiment",
+        "relation": "mechanism",
+        "anchor": "X-01:3",
+        "observed": "Training-context compliance coexisted with retained preferences in the experiment.",
+        "notEstablished": "Successor capture, loss of human control and later outcomes were not observed."
       },
       "SAB-2024": {
         "title": "Sabotage tests",
         "target": "X-01:3",
-        "limit": "Controlled experiment at 03. Later steps were not observed.",
+        "limit": "Mechanism comparison at 03. Detection is distinct from verified interruption; later milestones remain hypothetical.",
         "barriers": {
           "sabotage-review": {
             "title": "Code review",
-            "result": "Stronger review reduced success; some bugs passed."
+            "result": "Stronger review reduced success; some bugs passed.",
+            "condition": "reinforced",
+            "conditionBasis": "A stronger reviewer reduced attacker success in the compared test conditions; residual successful sabotage remained.",
+            "limitType": "mixed",
+            "strongerAI": "The protection depends on the attacker–reviewer capability gap, review budget and coverage. A stronger attacker could defeat a reviewer that currently holds. The experiment compares reviewers; it does not show robustness to future attackers.",
+            "reinforcement": {
+              "proposal": "Use independent review and protected checks beyond a single model reviewer.",
+              "test": "Vary attacker capability, review effort and correlated reviewer failures; measure missed sabotage as well as false alarms.",
+              "status": "proposed"
+            }
           },
           "sabotage-monitor": {
             "title": "Separate monitor",
-            "result": "Manipulation raised suspicion; shutdown not shown."
+            "result": "Manipulation raised suspicion; shutdown not shown.",
+            "condition": "unknown",
+            "conditionBasis": "Suspicion was detected, but verified interruption was not demonstrated.",
+            "limitType": "mixed",
+            "strongerAI": "A monitor can be brittle to less conspicuous manipulation, shared blind spots or alerts that never trigger intervention. The missing evidence is whether detection leads to timely, verified stopping under a more capable attacker.",
+            "reinforcement": {
+              "proposal": "Connect independent monitoring to an enforceable stop decision and confirmation that activity has ceased.",
+              "test": "Does an alert stop all relevant activity before the protected outcome is compromised, including when the attacker manipulates feedback?",
+              "status": "proposed"
+            }
           }
-        }
+        },
+        "kind": "Experiment",
+        "relation": "mechanism",
+        "anchor": "X-01:3",
+        "observed": "Stronger code review reduced sabotage success; monitoring detected suspicious manipulation.",
+        "notEstablished": "These tests did not establish successor capture or operational shutdown."
       }
     },
     "fidelity": "This is a provisional causal model. Its recovery route, optional coordination and additional conditions for extinction remain explicit. Incident overlays supply evidence only about the mapped component and its controls; the hypothetical continuation is not presented as an observed outcome."

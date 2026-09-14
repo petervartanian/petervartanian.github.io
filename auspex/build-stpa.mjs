@@ -1,22 +1,54 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import vm from 'node:vm';
 
-// The A.1 example is deliberately independent of the superseded catalogue model.
 const read = name => readFile(new URL(name, import.meta.url), 'utf8');
-const model = JSON.parse(await read('stpa-a1.json'));
-const bundle = `// Generated from stpa-a1.json by build-stpa.mjs.\nwindow.AuspexSTPAData = ${JSON.stringify(model, null, 2)};\n`;
+const parse = async name => JSON.parse(await read(name));
+const models = await Promise.all(['a','b','c','d','e','f'].map(letter => parse(`stpa-${letter}1.json`)));
+const registry = Object.fromEntries(models.map(model => [model.pathway, model]));
+const bundle = `// Generated from stpa-[a-f]1.json by build-stpa.mjs.\nwindow.AuspexSTPAModels = ${JSON.stringify(registry, null, 2)};\nwindow.AuspexSTPAData = window.AuspexSTPAModels['X-01'];\n`;
 await writeFile(new URL('stpa-data.js', import.meta.url), bundle);
-const context = vm.createContext({ window: { AuspexSTPAData: model } });
+const context = vm.createContext({ window: { AuspexSTPAModels: registry, AuspexSTPAData: models[0] } });
 vm.runInContext(await read('stpa.js'), context);
+const presentation = context.window.AuspexSTPA;
+const [catalogue, assessments, evidence, incidents] = await Promise.all(['pathways.json','assessments.json','evidence.json','incidents.json'].map(parse));
+const sources = new Map(evidence.sources.map(s => [s.id,s]));
+const passages = new Map(evidence.passages.map(p => [p.id,p]));
+for (const model of models) {
+  for (const s of model.additionalEvidence?.sources || []) sources.set(s.id,s);
+  for (const p of model.additionalEvidence?.passages || []) passages.set(p.id,p);
+}
+const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const sourceLinks = ids => [...new Set(ids.map(id => passages.get(id)?.source))].filter(Boolean).map(id => `<a href="${esc(sources.get(id).url)}" target="_blank" rel="noopener noreferrer">${esc(sources.get(id).title)} ↗</a>`).join(' · ');
+function mappedEvidence(model) {
+  const overrides = new Map((model.assessments || []).map(a => [a.id,a]));
+  const cases = assessments.filter(a => a.pathway === model.pathway).map(a => overrides.get(a.id) || a);
+  return `<h3>Mapped evidence</h3>${cases.map(a => {
+    const overlay = model.presentation.overlays[a.incident];
+    const incident = incidents.find(i => i.id === a.incident);
+    return `<section class="stpa-mapped-case"><h4>${esc(overlay.title)}</h4><p>${esc(incident.date)} · ${esc(overlay.kind)} · ${esc(overlay.target)}</p><p>${esc(overlay.observed)}</p><p>${esc(overlay.notEstablished)}</p><p>${esc(a.scope)}</p>${a.barriers.length ? a.barriers.map(b => {
+      const detail = overlay.barriers[b.id];
+      return `<details><summary>${esc(detail.title)} · ${esc(presentation.conditionLabel(detail.condition))}</summary><p>${esc(detail.conditionBasis)}</p><dl><dt>Mechanism</dt><dd>${esc(b.action)}</dd><dt>Evidence</dt><dd>${esc(b.efficacy)}</dd><dt>Brittleness</dt><dd>${esc(detail.strongerAI)}</dd><dt>Failure</dt><dd>${esc(b.failure)}</dd></dl>${detail.reinforcement ? `<p><strong>Proposed reinforcement</strong> · ${esc(detail.reinforcement.proposal)}</p><p><strong>Test</strong> · ${esc(detail.reinforcement.test)}</p>` : ''}<p>${sourceLinks(b.evidence)}</p></details>`;
+    }).join('') : '<p>Barrier performance not established.</p>'}<details><summary>Case observations & evidence</summary>${(a.trace || []).map(t => `<p>${esc(t.text)}</p><p>${sourceLinks(t.evidence)}</p>`).join('')}${[...new Set([...a.evidence,...a.barriers.flatMap(b=>b.evidence)])].map(id => {
+      const p = passages.get(id);
+      if (!p) throw new Error(`Missing evidence ${id}`);
+      return `<section><h5>${esc(p.title)}</h5><p>${esc(p.locator)}</p>${p.kind === 'quote' ? `<blockquote>${esc(p.text)}</blockquote>` : `<p>${esc(p.text)}</p>`}<p>${esc(p.scope)}</p><p>${sourceLinks([id])}</p></section>`;
+    }).join('')}</details></section>`;
+  }).join('')}`;
+}
 let html = await read('pathways.html');
-const article = /<article id="X-01" data-group="X">[\s\S]*?<\/article>(?=<article id="X-02")/;
-if (!article.test(html)) throw new Error('A.1 static article boundary not found');
-const oldArticle = html.match(article)[0];
-const mappedEvidence = oldArticle.match(/<!-- A1-EVIDENCE-START -->([\s\S]*?)<!-- A1-EVIDENCE-END -->/)?.[1]
-  || oldArticle.match(/(<h3>Mapped evidence<\/h3>[\s\S]*?)(?=\s*<h3>Required conditions<\/h3>)/)?.[1];
-if (!mappedEvidence) throw new Error('Preserved A.1 case evidence not found');
-html = html.replace(article, `<article id="X-01" data-group="X"><p class="eyebrow">A.1 · Pathway</p>${context.window.AuspexSTPA.staticPage()}<!-- A1-EVIDENCE-START -->${mappedEvidence}<!-- A1-EVIDENCE-END --><a href="./?p=A.1">Explore A.1 in Auspex ↗</a></article>`);
-if (!html.includes('href="stpa.css"')) html = html.replace('<link rel="stylesheet" href="style.css">', '<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="stpa.css">');
-html = html.replace(/(<a href="#X-01">)A\.1[^<]*(<\/a>)/, `$1A.1 — ${model.title}$2`);
+for (const model of models) {
+  presentation.use(model.pathway);
+  const pathway = catalogue.pathways.find(p => p.id === model.pathway);
+  const start = html.indexOf(`<article id="${model.pathway}" data-group="${pathway.group}">`);
+  if (start < 0) throw new Error(`Missing static article ${model.pathway}`);
+  const nextArticle = /<article id="[^"]+" data-group="[^"]+">/.exec(html.slice(start + 1));
+  if (!nextArticle) throw new Error(`Missing next static article after ${model.pathway}`);
+  const next = start + 1 + nextArticle.index;
+  const marker = model.displayId.replace('.','');
+  const article = `<article id="${model.pathway}" data-group="${pathway.group}"><p class="eyebrow">${model.displayId} · Pathway</p>${presentation.staticPage()}<!-- ${marker}-EVIDENCE-START -->${mappedEvidence(model)}<!-- ${marker}-EVIDENCE-END --><a href="./?p=${model.displayId}">Explore ${model.displayId} in Auspex ↗</a></article>`;
+  html = html.slice(0,start) + article + html.slice(next);
+  html = html.replace(new RegExp(`(<a href="#${model.pathway}">)[^<]*(</a>)`), `$1${model.displayId} — ${esc(model.title)}$2`);
+}
+html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=22.0"');
 await writeFile(new URL('pathways.html', import.meta.url), html);
-console.log('Built the A.1 bundle and static reading version.');
+console.log('Built six STPA models, source-scoped case overlays and matching static reading versions.');

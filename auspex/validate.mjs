@@ -168,7 +168,7 @@ assert(html.includes('<em class="opening-question">As governments experiment wit
 assert.equal(catalogue.groups.find(g => g.id === 'F').shortTitle, 'Informational ecosystems');
 const app = await readFile(new URL('app.js', import.meta.url), 'utf8');
 for (const label of ['Choose a pathway', 'Trace the incidents', 'Inspect the barrier']) assert(html.includes(label));
-for (const label of ['(How) did the barrier work?', 'What makes us think so?', 'How durable is that protection?', 'What could make it fail?']) assert(app.includes(label));
+for (const label of ['(How) did the barrier work?', 'What makes us think so?', 'How brittle is that protection?', 'What could make it fail?']) assert(app.includes(label));
 assert(!/Research draft|ERO alignment|working study|provisional mapping/i.test(`${html}\n${app}`));
 assert(!html.includes('framework.js'));
 assert(!html.includes('assessment.js'));

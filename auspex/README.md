@@ -6,6 +6,35 @@ Serve the repository root and open `/auspex/`. The interface also works directly
 `index.html`, using local assets and a bundled data file. No runtime dependencies.
 `pathways.html` provides a complete static reader without JavaScript.
 
+## Six STPA worked examples
+
+A.1, B.1, C.1, D.1, E.1 and F.1 use the STPA models in `stpa-[a-f]1.json`.
+Their workflow is I: choose a pathway, II: overlay a case at its assessed component,
+III: inspect a barrier. Each model includes losses, hazards, control and feedback
+relationships, constraints, contextual unsafe actions, causal scenarios and recovery.
+The bow-tie map is a summary of this provisional analysis, not a validated forecast.
+
+Overlays distinguish experiments, reports, announcements and historical comparisons.
+An edge's evidence address remains unchanged when its card is placed at a nearby node.
+Barrier condition (reinforced, holding, crumbling, broken or unassessed) describes the
+cited evidence; the **Brittleness** tab separately examines dependence on capabilities
+and operating conditions. These visual labels are editorial, not an STPA rating scale.
+Later corrective changes are dated; proposed reinforcements are explicitly untested.
+Where no barrier was evaluated, the interface says so instead of implying protection.
+
+Models may supply complete assessment overrides and additional evidence records.
+`app.js` merges those by ID without changing the underlying catalogue bundle.
+The static reader uses the same effective records and namespaces internal model links.
+Rebuild and check these examples after editing a model or the renderer:
+
+```sh
+node build-stpa.mjs
+node validate-stpa.mjs
+node validate.mjs
+```
+
+The remaining 31 pathways and comparisons retain the catalogue workflow described below.
+
 ## Content
 
 The register contains 31 catastrophe pathway hypotheses and six bounded-harm comparisons.
