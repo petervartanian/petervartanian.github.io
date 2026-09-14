@@ -508,7 +508,7 @@
 .a1-change-check p + p { border-top: 1px solid color-mix(in srgb,var(--ink) 9%,transparent); }
 .a1-change-check:last-child { margin-bottom: calc(-1 * var(--change-pad-y)); }
 .a1-change-check strong { font-weight: 500; color: var(--ink); }
-.a1-change-sheet .a1-change-owners { max-width: none; margin: 0 calc(-1 * var(--change-pad-x)) calc(-1 * var(--change-pad-y)); padding: 9px var(--change-pad-x); border-top: 1px solid color-mix(in srgb,var(--ink) 14%,transparent); background: color-mix(in srgb,var(--ink) 17%,var(--page)); font: 10px/1.6 var(--sans); color: var(--ink); }
+.a1-change-sheet .a1-change-owners { max-width: none; margin: 0 calc(-1 * var(--change-pad-x)) calc(-1 * var(--change-pad-y)); padding: 9px var(--change-pad-x); border-top: 1px solid color-mix(in srgb,var(--ink) 14%,transparent); background: color-mix(in srgb,var(--ink) 17%,var(--page)); font: 10px/1.6 var(--sans); color: var(--ink); text-align: center; }
 .a1-change-owners strong { display: block; font-weight: 500; }
 .a1-change-owners span { display: block; }
 .a1-barrier-evidence { margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--line); }
