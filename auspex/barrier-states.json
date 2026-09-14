@@ -70,7 +70,7 @@
       "question": "What evidence or test would establish whether it works?",
       "source": "CAA-P",
       "path": "M16 4v3m0 18v3M12 12c0-5 8-5 8 0 0 3-4 3-4 6m0 3h0",
-      "example": "The sabotage monitor became suspicious; whether that led to an effective stop was not tested.",
+      "example": "The sabotage monitor became suspicious. Whether that led to an effective stop was not tested.",
       "exampleSource": "SAB"
     }
   ],

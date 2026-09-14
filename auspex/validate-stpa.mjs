@@ -29,7 +29,7 @@ for (const s of stateModel.states) {
   assert(s.example && stateModel.sources.some(x=>x.id===s.exampleSource));
 }
 assert.deepEqual(Array.from(presentation.routeDefinitions,r=>r.id),['contribution','optional','recovery','feedback']);
-for (const section of ['paths','barriers','recovery']) {
+for (const section of ['paths','barriers']) {
   const guide=presentation.mapGuide(section);
   assert(guide.includes(`data-map-guide="${section}" aria-pressed="true"`));
 }
@@ -237,4 +237,35 @@ assert(!css.includes('route-twist') && !css.includes('a1-gate-'));
 assert(presentation.mapGuide('barriers').includes('A safeguard is a deliberately designed barrier.'));
 assert(presentation.mapGuide('barriers').includes('a1-proposed-definition'));
 assert(!presentation.pathsGuide().includes('a1-safeguard-definition'),'Proposed safeguards belong under Barriers, not among route types');
-assert(presentation.pathsGuide().includes('Conditional names what else must hold'));
+assert.equal(presentation.mapGuide('recovery'),presentation.mapGuide('paths'),'A removed guide falls back to the path key');
+for (const m of models) {
+  presentation.use(m.pathway);
+  const guide=presentation.pathsGuide(true)+presentation.guide()+presentation.stateGuide();
+  const prose=guide.replace(/<[^>]*>/g,'').replace(/&[^;]+;/g,'');
+  assert(!prose.includes(';'),'Guide explanations use full sentences');
+  assert(!guide.includes('Possible means a transition could happen'));
+  assert(!guide.includes('Conditional names what else must hold'));
+  assert(!guide.includes('Recovery & reinforcement') && !guide.includes('Brittleness & recovery'));
+  assert(!guide.includes('stpa-recovery-guide'));
+  assert(guide.includes('Systems-Theoretic Process Analysis'));
+  assert(guide.includes('Haruspex uses CAST'));
+  assert(guide.includes('The related component is highlighted, while'));
+  const recovery=m.nodes.find(n=>n.type==='recovery');
+  assert(!presentation.renderMap(recovery.id,null,'').includes('data-recovery-info'));
+  const routes=presentation.proposedBarriers(),first=new Map();
+  for (const route of routes) {
+    const view=presentation.proposedBarrierView(route.id,null);
+    for (const c of route.controls) {
+      const heading=view.match(new RegExp(`<h4 id="a1-proposed-${c.id}"[^>]*>(.*?)</h4>`))[1];
+      if (first.has(c.id)) {
+        assert(heading.includes('<em>Ibid.</em>'));
+        assert(heading.includes(`data-safeguard-reference="${first.get(c.id).replaceAll('>','&gt;')}"`));
+        assert(heading.includes(`data-control-reference="${c.id}"`));
+      } else {
+        first.set(c.id,route.id);
+        assert(!heading.includes('Ibid.'));
+      }
+    }
+  }
+}
+assert(!staticHTML.includes('stpa-recovery-guide'));

@@ -796,6 +796,14 @@
   });
   $('#return-map').addEventListener('click', revealMap);
   $('#barrier-panel').addEventListener('click', (event) => {
+    const reference = event.target.closest('a[data-safeguard-reference]');
+    if (reference && isSTPA()) {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      inspectProposedBarrier(reference.dataset.safeguardReference);
+      focusAndReveal($(`#a1-proposed-${reference.dataset.controlReference}`));
+      return;
+    }
     const related = event.target.closest('[data-related-barrier]');
     if (related && isSTPA()) {
       const selected = localBarriers().find(b=>b.id===related.dataset.relatedBarrier);
@@ -886,13 +894,13 @@
   });
   document.addEventListener('click', (event) => {
     const footnote = event.target.closest('a[href^="#a1-"]');
-    if (footnote && (footnote.classList.contains('a1-note-reference') || footnote.closest('.a1-footnote'))) {
+    if (footnote && (footnote.classList.contains('a1-note-reference') || footnote.classList.contains('a1-ibid') || footnote.closest('.a1-footnote'))) {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const target = document.getElementById(footnote.getAttribute('href').slice(1));
       if (target) { event.preventDefault(); focusAndReveal(target); }
       return;
     }
     const stateInfo = event.target.closest('[data-state-info]');
-    const recoveryInfo = event.target.closest('[data-recovery-info]');
     const mapInfo = event.target.closest('[data-map-guide]');
     const exploreState = event.target.closest('[data-explore-state]');
     if (exploreState) {
@@ -900,11 +908,11 @@
       $(`[data-explore-state="${exploreState.dataset.exploreState}"]`).focus({ preventScroll: true });
       return;
     }
-    if (stateInfo || recoveryInfo || mapInfo) {
+    if (stateInfo || mapInfo) {
       const wasOpen = $('#method-dialog').open;
-      const section = mapInfo?.dataset.mapGuide || (stateInfo ? 'barriers' : 'recovery');
+      const section = mapInfo?.dataset.mapGuide || 'barriers';
       if (!wasOpen) {
-        methodReturn = stateInfo || recoveryInfo || mapInfo;
+        methodReturn = stateInfo || mapInfo;
         methodReturn.focus({ preventScroll: true });
       }
       $('#method-title').textContent = 'Path & barrier key';

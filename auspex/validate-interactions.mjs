@@ -19,7 +19,7 @@ function element(key) {
 let url='file:///fixture/auspex/index.html';
 const location={get href(){return url},get search(){return new URL(url).search}};
 const nodeButtons=()=>Array.from((elements.get('#map-nodes')?.innerHTML || '').matchAll(/data-node="([^"]+)"/g),([,id])=>Object.assign(element('node-'+id),{dataset:{node:id,target:id}}));
-const document={querySelector:element,querySelectorAll:selector=>selector.includes('#a1-route')?nodeButtons():[],createElement:tag=>element('created-'+tag),addEventListener(type,fn){documentListeners[type]=fn},get activeElement(){return element(focused)}};
+const document={querySelector:element,getElementById:id=>element('#'+id),querySelectorAll:selector=>selector.includes('#a1-route')?nodeButtons():[],createElement:tag=>element('created-'+tag),addEventListener(type,fn){documentListeners[type]=fn},get activeElement(){return element(focused)}};
 let geometryMobile=false;
 const matchMedia=query=>({matches:geometryMobile && query==='(max-width: 740px)',addEventListener(){}});
 const history={pushState(a,b,next){url=String(next)},replaceState(a,b,next){url=String(next)}};
@@ -111,6 +111,9 @@ for(const m of models) {
    assert(panel().includes(escaped(b.strongerAI || b.durability || b.failure)));
    assert(panel().includes('a1-barrier-card') && panel().includes('stpa-barrier-glyph'));
    assert(!panel().includes('question-lenses'));
+   const reference=`#a1-overlay-barrier-${b.id}`;
+   assert(panel().includes(`href="${reference}"`) && panel().includes('<em>Ibid.</em>'));
+   assert(map().includes(`id="${reference.slice(1)}"`),'A repeated incident name points to the visible original');
    singleCase(config);
   }
   click('#pathway-map','explore-connection');
@@ -314,3 +317,37 @@ document.querySelector=originalQuery;document.querySelectorAll=originalAll;
 Object.defineProperty(document,'activeElement',activeDescriptor);geometryMobile=false;
 assert.equal(drawnRoutes,84);
 console.log(`Passed all ${count} incident flows and ${proposedCount} proposed-route inspections across seven models, single readings and legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks also match all ${drawnRoutes} desktop/mobile barrier marks to their controls. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);
+
+// Repeated safeguards refer to a stable occurrence within the current case.
+let repeatCount=0;
+for (const m of models) {
+ url='file:///fixture/auspex/index.html?p='+m.displayId;test.readLocation();
+ const routes=stpa.proposedBarriers(),first=new Map();
+ const incident=Object.keys(m.presentation.overlays)[0];
+ const assessment=context.window.AuspexData.assessments.find(a=>a.pathway===m.pathway && a.incident===incident);
+ click('#incident-rail','case',assessment.id);
+ for (const route of routes) for (const c of route.controls) {
+  if (!first.has(c.id)) {first.set(c.id,route);continue;}
+  click('#pathway-map','safeguard',route.id);
+  const before=url,original=first.get(c.id);
+  const heading=panel().match(new RegExp(`<h4 id="a1-proposed-${c.id}"[^>]*>(.*?)</h4>`))[1];
+  assert(heading.includes('<em>Ibid.</em>'));
+  assert(heading.includes(`title="${escaped(c.title)}"`),'The full name remains available');
+  const href=heading.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&');
+  const target=targetFor('#barrier-panel','safeguard-reference',original.id);
+  Object.assign(target,{tagName:'A',className:'a1-ibid'});target.dataset.controlReference=c.id;
+  let prevented=false;
+  elements.get('#barrier-panel').listeners.click({target,preventDefault(){prevented=true},ctrlKey:true});
+  assert(!prevented && url===before,'Modified clicks keep ordinary link behavior');
+  elements.get('#barrier-panel').listeners.click({target,preventDefault(){prevented=true}});
+  assert(prevented);assertProposed(original,incident);
+  assert.equal(focused,`#a1-proposed-${c.id}`,'The reference reveals the named original');
+  assert(panel().includes(`>${escaped(c.title)}</h4>`));
+  url=before;windowListeners.popstate();assertProposed(route,incident);
+  url=new URL(href,url).href;test.readLocation();assertProposed(original,incident);
+  url=before;test.readLocation();assertProposed(route,incident);
+  repeatCount++;
+ }
+}
+assert(repeatCount>0);
+console.log(`Validated ${repeatCount} Ibid. references across seven cases, including direct links, focus, history, and preserved incident selection.`);
