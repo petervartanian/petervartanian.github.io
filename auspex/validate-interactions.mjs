@@ -353,8 +353,8 @@ for(const params of ['p=A-2&strengthen=1','p=A-1&strengthen=1','p=A-1&s=missing&
 const originalQuery=document.querySelector,originalAll=document.querySelectorAll;
 const activeDescriptor=Object.getOwnPropertyDescriptor(document,'activeElement');
 const decoded=text=>text.replace(/&(amp|lt|gt|quot|#39);/g,(_,x)=>({amp:'&',lt:'<',gt:'>',quot:'"','#39':"'"}[x]));
-let drawnRoutes=0,connectedArrows=0,dashedArrows=0;
-for(const mobile of [false,true])for(const m of models) {
+let drawnRoutes=0,connectedArrows=0,dashedArrows=0,levelRoutes=0,curvedRoutes=0;
+for(const mobile of [false,true])for(const expanded of [false,true])for(const m of models) {
  geometryMobile=mobile;stpa.use(m.pathway);
  let active=true,restored='';
  const selected=m.links[0].id,selectedConstraint=m.links[0].constraints[0];
@@ -366,8 +366,11 @@ for(const mobile of [false,true])for(const m of models) {
  for(const n of m.nodes) {
   const wing=n.type==='recovery'?'recovery':n.wing;
   const col=['before','centre','after','recovery'].indexOf(wing),row=counts[wing]++;
-  const rect=box(mobile?120:55+col*335,mobile?100+ordinal++*145:100+row*160,220,70);
-  const cell={getBoundingClientRect:()=>({...rect,bottom:rect.bottom+30,height:100})};
+  const x=mobile?120:55+(wing==='recovery'?1:col)*335;
+  const y=mobile?100+ordinal++*145:wing==='recovery'?900:wing==='centre'?110:100+row*160+(expanded && wing==='before' && row>0?230:0);
+  const rect=box(x,y,220,70);
+  const extra=expanded && wing==='before' && row===0?260:30;
+  const cell={getBoundingClientRect:()=>({...rect,bottom:rect.bottom+extra,height:70+extra})};
   const region={dataset:{wing}};
   const button={dataset:{node:n.id},getBoundingClientRect:()=>rect,closest:selector=>selector==='.a1-cell'?cell:selector==='.a1-region'?region:null};
   cells.push(cell);nodes.push(button);
@@ -375,7 +378,8 @@ for(const mobile of [false,true])for(const m of models) {
  const svg={innerHTML:'',setAttribute(){}};
  const controls={innerHTML:'',querySelectorAll(){return Array.from(this.innerHTML.matchAll(/<button\b[^>]*data-safeguard="([^"]+)" data-constraint="([^"]+)"/g),([,id,c])=>({dataset:{safeguard:decoded(id),constraint:c},focus(){restored=decoded(id)+'|'+c}}))}};
  const mapElement={offsetWidth:origin.width,dataset:{selectedSafeguard:selected,selectedConstraint},classList:{contains:()=>active},getBoundingClientRect:()=>origin};
- const routeElement={getBoundingClientRect:()=>box(0,30,origin.width,origin.height-30),querySelectorAll:()=>cells};
+ const headings=mobile?[]:[box(55,65,125,20),box(390,65,95,20),box(725,65,140,20)];
+ const routeElement={getBoundingClientRect:()=>box(0,30,origin.width,origin.height-30),querySelectorAll:selector=>selector==='.a1-cell'?cells:headings.map(rect=>({getBoundingClientRect:()=>rect}))};
  const fakeFocused={dataset:{safeguard:selected,constraint:selectedConstraint},closest(selector){return selector==='.a1-route-barrier'?this:null}};
  document.querySelector=selector=>({'#pathway-map':mapElement,'#map-connections':svg,'#a1-route':routeElement,'#stpa-barrier-controls':controls}[selector]||null);
  document.querySelectorAll=selector=>selector==='#a1-route [data-node]'?nodes:[];
@@ -415,11 +419,32 @@ for(const mobile of [false,true])for(const m of models) {
    dashedArrows++;
   }
   connectedArrows++;
-  if (!mobile && m.pathway==='X-01' && id==='X-01:2>X-01:4') {
-   const pieces=Array.from(part.matchAll(/class="stpa-connection[^"]*" d="([^"]+)"/g),x=>x[1].match(/-?\d+(?:\.\d+)?/g).map(Number));
-   const a=pieces[0].slice(0,2),b=pieces.at(-1).slice(-2),length=Math.hypot(b[0]-a[0],b[1]-a[1]);
-   for(const piece of pieces)for(let i=0;i<piece.length;i+=2)assert(Math.abs((piece[i]-a[0])*(b[1]-a[1])-(piece[i+1]-a[1])*(b[0]-a[0]))/length<.2,'A-1 1.2 to 2.1 is straight through its barrier');
+  const strokes=tipPath?Array.from(part.matchAll(/class="stpa-recovery-rail" d="([^"]+)"/g),x=>x[1]):linePaths.map(x=>x[1]);
+  for(const d of strokes) {
+   let previous=null,lastLine=null,curves=0;
+   for(const [,command,values] of d.matchAll(/([MLA])([^MLA]+)/g)) {
+    const n=values.match(/-?\d+(?:\.\d+)?/g).map(Number),end=n.slice(-2);
+    if(command==='L') {
+     assert(Math.abs(previous[0]-end[0])<.11 || Math.abs(previous[1]-end[1])<.11,`${m.displayId} ${id}: no skewed straight segments`);
+     lastLine={start:previous,end};
+    } else if(command==='A') {
+     assert(Math.abs(Math.abs(end[0]-previous[0])-n[0])<.15 && Math.abs(Math.abs(end[1]-previous[1])-n[1])<.15,`${m.displayId} ${id}: quarter-circle bends join level segments`);
+     curves++;
+    }
+    previous=end;
+   }
+   if(curves)curvedRoutes++;
+   else levelRoutes++;
+   if(d===strokes.at(-1)) {
+    assert(lastLine && Math.abs(lastLine.start[1]-lastLine.end[1])<.11,`${m.displayId} ${id}: horizontal final approach`);
+    if(!tipPath)assert(Math.abs(lastLine.start[0]-lastLine.end[0])>=7,`${m.displayId} ${id}: the arrowhead has a visible straight approach`);
+   }
   }
+  if(!mobile && m.pathway==='P-01' && id==='P-01:4>P-01:5') {
+   assert(strokes.every(d=>!d.includes('A')),'B-1 2.1 to 3.1 shares one horizontal height');
+   assert.equal(tip[1],destination.top-origin.top+destination.height/2,'B-1 keeps the destination’s centered arrow height');
+  }
+  if(!mobile && m.pathway==='P-01' && id==='P-01:3>P-01:4')assert(strokes.some(d=>d.includes('A')),'B-1 1.3 to 2.1 uses curved bends, not a steep diagonal');
   const routeButtons=buttons.filter(b=>b.id===id);
   const marks=Array.from(part.matchAll(/class="stpa-proposed-barrier(?: is-selected)?" data-constraint="([^"]+)"[^>]*><path class="a1-barrier-stem" d="([^"]+)"/g));
   assert.equal(marks.length,m.links.find(l=>l.id===id).constraints.length);
@@ -437,7 +462,8 @@ for(const mobile of [false,true])for(const m of models) {
 }
 document.querySelector=originalQuery;document.querySelectorAll=originalAll;
 Object.defineProperty(document,'activeElement',activeDescriptor);geometryMobile=false;
-assert.equal(drawnRoutes,136);
-assert.equal(connectedArrows,models.reduce((n,m)=>n+m.links.length,0)*2);
-assert.equal(dashedArrows,models.reduce((n,m)=>n+m.links.filter(l=>l.kind==='optional').length,0)*2);
-console.log(`Passed all ${count} incident flows and ${proposedCount} individual barrier inspections across seven models, 35 tailored improvements and 19 incident improvement views, unchanged source states, legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks also match all ${drawnRoutes} desktop/mobile barrier marks to their controls, all ${connectedArrows} arrows to destination borders, and all ${dashedArrows} dashed arrow endings. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);
+assert.equal(drawnRoutes,272);
+assert(levelRoutes>0 && curvedRoutes>0);
+assert.equal(connectedArrows,models.reduce((n,m)=>n+m.links.length,0)*4);
+assert.equal(dashedArrows,models.reduce((n,m)=>n+m.links.filter(l=>l.kind==='optional').length,0)*4);
+console.log(`Passed all ${count} incident flows and ${proposedCount} individual barrier inspections across seven models, 35 tailored improvements and 19 incident improvement views, unchanged source states, legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks cover compact and expanded-card layouts with no diagonal route segments, square arrow approaches, and correctly aligned B-1 connections. They also match all ${drawnRoutes} desktop/mobile barrier marks to their controls, all ${connectedArrows} arrows to destination borders, and all ${dashedArrows} dashed arrow endings. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);

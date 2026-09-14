@@ -457,11 +457,28 @@
       group.sort((a,b)=>a.order-b.order);
       group.forEach((port,index)=>{
         const step=Math.min(12,port.box.height/(group.length+1));
+        port.clearance=Math.min(10,step);
         port.entry[port.key]=port.box.top+port.box.height/2+(index-(group.length-1)/2)*step;
       });
     }
+    // A shared height is preferable to a diagonal between independently spaced ports.
+    // Keep the destination's height when it fits the source, without merging other ports.
+    if (!mobile) for (const entry of all.filter(e=>!e.sameColumn)) {
+      const {a,b,ac,bc,fromSide,toSide}=entry;
+      const fromGroup=attachments.get(entry.link.from+':'+fromSide);
+      const toGroup=attachments.get(entry.link.to+':'+toSide);
+      const low=Math.max(a.top+12,b.top+12),high=Math.min(a.bottom-12,b.bottom-12);
+      if (low>high) continue;
+      const x1=fromSide==='right'?a.right:a.left,x2=toSide==='left'?b.left:b.right;
+      const obstacles=[...cells.filter(c=>c.left>Math.min(ac.right,bc.right)+3 && c.right<Math.max(ac.left,bc.left)-3),...headings];
+      const occupied=[...fromGroup,...toGroup].filter(p=>p.entry!==entry);
+      const candidates=[entry.y2,entry.y1,(low+high)/2,low,high,...occupied.flatMap(p=>[p.entry[p.key]-p.clearance,p.entry[p.key]+p.clearance])];
+      const valid=candidates.filter(y=>y>=low && y<=high && occupied.every(p=>Math.abs(y-p.entry[p.key])>=p.clearance-.01) && clearSegment([x1,y],[x2,y],obstacles));
+      valid.sort((y,z)=>Math.abs(y-entry.y2)-Math.abs(z-entry.y2));
+      if (valid.length) entry.y1=entry.y2=valid[0];
+    }
     const mobileLanes=[];
-    const sideLanes=new Map();
+    const sideLanes=new Map(),crossLanes=new Map();
     const reserveLane=(lanes,low,high)=>{
       let lane=lanes.findIndex(intervals=>intervals.every(([l,h])=>high<l || low>h));
       if (lane<0) { lane=lanes.length; lanes.push([]); }
@@ -487,16 +504,28 @@
       } else {
         const forward=bc.left>ac.left, x1=forward?a.right:a.left,x2=forward?b.left:b.right;
         const between=cells.filter(c=>forward?c.left>ac.right+3 && c.right<bc.left-3:c.left>bc.right+3 && c.right<ac.left-3);
-        const betweenHeadings=headings.filter(h=>forward?h.left>ac.right && h.right<bc.left:h.left>bc.right && h.right<ac.left);
-        if (between.length && !clearSegment([x1,y1],[x2,y2],[...between,...betweenHeadings])) {
-          // Obstructed spans pass above the cards with rounded turns.
-          const top=routeBox.top-bounds.top+7;
-          const startInset=kind==='feedback'?10:20;
-          const startLane=forward?ac.right+startInset:ac.left-startInset,endLane=forward?bc.left-20:bc.right+20;
-          points=[[x1,y1],[startLane,y1],[startLane,top],[endLane,top],[endLane,y2],[x2,y2]];
+        const obstacles=[...between,...headings];
+        const clear=route=>route.slice(1).every((p,i)=>clearSegment(route[i],p,obstacles));
+        const start=[x1,y1],end=[x2,y2],middle=(x1+x2)/2;
+        if (Math.abs(y1-y2)<.01 && clear([start,end])) {
+          points=[start,end];
         } else {
-          // A clear span needs no bend, including across an empty middle column.
-          points=[[x1,y1],[x2,y2]];
+          // Level departures and arrivals keep every arrowhead square to its box.
+          // Rounded right-angle bends absorb any vertical displacement in the gap.
+          const key=[Math.min(x1,x2),Math.max(x1,x2)].join(':');
+          if (!crossLanes.has(key)) crossLanes.set(key,[]);
+          const used=crossLanes.get(key),low=Math.min(y1,y2)-4,high=Math.max(y1,y2)+4;
+          const candidates=[middle,middle-14,middle+14,forward?ac.right+22:ac.left-22,forward?bc.left-22:bc.right+22]
+            .filter(x=>Math.abs(x-x1)>=18 && Math.abs(x2-x)>=18)
+            .map(x=>[start,[x,y1],[x,y2],end]).filter(clear);
+          points=candidates.find(route=>used.every(lane=>Math.abs(route[1][0]-lane.x)>=13 || high<lane.low || low>lane.high)) || candidates[0];
+          if (points) used.push({x:points[1][0],low,high});
+          if (!points) {
+            // Obstructed spans pass above the cards, clear of their headings.
+            const top=routeBox.top-bounds.top+7;
+            const startLane=forward?ac.right+22:ac.left-22,endLane=forward?bc.left-22:bc.right+22;
+            points=[start,[startLane,y1],[startLane,top],[endLane,top],[endLane,y2],end];
+          }
         }
       }
       const safeguard=proposedSafeguard(link), proposed=proposedBarrier(link.id);

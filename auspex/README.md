@@ -65,8 +65,11 @@ represented across selected actions, not exhaustively assessed for every action.
 The map uses **0. Context**, **1. Precursors**, **2. Event**, **3. Consequences**,
 with components numbered within their region (1.1, 1.2, 2.1, 3.1…). The region heading is
 **Recovery**. Its node marker retains R.
-Possible progression uses straight arrows where space permits and small curved turns
-where necessary. Optional branches use long dashes,
+Connections share a horizontal height wherever their boxes and other attachment points
+allow it, retaining the destination height when possible. Otherwise, level departures
+and arrivals are joined by rounded bends through a clear gap or above an obstruction.
+Straight route segments are always horizontal or vertical. Arrowheads approach box
+borders squarely, and overlapping bends use separate lanes where the gutter permits. Optional branches use long dashes,
 feedback round dots and double chevrons, and recovery two fine parallel green lines with a filled
 arrowhead. Possible contribution and conditional consequence keep their data meanings
 but share the forward-arrow style. Conditions remain in component text and route
