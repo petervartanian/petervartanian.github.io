@@ -113,9 +113,10 @@
       const optional=n.type==='amplifier', mapped=config && anchor===n.id;
       const condition=model.presentation?.conditions?.[n.id];
       const label=n.shortLabel || n.title;
+      const shownSources=n.type==='recovery'?list(n.sources):[];
       return `<div class="a1-cell${optional?' is-optional':''}${mapped?' is-overlaid':''}${n.wing==='centre'?' is-centre':''}${n.type==='recovery'?' is-recovery':''}" data-cell="${esc(n.id)}">
         ${condition?`<p class="a1-condition">${esc(condition)}</p>`:''}
-        <div class="a1-step-box${list(n.sources).length?' has-sources':''}"><button class="a1-step" data-node="${esc(n.id)}" data-target="${esc(n.id)}" aria-pressed="${selected===n.id}" aria-controls="a1-node-note" aria-label="${esc(n.number)}. ${esc(label)}${optional?' (optional)':''}"><span class="a1-number">${esc(n.number)}</span><strong>${esc(label)}${optional?'<span class="a1-optional-label">optional</span>':''}</strong></button>${list(n.sources).length?`<div class="a1-step-sources">${cite(n.sources)}</div>`:''}</div>
+        <div class="a1-step-box${shownSources.length?' has-sources':''}"><button class="a1-step" data-node="${esc(n.id)}" data-target="${esc(n.id)}" aria-pressed="${selected===n.id}" aria-controls="a1-node-note" aria-label="${esc(n.number)}. ${esc(label)}${optional?' (optional)':''}"><span class="a1-number">${esc(n.number)}</span><strong>${esc(label)}${optional?'<span class="a1-optional-label">optional</span>':''}</strong></button>${shownSources.length?`<div class="a1-step-sources">${cite(shownSources)}</div>`:''}</div>
         ${mapped?overlay(a,inspectedBarrier,evidenceMarks):''}
       </div>`;
     };
@@ -287,7 +288,7 @@
       return `<path class="stpa-connection${kind==='optional'?' is-optional':''}${kind==='feedback'?' is-feedback':''}${kind==='recovery'?' is-recovery':''}" data-link="${esc(link.id || link.from+'→'+link.to)}" data-from="${esc(link.from)}" data-to="${esc(link.to)}" d="${d}" marker-end="url(#${marker})"><title>${esc(link.label || 'Possible contribution')}</title></path>${crossbar}`;
     }).join('');
     const marker=(id,color)=>`<marker id="${id}" viewBox="0 0 8 8" refX="7" refY="4" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M1.5 1.5 6.5 4 1.5 6.5" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker>`;
-    const recoveryMarker='<marker id="stpa-arrow-recovery" viewBox="0 0 8 8" refX="7" refY="4" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 7 4 1 7z" fill="#7e8088"/></marker>';
+    const recoveryMarker='<marker id="stpa-arrow-recovery" viewBox="0 0 8 8" refX="7" refY="4" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 7 4 1 7z" fill="#6d8976"/></marker>';
     const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="11" refY="4" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
     svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${recoveryMarker}${feedbackMarker}</defs>${paths}`;
   }

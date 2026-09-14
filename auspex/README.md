@@ -28,10 +28,12 @@ Recovery uses a smooth curve and filled arrowhead; feedback uses a squared, dash
 return loop and double chevrons. Matching symbols in the key distinguish the routes
 without relying on color. Proposed safeguard marks follow each route’s direction.
 
-Source references use filled circles inside pathway cards, case overlays and barrier
-explanations, with small i/ii/iii labels within each source group. Each circle retains
-its source title and keyboard access; case evidence opens the existing passage reader.
-Asterisks stay next to the text they qualify. Recovery uses neutral colors. Arrow
+Source references use filled circles in case overlays, barrier explanations and the
+recovery card, with small i/ii/iii labels within each source group. Ordinary pathway
+boxes omit repeated source circles; their citations remain in the full research notes.
+Each circle retains its source title and keyboard access; case evidence opens the
+existing passage reader. Asterisks stay next to the text they qualify. Recovery retains
+its green tint and route; only its source circles use a neutral color. Arrow
 attachments are separated on each card edge, and successive bends reuse clear lanes
 instead of drifting outside the map.
 
