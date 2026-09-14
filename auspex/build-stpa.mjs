@@ -61,6 +61,6 @@ for (let i = starts.length - 1; i >= 0; i--) {
   if (end < 0) throw new Error(`Missing reader boundary ${p.id}`);
   html = html.slice(0, match.index) + `<article id="${p.id}" data-group="${p.group}" data-unworked="true"><p class="eyebrow">${p.displayId} · Pathway</p><h2>${esc(p.title)}</h2></article>` + html.slice(end);
 }
-html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=24.0"');
+html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=24.1"');
 await writeFile(new URL('pathways.html', import.meta.url), html);
 console.log('Built seven worked examples, barrier states and matching readers; other entries are blank.');

@@ -169,7 +169,9 @@
 .a1-map-key > span { display: inline-flex; align-items: center; gap: 7px; }
 .a1-map-key i { display: block; width: 23px; height: 0; border-top: 1px solid #928896; position: relative; }
 .a1-map-key i.is-optional { border-top-style: dashed; }
-.a1-map-key i.is-recovery { border-top-color: #6d8976; }
+.a1-route-symbol { width: 34px; height: 20px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.3; flex-shrink: 0; }
+.a1-route-symbol.is-recovery { color: #6d8976; }
+.a1-route-symbol .route-tip { fill: currentColor; stroke: none; }
 .a1-map-key i.is-proposed::after { content: ''; position: absolute; height: 12px; top: -7px; left: 11px; border-left: 2px dotted #7d7f88; }
 .stpa-active #map-connections > path.a1-possible-barrier { stroke: #7d7f88; stroke-width: 2; stroke-dasharray: 1.5 3; stroke-linecap: round; }
 .a1-overlay { margin: -1px 0 0; padding: 14px 13px 12px; border: 1px solid color-mix(in srgb,var(--accent) 30%,var(--line)); border-left: 3px solid var(--accent); border-radius: 0 0 3px 3px; background: color-mix(in srgb,var(--tint) 62%,var(--page)); color: var(--ink); }
@@ -278,8 +280,9 @@
 .stpa-state-menu button:hover, .stpa-state-menu button[aria-pressed='true'] { border-color: color-mix(in srgb,var(--accent) 50%,var(--line)); background: var(--tint); }
 .stpa-state-explorer > details { order: 3; margin-top: 5px; }
 .stpa-state-explorer > details p { font: 12px/1.6 var(--sans); }
-.stpa-active #map-connections > path.is-feedback { stroke-dasharray: 8 3; }
-.a1-map-key i.is-feedback { border-top-style: dashed; }
+.stpa-active #map-connections > path.is-feedback { stroke-dasharray: 8 3; stroke-linejoin: miter; }
+.stpa-active #map-connections > path.is-recovery { stroke-width: 1.5; stroke-dasharray: none; }
+.a1-route-symbol.is-feedback > path:first-child { stroke-dasharray: 5 2; }
 .stpa-change-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 20px; margin: 18px 0; background: var(--tint); font: 14px/1.6 var(--sans); }
 .stpa-change-flow > span:last-child { flex: 1; min-width: 160px; }
 .stpa-recovery-guide p { font: 14px/1.7 var(--sans); }

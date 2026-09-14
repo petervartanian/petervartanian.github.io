@@ -84,6 +84,12 @@
   function recoveryGuide() {
     return `<div class="stpa-recovery-guide"><div class="stpa-change-flow"><span>Hazardous situation</span><span aria-hidden="true">→</span><strong>Recovery</strong><span aria-hidden="true">→</span><span>Escalation stopped, harm limited or control restored</span></div><p>Recovery acts on the affected system after the loss-of-control event. It can prevent a consequence, reduce its severity or restore effective control.</p><div class="stpa-change-flow"><span>Existing protection</span><span aria-hidden="true">→</span><strong>Reinforcement</strong><span aria-hidden="true">→</span><span>Strengthened barrier</span></div><p>Reinforcement changes a barrier relative to a baseline. A recovery barrier can be reinforced too. Repair restores a defective barrier’s intended function; reinforcement improves the protection.</p><p>The green route on this map shows the model’s stated recovery outcome. It remains conditional on an effective intervention.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">UK CAA · Recovery controls ↗</a></p></div>`;
   }
+  function routeSymbol(kind) {
+    const path=kind==='recovery'
+      ? '<path d="M2 16C14 16 10 4 27 4"/><path class="route-tip" d="M24 1l6 3-6 3z"/>'
+      : '<path d="M29 16H5V4H26"/><path d="m21 1 4 3-4 3m5-6 4 3-4 3"/>';
+    return `<svg class="a1-route-symbol is-${kind}" viewBox="0 0 34 20" aria-hidden="true" focusable="false">${path}</svg>`;
+  }
   function renderMap(selected, a, inspectedBarrier) {
     const groups={before:[],centre:[],after:[],recovery:[]};
     for (const n of model.nodes) {
@@ -104,7 +110,7 @@
     const headings={before:'Contributing conditions',centre:'Loss of control',after:'Conditional consequences',recovery:'Recovery route'};
     return `<div id="a1-route" class="a1-route${config?' has-overlay':''}" data-model-pathway="${esc(model.pathway)}" aria-label="Hypothetical pathway: contributing conditions, loss of control, conditional consequences and recovery">${['before','centre','after','recovery'].map(wing=>groups[wing].length?`<section class="a1-region a1-region-${wing}" data-wing="${wing}" aria-label="${headings[wing]}"><h3 class="a1-region-heading">${headings[wing]}</h3>${groups[wing].map(cell).join('')}</section>`:'').join('')}</div>
     <p class="a1-node-note" id="a1-node-note" tabindex="-1"${config && selected===anchor?' hidden':''}>${esc(node(selected)?.text || model.summary)}</p>${config?`<p class="a1-footnote" id="a1-case-footnote" tabindex="-1"><a href="#a1-case-reference" aria-label="Return to case title">*</a> ${esc(config.limit)}</p>`:''}${node(selected)?.type==='recovery'?'<button class="a1-recovery-link" data-recovery-info>Recovery & reinforcement ↗</button>':''}
-    <div class="a1-map-key"><span><i aria-hidden="true"></i>Possible contribution</span>${projectedLinks().some(l=>(l.kind || l.type)==='optional')?'<span><i class="is-optional" aria-hidden="true"></i>Optional route</span>':''}<span><i class="is-recovery" aria-hidden="true"></i>Recovery</span>${projectedLinks().some(l=>l.kind==='feedback')?'<span><i class="is-feedback" aria-hidden="true"></i>Feedback</span>':''}<span><i class="is-proposed" aria-hidden="true"></i>Proposed safeguard · untested</span></div>
+    <div class="a1-map-key"><span><i aria-hidden="true"></i>Possible contribution</span>${projectedLinks().some(l=>(l.kind || l.type)==='optional')?'<span><i class="is-optional" aria-hidden="true"></i>Optional route</span>':''}<span>${routeSymbol('recovery')}Recovery</span>${projectedLinks().some(l=>l.kind==='feedback')?`<span>${routeSymbol('feedback')}Feedback</span>`:''}<span><i class="is-proposed" aria-hidden="true"></i>Proposed safeguard · untested</span></div>
     `;
   }
   function targetButton(id) { return Array.from(document.querySelectorAll('#a1-route [data-node]')).find(el=>el.dataset.node===id); }
@@ -167,6 +173,22 @@
     const shared=ids.length ? ids : list(node(link.from)?.constraints).filter(id=>list(node(link.to)?.constraints).includes(id));
     return shared.map(id=>control(id)?.title).filter(Boolean).join('; ');
   }
+  function connectionGeometry(kind, points) {
+    const point=p=>`${p[0].toFixed(1)},${p[1].toFixed(1)}`;
+    if (kind==='recovery' && points.length===4) {
+      const [a,b,c,d]=points;
+      const midpoint=[0,1].map(i=>(a[i]+3*b[i]+3*c[i]+d[i])/8);
+      const tangent=[0,1].map(i=>.75*(b[i]-a[i])+1.5*(c[i]-b[i])+.75*(d[i]-c[i]));
+      return {d:`M${point(a)} C${point(b)} ${point(c)} ${point(d)}`,midpoint,tangent};
+    }
+    const segments=points.slice(1).map((b,i)=>({a:points[i],b,length:Math.hypot(b[0]-points[i][0],b[1]-points[i][1])}));
+    const segment=segments.reduce((longest,current)=>current.length>longest.length?current:longest,segments[0]);
+    return {
+      d:kind==='feedback'?points.map((p,i)=>`${i?'L':'M'}${point(p)}`).join(' '):roundedPath(points),
+      midpoint:[(segment.a[0]+segment.b[0])/2,(segment.a[1]+segment.b[1])/2],
+      tangent:[segment.b[0]-segment.a[0],segment.b[1]-segment.a[1]]
+    };
+  }
   function draw() {
     const map=document.querySelector('#pathway-map'), svg=document.querySelector('#map-connections'), route=document.querySelector('#a1-route');
     if (!map?.offsetWidth || !svg || !route || !map.classList.contains('stpa-active')) return;
@@ -203,13 +225,16 @@
         let lane=mobileLanes.findIndex(intervals=>intervals.every(([l,h])=>high<l || low>h));
         if (lane<0) { lane=mobileLanes.length; mobileLanes.push([]); }
         mobileLanes[lane].push([low,high]);
-        const x=Math.max(7,minLeft-15-lane*8);
+        const x=kind==='recovery'?Math.max(7,minLeft-60):Math.max(7,minLeft-15-lane*8);
         points=[[a.left-2,y1],[x,y1],[x,y2],[b.left-5,y2]];
       } else if (sameColumn) {
         const wing=from.closest('.a1-region')?.dataset.wing;
         const rightSide=wing==='after' || wing==='centre';
         const sameSideBefore=all.slice(0,index).filter(x=>Math.abs(x.ac.left-x.bc.left)<3 && (x.from.closest('.a1-region')?.dataset.wing===wing)).length;
-        const x=rightSide?Math.max(ac.right,bc.right)+17+sameSideBefore*10:Math.min(ac.left,bc.left)-17-sameSideBefore*10;
+        const edge=rightSide?Math.max(ac.right,bc.right):Math.min(ac.left,bc.left);
+        const nextEdge=rightSide?Math.min(bounds.width-5,...cells.filter(c=>c.left>edge+3).map(c=>c.left)):Math.max(5,...cells.filter(c=>c.right<edge-3).map(c=>c.right));
+        const offset=kind==='recovery'?Math.min(60,Math.max(12,Math.abs(nextEdge-edge)-12)):17+sameSideBefore*10;
+        const x=edge+(rightSide?offset:-offset);
         points=rightSide?[[a.right+2,y1],[x,y1],[x,y2],[b.right+5,y2]]:[[a.left-2,y1],[x,y1],[x,y2],[b.left-5,y2]];
       } else {
         const forward=bc.left>ac.left, x1=forward?a.right+2:a.left-2,x2=forward?b.left-5:b.right+5;
@@ -217,7 +242,8 @@
         if (between.length) {
           // Skip links travel above all cards; they never cut through a middle column.
           const top=routeBox.top-bounds.top+7;
-          const startLane=forward?ac.right+20:ac.left-20,endLane=forward?bc.left-20:bc.right+20;
+          const startInset=kind==='feedback'?10:20;
+          const startLane=forward?ac.right+startInset:ac.left-startInset,endLane=forward?bc.left-20:bc.right+20;
           points=[[x1,y1],[startLane,y1],[startLane,top],[endLane,top],[endLane,y2],[x2,y2]];
         } else {
           const lane=(forward?(ac.right+bc.left):(bc.right+ac.left))/2;
@@ -226,16 +252,16 @@
           points=[[x1,y1],[lane+offset,y1],[lane+offset,y2],[x2,y2]];
         }
       }
-      const d=roundedPath(points),safeguard=proposedSafeguard(link);
-      const segments=points.slice(1).map((point,i)=>({a:points[i],b:point,length:Math.hypot(point[0]-points[i][0],point[1]-points[i][1])}));
-      const segment=segments.reduce((longest,current)=>current.length>longest.length?current:longest,segments[0]);
-      const x=(segment.a[0]+segment.b[0])/2,y=(segment.a[1]+segment.b[1])/2,vertical=Math.abs(segment.a[0]-segment.b[0])<1;
-      const crossbar=safeguard && segment.length>27?`<path class="a1-possible-barrier" d="${vertical?`M${x-7},${y}h14`:`M${x},${y-7}v14`}"><title>Proposed safeguard, not demonstrated by this pathway: ${esc(safeguard)}</title></path>`:'';
-      const marker=kind==='recovery'?'stpa-arrow-recovery':'stpa-arrow';
+      const {d,midpoint:[x,y],tangent:[dx,dy]}=connectionGeometry(kind,points),safeguard=proposedSafeguard(link);
+      const length=Math.hypot(dx,dy),nx=length?-dy/length*7:0,ny=length?dx/length*7:0;
+      const crossbar=safeguard && length>27?`<path class="a1-possible-barrier" d="M${(x-nx).toFixed(1)},${(y-ny).toFixed(1)}L${(x+nx).toFixed(1)},${(y+ny).toFixed(1)}"><title>Proposed safeguard, not demonstrated by this pathway: ${esc(safeguard)}</title></path>`:'';
+      const marker=kind==='recovery'?'stpa-arrow-recovery':kind==='feedback'?'stpa-arrow-feedback':'stpa-arrow';
       return `<path class="stpa-connection${kind==='optional'?' is-optional':''}${kind==='feedback'?' is-feedback':''}${kind==='recovery'?' is-recovery':''}" data-link="${esc(link.id || link.from+'→'+link.to)}" data-from="${esc(link.from)}" data-to="${esc(link.to)}" d="${d}" marker-end="url(#${marker})"><title>${esc(link.label || 'Possible contribution')}</title></path>${crossbar}`;
     }).join('');
     const marker=(id,color)=>`<marker id="${id}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1.5 1.5 6.5 4 1.5 6.5" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker>`;
-    svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${marker('stpa-arrow-recovery','#6d8976')}</defs>${paths}`;
+    const recoveryMarker='<marker id="stpa-arrow-recovery" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 7 4 1 7z" fill="#6d8976"/></marker>';
+    const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="11" refY="4" markerWidth="11" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
+    svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${recoveryMarker}${feedbackMarker}</defs>${paths}`;
   }
   window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide};
 })();

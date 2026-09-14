@@ -24,6 +24,10 @@ capability or conditions would defeat the protection; observed and projected ero
 must remain distinguishable. Recovery is a separate route, whose controls can themselves
 hold, fail or be reinforced. These are editorial labels, not an STPA rating scale.
 
+Recovery uses a smooth curve and filled arrowhead; feedback uses a squared, dashed
+return loop and double chevrons. Matching symbols in the key distinguish the routes
+without relying on color. Proposed safeguard marks follow each route’s direction.
+
 Maven and Replicator expose proposed safeguards with unassessed performance and test
 questions. Their announcements remain contextual evidence. Later corrective changes are
 dated; new reinforcement proposals are identified as proposals. Scope notes use paired
