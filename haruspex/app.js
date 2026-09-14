@@ -783,7 +783,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const plan = window.HaruspexLayout.calendarPlan(from, to);
     const span = Math.max(from.range[1] - from.range[0], to.range[1] - to.range[0]);
     const distance = Math.max(...from.range.map((v, i) => Math.abs(to.range[i] - v))) / span;
-    const duration = Math.min(1500, 1050 + distance * 400);
+    const duration = Math.min(1200, 840 + distance * 320);
     movingBackdrop = document.createElement('canvas');
     movingBackdrop.width = transitionCanvas.width; movingBackdrop.height = transitionCanvas.height;
     const backdrop = movingBackdrop.getContext('2d');
@@ -844,7 +844,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   function animateBowtie(from, to) {
     stopMotion();
     if (reducedMotion.matches || (!from.length && !to.length)) return;
-    const plan = window.HaruspexLayout.calendarPlan(from,to), duration = 1550;
+    const plan = window.HaruspexLayout.calendarPlan(from,to), duration = 1240;
     transitionCanvas.hidden = false;
     const size = fitCanvas(transitionCanvas,tctx);
     movingBackdrop = document.createElement('canvas');
@@ -905,7 +905,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const backdropContext = movingBackdrop.getContext('2d');
     const fromMap = new Map(from.map((point) => [point.event.id, point]));
     const toMap = new Map(to.map((point) => [point.event.id, point]));
-    const omega = 7.5;
+    const omega = 9.375;
     const pairs = [...new Set([...fromMap.keys(), ...toMap.keys()])].map((id) => {
       const old = fromMap.get(id); const next = toMap.get(id);
       const start = old || { ...next, alpha: 0, radius: next.radius * .55, vx: 0, vy: 0 };
@@ -929,7 +929,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('.visual-column').dataset.movingEvents = String(pairs.length);
     $('#plot-tooltip').hidden = true; $('#bowtie-tooltip').hidden = true;
     const started = performance.now();
-    const limit = 1650;
+    const limit = 1320;
     $('.visual-column').dataset.motionDuration = String(limit);
     const spring = (a, b, velocity, seconds) => {
       const offset = a - b; const coefficient = velocity + omega * offset;
