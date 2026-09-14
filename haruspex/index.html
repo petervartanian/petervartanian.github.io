@@ -1088,9 +1088,9 @@ body{overflow:hidden}
 
 
 /* Title screen: one viewport, sized by height as well as width */
-.intro{display:grid;grid-template-rows:auto minmax(0,2fr) auto minmax(0,1fr) auto minmax(0,1fr);height:100svh;min-height:0;padding:clamp(16px,2.6svh,28px) 48px clamp(14px,2.2svh,24px);overflow:auto}
+.intro{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,2fr) auto minmax(0,1fr) auto minmax(0,1fr);justify-content:normal;height:100svh;min-height:0;padding:clamp(16px,2.6svh,28px) 48px clamp(14px,2.2svh,24px);overflow:auto}
 .intro-header{grid-row:1}
-.intro-main{grid-row:3;margin:0;padding:clamp(10px,2.4svh,28px) 0;max-width:1240px}
+.intro-main{grid-row:3;min-width:0;margin:0;padding:clamp(10px,2.4svh,28px) 0;max-width:none}
 .intro h1{font-size:clamp(38px,min(6.6vw,11svh),104px);line-height:1.04;letter-spacing:-.032em;max-width:1150px}
 .quote-credit{margin-top:clamp(12px,2.2svh,24px)}
 .intro-story{max-width:660px;margin-top:clamp(14px,3svh,30px);font-family:var(--serif);font-size:clamp(13px,min(1.22vw,2.05svh),17px);line-height:1.7;color:#a5b9bf}
