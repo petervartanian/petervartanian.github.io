@@ -81,7 +81,7 @@
   const a1ResearchLink = document.createElement('a');
   a1ResearchLink.className = 'a1-research-link';
   a1ResearchLink.href = 'pathways.html#X-01';
-  a1ResearchLink.textContent = 'Sources ↗';
+  a1ResearchLink.innerHTML = `<span class="control-label">Sources</span>${icon('external')}`;
   a1ResearchLink.target = '_blank';
   a1ResearchLink.rel = 'noopener noreferrer';
   a1ResearchLink.hidden = true;
