@@ -144,27 +144,26 @@ main { max-width: 1600px; margin: 0 auto; padding: 0 var(--edge) 60px; }
 .overview-group summary:hover .cluster-text { color: var(--accent); }
 .overview-group small { display: block; font: 12px/1.5 var(--sans); color: var(--accent); margin-top: 10px; }
 .overview-group ul { list-style: none; padding: 0 24px 22px; margin: 0; }
-.overview-pathway { display: grid; grid-template-columns: 43px 1fr 16px; align-items: baseline; gap: 12px; width: 100%; min-height: 48px; padding: 15px 0; border-top: 1px solid color-mix(in srgb, var(--accent) 22%, transparent); text-align: left; font: 15px/1.5 var(--sans); }
+.overview-pathway { display: grid; grid-template-columns: max-content minmax(0,1fr) 24px; align-items: baseline; gap: 20px; width: 100%; min-height: 48px; padding: 15px 0; border-top: 1px solid color-mix(in srgb, var(--accent) 22%, transparent); text-align: left; font: 15px/1.5 var(--sans); }
 .overview-pathway .code { color: var(--accent); font: 500 13px/1.5 var(--sans); }
 .overview-pathway > span:last-child { color: var(--accent); }
 .overview-group.comparisons > summary > .cluster-index { font: 500 15px/1.1 var(--sans); letter-spacing: 0; }
-.overview-group.comparisons .overview-pathway { grid-template-columns: 58px 1fr 16px; }
 .overview-group.comparisons { grid-column: 1 / -1; }
 .overview-group.comparisons > summary { min-height: 88px; padding-block: 18px; grid-template-rows: auto auto; row-gap: 8px; font-size: 16px; }
 .overview-groups { gap: 20px 5%; }
 .incident-matches { padding-bottom: 20px; }
 .incident-matches h3 { margin: 8px 0; font: 12px/1.5 var(--sans); color: var(--muted); }
 .incident-result { display: flex; justify-content: space-between; gap: 20px; width: 100%; min-height: 48px; padding: 10px 0; border-bottom: 1px solid var(--line); font: 20px/1.4 var(--serif); text-align: left; }
-.incident-result .code { flex-shrink: 0; align-self: center; }
-.pathway-trigger { display: flex; gap: 16px; align-items: center; width: 100%; text-align: left; min-height: 44px; }
+.incident-result-route { display: inline-flex; align-items: center; gap: 12px; flex: 0 0 auto; }
+.pathway-trigger { display: flex; gap: 24px; align-items: center; width: 100%; text-align: left; min-height: 44px; }
 .pathway-trigger > #selected-name { max-width: 1030px; text-wrap: pretty; }
 .code { font: 11px/1.6 var(--mono); color: var(--muted); white-space: nowrap; }
-.pathway-trigger .code { color: var(--accent); }
+:is(.pathway-trigger, .overview-pathway, .pathway-result, .incident-result-route) > .code { display: inline-flex; align-items: center; justify-content: center; justify-self: start; flex: 0 0 auto; width: max-content; min-height: 24px; padding: 4px 8px; background: var(--accent); color: var(--page); font: 500 11px/1.45 var(--mono); }
 .trigger-arrow { margin-left: auto; color: var(--accent); font: 28px/1 var(--sans); padding-inline: 6px; }
 .pathway-heading { padding: 12px 0 0; }
 .eyebrow { font: 11px/1.7 var(--sans); color: var(--muted); margin: 0; }
 .pathway-heading h2 { font: 30px/1.2 var(--serif); letter-spacing: -.015em; margin: 0; }
-.pathway-trigger .code, #pathway-family { color: var(--accent); }
+#pathway-family { color: var(--accent); }
 .harm-scales { margin: 0 0 24px; }
 .model-toolbar { display: flex; justify-content: flex-end; align-items: center; gap: 20px; min-height: 52px; color: var(--muted); font-size: 12px; }
 .model-toolbar button { min-height: 44px; color: var(--accent); }
@@ -379,9 +378,9 @@ dialog[data-group]:not([data-group='']) > .dialog-heading { background: var(--ti
 .result-group h3 { color: var(--accent); font-size: 11px; line-height: 1.7; letter-spacing: .04em; text-transform: uppercase; margin: 25px 0 9px; }
 .result-group h3 > span { margin-left: 10px; color: var(--quiet); }
 .result-group ul { margin: 0; padding: 0; list-style: none; }
-.pathway-result { display: grid; grid-template-columns: 43px 1fr 15px; gap: 12px; align-items: baseline; text-align: left; width: 100%; padding: 14px 8px; border-bottom: 1px solid var(--line); font: 18px/1.35 var(--serif); }
+.pathway-result { display: grid; grid-template-columns: max-content minmax(0,1fr) 24px; gap: 20px; align-items: baseline; text-align: left; width: 100%; padding: 14px 8px; border-bottom: 1px solid var(--line); font: 18px/1.35 var(--serif); }
 .pathway-result:hover, .pathway-result[aria-current='true'] { background: var(--tint); }
-.pathway-result[aria-current='true'] .code, .pathway-result .result-arrow { color: var(--accent); }
+.pathway-result .result-arrow { color: var(--accent); }
 .pathway-result .result-arrow { font: 14px/1 var(--sans); }
 .comparison-group { margin-top: 30px; border-top: 1px solid var(--muted); }
 .no-results { color: var(--muted); padding: 30px 0; }
@@ -395,7 +394,6 @@ body:has(dialog[open]) { overflow: hidden; }
 .reading-page main > article[data-group='H'] { background: var(--page); box-shadow: 0 0 0 16px var(--page); }
 .reading-page article > ol { font: 21px/1.6 var(--serif); }
 @media (max-width: 1100px) {
-  .pathway-trigger { gap: 10px; }
   .workspace { gap: 30px; }
   .barrier-column { padding-left: 24px; }
   .map-label { font-size: 12px; }
@@ -469,7 +467,7 @@ body:has(dialog[open]) { overflow: hidden; }
   .role-definitions > div { grid-template-columns: 1fr; gap: 6px; }
   .role-definitions dt small { display: inline; margin-left: 12px; }
   .section-heading { font-size: 13px; gap: 10px; }
-  .pathway-trigger { display: grid; grid-template-columns: 1fr 24px; gap: 6px 12px; }
+  .pathway-trigger { display: grid; grid-template-columns: minmax(0,1fr) 24px; gap: 12px 16px; }
   .pathway-trigger #selected-name { grid-column: 1; }
   .trigger-arrow { grid-column: 2; grid-row: 1 / 3; }
   .pathway-trigger .code { font-size: 10px; }
@@ -480,7 +478,7 @@ body:has(dialog[open]) { overflow: hidden; }
   .dialog-heading h2 { font-size: 25px; }
   .search-field { margin-inline: 19px; }
   .pathway-results { padding-inline: 19px; }
-  .pathway-result { padding-inline: 0; gap: 9px; grid-template-columns: 37px 1fr 12px; font-size: 17px; }
+  .pathway-result { padding-inline: 0; gap: 16px; font-size: 17px; }
   .pathway-result .code { font-size: 10px; }
 }
 @media (max-width: 350px) {

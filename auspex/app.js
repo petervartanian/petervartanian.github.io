@@ -560,7 +560,7 @@
     const words = termPatterns(terms);
     const exact = candidates.filter((a) => words.every((word) => word.test(text(a))));
     const matches = exact.length ? exact : candidates;
-    return matches.length ? `<section class="incident-matches"><h3>Incidents</h3>${matches.map((a) => `<button class="incident-result" data-search-incident="${a.id}"><span>${escape(incidents.get(a.incident).title)}</span><span class="code">${pathways.get(a.pathway).displayId} ${icon('right', 'choice-icon')}</span></button>`).join('')}</section>` : '';
+    return matches.length ? `<section class="incident-matches"><h3>Incidents</h3>${matches.map((a) => `<button class="incident-result" data-search-incident="${a.id}"><span>${escape(incidents.get(a.incident).title)}</span><span class="incident-result-route" data-group="${pathways.get(a.pathway).group}"><span class="code">${pathways.get(a.pathway).displayId}</span>${icon('right', 'choice-icon')}</span></button>`).join('')}</section>` : '';
   }
   function selectIncident(id) {
     const a = data.assessments.find((item) => item.id === id);
