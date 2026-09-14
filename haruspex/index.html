@@ -1037,7 +1037,6 @@ footer>span:first-child{letter-spacing:0;text-transform:none}
 #legend-modal{padding:0;width:min(530px,calc(100vw - 32px));max-height:calc(100svh - 48px);border:1px solid #879d9b55;background:#10191f;border-radius:10px;overflow:auto}
 #legend-modal::backdrop{background:#03080ed9;backdrop-filter:blur(5px)}
 #legend-modal #legend-panel{position:static;inset:auto;transform:none;translate:none;width:auto;max-width:none;max-height:none;margin:0;border:0;box-shadow:none;background:transparent;padding:28px}
-#egg-message{position:fixed;z-index:800;left:24px;bottom:105px;max-width:min(440px,calc(100vw - 48px));padding:13px 17px;background:#0c231eee;border:1px solid #69c59655;border-radius:6px;color:#8ee0b3;font:13px/1.6 var(--sans,Arial,sans-serif);box-shadow:0 8px 30px #0005;pointer-events:none}
 #detail-panel{border-radius:0 0 6px 6px!important;max-width:340px;padding:20px 24px;background:linear-gradient(150deg,#15212bf8,#0b141df5)}
 #detail-panel .detail-title{font-size:27px;line-height:1.16}#detail-panel .detail-facts{grid-template-columns:1fr}#detail-panel .detail-top{padding:0 0 12px}.waypoint-note{font-size:11px;color:#8d9ca5;margin-bottom:25px}.waypoint-note button{border:1px solid #83979b66;border-radius:50%;width:20px;height:20px;margin-left:6px}#milestones{gap:28px}.milestone{min-height:78px}.milestone small{margin-top:8px}
 
@@ -1047,25 +1046,18 @@ body:has(#scene[data-view="cast"]) #egg-message{display:none}
 #detail-panel[data-hoisted="true"]{max-width:none;border-radius:0 0 3px 3px!important;padding:18px 16px 24px;border-top:1px solid var(--event-color);border-left:1px solid #7996a52f;box-shadow:0 18px 45px #0005}
 #detail-panel[data-hoisted="true"] .detail-title{font-size:23px}#detail-panel[data-hoisted="true"] .detail-top{top:-18px;gap:4px}#detail-panel[data-hoisted="true"] .detail-top button{min-width:25px}
 .milestone:last-child{grid-column:auto}
-.field-readout.egg-revealed> :not(#egg-message){visibility:hidden;pointer-events:none}
-.field-readout #egg-message{position:absolute;inset:0;z-index:1;max-width:none;width:100%;height:100%;margin:0;padding:0 10px;box-sizing:border-box;display:flex;align-items:center;white-space:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;border:0;border-radius:2px;background:#103629;color:#8ee0b3;font:inherit;line-height:1.3;box-shadow:none;pointer-events:auto}
-.field-readout #egg-message[hidden]{display:none}
-@media(max-width:600px){.field-readout #egg-message{font-size:inherit}}
 
 body>#focus-origin{position:fixed;z-index:893}body:has(#event-focus[hidden])>#focus-origin{display:none}
 #milestones{grid-template-columns:repeat(4,minmax(0,1fr))}.milestone em{display:block;font:9px var(--mono);font-style:normal;color:var(--dim);margin-top:7px;letter-spacing:.02em}
 @media(min-width:561px) and (max-width:1000px){#milestones{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){#milestones{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* The egg reveal: one line to the right of the egg, spanning the rest of the readout row. Type is sized to fit; below 9px it wraps. The ground is a feathered wash of the workstream colours, not a box. */
-.field-readout.egg-revealed{min-height:30px}
-.field-readout.egg-revealed> :not(#egg-message){display:none}
-.field-readout #egg-message{font:inherit;line-height:1.3;padding:0;color:#8ee0b3;overflow:visible;border:0;border-radius:0;background:transparent;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;text-shadow:0 0 14px #0b0f10,0 0 3px #0b0f10}
-.field-readout #egg-message::before{content:"";position:absolute;inset:-8px -6px;z-index:-1;pointer-events:none;background:radial-gradient(50% 130% at 4% 50%,#e2b93a2a,transparent 65%),radial-gradient(40% 140% at 27% 50%,#2bd2c226,transparent 65%),radial-gradient(40% 140% at 50% 50%,#c691fe26,transparent 65%),radial-gradient(40% 140% at 73% 50%,#ff834626,transparent 65%),radial-gradient(40% 140% at 96% 50%,#72a7ff2a,transparent 65%),radial-gradient(1px 1px at 12% 26%,#ffffff66,transparent 100%),radial-gradient(1px 1px at 38% 74%,#ffffff55,transparent 100%),radial-gradient(1px 1px at 64% 20%,#ffffff55,transparent 100%),radial-gradient(1px 1px at 87% 68%,#ffffff66,transparent 100%),#070d14d9;-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent);mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
-.field-readout #egg-message>span{display:inline-block;white-space:nowrap}
-.field-readout #egg-message strong{font-weight:700;color:#b9f1d2;text-decoration:none}
-.field-readout #egg-message.wrapped{position:static;inset:auto;height:auto;white-space:normal;padding:6px 0}
-.field-readout #egg-message.wrapped>span{white-space:normal;display:inline}
+
+/* The discovery note wraps at a readable size above its trigger. */
+.field-foot > #egg-message{position:absolute;z-index:3;left:var(--scene-edge);bottom:calc(var(--scene-bottom) + var(--scene-rail-height) + 58px);width:min(560px,calc(100vw - var(--scene-edge) - var(--scene-edge)));max-height:min(34svh,220px);margin:0;padding:12px 15px;box-sizing:border-box;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;border:1px solid #849ba533;border-radius:4px;background:linear-gradient(135deg,#15212af5,#0c141bf5);color:#c5d1d7;font:12px/1.6 "Helvetica Neue",Arial,sans-serif;letter-spacing:0;white-space:normal;text-shadow:none;box-shadow:0 6px 22px #0003;pointer-events:auto}
+#egg-message .egg-link{display:inline;background:none;border:0;padding:0;margin:0;font:inherit;color:#e0e8ec;text-align:left;text-decoration:underline;text-decoration-color:#adc0cb88;text-underline-offset:3px;cursor:pointer}
+#egg-message .egg-link:hover{color:#fff;text-decoration-color:currentColor}
+#egg-message strong{font-weight:600}
 
 /* The Legend flyout: one section per key, contents centred both ways. */
 #legend-panel> :not(.legend-panel-head){display:flex;flex-wrap:wrap;justify-content:center;align-items:center;align-content:center;text-align:center;gap:10px 24px;margin:0;padding:14px 18px;min-height:58px;border-top:1px solid var(--line)}
@@ -1094,9 +1086,6 @@ body{overflow:hidden}
 .intro-aims li{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:6px}
 .intro-aims li::before{counter-increment:aim;content:"(" counter(aim,lower-roman) ")";color:var(--jewel-gold);font-variant-numeric:tabular-nums}
 
-/* "the rest" in the egg line opens the coverage note. */
-#egg-message .egg-link{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
-#egg-message .egg-link:hover{color:#b9f1d2}
 
 /* Title screen: one viewport, sized by height as well as width */
 .intro{display:grid;grid-template-rows:auto minmax(0,2fr) auto minmax(0,1fr) auto minmax(0,1fr);height:100svh;min-height:0;padding:clamp(16px,2.6svh,28px) 48px clamp(14px,2.2svh,24px);overflow:auto}
@@ -1192,12 +1181,10 @@ body:has(#scene) #scene.legend-open .plot-tools{right:calc(var(--scene-edge,40px
 .record-row:hover .row-arrow,.record-row:focus-visible .row-arrow,.record-row.selected .row-arrow{opacity:1}
 #dialog-content p,#dialog-content li,#dialog-content dd,#dialog-content h3{max-width:68ch}
 
-/* Title: the story and its actions sit against the right margin; the egg line speaks in monospace */
+/* Title: the story and its actions sit against the right margin. */
 .intro-story{margin-left:auto;max-width:696px;text-align:right}
 .intro-actions{justify-content:flex-start}
 .view-order{font-size:10px}
-.field-readout #egg-message{font-family:var(--mono);letter-spacing:0}
-.field-readout #egg-message strong{font-weight:700}
 
 /* The header measures its own space; secondary controls unfold over the field. */
 .field-header{position:absolute;inset:0;z-index:14;pointer-events:none}
@@ -1497,7 +1484,8 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
         </div>
         <div class="field-foot">
           <div class="field-discoveries"><button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button><button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button></div>
-          <div class="field-readout"><span id="egg-message" role="status" tabindex="0" hidden></span><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
+          <span id="egg-message" role="status" tabindex="0" hidden></span>
+          <div class="field-readout"><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
           <div class="timeline-navigation">
             <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
             <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
@@ -3450,12 +3438,44 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if(scrollGateway)scrollGateway.enter(options);
     else $('#scene').scrollIntoView(options);
   }
+  let entrySnapshot=null;
+  function freezeEntryTitle() {
+    entrySnapshot?.remove();
+    if(reducedMotion.matches)return null;
+    const intro=$('#intro'),ghost=intro.cloneNode(true);
+    const originals=[intro,...intro.querySelectorAll('*')],copies=[ghost,...ghost.querySelectorAll('*')];
+    originals.forEach((original,index)=>{
+      const copy=copies[index];
+      if(original.id||original.tagName==='CANVAS'){
+        const computed=getComputedStyle(original);
+        copy.style.cssText=Array.from(computed,key=>`${key}:${computed.getPropertyValue(key)};`).join('');
+      }
+      if(original.tagName==='CANVAS'){
+        copy.width=original.width;copy.height=original.height;
+        copy.getContext('2d').drawImage(original,0,0);
+      }
+      copy.removeAttribute('id');
+    });
+    ghost.inert=true;ghost.setAttribute('aria-hidden','true');ghost.classList.add('entry-ghost');
+    Object.assign(ghost.style,{position:'fixed',inset:'0',width:'100%',height:'100%',margin:'0',zIndex:'1000',pointerEvents:'none',overflow:'hidden',animation:'none',transition:'none'});
+    document.body.append(ghost);ghost.scrollTop=intro.scrollTop;ghost.scrollLeft=intro.scrollLeft;
+    entrySnapshot=ghost;return ghost;
+  }
+  function revealFromTitle(change) {
+    const ghost=freezeEntryTitle();
+    change();
+    if(ghost){
+      const done=()=>{ghost.remove();if(entrySnapshot===ghost)entrySnapshot=null;};
+      ghost.animate([{opacity:1},{opacity:0}],{duration:280,easing:'ease-out',fill:'forwards'}).finished.then(done).catch(done);
+    }
+  }
   function enterField() {
-    $('#explorer').scrollTop = 0;
-    changeView('stream');finishCamera();stopMotion();
-    const behavior=reducedMotion.matches?'instant':'smooth';
-    if(scrollGateway)scrollGateway.show({behavior});
-    else $('#scene').scrollIntoView({behavior});
+    revealFromTitle(()=>{
+      $('#explorer').scrollTop = 0;
+      changeView('stream');finishCamera();stopMotion();
+      if(scrollGateway)scrollGateway.show({behavior:'instant'});
+      else $('#scene').scrollIntoView({behavior:'instant'});
+    });
   }
   const roman = value => {let n=value,out='';for(const[v,s]of [[1000,'m'],[900,'cm'],[500,'d'],[400,'cd'],[100,'c'],[90,'xc'],[50,'l'],[40,'xl'],[10,'x'],[9,'ix'],[5,'v'],[4,'iv'],[1,'i']])while(n>=v){out+=s;n-=v;}return out;};
   let noteSerial=0;
@@ -3814,15 +3834,15 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('#framework-info').addEventListener('click', openFramework);
   function openCoverage(){openDialog('How much happened?',coverageContent());}
   $('#background-info').addEventListener('click',openCoverage);
-  function fitEggMessage(message){const span=message.firstElementChild;if(!span)return;message.classList.remove('wrapped');message.style.fontSize='';let size=parseFloat(getComputedStyle(message).fontSize)||10;while(span.scrollWidth>message.clientWidth&&size>9){size=Math.max(9,Math.round((size-.2)*10)/10);message.style.fontSize=`${size}px`;}if(span.scrollWidth>message.clientWidth){message.style.fontSize='9px';message.classList.add('wrapped');}}
   $('#hidden-egg').addEventListener('click', () => {
     starsUnlocked = !starsUnlocked;
     $('#hidden-egg').setAttribute('aria-pressed', String(starsUnlocked));
     $('#hidden-egg span').textContent = starsUnlocked ? '🐣' : '🥚';
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
-    if (!starsUnlocked) { showStar(null);const message=$('#egg-message');const done=()=>{message.hidden=true;$('.field-readout').classList.remove('egg-revealed');};if(reducedMotion.matches||message.hidden)done();else{const fade=message.animate([{opacity:1},{opacity:0}],{duration:240,easing:'ease-in'});fade.onfinish=done;fade.oncancel=done;}return; }
+    const message=$('#egg-message');message.getAnimations().forEach(animation=>animation.cancel());
+    if (!starsUnlocked) { showStar(null);const done=()=>{if(!starsUnlocked)message.hidden=true;};if(reducedMotion.matches||message.hidden)done();else message.animate([{opacity:1},{opacity:0}],{duration:180,easing:'ease-in'}).finished.then(done).catch(()=>{});return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found the stars:</strong> over 70,000 messages and files beyond the ${events.length} events here, encoded as 1.2 million entries (in a cache of 20 million). But only OpenAI, Hugging Face and METR/Redwood can disclose <button type="button" class="egg-link" id="egg-rest">the rest</button>.</span>`;message.hidden=false;fitEggMessage(message);message.querySelector('#egg-rest')?.addEventListener('click',openCoverage);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    message.innerHTML=`<span><button type="button" class="egg-link" id="egg-coverage" aria-haspopup="dialog"><strong>You found the stars</strong></button>: over 70,000 messages and files beyond the ${events.length} events here, encoded as 1.2 million entries (in a cache of 20 million). But only OpenAI, Hugging Face, and METR/Redwood can disclose the rest.</span>`;message.hidden=false;message.querySelector('#egg-coverage').addEventListener('click',openCoverage);if(!reducedMotion.matches)message.animate([{opacity:0},{opacity:1}],{duration:180});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
@@ -3878,7 +3898,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   document.body.append($('#focus-origin'));
   let veilShownAt=0;
   $('#event-focus .focus-veil').addEventListener('click',()=>{if(performance.now()-veilShownAt>250)closeDetails();});
-  window.addEventListener('resize',()=>{if(!$('#egg-message').hidden)fitEggMessage($('#egg-message'));if(focusAnchor?.lineLength){const hoist=document.querySelector(`.milestone[data-event="${state.selected}"]`);if(hoist){const r=hoist.getBoundingClientRect();focusAnchor.documentX=r.left+scrollX;focusAnchor.documentY=r.top+scrollY;focusAnchor.lineLength=r.width;}}positionBanner();});
+  window.addEventListener('resize',()=>{if(focusAnchor?.lineLength){const hoist=document.querySelector(`.milestone[data-event="${state.selected}"]`);if(hoist){const r=hoist.getBoundingClientRect();focusAnchor.documentX=r.left+scrollX;focusAnchor.documentY=r.top+scrollY;focusAnchor.lineLength=r.width;}}positionBanner();});
   document.addEventListener('keydown',event=>{
     if(event.key!=='Tab'||detailPanel.hidden||$('#info-dialog').open)return;
     const controls=[...detailPanel.querySelectorAll('button:not(:disabled),a[href],summary,[tabindex="0"]')].filter(el=>el.getClientRects().length);
@@ -3896,7 +3916,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('#next-event').addEventListener('click', () => { const i = visible.findIndex((event) => event.id === state.selected); if (visible.length) selectEvent(visible[Math.min(visible.length - 1, i + 1)].id); });
   $('#method-button').addEventListener('click', openMethod);
   $('#enter-explorer').addEventListener('click', (event) => { event.preventDefault(); enterField(); });
-  $('#intro-cast').addEventListener('click', () => { changeView('cast'); renderCast(); castUI.show('inquiry'); scrollToField({behavior:reducedMotion.matches?'auto':'smooth'}); });
+  $('#intro-cast').addEventListener('click', () => revealFromTitle(()=>{changeView('cast');renderCast();castUI.show('inquiry');scrollToField({behavior:'instant'});}));
   $('#footer-method').addEventListener('click', openMethod);
   $('#actual-interventions').addEventListener('click', () => {
     navigate(() => { state.interventions = !state.interventions; state.lifecycle = 'all'; state.temporal = 'all'; }, { fit: true });

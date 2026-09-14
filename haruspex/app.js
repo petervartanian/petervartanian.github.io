@@ -1268,12 +1268,44 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if(scrollGateway)scrollGateway.enter(options);
     else $('#scene').scrollIntoView(options);
   }
+  let entrySnapshot=null;
+  function freezeEntryTitle() {
+    entrySnapshot?.remove();
+    if(reducedMotion.matches)return null;
+    const intro=$('#intro'),ghost=intro.cloneNode(true);
+    const originals=[intro,...intro.querySelectorAll('*')],copies=[ghost,...ghost.querySelectorAll('*')];
+    originals.forEach((original,index)=>{
+      const copy=copies[index];
+      if(original.id||original.tagName==='CANVAS'){
+        const computed=getComputedStyle(original);
+        copy.style.cssText=Array.from(computed,key=>`${key}:${computed.getPropertyValue(key)};`).join('');
+      }
+      if(original.tagName==='CANVAS'){
+        copy.width=original.width;copy.height=original.height;
+        copy.getContext('2d').drawImage(original,0,0);
+      }
+      copy.removeAttribute('id');
+    });
+    ghost.inert=true;ghost.setAttribute('aria-hidden','true');ghost.classList.add('entry-ghost');
+    Object.assign(ghost.style,{position:'fixed',inset:'0',width:'100%',height:'100%',margin:'0',zIndex:'1000',pointerEvents:'none',overflow:'hidden',animation:'none',transition:'none'});
+    document.body.append(ghost);ghost.scrollTop=intro.scrollTop;ghost.scrollLeft=intro.scrollLeft;
+    entrySnapshot=ghost;return ghost;
+  }
+  function revealFromTitle(change) {
+    const ghost=freezeEntryTitle();
+    change();
+    if(ghost){
+      const done=()=>{ghost.remove();if(entrySnapshot===ghost)entrySnapshot=null;};
+      ghost.animate([{opacity:1},{opacity:0}],{duration:280,easing:'ease-out',fill:'forwards'}).finished.then(done).catch(done);
+    }
+  }
   function enterField() {
-    $('#explorer').scrollTop = 0;
-    changeView('stream');finishCamera();stopMotion();
-    const behavior=reducedMotion.matches?'instant':'smooth';
-    if(scrollGateway)scrollGateway.show({behavior});
-    else $('#scene').scrollIntoView({behavior});
+    revealFromTitle(()=>{
+      $('#explorer').scrollTop = 0;
+      changeView('stream');finishCamera();stopMotion();
+      if(scrollGateway)scrollGateway.show({behavior:'instant'});
+      else $('#scene').scrollIntoView({behavior:'instant'});
+    });
   }
   const roman = value => {let n=value,out='';for(const[v,s]of [[1000,'m'],[900,'cm'],[500,'d'],[400,'cd'],[100,'c'],[90,'xc'],[50,'l'],[40,'xl'],[10,'x'],[9,'ix'],[5,'v'],[4,'iv'],[1,'i']])while(n>=v){out+=s;n-=v;}return out;};
   let noteSerial=0;
@@ -1632,15 +1664,15 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('#framework-info').addEventListener('click', openFramework);
   function openCoverage(){openDialog('How much happened?',coverageContent());}
   $('#background-info').addEventListener('click',openCoverage);
-  function fitEggMessage(message){const span=message.firstElementChild;if(!span)return;message.classList.remove('wrapped');message.style.fontSize='';let size=parseFloat(getComputedStyle(message).fontSize)||10;while(span.scrollWidth>message.clientWidth&&size>9){size=Math.max(9,Math.round((size-.2)*10)/10);message.style.fontSize=`${size}px`;}if(span.scrollWidth>message.clientWidth){message.style.fontSize='9px';message.classList.add('wrapped');}}
   $('#hidden-egg').addEventListener('click', () => {
     starsUnlocked = !starsUnlocked;
     $('#hidden-egg').setAttribute('aria-pressed', String(starsUnlocked));
     $('#hidden-egg span').textContent = starsUnlocked ? '🐣' : '🥚';
     $('#hidden-egg').classList.toggle('hatched', starsUnlocked);
-    if (!starsUnlocked) { showStar(null);const message=$('#egg-message');const done=()=>{message.hidden=true;$('.field-readout').classList.remove('egg-revealed');};if(reducedMotion.matches||message.hidden)done();else{const fade=message.animate([{opacity:1},{opacity:0}],{duration:240,easing:'ease-in'});fade.onfinish=done;fade.oncancel=done;}return; }
+    const message=$('#egg-message');message.getAnimations().forEach(animation=>animation.cancel());
+    if (!starsUnlocked) { showStar(null);const done=()=>{if(!starsUnlocked)message.hidden=true;};if(reducedMotion.matches||message.hidden)done();else message.animate([{opacity:1},{opacity:0}],{duration:180,easing:'ease-in'}).finished.then(done).catch(()=>{});return; }
     if(state.view==='cast')changeView('stream');
-    const message=$('#egg-message');$('.field-readout').classList.add('egg-revealed');message.innerHTML=`<span><strong>You found the stars:</strong> over 70,000 messages and files beyond the ${events.length} events here, encoded as 1.2 million entries (in a cache of 20 million). But only OpenAI, Hugging Face and METR/Redwood can disclose <button type="button" class="egg-link" id="egg-rest">the rest</button>.</span>`;message.hidden=false;fitEggMessage(message);message.querySelector('#egg-rest')?.addEventListener('click',openCoverage);if(!reducedMotion.matches)message.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:250});
+    message.innerHTML=`<span><button type="button" class="egg-link" id="egg-coverage" aria-haspopup="dialog"><strong>You found the stars</strong></button>: over 70,000 messages and files beyond the ${events.length} events here, encoded as 1.2 million entries (in a cache of 20 million). But only OpenAI, Hugging Face, and METR/Redwood can disclose the rest.</span>`;message.hidden=false;message.querySelector('#egg-coverage').addEventListener('click',openCoverage);if(!reducedMotion.matches)message.animate([{opacity:0},{opacity:1}],{duration:180});
 
   });
   $('#return-inquiry').addEventListener('click', () => openInvestigation(state.investigation.id));
@@ -1696,7 +1728,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   document.body.append($('#focus-origin'));
   let veilShownAt=0;
   $('#event-focus .focus-veil').addEventListener('click',()=>{if(performance.now()-veilShownAt>250)closeDetails();});
-  window.addEventListener('resize',()=>{if(!$('#egg-message').hidden)fitEggMessage($('#egg-message'));if(focusAnchor?.lineLength){const hoist=document.querySelector(`.milestone[data-event="${state.selected}"]`);if(hoist){const r=hoist.getBoundingClientRect();focusAnchor.documentX=r.left+scrollX;focusAnchor.documentY=r.top+scrollY;focusAnchor.lineLength=r.width;}}positionBanner();});
+  window.addEventListener('resize',()=>{if(focusAnchor?.lineLength){const hoist=document.querySelector(`.milestone[data-event="${state.selected}"]`);if(hoist){const r=hoist.getBoundingClientRect();focusAnchor.documentX=r.left+scrollX;focusAnchor.documentY=r.top+scrollY;focusAnchor.lineLength=r.width;}}positionBanner();});
   document.addEventListener('keydown',event=>{
     if(event.key!=='Tab'||detailPanel.hidden||$('#info-dialog').open)return;
     const controls=[...detailPanel.querySelectorAll('button:not(:disabled),a[href],summary,[tabindex="0"]')].filter(el=>el.getClientRects().length);
@@ -1714,7 +1746,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('#next-event').addEventListener('click', () => { const i = visible.findIndex((event) => event.id === state.selected); if (visible.length) selectEvent(visible[Math.min(visible.length - 1, i + 1)].id); });
   $('#method-button').addEventListener('click', openMethod);
   $('#enter-explorer').addEventListener('click', (event) => { event.preventDefault(); enterField(); });
-  $('#intro-cast').addEventListener('click', () => { changeView('cast'); renderCast(); castUI.show('inquiry'); scrollToField({behavior:reducedMotion.matches?'auto':'smooth'}); });
+  $('#intro-cast').addEventListener('click', () => revealFromTitle(()=>{changeView('cast');renderCast();castUI.show('inquiry');scrollToField({behavior:'instant'});}));
   $('#footer-method').addEventListener('click', openMethod);
   $('#actual-interventions').addEventListener('click', () => {
     navigate(() => { state.interventions = !state.interventions; state.lifecycle = 'all'; state.temporal = 'all'; }, { fit: true });
