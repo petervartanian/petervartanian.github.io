@@ -208,8 +208,31 @@ for (const kind of ['contribution','continuation','optional','feedback','recover
   assert(geometry.tangent.some(value=>value!==0));
 }
 const css=await read('stpa.css');
-assert(css.includes('path.is-feedback { stroke-dasharray: .1 4.8'));
-assert(css.includes('path.is-optional { stroke-dasharray: 7 5'));
-assert(presentation.routeSymbol('safeguard').includes('a1-gate-leaf'));
+assert(css.includes('.stpa-connection.is-feedback { stroke-dasharray: .1 4.8'));
+assert(css.includes('.stpa-connection.is-optional { stroke-dasharray: 7 5'));
+assert(presentation.routeSymbol('safeguard').includes('route-twist'));
 assert(!css.includes('route-crossbar') && !css.includes('a1-possible-barrier'));
 assert(presentation.pathsGuide().includes('Conditional names what else must hold'));
+
+// Waves repeat at a roughly fixed spatial frequency; safeguards replace a section
+// of the route, so no straight line passes through the angular twist.
+const endpoints=d=>{const n=d.match(/-?\d+\.\d+/g).map(Number);return [n.slice(0,2),n.slice(-2)];};
+for (const path of [points,[[0,0],[200,0]],[[0,0],[0,200]],[[200,20],[0,20]],[[0,0],[0,0],[80,80]],[[0,0],[4,0]]]) {
+  for (const kind of ['contribution','optional','feedback','recovery']) {
+    const plain=presentation.connectionGeometry(kind,path);
+    const twisted=presentation.connectionGeometry(kind,path,true);
+    assert(!/NaN|undefined|Infinity/.test(twisted.d));
+    for (let i=1;i<twisted.sections.length;i++) assert.deepEqual(endpoints(twisted.sections[i-1].d)[1],endpoints(twisted.sections[i].d)[0],'Joined sections must meet');
+    assert.deepEqual(endpoints(twisted.sections[0].d)[0],path[0]);
+    assert.deepEqual(endpoints(twisted.sections.at(-1).d)[1],path.at(-1));
+    if (twisted.sections.length>1) {
+      assert.equal(twisted.sections.length,3);
+      assert(twisted.sections[1].safeguard);
+      assert.equal((twisted.sections[1].d.match(/ L/g)||[]).length,3);
+      assert(!twisted.sections[1].d.includes(' C'));
+    }
+    if(kind==='recovery' && path===points) assert((plain.d.match(/ C/g)||[]).length>=10,'Recovery must have repeated short curves');
+  }
+}
+assert(!css.includes('a1-gate-'));
+assert(css.includes('.stpa-connection.is-safeguard { stroke-dasharray: none'));

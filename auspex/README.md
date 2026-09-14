@@ -42,13 +42,13 @@ represented across selected actions, not exhaustively assessed for every action.
 The map uses **0. Context**, **1. Precursors**, **2. Event**, **3. Consequences**,
 with components numbered within their region (1.1, 1.2, 2.1, 3.1…). Recovery retains R.
 Possible progression uses solid angular arrows, optional branches long dashes,
-feedback round dots and double chevrons, and recovery a green curve with a filled
+feedback round dots and double chevrons, and recovery a close-set green wave with a filled
 arrowhead. Possible contribution and conditional consequence keep their data meanings
 but share the forward-arrow style. Conditions remain in component text and route
 descriptions; the key explains their difference from an optional branch.
 
-Proposed safeguards use a hinged gate with an open leaf, rather than dashed marks.
-Its orientation follows the route; the key includes the named safeguards for the
+Proposed safeguards make a compact sharp zigzag in the middle of the route itself.
+The twist stays solid even on a dashed or dotted route; the key includes the named safeguards for the
 current pathway. Actual barrier states stay attached to incident evidence.
 
 Pathway labels use A-1 / Bonus-1 throughout the catalogue. Old A.1 / Bonus.1 links and
@@ -68,9 +68,9 @@ capability or conditions would defeat the protection; observed and projected ero
 must remain distinguishable. Recovery is a separate route, whose controls can themselves
 hold, fail or be reinforced. These are editorial labels, not an STPA rating scale.
 
-Recovery uses a smooth curve and filled arrowhead; feedback uses a squared, dotted
+Recovery uses repeated small curves and a filled arrowhead; feedback uses a squared, dotted
 return loop and double chevrons. Matching symbols in the key distinguish the routes
-without relying on color. The proposed gate follows each route’s direction.
+without relying on color. The proposed safeguard twist follows each route’s direction.
 
 Source references use filled circles in case overlays, barrier explanations and the
 recovery card, with small i/ii/iii labels within each source group. Ordinary pathway
