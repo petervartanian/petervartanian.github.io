@@ -213,9 +213,9 @@ for (const path of paths) for (const kind of ['contribution','continuation','opt
   if(geometry.barrier) {
     assert.equal(geometry.sections.length,2);
     const a=endpoints(geometry.sections[0].d)[1],b=endpoints(geometry.sections[1].d)[0];
-    assert(Math.abs(Math.hypot(b[0]-a[0],b[1]-a[1])-6)<.15,'A six-pixel gap gives the barrier breathing room');
+    assert(Math.abs(Math.hypot(b[0]-a[0],b[1]-a[1])-4)<.15,'A four-pixel gap gives the barrier breathing room');
     const [top,bottom]=endpoints(geometry.barrier.stem);
-    assert(Math.abs(Math.hypot(bottom[0]-top[0],bottom[1]-top[1])-14)<.15);
+    assert(Math.abs(Math.hypot(bottom[0]-top[0],bottom[1]-top[1])-10)<.15);
     assert(Math.abs((bottom[0]-top[0])*geometry.tangent[0]+(bottom[1]-top[1])*geometry.tangent[1])<.2,'Barrier crosses the route');
   }
   if(kind==='recovery') {
@@ -223,7 +223,7 @@ for (const path of paths) for (const kind of ['contribution','continuation','opt
     assert.deepEqual(Array.from(geometry.head.tip),path.at(-1));
     for(let i=0;i<geometry.rails.length;i+=2) {
       const a=endpoints(geometry.rails[i].d)[0],b=endpoints(geometry.rails[i+1].d)[0];
-      assert(Math.abs(Math.hypot(b[0]-a[0],b[1]-a[1])-4)<.15,'Recovery lines stay visibly separate');
+      assert(Math.abs(Math.hypot(b[0]-a[0],b[1]-a[1])-2.5)<.15,'Recovery lines stay visibly separate');
     }
   } else assert.equal(geometry.rails.length,0);
 }
@@ -234,7 +234,7 @@ assert(css.includes('.stpa-recovery-rail { fill: none; stroke: #6d8976; stroke-w
 assert(presentation.routeSymbol('safeguard').includes('a1-barrier-stem'));
 assert(presentation.routeSymbol('recovery').includes('route-rail'));
 assert(!css.includes('route-twist') && !css.includes('a1-gate-'));
-assert(presentation.mapGuide('barriers').includes('A safeguard is a deliberately designed barrier.'));
+assert(presentation.mapGuide('barriers').includes('Each mark on a route represents one proposed barrier.'));
 assert(presentation.mapGuide('barriers').includes('a1-proposed-definition'));
 assert(!presentation.pathsGuide().includes('a1-safeguard-definition'),'Proposed safeguards belong under Barriers, not among route types');
 assert.equal(presentation.mapGuide('recovery'),presentation.mapGuide('paths'),'A removed guide falls back to the path key');
@@ -252,20 +252,21 @@ for (const m of models) {
   assert(guide.includes('The related component is highlighted, while'));
   const recovery=m.nodes.find(n=>n.type==='recovery');
   assert(!presentation.renderMap(recovery.id,null,'').includes('data-recovery-info'));
-  const routes=presentation.proposedBarriers(),first=new Map();
-  for (const route of routes) {
-    const view=presentation.proposedBarrierView(route.id,null);
-    for (const c of route.controls) {
-      const heading=view.match(new RegExp(`<h4 id="a1-proposed-${c.id}"[^>]*>(.*?)</h4>`))[1];
-      if (first.has(c.id)) {
-        assert(heading.includes('<em>Ibid.</em>'));
-        assert(heading.includes(`data-safeguard-reference="${first.get(c.id).replaceAll('>','&gt;')}"`));
-        assert(heading.includes(`data-control-reference="${c.id}"`));
-      } else {
-        first.set(c.id,route.id);
-        assert(!heading.includes('Ibid.'));
-      }
-    }
+  for (const route of presentation.proposedBarriers()) for (const c of route.controls) {
+    const view=presentation.proposedBarrierView(route.id,null,()=>'',c.id);
+    assert.equal((view.match(/data-constraint=/g)||[]).length,1);
+    assert(view.includes(`data-constraint="${c.id}"`));
+    assert(!view.includes('Ibid.') && !view.includes('Proposed safeguard'));
   }
 }
 assert(!staticHTML.includes('stpa-recovery-guide'));
+
+for (const path of [[[0,0],[61,0]],[[0,0],[33,0],[33,30],[66,30]],[[0,0],[0,160]]]) {
+ const count=path.at(-1)[1]===160?4:2;
+ for(const kind of ['contribution','optional','feedback','recovery']) {
+  const g=presentation.connectionGeometry(kind,path,count);
+  assert.equal(g.barriers.length,count);
+  assert.equal(g.sections.length,count+1);
+  for(let i=0;i<count;i++)for(let j=i+1;j<count;j++)assert(Math.hypot(g.barriers[i].center[0]-g.barriers[j].center[0],g.barriers[i].center[1]-g.barriers[j].center[1])>=29.9);
+ }
+}

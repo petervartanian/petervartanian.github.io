@@ -111,9 +111,6 @@ for(const m of models) {
    assert(panel().includes(escaped(b.strongerAI || b.durability || b.failure)));
    assert(panel().includes('a1-barrier-card') && panel().includes('stpa-barrier-glyph'));
    assert(!panel().includes('question-lenses'));
-   const reference=`#a1-overlay-barrier-${b.id}`;
-   assert(panel().includes(`href="${reference}"`) && panel().includes('<em>Ibid.</em>'));
-   assert(map().includes(`id="${reference.slice(1)}"`),'A repeated incident name points to the visible original');
    singleCase(config);
   }
   click('#pathway-map','explore-connection');
@@ -150,7 +147,8 @@ assert.equal(elements.get('#app').dataset.blank,'false');assert(cloud().includes
 
 let proposedCount=0;
 const questionNames=['mechanism','evidence','durability','failure'];
-const assertProposed=(route,incident='')=>{
+const clickProposal=(route,c=route.controls[0])=>{const target=targetFor('#pathway-map','safeguard',route.id);target.dataset.constraint=c.id;elements.get('#pathway-map').listeners.click({target});};
+const assertProposed=(route,incident='',c=route.controls[0])=>{
  assert.equal(test.state.safeguard,route.id,'The route identifies the proposed barrier');
  assert.equal(test.state.inspect,true,'A proposed barrier can open independently');
  assert.equal(test.state.incident,incident,'Inspection does not select or change an incident');
@@ -159,55 +157,53 @@ const assertProposed=(route,incident='')=>{
  assert(panel().includes('Proposed') && panel().includes('Unassessed'));
  assert(panel().includes('Would this hold against more capable AI?'));
  assert(!panel().includes('question-lenses') && !panel().includes('role="tablist"'));
- assert.equal((panel().match(/data-constraint=/g)||[]).length,route.controls.length);
- assert.equal((panel().match(/class="a1-barrier-card-heading"/g)||[]).length,route.controls.length);
+ assert.equal((panel().match(/data-constraint=/g)||[]).length,1);
+ assert.equal((panel().match(/class="a1-barrier-card-heading"/g)||[]).length,1);
  assert(panel().includes('stpa-barrier-glyph is-unknown'));
+ assert.equal(test.state.constraint,c.id);
+ assert(panel().includes(`data-constraint="${c.id}"`) && panel().includes(escaped(c.title)));
+ assert(!panel().includes('Ibid.'));
+ assert.equal(new URL(url).searchParams.get('c'),c.id);
  assert.equal(new URL(url).searchParams.get('s'),route.id);
  assert.equal(new URL(url).searchParams.get('inspect'),'1');
  assert(!new URL(url).searchParams.has('b'),'An incident barrier is not selected at the same time');
 };
-const assertClosed=route=>{
+const assertClosed=(route,c=route.controls[0])=>{
  assert.equal(test.state.safeguard,'');assert.equal(test.state.inspect,false);
  assert(elements.get('#workspace').hidden);
- for(const name of ['s','q','inspect'])assert(!new URL(url).searchParams.has(name),`${name} clears on close`);
- assert.equal(focused,`#pathway-map [data-safeguard="${route.id}"]`,'Focus returns to the route barrier');
+ for(const name of ['s','c','q','inspect'])assert(!new URL(url).searchParams.has(name),`${name} clears on close`);
+ assert.equal(focused,`#pathway-map [data-safeguard="${route.id}"][data-constraint="${c.id}"]`,'Focus returns to the route barrier');
 };
 for(const m of models) {
  url=`file:///fixture/auspex/index.html?p=${m.displayId}`;test.readLocation();
  const proposals=stpa.proposedBarriers();
  assert.equal(proposals.length,m.links.length,'Each modeled route has an inspectable proposal');
- for(const route of proposals) {
-  assert.equal(stpa.proposedBarrier(route.id).id,route.id);
-  click('#pathway-map','safeguard',route.id);assertProposed(route);
+ for(const route of proposals) for(const c of route.controls) {
+  clickProposal(route,c);assertProposed(route,'',c);
   assert.equal(test.state.question,0);
-  assert(!map().includes('id="a1-overlay"'),'No incident is required');
-  const mechanismURL=url;
-  for(const c of route.controls) {
-   assert(panel().includes(escaped(c.text)),`Mechanism includes ${m.displayId} ${c.id}`);
-   for(const owner of c.owners) assert(panel().includes(escaped(m.controllers.find(x=>x.id===owner).title)),`Accountability includes ${owner}`);
+  assert(!map().includes('id="a1-overlay"'));
+  assert(map().includes('<strong>Explanation:</strong>'));
+  const selectedURL=url;
+  assert(panel().includes(escaped(c.text)) && panel().includes(escaped(c.limit)) && panel().includes(escaped(c.test)));
+  for(const owner of c.owners) assert(panel().includes(escaped(m.controllers.find(x=>x.id===owner).title)));
+  for(const other of route.controls.filter(x=>x.id!==c.id)) assert(!panel().includes(`data-constraint="${other.id}"`),'Only the clicked barrier opens');
+  if(m.controlEvidence) assert.equal(panel().includes(escaped(m.controlEvidence.text)),c.id===m.controlEvidence.constraint);
+  for(const q of questionNames) {
+   const legacy=new URL(selectedURL);legacy.searchParams.set('q',q);url=legacy.href;test.readLocation();
+   assertProposed(route,'',c);assert.equal(test.state.question,0);assert(!new URL(url).searchParams.has('q'));
   }
-  for(const c of route.controls) {
-   assert(panel().includes(escaped(c.limit)),`Brittleness includes ${c.id}`);
-   assert(panel().includes(escaped(c.test)),`Supporting detail retains the proposed test for ${c.id}`);
-  }
-  if(m.controlEvidence) {
-   const linked=route.controls.some(c=>c.id===m.controlEvidence.constraint);
-   assert.equal(panel().includes(escaped(m.controlEvidence.text)),linked,'Research evidence appears only on its explicitly linked constraint');
-  }
-  for(let q=0;q<4;q++) {
-   const legacy=new URL(mechanismURL);legacy.searchParams.set('q',questionNames[q]);url=legacy.href;test.readLocation();
-   assertProposed(route);assert.equal(test.state.question,0);assert(!new URL(url).searchParams.has('q'),'Old lens links normalize to the single reading');
-  }
-  url=mechanismURL;windowListeners.popstate();assertProposed(route);assert.equal(test.state.question,0);
-  click('#barrier-panel','close-inspector');assertClosed(route);
-  click('#pathway-map','safeguard',route.id);keydown('#barrier-panel','Escape');assertClosed(route);
+  url=selectedURL;windowListeners.popstate();assertProposed(route,'',c);
+  click('#barrier-panel','close-inspector');assertClosed(route,c);
+  clickProposal(route,c);keydown('#barrier-panel','Escape');assertClosed(route,c);
+  // An older route-only link still opens a real, named barrier.
+  const old=new URL(selectedURL);old.searchParams.delete('c');url=old.href;test.readLocation();assertProposed(route);
   proposedCount++;
  }
  const route=proposals[0];
  const configs=Object.entries(m.presentation.overlays).map(([incident,config])=>({config,a:context.window.AuspexData.assessments.find(a=>a.pathway===m.pathway&&a.incident===incident)}));
- for(const {a} of configs)for(const proposal of proposals) {
-  const actual=Array.from(stpa.proposedBarrierView(proposal.id,a).matchAll(/data-related-barrier="([^"]+)"/g),([,id])=>id).sort();
-  const expected=Array.from(stpa.barriers(a).filter(b=>proposal.controls.some(c=>c.id===b.constraint)),b=>b.id).sort();
+ for(const {a} of configs)for(const proposal of proposals)for(const c of proposal.controls) {
+  const actual=Array.from(stpa.proposedBarrierView(proposal.id,a,()=>'',c.id).matchAll(/data-related-barrier="([^"]+)"/g),([,id])=>id).sort();
+  const expected=Array.from(stpa.barriers(a).filter(b=>c.id===b.constraint),b=>b.id).sort();
   assert.deepEqual(actual,expected,'Incident evidence links only through an explicit constraint ID');
  }
  const [first,second]=configs;
@@ -217,7 +213,7 @@ for(const m of models) {
  click('#incident-rail','case',first.a.id);assertProposed(route,first.a.incident);
  click('#incident-rail','case',second.a.id);assertProposed(route,second.a.incident);
  assert.equal(test.state.exploration,false);singleCase(second.config);
- const related=stpa.barriers(second.a).find(b=>route.controls.some(c=>c.id===b.constraint));
+ const related=stpa.barriers(second.a).find(b=>route.controls[0].id===b.constraint);
  if(related) {
   click('#barrier-panel','related-barrier',related.id);
   assert.equal(test.state.safeguard,'');assert.equal(test.state.barrier,related.id);assert.equal(test.state.inspect,true);
@@ -252,7 +248,7 @@ for(const p of context.window.AuspexData.pathways.filter(p=>!stpa.has(p.id))) {
  assert.equal(test.state.safeguard,'');assert.equal(test.state.inspect,false);
  assert(!new URL(url).searchParams.has('s'));assert.equal(map(),'');
 }
-assert.equal(proposedCount,42);
+assert.equal(proposedCount,68);
 
 // Feed authored rectangles to draw() to test geometry/button correspondence.
 // This does not measure, render, reconstruct, or screenshot the actual page.
@@ -263,7 +259,7 @@ let drawnRoutes=0;
 for(const mobile of [false,true])for(const m of models) {
  geometryMobile=mobile;stpa.use(m.pathway);
  let active=true,restored='';
- const selected=m.links[0].id;
+ const selected=m.links[0].id,selectedConstraint=m.links[0].constraints[0];
  const origin={left:37,top:61,width:mobile?520:1400,height:1700};
  const box=(left,top,width,height)=>({left:left+origin.left,top:top+origin.top,right:left+origin.left+width,bottom:top+origin.top+height,width,height});
  const counts={before:0,centre:0,after:0,recovery:0};
@@ -279,10 +275,10 @@ for(const mobile of [false,true])for(const m of models) {
   cells.push(cell);nodes.push(button);
  }
  const svg={innerHTML:'',setAttribute(){}};
- const controls={innerHTML:'',querySelectorAll(){return Array.from(this.innerHTML.matchAll(/<button\b[^>]*data-safeguard="([^"]+)"/g),([,id])=>({dataset:{safeguard:decoded(id)},focus(){restored=decoded(id)}}))}};
- const mapElement={offsetWidth:origin.width,dataset:{selectedSafeguard:selected},classList:{contains:()=>active},getBoundingClientRect:()=>origin};
+ const controls={innerHTML:'',querySelectorAll(){return Array.from(this.innerHTML.matchAll(/<button\b[^>]*data-safeguard="([^"]+)" data-constraint="([^"]+)"/g),([,id,c])=>({dataset:{safeguard:decoded(id),constraint:c},focus(){restored=decoded(id)+'|'+c}}))}};
+ const mapElement={offsetWidth:origin.width,dataset:{selectedSafeguard:selected,selectedConstraint},classList:{contains:()=>active},getBoundingClientRect:()=>origin};
  const routeElement={getBoundingClientRect:()=>box(0,30,origin.width,origin.height-30),querySelectorAll:()=>cells};
- const fakeFocused={dataset:{safeguard:selected},closest(selector){return selector==='.a1-route-barrier'?this:null}};
+ const fakeFocused={dataset:{safeguard:selected,constraint:selectedConstraint},closest(selector){return selector==='.a1-route-barrier'?this:null}};
  document.querySelector=selector=>({'#pathway-map':mapElement,'#map-connections':svg,'#a1-route':routeElement,'#stpa-barrier-controls':controls}[selector]||null);
  document.querySelectorAll=selector=>selector==='#a1-route [data-node]'?nodes:[];
  Object.defineProperty(document,'activeElement',{configurable:true,get:()=>fakeFocused});
@@ -292,62 +288,36 @@ for(const mobile of [false,true])for(const m of models) {
   const center=value('style')?.match(/left:([-\d.]+)px;top:([-\d.]+)px/);
   assert(center,'An inspectable barrier has finite map-relative coordinates');
   assert.equal(value('aria-controls'),'barrier-panel');
-  assert(value('aria-label')?.startsWith('Inspect proposed barrier from '));
-  return {id:decoded(value('data-safeguard')),x:Number(center[1]),y:Number(center[2]),pressed:value('aria-pressed')};
+  assert(value('aria-label')?.startsWith('Inspect '));
+  return {id:decoded(value('data-safeguard')),constraint:value('data-constraint'),x:Number(center[1]),y:Number(center[2]),pressed:value('aria-pressed')};
  });
- assert.equal(buttons.length,m.links.length,`${m.displayId}: every synthetic route produces one button`);
- assert.equal(new Set(buttons.map(b=>b.id)).size,buttons.length);
+ assert.equal(buttons.length,m.links.reduce((n,l)=>n+l.constraints.length,0),`${m.displayId}: every barrier gets one button`);
+ assert.equal(new Set(buttons.map(b=>b.id+'|'+b.constraint)).size,buttons.length);
  assert.equal(buttons.filter(b=>b.pressed==='true').length,1);
  assert.equal(buttons.find(b=>b.pressed==='true').id,selected);
  for(const part of svg.innerHTML.split('<g class="stpa-edge').slice(1)) {
   const id=decoded(part.match(/data-link="([^"]+)"/)[1]);
-  const path=part.match(/class="a1-barrier-stem" d="([^"]+)"/)?.[1];
-  assert(path,`${id} has a visible stem`);
-  const coordinates=path.match(/-?\d+(?:\.\d+)?/g).map(Number);
-  assert.equal(coordinates.length,4);
-  const button=buttons.find(b=>b.id===id);assert(button);
-  assert(Math.abs(button.x-(coordinates[0]+coordinates[2])/2)<.11,`${id} button x matches its mark`);
-  assert(Math.abs(button.y-(coordinates[1]+coordinates[3])/2)<.11,`${id} button y matches its mark`);
+  if (!mobile && m.pathway==='X-01' && id==='X-01:2>X-01:4') {
+   const pieces=Array.from(part.matchAll(/class="stpa-connection[^"]*" d="([^"]+)"/g),x=>x[1].match(/-?\d+(?:\.\d+)?/g).map(Number));
+   const a=pieces[0].slice(0,2),b=pieces.at(-1).slice(-2),length=Math.hypot(b[0]-a[0],b[1]-a[1]);
+   for(const piece of pieces)for(let i=0;i<piece.length;i+=2)assert(Math.abs((piece[i]-a[0])*(b[1]-a[1])-(piece[i+1]-a[1])*(b[0]-a[0]))/length<.2,'A-1 1.2 to 2.1 is straight through its barrier');
+  }
+  const routeButtons=buttons.filter(b=>b.id===id);
+  const marks=Array.from(part.matchAll(/class="stpa-proposed-barrier(?: is-selected)?" data-constraint="([^"]+)"[^>]*><path class="a1-barrier-stem" d="([^"]+)"/g));
+  assert.equal(marks.length,m.links.find(l=>l.id===id).constraints.length);
+  for(const [,constraint,path] of marks) {
+   const coordinates=path.match(/-?\d+(?:\.\d+)?/g).map(Number);
+   const button=routeButtons.find(b=>b.constraint===constraint);assert(button);
+   assert(Math.abs(button.x-(coordinates[0]+coordinates[2])/2)<.11);
+   assert(Math.abs(button.y-(coordinates[1]+coordinates[3])/2)<.11);
+  }
+  for(let i=0;i<routeButtons.length;i++)for(let j=i+1;j<routeButtons.length;j++)assert(Math.hypot(routeButtons[i].x-routeButtons[j].x,routeButtons[i].y-routeButtons[j].y)>=29.8,'Individual targets do not overlap');
  }
- assert.equal(restored,selected,'Redrawing preserves focus on a proposed-barrier control');
+ assert.equal(restored,selected+'|'+selectedConstraint,'Redrawing preserves focus on a proposed-barrier control');
  active=false;stpa.draw();assert.equal(controls.innerHTML,'','Inactive maps clear their old hit targets');
  drawnRoutes+=buttons.length;
 }
 document.querySelector=originalQuery;document.querySelectorAll=originalAll;
 Object.defineProperty(document,'activeElement',activeDescriptor);geometryMobile=false;
-assert.equal(drawnRoutes,84);
-console.log(`Passed all ${count} incident flows and ${proposedCount} proposed-route inspections across seven models, single readings and legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks also match all ${drawnRoutes} desktop/mobile barrier marks to their controls. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);
-
-// Repeated safeguards refer to a stable occurrence within the current case.
-let repeatCount=0;
-for (const m of models) {
- url='file:///fixture/auspex/index.html?p='+m.displayId;test.readLocation();
- const routes=stpa.proposedBarriers(),first=new Map();
- const incident=Object.keys(m.presentation.overlays)[0];
- const assessment=context.window.AuspexData.assessments.find(a=>a.pathway===m.pathway && a.incident===incident);
- click('#incident-rail','case',assessment.id);
- for (const route of routes) for (const c of route.controls) {
-  if (!first.has(c.id)) {first.set(c.id,route);continue;}
-  click('#pathway-map','safeguard',route.id);
-  const before=url,original=first.get(c.id);
-  const heading=panel().match(new RegExp(`<h4 id="a1-proposed-${c.id}"[^>]*>(.*?)</h4>`))[1];
-  assert(heading.includes('<em>Ibid.</em>'));
-  assert(heading.includes(`title="${escaped(c.title)}"`),'The full name remains available');
-  const href=heading.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&');
-  const target=targetFor('#barrier-panel','safeguard-reference',original.id);
-  Object.assign(target,{tagName:'A',className:'a1-ibid'});target.dataset.controlReference=c.id;
-  let prevented=false;
-  elements.get('#barrier-panel').listeners.click({target,preventDefault(){prevented=true},ctrlKey:true});
-  assert(!prevented && url===before,'Modified clicks keep ordinary link behavior');
-  elements.get('#barrier-panel').listeners.click({target,preventDefault(){prevented=true}});
-  assert(prevented);assertProposed(original,incident);
-  assert.equal(focused,`#a1-proposed-${c.id}`,'The reference reveals the named original');
-  assert(panel().includes(`>${escaped(c.title)}</h4>`));
-  url=before;windowListeners.popstate();assertProposed(route,incident);
-  url=new URL(href,url).href;test.readLocation();assertProposed(original,incident);
-  url=before;test.readLocation();assertProposed(route,incident);
-  repeatCount++;
- }
-}
-assert(repeatCount>0);
-console.log(`Validated ${repeatCount} Ibid. references across seven cases, including direct links, focus, history, and preserved incident selection.`);
+assert.equal(drawnRoutes,136);
+console.log(`Passed all ${count} incident flows and ${proposedCount} individual barrier inspections across seven models, single readings and legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks also match all ${drawnRoutes} desktop/mobile barrier marks to their controls. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);
