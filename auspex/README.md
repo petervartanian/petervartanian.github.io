@@ -35,17 +35,17 @@ The cloud is a presentation of the assumed setting, not a new causal stage or a
 substitute for the STPA control structure. Feedback can reshape upstream conditions.
 
 All 42 proposed-barrier marks across the seven maps are native buttons with larger
-transparent hit areas. They open III without requiring an incident. Mechanism shows
-the constraints and their responsible controllers; Evidence shows only explicitly
-linked comparisons; Brittleness gives failure conditions; Tests gives proposed checks.
+fine frames around their symbols and larger hit areas. They open III without requiring an incident. A single reading asks whether the
+protection would hold against more capable AI. Its failure conditions are visible;
+explicit evidence links, proposed tests, and responsibilities sit in supporting detail.
 A mark may cover more than one constraint, each of which is named in the inspector.
 Proposed performance remains Unassessed. Source comparisons are not inherited ratings.
 
 Proposed selections use `s=<route-id>`; incident assessments retain `b=<barrier-id>`.
 Clearing or switching a dated case preserves an independently open route inspector.
 Opening an incident barrier or changing pathways clears the proposed selection.
-Close and Escape restore focus to the mark. Evidence limits use a compact bold label
-followed by a slash and the visible text. Scope footnotes contain complete sentences.
+Close and Escape restore focus to the mark. Caveats use a compact bold label
+followed by a slash and the visible text, within a four-sided Caveat box. Scope footnotes contain complete sentences.
 
 Every model contains losses, hazards, control and feedback relationships, constraints,
 contextual unsafe control actions, causal scenarios, and a conditional recovery route.
@@ -67,10 +67,12 @@ not its protective performance. Actual barrier states stay attached to incident 
 
 Pathway labels use A-1 / Bonus-1 throughout the catalogue. Old A.1 / Bonus.1 links and
 searches remain supported; internal component addresses and evidence anchors are stable.
-Every map has a clickable key for path types, all seven barrier modes, and recovery
+Every map has a clickable key for path types, barriers, and recovery
 versus reinforcement. It includes conditional consequences and feedback, even when
 those marks are absent from the currently selected map. The static reader includes
-the same definitions at `pathways.html#map-key`.
+the same definitions at `pathways.html#map-key`. Proposed safeguards are subordinate
+to Barriers in the key, alongside the state explanations. Proposed and assessed
+barriers share a thin card frame and the relevant state symbol.
 
 The other 30 entries show their titles and no case content, in both the application and
 static reader. Their underlying catalogue records are retained for future work.
@@ -375,3 +377,6 @@ At widths below 350px, the chooser context can wrap to avoid crowding the sectio
 `validate-interactions.mjs` checks application state and accessible control markup in
 an isolated harness. Its authored rectangles check route/target alignment; they do
 not measure a browser page or establish actual responsive layout.
+
+The four inspector tabs were removed. Old `q=` links normalize to the single reading;
+no incident evidence or underlying STPA fields were removed.

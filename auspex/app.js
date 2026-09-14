@@ -173,7 +173,7 @@
     if (state.safeguard && state.inspect) url.searchParams.set('s', state.safeguard);
     else if (state.barrier && (!isSTPA() || state.inspect)) url.searchParams.set('b', state.barrier);
     if (!isSTPA() && state.incident && state.observation >= 0) url.searchParams.set('o', String(state.observation));
-    if (state.question && (!isSTPA() || state.inspect)) url.searchParams.set('q', questionNames[state.question]);
+    if (state.question && !isSTPA()) url.searchParams.set('q', questionNames[state.question]);
     if (isSTPA() && state.inspect) url.searchParams.set('inspect', '1');
     // The interface also works when opened directly from disk.
     try {
@@ -195,7 +195,7 @@
     normalize();
     const requestedObservation = Number(params.get('o'));
     if (params.has('o') && Number.isInteger(requestedObservation) && requestedObservation >= 0 && requestedObservation < observationEntries().length) state.observation = requestedObservation;
-    state.question = state.pathway && state.inspect ? Math.max(0, questionNames.indexOf(params.get('q'))) : 0;
+    state.question = state.pathway && state.inspect && !isSTPA() ? Math.max(0, questionNames.indexOf(params.get('q'))) : 0;
     if (requested !== [state.pathway, state.incident, state.barrier].join('|') && (params.has('i') || params.has('b') || (params.has('p') && !pathways.has(params.get('p'))))) {
       announce(state.pathway ? `${pathways.get(state.pathway).displayId} · ${pathwayTitle(pathways.get(state.pathway))}` : 'Choose a pathway');
     }
@@ -381,26 +381,9 @@
     const selected = barrier();
     if (isSTPA(p.id)) {
       const proposed = proposedBarrier();
-      if (state.inspect && proposed) {
-        const labels = ['Mechanism', 'Evidence', 'Brittleness', 'Tests'];
-        $('#barrier-panel').innerHTML = `<div class="a1-inspector-heading"><h3>${escape(proposed.controls.length===1?proposed.title:'Barriers on this route')}</h3><button class="a1-close-inspector" data-close-inspector>Close</button></div>
-          <p class="a1-inspector-case">Proposed barrier / ${escape(window.AuspexSTPA.node(proposed.from).number)} → ${escape(window.AuspexSTPA.node(proposed.to).number)}</p>
-          <p class="a1-proposed-status">Performance / <button data-state-info="unknown" aria-haspopup="dialog" aria-controls="method-dialog">Unassessed</button></p>
-          <div class="question-lenses" role="tablist" aria-label="Proposed barrier questions">${labels.map((label,index)=>`<button role="tab" id="question-${index}" data-question="${index}" aria-selected="${index===state.question}" tabindex="${index===state.question?0:-1}" aria-controls="barrier-lens">${label}</button>`).join('')}</div>
-          <div id="barrier-lens" class="barrier-lens" role="tabpanel" aria-labelledby="question-${state.question}" tabindex="0">${window.AuspexSTPA.proposedBarrierView(proposed.id,state.question,a,evidenceButtons)}</div>`;
-        return;
-      }
-      if (!state.inspect || !selected) { $('#barrier-panel').innerHTML = ''; return; }
-      const detail = selected;
-      const answers = [selected.action, selected.efficacy, detail.strongerAI || selected.durability, selected.failure];
-      const labels = ['Mechanism', 'Evidence', 'Brittleness', 'Failure'];
-      const kind = { safeguard: 'Safeguard', capability: 'Capability limit', opportunity: 'Limited opportunity', contingency: 'Contingent circumstance', mixed: 'Safeguard + contingent limits', unknown: 'Basis unassessed' }[detail.limitType] || 'Basis unassessed';
-      const reinforcement = detail.reinforcement;
-      $('#barrier-panel').innerHTML = `<div class="a1-inspector-heading"><h3>${escape(detail.title || selected.title)}</h3><button class="a1-close-inspector" data-close-inspector>Close</button></div>
-        <p class="a1-inspector-case">${escape(window.AuspexSTPA.overlayNames[a.incident])}${selected.candidate?' · Proposed safeguard':selected.role==='recovery'?' · Recovery':''}</p>
-        <div class="a1-barrier-condition" data-condition="${escape(detail.condition)}">${window.AuspexSTPA.barrierGlyph(detail.condition)}<span><span class="a1-state-buttons">${window.AuspexSTPA.barrierStates(detail).map(id=>`<button data-state-info="${id}" aria-haspopup="dialog" aria-controls="method-dialog" aria-label="Explore the ${escape(window.AuspexSTPA.conditionLabel(id))} state">${escape(window.AuspexSTPA.conditionLabel(id))}</button>`).join('')}<sup><a class="a1-note-reference" id="a1-state-reference" href="#a1-state-footnote" aria-label="Evidence for this state">*</a></sup></span></span></div>
-        <div class="question-lenses" role="tablist" aria-label="Barrier questions">${questions.map((question,index)=>`<button role="tab" id="question-${index}" data-question="${index}" aria-selected="${index===state.question}" tabindex="${index===state.question?0:-1}" aria-controls="barrier-lens" aria-label="${labels[index]}: ${index===0 && selected.candidate ? 'How would this safeguard work?' : question}">${labels[index]}</button>`).join('')}</div>
-        <div id="barrier-lens" class="barrier-lens" role="tabpanel" aria-labelledby="question-${state.question}" tabindex="0">${window.AuspexSTPA.barrierView(detail,state.question)}<div class="a1-answer-box">${state.question === 2 ? `<p class="a1-brittleness-kind">${escape(kind)}</p>` : ''}<p class="lens-answer">${escape(answers[state.question])}<span class="source-dots">${evidenceButtons(selected.evidence)}</span></p>${state.question === 2 && reinforcement ? `<details class="reinforcement"><summary>${selected.candidate ? 'Test this safeguard' : 'Reinforce this barrier'}</summary><p class="proposal-status">Proposed</p><p>${escape(reinforcement.proposal)}</p><h5>What to test</h5><p>${escape(reinforcement.test)}</p></details>` : ''}</div></div><p class="a1-footnote" id="a1-state-footnote" tabindex="-1"><a href="#a1-state-reference" aria-label="Return to barrier state">*</a> ${escape(detail.conditionBasis)}</p>`;
+      if (!state.inspect || (!proposed && !selected)) { $('#barrier-panel').innerHTML = ''; return; }
+      const context = proposed ? (proposed.controls.length===1?'Proposed barrier / ':'Proposed barriers / ')+window.AuspexSTPA.node(proposed.from).number+' → '+window.AuspexSTPA.node(proposed.to).number : window.AuspexSTPA.overlayNames[a.incident];
+      $('#barrier-panel').innerHTML = `<div class="a1-inspector-heading"><h3 id="barrier-question">Would this hold against more capable AI?</h3><button class="a1-close-inspector" data-close-inspector>Close</button></div><p class="a1-inspector-case">${escape(context)}</p><div id="barrier-reading" aria-labelledby="barrier-question">${proposed ? window.AuspexSTPA.proposedBarrierView(proposed.id,a,evidenceButtons) : window.AuspexSTPA.incidentBarrierReading(selected,evidenceButtons)}</div>`;
       return;
     }
     if (!selected) {
@@ -849,7 +832,7 @@
       announce(barrier().title);
     }
     const question = event.target.closest('[data-question]');
-    if (question) {
+    if (question && !isSTPA()) {
       state.question = Number(question.dataset.question);
       renderBarrier();
       writeLocation();
@@ -886,6 +869,7 @@
     announce(`${proposedBarrier().title}. This barrier is proposed, and its performance is unassessed.`);
   }
   $('#barrier-panel').addEventListener('keydown', (event) => {
+    if (isSTPA()) return;
     const scene = event.target.closest('[data-scene-observation]');
     if (scene && ['Enter', ' '].includes(event.key)) {
       event.preventDefault();

@@ -234,5 +234,7 @@ assert(css.includes('.stpa-recovery-rail { fill: none; stroke: #6d8976; stroke-w
 assert(presentation.routeSymbol('safeguard').includes('a1-barrier-stem'));
 assert(presentation.routeSymbol('recovery').includes('route-rail'));
 assert(!css.includes('route-twist') && !css.includes('a1-gate-'));
-assert(presentation.pathsGuide().includes('intentional barrier to progression'));
+assert(presentation.mapGuide('barriers').includes('A safeguard is a deliberately designed barrier.'));
+assert(presentation.mapGuide('barriers').includes('a1-proposed-definition'));
+assert(!presentation.pathsGuide().includes('a1-safeguard-definition'),'Proposed safeguards belong under Barriers, not among route types');
 assert(presentation.pathsGuide().includes('Conditional names what else must hold'));

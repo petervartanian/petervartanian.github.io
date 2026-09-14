@@ -64,6 +64,10 @@ function singleCase(config) {
  assert(map().includes(`data-overlay-anchor="${config.anchor}"`));
  assert(!map().includes('a1-tentative-overlay'));
  assert(!map().includes('Analyst question.'));
+ assert(map().includes('<strong>Caveat /</strong>'));
+ assert(!map().includes('Evidence limits /'));
+ assert(!map().includes('Barrier modes ↗'));
+ assert(map().includes('<strong>Barriers ↗</strong><small>'));
 }
 for(const m of models) {
  url=`file:///fixture/auspex/index.html?p=${m.displayId}`;
@@ -104,6 +108,9 @@ for(const m of models) {
    assert.equal(test.state.exploration,true);
    assert(!elements.get('#workspace').hidden);
    assert(elements.get('#barrier-panel').innerHTML.includes(b.title));
+   assert(panel().includes(escaped(b.strongerAI || b.durability || b.failure)));
+   assert(panel().includes('a1-barrier-card') && panel().includes('stpa-barrier-glyph'));
+   assert(!panel().includes('question-lenses'));
    singleCase(config);
   }
   click('#pathway-map','explore-connection');
@@ -147,6 +154,11 @@ const assertProposed=(route,incident='')=>{
  assert(!elements.get('#workspace').hidden,'The inspector is visible');
  assert(panel().includes(`data-proposed-barrier="${escaped(route.id)}"`));
  assert(panel().includes('Proposed') && panel().includes('Unassessed'));
+ assert(panel().includes('Would this hold against more capable AI?'));
+ assert(!panel().includes('question-lenses') && !panel().includes('role="tablist"'));
+ assert.equal((panel().match(/data-constraint=/g)||[]).length,route.controls.length);
+ assert.equal((panel().match(/class="a1-barrier-card-heading"/g)||[]).length,route.controls.length);
+ assert(panel().includes('stpa-barrier-glyph is-unknown'));
  assert.equal(new URL(url).searchParams.get('s'),route.id);
  assert.equal(new URL(url).searchParams.get('inspect'),'1');
  assert(!new URL(url).searchParams.has('b'),'An incident barrier is not selected at the same time');
@@ -171,23 +183,19 @@ for(const m of models) {
    assert(panel().includes(escaped(c.text)),`Mechanism includes ${m.displayId} ${c.id}`);
    for(const owner of c.owners) assert(panel().includes(escaped(m.controllers.find(x=>x.id===owner).title)),`Accountability includes ${owner}`);
   }
-  for(let q=1;q<4;q++) {
-   click('#barrier-panel','question',String(q));assertProposed(route);
-   assert.equal(test.state.question,q);
-   assert.equal(new URL(url).searchParams.get('q'),questionNames[q]);
-   if(q===1 && m.controlEvidence) {
-    const linked=route.controls.some(c=>c.id===m.controlEvidence.constraint);
-    assert.equal(panel().includes(escaped(m.controlEvidence.text)),linked,'Research evidence appears only on its explicitly linked constraint');
-   }
-   if(q===2)for(const c of route.controls)assert(panel().includes(escaped(c.limit)),`Brittleness includes ${c.id}`);
-   if(q===3)for(const c of route.controls)assert(panel().includes(escaped(c.test)),`Tests include ${c.id}`);
-   const requested=url;test.readLocation();assert.equal(url,requested);assertProposed(route);assert.equal(test.state.question,q);
+  for(const c of route.controls) {
+   assert(panel().includes(escaped(c.limit)),`Brittleness includes ${c.id}`);
+   assert(panel().includes(escaped(c.test)),`Supporting detail retains the proposed test for ${c.id}`);
   }
-  // The same read path handles browser back/forward, including an earlier lens.
+  if(m.controlEvidence) {
+   const linked=route.controls.some(c=>c.id===m.controlEvidence.constraint);
+   assert.equal(panel().includes(escaped(m.controlEvidence.text)),linked,'Research evidence appears only on its explicitly linked constraint');
+  }
+  for(let q=0;q<4;q++) {
+   const legacy=new URL(mechanismURL);legacy.searchParams.set('q',questionNames[q]);url=legacy.href;test.readLocation();
+   assertProposed(route);assert.equal(test.state.question,0);assert(!new URL(url).searchParams.has('q'),'Old lens links normalize to the single reading');
+  }
   url=mechanismURL;windowListeners.popstate();assertProposed(route);assert.equal(test.state.question,0);
-  keydown('#barrier-panel','ArrowRight','question','0');assert.equal(test.state.question,1);
-  keydown('#barrier-panel','End','question','1');assert.equal(test.state.question,3);
-  keydown('#barrier-panel','Home','question','3');assert.equal(test.state.question,0);
   click('#barrier-panel','close-inspector');assertClosed(route);
   click('#pathway-map','safeguard',route.id);keydown('#barrier-panel','Escape');assertClosed(route);
   proposedCount++;
@@ -195,7 +203,7 @@ for(const m of models) {
  const route=proposals[0];
  const configs=Object.entries(m.presentation.overlays).map(([incident,config])=>({config,a:context.window.AuspexData.assessments.find(a=>a.pathway===m.pathway&&a.incident===incident)}));
  for(const {a} of configs)for(const proposal of proposals) {
-  const actual=Array.from(stpa.proposedBarrierView(proposal.id,1,a).matchAll(/data-related-barrier="([^"]+)"/g),([,id])=>id).sort();
+  const actual=Array.from(stpa.proposedBarrierView(proposal.id,a).matchAll(/data-related-barrier="([^"]+)"/g),([,id])=>id).sort();
   const expected=Array.from(stpa.barriers(a).filter(b=>proposal.controls.some(c=>c.id===b.constraint)),b=>b.id).sort();
   assert.deepEqual(actual,expected,'Incident evidence links only through an explicit constraint ID');
  }
@@ -208,7 +216,7 @@ for(const m of models) {
  assert.equal(test.state.exploration,false);singleCase(second.config);
  const related=stpa.barriers(second.a).find(b=>route.controls.some(c=>c.id===b.constraint));
  if(related) {
-  click('#barrier-panel','question','1');click('#barrier-panel','related-barrier',related.id);
+  click('#barrier-panel','related-barrier',related.id);
   assert.equal(test.state.safeguard,'');assert.equal(test.state.barrier,related.id);assert.equal(test.state.inspect,true);
   assert(panel().includes(escaped(related.title)));
   click('#pathway-map','safeguard',route.id);assertProposed(route,second.a.incident);
@@ -305,4 +313,4 @@ for(const mobile of [false,true])for(const m of models) {
 document.querySelector=originalQuery;document.querySelectorAll=originalAll;
 Object.defineProperty(document,'activeElement',activeDescriptor);geometryMobile=false;
 assert.equal(drawnRoutes,84);
-console.log(`Passed all ${count} incident flows and ${proposedCount} proposed-route inspections across seven models, every lens, URL round-trips and history, keyboard navigation and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks also match all ${drawnRoutes} desktop/mobile barrier marks to their controls. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);
+console.log(`Passed all ${count} incident flows and ${proposedCount} proposed-route inspections across seven models, single readings and legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks also match all ${drawnRoutes} desktop/mobile barrier marks to their controls. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);

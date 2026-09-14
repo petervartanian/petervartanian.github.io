@@ -220,26 +220,25 @@
 .a1-map-key { display: flex; flex-wrap: wrap; gap: 3px 20px; margin: 18px 0 0; padding-top: 12px; border-top: 1px solid var(--line); }
 .a1-map-key > button { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 4px 0; background: transparent; font: 10px/1.5 var(--sans); color: var(--muted); }
 .a1-map-key > button:hover > span { text-decoration: underline; text-underline-offset: 3px; }
-.a1-map-key .a1-barrier-key { color: var(--accent); }
-.a1-map-key .a1-barrier-key svg { width: 27px; height: 27px; }
+.a1-map-key .a1-barrier-key { color: var(--accent); border: 1px solid var(--line); border-radius: 2px; padding: 7px 10px; text-align: left; gap: 9px; }
+.a1-map-key .a1-barrier-key > svg { width: 27px; height: 27px; }
+.a1-barrier-key strong { display: block; font: 500 11px/1.5 var(--sans); }
+.a1-barrier-key small { display: flex; align-items: center; gap: 4px; margin-top: 2px; font: 9px/1.5 var(--sans); color: var(--muted); }
+.a1-barrier-key small svg { width: 23px; height: 16px; }
 .a1-route-symbol { width: 34px; height: 20px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.3; flex-shrink: 0; }
 .a1-route-symbol.is-optional .route-line { stroke-dasharray: 6 4; stroke-linecap: butt; }
 .a1-route-symbol .route-rail { stroke-width: 1; }
 .a1-barrier-stem, .a1-barrier-caps { fill: none; stroke: #626573; stroke-linecap: butt; }
 .a1-barrier-stem { stroke-width: 1.7; }
 .a1-barrier-caps { stroke-width: 1.35; }
-.a1-proposed-register { margin: 20px 0; }
-.a1-proposed-register p { font: 12px/1.7 var(--sans); }
-.a1-proposed-register strong { font-weight: 500; margin-right: 7px; }
 .a1-route-symbol.is-recovery { color: #6d8976; }
 .a1-route-symbol .route-tip { fill: currentColor; stroke: none; }
 .stpa-barrier-controls { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-#pathway-map .a1-route-barrier { position: absolute; transform: translate(-50%,-50%); width: 28px; height: 28px; min-height: 28px; padding: 0; border: 0; background: transparent; box-shadow: none; pointer-events: auto; cursor: pointer; border-radius: 2px; }
+#pathway-map .a1-route-barrier { position: absolute; transform: translate(-50%,-50%); width: 28px; height: 28px; min-height: 28px; padding: 0; border: 1px solid color-mix(in srgb,var(--accent) 16%,var(--line)); background: transparent; box-shadow: none; pointer-events: auto; cursor: pointer; border-radius: 2px; }
 #pathway-map .a1-route-barrier:hover, #pathway-map .a1-route-barrier[aria-pressed='true'] { background: color-mix(in srgb,var(--accent) 9%,transparent); }
 #pathway-map .a1-route-barrier:focus-visible { outline: 1.5px solid var(--accent); outline-offset: 2px; }
-.a1-proposed-status { font: 11px/1.6 var(--sans); color: var(--muted); margin: -6px 0 18px; }
-.a1-proposed-status button, .a1-related-barrier { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; min-height: 28px; padding: 2px 0; font: inherit; }
-.a1-proposed-study > section + section { margin-top: 22px; padding-top: 17px; border-top: 1px solid var(--line); }
+.a1-related-barrier { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; min-height: 28px; padding: 2px 0; font: inherit; }
+.a1-proposed-study > article + article { margin-top: 15px; }
 .a1-proposed-study h4 { margin: 0 0 9px; font: 500 14px/1.5 var(--sans); }
 .a1-proposed-study p { font: 13px/1.7 var(--sans); margin: 7px 0; }
 .a1-proposed-study .a1-evidence-boundary { font-size: 11px; color: var(--muted); }
@@ -252,7 +251,7 @@
 .a1-cell.is-overlaid .a1-step { border-color: color-mix(in srgb,var(--accent) 50%,var(--line)); border-bottom-right-radius: 0; border-bottom-left-radius: 0; background: var(--tint); }
 .a1-overlay-close { position: absolute; right: 5px; top: 5px; width: 26px; height: 26px; padding: 0; border: 0; background: transparent; color: var(--muted); font: 20px/1 var(--sans); }
 .a1-overlay-close:hover { color: var(--accent); }
-.a1-open-question { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+.a1-open-question { margin-top: 12px; padding-top: 2px; }
 .a1-open-question > span { display: block; color: var(--muted); font: 9px/1.5 var(--sans); margin-bottom: 3px; }
 .a1-open-question > button { display: flex; align-items: start; justify-content: space-between; gap: 9px; width: 100%; min-height: 30px; padding: 3px 0; text-align: left; font: italic 13px/1.5 Georgia,serif; color: var(--accent); text-wrap: pretty; }
 .a1-open-question > button:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -269,7 +268,7 @@
 .a1-overlay-observed, .a1-overlay-unestablished { font: 11px/1.55 var(--sans); margin: 9px 0; }
 .a1-overlay-observed > span, .a1-overlay-unestablished > span { display: block; font-size: 9px; font-weight: 500; letter-spacing: .025em; margin-bottom: 2px; }
 .a1-overlay-unestablished { color: var(--muted); }
-.a1-overlay-barriers { border-top: 1px solid color-mix(in srgb,var(--accent) 18%,transparent); margin-top: 13px; padding-top: 3px; }
+.a1-overlay-barriers { margin-top: 13px; }
 .a1-observed-control { margin: 10px 0; }
 .a1-observed-control button { display: flex; width: 100%; gap: 8px; align-items: center; background: transparent; text-align: left; min-height: 44px; padding: 0; font: 12px/1.4 var(--sans); }
 .a1-observed-control button > span:not(.a1-inspect-arrow) { flex: 1; min-width: 0; }
@@ -346,7 +345,7 @@
 #app[data-blank='true'] #pathway-endpoint { display: none !important; }
 #app[data-blank='true'] #selected-pathway { min-height: 45vh; }
 .a1-overlay-barriers { border-top: 0; padding-top: 0; margin-top: 0; }
-.a1-case-evidence { margin: 12px 0 0; padding-top: 10px; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); font: 11px/1.6 var(--sans); color: var(--muted); }
+.a1-case-evidence { margin: 12px 0 0; padding: 10px 11px; border: 1px solid var(--line); border-radius: 2px; font: 11px/1.6 var(--sans); color: var(--muted); }
 .a1-case-evidence > strong { font-weight: 500; color: var(--ink); }
 .a1-state-buttons { display: flex; flex-wrap: wrap; gap: 5px 12px; margin-bottom: 6px; }
 .a1-state-buttons button { min-height: 30px; text-align: left; font: 500 12px/1.5 var(--sans); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: color-mix(in srgb,currentColor 40%,transparent); }
@@ -460,3 +459,28 @@
   .a1-guide-tabs { gap: 4px 14px; }
   .a1-guide-tabs button { font-size: 11px; }
 }
+
+/* A shared frame keeps proposed protections and observed barriers recognizably related. */
+.a1-barrier-card { border: 1px solid var(--line); border-radius: 2px; padding: 14px; min-width: 0; }
+.a1-barrier-card-heading { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+.a1-barrier-card-heading > div { min-width: 0; flex: 1; }
+.a1-barrier-card-heading > svg { flex-shrink: 0; margin-top: 1px; }
+.a1-barrier-card .a1-barrier-card-heading h4 { margin: 0; font: 500 14px/1.5 var(--sans); }
+.a1-barrier-card .a1-barrier-meta { margin: 2px 0 0; color: var(--muted); font: 10px/1.6 var(--sans); }
+.a1-barrier-states { white-space: nowrap; }
+.a1-barrier-states button { min-height: 26px; padding: 0; font: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.a1-barrier-states sup { margin-left: 1px; }
+.a1-barrier-card .a1-barrier-answer { margin: 10px 0 0; font: 13px/1.7 var(--sans); }
+.a1-barrier-card .a1-barrier-purpose, .a1-barrier-card .a1-barrier-result { margin: 7px 0; color: var(--muted); font: 11px/1.65 var(--sans); }
+.a1-barrier-support { margin: 14px 0 0; border: 0; border-top: 1px solid var(--line); }
+.a1-barrier-support > summary { padding: 8px 0 0; min-height: 32px; font: 11px/1.5 var(--sans); }
+.a1-barrier-support > p, .a1-barrier-support .a1-proposed-change > p { font: 11px/1.7 var(--sans); margin: 10px 0; }
+.a1-barrier-support > .a1-proposed-change { margin-top: 14px; background: color-mix(in srgb,var(--tint) 30%,var(--page)); }
+.a1-barrier-card > .a1-footnote { margin-top: 12px; }
+.a1-observed-control.a1-barrier-card { padding: 8px 10px; }
+.a1-proposed-definition { margin: 12px 0 20px; }
+.a1-proposed-definition p { margin: 8px 0 0; font: 12px/1.65 var(--sans); }
+.a1-proposed-definition .a1-barrier-card-heading { align-items: center; }
+.a1-barrier-states-heading { font: 500 14px/1.5 var(--sans); }
+.a1-barrier-definitions > .a1-barrier-card { margin-bottom: 8px; }
+.stpa-state-menu button { border-color: var(--line); border-radius: 2px; }
