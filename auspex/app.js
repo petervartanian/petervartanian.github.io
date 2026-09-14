@@ -58,7 +58,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const narrow = matchMedia('(max-width: 800px)');
   const compactMap = matchMedia('(max-width: 700px)');
-  const state = { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, inspect: false };
+  const state = { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, inspect: false };
   const isSTPA = (id = state.pathway) => !!window.AuspexSTPA?.has(id);
   const pathwayTitle = p => window.AuspexSTPAModels?.[p.id]?.title || p.title;
   const overlayConfig = () => window.AuspexSTPA?.model?.presentation.overlays[state.incident];
@@ -117,14 +117,14 @@
 
   function normalize() {
     if (!pathways.has(state.pathway)) {
-      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, inspect: false });
+      Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, inspect: false });
       window.AuspexSTPA?.use('');
       readingKey = '';
       return;
     }
     const p = pathways.get(state.pathway);
     if (!isSTPA(p.id)) {
-      Object.assign(state, { target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, inspect: false });
+      Object.assign(state, { target: '', incident: '', barrier: '', observation: 0, question: 0, overlay: false, overlayEnabled: false, inspect: false });
       readingKey = '';
       return;
     }
@@ -158,6 +158,7 @@
     if (state.pathway) url.searchParams.set('p', pathways.get(state.pathway).displayId);
     if (state.target) url.searchParams.set('t', state.target);
     if (state.incident) url.searchParams.set('i', state.incident);
+    else if (state.overlayEnabled) url.searchParams.set('overlay', '1');
     if (state.barrier && (!isSTPA() || state.inspect)) url.searchParams.set('b', state.barrier);
     if (!isSTPA() && state.incident && state.observation >= 0) url.searchParams.set('o', String(state.observation));
     if (state.question && (!isSTPA() || state.inspect)) url.searchParams.set('q', questionNames[state.question]);
@@ -173,6 +174,7 @@
     state.pathway = aliases.get((params.get('p') || '').toLowerCase()) || params.get('p') || '';
     state.target = params.get('t') || '';
     state.overlay = isSTPA() && params.has('i');
+    state.overlayEnabled = isSTPA() && (state.overlay || params.get('overlay') === '1');
     state.inspect = state.overlay && (params.get('inspect') === '1' || params.has('b'));
     state.incident = params.get('i') || '';
     state.barrier = params.get('b') || '';
@@ -237,12 +239,20 @@
   const stepLabel = (step) => stpaNode(step)?.title || step.shortLabel || window.AuspexLabels?.[state.pathway]?.[step.number - 1] || step.text;
   const targetCount = (id) => pathwayAssessments().filter((a) => a.targets.some((t) => t.id === id)).length;
   const countLabel = (count) => `${count} case${count === 1 ? '' : 's'}`;
+  const shortIncidentDate = date => {
+    const range=date.match(/\b(\d{4})[–-](\d{4})\b/);
+    if (range) return `${range[1]}–${range[2]}`;
+    const year=date.match(/\b(?:19|20)\d{2}\b/)?.[0];
+    const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const month=date.match(new RegExp(`\\b(${months.join('|')})\\b`,'i'))?.[0];
+    return month && year ? `Q${Math.floor(months.findIndex(m=>m.toLowerCase()===month.toLowerCase())/3)+1} ${year}` : year || date;
+  };
 
   function renderEvidenceMap() {
     const p = pathways.get(state.pathway);
     if (isSTPA(p.id)) {
       const names = window.AuspexSTPA.overlayNames;
-      $('#incident-rail').innerHTML = `<div class="a1-case-links" id="evidence-map-title" role="group" aria-label="Incident overlay"><button data-clear-overlay aria-pressed="${!state.overlay}" aria-controls="a1-route">None</button>${pathwayAssessments().map(a=>`<button data-case="${a.id}" aria-pressed="${state.overlay && a.incident===state.incident}" aria-controls="a1-route">${escape(names[a.incident])}</button>`).join('')}</div>`;
+      $('#incident-rail').innerHTML = `<div class="a1-overlay-choice" id="evidence-map-title"><div class="a1-overlay-switch" role="group" aria-label="Overlay an incident"><button data-clear-overlay aria-pressed="${!state.overlayEnabled}" aria-controls="a1-incident-branches a1-route">No</button><button data-enable-overlay aria-pressed="${state.overlayEnabled}" aria-expanded="${state.overlayEnabled}" aria-controls="a1-incident-branches">Yes</button></div><svg class="a1-choice-lines" aria-hidden="true" focusable="false"></svg><div id="a1-incident-branches" class="a1-incident-branches" role="group" aria-label="Choose an incident"${state.overlayEnabled?'':' hidden'}>${pathwayAssessments().map(a=>`<button class="a1-incident-branch" data-case="${a.id}" aria-pressed="${state.overlay && a.incident===state.incident}" aria-controls="a1-route" title="${escape(incidents.get(a.incident).date)}" aria-label="${escape(names[a.incident])}. ${escape(incidents.get(a.incident).date)}"><span class="a1-case-date">${escape(shortIncidentDate(incidents.get(a.incident).date))}:</span> <span class="a1-case-name">${escape(names[a.incident])}</span></button>`).join('')}</div></div>`;
       return;
     }
     const targets = p.steps.flatMap((s) => [s, ...p.edges.filter((e) => e.from === s.id)]);
@@ -281,7 +291,24 @@
     requestAnimationFrame(drawConnections);
   }
 
+  function drawIncidentBranches() {
+    const root=$('.a1-overlay-choice'), svg=$('.a1-choice-lines'), yes=$('[data-enable-overlay]');
+    if (!root || !svg || !yes || !root.offsetWidth) return;
+    if (!state.overlayEnabled) { svg.innerHTML=''; return; }
+    const bounds=root.getBoundingClientRect(), origin=yes.getBoundingClientRect();
+    const x=origin.right-bounds.left, y=origin.top+origin.height/2-bounds.top;
+    svg.setAttribute('viewBox',`0 0 ${bounds.width} ${bounds.height}`);
+    svg.innerHTML=Array.from(root.querySelectorAll('[data-case]')).map(button=>{
+      const b=button.getBoundingClientRect();
+      const endX=b.left-bounds.left, endY=b.top+b.height/2-bounds.top;
+      const bend=(endX-x)/2;
+      const d=`M${x},${y}C${x+bend},${y} ${endX-bend},${endY} ${endX},${endY}`;
+      return `<path d="${d}"${button.getAttribute('aria-pressed')==='true'?' class="is-selected"':''}/>`;
+    }).join('');
+  }
+
   function drawConnections() {
+    drawIncidentBranches();
     const p = pathways.get(state.pathway);
     const map = $('#pathway-map');
     if (!p || !map.offsetWidth) return;
@@ -454,6 +481,7 @@
     const enteringPathway = !state.pathway;
     state.pathway = id;
     state.overlay = false;
+    state.overlayEnabled = false;
     state.inspect = false;
     state.target = '';
     state.incident = '';
@@ -527,6 +555,7 @@
     const enteringPathway = !state.pathway;
     state.pathway = a.pathway;
     state.overlay = isSTPA(a.pathway);
+    state.overlayEnabled = state.overlay;
     state.inspect = false;
     state.target = a.targets[0].id;
     state.incident = a.incident;
@@ -643,8 +672,17 @@
   });
 
   $('#incident-rail').addEventListener('click', (event) => {
+    if (isSTPA() && event.target.closest('[data-enable-overlay]')) {
+      if (!state.overlayEnabled) {
+        state.overlayEnabled = true;
+        normalize(); render(); writeLocation();
+      }
+      $('[data-enable-overlay]').focus({ preventScroll: true });
+      announce('Choose an incident to overlay');
+      return;
+    }
     if (isSTPA() && event.target.closest('[data-clear-overlay]')) {
-      state.overlay = false; state.inspect = false;
+      state.overlay = false; state.overlayEnabled = false; state.inspect = false;
       normalize(); render(); writeLocation();
       $('[data-clear-overlay]').focus({ preventScroll: true });
       announce('Incident overlay removed');
@@ -672,6 +710,7 @@
     const a = pathwayAssessments().find((item) => item.id === button.dataset.case);
     if (isSTPA()) {
       state.overlay = true;
+      state.overlayEnabled = true;
       state.inspect = false;
       state.target = a.targets[0].id;
       state.incident = a.incident;
@@ -920,6 +959,7 @@
   $('#app').hidden = false;
   $('#fallback').hidden = true;
   new ResizeObserver(drawConnections).observe($('#pathway-map'));
+  new ResizeObserver(drawIncidentBranches).observe($('#incident-rail'));
   document.fonts.ready.then(drawConnections);
   // Fit the headline to the copy's measured height, retaining the type proportions.
   const openingColumns = window.matchMedia('(min-width: 701px)');
