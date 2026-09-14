@@ -260,7 +260,7 @@
         "F-01:R"
       ],
       "test": "How long does a locally intelligible threat take to reach review, decision, and verified distribution change?",
-      "limit": "Insufficient language coverage, ambiguous context, repeat uploads, and slow enforcement can defeat timely response.",
+      "limit": "Reviewers may not cover the relevant language or understand the context. Slow enforcement and repeat uploads can keep a threat in circulation.",
       "improvement": {
         "title": "Put local response on the clock",
         "proposal": "Give trained local-language reviewers an escalation route with authority to limit distribution during a credible threat. Check response time against the period in which the threatened harm could occur.",
@@ -313,7 +313,7 @@
         "F-01:R"
       ],
       "test": "Do people receive safe, impartial, and accessible protection before perpetrators can act?",
-      "limit": "Protection may be limited by state involvement, coercive capacity, inaccessible locations, and mistrust of responders.",
+      "limit": "People may be unable to reach protection or may mistrust those offering it. State involvement in the threat and the strength of coercive actors can further limit what responders can do.",
       "improvement": {
         "title": "Ask whether people became safer",
         "proposal": "Keep civilian-protection verification separate from platform enforcement metrics. Use safe, locally informed reporting to check whether threatened people can access protection after online intervention.",
@@ -338,7 +338,7 @@
         "F-01:R"
       ],
       "test": "Can threatened communities still communicate safely, contest mistakes, and preserve evidence while harmful exposure is reduced?",
-      "limit": "Indiscriminate shutdowns, politicized enforcement, and premature or indefinitely prolonged restrictions can undermine proportionate crisis measures.",
+      "limit": "A restriction can cause harm when it shuts down legitimate information indiscriminately or serves a political interest. Acting too early, or leaving a restriction in place indefinitely, can also defeat its protective purpose.",
       "improvement": {
         "title": "Give emergency limits an expiry and an appeal",
         "proposal": "Make emergency content restrictions proportionate and time-limited, with independent review and a usable appeal. Preserve access to necessary public information and evidence of abuse.",

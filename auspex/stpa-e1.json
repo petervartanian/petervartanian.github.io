@@ -212,7 +212,7 @@
         "S-01:2"
       ],
       "test": "Can related models produce individually plausible commands that violate a regional limit when executed together?",
-      "limit": "Shared inputs, missing external facilities, or objectives that use up reserve margins can undermine independent dispatch checks.",
+      "limit": "A dispatch check may inherit the recommender’s bad inputs or omit an external facility. It can also accept an objective that leaves too little reserve capacity.",
       "improvement": {
         "title": "Check the combined physical effect",
         "proposal": "Place an independently maintained operating-envelope check between AI dispatch recommendations and authorization. Evaluate their combined effect on the network rather than approving each recommendation in isolation.",
@@ -239,7 +239,7 @@
         "S-01:3"
       ],
       "test": "Do independent network simulations and staged drills contain the specified credible combinations of disturbances?",
-      "limit": "Unmodeled neighboring systems, stale topology, conflicting relay behavior, or inadequate reserves can defeat coordinated protection.",
+      "limit": "Protection settings may no longer fit the network if neighboring systems are omitted or the topology is out of date. Conflicting relay behavior and inadequate reserves can leave the resulting disturbance uncontained.",
       "improvement": {
         "title": "Review protection across the boundary",
         "proposal": "Require neighboring operators to review joint protection settings against a shared, current network model. Resolve incompatible assumptions before approving a material operating change.",
@@ -264,7 +264,7 @@
         "S-01:3"
       ],
       "test": "Does loss or staleness of a monitoring tool trigger a verified fallback and timely corrective decision?",
-      "limit": "Common telemetry failures, undetected backup failure, and coordination delay can prevent timely corrective action.",
+      "limit": "The main view and its backup may fail together, or a backup failure may go unnoticed. Operators can also lose time coordinating a corrective response.",
       "improvement": {
         "title": "Make loss of visibility visible",
         "proposal": "Show operators when the primary state estimate or alarm service becomes unreliable. Provide independently maintained fallback measurements with a rehearsed route to corrective action.",
@@ -290,7 +290,7 @@
         "S-01:R"
       ],
       "test": "Can restoration work when a neighboring supply, telecommunications service, or usual recovery tool is unavailable?",
-      "limit": "Shared regional dependencies, inaccessible equipment, and early restart can undermine restoration.",
+      "limit": "Restoration may rely on regional services that failed in the same outage. Equipment can remain inaccessible, and restarting before conditions are ready can undermine the recovery.",
       "improvement": {
         "title": "Rehearse restoration without the usual help",
         "proposal": "Exercise restoration under a scenario in which the usual neighboring supply or coordination service is unavailable. Confirm that essential loads can be supported before relying on the restoration plan.",

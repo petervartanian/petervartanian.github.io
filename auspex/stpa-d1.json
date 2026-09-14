@@ -296,7 +296,7 @@
         "B-01:3"
       ],
       "test": "Does an unapproved change trigger a meaningful hold and independent review before consequential activity proceeds?",
-      "limit": "Misleading records, unclear ownership, or oversight that only checks the written proposal can leave actual activity outside effective scrutiny.",
+      "limit": "A review of the written proposal may miss what actually happens. Misleading records can conceal that gap, especially when no one clearly owns the oversight.",
       "improvement": {
         "title": "Connect approval to what actually happens",
         "proposal": "Tie authorized research activity to independent facility oversight that can pause work when its scope changes. Require renewed approval for material departures from the reviewed activity.",
@@ -349,7 +349,7 @@
         "B-01:R"
       ],
       "test": "In an appropriate preparedness exercise, do detection, coordination, and action reach the affected population before the modeled response window closes?",
-      "limit": "Delayed signals, insufficient capacity, and ineffective coordination can prevent a response from interrupting spread. Detection alone does not establish interruption.",
+      "limit": "Detecting a problem does not establish interruption when warnings arrive late or the response lacks the capacity and coordination to act.",
       "improvement": {
         "title": "Turn an early signal into a resourced response",
         "proposal": "Assign an accountable public-health coordinator to evaluate early signals and activate the appropriate response capacity. Give clinical services a clear way to report when the planned response cannot be delivered.",

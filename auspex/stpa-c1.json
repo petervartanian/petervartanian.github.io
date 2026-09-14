@@ -264,7 +264,7 @@
         "W-01:R"
       ],
       "test": "Does contradictory evidence from an independent channel change the assessment, rather than being summarized away?",
-      "limit": "Shared upstream errors, missing observations, or common dependence on one AI summary can make apparent corroboration unreliable.",
+      "limit": "Several apparently independent accounts may inherit the same upstream error or rely on one AI summary. Missing observations can leave that apparent agreement unchallenged.",
       "improvement": {
         "title": "Preserve disagreement between sources",
         "proposal": "Show decision-makers which warning sources are independent and where their accounts conflict. Require corroboration outside the AI summary before treating its conclusion as established.",
@@ -293,7 +293,7 @@
         "W-01:R"
       ],
       "test": "In a safe crisis exercise, do decision-makers defer or revise a decision when independent evidence invalidates its premise?",
-      "limit": "Time pressure, doctrine, prior beliefs, and institutional pressure can overwhelm nominal human review.",
+      "limit": "Human review can be rushed by time or institutional pressure. Doctrine and prior beliefs can also crowd out a conflicting interpretation.",
       "improvement": {
         "title": "Keep a dissenting account in the room",
         "proposal": "Give an independent assessment team a protected route to the decision authority. Preserve its alternative explanation alongside the AI recommendation through the deliberation.",

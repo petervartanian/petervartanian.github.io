@@ -231,7 +231,7 @@
         "P-01:2"
       ],
       "test": "In a bounded exercise, does an invalid order from a legitimate commander remain blocked when that commander insists it is valid?",
-      "limit": "A narrow exercise may not represent institutional pressure, ambiguous authority, or a more persuasive model.",
+      "limit": "A narrow exercise can miss the pressure institutions face in practice. It may also assume clearer authority, or a less persuasive model, than operators could encounter.",
       "improvement": {
         "title": "Give refusal an independent route",
         "proposal": "Provide an independently governed authorization check that can withhold execution and protect operators who refuse a disputed order. The requesting commander should not be able to waive the check.",
@@ -258,7 +258,7 @@
         "P-01:4"
       ],
       "test": "Can any single principal expand or bypass the required authorization without an independent decision?",
-      "limit": "Nominally separate approvers may share dependence, incentives, or compromised evidence.",
+      "limit": "Separate approvers may still rely on the same support or share reasons to approve. They may also reach the same mistaken decision when their evidence is compromised.",
       "improvement": {
         "title": "Separate the keys to authority",
         "proposal": "Place consequential authorization with separate accountable institutions, each able to withhold its part. Require each to consult evidence outside the requesting command’s account.",
@@ -286,7 +286,7 @@
         "P-01:R"
       ],
       "test": "Does a valid countermand prevent the disputed action before it becomes irreversible?",
-      "limit": "Jurisdictional ambiguity, communications loss, delay, or an operator’s refusal to execute a lawful restraint can prevent it from taking effect.",
+      "limit": "A lawful restraint may never take effect if its authority is disputed or an operator refuses to carry it out. Communications loss or delay can also prevent it from reaching the system in time.",
       "improvement": {
         "title": "Let lawful restraint reach the operator",
         "proposal": "Give a lawful countermand a protected route to the operators who can enforce it. Rehearse how they resolve conflicting instructions without handing that decision back to the disputed command.",
@@ -313,7 +313,7 @@
         "P-01:R"
       ],
       "test": "Can independent observers verify that all relevant units have stopped and cannot resume on the disputed authority?",
-      "limit": "Residual units, inaccessible resources, or control of the only telemetry source can prevent reliable verification that lawful control has been restored.",
+      "limit": "A stand-down cannot be verified as complete while units remain active or resources cannot be inspected. Reliance on one telemetry source can also hide activity from the reviewer.",
       "improvement": {
         "title": "Verify that stand-down reached every unit",
         "proposal": "After a stand-down order, reconcile the declared force inventory with independent operator reports. Keep restart authority separate until unresolved units and residual access have been accounted for.",
@@ -340,7 +340,7 @@
         "P-01:3"
       ],
       "test": "Do adverse findings survive pressure from the requesting commander and change the next deployment decision?",
-      "limit": "Censorship, dependence on a single supplier, or urgency that overrides the review can prevent effective oversight.",
+      "limit": "Oversight becomes vulnerable when it depends on a single supplier, especially if findings can be censored. Urgency may also be used to bypass the review.",
       "improvement": {
         "title": "Protect the finding from the chain of command",
         "proposal": "Give independent oversight direct access to assurance findings and the authority to delay deployment. Require an accountable response to unresolved findings before approval can resume.",

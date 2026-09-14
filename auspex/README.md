@@ -46,8 +46,9 @@ barriers use their existing improvement proposals, while unassessed candidate ba
 use the corresponding model constraint. “Back to assessment” restores the original
 reading. There is no supporting disclosure, simulated success, or new assessed state.
 The original state glyph and source evidence remain visible throughout. A small
-illustration in the proposal sheet thickens its barrier once on opening. Reduced-motion
-preferences and the static reader show the finished illustration without animation.
+illustration in the proposal sheet thickens its barrier on opening, then gently pulses
+every three seconds. Reduced-motion preferences and the static reader show the
+finished illustration without animation.
 
 Proposed selections use `s=<route-id>&c=<constraint-id>`. Incident assessments retain
 `b=<barrier-id>`. `strengthen=1` opens the proposed change and supports browser history

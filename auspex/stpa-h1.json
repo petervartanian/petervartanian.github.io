@@ -199,7 +199,7 @@
       ],
       "role": "Prevention",
       "test": "Do identity, duplication, and update checks block a materially wrong record before use?",
-      "limit": "Stale sources, mistaken identity, uncertain proxies, or incorrect matching can defeat the check.",
+      "limit": "Mistaken identity or an incorrect match can link someone to the wrong record. Stale sources and uncertain proxies can also make the record misleading.",
       "nodes": [
         "H-01:1",
         "H-01:2",
@@ -225,7 +225,7 @@
       ],
       "role": "Prevention and recovery",
       "test": "Does a valid dispute reach a decision-maker and change the decision within the relevant window?",
-      "limit": "Cost, delay, inaccessible notices, or an unempowered reviewer may make appeal ineffective.",
+      "limit": "An appeal can arrive too late or be too costly to pursue. Inaccessible notices may prevent a person from challenging the decision at all, and a reviewer without authority may be unable to change it.",
       "nodes": [
         "H-01:2",
         "H-01:5",
@@ -279,7 +279,7 @@
       ],
       "role": "Prevention",
       "test": "Can provenance and purpose restrictions prevent unsupported reuse across deployments?",
-      "limit": "Copied data, proxy variables, and diffuse responsibility may evade the restriction.",
+      "limit": "Restrictions may not follow copied data or information recreated through proxy variables. When responsibility is spread across recipients, no one may ensure that the restriction is enforced.",
       "nodes": [
         "H-01:1",
         "H-01:3",
@@ -308,7 +308,7 @@
       ],
       "role": "Recovery",
       "test": "After correction, do downstream records and decisions change and remain corrected?",
-      "limit": "Derived records, delayed propagation, or a continuing input loop can recreate the exclusion.",
+      "limit": "Correcting one record may leave derived records unchanged or take too long to reach them. A continuing input loop can recreate the same exclusion.",
       "nodes": [
         "H-01:2",
         "H-01:4",

@@ -495,10 +495,12 @@
 .a1-build-route { fill: none; stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; opacity: .35; }
 .a1-build-body { fill: currentColor; transform-origin: 80px 26px; }
 .a1-build-caps { fill: none; stroke: currentColor; stroke-width: 1.2; transform-origin: 80px 26px; }
-#barrier-panel [data-strengthening='true'] .a1-build-body { animation: a1-thicken-barrier 850ms cubic-bezier(.2,.7,.2,1) both; }
-#barrier-panel [data-strengthening='true'] .a1-build-caps { animation: a1-widen-barrier-caps 850ms cubic-bezier(.2,.7,.2,1) both; }
+#barrier-panel [data-strengthening='true'] .a1-build-body { animation: a1-thicken-barrier 850ms cubic-bezier(.2,.7,.2,1) both, a1-pulse-barrier 3s ease-in-out 850ms infinite; }
+#barrier-panel [data-strengthening='true'] .a1-build-caps { animation: a1-widen-barrier-caps 850ms cubic-bezier(.2,.7,.2,1) both, a1-pulse-barrier-caps 3s ease-in-out 850ms infinite; }
 @keyframes a1-thicken-barrier { 0%, 12% { transform: scaleX(.15); } 78% { transform: scaleX(1.08); } 100% { transform: scaleX(1); } }
 @keyframes a1-widen-barrier-caps { 0%, 12% { transform: scaleX(.4); } 78% { transform: scaleX(1.04); } 100% { transform: scaleX(1); } }
+@keyframes a1-pulse-barrier { 0%, 65%, 100% { transform: scaleX(1); } 82% { transform: scaleX(1.22); } }
+@keyframes a1-pulse-barrier-caps { 0%, 65%, 100% { transform: scaleX(1); } 82% { transform: scaleX(1.08); } }
 @media (max-width: 500px) { .a1-barrier-build { flex-basis: 112px; width: 112px; height: 40px; } }
 @media (prefers-reduced-motion: reduce) { #barrier-panel [data-strengthening='true'] .a1-build-body, #barrier-panel [data-strengthening='true'] .a1-build-caps { animation: none; } }
 .a1-change-sheet h5 { margin: 0 0 8px; font: italic 19px/1.4 var(--serif); color: var(--accent); text-wrap: pretty; }
