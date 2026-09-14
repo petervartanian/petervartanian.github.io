@@ -141,7 +141,7 @@
       ? '<path class="route-rail" d="M2 10.75H25M2 13.25H25"/><path class="route-tip" d="M25 8l7 4-7 4z"/>'
       : kind==='feedback'?'<path class="route-line" d="M29 17H8A3 3 0 0 1 5 14V7A3 3 0 0 1 8 4H26"/><path d="m21 1 4 3-4 3m5-6 4 3-4 3"/>'
       : kind==='safeguard'?'<path d="M2 12H15M19 12H32"/><path class="a1-barrier-stem" d="M17 7V17"/><path class="a1-barrier-caps" d="M15 7H19M15 17H19"/>'
-      : '<path class="route-line" d="M2 10H30"/><path d="m25 6 5 4-5 4"/>';
+      : `<path class="route-line" d="M2 10H30"${kind==='optional'?' pathLength="28" stroke-dashoffset="8"':''}/><path d="m25 6 5 4-5 4"/>`;
     return `<svg class="a1-route-symbol is-${kind}" viewBox="0 0 34 24" aria-hidden="true" focusable="false">${path}</svg>`;
   }
   const routeDefinitions=[
@@ -302,6 +302,10 @@
     }
     return d;
   }
+  function roundedLength(points, corners=roundedCorners(points)) {
+    const length=points.slice(1).reduce((sum,p,i)=>sum+Math.hypot(p[0]-points[i][0],p[1]-points[i][1]),0);
+    return length+corners.reduce((sum,corner)=>sum+(corner?corner.radius*(2*Math.atan(corner.tangent)-2*corner.tangent):0),0);
+  }
   function clearSegment(a,b,boxes,margin=8) {
     return boxes.every(box=>{
       let low=0,high=1;
@@ -383,7 +387,12 @@
         return [-1.25,1.25].map(offset=>({d:roundedPath(offsetPolyline(trimmed,offset),corners,offset),section:index,offset}));
       });
     }
-    return {d:sections.map(p=>roundedPath(p)).join(' '),sections:sections.map(p=>({d:roundedPath(p)})),rails,barriers,barrier:barriers[0] || null,head,midpoint,tangent};
+    const strokes=sections.map(p=>{
+      const corners=roundedCorners(p),length=Number(roundedLength(p,corners).toFixed(4));
+      // Calibrate to the rounded path, then end a full dash at the arrow tip.
+      return {d:roundedPath(p,corners),length,dashOffset:Number(((7-length%12+12)%12).toFixed(4))};
+    });
+    return {d:strokes.map(s=>s.d).join(' '),sections:strokes,rails,barriers,barrier:barriers[0] || null,head,midpoint,tangent};
   }
   function draw() {
     const map=document.querySelector('#pathway-map'), svg=document.querySelector('#map-connections'), route=document.querySelector('#a1-route'), controls=document.querySelector('#stpa-barrier-controls');
@@ -445,7 +454,7 @@
       if (mobile) {
         const lane=reserveLane(mobileLanes,Math.min(y1,y2)-3,Math.max(y1,y2)+3);
         const x=kind==='recovery'?Math.max(7,minLeft-60):Math.max(7,minLeft-15-lane*8);
-        points=[[a.left-2,y1],[x,y1],[x,y2],[b.left-5,y2]];
+        points=[[a.left,y1],[x,y1],[x,y2],[b.left,y2]];
       } else if (sameColumn) {
         const rightSide=fromSide==='right', key=wing+':'+fromSide;
         if (!sideLanes.has(key)) sideLanes.set(key,[]);
@@ -454,9 +463,9 @@
         const nextEdge=rightSide?Math.min(bounds.width-5,...cells.filter(c=>c.left>edge+3).map(c=>c.left)):Math.max(5,...cells.filter(c=>c.right<edge-3).map(c=>c.right));
         const offset=kind==='recovery'?Math.min(60,Math.max(12,Math.abs(nextEdge-edge)-12)):17+lane*8;
         const x=Math.max(8,Math.min(bounds.width-8,edge+(rightSide?offset:-offset)));
-        points=rightSide?[[a.right+2,y1],[x,y1],[x,y2],[b.right+5,y2]]:[[a.left-2,y1],[x,y1],[x,y2],[b.left-5,y2]];
+        points=rightSide?[[a.right,y1],[x,y1],[x,y2],[b.right,y2]]:[[a.left,y1],[x,y1],[x,y2],[b.left,y2]];
       } else {
-        const forward=bc.left>ac.left, x1=forward?a.right+2:a.left-2,x2=forward?b.left-5:b.right+5;
+        const forward=bc.left>ac.left, x1=forward?a.right:a.left,x2=forward?b.left:b.right;
         const between=cells.filter(c=>forward?c.left>ac.right+3 && c.right<bc.left-3:c.left>bc.right+3 && c.right<ac.left-3);
         const betweenHeadings=headings.filter(h=>forward?h.left>ac.right && h.right<bc.left:h.left>bc.right && h.right<ac.left);
         if (between.length && !clearSegment([x1,y1],[x2,y2],[...between,...betweenHeadings])) {
@@ -477,12 +486,12 @@
       const classes=`stpa-connection${kind==='optional'?' is-optional':''}${kind==='feedback'?' is-feedback':''}`;
       const route=kind==='recovery'
         ? geometry.rails.map(rail=>`<path class="stpa-recovery-rail" d="${rail.d}"/>`).join('')+(geometry.head?`<path class="stpa-recovery-tip" d="${geometry.head.d}"/>`:'')
-        : geometry.sections.map((section,index)=>`<path class="${classes}" d="${section.d}"${index===geometry.sections.length-1?` marker-end="url(#${marker})"`:''}/>`).join('');
+        : geometry.sections.map((section,index)=>`<path class="${classes}" d="${section.d}"${kind==='optional' && index===geometry.sections.length-1?` pathLength="${section.length}" stroke-dashoffset="${section.dashOffset}"`:''}${index===geometry.sections.length-1?` marker-end="url(#${marker})"`:''}/>`).join('');
       const protection=geometry.barriers.map((mark,index)=>`<g class="stpa-proposed-barrier${map.dataset.selectedSafeguard===link.id && map.dataset.selectedConstraint===proposed.controls[index].id?' is-selected':''}" data-constraint="${esc(proposed.controls[index].id)}" aria-hidden="true"><path class="a1-barrier-stem" d="${mark.stem}"/><path class="a1-barrier-caps" d="${mark.caps}"/></g>`).join('');
       return `<g class="stpa-edge${kind==='recovery'?' is-recovery':''}" data-link="${esc(link.id || link.from+'→'+link.to)}" data-from="${esc(link.from)}" data-to="${esc(link.to)}"><title>${esc(link.label || 'Possible contribution')}${safeguard?` — Proposed barrier: ${esc(safeguard)}`:''}</title>${route}${protection}</g>`;
     }).join('');
-    const marker=(id,color)=>`<marker id="${id}" viewBox="0 0 8 8" refX="7" refY="4" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M1.5 1.5 6.5 4 1.5 6.5" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker>`;
-    const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="11" refY="4" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
+    const marker=(id,color)=>`<marker id="${id}" viewBox="0 0 8 8" refX="6.5" refY="4" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M1.5 1.5 6.5 4 1.5 6.5" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker>`;
+    const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="10" refY="4" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
     svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${feedbackMarker}</defs>${paths}`;
     if (controls) {
       controls.innerHTML=buttons.join('');

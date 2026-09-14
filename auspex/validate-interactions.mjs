@@ -255,7 +255,7 @@ assert.equal(proposedCount,68);
 const originalQuery=document.querySelector,originalAll=document.querySelectorAll;
 const activeDescriptor=Object.getOwnPropertyDescriptor(document,'activeElement');
 const decoded=text=>text.replace(/&(amp|lt|gt|quot|#39);/g,(_,x)=>({amp:'&',lt:'<',gt:'>',quot:'"','#39':"'"}[x]));
-let drawnRoutes=0;
+let drawnRoutes=0,connectedArrows=0,dashedArrows=0;
 for(const mobile of [false,true])for(const m of models) {
  geometryMobile=mobile;stpa.use(m.pathway);
  let active=true,restored='';
@@ -283,6 +283,8 @@ for(const mobile of [false,true])for(const m of models) {
  document.querySelectorAll=selector=>selector==='#a1-route [data-node]'?nodes:[];
  Object.defineProperty(document,'activeElement',{configurable:true,get:()=>fakeFocused});
  stpa.draw();
+ assert(svg.innerHTML.includes('id="stpa-arrow" viewBox="0 0 8 8" refX="6.5"'),'Forward marker anchors at its tip');
+ assert(svg.innerHTML.includes('id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="10"'),'Feedback marker anchors at its second tip');
  const buttons=Array.from(controls.innerHTML.matchAll(/<button\b([^>]*)>/g),([,attributes])=>{
   const value=name=>attributes.match(new RegExp(`${name}="([^"]*)"`))?.[1];
   const center=value('style')?.match(/left:([-\d.]+)px;top:([-\d.]+)px/);
@@ -297,6 +299,24 @@ for(const mobile of [false,true])for(const m of models) {
  assert.equal(buttons.find(b=>b.pressed==='true').id,selected);
  for(const part of svg.innerHTML.split('<g class="stpa-edge').slice(1)) {
   const id=decoded(part.match(/data-link="([^"]+)"/)[1]);
+  const link=m.links.find(l=>l.id===id);
+  const destination=nodes.find(n=>n.dataset.node===link.to).getBoundingClientRect();
+  const tipPath=part.match(/class="stpa-recovery-tip" d="([^"]+)"/);
+  const linePaths=Array.from(part.matchAll(/<path class="stpa-connection[^"]*" d="([^"]+)"([^>]*)\/>/g));
+  const coordinates=(tipPath?tipPath[1]:linePaths.at(-1)[1]).match(/-?\d+(?:\.\d+)?/g).map(Number);
+  const tip=tipPath?coordinates.slice(2,4):coordinates.slice(-2);
+  const boxEdges=[destination.left-origin.left,destination.right-origin.left];
+  assert(boxEdges.some(x=>Math.abs(tip[0]-x)<.06),`${m.displayId} ${id}: arrow tip meets the destination box border`);
+  assert(tip[1]>=destination.top-origin.top && tip[1]<=destination.bottom-origin.top,'Arrow meets the box within its side');
+  if(link.kind==='optional') {
+   const attributes=linePaths.at(-1)[2];
+   const length=Number(attributes.match(/pathLength="([\d.]+)"/)?.[1]);
+   const offset=Number(attributes.match(/stroke-dashoffset="([\d.]+)"/)?.[1]);
+   assert(attributes.includes('marker-end="url(#stpa-arrow)"'));
+   assert(Math.abs((length+offset)%12-7)<.0002,'The dashed route ends with ink touching the arrowhead');
+   dashedArrows++;
+  }
+  connectedArrows++;
   if (!mobile && m.pathway==='X-01' && id==='X-01:2>X-01:4') {
    const pieces=Array.from(part.matchAll(/class="stpa-connection[^"]*" d="([^"]+)"/g),x=>x[1].match(/-?\d+(?:\.\d+)?/g).map(Number));
    const a=pieces[0].slice(0,2),b=pieces.at(-1).slice(-2),length=Math.hypot(b[0]-a[0],b[1]-a[1]);
@@ -320,4 +340,6 @@ for(const mobile of [false,true])for(const m of models) {
 document.querySelector=originalQuery;document.querySelectorAll=originalAll;
 Object.defineProperty(document,'activeElement',activeDescriptor);geometryMobile=false;
 assert.equal(drawnRoutes,136);
-console.log(`Passed all ${count} incident flows and ${proposedCount} individual barrier inspections across seven models, single readings and legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks also match all ${drawnRoutes} desktop/mobile barrier marks to their controls. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);
+assert.equal(connectedArrows,models.reduce((n,m)=>n+m.links.length,0)*2);
+assert.equal(dashedArrows,models.reduce((n,m)=>n+m.links.filter(l=>l.kind==='optional').length,0)*2);
+console.log(`Passed all ${count} incident flows and ${proposedCount} individual barrier inspections across seven models, single readings and legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks also match all ${drawnRoutes} desktop/mobile barrier marks to their controls, all ${connectedArrows} arrows to destination borders, and all ${dashedArrows} dashed arrow endings. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);

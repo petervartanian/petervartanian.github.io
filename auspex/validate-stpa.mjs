@@ -210,6 +210,17 @@ for (const path of paths) for (const kind of ['contribution','continuation','opt
   assert(!/[CQ]/.test(geometry.d),'Necessary bends use circular turns rather than waves');
   assert.deepEqual(endpoints(geometry.sections[0].d)[0],path[0]);
   assert.deepEqual(endpoints(geometry.sections.at(-1).d)[1],path.at(-1));
+  const terminal=geometry.sections.at(-1);
+  assert(terminal.length>0);
+  if(kind==='optional') {
+    const phase=distance=>((distance+terminal.dashOffset)%12+12)%12;
+    assert(Math.abs(phase(terminal.length)-7)<.0002,'The last optional dash ends at the arrowhead');
+    assert(phase(terminal.length-Math.min(.01,terminal.length/2))<7,'There is ink immediately before the arrowhead');
+    if(terminal.length>12) {
+      assert(phase(terminal.length-6.99)<7,'The terminal dash retains its full length');
+      assert(phase(terminal.length-7.01)>7,'A real gap separates the final dash from the previous one');
+    }
+  }
   if(geometry.barrier) {
     assert.equal(geometry.sections.length,2);
     const a=endpoints(geometry.sections[0].d)[1],b=endpoints(geometry.sections[1].d)[0];
@@ -227,6 +238,8 @@ for (const path of paths) for (const kind of ['contribution','continuation','opt
     }
   } else assert.equal(geometry.rails.length,0);
 }
+assert.equal(presentation.connectionGeometry('optional',[[0,0],[200,0]]).sections[0].length,200);
+assert(Math.abs(presentation.connectionGeometry('optional',[[0,0],[30,0],[30,80],[60,80]]).sections[0].length-(140-48+12*Math.PI))<.0001,'Dash calibration includes the length removed by rounded corners');
 for (const kind of ['contribution','optional','feedback','recovery']) {
   const straight=presentation.connectionGeometry(kind,[[0,0],[80,40],[160,80]],2);
   assert(!/[ACQ]/.test(straight.d),'A clear, collinear connection stays straight');
@@ -253,6 +266,8 @@ assert(css.includes('.stpa-connection.is-optional { stroke-dasharray: 7 5'));
 assert(css.includes('.stpa-recovery-rail { fill: none; stroke: #6d8976; stroke-width: 1;'));
 assert(presentation.routeSymbol('safeguard').includes('a1-barrier-stem'));
 assert(presentation.routeSymbol('recovery').includes('route-rail'));
+const optionalSymbol=presentation.routeSymbol('optional');
+assert.equal((Number(optionalSymbol.match(/pathLength="([\d.]+)"/)[1])+Number(optionalSymbol.match(/stroke-dashoffset="([\d.]+)"/)[1]))%10,6,'The optional-route key also ends with an attached dash');
 assert(!css.includes('route-twist') && !css.includes('a1-gate-'));
 assert(presentation.mapGuide('barriers').includes('Each mark on a route represents one proposed barrier.'));
 assert(presentation.mapGuide('barriers').includes('a1-proposed-definition'));
