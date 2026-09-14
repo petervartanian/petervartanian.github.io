@@ -105,11 +105,11 @@ h1, h2, h3 { font-weight: 400; }
 /* Align the last visible circle with the shared text edge. */
 .opening-sources { display: inline-flex; gap: 0; height: 24px; margin-inline: 3px -4.5px; vertical-align: middle; font: inherit; line-height: 1; white-space: nowrap; text-indent: 0; }
 .opening-sources .source-dot { width: 24px; height: 24px; min-width: 24px; min-height: 24px; color: var(--ink); }
-.opening-sources .source-disc { background: var(--intro-source-colors); color: var(--ink); }
-.opening-sources a:nth-child(1) { --intro-source-colors: linear-gradient(125deg,#e9bdce,#f3d3b6); }
-.opening-sources a:nth-child(2) { --intro-source-colors: linear-gradient(125deg,#f0dfaa,#d2e3bc); }
-.opening-sources a:nth-child(3) { --intro-source-colors: linear-gradient(125deg,#c0e1cc,#b7ddea); }
-.opening-sources a:nth-child(4) { --intro-source-colors: linear-gradient(125deg,#c5d3ed,#d9c5e9); }
+.opening-sources .source-disc { background: var(--intro-source-colors) #e4e5e7; color: var(--ink); }
+.opening-sources a:nth-child(1) { --intro-source-colors: linear-gradient(125deg,rgb(200 106 141 / 8%),rgb(219 165 88 / 8%)); }
+.opening-sources a:nth-child(2) { --intro-source-colors: linear-gradient(125deg,rgb(204 176 82 / 8%),rgb(136 173 116 / 8%)); }
+.opening-sources a:nth-child(3) { --intro-source-colors: linear-gradient(125deg,rgb(97 172 152 / 8%),rgb(109 159 201 / 8%)); }
+.opening-sources a:nth-child(4) { --intro-source-colors: linear-gradient(125deg,rgb(132 155 201 / 8%),rgb(173 138 189 / 8%)); }
 .opening-sources .source-dot:hover { background: transparent; text-decoration: none; }
 .opening-sources .source-dot:hover .source-disc { outline: 1px solid color-mix(in srgb,var(--ink) 25%,transparent); outline-offset: 1px; }
 
