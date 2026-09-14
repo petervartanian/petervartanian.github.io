@@ -221,7 +221,7 @@
 .a1-condition { margin: 0 0 8px; width: fit-content; max-width: 100%; background: var(--page); font: 11px/1.5 var(--sans); color: var(--muted); }
 .a1-node-note { font: 13px/1.65 var(--sans); margin: 0; max-width: 90ch; }
 .a1-node-note > strong { font-weight: 500; }
-.a1-map-key { display: flex; flex-wrap: wrap; gap: 3px 20px; margin: 18px 0 0; padding-top: 12px; border-top: 1px solid var(--line); }
+.a1-map-key { display: flex; flex-wrap: wrap; justify-content: center; gap: 3px 20px; margin: 18px 0 0; padding-top: 12px; border-top: 1px solid var(--line); }
 .a1-map-key > button { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 4px 0; background: transparent; font: 10px/1.5 var(--sans); color: var(--muted); }
 .a1-map-key > button:hover > span { text-decoration: underline; text-underline-offset: 3px; }
 .a1-map-key .a1-barrier-key { color: var(--accent); border: 1px solid var(--line); border-radius: 2px; padding: 7px 10px; text-align: left; gap: 9px; }
