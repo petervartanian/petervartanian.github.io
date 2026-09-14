@@ -206,9 +206,9 @@
         "H-01:R"
       ],
       "improvement": {
-        "title": "Check the record before it follows someone",
-        "proposal": "Require a record supplier and the receiving decision-maker to verify identity, current status, and fitness for the stated use before consequential reuse. Hold uncertain matches for review.",
-        "test": "In a safe audit using synthetic records, introduce an outdated record and a plausible mistaken identity. Check whether review catches them before they change a decision.",
+        "title": "A record checked before reuse",
+        "proposal": "Record suppliers and receiving decision-makers would verify identity, current status, and fitness for the stated use before consequential reuse. Uncertain matches would be held for review.",
+        "test": "A safe audit using synthetic records would introduce an outdated record and a plausible mistaken identity to test whether review catches them before they change a decision.",
         "remaining": "The underlying record may still omit context or contain an error that neither party can verify."
       }
     },
@@ -232,9 +232,9 @@
         "H-01:R"
       ],
       "improvement": {
-        "title": "Give a challenge the power to pause",
-        "proposal": "Let a person challenge an adverse record through an accessible reviewer who can pause the consequential decision. Require the decision-maker to act on a substantiated correction.",
-        "test": "Trace a synthetic challenge through the full process. Check whether someone without specialist help can reach an empowered reviewer before the decision takes effect.",
+        "title": "A challenge with the power to pause",
+        "proposal": "A person could challenge an adverse record through an accessible reviewer empowered to pause the consequential decision. The decision-maker would be required to act on a substantiated correction.",
+        "test": "A synthetic challenge would be traced through the full process to test whether someone without specialist help can reach an empowered reviewer before the decision takes effect.",
         "remaining": "Delay, cost, or fear of retaliation could prevent a person from using the process at all."
       }
     },
@@ -258,9 +258,9 @@
         "H-01:R"
       ],
       "improvement": {
-        "title": "Look beyond the places already inspected",
-        "proposal": "Audit the model against independent observations that do not simply repeat earlier enforcement allocations. Require review of how the correction treats unobserved activity before using its outputs to allocate attention.",
-        "test": "In a controlled simulation, vary the relationship between reporting and discovery. Check whether the correction still avoids concentrating attention because earlier attention generated more records.",
+        "title": "A view beyond earlier enforcement",
+        "proposal": "The enforcement authority and data steward would audit the model against independent observations that do not simply repeat earlier enforcement allocations. Review would examine how the correction treats unobserved activity before its outputs are used to allocate attention.",
+        "test": "A controlled simulation would vary the relationship between reporting and discovery. It would test whether the correction still avoids concentrating attention because earlier attention generated more records.",
         "remaining": "Independent observations may be sparse, and their selection may carry a different bias."
       }
     },
@@ -287,9 +287,9 @@
         "H-01:R"
       ],
       "improvement": {
-        "title": "Make permission to reuse travel with the record",
-        "proposal": "Attach the authorized purpose and provenance to each transfer, and require the recipient to review a new use. Keep an accountable record of recipients so restrictions and corrections can follow the data.",
-        "test": "In a synthetic audit, attempt a materially different use and send a correction downstream. Check whether recipients can be identified and the new use is held for review.",
+        "title": "Terms of reuse that follow the record",
+        "proposal": "Each transfer would carry the authorized purpose and provenance, and recipients would review any new use. An accountable record of recipients would allow restrictions and corrections to follow the data.",
+        "test": "A synthetic audit would attempt a materially different use and send a correction downstream. It would test whether recipients can be identified and the new use is held for review.",
         "remaining": "Unrecorded copies or derived proxies could carry the same information beyond those restrictions."
       }
     },
@@ -316,9 +316,9 @@
         "H-01:R"
       ],
       "improvement": {
-        "title": "Follow the correction to the decision",
-        "proposal": "Require recipients to confirm both that a correction reached their records and that affected decisions were reconsidered. Give an independent reviewer responsibility for unresolved downstream effects.",
-        "test": "Trace a synthetic corrected record through its recipients. Check the resulting decisions and later reuse, rather than stopping at a successful database update.",
+        "title": "A correction that reaches the decision",
+        "proposal": "Recipients would confirm that a correction reached their records and that affected decisions were reconsidered. An independent reviewer would take responsibility for unresolved downstream effects.",
+        "test": "A synthetic corrected record would be traced through its recipients to check the resulting decisions and later reuse, beyond whether the database update succeeded.",
         "remaining": "A recipient may be missing from the record, or the same adverse inference may persist through another data field."
       }
     }
@@ -810,8 +810,8 @@
           ],
           "dependencies": [],
           "reinforcement": {
-            "proposal": "Test record matching and correction propagation before consequential reuse.",
-            "test": "Trace a corrected record through every recipient and verify changed decisions.",
+            "proposal": "Record suppliers and receiving decision-makers would assess record matching and correction propagation before consequential reuse.",
+            "test": "An audit would trace a corrected record through every recipient and check whether affected decisions change.",
             "basis": "This is an analyst proposal. The case did not evaluate it.",
             "evidence": [
               "HRI-2012-account"
@@ -909,8 +909,8 @@
           ],
           "reinforcement": {
             "label": "Selection-bias audit",
-            "proposal": "Audit whether correction assumptions match reporting and discovery in deployment.",
-            "test": "Compare independent observations and subgroup outcomes before treating the model correction as effective.",
+            "proposal": "An independent audit would examine whether the correction’s assumptions match reporting and discovery in deployment.",
+            "test": "The audit would compare independent observations and subgroup outcomes to assess whether the model correction is effective.",
             "basis": "This is an editorial proposal. Its effectiveness is unassessed.",
             "evidence": [
               "PFL-2018-account"
@@ -955,7 +955,7 @@
             "limitType": "safeguard",
             "strongerAI": "More rapid screening and easier data reuse could spread an error before correction. Better matching could help. Test correction speed and downstream decisions.",
             "reinforcement": {
-              "proposal": "Verify identity, currency, and correction propagation before consequential reuse.",
+              "proposal": "Record suppliers and receiving decision-makers would verify identity and whether records are current before consequential reuse. They would also check that corrections reach downstream recipients.",
               "test": "Does a corrected record change every affected decision within the useful time window?",
               "status": "proposed"
             }
@@ -995,7 +995,7 @@
             "limitType": "mixed",
             "strongerAI": "Protection is brittle to incorrect assumptions about discovery and reporting. More adaptive allocation could change those processes. The correction must be retested.",
             "reinforcement": {
-              "proposal": "Check selection assumptions against independent observations and outcomes.",
+              "proposal": "The enforcement authority and data steward would assess selection assumptions against independent observations and outcomes.",
               "test": "Does the correction still prevent feedback when reporting and discovery patterns change?",
               "status": "proposed"
             }

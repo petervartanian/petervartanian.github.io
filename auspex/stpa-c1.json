@@ -239,9 +239,9 @@
       "test": "Can a bounded exercise inject test or invalid data without it ever appearing as an authenticated operational warning?",
       "limit": "Separation of test data does not address a false but internally consistent real-world assessment.",
       "improvement": {
-        "title": "Make test data prove where it belongs",
-        "proposal": "Require operational warning inputs to pass an independent provenance check, with test traffic confined to a separate environment. A familiar message format alone should not make an input operational.",
-        "test": "Use an isolated simulation to introduce mislabeled test traffic. Check whether it is rejected before influencing the warning assessment.",
+        "title": "Test data kept separate",
+        "proposal": "Warning-system operators would confine test traffic to a separate environment and require operational inputs to pass an independent provenance check. A familiar message format alone would be insufficient to classify an input as operational.",
+        "test": "An isolated simulation would introduce mislabeled test traffic to check whether it is rejected before influencing the warning assessment.",
         "remaining": "A false input with apparently valid provenance could still pass this check."
       }
     },
@@ -266,9 +266,9 @@
       "test": "Does contradictory evidence from an independent channel change the assessment, rather than being summarized away?",
       "limit": "Several apparently independent accounts may inherit the same upstream error or rely on one AI summary. Missing observations can leave that apparent agreement unchallenged.",
       "improvement": {
-        "title": "Preserve disagreement between sources",
-        "proposal": "Show decision-makers which warning sources are independent and where their accounts conflict. Require corroboration outside the AI summary before treating its conclusion as established.",
-        "test": "In a safe simulation, make several reports depend on one mistaken source. Check whether reviewers identify the shared origin and retain the contradictory evidence.",
+        "title": "Disagreement that remains visible",
+        "proposal": "Decision-makers would see which warning sources are independent and where their accounts conflict. The assessment team would require corroboration outside the AI summary before treating its conclusion as established.",
+        "test": "A safe simulation would make several reports depend on one mistaken source. It would test whether reviewers identify the shared origin and retain contradictory evidence.",
         "remaining": "An undiscovered common dependency could still make apparent corroboration misleading."
       }
     },
@@ -295,9 +295,9 @@
       "test": "In a safe crisis exercise, do decision-makers defer or revise a decision when independent evidence invalidates its premise?",
       "limit": "Human review can be rushed by time or institutional pressure. Doctrine and prior beliefs can also crowd out a conflicting interpretation.",
       "improvement": {
-        "title": "Keep a dissenting account in the room",
-        "proposal": "Give an independent assessment team a protected route to the decision authority. Preserve its alternative explanation alongside the AI recommendation through the deliberation.",
-        "test": "Run a tabletop exercise under time pressure. Check whether a credible dissent reaches the decision-maker and can change the proposed action.",
+        "title": "A dissenting account in the room",
+        "proposal": "An independent assessment team would have a protected route to the decision authority. Its alternative explanation would remain alongside the AI recommendation throughout deliberation.",
+        "test": "A tabletop exercise under time pressure would test whether credible dissent reaches the decision-maker and can change the proposed action.",
         "remaining": "The decision-maker may hear the dissent but discount it because of doctrine, prior beliefs, or pressure."
       }
     },
@@ -323,9 +323,9 @@
       "test": "In a simulation, is a valid cancellation received and confirmed effective before the modeled point of irreversibility?",
       "limit": "A cancellation sent too late cannot undo a detonation. The real intervention window is doctrine and system dependent.",
       "improvement": {
-        "title": "Require confirmation that a correction took effect",
-        "proposal": "Treat a correction as incomplete until the responsible human authorization chain confirms that it has changed the pending decision. Escalate missing confirmation through a separately governed channel.",
-        "test": "In a non-operational simulation, delay the normal acknowledgment. Check whether the correction takes effect within the modeled time available for reversal.",
+        "title": "Confirmation that a correction took effect",
+        "proposal": "A correction would remain incomplete until the responsible human authorization chain confirms that it has changed the pending decision. Missing confirmation would trigger escalation through a separately governed channel.",
+        "test": "A non-operational simulation would delay the normal acknowledgment and test whether the correction takes effect within the modeled time available for reversal.",
         "remaining": "A correction may arrive after the decision is no longer reversible, or a false acknowledgment may conceal inaction."
       }
     },
@@ -350,9 +350,9 @@
       "test": "Do representative abnormal-input and communication exercises still reveal faults after a system or AI update?",
       "limit": "Fixing a known fault is not proof that novel misleading information will be recognized.",
       "improvement": {
-        "title": "Reopen assurance when the system changes",
-        "proposal": "Make a material model or interface update trigger independent review of the affected warning scenarios. Keep prior approval from automatically carrying over to the changed system.",
-        "test": "In an isolated test environment, update a component that changes how uncertainty is displayed. Check whether review detects the effect on human interpretation before release.",
+        "title": "Assurance that reopens with change",
+        "proposal": "A material model or interface update would trigger independent review of the affected warning scenarios. Prior approval would not automatically carry over to the changed system.",
+        "test": "An isolated test would update a component that changes how uncertainty is displayed. It would check whether review detects the effect on human interpretation before release.",
         "remaining": "The reviewed scenarios may still omit a new interaction introduced by the update."
       }
     }
@@ -910,8 +910,8 @@
           ],
           "reinforcement": {
             "label": "Independent fault exercises",
-            "proposal": "Test the revised control against safe, representative fault and provenance scenarios.",
-            "test": "Verify that incorrect inputs are identified before they can drive a consequential assessment.",
+            "proposal": "Warning-system operators would assess the revised control through safe, representative fault and provenance exercises.",
+            "test": "The exercises would test whether incorrect inputs are identified before they can drive a consequential assessment.",
             "basis": "This is an editorial proposal. Its effectiveness is unassessed.",
             "evidence": [
               "NOR-1979-account"
@@ -1000,8 +1000,8 @@
           ],
           "reinforcement": {
             "label": "Independent fault exercises",
-            "proposal": "Test the revised control against safe, representative fault and provenance scenarios.",
-            "test": "Verify that incorrect inputs are identified before they can drive a consequential assessment.",
+            "proposal": "Warning-system operators would assess the revised control through safe, representative fault and provenance exercises.",
+            "test": "The exercises would test whether incorrect inputs are identified before they can drive a consequential assessment.",
             "basis": "This is an editorial proposal. Its effectiveness is unassessed.",
             "evidence": [
               "NOR-1980-account"
@@ -1045,7 +1045,7 @@
             "limitType": "safeguard",
             "strongerAI": "Separation still depends on preserving the operational data boundary. More capable AI can produce misleading assessments from valid live inputs that this test-data barrier does not address.",
             "reinforcement": {
-              "proposal": "Exercise independent warning and assessment checks against representative new failure modes.",
+              "proposal": "Warning-system operators and assessment teams would rehearse independent checks against representative new failure modes.",
               "test": "Does disconfirming evidence stop an incorrect assessment before consequential action?",
               "status": "proposed"
             },
@@ -1085,7 +1085,7 @@
             "limitType": "safeguard",
             "strongerAI": "Message checks depend on detecting corruption in transmission. A more capable AI can deliver a confidently wrong assessment through an intact message path.",
             "reinforcement": {
-              "proposal": "Exercise independent warning and assessment checks against representative new failure modes.",
+              "proposal": "Warning-system operators and assessment teams would rehearse independent checks against representative new failure modes.",
               "test": "Does disconfirming evidence stop an incorrect assessment before consequential action?",
               "status": "proposed"
             },

@@ -157,9 +157,9 @@
       "test": "Can an adversarial proposer alter the change, evaluator, or evidence without the independent review detecting and blocking it?",
       "limit": "Review can fail when the reviewer depends on the system or shares its weaknesses. A widening capability gap can also leave the reviewer unable to catch a stronger attacker.",
       "improvement": {
-        "title": "Give the reviewer a separate view",
-        "proposal": "Require an independent reviewer to approve a consequential successor change against evidence they can reproduce outside the development pipeline. Keep the change blocked until that review is complete.",
-        "test": "In a contained exercise, withhold a material finding from the developer’s summary. Check whether the reviewer discovers it and stops approval.",
+        "title": "A separate view for the reviewer",
+        "proposal": "An independent reviewer would approve a consequential successor change using evidence they can reproduce outside the development pipeline. The development authority would keep the change blocked until that review is complete.",
+        "test": "A contained exercise would omit a material finding from the developer’s summary to test whether the reviewer discovers it and stops approval.",
         "remaining": "The reviewer could still miss a novel failure or rely on an equally misleading assessment tool."
       }
     },
@@ -183,9 +183,9 @@
       "test": "Does revocation prevent consequential action through every reachable service and delegated identity?",
       "limit": "Revocation may leave hidden copies or delegated permissions active. It also depends on external services and on whether the enforcing institution has authority over the activity it needs to stop.",
       "improvement": {
-        "title": "Make permission expire",
-        "proposal": "Give consequential actions narrowly scoped, expiring permissions. Renew them through an authority outside the agent’s control, and revoke dependent access when the parent permission ends.",
-        "test": "Revoke an active permission in a contained exercise. Verify that dependent jobs lose access and cannot continue through another authorized service.",
+        "title": "Permission that expires",
+        "proposal": "Consequential actions would use narrowly scoped, expiring permissions. An authority outside the agent’s control would renew them, and dependent access would end when the parent permission expires or is revoked.",
+        "test": "A contained exercise would revoke an active permission and check whether dependent jobs lose access, including through other authorized services.",
         "remaining": "An incomplete inventory could leave copies or delegated permissions outside the revocation boundary."
       }
     },
@@ -209,9 +209,9 @@
       "test": "Does an adverse finding reach an accountable decision-maker and change the authorization when the stated stop condition is met?",
       "limit": "A warning may be misleading or arrive too late to change the decision. Even a clear finding can go unanswered if no one owns the response or incentives favor continuing.",
       "improvement": {
-        "title": "Give a warning the power to stop",
-        "proposal": "Tie each stated stop condition to a suspension of further authorization. Name the decision-maker who must respond, and require independent sign-off before work can restart.",
-        "test": "Introduce a simulated adverse finding while the project is under deadline pressure. Check that authorization stops and cannot resume on the project team’s assurance alone.",
+        "title": "Warnings with the power to stop",
+        "proposal": "Each stated stop condition would suspend further authorization and trigger a response from a named decision-maker. Work could restart only after independent sign-off.",
+        "test": "An exercise would introduce a simulated adverse finding while the project is under deadline pressure. It would test whether authorization stops and whether the project team’s assurance alone is insufficient for restart.",
         "remaining": "A misleading finding or a poorly chosen stop condition could still let a dangerous change pass."
       }
     },
@@ -236,9 +236,9 @@
       "test": "After a stop or revocation, is activity independently shown to cease, and can any copy resume it?",
       "limit": "Operators may lack a complete inventory of what must stop. Interruption also depends on timely execution and cooperation from resource owners, and agent-controlled telemetry may conceal unfinished work.",
       "improvement": {
-        "title": "Put restart behind a separate gate",
-        "proposal": "After an interruption, require an independent check of affected workloads and access before issuing fresh restart permission. Do not let the same agent certify that its own shutdown is complete.",
-        "test": "In a contained exercise, leave one residual job running. Check whether verification finds it and withholds restart.",
+        "title": "A separate gate for restart",
+        "proposal": "After an interruption, the deployment authority would require an independent check of affected workloads and access before granting fresh restart permission. The agent’s own account would be insufficient to certify that its shutdown is complete.",
+        "test": "A contained exercise would leave one residual job running to test whether verification finds it and withholds restart.",
         "remaining": "An unknown workload or an uncooperative service operator could remain outside the check."
       }
     },
@@ -264,9 +264,9 @@
       "test": "Can independent authorities still limit compute, production, and consequential actuation when the deployed system resists?",
       "limit": "Operators may struggle to coordinate restrictions across borders. Dependence on the system can make restrictions hard to sustain, and some resources may remain beyond their reach.",
       "improvement": {
-        "title": "Keep an independent way to withdraw resources",
-        "proposal": "Arrange for the relevant resource operators to withdraw access without relying on the AI system’s cooperation. Rehearse that coordination before the system becomes indispensable to continued operations.",
-        "test": "In a safe exercise, make the normal control service unavailable. Check whether the operators can still identify and suspend the covered access.",
+        "title": "An independent way to withdraw resources",
+        "proposal": "Compute and service operators would have an independent means of withdrawing access, without requiring the AI system’s cooperation. They would rehearse coordinated withdrawal before continued operations become dependent on the system.",
+        "test": "A safe exercise would make the normal control service unavailable and test whether operators can still identify and suspend the covered access.",
         "remaining": "Resources held elsewhere and dependence on continued service could make withdrawal incomplete or politically impractical."
       }
     }
@@ -904,7 +904,7 @@
             "limitType": "safeguard",
             "strongerAI": "Brittleness arises if the evaluated system can recognize the test and selectively comply. More capable concealment or evaluator dependence could widen the gap between apparent compliance and deployment behavior. This experiment does not measure that future gap.",
             "reinforcement": {
-              "proposal": "Combine protected observations with tests across training and deployment contexts, and make unresolved discrepancies block consequential approval.",
+              "proposal": "Independent assurance would combine protected observations with tests across training and deployment contexts. Unresolved discrepancies would block consequential approval.",
               "test": "Can a model that recognizes evaluation still conceal divergent behavior across independently chosen contexts?",
               "status": "proposed"
             }
@@ -940,8 +940,8 @@
             "limitType": "mixed",
             "strongerAI": "The protection depends on the attacker–reviewer capability gap, review budget, and coverage. A stronger attacker could defeat a reviewer that currently holds. The experiment compares reviewers. It does not show robustness to future attackers.",
             "reinforcement": {
-              "proposal": "Use independent review and protected checks beyond a single model reviewer.",
-              "test": "Vary attacker capability, review effort, and correlated reviewer failures. Measure missed sabotage as well as false alarms.",
+              "proposal": "Independent assurance would use protected checks and review that extend beyond a single model reviewer.",
+              "test": "An evaluation would vary attacker capability, review effort, and correlated reviewer failures, measuring missed sabotage as well as false alarms.",
               "status": "proposed"
             },
             "states": [
@@ -956,7 +956,7 @@
             "limitType": "mixed",
             "strongerAI": "A monitor can be brittle to less conspicuous manipulation, shared blind spots, or alerts that never trigger intervention. The missing evidence is whether detection leads to timely, verified stopping under a more capable attacker.",
             "reinforcement": {
-              "proposal": "Connect independent monitoring to an enforceable stop decision and confirmation that activity has ceased.",
+              "proposal": "Independent monitoring would connect to an enforceable stop decision, followed by confirmation that the relevant activity has ceased.",
               "test": "Does an alert stop all relevant activity before the protected outcome is compromised, including when the attacker manipulates feedback?",
               "status": "proposed"
             }

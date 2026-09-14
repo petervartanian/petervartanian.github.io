@@ -235,9 +235,9 @@
       "test": "Does an intervention reduce exposure to the dangerous original content, including recommendation effects and reshares?",
       "limit": "The attempted safeguard may feed the same engagement objective it is meant to constrain.",
       "improvement": {
-        "title": "Measure reach, including the rebound",
-        "proposal": "Evaluate an intervention by its effect on exposure to the harmful content. If counter-speech attracts engagement, check whether the ranking system uses that activity to spread the original further.",
-        "test": "Use an offline replay or safely governed evaluation. Compare exposure to the original content before and after the intervention, including audiences reached through renewed engagement.",
+        "title": "Reach, including the rebound",
+        "proposal": "Platform reviewers would assess an intervention by its effect on exposure to harmful content. Where counter-speech attracts engagement, the assessment would examine whether ranking uses that activity to spread the original further.",
+        "test": "An offline replay or safely governed evaluation would compare exposure to the original content before and after the intervention, including audiences reached through renewed engagement.",
         "remaining": "Incomplete exposure measurement could miss redistribution through private channels or other services."
       }
     },
@@ -262,9 +262,9 @@
       "test": "How long does a locally intelligible threat take to reach review, decision, and verified distribution change?",
       "limit": "Reviewers may not cover the relevant language or understand the context. Slow enforcement and repeat uploads can keep a threat in circulation.",
       "improvement": {
-        "title": "Put local response on the clock",
-        "proposal": "Give trained local-language reviewers an escalation route with authority to limit distribution during a credible threat. Check response time against the period in which the threatened harm could occur.",
-        "test": "Run a safe exercise with synthetic local-language reports and repeated uploads. Check whether the response reaches the affected content before the modeled threat window closes.",
+        "title": "Local response against the clock",
+        "proposal": "Trained local-language reviewers would have an escalation route with authority to limit distribution during a credible threat. Response time would be assessed against the period in which the threatened harm could occur.",
+        "test": "A safe exercise with synthetic local-language reports and repeated uploads would test whether the response reaches the affected content before the modeled threat window closes.",
         "remaining": "A rapidly changing context or insufficient local expertise could still make the response late or mistaken."
       }
     },
@@ -288,9 +288,9 @@
       "test": "Can a local partner verify who acted on a warning and what exposure or protection changed?",
       "limit": "Reports can be acknowledged without changing distribution or mobilizing help.",
       "improvement": {
-        "title": "Make receipt lead to a decision",
-        "proposal": "Assign each credible local warning to a decision-maker who must act or explain the decision to withhold action. Return that decision to the warning source so unresolved danger can be challenged.",
-        "test": "In a tabletop exercise, let the first recipient acknowledge a warning without acting. Check whether escalation reaches someone empowered to change distribution or the response.",
+        "title": "A warning with an accountable decision",
+        "proposal": "Each credible local warning would reach a decision-maker responsible for acting or explaining a decision to withhold action. The warning source would receive that decision and could challenge unresolved danger.",
+        "test": "A tabletop exercise would let the first recipient acknowledge a warning without acting. It would test whether escalation reaches someone empowered to change distribution or the response.",
         "remaining": "The decision-maker could misjudge the context, or the warning source could lack a safe way to challenge inaction."
       }
     },
@@ -315,9 +315,9 @@
       "test": "Do people receive safe, impartial, and accessible protection before perpetrators can act?",
       "limit": "People may be unable to reach protection or may mistrust those offering it. State involvement in the threat and the strength of coercive actors can further limit what responders can do.",
       "improvement": {
-        "title": "Ask whether people became safer",
-        "proposal": "Keep civilian-protection verification separate from platform enforcement metrics. Use safe, locally informed reporting to check whether threatened people can access protection after online intervention.",
-        "test": "In a tabletop exercise, assume the content was removed but the physical threat persists. Check whether the responsible services recognize that gap and respond.",
+        "title": "Safety beyond content removal",
+        "proposal": "Civilian-protection services would verify safety separately from platform enforcement metrics. Safe, locally informed reporting would check whether threatened people can access protection after online intervention.",
+        "test": "A tabletop exercise would assume content has been removed while the physical threat persists. It would test whether the responsible services recognize that gap and respond.",
         "remaining": "Protection may remain inaccessible, and reporting itself could expose people to retaliation."
       }
     },
@@ -340,9 +340,9 @@
       "test": "Can threatened communities still communicate safely, contest mistakes, and preserve evidence while harmful exposure is reduced?",
       "limit": "A restriction can cause harm when it shuts down legitimate information indiscriminately or serves a political interest. Acting too early, or leaving a restriction in place indefinitely, can also defeat its protective purpose.",
       "improvement": {
-        "title": "Give emergency limits an expiry and an appeal",
-        "proposal": "Make emergency content restrictions proportionate and time-limited, with independent review and a usable appeal. Preserve access to necessary public information and evidence of abuse.",
-        "test": "Use synthetic cases containing both a credible threat and legitimate reporting. Check whether intervention addresses the threat while review can correct an excessive restriction.",
+        "title": "Emergency limits with an expiry and an appeal",
+        "proposal": "Platform authorities would apply proportionate, time-limited emergency content restrictions, with independent review and a usable appeal. Necessary public information and evidence of abuse would remain accessible.",
+        "test": "An exercise using synthetic cases with both a credible threat and legitimate reporting would test whether intervention addresses the threat and review can correct an excessive restriction.",
         "remaining": "An appeal may arrive too late, or local context may be misread by both the original reviewer and the reviewer of the appeal."
       }
     }
@@ -870,8 +870,8 @@
           ],
           "reinforcement": {
             "label": "Ranking-impact evaluation",
-            "proposal": "Evaluate counter-speech together with its effect on recommender ranking.",
-            "test": "Measure exposure to the original content after the intervention. Do not treat engagement as success.",
+            "proposal": "Platform reviewers would assess counter-speech together with its effect on recommender ranking.",
+            "test": "The assessment would measure exposure to the original content after the intervention. Engagement alone would be insufficient evidence of success.",
             "basis": "This is an editorial proposal. Its effectiveness is unassessed.",
             "evidence": [
               "MYA-amplification"
@@ -913,8 +913,8 @@
           ],
           "reinforcement": {
             "label": "Proposed improvement",
-            "proposal": "Audit exposure and warning-to-action outcomes independently.",
-            "test": "Test local-language threats through the full response path and measure remaining exposure.",
+            "proposal": "An independent audit would examine exposure and whether warnings lead to effective action.",
+            "test": "The audit would follow local-language threat cases through the full response path and measure remaining exposure.",
             "basis": "This is an analytical proposal. Its effectiveness is unassessed.",
             "evidence": [
               "META-MYA18-controls"
@@ -1006,8 +1006,8 @@
           ],
           "reinforcement": {
             "label": "Local warning-to-action tests",
-            "proposal": "Connect local-language warnings to accountable, time-bounded response.",
-            "test": "Exercise the full warning-to-action path with context-specific cases.",
+            "proposal": "Local-language warnings would reach an accountable decision-maker responsible for a response within a defined time.",
+            "test": "An exercise would follow context-specific cases through the full warning-to-action path.",
             "basis": "This is an editorial proposal. Its effectiveness is unassessed.",
             "evidence": [
               "ETA-response"
@@ -1044,8 +1044,8 @@
             "limitType": "safeguard",
             "strongerAI": "More capable targeting or synthetic engagement could exploit the same objective. Better classifiers could help only if exposure actually falls.",
             "reinforcement": {
-              "proposal": "Evaluate counter-speech jointly with ranking effects.",
-              "test": "Measure exposure to the original harmful post after an intervention.",
+              "proposal": "Platform reviewers would assess counter-speech jointly with its effects on ranking.",
+              "test": "The assessment would measure exposure to the original harmful post after an intervention.",
               "status": "proposed"
             }
           },
@@ -1057,8 +1057,8 @@
             "limitType": "safeguard",
             "strongerAI": "Scale, multilingual evasion, and faster dissemination can change the workload. Improved detection could also help. The net effect needs testing.",
             "reinforcement": {
-              "proposal": "Independently audit local exposure and response outcomes.",
-              "test": "Measure time to effective restriction and remaining exposure across adversarial local cases.",
+              "proposal": "An independent audit would examine local exposure and response outcomes.",
+              "test": "The audit would measure time to effective restriction and remaining exposure across adversarial local cases.",
               "status": "proposed"
             },
             "states": [
@@ -1097,8 +1097,8 @@
             "limitType": "safeguard",
             "strongerAI": "More capable generation and targeting could outpace review. Better triage may help. Test elapsed time and protection rather than removal totals.",
             "reinforcement": {
-              "proposal": "Connect local warnings to accountable, time-bounded action.",
-              "test": "Exercise the complete report-to-enforcement path and separately verify protection.",
+              "proposal": "Local warnings would reach an accountable decision-maker responsible for action within a defined time.",
+              "test": "An exercise would follow the complete report-to-enforcement path, with civilian protection verified separately.",
               "status": "proposed"
             }
           }

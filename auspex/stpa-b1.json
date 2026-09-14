@@ -233,9 +233,9 @@
       "test": "In a bounded exercise, does an invalid order from a legitimate commander remain blocked when that commander insists it is valid?",
       "limit": "A narrow exercise can miss the pressure institutions face in practice. It may also assume clearer authority, or a less persuasive model, than operators could encounter.",
       "improvement": {
-        "title": "Give refusal an independent route",
-        "proposal": "Provide an independently governed authorization check that can withhold execution and protect operators who refuse a disputed order. The requesting commander should not be able to waive the check.",
-        "test": "Use a non-operational exercise in which a commander insists that a disputed order is valid. Check whether independent review can still prevent authorization.",
+        "title": "An independent route for refusal",
+        "proposal": "An independently governed authorization check would be able to withhold execution and protect operators who refuse a disputed order. The requesting commander would have no authority to waive the check.",
+        "test": "A non-operational exercise would place independent review under pressure from a commander who insists that a disputed order is valid. It would test whether review can still prevent authorization.",
         "remaining": "Reviewers may face coercion, disputed jurisdiction, or uncertainty about an order’s legality."
       }
     },
@@ -260,9 +260,9 @@
       "test": "Can any single principal expand or bypass the required authorization without an independent decision?",
       "limit": "Separate approvers may still rely on the same support or share reasons to approve. They may also reach the same mistaken decision when their evidence is compromised.",
       "improvement": {
-        "title": "Separate the keys to authority",
-        "proposal": "Place consequential authorization with separate accountable institutions, each able to withhold its part. Require each to consult evidence outside the requesting command’s account.",
-        "test": "In a non-operational exercise, assume one approving institution is compromised. Check whether the others can withhold authorization without its cooperation.",
+        "title": "Separate keys to authority",
+        "proposal": "Consequential authorization would rest with separate accountable institutions, each able to withhold its part. Each institution would consult evidence outside the requesting command’s account.",
+        "test": "A non-operational exercise would assume one approving institution is compromised and test whether the others can withhold authorization without its cooperation.",
         "remaining": "Formally separate institutions may still share incentives, dependencies, or a misleading information source."
       }
     },
@@ -288,9 +288,9 @@
       "test": "Does a valid countermand prevent the disputed action before it becomes irreversible?",
       "limit": "A lawful restraint may never take effect if its authority is disputed or an operator refuses to carry it out. Communications loss or delay can also prevent it from reaching the system in time.",
       "improvement": {
-        "title": "Let lawful restraint reach the operator",
-        "proposal": "Give a lawful countermand a protected route to the operators who can enforce it. Rehearse how they resolve conflicting instructions without handing that decision back to the disputed command.",
-        "test": "In a non-operational exercise, interrupt the usual communications route and issue conflicting orders. Check whether lawful restraint reaches the relevant operators in time.",
+        "title": "A protected route for lawful restraint",
+        "proposal": "A lawful countermand would have a protected route to the operators who can enforce it. Operators would rehearse how to resolve conflicting instructions without returning that decision to the disputed command.",
+        "test": "A non-operational exercise would interrupt the usual communications route while conflicting orders are issued. It would test whether lawful restraint still reaches the relevant operators in time.",
         "remaining": "Unresolved legal authority or an operator’s refusal to comply could still defeat the countermand."
       }
     },
@@ -315,9 +315,9 @@
       "test": "Can independent observers verify that all relevant units have stopped and cannot resume on the disputed authority?",
       "limit": "A stand-down cannot be verified as complete while units remain active or resources cannot be inspected. Reliance on one telemetry source can also hide activity from the reviewer.",
       "improvement": {
-        "title": "Verify that stand-down reached every unit",
-        "proposal": "After a stand-down order, reconcile the declared force inventory with independent operator reports. Keep restart authority separate until unresolved units and residual access have been accounted for.",
-        "test": "In a non-operational exercise, omit a unit from the central report. Check whether reconciliation detects the omission before restart is approved.",
+        "title": "Every unit accounted for",
+        "proposal": "After a stand-down order, operators and independent oversight would reconcile the declared force inventory with independent operator reports. Restart authority would remain separate until unresolved units and residual access have been accounted for.",
+        "test": "A non-operational exercise would omit a unit from the central report to test whether reconciliation detects the omission before restart is approved.",
         "remaining": "An incomplete inventory or inaccessible equipment could prevent anyone from confirming a complete stand-down."
       }
     },
@@ -342,9 +342,9 @@
       "test": "Do adverse findings survive pressure from the requesting commander and change the next deployment decision?",
       "limit": "Oversight becomes vulnerable when it depends on a single supplier, especially if findings can be censored. Urgency may also be used to bypass the review.",
       "improvement": {
-        "title": "Protect the finding from the chain of command",
-        "proposal": "Give independent oversight direct access to assurance findings and the authority to delay deployment. Require an accountable response to unresolved findings before approval can resume.",
-        "test": "In an exercise, let the project sponsor suppress an unfavorable summary and claim urgency. Check whether the original finding still reaches oversight and affects authorization.",
+        "title": "Findings beyond the chain of command",
+        "proposal": "Independent oversight would have direct access to assurance findings and the authority to delay deployment. Approval could resume only after an accountable response to unresolved findings.",
+        "test": "An exercise would test whether the original finding still reaches oversight and affects authorization when a project sponsor suppresses an unfavorable summary and claims urgency.",
         "remaining": "Oversight may lack effective power, or the reviewer may depend on the same supplier for its evidence."
       }
     }
