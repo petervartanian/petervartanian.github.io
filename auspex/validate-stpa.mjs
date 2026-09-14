@@ -124,7 +124,7 @@ for (const m of models) {
   assert(cloud.indexOf('a1-cloud-conditions') < cloud.indexOf('a1-cloud-actors'));
   assert(!/undefined|NaN/.test(cloud));
   assert(staticHTML.includes(presentation.contextCloud(m.pathway)));
-  for (const heading of ['1. Precursors','2. Event','3. Consequences','R. Recovery']) assert(base.includes(heading));
+  for (const heading of ['1. Precursors','2. Event','3. Consequences','Recovery']) assert(base.includes(`<h3 class="a1-region-heading">${heading}</h3>`));
   for (const [wing,prefix] of [['before','1.'],['centre','2.'],['after','3.']]) {
     assert(m.nodes.filter(n=>n.wing===wing).every((n,i)=>n.number===prefix+(i+1)));
   }
