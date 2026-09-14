@@ -711,7 +711,7 @@ window.AuspexSTPAModels = {
       }
     ],
     "controlEvidence": {
-      "title": "Haruspex → verified interruption",
+      "title": "Reported containment at Hugging Face",
       "kind": "Operational incident · control comparison",
       "source": "HF",
       "constraint": "SC4",
@@ -798,7 +798,7 @@ window.AuspexSTPAModels = {
         "title": "Hugging Face · July 2026 intrusion technical timeline",
         "url": "https://huggingface.co/blog/agent-intrusion-technical-timeline",
         "locator": "Containment and mitigation sections",
-        "use": "Reported operational response, used only as a control-mechanism comparison for SC4. Haruspex contains the fuller investigation."
+        "use": "Reported operational response, used only as a control-mechanism comparison for SC4."
       },
       {
         "id": "SAIL",

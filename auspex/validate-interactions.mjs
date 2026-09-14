@@ -145,6 +145,39 @@ for(const p of context.window.AuspexData.pathways.filter(p=>!stpa.has(p.id))) {
 test.selectPathway(models[0].pathway);
 assert.equal(elements.get('#app').dataset.blank,'false');assert(cloud().includes('a1-cloud-title') && cloud().includes('Context'));
 
+// Follow the actual guide handlers while keeping the chosen pathway intact.
+const guideClick=(attribute,value,container='#method-reading')=>{
+ const target=targetFor(container,attribute,value);
+ target.isConnected=true;target.focus=()=>{focused=container+'|'+attribute+'|'+value;};
+ documentListeners.click({target});
+ return target;
+};
+for(const m of models) {
+ url=`file:///fixture/auspex/index.html?p=${m.displayId}`;test.readLocation();
+ const before=url;
+ guideClick('map-guide','paths','#pathway-map');
+ assert(elements.get('#method-dialog').open);
+ assert(elements.get('#method-reading').innerHTML.includes('aria-controls="a1-guide-content">Paths</button>'));
+ guideClick('map-guide','barriers');
+ for(const state of context.window.AuspexBarrierStateData.states) {
+  guideClick('explore-state',state.id);
+  const reading=elements.get('#method-reading').innerHTML;
+  assert(reading.includes(`data-explore-state="${state.id}" aria-pressed="true"`));
+  assert.equal((reading.match(/class="a1-map-overview"/g)||[]).length,1);
+  assert.equal((reading.match(/class="a1-method-guide"/g)||[]).length,1);
+  assert(reading.includes('Incidents on the map') && !reading.includes('Haruspex'));
+  assert.equal(focused,`[data-explore-state="${state.id}"]`);
+ }
+ guideClick('map-guide','paths');
+ assert(elements.get('#method-reading').innerHTML.includes('data-map-guide="paths" aria-pressed="true"'));
+ assert(!elements.get('#method-reading').innerHTML.includes('data-explore-state='));
+ elements.get('#close-method').listeners.click();
+ elements.get('#method-dialog').listeners.close();
+ assert(!elements.get('#method-dialog').open);
+ assert.equal(focused,'#pathway-map|map-guide|paths','Closing the guide returns to its original map key');
+ assert.equal(url,before,'Guide navigation does not change the selected pathway');
+}
+
 let proposedCount=0;
 const questionNames=['mechanism','evidence','durability','failure'];
 const clickProposal=(route,c=route.controls[0])=>{const target=targetFor('#pathway-map','safeguard',route.id);target.dataset.constraint=c.id;elements.get('#pathway-map').listeners.click({target});};

@@ -32,7 +32,18 @@ assert.deepEqual(Array.from(presentation.routeDefinitions,r=>r.id),['contributio
 for (const section of ['paths','barriers']) {
   const guide=presentation.mapGuide(section);
   assert(guide.includes(`data-map-guide="${section}" aria-pressed="true"`));
+  assert(guide.includes('aria-controls="a1-guide-content">Paths</button>'));
+  assert(!guide.includes('Path types'));
+  assert.equal((guide.match(/class="a1-map-overview"/g)||[]).length,1);
+  assert.equal((guide.match(/class="a1-method-guide"/g)||[]).length,1);
+  assert(guide.indexOf('a1-map-overview')<guide.indexOf('a1-guide-tabs'),'The map overview belongs above both symbol categories');
+  const symbols=guide.match(/<div id="a1-guide-content">([\s\S]*?)<\/div><div class="a1-map-instructions">/)[1];
+  assert(!symbols.includes('a1-stage-guide') && !symbols.includes('a1-method-guide') && !symbols.includes('Inspect a barrier'));
+  assert.equal(symbols.includes('a1-proposed-definition'),section==='barriers');
+  assert.equal(symbols.includes('Possible progression'),section==='paths');
 }
+assert.equal(presentation.mapGuide('paths').split('<nav')[0],presentation.mapGuide('barriers').split('<nav')[0]);
+assert.equal(presentation.mapGuide('paths').split('<div class="a1-map-instructions">')[1],presentation.mapGuide('barriers').split('<div class="a1-map-instructions">')[1],'Both categories share the same incident and method instructions');
 const reaches = (links, from, to, seen = new Set()) => {
   if (from === to) return true;
   if (seen.has(from)) return false;
@@ -283,8 +294,22 @@ for (const m of models) {
   assert(!guide.includes('Recovery & reinforcement') && !guide.includes('Brittleness & recovery'));
   assert(!guide.includes('stpa-recovery-guide'));
   assert(guide.includes('Systems-Theoretic Process Analysis'));
-  assert(guide.includes('Haruspex uses CAST'));
+  assert(!guide.includes('Haruspex') && !guide.includes('Both sites'));
+  assert(guide.includes('CAST investigates how control broke down'));
   assert(guide.includes('The related component is highlighted, while'));
+  const method=presentation.guide().match(/<section class="a1-method-guide">([\s\S]*?)<\/section>/)[1];
+  assert(!method.includes('↗'));
+  const citations=Array.from(method.matchAll(/<a class="source-dot"[^>]*href="([^"]+)"[^>]*title="([^"]+)"[^>]*aria-label="([^"]+)"[^>]*><span class="source-disc" aria-hidden="true">([^<]+)<\/span><\/a>/g));
+  assert.deepEqual(citations.map(c=>c[4]),['i','ii','iii']);
+  for(const citation of citations) {
+    assert(citation[1].startsWith('https://'));
+    assert(citation[2].startsWith(citation[4]+'. '));
+    assert(citation[3].startsWith('Open source '+citation[4]+': '));
+  }
+  const register=presentation.staticPage().match(/<ol class="stpa-sources">([\s\S]*?)<\/ol>/)[1];
+  assert.equal((register.match(/class="source-disc"/g)||[]).length,m.sources.length);
+  assert(!register.includes('↗'));
+  assert(!presentation.staticPage().includes('Haruspex'));
   const recovery=m.nodes.find(n=>n.type==='recovery');
   assert(!presentation.renderMap(recovery.id,null,'').includes('data-recovery-info'));
   for (const route of presentation.proposedBarriers()) for (const c of route.controls) {
@@ -295,6 +320,11 @@ for (const m of models) {
   }
 }
 assert(!staticHTML.includes('stpa-recovery-guide'));
+const staticKey=staticHTML.match(/<!-- MAP-KEY-START -->([\s\S]*?)<!-- MAP-KEY-END -->/)[1];
+assert.equal((staticKey.match(/class="a1-map-overview"/g)||[]).length,1);
+assert.equal((staticKey.match(/class="a1-method-guide"/g)||[]).length,1);
+assert(staticKey.includes('<h3>Paths</h3>') && staticKey.includes('<h3>Barriers</h3>'));
+assert(!staticKey.includes('Haruspex') && !staticKey.includes('Path types'));
 
 for (const path of [[[0,0],[61,0]],[[0,0],[33,0],[33,30],[66,30]],[[0,0],[0,160]]]) {
  const count=path.at(-1)[1]===160?4:2;
