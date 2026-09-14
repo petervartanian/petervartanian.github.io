@@ -82,8 +82,11 @@ h1, h2, h3 { font-weight: 400; }
 .opening-display > * { flex-shrink: 0; }
 .opening-display > .headline-line { display: block; white-space: nowrap; }
 .opening-display > .headline-line:first-child { transform: scaleY(1.35); transform-origin: left top; }
-.headline-plus { position: relative; z-index: 1; align-self: center; font: 300 .55em/1 var(--sans); letter-spacing: 0; color: var(--quiet); transform: translate(var(--plus-x, 0px), var(--plus-y, 0px)) scale(1.4); }
+.headline-plus { position: relative; z-index: 1; align-self: center; display: block; width: .5em; height: .5em; background: var(--ink); color: var(--page); transform: translate(var(--plus-x, 0px), var(--plus-y, 0px)); }
+.headline-plus svg { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: butt; }
 .headline-risk { align-self: flex-end; font: italic 400 1.5em/.95 Auspex, Georgia, serif; letter-spacing: -.055em; color: var(--brand-accent); padding-right: .04em; transform: scaleY(1.25); transform-origin: right bottom; }
+/* Include the italic k's overhang in the painted gradient. */
+.risk-spectrum { padding-right: .18em; margin-right: -.18em; }
 @supports (background-clip: text) {
   .risk-spectrum, .opening-sources { background: var(--risk-spectrum); background-clip: text; -webkit-background-clip: text; color: transparent; }
 }
