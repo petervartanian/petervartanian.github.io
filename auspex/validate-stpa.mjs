@@ -207,7 +207,7 @@ const paths=[[[0,0],[30,0],[30,80],[60,80]],[[0,0],[200,0]],[[0,0],[0,200]],[[20
 for (const path of paths) for (const kind of ['contribution','continuation','optional','feedback','recovery']) for (const safeguard of [false,true]) {
   const geometry=presentation.connectionGeometry(kind,path,safeguard);
   assert(!/NaN|undefined|Infinity/.test(JSON.stringify(geometry)));
-  assert(!/[CQ]/.test(geometry.d),'No waves or decorative bends');
+  assert(!/[CQ]/.test(geometry.d),'Necessary bends use circular turns rather than waves');
   assert.deepEqual(endpoints(geometry.sections[0].d)[0],path[0]);
   assert.deepEqual(endpoints(geometry.sections.at(-1).d)[1],path.at(-1));
   if(geometry.barrier) {
@@ -227,6 +227,26 @@ for (const path of paths) for (const kind of ['contribution','continuation','opt
     }
   } else assert.equal(geometry.rails.length,0);
 }
+for (const kind of ['contribution','optional','feedback','recovery']) {
+  const straight=presentation.connectionGeometry(kind,[[0,0],[80,40],[160,80]],2);
+  assert(!/[ACQ]/.test(straight.d),'A clear, collinear connection stays straight');
+  const bent=presentation.connectionGeometry(kind,[[0,0],[45,0],[45,160],[90,160]],3);
+  assert(bent.d.includes(' A'),'Necessary elbows receive gentle curves');
+  assert.equal(bent.barriers.length,3);
+  if (kind==='recovery') for(let i=0;i<bent.rails.length;i+=2) {
+    const arcs=rail=>Array.from(rail.d.matchAll(/A([\d.]+),([\d.]+) 0 0 ([01]) ([\d.-]+),([\d.-]+)/g),m=>m.slice(1).map(Number));
+    const outer=arcs(bent.rails[i]),inner=arcs(bent.rails[i+1]);
+    assert.equal(outer.length,inner.length);
+    for(let j=0;j<outer.length;j++) assert(Math.abs(Math.abs(outer[j][0]-inner[j][0])-2.5)<.02,'Recovery rails keep their spacing through curved turns');
+  }
+}
+const obstacle={left:40,right:60,top:20,bottom:40};
+assert(presentation.clearSegment([0,0],[100,0],[obstacle]));
+assert(!presentation.clearSegment([0,30],[100,30],[obstacle]));
+assert(!presentation.clearSegment([100,30],[0,30],[obstacle]));
+assert(!presentation.clearSegment([50,0],[50,80],[obstacle]));
+assert(presentation.clearSegment([20,0],[20,80],[obstacle]));
+assert(!presentation.clearSegment([0,0],[100,60],[obstacle]));
 const css=await read('stpa.css');
 assert(css.includes('.stpa-connection.is-feedback { stroke-dasharray: .1 4.8'));
 assert(css.includes('.stpa-connection.is-optional { stroke-dasharray: 7 5'));

@@ -139,7 +139,7 @@
   function routeSymbol(kind) {
     const path=kind==='recovery'
       ? '<path class="route-rail" d="M2 10.75H25M2 13.25H25"/><path class="route-tip" d="M25 8l7 4-7 4z"/>'
-      : kind==='feedback'?'<path class="route-line" d="M29 17H5V4H26"/><path d="m21 1 4 3-4 3m5-6 4 3-4 3"/>'
+      : kind==='feedback'?'<path class="route-line" d="M29 17H8A3 3 0 0 1 5 14V7A3 3 0 0 1 8 4H26"/><path d="m21 1 4 3-4 3m5-6 4 3-4 3"/>'
       : kind==='safeguard'?'<path d="M2 12H15M19 12H32"/><path class="a1-barrier-stem" d="M17 7V17"/><path class="a1-barrier-caps" d="M15 7H19M15 17H19"/>'
       : '<path class="route-line" d="M2 10H30"/><path d="m25 6 5 4-5 4"/>';
     return `<svg class="a1-route-symbol is-${kind}" viewBox="0 0 34 24" aria-hidden="true" focusable="false">${path}</svg>`;
@@ -277,6 +277,46 @@
   }
   const pointText = p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`;
   const polyline = points => points.map((p,i)=>`${i?'L':'M'}${pointText(p)}`).join(' ');
+  function roundedCorners(points) {
+    return points.map((p,i)=>{
+      if (!i || i===points.length-1) return null;
+      const a=points[i-1],b=points[i+1],incoming=Math.hypot(p[0]-a[0],p[1]-a[1]),outgoing=Math.hypot(b[0]-p[0],b[1]-p[1]);
+      if (!incoming || !outgoing) return null;
+      const u=[(p[0]-a[0])/incoming,(p[1]-a[1])/incoming],v=[(b[0]-p[0])/outgoing,(b[1]-p[1])/outgoing];
+      const cross=u[0]*v[1]-u[1]*v[0];
+      if (Math.abs(cross)<1e-6) return null;
+      const tangent=Math.tan(Math.acos(Math.max(-1,Math.min(1,u[0]*v[0]+u[1]*v[1])))/2);
+      return {u,v,turn:Math.sign(cross),tangent,radius:Math.min(12,incoming*.45/tangent,outgoing*.45/tangent)};
+    });
+  }
+  function roundedPath(points, corners=roundedCorners(points), offset=0) {
+    if (!points.length) return '';
+    let d='M'+pointText(points[0]);
+    for (let i=1;i<points.length;i++) {
+      const p=points[i],corner=corners[i];
+      if (!corner) { d+=' L'+pointText(p); continue; }
+      // Offset recovery rails share a centre of curvature at each turn.
+      const radius=Math.max(.1,corner.radius-offset*corner.turn),trim=radius*corner.tangent;
+      const start=p.map((v,j)=>v-corner.u[j]*trim),end=p.map((v,j)=>v+corner.v[j]*trim);
+      d+=` L${pointText(start)} A${radius.toFixed(2)},${radius.toFixed(2)} 0 0 ${corner.turn>0?1:0} ${pointText(end)}`;
+    }
+    return d;
+  }
+  function clearSegment(a,b,boxes,margin=8) {
+    return boxes.every(box=>{
+      let low=0,high=1;
+      for (let axis=0;axis<2;axis++) {
+        const min=(axis?box.top:box.left)-margin,max=(axis?box.bottom:box.right)+margin,delta=b[axis]-a[axis];
+        if (Math.abs(delta)<1e-8) { if (a[axis]<min || a[axis]>max) return true; }
+        else {
+          const t1=(min-a[axis])/delta,t2=(max-a[axis])/delta;
+          low=Math.max(low,Math.min(t1,t2));high=Math.min(high,Math.max(t1,t2));
+          if (low>high) return true;
+        }
+      }
+      return false;
+    });
+  }
   function offsetPolyline(points, offset) {
     const normals=points.slice(1).map((b,i)=>{
       const a=points[i],length=Math.hypot(b[0]-a[0],b[1]-a[1]);
@@ -339,10 +379,11 @@
       head={tip,d:polyline([[base[0]-uy*halfWidth,base[1]+ux*halfWidth],tip,[base[0]+uy*halfWidth,base[1]-ux*halfWidth]])+' Z'};
       rails=sections.flatMap((section,index)=>{
         const trimmed=index===sections.length-1?section.slice(0,-1).concat([base]):section;
-        return [-1.25,1.25].map(offset=>({d:polyline(offsetPolyline(trimmed,offset)),section:index,offset}));
+        const corners=roundedCorners(trimmed);
+        return [-1.25,1.25].map(offset=>({d:roundedPath(offsetPolyline(trimmed,offset),corners,offset),section:index,offset}));
       });
     }
-    return {d:sections.map(polyline).join(' '),sections:sections.map(p=>({d:polyline(p)})),rails,barriers,barrier:barriers[0] || null,head,midpoint,tangent};
+    return {d:sections.map(p=>roundedPath(p)).join(' '),sections:sections.map(p=>({d:roundedPath(p)})),rails,barriers,barrier:barriers[0] || null,head,midpoint,tangent};
   }
   function draw() {
     const map=document.querySelector('#pathway-map'), svg=document.querySelector('#map-connections'), route=document.querySelector('#a1-route'), controls=document.querySelector('#stpa-barrier-controls');
@@ -361,6 +402,7 @@
       return {left:b.left-bounds.left,right:b.right-bounds.left,top:b.top-bounds.top,bottom:b.bottom-bounds.top,width:b.width,height:b.height};
     };
     const cells=Array.from(route.querySelectorAll('.a1-cell')).map(rect);
+    const headings=Array.from(route.querySelectorAll('.a1-region-heading')).map(rect);
     const minLeft=Math.min(...cells.map(c=>c.left));
     const all=[];
     for (const link of links) {
@@ -416,14 +458,15 @@
       } else {
         const forward=bc.left>ac.left, x1=forward?a.right+2:a.left-2,x2=forward?b.left-5:b.right+5;
         const between=cells.filter(c=>forward?c.left>ac.right+3 && c.right<bc.left-3:c.left>bc.right+3 && c.right<ac.left-3);
-        if (between.length) {
-          // Skip links travel above all cards; they never cut through a middle column.
+        const betweenHeadings=headings.filter(h=>forward?h.left>ac.right && h.right<bc.left:h.left>bc.right && h.right<ac.left);
+        if (between.length && !clearSegment([x1,y1],[x2,y2],[...between,...betweenHeadings])) {
+          // Obstructed spans pass above the cards with rounded turns.
           const top=routeBox.top-bounds.top+7;
           const startInset=kind==='feedback'?10:20;
           const startLane=forward?ac.right+startInset:ac.left-startInset,endLane=forward?bc.left-20:bc.right+20;
           points=[[x1,y1],[startLane,y1],[startLane,top],[endLane,top],[endLane,y2],[x2,y2]];
         } else {
-          // The open strip between adjacent columns needs no bend.
+          // A clear span needs no bend, including across an empty middle column.
           points=[[x1,y1],[x2,y2]];
         }
       }
@@ -446,5 +489,5 @@
       if (focusedRoute) Array.from(controls.querySelectorAll('[data-safeguard]')).find(button=>button.dataset.safeguard===focusedRoute && button.dataset.constraint===focusedConstraint)?.focus({preventScroll:true});
     }
   }
-  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,sourceNumber,notedTitle,mapGuide,pathsGuide,routeDefinitions,overlayAnchor,tentativeConnection,overlayGuide,contextCloud,connectionGeometry,routeSymbol,proposedBarriers,proposedBarrier,proposedBarrierView,incidentBarrierReading,barrierCardHeading,barrierButton};
+  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,sourceNumber,notedTitle,mapGuide,pathsGuide,routeDefinitions,overlayAnchor,tentativeConnection,overlayGuide,contextCloud,connectionGeometry,clearSegment,routeSymbol,proposedBarriers,proposedBarrier,proposedBarrierView,incidentBarrierReading,barrierCardHeading,barrierButton};
 })();
