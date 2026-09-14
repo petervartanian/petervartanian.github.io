@@ -486,7 +486,7 @@
 .a1-strengthen:not(.is-return):hover svg { transform: rotate(-9deg); }
 .a1-strengthen:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .a1-strengthen.is-return { margin: 0 0 9px; font-size: 11px; color: var(--muted); }
-.a1-change-sheet { position: relative; padding: 16px 18px; border-left: 2px solid color-mix(in srgb,var(--accent) 48%,var(--line)); background: linear-gradient(115deg,color-mix(in srgb,var(--tint) 70%,var(--page)),color-mix(in srgb,var(--tint) 18%,var(--page))); }
+.a1-change-sheet { --change-pad-x: 18px; --change-pad-y: 16px; position: relative; padding: var(--change-pad-y) var(--change-pad-x); border-left: 2px solid color-mix(in srgb,var(--accent) 48%,var(--line)); background: linear-gradient(115deg,color-mix(in srgb,var(--tint) 70%,var(--page)),color-mix(in srgb,var(--tint) 18%,var(--page))); }
 .a1-change-sheet::after { content: ''; position: absolute; top: 0; right: 0; width: 12px; height: 12px; background: linear-gradient(45deg,color-mix(in srgb,var(--accent) 14%,var(--page)) 48%,var(--page) 51%); }
 .a1-change-sheet .a1-change-label { margin: 0 0 5px; color: var(--muted); font: 10px/1.5 var(--sans); }
 .a1-change-topline { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: -7px 0 3px; }
@@ -503,10 +503,12 @@
 @media (prefers-reduced-motion: reduce) { #barrier-panel [data-strengthening='true'] .a1-build-body, #barrier-panel [data-strengthening='true'] .a1-build-caps { animation: none; } }
 .a1-change-sheet h5 { margin: 0 0 8px; font: italic 19px/1.4 var(--serif); color: var(--accent); text-wrap: pretty; }
 .a1-change-sheet .a1-change-proposal { margin: 0; font: 13px/1.7 var(--sans); }
-.a1-change-check { margin-top: 14px; padding-top: 3px; border-top: 1px solid color-mix(in srgb,var(--accent) 16%,transparent); }
-.a1-change-check p { margin: 9px 0 0; font: 11px/1.7 var(--sans); }
-.a1-change-check strong { font-weight: 500; }
-.a1-change-sheet .a1-change-owners { margin: 14px 0 0; font: 10px/1.6 var(--sans); color: var(--muted); }
+.a1-change-check { margin: 14px calc(-1 * var(--change-pad-x)) 0; padding: 0; border-top: 1px solid color-mix(in srgb,var(--ink) 12%,transparent); background: color-mix(in srgb,var(--ink) 8%,var(--page)); color: #4b545e; }
+.a1-change-check p { max-width: none; margin: 0; padding: 8px var(--change-pad-x); font: 10.5px/1.65 var(--sans); }
+.a1-change-check p + p { border-top: 1px solid color-mix(in srgb,var(--ink) 9%,transparent); }
+.a1-change-check:last-child { margin-bottom: calc(-1 * var(--change-pad-y)); }
+.a1-change-check strong { font-weight: 500; color: var(--ink); }
+.a1-change-sheet .a1-change-owners { max-width: none; margin: 0 calc(-1 * var(--change-pad-x)) calc(-1 * var(--change-pad-y)); padding: 9px var(--change-pad-x); border-top: 1px solid color-mix(in srgb,var(--ink) 14%,transparent); background: color-mix(in srgb,var(--ink) 17%,var(--page)); font: 10px/1.6 var(--sans); color: var(--ink); }
 .a1-change-owners strong { display: block; font-weight: 500; }
 .a1-change-owners span { display: block; }
 .a1-barrier-evidence { margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--line); }
@@ -517,7 +519,7 @@
 .stpa-controls .a1-change-sheet { margin-top: 16px; }
 .a1-static-case-assessment .a1-change-sheet { margin-top: 14px; }
 @keyframes a1-unfold-change { from { opacity: .5; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-@media (max-width: 500px) { .a1-change-sheet { padding: 13px; } .a1-change-sheet h5 { font-size: 18px; } }
+@media (max-width: 500px) { .a1-change-sheet { --change-pad-x: 13px; --change-pad-y: 13px; } .a1-change-sheet h5 { font-size: 18px; } }
 @media (prefers-reduced-motion: reduce) { #barrier-panel [data-strengthening='true'] .a1-change-sheet { animation: none; } .a1-strengthen svg { transition: none; } }
 .a1-barrier-card > .a1-footnote { margin: 12px -14px -14px; padding: 6px 8px; border-top: 1px solid var(--line); font-size: 9.5px; line-height: 1.55; color: #56616b; background: color-mix(in srgb,var(--ink) 6%,var(--page)); }
 .a1-observed-control.a1-barrier-card { padding: 8px 10px; }
