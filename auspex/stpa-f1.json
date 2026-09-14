@@ -1009,8 +1009,8 @@
           "counter-speech": {
             "title": "Counter-speech",
             "result": "The response reportedly increased visibility.",
-            "condition": "failed",
-            "conditionBasis": "The intervention did not reduce exposure in the activists’ account; the failure concerns ranking interaction.",
+            "condition": "backfiring",
+            "conditionBasis": "Activists reported that ranking treated the counter-speech as engagement and increased the harmful posts’ visibility.",
             "limitType": "safeguard",
             "strongerAI": "More capable targeting or synthetic engagement could exploit the same objective; better classifiers could help only if exposure actually falls.",
             "reinforcement": {
@@ -1030,7 +1030,11 @@
               "proposal": "Independently audit local exposure and response outcomes.",
               "test": "Measure time to effective restriction and remaining exposure across adversarial local cases.",
               "status": "proposed"
-            }
+            },
+            "states": [
+              "reinforced",
+              "unknown"
+            ]
           }
         }
       },

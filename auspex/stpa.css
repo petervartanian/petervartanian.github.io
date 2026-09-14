@@ -198,10 +198,6 @@
 .stpa-barrier-glyph.is-failed { color: #a4534a; }
 .stpa-barrier-glyph .stpa-glyph-fragment { stroke-width: 1.5; }
 .stpa-barrier-glyph .stpa-glyph-unknown { stroke-dasharray: 1.5 4; }
-.stpa-condition-legend { display: flex; flex-wrap: wrap; gap: 4px 19px; margin: 20px 0 0; padding: 14px 0 0; border-top: 1px solid var(--line); max-width: 850px; }
-.stpa-condition-legend > span { display: inline-flex; align-items: center; gap: 5px; font: 10px/1.4 var(--sans); color: var(--muted); }
-.stpa-condition-legend .stpa-barrier-glyph { width: 25px; height: 28px; flex-basis: 25px; }
-.stpa-condition-legend > p { flex-basis: 100%; margin: 5px 0 0; font: 10px/1.6 var(--sans); color: var(--muted); }
 .a1-inspector-heading { display: flex; justify-content: space-between; gap: 20px; align-items: center; }
 .a1-inspector-heading h3 { font: 20px/1.4 var(--sans); margin: 0; }
 .a1-close-inspector { background: transparent; color: var(--accent); padding: 7px 12px; font-size: 12px; min-height: 40px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 30%, transparent); }
@@ -234,7 +230,6 @@
   .a1-inspector-heading { align-items: start; }
   .a1-inspector-heading h3 { font-size: 18px; }
   .a1-map-key { gap: 8px 16px; }
-  .stpa-condition-legend { gap: 5px 13px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .a1-step, .a1-observed-control button { transition: none; }
@@ -253,3 +248,86 @@
 .reinforcement { max-width: 760px; margin: 18px 0 0; padding: 14px 16px; border: 1px solid var(--line); background: color-mix(in srgb,var(--surface) 40%,var(--page)); }
 .reinforcement > summary { font: 500 12px/1.5 var(--sans); min-height: 24px; }
 .reinforcement p { font: 12px/1.7 var(--sans); color: var(--muted); margin: 12px 0 0; }
+
+/* Unworked entries deliberately retain only their title and chooser. */
+#app[data-blank='true'] .model-toolbar,
+#app[data-blank='true'] .causal-argument,
+#app[data-blank='true'] #workspace,
+#app[data-blank='true'] .research-details,
+#app[data-blank='true'] #pathway-endpoint { display: none !important; }
+#app[data-blank='true'] #selected-pathway { min-height: 45vh; }
+.a1-overlay-barriers { border-top: 0; padding-top: 0; margin-top: 0; }
+.a1-case-evidence { margin: 12px 0 0; border: 0; border-top: 1px solid color-mix(in srgb,var(--accent) 15%,transparent); }
+.a1-case-evidence > summary { min-height: 34px; font: 11px/1.5 var(--sans); padding: 7px 0; }
+.a1-case-evidence p { font: 11px/1.6 var(--sans); color: var(--muted); margin: 8px 0; }
+.a1-state-buttons { display: flex; flex-wrap: wrap; gap: 5px 12px; margin-bottom: 6px; }
+.a1-state-buttons button { min-height: 30px; text-align: left; font: 500 12px/1.5 var(--sans); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: color-mix(in srgb,currentColor 40%,transparent); }
+.a1-state-buttons button:hover { text-decoration-color: currentColor; }
+.a1-recovery-link { margin: 8px 0; font: 12px/1.5 var(--sans); color: var(--accent); text-decoration: underline; text-underline-offset: 4px; min-height: 36px; }
+.stpa-state-explorer { display: flex; flex-direction: column; gap: 16px; }
+.stpa-state-explorer > p { order: 0; margin: 0; font: 13px/1.7 var(--sans); color: var(--muted); }
+.stpa-state-definition { order: 1; display: flex; align-items: start; gap: 18px; padding: 20px; border: 1px solid var(--line); background: color-mix(in srgb,var(--tint) 48%,var(--page)); }
+.stpa-state-definition > svg { width: 48px; height: 48px; flex-shrink: 0; margin-top: 5px; }
+.stpa-state-definition h3 { margin: 0 0 8px; font: 24px/1.35 var(--sans); }
+.stpa-state-definition p { margin: 8px 0; font: 13px/1.65 var(--sans); }
+.stpa-state-definition a { font: 11px/1.5 var(--sans); }
+.stpa-state-question { color: var(--muted); }
+.stpa-state-menu { order: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 25px; }
+.stpa-state-menu button { display: inline-flex; align-items: center; gap: 3px; min-height: 40px; padding: 4px 8px 4px 4px; font: 11px/1.5 var(--sans); border: 1px solid transparent; }
+.stpa-state-menu button svg { width: 25px; height: 25px; }
+.stpa-state-menu button:hover, .stpa-state-menu button[aria-pressed='true'] { border-color: color-mix(in srgb,var(--accent) 50%,var(--line)); background: var(--tint); }
+.stpa-state-explorer > details { order: 3; margin-top: 5px; }
+.stpa-state-explorer > details p { font: 12px/1.6 var(--sans); }
+.stpa-active #map-connections > path.is-feedback { stroke-dasharray: 8 3; }
+.a1-map-key i.is-feedback { border-top-style: dashed; }
+.stpa-change-flow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 20px; margin: 18px 0; background: var(--tint); font: 14px/1.6 var(--sans); }
+.stpa-change-flow > span:last-child { flex: 1; min-width: 160px; }
+.stpa-recovery-guide p { font: 14px/1.7 var(--sans); }
+@media (max-width: 600px) {
+  .stpa-state-menu { grid-template-columns: 1fr; gap: 15px; }
+  .stpa-state-definition { padding: 14px; gap: 10px; }
+  .stpa-state-definition > svg { width: 35px; height: 35px; }
+  .stpa-state-menu button { min-height: 44px; }
+}
+
+/* Short, linked scope notes accompany the claim they qualify. */
+.a1-note-reference { padding: 5px; font: 12px/1 var(--sans); text-decoration: none; color: var(--accent); }
+.a1-overlay-title sup { margin-left: 2px; }
+.a1-footnote { max-width: 95ch; margin: 12px 0; font: 11px/1.65 var(--sans); color: var(--muted); scroll-margin-top: 24px; }
+.a1-footnote > a { padding: 5px 4px 5px 0; color: var(--accent); text-decoration: none; }
+.a1-state-buttons { align-items: center; margin: 0; }
+.a1-state-buttons sup { align-self: start; }
+.stpa-state-menu { order: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.stpa-state-menu button { min-height: 44px; padding: 6px 12px 6px 7px; gap: 7px; border: 1px solid var(--line); border-radius: 3px; }
+.stpa-state-menu button svg { width: 30px; height: 30px; }
+.stpa-state-definition { order: 1; }
+.stpa-state-definition .stpa-state-example { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.stpa-barrier-glyph.is-absent { color: #78727e; }
+.stpa-barrier-glyph.is-absent path:not(.stpa-glyph-flow) { stroke-dasharray: 2 3; }
+.stpa-barrier-glyph.is-backfiring { color: #9b514e; }
+.stpa-barrier-glyph.is-backfiring .stpa-glyph-flow { opacity: 1; stroke-width: 1.6; }
+.a1-barrier-condition[data-condition='backfiring'] { border-left-color: #9b514e; }
+.a1-barrier-condition[data-condition='absent'] { border-left-color: #78727e; }
+#app[data-blank='true'] .incident-section { display: none; }
+
+/* A compact view of the selected protective function, with its actual result. */
+.a1-barrier-study { margin: 22px 0 24px; max-width: 760px; }
+.a1-study-flow { display: grid; grid-template-columns: minmax(0,1fr) 35px minmax(0,1.15fr) 35px minmax(0,1fr); align-items: center; gap: 9px; }
+.a1-study-flow > span { font: 12px/1.55 var(--sans); text-align: center; overflow-wrap: anywhere; }
+.a1-study-flow > i { height: 1px; position: relative; background: var(--muted); opacity: .65; }
+.a1-study-flow > i::after { content: ''; position: absolute; right: 0; top: -3px; width: 6px; height: 6px; border-top: 1px solid var(--muted); border-right: 1px solid var(--muted); transform: rotate(45deg); }
+.a1-study-control { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 9px; border: 1px solid var(--line); border-radius: 3px; background: var(--tint); }
+.a1-study-control > svg { width: 35px; height: 35px; flex-shrink: 0; }
+.a1-study-control > strong { font-weight: 500; }
+.a1-study-dependency { position: relative; width: fit-content; max-width: 75%; margin: 28px auto 0; padding: 8px 14px; border: 1px dashed var(--muted); font: 12px/1.55 var(--sans); text-align: center; }
+.a1-study-dependency::before { content: ''; position: absolute; left: 50%; bottom: 100%; height: 28px; border-left: 1px dashed var(--muted); }
+.a1-study-dependency > span { display: block; font-size: 10px; color: var(--muted); }
+.a1-barrier-study.is-candidate .a1-study-control { border-style: dashed; }
+.a1-barrier-study[data-condition='backfiring'] .a1-study-result { color: #914744; font-weight: 500; }
+.a1-barrier-study[data-condition='backfiring'] .a1-study-control + i { height: 2px; background: #914744; opacity: 1; }
+@media (max-width: 600px) {
+  .a1-study-flow { grid-template-columns: minmax(0,1fr) 15px minmax(0,1.2fr) 15px minmax(0,1fr); gap: 5px; }
+  .a1-study-flow > span { font-size: 11px; }
+  .a1-study-control { flex-direction: column; gap: 5px; padding: 9px 5px; }
+  .a1-study-control > svg { width: 30px; height: 30px; }
+}

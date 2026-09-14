@@ -4,28 +4,34 @@ Choose a pathway → Trace the incidents → Inspect the barrier.
 
 Serve the repository root and open `/auspex/`. The interface also works directly from
 `index.html`, using local assets and a bundled data file. No runtime dependencies.
-`pathways.html` provides a complete static reader without JavaScript.
+`pathways.html` provides a static reader of the worked examples without JavaScript.
 
-## Six STPA worked examples
+## Seven STPA worked examples
 
-A.1, B.1, C.1, D.1, E.1 and F.1 use the STPA models in `stpa-[a-f]1.json`.
-Their workflow is I: choose a pathway, II: overlay a case at its assessed component,
-III: inspect a barrier. Each model includes losses, hazards, control and feedback
-relationships, constraints, contextual unsafe actions, causal scenarios and recovery.
-The bow-tie map is a summary of this provisional analysis, not a validated forecast.
+A.1, B.1, C.1, D.1, E.1, F.1 and Bonus.1 use the models in `stpa-[a-fh]1.json`.
+I selects a pathway; II overlays a case at its assessed component; III inspects a barrier.
+Every model contains losses, hazards, control and feedback relationships, constraints,
+contextual unsafe control actions, causal scenarios and a conditional recovery route.
+The bow-tie map summarizes the provisional analysis.
 
-Overlays distinguish experiments, reports, announcements and historical comparisons.
-An edge's evidence address remains unchanged when its card is placed at a nearby node.
-Barrier condition (reinforced, holding, crumbling, broken or unassessed) describes the
-cited evidence; the **Brittleness** tab separately examines dependence on capabilities
-and operating conditions. These visual labels are editorial, not an STPA rating scale.
-Later corrective changes are dated; proposed reinforcements are explicitly untested.
-Where no barrier was evaluated, the interface says so instead of implying protection.
+The other 30 entries show their titles and no case content, in both the application and
+static reader. Their underlying catalogue records are retained for future work.
 
-Models may supply complete assessment overrides and additional evidence records.
-`app.js` merges those by ID without changing the underlying catalogue bundle.
-The static reader uses the same effective records and namespaces internal model links.
-Rebuild and check these examples after editing a model or the renderer:
+`barrier-states.json` defines seven symbols: Reinforced, Holding, Crumbling, Broken,
+Absent, Backfiring and Unassessed. Only applicable states appear on a selected barrier.
+Their buttons open definitions and source examples. Brittleness asks which changes in
+capability or conditions would defeat the protection; observed and projected erosion
+must remain distinguishable. Recovery is a separate route, whose controls can themselves
+hold, fail or be reinforced. These are editorial labels, not an STPA rating scale.
+
+Maven and Replicator expose proposed safeguards with unassessed performance and test
+questions. Their announcements remain contextual evidence. Later corrective changes are
+dated; new reinforcement proposals are identified as proposals. Scope notes use paired
+asterisks and smaller text. The Myanmar counter-speech intervention is Backfiring in
+the attributed account. Bonus.1 separates the FTC allegations from the mathematical
+predictive-policing comparison and includes the latter’s feedback loop and correction.
+
+Models may override assessments and add evidence by stable ID. Build and validate:
 
 ```sh
 node build-stpa.mjs
@@ -33,7 +39,7 @@ node validate-stpa.mjs
 node validate.mjs
 ```
 
-The remaining 31 pathways and comparisons retain the catalogue workflow described below.
+The catalogue below describes retained source data, including unworked entries.
 
 ## Content
 

@@ -13,19 +13,20 @@
   const refs = ids => list(ids).map(tag).join(' ');
   const control = id => byId(model.constraints,id);
   const controller = id => byId(model.controllers,id) || {title: id};
-  const conditionNames = {reinforced:'Reinforced', intact:'Holding', degrading:'Crumbling', failed:'Broken', unknown:'Unassessed'};
+  const stateModel = window.AuspexBarrierStateData;
+  const stateDefinitions = stateModel.states;
+  const conditionNames = Object.fromEntries(stateDefinitions.map(s => [s.id,s.label]));
   const conditionLabel = condition => conditionNames[condition] || conditionNames.unknown;
   const conditionKey = condition => Object.hasOwn(conditionNames, condition) ? condition : 'unknown';
-  const glyphPaths = {
-    reinforced: '<path d="M12 5v22M19 5v22M10 5h11M10 27h11"/>',
-    intact: '<path d="M16 5v22M12 5h8M12 27h8"/>',
-    degrading: '<path d="M16 5v7l-3 3 5 3-2 3v6M12 5h8M12 27h8"/><path class="stpa-glyph-fragment" d="m22 13 2 2m-14 7-2 2"/>',
-    failed: '<path d="M14 5v7l-3 3M21 20l-3 3v5M10 5h8M14 28h8"/>',
-    unknown: '<path class="stpa-glyph-unknown" d="M16 4v3m0 18v3"/><path d="M12 12c0-5 8-5 8 0 0 3-4 3-4 6m0 3h0"/>'
-  };
+  const glyphPaths = Object.fromEntries(stateDefinitions.map(s => [s.id,`<path d="${s.path}"/>`]));
+  const barrierStates = b => list(b.states).length ? b.states : [conditionKey(b.condition)];
   function barrierGlyph(condition) {
     const key=conditionKey(condition);
-    return `<svg class="stpa-barrier-glyph is-${key}" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="stpa-glyph-flow" d="M2 16h8m13 0h7m-3-3 3 3-3 3"/>${glyphPaths[key]}</svg>`;
+    const flow = ['intact','reinforced','degrading'].includes(key)
+      ? 'M2 16h8m-3-3 3 3-3 3'
+      : key==='backfiring' ? 'M2 16h8M23 16h7M24 12l4 4-4 4M28 12l3 4-3 4'
+      : key==='unknown' ? 'M2 16h5m18 0h5' : 'M2 16h28m-3-3 3 3-3 3';
+    return `<svg class="stpa-barrier-glyph is-${key}" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path class="stpa-glyph-flow" d="${flow}"/>${glyphPaths[key]}</svg>`;
   }
   const overlayNames = () => Object.fromEntries(Object.entries(model.presentation?.overlays || {}).map(([id,o])=>[id,o.title]));
   const projectedLinks = () => list(model.links);
@@ -40,29 +41,48 @@
     const edge=projectedLinks().find(l=>l.id===config.target);
     return edge?.from || list(a.targets).find(t=>node(t.id))?.id || null;
   }
-  function assessedBarriers(a,config) {
-    const data=Array.isArray(config.barriers) ? Object.fromEntries(config.barriers.map(b=>[b.id,b])) : (config.barriers || {});
-    const items=list(a.barriers).map(b=>({...b,...data[b.id]}));
-    for (const [id,b] of Object.entries(data)) if (!items.some(x=>x.id===id)) items.push({id,...b});
+  function barriers(a) {
+    const config=overlayConfig(a);
+    if (!config) return [];
+    const items=list(a.barriers).map(b=>({...b,...config.barriers?.[b.id]}));
+    for (const id of list(config.candidates)) {
+      const c=control(id);
+      if (!c) continue;
+      items.push({id:`candidate-${id}`, title:c.title, target:config.target, candidate:true, constraint:id,
+        condition:'unknown', states:['unknown'], conditionBasis:'Proposed safeguard; the announcement does not establish its implementation or effectiveness.',
+        result:id==='SC1'?'Would an unlawful order be blocked?':'Would adverse findings change the decision?', outcome:'Proposed safeguard',
+        action:c.text, efficacy:`${config.observed} ${config.notEstablished}`, evidence:list(a.evidence),
+        durability:c.limit, failure:c.limit, strongerAI:c.limit, limitType:'safeguard',
+        view:{input:id==='SC1'?'Disputed orders':'Adverse findings',control:c.title,result:'Protection unassessed',dependency:id==='SC1'?'Independent authorization':'Uncensored oversight'},
+        reinforcement:{proposal:c.text,test:c.test,status:'proposed'}});
+    }
     return items;
+  }
+  function barrierView(b, question) {
+    const v=b.view;
+    if (!v || ![0,2].includes(question)) return '';
+    const result=b.id==='training-assurance'?'Compliance without preference change':v.result;
+    return `<figure class="a1-barrier-study${b.candidate?' is-candidate':''}" data-condition="${esc(b.condition)}" aria-label="${esc(v.input)}; ${esc(v.control)}; ${esc(result)}"><div class="a1-study-flow"><span>${esc(v.input)}</span><i aria-hidden="true"></i><span class="a1-study-control">${barrierGlyph(b.condition)}<strong>${esc(v.control)}</strong></span><i aria-hidden="true"></i><span class="a1-study-result">${esc(result)}</span></div>${question===2 && v.dependency?`<figcaption class="a1-study-dependency"><span>Depends on</span>${esc(v.dependency)}</figcaption>`:''}</figure>`;
   }
   function overlay(a, inspectedBarrier) {
     const config=overlayConfig(a);
     if (!config) return '';
-    const anchor=node(overlayAnchor(a)), barriers=assessedBarriers(a,config);
+    const anchor=node(overlayAnchor(a)), items=barriers(a);
     const kind=config.kind || 'Source evidence';
-    const relation={mechanism:'mechanism evidence',context:'context only',observed:'observed component'}[config.relation] || 'evidence overlay';
     return `<section class="a1-overlay" id="a1-overlay" data-overlay-incident="${esc(a.incident)}" data-overlay-target="${esc(config.target)}" data-overlay-anchor="${esc(anchor?.id)}" aria-label="${esc(config.title)}: evidence relevant to ${esc(anchor?.title)}">
-      <p class="a1-overlay-kicker">${esc(kind)} · ${esc(relation)}</p>
-      <h4 class="a1-overlay-title">${esc(config.title)}</h4>
-      ${config.observed?`<p class="a1-overlay-observed"><span>Observed</span>${esc(config.observed)}</p>`:''}
-      ${config.notEstablished?`<p class="a1-overlay-unestablished"><span>Not established</span>${esc(config.notEstablished)}</p>`:''}
-      ${barriers.length?`<div class="a1-overlay-barriers">${barriers.map(b=>`<div class="a1-observed-control"><button data-overlay-barrier="${esc(b.id)}" aria-label="Inspect ${esc(b.title)}: ${esc(conditionLabel(b.condition))}" aria-pressed="${inspectedBarrier===b.id}" aria-controls="workspace">${barrierGlyph(b.condition)}<span><strong>${esc(b.title)}</strong><small class="a1-barrier-condition">${esc(conditionLabel(b.condition))}</small></span><span class="a1-inspect-arrow" aria-hidden="true">↗</span></button><p>${esc(b.result || b.conditionBasis || '')}</p></div>`).join('')}</div>`:'<p class="a1-no-barrier">Barrier performance not established.</p>'}
-      ${config.limit && config.limit.trim() !== `${config.observed} ${config.notEstablished}`.trim()?`<p class="a1-overlay-limit">${esc(config.limit)}</p>`:''}
+      <p class="a1-overlay-kicker">${esc(kind)}</p>
+      <h4 class="a1-overlay-title">${esc(config.title)}<sup><a class="a1-note-reference" id="a1-case-reference" href="#a1-case-footnote" aria-label="Scope of this case">*</a></sup></h4>
+      ${items.length?`<div class="a1-overlay-barriers">${items.map(b=>`<div class="a1-observed-control"><button data-overlay-barrier="${esc(b.id)}" aria-label="Inspect ${esc(b.title)}: ${esc(barrierStates(b).map(conditionLabel).join(', '))}" aria-pressed="${inspectedBarrier===b.id}" aria-controls="workspace">${barrierGlyph(b.condition)}<span><strong>${esc(b.title)}</strong><small class="a1-barrier-condition">${esc(barrierStates(b).map(conditionLabel).join(' · '))}</small></span><span class="a1-inspect-arrow" aria-hidden="true">↗</span></button><p>${esc(b.result || b.conditionBasis || '')}</p></div>`).join('')}</div>`:''}
+      <details class="a1-case-evidence"><summary>Case evidence</summary><p>${esc(config.observed)}</p><p>${esc(config.notEstablished)}</p></details>
     </section>`;
   }
-  function barrierLegend() {
-    return `<div class="stpa-condition-legend" aria-label="Barrier conditions">${Object.keys(conditionNames).map(condition=>`<span>${barrierGlyph(condition)}${esc(conditionLabel(condition))}</span>`).join('')}<p>Condition describes the cited evidence. Brittleness asks how that protection changes with stronger AI or different conditions.</p></div>`;
+  function stateGuide(selected = 'unknown') {
+    const current=byId(stateDefinitions,selected) || byId(stateDefinitions,'unknown');
+    const exampleSource=byId(stateModel.sources,current.exampleSource);
+    return `<div class="stpa-state-explorer"><div class="stpa-state-menu" role="group" aria-label="Explore barrier states">${stateDefinitions.map(s=>`<button data-explore-state="${s.id}" aria-pressed="${s.id===current.id}" aria-controls="state-definition">${barrierGlyph(s.id)}<span>${esc(s.label)}</span></button>`).join('')}</div><section id="state-definition" class="stpa-state-definition" aria-live="polite">${barrierGlyph(current.id)}<div><h3>${esc(current.label)}</h3><p>${esc(current.definition)}</p><p class="stpa-state-question">${esc(current.question)}</p><p class="stpa-state-example">${esc(current.example)} <a href="${esc(exampleSource.url)}" target="_blank" rel="noopener noreferrer">Source ↗</a></p></div></section><details><summary>Brittleness & recovery</summary><p>A barrier can hold in one incident and still be brittle. Ask which change in capability, access, timing or operating conditions would defeat it.</p><p>Recovery stops escalation, limits harm or restores control after the loss-of-control event. Reinforcement strengthens a barrier.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">Recovery controls ↗</a></p></details></div>`;
+  }
+  function recoveryGuide() {
+    return `<div class="stpa-recovery-guide"><div class="stpa-change-flow"><span>Hazardous situation</span><span aria-hidden="true">→</span><strong>Recovery</strong><span aria-hidden="true">→</span><span>Escalation stopped, harm limited or control restored</span></div><p>Recovery acts on the affected system after the loss-of-control event. It can prevent a consequence, reduce its severity or restore effective control.</p><div class="stpa-change-flow"><span>Existing protection</span><span aria-hidden="true">→</span><strong>Reinforcement</strong><span aria-hidden="true">→</span><span>Strengthened barrier</span></div><p>Reinforcement changes a barrier relative to a baseline. A recovery barrier can be reinforced too. Repair restores a defective barrier’s intended function; reinforcement improves the protection.</p><p>The green route on this map shows the model’s stated recovery outcome. It remains conditional on an effective intervention.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">UK CAA · Recovery controls ↗</a></p></div>`;
   }
   function renderMap(selected, a, inspectedBarrier) {
     const groups={before:[],centre:[],after:[],recovery:[]};
@@ -83,9 +103,9 @@
     };
     const headings={before:'Contributing conditions',centre:'Loss of control',after:'Conditional consequences',recovery:'Recovery route'};
     return `<div id="a1-route" class="a1-route${config?' has-overlay':''}" data-model-pathway="${esc(model.pathway)}" aria-label="Hypothetical pathway: contributing conditions, loss of control, conditional consequences and recovery">${['before','centre','after','recovery'].map(wing=>groups[wing].length?`<section class="a1-region a1-region-${wing}" data-wing="${wing}" aria-label="${headings[wing]}"><h3 class="a1-region-heading">${headings[wing]}</h3>${groups[wing].map(cell).join('')}</section>`:'').join('')}</div>
-    <p class="a1-node-note" id="a1-node-note" tabindex="-1">${config && selected===anchor?'Evidence is attached to this component; it does not establish the rest of the pathway.':esc(node(selected)?.text || model.summary)}</p>
-    <div class="a1-map-key"><span><i aria-hidden="true"></i>Possible contribution</span>${projectedLinks().some(l=>(l.kind || l.type)==='optional')?'<span><i class="is-optional" aria-hidden="true"></i>Optional route</span>':''}<span><i class="is-recovery" aria-hidden="true"></i>Recovery</span><span><i class="is-proposed" aria-hidden="true"></i>Proposed safeguard · untested</span></div>
-    ${config?barrierLegend():''}`;
+    <p class="a1-node-note" id="a1-node-note" tabindex="-1"${config && selected===anchor?' hidden':''}>${esc(node(selected)?.text || model.summary)}</p>${config?`<p class="a1-footnote" id="a1-case-footnote" tabindex="-1"><a href="#a1-case-reference" aria-label="Return to case title">*</a> ${esc(config.limit)}</p>`:''}${node(selected)?.type==='recovery'?'<button class="a1-recovery-link" data-recovery-info>Recovery & reinforcement ↗</button>':''}
+    <div class="a1-map-key"><span><i aria-hidden="true"></i>Possible contribution</span>${projectedLinks().some(l=>(l.kind || l.type)==='optional')?'<span><i class="is-optional" aria-hidden="true"></i>Optional route</span>':''}<span><i class="is-recovery" aria-hidden="true"></i>Recovery</span>${projectedLinks().some(l=>l.kind==='feedback')?'<span><i class="is-feedback" aria-hidden="true"></i>Feedback</span>':''}<span><i class="is-proposed" aria-hidden="true"></i>Proposed safeguard · untested</span></div>
+    `;
   }
   function targetButton(id) { return Array.from(document.querySelectorAll('#a1-route [data-node]')).find(el=>el.dataset.node===id); }
   function analysis() {
@@ -212,10 +232,10 @@
       const x=(segment.a[0]+segment.b[0])/2,y=(segment.a[1]+segment.b[1])/2,vertical=Math.abs(segment.a[0]-segment.b[0])<1;
       const crossbar=safeguard && segment.length>27?`<path class="a1-possible-barrier" d="${vertical?`M${x-7},${y}h14`:`M${x},${y-7}v14`}"><title>Proposed safeguard, not demonstrated by this pathway: ${esc(safeguard)}</title></path>`:'';
       const marker=kind==='recovery'?'stpa-arrow-recovery':'stpa-arrow';
-      return `<path class="stpa-connection${kind==='optional'?' is-optional':''}${kind==='recovery'?' is-recovery':''}" data-link="${esc(link.id || link.from+'→'+link.to)}" data-from="${esc(link.from)}" data-to="${esc(link.to)}" d="${d}" marker-end="url(#${marker})"><title>${esc(link.label || 'Possible contribution')}</title></path>${crossbar}`;
+      return `<path class="stpa-connection${kind==='optional'?' is-optional':''}${kind==='feedback'?' is-feedback':''}${kind==='recovery'?' is-recovery':''}" data-link="${esc(link.id || link.from+'→'+link.to)}" data-from="${esc(link.from)}" data-to="${esc(link.to)}" d="${d}" marker-end="url(#${marker})"><title>${esc(link.label || 'Possible contribution')}</title></path>${crossbar}`;
     }).join('');
     const marker=(id,color)=>`<marker id="${id}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1.5 1.5 6.5 4 1.5 6.5" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker>`;
     svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${marker('stpa-arrow-recovery','#6d8976')}</defs>${paths}`;
   }
-  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel};
+  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide};
 })();

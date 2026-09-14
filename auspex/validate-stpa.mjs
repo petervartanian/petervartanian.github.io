@@ -4,7 +4,7 @@ import vm from 'node:vm';
 
 const read = name => readFile(new URL(name, import.meta.url), 'utf8');
 const parse = async name => JSON.parse(await read(name));
-const models = await Promise.all(['a','b','c','d','e','f'].map(letter => parse(`stpa-${letter}1.json`)));
+const models = await Promise.all(['a','b','c','d','e','f','h'].map(letter => parse(`stpa-${letter}1.json`)));
 const [assessments,evidence,staticHTML] = await Promise.all([parse('assessments.json'),parse('evidence.json'),read('pathways.html')]);
 const sourceIds = new Set([...evidence.sources,...models.flatMap(m=>m.additionalEvidence?.sources||[])].map(s=>s.id));
 const passageIds = new Set([...evidence.passages,...models.flatMap(m=>m.additionalEvidence?.passages||[])].map(p=>p.id));
@@ -14,6 +14,20 @@ assert.equal(JSON.stringify(context.window.AuspexSTPAModels),JSON.stringify(Obje
 assert.equal(JSON.stringify(context.window.AuspexSTPAData),JSON.stringify(models[0]));
 vm.runInContext(await read('stpa.js'),context);
 const presentation = context.window.AuspexSTPA;
+const stateModel = await parse('barrier-states.json');
+assert.equal(JSON.stringify(context.window.AuspexBarrierStateData),JSON.stringify(stateModel));
+const stateIds = new Set(stateModel.states.map(s=>s.id));
+assert.equal(stateIds.size,stateModel.states.length);
+assert.deepEqual([...stateIds].sort(), ['absent','backfiring','degrading','failed','intact','reinforced','unknown']);
+assert.equal(new Set(stateModel.states.map(s=>s.path)).size,7,'Each state has a distinct symbol');
+assert(!stateIds.has('recovery'));
+for (const s of stateModel.states) assert(s.definition && s.question && s.path && stateModel.sources.some(x=>x.id===s.source));
+for (const s of stateModel.states) {
+  const guide=presentation.stateGuide(s.id);
+  assert.equal((guide.match(/data-explore-state=/g)||[]).length,7);
+  assert(guide.includes(`data-explore-state="${s.id}" aria-pressed="true"`));
+  assert(s.example && stateModel.sources.some(x=>x.id===s.exampleSource));
+}
 const reaches = (links, from, to, seen = new Set()) => {
   if (from === to) return true;
   if (seen.has(from)) return false;
@@ -82,11 +96,23 @@ for (const m of models) {
     assert(html.includes(`data-overlay-anchor="${config.anchor}"`),'Evidence anchor remains explicit');
     assert(!/undefined|NaN/.test(html),`${m.displayId} renders valid content`);
     for (const id of [...a.evidence,...a.barriers.flatMap(b=>b.evidence),...(a.trace||[]).flatMap(t=>t.evidence)]) assert(passageIds.has(id),`Missing passage ${id}`);
+    assert(!html.includes('stpa-condition-legend'), 'No inert state legend');
+    assert(html.includes('id="a1-case-reference" href="#a1-case-footnote"'));
+    assert(html.includes('id="a1-case-footnote"') && html.includes('href="#a1-case-reference"'));
+    assert(!html.includes('Evidence is attached to this component;'));
+    for (const id of config.candidates || []) {
+      const candidate=presentation.barriers(a).find(b=>b.constraint===id);
+      assert(candidate && candidate.candidate && candidate.condition==='unknown');
+      assert.deepEqual(Array.from(presentation.barrierStates(candidate)),['unknown']);
+      assert(html.includes(`data-overlay-barrier="${candidate.id}"`));
+      assert(candidate.efficacy.includes(config.notEstablished) && candidate.reinforcement.test);
+    }
     for (const b of a.barriers) {
       assert(a.targets.some(t=>t.id===b.target),'Barrier assessment uses a scoped target');
       assert(html.includes(`data-overlay-barrier="${b.id}"`));
       const detail=config.barriers[b.id];
-      assert(['reinforced','intact','degrading','failed','unknown'].includes(detail.condition));
+      assert(stateIds.has(detail.condition));
+      for (const state of detail.states || []) assert(stateIds.has(state));
       assert(['safeguard','capability','opportunity','contingency','mixed','unknown'].includes(detail.limitType));
       assert(detail.conditionBasis && detail.strongerAI,'Observed condition and future brittleness are separate');
       assert(b.action && b.efficacy && b.durability && b.failure && b.evidence.length);
@@ -105,5 +131,8 @@ assert(a.links.filter(l=>l.from==='X-01:5'||l.to==='X-01:5').every(l=>l.kind==='
 assert(a.links.filter(l=>l.to==='X-01:7').every(l=>l.from==='X-01:6'&&l.kind==='continuation'));
 assert(a.scenarios.some(s=>s.ucas.length===0 && s.archetype.includes('Control action not executed')));
 for (const o of Object.values(a.presentation.overlays)) assert.equal(o.target,'X-01:3');
-assert(!presentation.has('X-02'),'Unmigrated pathways keep their existing workflow');
-console.log(`Validated six STPA models and ${barriers} barriers: traceability, conditional routes, recovery, evidence scope, brittleness, bundle and static reader.`);
+assert(!presentation.has('X-02'),'Unworked pathways have no active model');
+console.log(`Validated seven STPA models and ${barriers} barriers: traceability, conditional routes, recovery, evidence scope, brittleness, bundle and static reader.`);
+
+const catalogue = await parse('pathways.json');
+for (const p of catalogue.pathways.filter(p=>!models.some(m=>m.pathway===p.id))) assert(staticHTML.includes(`id="${p.id}" data-group="${p.group}" data-unworked="true"`));

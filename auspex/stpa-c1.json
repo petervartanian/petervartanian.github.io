@@ -1018,7 +1018,11 @@
               "proposal": "Exercise independent warning and assessment checks against representative new failure modes.",
               "test": "Does disconfirming evidence stop an incorrect assessment before consequential action?",
               "status": "proposed"
-            }
+            },
+            "states": [
+              "reinforced",
+              "unknown"
+            ]
           }
         }
       },
@@ -1043,7 +1047,11 @@
               "proposal": "Exercise independent warning and assessment checks against representative new failure modes.",
               "test": "Does disconfirming evidence stop an incorrect assessment before consequential action?",
               "status": "proposed"
-            }
+            },
+            "states": [
+              "reinforced",
+              "unknown"
+            ]
           }
         }
       }

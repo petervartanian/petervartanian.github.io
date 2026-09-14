@@ -58,7 +58,7 @@
       "question": "What actually ended the episode, and would that circumstance recur?"
     }
   ],
-  "version": "1.0",
+  "version": "1.1",
   "pathway": "P-01",
   "displayId": "B.1",
   "title": "Personal command and the loss of constitutional control",
@@ -216,7 +216,7 @@
   "constraints": [
     {
       "id": "SC1",
-      "title": "Assure conflicting-command behavior",
+      "title": "Independent command checks",
       "text": "Deployment must require independent evidence about disputed or unlawful orders, with coverage limits tied to the authority granted.",
       "hazards": [
         "H2"
@@ -299,7 +299,7 @@
     },
     {
       "id": "SC5",
-      "title": "Protect adverse feedback",
+      "title": "Independent oversight",
       "text": "Oversight must receive trustworthy evidence about order conflicts, refusals and exceptions while there is time and authority to act.",
       "hazards": [
         "H2",
@@ -783,7 +783,11 @@
         "limit": "Officials announced accelerated military AI acquisition to assist human imagery analysts. Personal loyalty, unlawful command, a coup and effective constitutional barriers were not established.",
         "barrierStatus": "Barrier performance not established",
         "barrierCondition": "unknown",
-        "barriers": {}
+        "barriers": {},
+        "candidates": [
+          "SC1",
+          "SC5"
+        ]
       },
       "REP-2024": {
         "title": "Replicator acquisition program",
@@ -796,7 +800,11 @@
         "limit": "Officials announced an accelerated autonomy fielding program motivated by military competition. The announcement does not establish complete delivery, personal command loyalty, a coup or tested command safeguards.",
         "barrierStatus": "Barrier performance not established",
         "barrierCondition": "unknown",
-        "barriers": {}
+        "barriers": {},
+        "candidates": [
+          "SC1",
+          "SC5"
+        ]
       }
     },
     "fidelity": "Evidence marks procurement context at 01 only. Candidate constitutional controls are explicit requirements for the hypothetical system; the mapped announcements do not demonstrate that they worked.",

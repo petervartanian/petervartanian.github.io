@@ -895,14 +895,17 @@
             "title": "Code review",
             "result": "Stronger review reduced success; some bugs passed.",
             "condition": "reinforced",
-            "conditionBasis": "A stronger reviewer reduced attacker success in the compared test conditions; residual successful sabotage remained.",
+            "conditionBasis": "Stronger review improved protection in the compared test conditions and blocked most attempts; successful sabotage still occurred.",
             "limitType": "mixed",
             "strongerAI": "The protection depends on the attacker–reviewer capability gap, review budget and coverage. A stronger attacker could defeat a reviewer that currently holds. The experiment compares reviewers; it does not show robustness to future attackers.",
             "reinforcement": {
               "proposal": "Use independent review and protected checks beyond a single model reviewer.",
               "test": "Vary attacker capability, review effort and correlated reviewer failures; measure missed sabotage as well as false alarms.",
               "status": "proposed"
-            }
+            },
+            "states": [
+              "reinforced"
+            ]
           },
           "sabotage-monitor": {
             "title": "Separate monitor",
