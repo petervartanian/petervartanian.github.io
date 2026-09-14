@@ -127,7 +127,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
   gap:0;width:190px;padding:9px 16px;border:1px solid #8ca2ac35;border-radius:9px;
   background:#10191ff5;box-shadow:0 18px 55px #0007;backdrop-filter:blur(22px);
 }
-.resource-menu .utility button{display:block!important;min-height:39px;padding:9px 0;font-size:12px;text-align:left}
+.resource-menu .utility button{display:flex!important;align-items:center;gap:8px;min-height:39px;padding:9px 0;font-size:12px;text-align:left}
 .resource-menu .utility #sources-button:before{content:none}
 .resource-menu .utility .counter{display:inline;font-size:9px}
 .resource-menu .utility button+button{border-top:1px solid #8ca2ac15}
@@ -1347,9 +1347,82 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
 .site-credit .credit-project{justify-self:end;text-align:right}
 .site-credit .credit-heart{display:inline-block;width:1em;height:1em;vertical-align:-.08em;fill:#a0a0a0}
 @media(max-width:600px){footer.site-credit{grid-template-columns:1fr;gap:8px}.site-credit .credit-project{grid-row:2}.site-credit #footer-method{grid-row:3;justify-self:start;margin-top:8px}}
+
+/* Shared navigation marks stay aligned without depending on a device's glyph font. */
+.ui-symbols{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+.ui-icon{display:inline-block;width:16px;height:16px;flex:0 0 16px;fill:none;stroke:currentColor;stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;overflow:visible}
+.ui-down{transform:rotate(180deg)}
+.ui-left{transform:rotate(-90deg)}
+.ui-right,.ui-vertical{transform:rotate(90deg)}
+.ui-chevron{transition:transform 160ms ease}
+[aria-expanded="true"]>.ui-chevron{transform:rotate(180deg)}
+#filter-toggle,#stage-toggle,#reset-button,#possible-interventions,.detail-more,.load-more,#results-to-list,.artifact-download{display:inline-flex;align-items:center;gap:8px}
+#previous-event,#next-event,.plot-tools .pan-y{display:inline-flex;align-items:center;justify-content:center}
+.axis-zoom>span,.bow-label small{display:inline-flex;align-items:center;gap:4px}
+.axis-zoom .ui-icon{width:12px;height:12px;flex-basis:12px}
+#list-toggle{display:inline-flex;align-items:center;gap:8px}
+#export-button .ui-icon,.bow-label .ui-icon{color:var(--nav-accent)}
+details>summary{display:flex;align-items:center;gap:9px;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::after{
+  content:""!important;display:block;flex:0 0 16px;width:16px;height:16px;
+  margin:0;padding:0;background:currentColor;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='black' stroke-width='1.35' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+  transition:transform 160ms ease;
+}
+details[open]>summary::after{transform:rotate(180deg)}
+#back-to-title,#back-to-field,#browse-records{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  min-height:32px;padding:6px 10px;margin:0;border:1px solid #f3e9b680;border-radius:4px;
+  background:#e8d88d;color:#20291f;font:11px/1 "Helvetica Neue",Arial,sans-serif;
+  text-decoration:none;white-space:nowrap;
+}
+#back-to-title:hover,#back-to-field:hover,#browse-records:hover{background:#f2e4ab;color:#111c18}
+#back-to-title:focus-visible,#back-to-field:focus-visible,#browse-records:focus-visible{outline:2px solid #f5edc7;outline-offset:4px}
+.field-presence{display:inline-flex;align-items:center;gap:5px;margin-left:auto;white-space:nowrap}
+.field-presence[hidden]{display:none}
+.field-presence #viewport-count{margin-left:0}
+.field-readout #unplaced-button{font:inherit;color:#9aaeb8;max-width:none;overflow:visible;min-height:26px}
+#unplaced-button:hover{color:#e1e9ed}
+#unplaced-button em{font-family:var(--serif)}
+.glossary-list{margin:12px 0 0}
+.glossary-list>div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:20px;padding:14px 0;border-bottom:1px solid #a9bdc220}
+.glossary-list>div:last-child{border-bottom:0}
+.glossary-list dt,.view-terms .glossary-list dt{margin:0;font:500 13px/1.7 "Helvetica Neue",Arial,sans-serif;color:#e0e8eb}
+.glossary-list dd,.view-terms .glossary-list dd{margin:0;font:12px/1.7 "Helvetica Neue",Arial,sans-serif;color:#adbec8}
+.view-terms>summary{font-size:13px;color:#cfdbdf}
+@media(max-width:600px){
+  #back-to-title,#back-to-field,#browse-records{min-height:40px;padding:6px 9px;font-size:10px;gap:5px}
+  #back-to-title{min-height:36px}
+  .field-presence{margin-left:0;flex-wrap:wrap;gap:0 5px;max-width:100%;line-height:1.5}
+  .field-presence #viewport-count{display:inline}
+  .field-readout #unplaced-button{min-height:20px;font-size:9px}
+  .glossary-list>div{grid-template-columns:80px minmax(0,1fr);gap:15px}
+}
+@media(prefers-reduced-motion:reduce){.ui-chevron,details>summary::after{transition:none}}
+#filter-indicator:empty{display:none}
+@media(min-width:1001px){
+  .scene-heading{right:calc(var(--scene-edge) + 185px);width:min(360px,calc(100vw - 800px))}
+}
+.resource-menu{z-index:30}
+.field-header:has(.resource-menu[open]){z-index:40}
+@media(max-width:360px){
+  .field-header{grid-template-columns:minmax(0,1fr) 85px auto auto;column-gap:6px}
+  .field-header .brand{font-size:19px;gap:4px}
+  .field-header .brand .haruspex-mark{width:16px;height:16px}
+  #search-toggle{width:32px}
+  .date-endpoint input{width:82px;min-width:0;font-size:9px}
+}
 </style>
 </head>
 <body>
+  <svg class="ui-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="ui-arrow" viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></symbol>
+    <symbol id="ui-chevron" viewBox="0 0 16 16"><path d="m4 6 4 4 4-4"/></symbol>
+    <symbol id="ui-external" viewBox="0 0 16 16"><path d="M4 12 12 4M5 4h7v7"/></symbol>
+    <symbol id="ui-reset" viewBox="0 0 16 16"><path d="M3 6a5 5 0 1 1 0 4M3 2v4h4"/></symbol>
+    <symbol id="ui-axis" viewBox="0 0 16 16"><path d="M2 8h12M5 5 2 8l3 3M11 5l3 3-3 3"/></symbol>
+  </defs></svg>
   <a class="skip-link" href="#event-list">Skip to events</a>
   <div class="grain" aria-hidden="true"></div>
   <main>
@@ -1386,21 +1459,22 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
             <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab"><span class="view-order">Bonus:</span> Investigate!</button>
           </div>
           <details id="resource-menu" class="resource-menu">
-            <summary aria-label="Resources">More <span aria-hidden="true">⌄</span></summary>
+            <summary aria-label="Resources">More</summary>
             <nav class="utility" aria-label="Resources">
               <button id="ontology-button" class="text-button">Structure</button>
               <button id="method-button" class="text-button">How to read this</button>
               <button id="sources-button" class="text-button">Sources</button>
-              <button id="export-button" class="export-button">Export <span aria-hidden="true">↓</span></button>
+              <button id="glossary-button" class="text-button">Glossary</button>
+              <button id="export-button" class="export-button">Export <svg class="ui-icon ui-arrow ui-down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button>
             </nav>
           </details>
-          <a id="back-to-title" class="back-up" href="#intro">↑ Title</a>
+          <a id="back-to-title" class="back-up" href="#intro"><svg class="ui-icon ui-arrow ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg> Title</a>
         </header>
         <div class="scene-heading">
           <h2 id="page-title" class="sr-only">OpenAI and Hugging Face incident explorer</h2>
           <div class="scene-actions">
             <button id="search-toggle" class="search-toggle" aria-label="Search events" aria-expanded="false" aria-controls="event-search search-results"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></button><label class="search"><span aria-hidden="true">⌕</span><input type="search" id="event-search" placeholder="Search events, people, systems…" aria-describedby="query-feedback" aria-label="Search events"><kbd>/</kbd></label><button id="query-help" class="query-help" aria-label="Search guide">?</button>
-            <button id="filter-toggle" aria-expanded="false" aria-controls="advanced-filters">Filters <span id="filter-indicator"></span><span aria-hidden="true">⌄</span></button>
+            <button id="filter-toggle" aria-expanded="false" aria-controls="advanced-filters">Filters <span id="filter-indicator"></span><svg class="ui-icon ui-chevron ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-chevron"/></svg></button>
           </div>
           <p id="query-feedback" class="query-feedback" role="status" hidden></p>
           <div id="search-results" class="search-results" role="listbox" aria-label="Matching events" hidden></div>
@@ -1412,7 +1486,7 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
             <button data-lifecycle="during" aria-pressed="false"><span class="lifecycle-number">II.</span> During</button>
             <button data-lifecycle="after" aria-pressed="false"><span class="lifecycle-number">III.</span> After</button>
           </div>
-          <button id="stage-toggle" class="stage-toggle" aria-expanded="false" aria-controls="stage-panel"><span id="stage-label">All stages</span><span id="stage-total">27</span><span aria-hidden="true">⌄</span></button>
+          <button id="stage-toggle" class="stage-toggle" aria-expanded="false" aria-controls="stage-panel"><span id="stage-label">All stages</span><span id="stage-total">27</span><svg class="ui-icon ui-chevron ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-chevron"/></svg></button>
           <div id="assessment-tabs" class="assessment-tabs" role="group" aria-label="Assessment field">
             <button data-assessment="impact" aria-pressed="true" class="selected">Impact <span id="assessment-impact-count" class="assessment-count">599</span></button>
             <button data-assessment="context" aria-pressed="false">Context <span id="assessment-context-count" class="assessment-count">192</span></button>
@@ -1432,8 +1506,8 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
           <div class="filter-options">
             <label hidden>Stage<select id="stage-filter"><option value="all">All stages</option></select></label>
             <label>Severity band<select id="severity-filter"><option value="all">Any severity</option></select></label>
-            <div class="intervention-options"><button id="actual-interventions" aria-pressed="false">Recorded interventions <span>50</span></button><button id="possible-interventions">Possible interventions <span aria-hidden="true">→</span></button></div>
-            <button id="reset-button" class="reset-button" aria-label="Reset all filters">Reset filters ↺</button>
+            <div class="intervention-options"><button id="actual-interventions" aria-pressed="false">Recorded interventions <span>50</span></button><button id="possible-interventions">Possible interventions <svg class="ui-icon ui-arrow ui-right" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button></div>
+            <button id="reset-button" class="reset-button" aria-label="Reset all filters">Reset filters <svg class="ui-icon ui-reset ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-reset"/></svg></button>
           </div>
         </div>
         <div class="visual-column">
@@ -1456,10 +1530,10 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
             <div id="undated-records" class="undated-records" role="group" aria-label="Events with an unknown start and a by-date bound" hidden></div>
           </div>
           <div id="field-navigation" class="plot-tools" role="group" aria-label="Field navigation">
-            <div class="axis-zoom"><span>Time ↔</span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
-            <div class="axis-zoom"><span>Severity ↕</span><button id="zoom-y-out" aria-label="Zoom out vertically">−</button><button id="zoom-y-in" aria-label="Zoom in vertically">+</button></div>
+            <div class="axis-zoom"><span>Time <svg class="ui-icon ui-axis ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-axis"/></svg></span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
+            <div class="axis-zoom"><span>Severity <svg class="ui-icon ui-axis ui-vertical" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-axis"/></svg></span><button id="zoom-y-out" aria-label="Zoom out vertically">−</button><button id="zoom-y-in" aria-label="Zoom in vertically">+</button></div>
             <button id="zoom-fit" class="fit-field" aria-label="Fit matching events on both axes">Fit</button>
-            <button id="move-up" class="pan-y" aria-label="Pan severity up">↑</button><button id="move-down" class="pan-y" aria-label="Pan severity down">↓</button>
+            <button id="move-up" class="pan-y" aria-label="Pan severity up"><svg class="ui-icon ui-arrow ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button><button id="move-down" class="pan-y" aria-label="Pan severity down"><svg class="ui-icon ui-arrow ui-down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button>
           </div>
         <section id="legend-panel" class="legend-panel" aria-labelledby="legend-title" hidden>
           <div class="legend-panel-head"><h2 id="legend-title">Legend</h2><button id="legend-close" aria-label="Close legend">×</button></div>
@@ -1485,27 +1559,27 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
         <div class="field-foot">
           <div class="field-discoveries"><button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button><button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button></div>
           <span id="egg-message" role="status" tabindex="0" hidden></span>
-          <div class="field-readout"><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
+          <div class="field-readout"><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span class="field-presence"><span id="viewport-count"></span><button id="unplaced-button" hidden></button></span><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
           <div class="timeline-navigation">
             <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
             <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
             <label class="date-endpoint"><span>To</span><input type="date" id="range-end" aria-label="Timeline end date"></label>
-            <a id="browse-records" href="#event-list">Events <span aria-hidden="true">↓</span></a>
+            <a id="browse-records" href="#event-list">Events <svg class="ui-icon ui-arrow ui-down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></a>
           </div>
         </div>
         <div class="scroll-progress" aria-hidden="true"><span></span></div>
       </div>
     </section>
     <section class="record-section" id="event-list" aria-labelledby="record-heading">
-      <div class="section-heading"><div><h2 id="record-heading">Events</h2></div><div class="record-controls"><a id="back-to-field" class="back-up" href="#scene">↑ Field</a><span id="record-count"></span><button id="list-toggle" aria-expanded="true" aria-controls="record-list-wrap">Collapse −</button></div></div>
+      <div class="section-heading"><div><h2 id="record-heading">Events</h2></div><div class="record-controls"><a id="back-to-field" class="back-up" href="#scene"><svg class="ui-icon ui-arrow ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg> Field</a><span id="record-count"></span><button id="list-toggle" aria-expanded="true" aria-controls="record-list-wrap">Collapse <svg class="ui-icon ui-chevron ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-chevron"/></svg></button></div></div>
       <div class="milestone-strip" aria-label="Turning points marked by the sources"><div id="milestones"></div></div>
-      <div id="record-list-wrap"><div id="record-list"></div><button id="load-more" class="load-more">Show more events <span>↓</span></button></div>
+      <div id="record-list-wrap"><div id="record-list"></div><button id="load-more" class="load-more">Show more events <svg class="ui-icon ui-arrow ui-down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button></div>
       <footer class="site-credit"><span class="credit-author">Created with 🩶 by Peter H. Vartanian (2026)</span><button id="footer-method">How to read this</button><span class="credit-project">This project is part of the suite <em>From Incident to Intervention</em> (FI2I).</span></footer>
     </section>
   </main>
   <div id="event-focus" hidden><div class="focus-veil"></div><canvas id="focus-origin" aria-hidden="true"></canvas><svg id="focus-thread" aria-hidden="true"><path/></svg></div>
   <aside class="detail-panel" id="detail-panel" aria-labelledby="event-banner-title" role="dialog" aria-modal="true" tabindex="-1" hidden>
-    <div class="detail-top"><div><button id="previous-event" aria-label="Previous visible event">←</button><button id="next-event" aria-label="Next visible event">→</button><button id="detail-close" aria-label="Close event details">×</button></div></div>
+    <div class="detail-top"><div><button id="previous-event" aria-label="Previous visible event"><svg class="ui-icon ui-arrow ui-left" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button><button id="next-event" aria-label="Next visible event"><svg class="ui-icon ui-arrow ui-right" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button><button id="detail-close" aria-label="Close event details">×</button></div></div>
     <div id="event-detail" aria-live="polite"></div>
   </aside>
   <dialog id="info-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><span>Haruspex</span><button id="dialog-close" aria-label="Close dialog">×</button></div><div id="dialog-content"></div></dialog>
@@ -1964,7 +2038,7 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
     }
     function researchView() {
       const quotation = quotations?.quotations?.find(item => item.id === 'leveson-information');
-      return `${quotation ? `<blockquote class="research-quote"><p>“${esc(quotation.quote)}”</p><cite><a href="${esc(quotation.url)}" target="_blank" rel="noopener noreferrer">${esc(quotation.author)} · CAST Handbook</a></cite></blockquote>` : '<h3>What further research established</h3>'}<p class="cast-note">Collected and reviewed on ${esc(research.checked_on)}. New publications, downloadable artifacts and rechecks are distinguished in each source record. Public accounts and derived chart data cannot settle every question about internal decisions.</p>${evidenceCards(evidence)}<details class="research-audit"><summary>Search trail & evidence inventory</summary>${(research.sources || []).map(source => `<div class="dialog-source"><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.id || source.source_id)} · ${esc(source.title || source.url)}</a>${source.local_artifact ? `<a class="artifact-download" href="${esc(source.local_artifact)}" download>Collected data ↓</a>` : ''}<p>${esc(source.kind?.replaceAll('_',' ') || '')} · ${esc(source.relation_to_existing_evidence || '')}</p>${source.sha256 ? `<p class="artifact-hash">SHA-256 ${esc(source.sha256)}</p>` : ''}</div>`).join('')}<pre>${esc(JSON.stringify(research.searches || [],null,2))}</pre><p>${esc(prose(research.overall_limits))}</p></details>`;
+      return `${quotation ? `<blockquote class="research-quote"><p>“${esc(quotation.quote)}”</p><cite><a href="${esc(quotation.url)}" target="_blank" rel="noopener noreferrer">${esc(quotation.author)} · CAST Handbook</a></cite></blockquote>` : '<h3>What further research established</h3>'}<p class="cast-note">Collected and reviewed on ${esc(research.checked_on)}. New publications, downloadable artifacts and rechecks are distinguished in each source record. Public accounts and derived chart data cannot settle every question about internal decisions.</p>${evidenceCards(evidence)}<details class="research-audit"><summary>Search trail & evidence inventory</summary>${(research.sources || []).map(source => `<div class="dialog-source"><a href="${esc(source.url)}" target="_blank" rel="noopener noreferrer">${esc(source.id || source.source_id)} · ${esc(source.title || source.url)}</a>${source.local_artifact ? `<a class="artifact-download" href="${esc(source.local_artifact)}" download>Collected data <svg class="ui-icon ui-arrow ui-down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></a>` : ''}<p>${esc(source.kind?.replaceAll('_',' ') || '')} · ${esc(source.relation_to_existing_evidence || '')}</p>${source.sha256 ? `<p class="artifact-hash">SHA-256 ${esc(source.sha256)}</p>` : ''}</div>`).join('')}<pre>${esc(JSON.stringify(research.searches || [],null,2))}</pre><p>${esc(prose(research.overall_limits))}</p></details>`;
     }
     function paper() {
       const primary = id => (data.sources || []).find(source=>source.source_id===id);
@@ -2072,13 +2146,13 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
           <section class="inquiry-chapter"><h4>What could change this account?</h4><p>${esc(copy.test)}</p><p class="cast-note">The question stays open. Public evidence does not settle every internal decision.</p></section>
         </div>
         <div class="inquiry-actions"><button class="trace-button" data-trace-view="stream">Follow this in the event-swarm</button><button class="trace-button" data-trace-view="bowtie">Trace it in the bow-tie</button></div>
-        <details class="inquiry-disclosure finding-records"><summary><span>See the evidence behind this account</span><span aria-hidden="true">+</span></summary>
+        <details class="inquiry-disclosure finding-records"><summary><span>See the evidence behind this account</span></summary>
           <section><h4>The reported events</h4><p class="cast-note">Several events can come from one passage. They are connected details, not independent confirmations.</p><div class="evidence-sequence">${sequence(records.slice(0,6))}</div>${records.length>6?`<details class="inquiry-aside"><summary>Read the remaining related events</summary><div class="evidence-sequence">${sequence(records.slice(6))}</div></details>`:''}</section>
           <section class="finding-new"><h4>What further public research adds</h4>${additions.length ? evidenceCards(additions,true) : '<p>No additional public evidence was located that resolves this question. The missing records remain necessary.</p>'}</section>
           <details class="inquiry-aside"><summary>Original observation and source passages</summary><p>${esc(finding.observation)}</p>${(finding.source_evidence || []).map(item=>`<div class="dialog-source"><a href="${esc(item.url)}" target="_blank" rel="noopener noreferrer">${esc(item.locator || item.source_id)}</a><p>${esc(item.supports || '')}</p></div>`).join('')}</details>
         </details>
-        <details class="inquiry-disclosure finding-next"><summary><span>Test the explanation</span><span aria-hidden="true">+</span></summary><p>These are the records and comparisons that could support, narrow or overturn this account.</p>${relevantQuestions.map(questionCard).join('')}${relatedChanges.length?`<section class="finding-improvements"><h4>Changes worth examining</h4>${reportedChanges.length?`<h5>Already reported</h5>${cards(reportedChanges)}`:''}${proposedChanges.length?`<h5>Proposals to test</h5><p class="cast-note">These are analytical proposals, not actions known to have happened.</p>${cards(proposedChanges)}`:''}</section>`:''}</details>
-        <details class="inquiry-disclosure finding-control"><summary><span>How the system connects</span><span aria-hidden="true">+</span></summary><h4>Who could act, and what reached them?</h4>${paths.length ? paths.map(path => `<button class="control-thread ${esc(path.status)}" data-cast-item="${esc(path.id)}"><span>${esc(entities.get(path.from)?.title)}</span><span class="control-thread-link"><i aria-hidden="true">⟶</i><b>${esc(path.label || path.title)}</b><small>${esc(path.status.replaceAll('_',' '))} · ${esc(path.type.replaceAll('_',' '))}</small></span><span>${esc(entities.get(path.to)?.title)}</span></button>`).join('') : `<div class="controller-list">${[...nodes].map(id => `<button data-cast-item="${esc(id)}">${esc(entities.get(id)?.title)}</button>`).join('')}</div>`}<div class="constraint-list">${(finding.constraint_ids || []).map(id => `<button data-cast-item="${esc(id)}">${esc(entities.get(id)?.title || id)}</button>`).join('')}</div><p class="cast-note">These are control and information relationships, not proof of a chain of causes.</p><button class="trace-button" data-cast-section="structure">Explore the whole system</button></details>
+        <details class="inquiry-disclosure finding-next"><summary><span>Test the explanation</span></summary><p>These are the records and comparisons that could support, narrow or overturn this account.</p>${relevantQuestions.map(questionCard).join('')}${relatedChanges.length?`<section class="finding-improvements"><h4>Changes worth examining</h4>${reportedChanges.length?`<h5>Already reported</h5>${cards(reportedChanges)}`:''}${proposedChanges.length?`<h5>Proposals to test</h5><p class="cast-note">These are analytical proposals, not actions known to have happened.</p>${cards(proposedChanges)}`:''}</section>`:''}</details>
+        <details class="inquiry-disclosure finding-control"><summary><span>How the system connects</span></summary><h4>Who could act, and what reached them?</h4>${paths.length ? paths.map(path => `<button class="control-thread ${esc(path.status)}" data-cast-item="${esc(path.id)}"><span>${esc(entities.get(path.from)?.title)}</span><span class="control-thread-link"><i aria-hidden="true">⟶</i><b>${esc(path.label || path.title)}</b><small>${esc(path.status.replaceAll('_',' '))} · ${esc(path.type.replaceAll('_',' '))}</small></span><span>${esc(entities.get(path.to)?.title)}</span></button>`).join('') : `<div class="controller-list">${[...nodes].map(id => `<button data-cast-item="${esc(id)}">${esc(entities.get(id)?.title)}</button>`).join('')}</div>`}<div class="constraint-list">${(finding.constraint_ids || []).map(id => `<button data-cast-item="${esc(id)}">${esc(entities.get(id)?.title || id)}</button>`).join('')}</div><p class="cast-note">These are control and information relationships, not proof of a chain of causes.</p><button class="trace-button" data-cast-section="structure">Explore the whole system</button></details>
       </article>`;
     }
     function wireInquiry(container) {
@@ -2156,7 +2230,7 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
     let size,center,radius,glow,grain,backdrop,endpoints=[],marble=[],dustColors=[],ratio=1,warmIndex=0,baseGradient=null,surfaceLayer=null,surfaceBmp=null,glowBmp=null,backdropBmp=null,lastPaint=0,nudgeAt=-1e9;
     const marbleBitmaps=new Map();const bitmap=(source,done)=>{if(window.createImageBitmap)createImageBitmap(source).then(done).catch(()=>{});};
     const warmCanvas=document.createElement('canvas');warmCanvas.width=warmCanvas.height=40;const warmCtx=warmCanvas.getContext('2d');
-    let dirty=true,popped=false,popping=null,hover=false,frame=null,sizeKey='',locked=false,rotationAt=performance.now();
+    let dirty=true,popped=false,popping=null,hover=false,frame=null,sizeKey='',locked=false,rotationAt=performance.now(),entryAt=null;
     const marbleSprites=new Map();
     function bounds(){const top=scene.parentElement.getBoundingClientRect().top+scrollY,h=scene.getBoundingClientRect().height;return{top,h};}
     function lock(value){if(value===locked)return;locked=value;if(value){for(const child of scene.children){if(child===host)continue;inertStates.set(child,child.inert);child.inert=true;}}else{for(const[child,v]of inertStates)child.inert=v;inertStates.clear();}}
@@ -2191,13 +2265,13 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
     function unrotate(v,angle){const ca=Math.cos(angle),sa=Math.sin(angle),ct=Math.cos(TILT),st=Math.sin(TILT);const y=v[1]*ct+v[2]*st,z1=-v[1]*st+v[2]*ct;return[v[0]*ca-z1*sa,y,v[0]*sa+z1*ca];}
     function project(u,shell,angle){const[x1,y2,z2]=rotate(u,angle);const R=radius*shell,f=radius*2.7,s=f/(f+z2*R);return{x:center.x+x1*R*s,y:center.y+y2*R*s,s,depth:(1-z2)/2,light:Math.max(0,-(x1*.45+y2*.55+z2*.7))};}
     function silhouette(angle){const path=new Path2D();for(let k=0;k<RIM;k++){const a=k/RIM*TAU,u=unrotate([Math.cos(a),Math.sin(a),0],angle),r=radius*bump(u)*.985,x=center.x+Math.cos(a)*r,y=center.y+Math.sin(a)*r;if(k)path.lineTo(x,y);else path.moveTo(x,y);}path.closePath();return path;}
-    function paintSolid(angle,alpha=1){
+    function paintSolid(angle,alpha=1,entryScale=1){
       const{ctx,width,height}=size,lift=hover?1.15:1,bx=center.x-radius*1.15,by=center.y-radius*1.15,bs=radius*2.3;
       const gx=Math.max(0,center.x-radius*1.7),gy=Math.max(0,center.y-radius*1.7),gw=Math.min(width,center.x+radius*1.7)-gx,gh=Math.min(height,center.y+radius*1.7)-gy;
       const path=silhouette(angle);
       ctx.save();ctx.globalAlpha=alpha;
       // The ball breathes once it has waited three seconds, and swells briefly when a wheel gesture asks the page to move.
-      const t=performance.now(),idle=t-rotationAt,n=(t-nudgeAt)/700;let k=1;if(idle>3000)k+=.012*(.5-.5*Math.cos((idle-3000)/1500*Math.PI));if(n>=0&&n<1)k+=.035*Math.sin(n*Math.PI);if(k!==1){ctx.translate(center.x,center.y);ctx.scale(k,k);ctx.translate(-center.x,-center.y);}
+      const t=performance.now(),idle=t-rotationAt,n=(t-nudgeAt)/700;let k=entryScale;if(idle>3000)k+=.012*(.5-.5*Math.cos((idle-3000)/1500*Math.PI));if(n>=0&&n<1)k+=.035*Math.sin(n*Math.PI);if(k!==1){ctx.translate(center.x,center.y);ctx.scale(k,k);ctx.translate(-center.x,-center.y);}
       ctx.fillStyle=baseGradient;ctx.fill(path);
       ctx.globalCompositeOperation='source-atop';
       for(const m of marble){const p=project(m.unit,1,angle);if(p.depth<.48)continue;const w=m.r*2*p.s*(1+.4*(p.depth-.5));ctx.globalAlpha=alpha*m.alpha*lift*(.45+.55*p.light);ctx.drawImage(marbleBitmaps.get(m.color)||marbleSprite(m.color),p.x-w/2,p.y-w/2,w,w);}
@@ -2205,15 +2279,25 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
       if(hover){ctx.globalAlpha=alpha*.08;ctx.fillStyle='#dfeaf0';ctx.fillRect(bx,by,bs,bs);}
       ctx.globalCompositeOperation='destination-over';ctx.globalAlpha=alpha;
       ctx.drawImage(glowBmp||glow,gx*ratio,gy*ratio,gw*ratio,gh*ratio,gx,gy,gw,gh);
-      ctx.globalCompositeOperation='source-over';ctx.globalAlpha=alpha*.35;ctx.strokeStyle='#dfeaf0';ctx.lineWidth=.6;ctx.stroke(path);
       ctx.restore();
     }
-    function paintGlobe(now){const{ctx,width,height}=size;ctx.clearRect(0,0,width,height);paintSolid(reduced.matches?.7:((now-rotationAt)/SPIN_MS)*TAU);canvas.dataset.progress='0';}
+    function entrance(now){
+      const progress=reduced.matches||entryAt===null?1:clamp((now-entryAt)/850),t=easeOut(progress);
+      canvas.dataset.entranceProgress=progress.toFixed(3);
+      scene.dataset.entrance=progress<1?'arriving':'settled';
+      return{scale:.86+.14*t,alpha:.16+.84*t};
+    }
+    function paintGlobe(now){
+      const{ctx,width,height}=size,{scale,alpha}=entrance(now);
+      ctx.clearRect(0,0,width,height);
+      paintSolid(reduced.matches?.7:((now-rotationAt)/SPIN_MS)*TAU,alpha,scale);
+      canvas.dataset.progress='0';
+    }
     function paintPop(progress){
       const{ctx,width,height}=size;ctx.clearRect(0,0,width,height);
       const reveal=ease((progress-.45)/.55);if(backdrop&&reveal>.002){ctx.globalAlpha=reveal;ctx.drawImage(backdropBmp||backdrop,0,0,width,height);ctx.globalAlpha=1;}
       const shatter=clamp(progress/.1);
-      if(shatter<1)paintSolid(popping.angle,1-shatter);
+      if(shatter<1)paintSolid(popping.angle,(1-shatter)*popping.alpha,popping.scale);
       ctx.globalAlpha=1;
       for(const g of endpoints){const t=easeOut((progress-g.delay)/(1-g.delay)),o=g.origin,bend=Math.sin(t*Math.PI)*g.bend,x=mix(o.x,g.x,t)+bend,y=mix(o.y,g.y,t)-bend*.42;paintPoint(ctx,{...g,radius:mix(o.r,g.radius,t)},x,y,Math.max(shatter,t)*(.85+.15*t));}
       canvas.dataset.progress=progress.toFixed(3);
@@ -2225,9 +2309,9 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
       if(popped||popping)return;
       if(dirty)prepare();
       if(instant||reduced.matches){settle();return;}
-      const angle=((performance.now()-rotationAt)/SPIN_MS)*TAU;
-      for(const g of endpoints){const p=project(g.unit,g.shell,angle);g.origin={x:p.x,y:p.y,r:Math.max(1.5,g.radius*(.7+.6*p.depth)*p.s)};}
-      button.disabled=true;scene.dataset.gateway='disintegrating';popping={start:performance.now(),angle};start();
+      const now=performance.now(),angle=((now-rotationAt)/SPIN_MS)*TAU,{scale,alpha}=entrance(now);
+      for(const g of endpoints){const p=project(g.unit,g.shell,angle);g.origin={x:center.x+(p.x-center.x)*scale,y:center.y+(p.y-center.y)*scale,r:Math.max(1.5,g.radius*(.7+.6*p.depth)*p.s)*scale};}
+      button.disabled=true;scene.dataset.gateway='disintegrating';popping={start:now,angle,scale,alpha};start();
     }
     function tick(now){
       frame=null;if(popped)return;
@@ -2236,7 +2320,7 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
       if(dirty){const wasPopping=popping;prepare();if(wasPopping){settle();return;}}
       if(popping){const p=Math.min(1,(now-popping.start)/POP_MS);scene.style.setProperty('--gateway-reveal',String(ease((p-.4)/.6)));paintPop(p);if(p>=1){settle();return;}}
       else{
-        if(rect.bottom>0&&rect.top<innerHeight&&now-lastPaint>=28){lastPaint=now;paintGlobe(now);}
+        if(rect.bottom>0&&rect.top<innerHeight&&now-lastPaint>=28){if(entryAt===null)entryAt=now;lastPaint=now;paintGlobe(now);}
         // Populate event sprites in small slices, after the globe has been drawn.
         const until=performance.now()+2,stop=Math.min(endpoints.length,warmIndex+4);
         for(;warmIndex<stop&&performance.now()<until;warmIndex++){const g=endpoints[warmIndex];for(let r=1.5;r<=9;r+=.5)paintPoint(warmCtx,{...g,radius:r},20,20,1);}
@@ -2247,7 +2331,7 @@ footer.site-credit{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(
     function start(){if(frame===null&&!popped)frame=requestAnimationFrame(tick);}
     function stop(){if(frame!==null){cancelAnimationFrame(frame);frame=null;}}
     function reform(){
-      popped=false;popping=null;host.hidden=false;button.disabled=false;scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);gate(true);rotationAt=performance.now();
+      popped=false;popping=null;host.hidden=false;button.disabled=false;scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);gate(true);rotationAt=performance.now();entryAt=rotationAt;
       const rect=canvas.getBoundingClientRect(),key=`${Math.round(rect.width)}x${Math.round(rect.height)}`;
       if(dirty||key!==sizeKey)prepare();
       // Paint before navigation, including when the sphere is still offscreen.
@@ -2317,6 +2401,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   const severityMap = new Map(severityData.records.map((record) => [record.id, record]));
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
+  const uiIcon = (kind='arrow', direction='up') => `<svg class="ui-icon ui-${kind} ui-${direction}" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-${kind}"/></svg>`;
   const DAY = 86400000;
   const MIN_TIME_SPAN = 60000;
   let query = window.HaruspexQuery.compile('');
@@ -2819,6 +2904,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#plot-empty').hidden = visible.length > 0;
     const fieldCount = points.filter((point) => !point.boundary).length + tailSegments.length;
     $('#viewport-count').textContent = `${fieldCount} in the field`;
+    updateOpenDateCount();
     $('#date-tail-label').textContent='Unknown start · tail length is not duration';
     bowCanvas.dataset.openTails=String(bowPoints.filter(p=>p.event._time.openStart).length);
     $('#visible-count').textContent = visible.length; $('#total-event-count').textContent = events.length;
@@ -2830,14 +2916,18 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     }
     drawOverview(state.range, true);
   }
+  function updateOpenDateCount() {
+    const count=tailSegments.length,button=$('#unplaced-button');
+    button.hidden=state.view!=='stream'||count===0;
+    button.innerHTML=`(<em>incl.</em> ${count} open-start ${count===1?'date':'dates'})`;
+    button.setAttribute('aria-label',`Included in the field: ${count} events with unknown start dates. Show the matching records.`);
+  }
   function renderComets() {
     // Boundary heads and trails participate in the canvas hit testing; the
     // register provides keyboard access to every record. There is no extra row.
     $('#comet-layer').hidden = true;
     $('#undated-records').hidden = true;
-    const openCount = visible.filter((event) => event._time.center === null).length;
-    $('#unplaced-button').hidden = state.view !== 'stream' || !openCount;
-    $('#unplaced-button').textContent = `${openCount} open-start dates`;
+    updateOpenDateCount();
     timeline.dataset.boundaryHeads = String(tailSegments.filter((point) => point.headVisible).length);
     if(state.view==='stream')$('#date-tail-label').textContent='Unknown start → by date';
     timeline.dataset.openTails = String(tailSegments.length);
@@ -2883,7 +2973,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   function eventInvestigation(event) {
     const findings = castData.findings.filter(item => item.event_ids.includes(event.id));
     const additions = researchData.evidence_items.filter(item => item.event_ids?.includes(event.id));
-    return `<section class="event-investigation"><h3>Investigate this event</h3>${findings.length ? findings.map(item => `<button data-event-finding="${item.id}"><span>${escapeHtml(item.title)}</span></button>`).join('') : '<p>What permitted this action, who could stop it, and what evidence would show whether an intervention worked?</p><button id="event-inquiry-browse">Examine these questions</button>'}${additions.length ? `<h3>Additional evidence</h3>${additions.map(item=>`<button data-event-evidence="${escapeHtml(item.id)}"><span>${escapeHtml(item.title)}</span><span>↗</span></button>`).join('')}` : ''}</section>`;
+    return `<section class="event-investigation"><h3>Investigate this event</h3>${findings.length ? findings.map(item => `<button data-event-finding="${item.id}"><span>${escapeHtml(item.title)}</span></button>`).join('') : '<p>What permitted this action, who could stop it, and what evidence would show whether an intervention worked?</p><button id="event-inquiry-browse">Examine these questions</button>'}${additions.length ? `<h3>Additional evidence</h3>${additions.map(item=>`<button data-event-evidence="${escapeHtml(item.id)}"><span>${escapeHtml(item.title)}</span>${uiIcon('external')}</button>`).join('')}` : ''}</section>`;
   }
   function openInvestigation(id, eventId = null) {
     closeDetails();changeView('cast'); renderCast(); castUI.focusFinding(id, eventId);
@@ -2912,9 +3002,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
       ${eventInvestigation(event)}
       ${conflicts.map((conflict) => `<div class="discrepancy-note"><strong>Accounts differ · ${conflict.conflict_id}</strong><p>${escapeHtml(conflict.detail)}</p><button class="text-button compare-sources" data-conflict="${conflict.conflict_id}">Compare sources</button></div>`).join('')}
       <div class="detail-block"><h3>Why this classification</h3><p>${escapeHtml(severityExplanation)}</p><p class="point-reading">Provisional assessment · ${escapeHtml(assessment.confidence.replaceAll('_', ' '))} confidence</p></div>
-      <div class="detail-block"><h3>Primary source</h3><a class="source-link" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer"><span>${escapeHtml(source.publisher)}</span><span aria-hidden="true">↗</span></a><div class="source-locator">${escapeHtml(event.source_locator)}</div></div>
-      <button class="detail-more" id="impact-record-button">Severity assessment & basis <span aria-hidden="true">↗</span></button>
-      <button class="detail-more" id="full-record-button">All 45 fields & uncertainties <span aria-hidden="true">↗</span></button>
+      <div class="detail-block"><h3>Primary source</h3><a class="source-link" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer"><span>${escapeHtml(source.publisher)}</span>${uiIcon('external')}</a><div class="source-locator">${escapeHtml(event.source_locator)}</div></div>
+      <button class="detail-more" id="impact-record-button">Severity assessment & basis ${uiIcon('external')}</button>
+      <button class="detail-more" id="full-record-button">All 45 fields & uncertainties ${uiIcon('external')}</button>
       ${state.nearby.length > 1 ? `<div class="nearby-group"><span>${state.nearby.length} nearby events</span>${state.nearby.filter((entry) => entry.id !== event.id).map((entry) => `<button data-nearby="${entry.id}">${entry.id} · ${escapeHtml(entry.title)}</button>`).join('')}</div>` : ''}`;
     $$('[data-event-finding]').forEach(button => button.addEventListener('click', () => openInvestigation(button.dataset.eventFinding, event.id)));
     $$('[data-event-evidence]').forEach(button => button.addEventListener('click', () => { closeDetails();changeView('cast'); renderCast(); castUI.focusEvidence(button.dataset.eventEvidence); }));
@@ -3233,7 +3323,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if (!camera) $('#bowtie-map').innerHTML = clusters.map((cluster) => {
       const x = focused ? margin : width * [.16, .5, .84][cluster.index];
       const y = focused ? fieldTop - 14 : Math.min(fieldBottom + 12, height - (narrow ? 205 : 190));
-      return focused ? `<div class="bow-label focused-label" style="left:${x}px;top:${y}px"><span>${cluster.label}</span><small>${cluster.entries.length} events</small></div>` : `<button class="bow-label" data-bow-group="${cluster.key}" style="left:${x}px;top:${y}px" aria-label="Focus ${cluster.label}, ${cluster.entries.length} events"><span>${cluster.label}</span><small>${cluster.entries.length} events <i aria-hidden="true">↗</i></small></button>`;
+      return focused ? `<div class="bow-label focused-label" style="left:${x}px;top:${y}px"><span>${cluster.label}</span><small>${cluster.entries.length} events</small></div>` : `<button class="bow-label" data-bow-group="${cluster.key}" style="left:${x}px;top:${y}px" aria-label="Focus ${cluster.label}, ${cluster.entries.length} events"><span>${cluster.label}</span><small>${cluster.entries.length} events ${uiIcon('external')}</small></button>`;
     }).join('');
     if (!camera) $$('[data-bow-group]').forEach((button) => button.addEventListener('click', () => focusBowtie(button.dataset.bowGroup || null)));
     if (!camera && selectedFocus !== undefined) $(`#bowtie-navigation [data-bow-group="${selectedFocus}"]`)?.focus({ preventScroll: true });
@@ -3425,8 +3515,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#query-feedback').textContent = query.error || '';
     $('#event-search').setAttribute('aria-invalid', String(!!query.error));
     $('#viewport-count').hidden = state.view !== 'stream';
+    $('.field-presence').hidden = state.view !== 'stream';
     $('#assessment-tabs').hidden = state.view === 'cast';
-    $('#zoom-y-out').parentElement.querySelector('span').textContent = state.assessment === 'impact' ? 'Severity ↕' : 'Vertical ↕';
+    $('#zoom-y-out').parentElement.querySelector('span').innerHTML = `${state.assessment === 'impact' ? 'Severity' : 'Vertical'} ${uiIcon('axis','vertical')}`;
     $('#zoom-y-out').disabled = state.vertical[1] - state.vertical[0] >= .999;
     $('#move-up').disabled = state.vertical[0] <= 0;
     $('#move-down').disabled = state.vertical[1] >= 1;
@@ -3439,7 +3530,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if (!term || searchDismissed === term || state.view === 'cast') { box.hidden = true; box.innerHTML = ''; return; }
     const matches = allFilteredPool;
     const rows = matches.slice(0, 8).map((event) => `<button type="button" role="option" data-result="${event.id}">${eventMark(event)}<span class="result-title">${escapeHtml(event.title)}</span><span class="result-meta">${escapeHtml(dateLabel(event, true))}</span></button>`).join('');
-    box.innerHTML = `${rows || '<p class="result-empty">No events match.</p>'}<div class="result-foot"><span>${matches.length} matching ${matches.length === 1 ? 'event' : 'events'}</span>${matches.length ? '<a href="#event-list" id="results-to-list">Events <span aria-hidden="true">↓</span></a>' : ''}</div>`;
+    box.innerHTML = `${rows || '<p class="result-empty">No events match.</p>'}<div class="result-foot"><span>${matches.length} matching ${matches.length === 1 ? 'event' : 'events'}</span>${matches.length ? `<a href="#event-list" id="results-to-list">Events ${uiIcon('arrow','down')}</a>` : ''}</div>`;
     box.hidden = false;
     $$('#search-results [data-result]').forEach((button) => button.addEventListener('click', () => {
       closeSearch();
@@ -3609,7 +3700,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     change();
     if(ghost){
       const done=()=>{ghost.remove();if(entrySnapshot===ghost)entrySnapshot=null;};
-      ghost.animate([{opacity:1},{opacity:0}],{duration:280,easing:'ease-out',fill:'forwards'}).finished.then(done).catch(done);
+      ghost.animate([{opacity:1},{opacity:0}],{duration:420,easing:'ease-out',fill:'forwards'}).finished.then(done).catch(done);
     }
   }
   function enterField() {
@@ -3639,7 +3730,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     container.append(section);
   }
   const glossary=[
-    ['CAST','Causal Analysis based on Systems Theory: a method for investigating how people, technology and organizational controls combined to produce an incident.'],
+    ['CAST','Causal Analysis based on Systems Theory: a method for investigating how people, technology, and organizational controls combined to produce an incident.'],
     ['STAMP','Systems-Theoretic Accident Model and Processes: the safety model underlying CAST.'],
     ['Artifactory','A repository used to store software packages and cached files. Agents used OpenAI’s instance as a shared communication channel.'],
     ['ExploitGym','An evaluation environment that assigns agents cybersecurity tasks.'],
@@ -3658,14 +3749,17 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     ['ablation','A controlled comparison that removes or changes one training ingredient to test its contribution.'],
     ['checkpoint','A saved version of a trained model.'],
     ['scorer','The automated process that judges whether an evaluation task succeeded.'],
-    ['bow-tie','A view grouping precursors, incident activity and subsequent response around a central event. Within each wing, events run chronologically from left to right. Its connecting lines do not establish causation.'],
-  ];
+    ['bow-tie','A view grouping precursors, incident activity, and subsequent response around a central event. Within each wing, events run chronologically from left to right. Its connecting lines do not establish causation.'],
+  ].sort(([a],[b])=>a.localeCompare(b, 'en', {sensitivity:'base'}));
+  function glossaryEntries(terms){
+    return `<dl class="glossary-list">${terms.map(([name,meaning])=>`<div><dt>${escapeHtml(name)}</dt><dd>${escapeHtml(meaning)}</dd></div>`).join('')}</dl>`;
+  }
   function explainTerms(container){
     if(container.querySelector('.view-terms'))return;
     const text=container.textContent;
     const terms=glossary.filter(([term])=>new RegExp(`\\b${term}\\b`,'i').test(text));
     if(!terms.length)return;
-    const block=document.createElement('details');block.className='view-terms';block.innerHTML=`<summary>Terms used here</summary><dl>${terms.map(([name,meaning])=>`<dt>${escapeHtml(name)}</dt><dd>${escapeHtml(meaning)}</dd>`).join('')}</dl>`;container.append(block);
+    const block=document.createElement('details');block.className='view-terms';block.innerHTML=`<summary>Glossary</summary>${glossaryEntries(terms)}`;container.append(block);
   }
   window.HaruspexReader={annotate(container){endnotes(container);explainTerms(container);}};
   function coverageContent(found=false){
@@ -3680,7 +3774,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   function openDialog(title, content) {
     if (!$('#info-dialog').open) dialogTrigger = document.activeElement;
     $('#dialog-content').innerHTML = `<h2 id="dialog-title">${title}</h2>${content}`;
-    if(title!=='Sources')window.HaruspexReader.annotate($('#dialog-content'));
+    if(title!=='Sources'&&title!=='Glossary')window.HaruspexReader.annotate($('#dialog-content'));
     $('#info-dialog').showModal(); if (!CSS.supports('transition-behavior', 'allow-discrete')) appear($('#info-dialog')); $('#dialog-close').focus();
   }
   function openTemporalRecord(event) {
@@ -3972,6 +4066,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('#stage-close').addEventListener('click', closeStages);
   $('#all-stages').addEventListener('click', () => selectStage('all'));
   $('#ontology-button').addEventListener('click', openOntology);
+  $('#glossary-button').addEventListener('click',()=>openDialog('Glossary',glossaryEntries(glossary)));
   $('#stage-structure').addEventListener('click', openOntology);
   $('#query-help').addEventListener('click', openQueryHelp);
   $('#framework-info').addEventListener('click', openFramework);
@@ -4078,7 +4173,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const url = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = url; link.download = 'haruspex-atlas-data-v10.json'; document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 60000); notify('Dataset download requested · events, reviews, dates and ontology.');
   });
   $('#load-more').addEventListener('click', () => { state.limit += 24; renderList(); });
-  $('#list-toggle').addEventListener('click', () => { const collapsed = !$('#record-list-wrap').hidden; $('#record-list-wrap').hidden = collapsed; $('#list-toggle').setAttribute('aria-expanded', String(!collapsed)); $('#list-toggle').textContent = collapsed ? 'Expand +' : 'Collapse −'; });
+  $('#list-toggle').addEventListener('click', () => { const collapsed = !$('#record-list-wrap').hidden; $('#record-list-wrap').hidden = collapsed; $('#list-toggle').setAttribute('aria-expanded', String(!collapsed)); $('#list-toggle').innerHTML = `${collapsed ? 'Expand' : 'Collapse'} ${uiIcon('chevron')}`; });
   $('.brand').addEventListener('click', (event) => { event.preventDefault(); changeView('stream'); reset(); closeDetails(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false'); window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
   document.addEventListener('keydown', (event) => { if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) && !$('#info-dialog').open && $('#detail-panel').hidden) { event.preventDefault(); openSearch(); } });
   ontology.stages.forEach((stage) => { const option = document.createElement('option'); option.value = stage.id; option.textContent = stage.label; $('#stage-filter').append(option); });

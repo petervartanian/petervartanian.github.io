@@ -43,6 +43,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   const severityMap = new Map(severityData.records.map((record) => [record.id, record]));
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
+  const uiIcon = (kind='arrow', direction='up') => `<svg class="ui-icon ui-${kind} ui-${direction}" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-${kind}"/></svg>`;
   const DAY = 86400000;
   const MIN_TIME_SPAN = 60000;
   let query = window.HaruspexQuery.compile('');
@@ -545,6 +546,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#plot-empty').hidden = visible.length > 0;
     const fieldCount = points.filter((point) => !point.boundary).length + tailSegments.length;
     $('#viewport-count').textContent = `${fieldCount} in the field`;
+    updateOpenDateCount();
     $('#date-tail-label').textContent='Unknown start · tail length is not duration';
     bowCanvas.dataset.openTails=String(bowPoints.filter(p=>p.event._time.openStart).length);
     $('#visible-count').textContent = visible.length; $('#total-event-count').textContent = events.length;
@@ -556,14 +558,18 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     }
     drawOverview(state.range, true);
   }
+  function updateOpenDateCount() {
+    const count=tailSegments.length,button=$('#unplaced-button');
+    button.hidden=state.view!=='stream'||count===0;
+    button.innerHTML=`(<em>incl.</em> ${count} open-start ${count===1?'date':'dates'})`;
+    button.setAttribute('aria-label',`Included in the field: ${count} events with unknown start dates. Show the matching records.`);
+  }
   function renderComets() {
     // Boundary heads and trails participate in the canvas hit testing; the
     // register provides keyboard access to every record. There is no extra row.
     $('#comet-layer').hidden = true;
     $('#undated-records').hidden = true;
-    const openCount = visible.filter((event) => event._time.center === null).length;
-    $('#unplaced-button').hidden = state.view !== 'stream' || !openCount;
-    $('#unplaced-button').textContent = `${openCount} open-start dates`;
+    updateOpenDateCount();
     timeline.dataset.boundaryHeads = String(tailSegments.filter((point) => point.headVisible).length);
     if(state.view==='stream')$('#date-tail-label').textContent='Unknown start → by date';
     timeline.dataset.openTails = String(tailSegments.length);
@@ -609,7 +615,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   function eventInvestigation(event) {
     const findings = castData.findings.filter(item => item.event_ids.includes(event.id));
     const additions = researchData.evidence_items.filter(item => item.event_ids?.includes(event.id));
-    return `<section class="event-investigation"><h3>Investigate this event</h3>${findings.length ? findings.map(item => `<button data-event-finding="${item.id}"><span>${escapeHtml(item.title)}</span></button>`).join('') : '<p>What permitted this action, who could stop it, and what evidence would show whether an intervention worked?</p><button id="event-inquiry-browse">Examine these questions</button>'}${additions.length ? `<h3>Additional evidence</h3>${additions.map(item=>`<button data-event-evidence="${escapeHtml(item.id)}"><span>${escapeHtml(item.title)}</span><span>↗</span></button>`).join('')}` : ''}</section>`;
+    return `<section class="event-investigation"><h3>Investigate this event</h3>${findings.length ? findings.map(item => `<button data-event-finding="${item.id}"><span>${escapeHtml(item.title)}</span></button>`).join('') : '<p>What permitted this action, who could stop it, and what evidence would show whether an intervention worked?</p><button id="event-inquiry-browse">Examine these questions</button>'}${additions.length ? `<h3>Additional evidence</h3>${additions.map(item=>`<button data-event-evidence="${escapeHtml(item.id)}"><span>${escapeHtml(item.title)}</span>${uiIcon('external')}</button>`).join('')}` : ''}</section>`;
   }
   function openInvestigation(id, eventId = null) {
     closeDetails();changeView('cast'); renderCast(); castUI.focusFinding(id, eventId);
@@ -638,9 +644,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
       ${eventInvestigation(event)}
       ${conflicts.map((conflict) => `<div class="discrepancy-note"><strong>Accounts differ · ${conflict.conflict_id}</strong><p>${escapeHtml(conflict.detail)}</p><button class="text-button compare-sources" data-conflict="${conflict.conflict_id}">Compare sources</button></div>`).join('')}
       <div class="detail-block"><h3>Why this classification</h3><p>${escapeHtml(severityExplanation)}</p><p class="point-reading">Provisional assessment · ${escapeHtml(assessment.confidence.replaceAll('_', ' '))} confidence</p></div>
-      <div class="detail-block"><h3>Primary source</h3><a class="source-link" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer"><span>${escapeHtml(source.publisher)}</span><span aria-hidden="true">↗</span></a><div class="source-locator">${escapeHtml(event.source_locator)}</div></div>
-      <button class="detail-more" id="impact-record-button">Severity assessment & basis <span aria-hidden="true">↗</span></button>
-      <button class="detail-more" id="full-record-button">All 45 fields & uncertainties <span aria-hidden="true">↗</span></button>
+      <div class="detail-block"><h3>Primary source</h3><a class="source-link" href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer"><span>${escapeHtml(source.publisher)}</span>${uiIcon('external')}</a><div class="source-locator">${escapeHtml(event.source_locator)}</div></div>
+      <button class="detail-more" id="impact-record-button">Severity assessment & basis ${uiIcon('external')}</button>
+      <button class="detail-more" id="full-record-button">All 45 fields & uncertainties ${uiIcon('external')}</button>
       ${state.nearby.length > 1 ? `<div class="nearby-group"><span>${state.nearby.length} nearby events</span>${state.nearby.filter((entry) => entry.id !== event.id).map((entry) => `<button data-nearby="${entry.id}">${entry.id} · ${escapeHtml(entry.title)}</button>`).join('')}</div>` : ''}`;
     $$('[data-event-finding]').forEach(button => button.addEventListener('click', () => openInvestigation(button.dataset.eventFinding, event.id)));
     $$('[data-event-evidence]').forEach(button => button.addEventListener('click', () => { closeDetails();changeView('cast'); renderCast(); castUI.focusEvidence(button.dataset.eventEvidence); }));
@@ -959,7 +965,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if (!camera) $('#bowtie-map').innerHTML = clusters.map((cluster) => {
       const x = focused ? margin : width * [.16, .5, .84][cluster.index];
       const y = focused ? fieldTop - 14 : Math.min(fieldBottom + 12, height - (narrow ? 205 : 190));
-      return focused ? `<div class="bow-label focused-label" style="left:${x}px;top:${y}px"><span>${cluster.label}</span><small>${cluster.entries.length} events</small></div>` : `<button class="bow-label" data-bow-group="${cluster.key}" style="left:${x}px;top:${y}px" aria-label="Focus ${cluster.label}, ${cluster.entries.length} events"><span>${cluster.label}</span><small>${cluster.entries.length} events <i aria-hidden="true">↗</i></small></button>`;
+      return focused ? `<div class="bow-label focused-label" style="left:${x}px;top:${y}px"><span>${cluster.label}</span><small>${cluster.entries.length} events</small></div>` : `<button class="bow-label" data-bow-group="${cluster.key}" style="left:${x}px;top:${y}px" aria-label="Focus ${cluster.label}, ${cluster.entries.length} events"><span>${cluster.label}</span><small>${cluster.entries.length} events ${uiIcon('external')}</small></button>`;
     }).join('');
     if (!camera) $$('[data-bow-group]').forEach((button) => button.addEventListener('click', () => focusBowtie(button.dataset.bowGroup || null)));
     if (!camera && selectedFocus !== undefined) $(`#bowtie-navigation [data-bow-group="${selectedFocus}"]`)?.focus({ preventScroll: true });
@@ -1151,8 +1157,9 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     $('#query-feedback').textContent = query.error || '';
     $('#event-search').setAttribute('aria-invalid', String(!!query.error));
     $('#viewport-count').hidden = state.view !== 'stream';
+    $('.field-presence').hidden = state.view !== 'stream';
     $('#assessment-tabs').hidden = state.view === 'cast';
-    $('#zoom-y-out').parentElement.querySelector('span').textContent = state.assessment === 'impact' ? 'Severity ↕' : 'Vertical ↕';
+    $('#zoom-y-out').parentElement.querySelector('span').innerHTML = `${state.assessment === 'impact' ? 'Severity' : 'Vertical'} ${uiIcon('axis','vertical')}`;
     $('#zoom-y-out').disabled = state.vertical[1] - state.vertical[0] >= .999;
     $('#move-up').disabled = state.vertical[0] <= 0;
     $('#move-down').disabled = state.vertical[1] >= 1;
@@ -1165,7 +1172,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     if (!term || searchDismissed === term || state.view === 'cast') { box.hidden = true; box.innerHTML = ''; return; }
     const matches = allFilteredPool;
     const rows = matches.slice(0, 8).map((event) => `<button type="button" role="option" data-result="${event.id}">${eventMark(event)}<span class="result-title">${escapeHtml(event.title)}</span><span class="result-meta">${escapeHtml(dateLabel(event, true))}</span></button>`).join('');
-    box.innerHTML = `${rows || '<p class="result-empty">No events match.</p>'}<div class="result-foot"><span>${matches.length} matching ${matches.length === 1 ? 'event' : 'events'}</span>${matches.length ? '<a href="#event-list" id="results-to-list">Events <span aria-hidden="true">↓</span></a>' : ''}</div>`;
+    box.innerHTML = `${rows || '<p class="result-empty">No events match.</p>'}<div class="result-foot"><span>${matches.length} matching ${matches.length === 1 ? 'event' : 'events'}</span>${matches.length ? `<a href="#event-list" id="results-to-list">Events ${uiIcon('arrow','down')}</a>` : ''}</div>`;
     box.hidden = false;
     $$('#search-results [data-result]').forEach((button) => button.addEventListener('click', () => {
       closeSearch();
@@ -1335,7 +1342,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     change();
     if(ghost){
       const done=()=>{ghost.remove();if(entrySnapshot===ghost)entrySnapshot=null;};
-      ghost.animate([{opacity:1},{opacity:0}],{duration:280,easing:'ease-out',fill:'forwards'}).finished.then(done).catch(done);
+      ghost.animate([{opacity:1},{opacity:0}],{duration:420,easing:'ease-out',fill:'forwards'}).finished.then(done).catch(done);
     }
   }
   function enterField() {
@@ -1365,7 +1372,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     container.append(section);
   }
   const glossary=[
-    ['CAST','Causal Analysis based on Systems Theory: a method for investigating how people, technology and organizational controls combined to produce an incident.'],
+    ['CAST','Causal Analysis based on Systems Theory: a method for investigating how people, technology, and organizational controls combined to produce an incident.'],
     ['STAMP','Systems-Theoretic Accident Model and Processes: the safety model underlying CAST.'],
     ['Artifactory','A repository used to store software packages and cached files. Agents used OpenAI’s instance as a shared communication channel.'],
     ['ExploitGym','An evaluation environment that assigns agents cybersecurity tasks.'],
@@ -1384,14 +1391,17 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     ['ablation','A controlled comparison that removes or changes one training ingredient to test its contribution.'],
     ['checkpoint','A saved version of a trained model.'],
     ['scorer','The automated process that judges whether an evaluation task succeeded.'],
-    ['bow-tie','A view grouping precursors, incident activity and subsequent response around a central event. Within each wing, events run chronologically from left to right. Its connecting lines do not establish causation.'],
-  ];
+    ['bow-tie','A view grouping precursors, incident activity, and subsequent response around a central event. Within each wing, events run chronologically from left to right. Its connecting lines do not establish causation.'],
+  ].sort(([a],[b])=>a.localeCompare(b, 'en', {sensitivity:'base'}));
+  function glossaryEntries(terms){
+    return `<dl class="glossary-list">${terms.map(([name,meaning])=>`<div><dt>${escapeHtml(name)}</dt><dd>${escapeHtml(meaning)}</dd></div>`).join('')}</dl>`;
+  }
   function explainTerms(container){
     if(container.querySelector('.view-terms'))return;
     const text=container.textContent;
     const terms=glossary.filter(([term])=>new RegExp(`\\b${term}\\b`,'i').test(text));
     if(!terms.length)return;
-    const block=document.createElement('details');block.className='view-terms';block.innerHTML=`<summary>Terms used here</summary><dl>${terms.map(([name,meaning])=>`<dt>${escapeHtml(name)}</dt><dd>${escapeHtml(meaning)}</dd>`).join('')}</dl>`;container.append(block);
+    const block=document.createElement('details');block.className='view-terms';block.innerHTML=`<summary>Glossary</summary>${glossaryEntries(terms)}`;container.append(block);
   }
   window.HaruspexReader={annotate(container){endnotes(container);explainTerms(container);}};
   function coverageContent(found=false){
@@ -1406,7 +1416,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   function openDialog(title, content) {
     if (!$('#info-dialog').open) dialogTrigger = document.activeElement;
     $('#dialog-content').innerHTML = `<h2 id="dialog-title">${title}</h2>${content}`;
-    if(title!=='Sources')window.HaruspexReader.annotate($('#dialog-content'));
+    if(title!=='Sources'&&title!=='Glossary')window.HaruspexReader.annotate($('#dialog-content'));
     $('#info-dialog').showModal(); if (!CSS.supports('transition-behavior', 'allow-discrete')) appear($('#info-dialog')); $('#dialog-close').focus();
   }
   function openTemporalRecord(event) {
@@ -1698,6 +1708,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   $('#stage-close').addEventListener('click', closeStages);
   $('#all-stages').addEventListener('click', () => selectStage('all'));
   $('#ontology-button').addEventListener('click', openOntology);
+  $('#glossary-button').addEventListener('click',()=>openDialog('Glossary',glossaryEntries(glossary)));
   $('#stage-structure').addEventListener('click', openOntology);
   $('#query-help').addEventListener('click', openQueryHelp);
   $('#framework-info').addEventListener('click', openFramework);
@@ -1804,7 +1815,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
     const url = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = url; link.download = 'haruspex-atlas-data-v10.json'; document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 60000); notify('Dataset download requested · events, reviews, dates and ontology.');
   });
   $('#load-more').addEventListener('click', () => { state.limit += 24; renderList(); });
-  $('#list-toggle').addEventListener('click', () => { const collapsed = !$('#record-list-wrap').hidden; $('#record-list-wrap').hidden = collapsed; $('#list-toggle').setAttribute('aria-expanded', String(!collapsed)); $('#list-toggle').textContent = collapsed ? 'Expand +' : 'Collapse −'; });
+  $('#list-toggle').addEventListener('click', () => { const collapsed = !$('#record-list-wrap').hidden; $('#record-list-wrap').hidden = collapsed; $('#list-toggle').setAttribute('aria-expanded', String(!collapsed)); $('#list-toggle').innerHTML = `${collapsed ? 'Expand' : 'Collapse'} ${uiIcon('chevron')}`; });
   $('.brand').addEventListener('click', (event) => { event.preventDefault(); changeView('stream'); reset(); closeDetails(); $('#advanced-filters').hidden = true; $('#filter-toggle').setAttribute('aria-expanded', 'false'); window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
   document.addEventListener('keydown', (event) => { if (event.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) && !$('#info-dialog').open && $('#detail-panel').hidden) { event.preventDefault(); openSearch(); } });
   ontology.stages.forEach((stage) => { const option = document.createElement('option'); option.value = stage.id; option.textContent = stage.label; $('#stage-filter').append(option); });

@@ -29,7 +29,7 @@
     let size,center,radius,glow,grain,backdrop,endpoints=[],marble=[],dustColors=[],ratio=1,warmIndex=0,baseGradient=null,surfaceLayer=null,surfaceBmp=null,glowBmp=null,backdropBmp=null,lastPaint=0,nudgeAt=-1e9;
     const marbleBitmaps=new Map();const bitmap=(source,done)=>{if(window.createImageBitmap)createImageBitmap(source).then(done).catch(()=>{});};
     const warmCanvas=document.createElement('canvas');warmCanvas.width=warmCanvas.height=40;const warmCtx=warmCanvas.getContext('2d');
-    let dirty=true,popped=false,popping=null,hover=false,frame=null,sizeKey='',locked=false,rotationAt=performance.now();
+    let dirty=true,popped=false,popping=null,hover=false,frame=null,sizeKey='',locked=false,rotationAt=performance.now(),entryAt=null;
     const marbleSprites=new Map();
     function bounds(){const top=scene.parentElement.getBoundingClientRect().top+scrollY,h=scene.getBoundingClientRect().height;return{top,h};}
     function lock(value){if(value===locked)return;locked=value;if(value){for(const child of scene.children){if(child===host)continue;inertStates.set(child,child.inert);child.inert=true;}}else{for(const[child,v]of inertStates)child.inert=v;inertStates.clear();}}
@@ -64,13 +64,13 @@
     function unrotate(v,angle){const ca=Math.cos(angle),sa=Math.sin(angle),ct=Math.cos(TILT),st=Math.sin(TILT);const y=v[1]*ct+v[2]*st,z1=-v[1]*st+v[2]*ct;return[v[0]*ca-z1*sa,y,v[0]*sa+z1*ca];}
     function project(u,shell,angle){const[x1,y2,z2]=rotate(u,angle);const R=radius*shell,f=radius*2.7,s=f/(f+z2*R);return{x:center.x+x1*R*s,y:center.y+y2*R*s,s,depth:(1-z2)/2,light:Math.max(0,-(x1*.45+y2*.55+z2*.7))};}
     function silhouette(angle){const path=new Path2D();for(let k=0;k<RIM;k++){const a=k/RIM*TAU,u=unrotate([Math.cos(a),Math.sin(a),0],angle),r=radius*bump(u)*.985,x=center.x+Math.cos(a)*r,y=center.y+Math.sin(a)*r;if(k)path.lineTo(x,y);else path.moveTo(x,y);}path.closePath();return path;}
-    function paintSolid(angle,alpha=1){
+    function paintSolid(angle,alpha=1,entryScale=1){
       const{ctx,width,height}=size,lift=hover?1.15:1,bx=center.x-radius*1.15,by=center.y-radius*1.15,bs=radius*2.3;
       const gx=Math.max(0,center.x-radius*1.7),gy=Math.max(0,center.y-radius*1.7),gw=Math.min(width,center.x+radius*1.7)-gx,gh=Math.min(height,center.y+radius*1.7)-gy;
       const path=silhouette(angle);
       ctx.save();ctx.globalAlpha=alpha;
       // The ball breathes once it has waited three seconds, and swells briefly when a wheel gesture asks the page to move.
-      const t=performance.now(),idle=t-rotationAt,n=(t-nudgeAt)/700;let k=1;if(idle>3000)k+=.012*(.5-.5*Math.cos((idle-3000)/1500*Math.PI));if(n>=0&&n<1)k+=.035*Math.sin(n*Math.PI);if(k!==1){ctx.translate(center.x,center.y);ctx.scale(k,k);ctx.translate(-center.x,-center.y);}
+      const t=performance.now(),idle=t-rotationAt,n=(t-nudgeAt)/700;let k=entryScale;if(idle>3000)k+=.012*(.5-.5*Math.cos((idle-3000)/1500*Math.PI));if(n>=0&&n<1)k+=.035*Math.sin(n*Math.PI);if(k!==1){ctx.translate(center.x,center.y);ctx.scale(k,k);ctx.translate(-center.x,-center.y);}
       ctx.fillStyle=baseGradient;ctx.fill(path);
       ctx.globalCompositeOperation='source-atop';
       for(const m of marble){const p=project(m.unit,1,angle);if(p.depth<.48)continue;const w=m.r*2*p.s*(1+.4*(p.depth-.5));ctx.globalAlpha=alpha*m.alpha*lift*(.45+.55*p.light);ctx.drawImage(marbleBitmaps.get(m.color)||marbleSprite(m.color),p.x-w/2,p.y-w/2,w,w);}
@@ -78,15 +78,25 @@
       if(hover){ctx.globalAlpha=alpha*.08;ctx.fillStyle='#dfeaf0';ctx.fillRect(bx,by,bs,bs);}
       ctx.globalCompositeOperation='destination-over';ctx.globalAlpha=alpha;
       ctx.drawImage(glowBmp||glow,gx*ratio,gy*ratio,gw*ratio,gh*ratio,gx,gy,gw,gh);
-      ctx.globalCompositeOperation='source-over';ctx.globalAlpha=alpha*.35;ctx.strokeStyle='#dfeaf0';ctx.lineWidth=.6;ctx.stroke(path);
       ctx.restore();
     }
-    function paintGlobe(now){const{ctx,width,height}=size;ctx.clearRect(0,0,width,height);paintSolid(reduced.matches?.7:((now-rotationAt)/SPIN_MS)*TAU);canvas.dataset.progress='0';}
+    function entrance(now){
+      const progress=reduced.matches||entryAt===null?1:clamp((now-entryAt)/850),t=easeOut(progress);
+      canvas.dataset.entranceProgress=progress.toFixed(3);
+      scene.dataset.entrance=progress<1?'arriving':'settled';
+      return{scale:.86+.14*t,alpha:.16+.84*t};
+    }
+    function paintGlobe(now){
+      const{ctx,width,height}=size,{scale,alpha}=entrance(now);
+      ctx.clearRect(0,0,width,height);
+      paintSolid(reduced.matches?.7:((now-rotationAt)/SPIN_MS)*TAU,alpha,scale);
+      canvas.dataset.progress='0';
+    }
     function paintPop(progress){
       const{ctx,width,height}=size;ctx.clearRect(0,0,width,height);
       const reveal=ease((progress-.45)/.55);if(backdrop&&reveal>.002){ctx.globalAlpha=reveal;ctx.drawImage(backdropBmp||backdrop,0,0,width,height);ctx.globalAlpha=1;}
       const shatter=clamp(progress/.1);
-      if(shatter<1)paintSolid(popping.angle,1-shatter);
+      if(shatter<1)paintSolid(popping.angle,(1-shatter)*popping.alpha,popping.scale);
       ctx.globalAlpha=1;
       for(const g of endpoints){const t=easeOut((progress-g.delay)/(1-g.delay)),o=g.origin,bend=Math.sin(t*Math.PI)*g.bend,x=mix(o.x,g.x,t)+bend,y=mix(o.y,g.y,t)-bend*.42;paintPoint(ctx,{...g,radius:mix(o.r,g.radius,t)},x,y,Math.max(shatter,t)*(.85+.15*t));}
       canvas.dataset.progress=progress.toFixed(3);
@@ -98,9 +108,9 @@
       if(popped||popping)return;
       if(dirty)prepare();
       if(instant||reduced.matches){settle();return;}
-      const angle=((performance.now()-rotationAt)/SPIN_MS)*TAU;
-      for(const g of endpoints){const p=project(g.unit,g.shell,angle);g.origin={x:p.x,y:p.y,r:Math.max(1.5,g.radius*(.7+.6*p.depth)*p.s)};}
-      button.disabled=true;scene.dataset.gateway='disintegrating';popping={start:performance.now(),angle};start();
+      const now=performance.now(),angle=((now-rotationAt)/SPIN_MS)*TAU,{scale,alpha}=entrance(now);
+      for(const g of endpoints){const p=project(g.unit,g.shell,angle);g.origin={x:center.x+(p.x-center.x)*scale,y:center.y+(p.y-center.y)*scale,r:Math.max(1.5,g.radius*(.7+.6*p.depth)*p.s)*scale};}
+      button.disabled=true;scene.dataset.gateway='disintegrating';popping={start:now,angle,scale,alpha};start();
     }
     function tick(now){
       frame=null;if(popped)return;
@@ -109,7 +119,7 @@
       if(dirty){const wasPopping=popping;prepare();if(wasPopping){settle();return;}}
       if(popping){const p=Math.min(1,(now-popping.start)/POP_MS);scene.style.setProperty('--gateway-reveal',String(ease((p-.4)/.6)));paintPop(p);if(p>=1){settle();return;}}
       else{
-        if(rect.bottom>0&&rect.top<innerHeight&&now-lastPaint>=28){lastPaint=now;paintGlobe(now);}
+        if(rect.bottom>0&&rect.top<innerHeight&&now-lastPaint>=28){if(entryAt===null)entryAt=now;lastPaint=now;paintGlobe(now);}
         // Populate event sprites in small slices, after the globe has been drawn.
         const until=performance.now()+2,stop=Math.min(endpoints.length,warmIndex+4);
         for(;warmIndex<stop&&performance.now()<until;warmIndex++){const g=endpoints[warmIndex];for(let r=1.5;r<=9;r+=.5)paintPoint(warmCtx,{...g,radius:r},20,20,1);}
@@ -120,7 +130,7 @@
     function start(){if(frame===null&&!popped)frame=requestAnimationFrame(tick);}
     function stop(){if(frame!==null){cancelAnimationFrame(frame);frame=null;}}
     function reform(){
-      popped=false;popping=null;host.hidden=false;button.disabled=false;scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);gate(true);rotationAt=performance.now();
+      popped=false;popping=null;host.hidden=false;button.disabled=false;scene.dataset.gateway='sphere';scene.style.setProperty('--gateway-reveal','0');lock(true);gate(true);rotationAt=performance.now();entryAt=rotationAt;
       const rect=canvas.getBoundingClientRect(),key=`${Math.round(rect.width)}x${Math.round(rect.height)}`;
       if(dirty||key!==sizeKey)prepare();
       // Paint before navigation, including when the sphere is still offscreen.

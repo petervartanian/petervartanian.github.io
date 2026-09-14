@@ -9,6 +9,13 @@
   <style>/* STYLES */</style>
 </head>
 <body>
+  <svg class="ui-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="ui-arrow" viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></symbol>
+    <symbol id="ui-chevron" viewBox="0 0 16 16"><path d="m4 6 4 4 4-4"/></symbol>
+    <symbol id="ui-external" viewBox="0 0 16 16"><path d="M4 12 12 4M5 4h7v7"/></symbol>
+    <symbol id="ui-reset" viewBox="0 0 16 16"><path d="M3 6a5 5 0 1 1 0 4M3 2v4h4"/></symbol>
+    <symbol id="ui-axis" viewBox="0 0 16 16"><path d="M2 8h12M5 5 2 8l3 3M11 5l3 3-3 3"/></symbol>
+  </defs></svg>
   <a class="skip-link" href="#event-list">Skip to events</a>
   <div class="grain" aria-hidden="true"></div>
   <main>
@@ -45,21 +52,22 @@
             <button id="cast-tab" role="tab" aria-selected="false" aria-controls="cast-view" class="view-tab"><span class="view-order">Bonus:</span> Investigate!</button>
           </div>
           <details id="resource-menu" class="resource-menu">
-            <summary aria-label="Resources">More <span aria-hidden="true">⌄</span></summary>
+            <summary aria-label="Resources">More</summary>
             <nav class="utility" aria-label="Resources">
               <button id="ontology-button" class="text-button">Structure</button>
               <button id="method-button" class="text-button">How to read this</button>
               <button id="sources-button" class="text-button">Sources</button>
-              <button id="export-button" class="export-button">Export <span aria-hidden="true">↓</span></button>
+              <button id="glossary-button" class="text-button">Glossary</button>
+              <button id="export-button" class="export-button">Export <svg class="ui-icon ui-arrow ui-down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button>
             </nav>
           </details>
-          <a id="back-to-title" class="back-up" href="#intro">↑ Title</a>
+          <a id="back-to-title" class="back-up" href="#intro"><svg class="ui-icon ui-arrow ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg> Title</a>
         </header>
         <div class="scene-heading">
           <h2 id="page-title" class="sr-only">OpenAI and Hugging Face incident explorer</h2>
           <div class="scene-actions">
             <button id="search-toggle" class="search-toggle" aria-label="Search events" aria-expanded="false" aria-controls="event-search search-results"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></button><label class="search"><span aria-hidden="true">⌕</span><input type="search" id="event-search" placeholder="Search events, people, systems…" aria-describedby="query-feedback" aria-label="Search events"><kbd>/</kbd></label><button id="query-help" class="query-help" aria-label="Search guide">?</button>
-            <button id="filter-toggle" aria-expanded="false" aria-controls="advanced-filters">Filters <span id="filter-indicator"></span><span aria-hidden="true">⌄</span></button>
+            <button id="filter-toggle" aria-expanded="false" aria-controls="advanced-filters">Filters <span id="filter-indicator"></span><svg class="ui-icon ui-chevron ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-chevron"/></svg></button>
           </div>
           <p id="query-feedback" class="query-feedback" role="status" hidden></p>
           <div id="search-results" class="search-results" role="listbox" aria-label="Matching events" hidden></div>
@@ -71,7 +79,7 @@
             <button data-lifecycle="during" aria-pressed="false"><span class="lifecycle-number">II.</span> During</button>
             <button data-lifecycle="after" aria-pressed="false"><span class="lifecycle-number">III.</span> After</button>
           </div>
-          <button id="stage-toggle" class="stage-toggle" aria-expanded="false" aria-controls="stage-panel"><span id="stage-label">All stages</span><span id="stage-total">27</span><span aria-hidden="true">⌄</span></button>
+          <button id="stage-toggle" class="stage-toggle" aria-expanded="false" aria-controls="stage-panel"><span id="stage-label">All stages</span><span id="stage-total">27</span><svg class="ui-icon ui-chevron ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-chevron"/></svg></button>
           <div id="assessment-tabs" class="assessment-tabs" role="group" aria-label="Assessment field">
             <button data-assessment="impact" aria-pressed="true" class="selected">Impact <span id="assessment-impact-count" class="assessment-count">599</span></button>
             <button data-assessment="context" aria-pressed="false">Context <span id="assessment-context-count" class="assessment-count">192</span></button>
@@ -91,8 +99,8 @@
           <div class="filter-options">
             <label hidden>Stage<select id="stage-filter"><option value="all">All stages</option></select></label>
             <label>Severity band<select id="severity-filter"><option value="all">Any severity</option></select></label>
-            <div class="intervention-options"><button id="actual-interventions" aria-pressed="false">Recorded interventions <span>50</span></button><button id="possible-interventions">Possible interventions <span aria-hidden="true">→</span></button></div>
-            <button id="reset-button" class="reset-button" aria-label="Reset all filters">Reset filters ↺</button>
+            <div class="intervention-options"><button id="actual-interventions" aria-pressed="false">Recorded interventions <span>50</span></button><button id="possible-interventions">Possible interventions <svg class="ui-icon ui-arrow ui-right" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button></div>
+            <button id="reset-button" class="reset-button" aria-label="Reset all filters">Reset filters <svg class="ui-icon ui-reset ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-reset"/></svg></button>
           </div>
         </div>
         <div class="visual-column">
@@ -115,10 +123,10 @@
             <div id="undated-records" class="undated-records" role="group" aria-label="Events with an unknown start and a by-date bound" hidden></div>
           </div>
           <div id="field-navigation" class="plot-tools" role="group" aria-label="Field navigation">
-            <div class="axis-zoom"><span>Time ↔</span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
-            <div class="axis-zoom"><span>Severity ↕</span><button id="zoom-y-out" aria-label="Zoom out vertically">−</button><button id="zoom-y-in" aria-label="Zoom in vertically">+</button></div>
+            <div class="axis-zoom"><span>Time <svg class="ui-icon ui-axis ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-axis"/></svg></span><button id="zoom-out" aria-label="Zoom out horizontally">−</button><button id="zoom-in" aria-label="Zoom in horizontally">+</button></div>
+            <div class="axis-zoom"><span>Severity <svg class="ui-icon ui-axis ui-vertical" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-axis"/></svg></span><button id="zoom-y-out" aria-label="Zoom out vertically">−</button><button id="zoom-y-in" aria-label="Zoom in vertically">+</button></div>
             <button id="zoom-fit" class="fit-field" aria-label="Fit matching events on both axes">Fit</button>
-            <button id="move-up" class="pan-y" aria-label="Pan severity up">↑</button><button id="move-down" class="pan-y" aria-label="Pan severity down">↓</button>
+            <button id="move-up" class="pan-y" aria-label="Pan severity up"><svg class="ui-icon ui-arrow ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button><button id="move-down" class="pan-y" aria-label="Pan severity down"><svg class="ui-icon ui-arrow ui-down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button>
           </div>
         <section id="legend-panel" class="legend-panel" aria-labelledby="legend-title" hidden>
           <div class="legend-panel-head"><h2 id="legend-title">Legend</h2><button id="legend-close" aria-label="Close legend">×</button></div>
@@ -144,27 +152,27 @@
         <div class="field-foot">
           <div class="field-discoveries"><button id="hidden-egg" class="hidden-egg" aria-label="A tiny egg" aria-pressed="false"><span aria-hidden="true">🥚</span></button><button id="legend-toggle" class="legend-toggle" aria-expanded="false" aria-controls="legend-panel"><span class="legend-glyph" aria-hidden="true">✧</span> Legend</button></div>
           <span id="egg-message" role="status" tabindex="0" hidden></span>
-          <div class="field-readout"><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span id="viewport-count"></span><button id="unplaced-button" hidden></button><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
+          <div class="field-readout"><span><b id="visible-count">—</b> of <span id="total-event-count">852</span> events</span><span class="field-presence"><span id="viewport-count"></span><button id="unplaced-button" hidden></button></span><button id="active-filter" hidden aria-label="Clear additional filter"></button></div>
           <div class="timeline-navigation">
             <label class="date-endpoint"><span>From</span><input type="date" id="range-start" aria-label="Timeline start date"></label>
             <div class="overview-wrap" id="range-brush"><canvas id="overview" role="img" aria-label="Date navigator. Drag either handle to resize the range, or its middle to move it."></canvas><button class="range-handle" data-edge="start" role="slider" aria-label="Timeline start handle" aria-orientation="horizontal"></button><button class="range-handle" data-edge="end" role="slider" aria-label="Timeline end handle" aria-orientation="horizontal"></button></div>
             <label class="date-endpoint"><span>To</span><input type="date" id="range-end" aria-label="Timeline end date"></label>
-            <a id="browse-records" href="#event-list">Events <span aria-hidden="true">↓</span></a>
+            <a id="browse-records" href="#event-list">Events <svg class="ui-icon ui-arrow ui-down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></a>
           </div>
         </div>
         <div class="scroll-progress" aria-hidden="true"><span></span></div>
       </div>
     </section>
     <section class="record-section" id="event-list" aria-labelledby="record-heading">
-      <div class="section-heading"><div><h2 id="record-heading">Events</h2></div><div class="record-controls"><a id="back-to-field" class="back-up" href="#scene">↑ Field</a><span id="record-count"></span><button id="list-toggle" aria-expanded="true" aria-controls="record-list-wrap">Collapse −</button></div></div>
+      <div class="section-heading"><div><h2 id="record-heading">Events</h2></div><div class="record-controls"><a id="back-to-field" class="back-up" href="#scene"><svg class="ui-icon ui-arrow ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg> Field</a><span id="record-count"></span><button id="list-toggle" aria-expanded="true" aria-controls="record-list-wrap">Collapse <svg class="ui-icon ui-chevron ui-up" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-chevron"/></svg></button></div></div>
       <div class="milestone-strip" aria-label="Turning points marked by the sources"><div id="milestones"></div></div>
-      <div id="record-list-wrap"><div id="record-list"></div><button id="load-more" class="load-more">Show more events <span>↓</span></button></div>
+      <div id="record-list-wrap"><div id="record-list"></div><button id="load-more" class="load-more">Show more events <svg class="ui-icon ui-arrow ui-down" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button></div>
       <footer class="site-credit"><span class="credit-author">Created with 🩶 by Peter H. Vartanian (2026)</span><button id="footer-method">How to read this</button><span class="credit-project">This project is part of the suite <em>From Incident to Intervention</em> (FI2I).</span></footer>
     </section>
   </main>
   <div id="event-focus" hidden><div class="focus-veil"></div><canvas id="focus-origin" aria-hidden="true"></canvas><svg id="focus-thread" aria-hidden="true"><path/></svg></div>
   <aside class="detail-panel" id="detail-panel" aria-labelledby="event-banner-title" role="dialog" aria-modal="true" tabindex="-1" hidden>
-    <div class="detail-top"><div><button id="previous-event" aria-label="Previous visible event">←</button><button id="next-event" aria-label="Next visible event">→</button><button id="detail-close" aria-label="Close event details">×</button></div></div>
+    <div class="detail-top"><div><button id="previous-event" aria-label="Previous visible event"><svg class="ui-icon ui-arrow ui-left" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button><button id="next-event" aria-label="Next visible event"><svg class="ui-icon ui-arrow ui-right" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><use href="#ui-arrow"/></svg></button><button id="detail-close" aria-label="Close event details">×</button></div></div>
     <div id="event-detail" aria-live="polite"></div>
   </aside>
   <dialog id="info-dialog" aria-labelledby="dialog-title"><div class="dialog-header"><span>Haruspex</span><button id="dialog-close" aria-label="Close dialog">×</button></div><div id="dialog-content"></div></dialog>
