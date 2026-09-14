@@ -300,7 +300,7 @@
 #app[data-stpa='true'] .barrier-lens { min-height: 0; padding-top: 12px; }
 #app[data-stpa='true'] .lens-answer { margin: 0 0 12px; font: 16px/1.6 var(--sans); }
 #app[data-stpa='true'] .question-lenses { max-width: 650px; }
-.a1-research-link { display: inline-block; font: 12px/1.5 var(--sans); margin: 22px 0 0; padding: 8px 12px; background: transparent; color: var(--accent); border-radius: 2px; }
+.a1-research-link { display: block; width: fit-content; font: 12px/1.5 var(--sans); margin: 22px auto 0; padding: 8px 12px; background: transparent; color: var(--accent); border-radius: 2px; text-align: center; }
 .a1-research-link:hover { background: var(--tint); }
 @media (max-width: 1050px) and (min-width: 741px) {
   .a1-route { column-gap: 48px; padding-inline: 28px; }
