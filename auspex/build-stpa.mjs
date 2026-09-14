@@ -19,7 +19,7 @@ for (const model of models) {
   for (const p of model.additionalEvidence?.passages || []) passages.set(p.id,p);
 }
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const sourceLinks = ids => [...new Set(ids.map(id => passages.get(id)?.source))].filter(Boolean).map(id => `<a class="source-dot" href="${esc(sources.get(id).url)}" target="_blank" rel="noopener noreferrer" title="${esc(sources.get(id).title)}" aria-label="Open source: ${esc(sources.get(id).title)}"><span class="source-disc" aria-hidden="true"></span></a>`).join('');
+const sourceLinks = ids => [...new Set(ids.map(id => passages.get(id)?.source))].filter(Boolean).map((id,index) => `<a class="source-dot" href="${esc(sources.get(id).url)}" target="_blank" rel="noopener noreferrer" title="${presentation.sourceNumber(index)}. ${esc(sources.get(id).title)}" aria-label="Open source ${presentation.sourceNumber(index)}: ${esc(sources.get(id).title)}"><span class="source-disc" aria-hidden="true">${presentation.sourceNumber(index)}</span></a>`).join('');
 function mappedEvidence(model) {
   const overrides = new Map((model.assessments || []).map(a => [a.id,a]));
   const cases = assessments.filter(a => a.pathway === model.pathway).map(a => overrides.get(a.id) || a);
@@ -27,7 +27,7 @@ function mappedEvidence(model) {
     const overlay = model.presentation.overlays[a.incident];
     const incident = incidents.find(i => i.id === a.incident);
     const barriers = presentation.barriers(a);
-    return `<section class="stpa-mapped-case"><h4>${esc(overlay.title)}<sup><a id="case-${a.id}-reference" href="#case-${a.id}-footnote" aria-label="Scope of this case">*</a></sup></h4><p>${esc(incident.date)} · ${esc(overlay.kind)}</p><p>${esc(overlay.observed)}</p><p class="a1-footnote" id="case-${a.id}-footnote"><a href="#case-${a.id}-reference" aria-label="Return to case title">*</a> ${esc(overlay.limit)}</p>${barriers.length ? barriers.map(b => {
+    return `<section class="stpa-mapped-case"><h4>${presentation.notedTitle(overlay.title,`case-${a.id}-reference`,`case-${a.id}-footnote`,'Scope of this case')}</h4><p>${esc(incident.date)} · ${esc(overlay.kind)}</p><p>${esc(overlay.observed)}</p><p class="a1-footnote" id="case-${a.id}-footnote"><a href="#case-${a.id}-reference" aria-label="Return to case title">*</a> ${esc(overlay.limit)}</p>${barriers.length ? barriers.map(b => {
       const detail = b;
       return `<details><summary>${esc(detail.title)} · ${esc(presentation.barrierStates(detail).map(presentation.conditionLabel).join(" · "))}</summary><p class="a1-footnote">${esc(detail.conditionBasis)}</p><dl><dt>Mechanism</dt><dd>${esc(b.action)}</dd><dt>Evidence</dt><dd>${esc(b.efficacy)}</dd><dt>Brittleness</dt><dd>${esc(detail.strongerAI)}</dd><dt>Failure</dt><dd>${esc(b.failure)}</dd></dl>${detail.reinforcement ? `<p><strong>Proposed reinforcement</strong> · ${esc(detail.reinforcement.proposal)}</p><p><strong>Test</strong> · ${esc(detail.reinforcement.test)}</p>` : ''}<p>${sourceLinks(b.evidence)}</p></details>`;
     }).join('') : '<p>Barrier performance not established.</p>'}<details><summary>Case observations & evidence</summary>${(a.trace || []).map(t => `<p>${esc(t.text)}</p><p>${sourceLinks(t.evidence)}</p>`).join('')}${[...new Set([...a.evidence,...a.barriers.flatMap(b=>b.evidence)])].map(id => {
@@ -61,6 +61,6 @@ for (let i = starts.length - 1; i >= 0; i--) {
   if (end < 0) throw new Error(`Missing reader boundary ${p.id}`);
   html = html.slice(0, match.index) + `<article id="${p.id}" data-group="${p.group}" data-unworked="true"><p class="eyebrow">${p.displayId} · Pathway</p><h2>${esc(p.title)}</h2></article>` + html.slice(end);
 }
-html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=24.2"');
+html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=24.3"');
 await writeFile(new URL('pathways.html', import.meta.url), html);
 console.log('Built seven worked examples, barrier states and matching readers; other entries are blank.');

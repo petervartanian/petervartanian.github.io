@@ -29,8 +29,11 @@ return loop and double chevrons. Matching symbols in the key distinguish the rou
 without relying on color. Proposed safeguard marks follow each route’s direction.
 
 Source references use filled circles inside pathway cards, case overlays and barrier
-explanations. Each circle retains its source title and keyboard access; case evidence
-opens the existing passage reader. Asterisks still refer to short scope notes.
+explanations, with small i/ii/iii labels within each source group. Each circle retains
+its source title and keyboard access; case evidence opens the existing passage reader.
+Asterisks stay next to the text they qualify. Recovery uses neutral colors. Arrow
+attachments are separated on each card edge, and successive bends reuse clear lanes
+instead of drifting outside the map.
 
 Maven and Replicator expose proposed safeguards with unassessed performance and test
 questions. Their announcements remain contextual evidence. Later corrective changes are

@@ -8,8 +8,19 @@
   const byId = (items, id) => list(items).find(x => x.id === id);
   const node = id => byId(model.nodes, id);
   const source = id => byId(model.sources, id);
-  const sourceMark = s => `<a class="source-dot" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" title="${esc(s.title)}" aria-label="Open source: ${esc(s.title)}"><span class="source-disc" aria-hidden="true"></span></a>`;
-  const cite = ids => `<span class="stpa-citations" role="group" aria-label="Sources">${list(ids).map(id => source(id) ? sourceMark(source(id)) : '').join('')}</span>`;
+  const sourceNumber = index => {
+    let n=index+1, result='';
+    for (const [value,symbol] of [[1000,'m'],[900,'cm'],[500,'d'],[400,'cd'],[100,'c'],[90,'xc'],[50,'l'],[40,'xl'],[10,'x'],[9,'ix'],[5,'v'],[4,'iv'],[1,'i']]) {
+      while (n>=value) { result+=symbol; n-=value; }
+    }
+    return result;
+  };
+  const sourceMark = (s,index=0) => `<a class="source-dot" href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" title="${sourceNumber(index)}. ${esc(s.title)}" aria-label="Open source ${sourceNumber(index)}: ${esc(s.title)}"><span class="source-disc" aria-hidden="true">${sourceNumber(index)}</span></a>`;
+  const cite = ids => `<span class="stpa-citations" role="group" aria-label="Sources">${list(ids).map(source).filter(Boolean).map(sourceMark).join('')}</span>`;
+  const notedTitle = (title,id,note,label) => {
+    const words=String(title).match(/^(.*\s)?(\S+)$/) || ['', '', title];
+    return `${esc(words[1] || '')}<span class="a1-noted-word">${esc(words[2])}<sup><a class="a1-note-reference" id="${esc(id)}" href="#${esc(note)}" aria-label="${esc(label)}">*</a></sup></span>`;
+  };
   const tag = s => `<span class="stpa-id">${esc(s)}</span>`;
   const refs = ids => list(ids).map(tag).join(' ');
   const control = id => byId(model.constraints,id);
@@ -72,7 +83,7 @@
     const kind=config.kind || 'Source evidence';
     return `<section class="a1-overlay" id="a1-overlay" data-overlay-incident="${esc(a.incident)}" data-overlay-target="${esc(config.target)}" data-overlay-anchor="${esc(anchor?.id)}" aria-label="${esc(config.title)}: evidence relevant to ${esc(anchor?.title)}">
       <p class="a1-overlay-kicker">${esc(kind)}</p>
-      <h4 class="a1-overlay-title">${esc(config.title)}<sup><a class="a1-note-reference" id="a1-case-reference" href="#a1-case-footnote" aria-label="Scope of this case">*</a></sup><span class="source-dots">${evidenceMarks(a.evidence)}</span></h4>
+      <h4 class="a1-overlay-title">${notedTitle(config.title,'a1-case-reference','a1-case-footnote','Scope of this case')}<span class="source-dots">${evidenceMarks(a.evidence)}</span></h4>
       ${items.length?`<div class="a1-overlay-barriers">${items.map(b=>`<div class="a1-observed-control"><button data-overlay-barrier="${esc(b.id)}" aria-label="Inspect ${esc(b.title)}: ${esc(barrierStates(b).map(conditionLabel).join(', '))}" aria-pressed="${inspectedBarrier===b.id}" aria-controls="workspace">${barrierGlyph(b.condition)}<span><strong>${esc(b.title)}</strong><small class="a1-barrier-condition">${esc(barrierStates(b).map(conditionLabel).join(' · '))}</small></span><span class="a1-inspect-arrow" aria-hidden="true">↗</span></button><p>${esc(b.result || b.conditionBasis || '')}</p></div>`).join('')}</div>`:''}
       <details class="a1-case-evidence"><summary>Case evidence</summary><p>${esc(config.observed)}</p><p>${esc(config.notEstablished)}</p></details>
     </section>`;
@@ -83,7 +94,7 @@
     return `<div class="stpa-state-explorer"><div class="stpa-state-menu" role="group" aria-label="Explore barrier states">${stateDefinitions.map(s=>`<button data-explore-state="${s.id}" aria-pressed="${s.id===current.id}" aria-controls="state-definition">${barrierGlyph(s.id)}<span>${esc(s.label)}</span></button>`).join('')}</div><section id="state-definition" class="stpa-state-definition" aria-live="polite">${barrierGlyph(current.id)}<div><h3>${esc(current.label)}</h3><p>${esc(current.definition)}</p><p class="stpa-state-question">${esc(current.question)}</p><p class="stpa-state-example">${esc(current.example)} ${sourceMark(exampleSource)}</p></div></section><details><summary>Brittleness & recovery</summary><p>A barrier can hold in one incident and still be brittle. Ask which change in capability, access, timing or operating conditions would defeat it.</p><p>Recovery stops escalation, limits harm or restores control after the loss-of-control event. Reinforcement strengthens a barrier.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">Recovery controls ↗</a></p></details></div>`;
   }
   function recoveryGuide() {
-    return `<div class="stpa-recovery-guide"><div class="stpa-change-flow"><span>Hazardous situation</span><span aria-hidden="true">→</span><strong>Recovery</strong><span aria-hidden="true">→</span><span>Escalation stopped, harm limited or control restored</span></div><p>Recovery acts on the affected system after the loss-of-control event. It can prevent a consequence, reduce its severity or restore effective control.</p><div class="stpa-change-flow"><span>Existing protection</span><span aria-hidden="true">→</span><strong>Reinforcement</strong><span aria-hidden="true">→</span><span>Strengthened barrier</span></div><p>Reinforcement changes a barrier relative to a baseline. A recovery barrier can be reinforced too. Repair restores a defective barrier’s intended function; reinforcement improves the protection.</p><p>The green route on this map shows the model’s stated recovery outcome. It remains conditional on an effective intervention.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">UK CAA · Recovery controls ↗</a></p></div>`;
+    return `<div class="stpa-recovery-guide"><div class="stpa-change-flow"><span>Hazardous situation</span><span aria-hidden="true">→</span><strong>Recovery</strong><span aria-hidden="true">→</span><span>Escalation stopped, harm limited or control restored</span></div><p>Recovery acts on the affected system after the loss-of-control event. It can prevent a consequence, reduce its severity or restore effective control.</p><div class="stpa-change-flow"><span>Existing protection</span><span aria-hidden="true">→</span><strong>Reinforcement</strong><span aria-hidden="true">→</span><span>Strengthened barrier</span></div><p>Reinforcement changes a barrier relative to a baseline. A recovery barrier can be reinforced too. Repair restores a defective barrier’s intended function; reinforcement improves the protection.</p><p>The curved route on this map shows the model’s stated recovery outcome. It remains conditional on an effective intervention.</p><p><a href="${esc(byId(stateModel.sources,'CAA-R').url)}" target="_blank" rel="noopener noreferrer">UK CAA · Recovery controls ↗</a></p></div>`;
   }
   function routeSymbol(kind) {
     const path=kind==='recovery'
@@ -203,39 +214,55 @@
     const cells=Array.from(route.querySelectorAll('.a1-cell')).map(rect);
     const minLeft=Math.min(...cells.map(c=>c.left));
     const all=[];
-    const ports={};
     for (const link of links) {
       const from=targetButton(link.from),to=targetButton(link.to);
       if (!from || !to) continue;
       const a=rect(from),b=rect(to),ac=rect(from.closest('.a1-cell')),bc=rect(to.closest('.a1-cell'));
-      all.push({link,a,b,ac,bc,from,to});
+      const sameColumn=Math.abs(ac.left-bc.left)<3;
+      const wing=from.closest('.a1-region')?.dataset.wing;
+      const fromSide=mobile?'left':sameColumn?(wing==='after' || wing==='centre'?'right':'left'):bc.left>ac.left?'right':'left';
+      const toSide=mobile || sameColumn?fromSide:fromSide==='right'?'left':'right';
+      all.push({link,a,b,ac,bc,from,to,sameColumn,wing,fromSide,toSide});
     }
-    // Independent entry ports keep converging arrows visible at the destination.
+    // Keep incoming tips separate from outgoing lines on the same edge of a card.
+    const attachments=new Map();
     for (const entry of all) {
-      const incoming=all.filter(x=>x.link.to===entry.link.to), slot=incoming.indexOf(entry)-(incoming.length-1)/2;
-      ports[entry.link.from+'→'+entry.link.to]=slot*Math.min(9,entry.b.height/(incoming.length+1));
+      for (const [id,side,box,peer,key] of [[entry.link.from,entry.fromSide,entry.a,entry.b,'y1'],[entry.link.to,entry.toSide,entry.b,entry.a,'y2']]) {
+        const groupKey=id+':'+side;
+        if (!attachments.has(groupKey)) attachments.set(groupKey,[]);
+        attachments.get(groupKey).push({entry,box,key,order:peer.top+peer.height/2});
+      }
+    }
+    for (const group of attachments.values()) {
+      group.sort((a,b)=>a.order-b.order);
+      group.forEach((port,index)=>{
+        const step=Math.min(12,port.box.height/(group.length+1));
+        port.entry[port.key]=port.box.top+port.box.height/2+(index-(group.length-1)/2)*step;
+      });
     }
     const mobileLanes=[];
-    const paths=all.map((entry,index)=>{
-      const {link,a,b,ac,bc,from,to}=entry, kind=link.kind || link.type || 'contribution';
-      const y1=a.top+a.height/2,y2=b.top+b.height/2+ports[link.from+'→'+link.to];
-      const sameColumn=Math.abs(ac.left-bc.left)<3;
+    const sideLanes=new Map();
+    const reserveLane=(lanes,low,high)=>{
+      let lane=lanes.findIndex(intervals=>intervals.every(([l,h])=>high<l || low>h));
+      if (lane<0) { lane=lanes.length; lanes.push([]); }
+      lanes[lane].push([low,high]);
+      return lane;
+    };
+    const paths=all.map(entry=>{
+      const {link,a,b,ac,bc,sameColumn,wing,fromSide,y1,y2}=entry, kind=link.kind || link.type || 'contribution';
       let points;
       if (mobile) {
-        const low=Math.min(y1,y2)-8,high=Math.max(y1,y2)+8;
-        let lane=mobileLanes.findIndex(intervals=>intervals.every(([l,h])=>high<l || low>h));
-        if (lane<0) { lane=mobileLanes.length; mobileLanes.push([]); }
-        mobileLanes[lane].push([low,high]);
+        const lane=reserveLane(mobileLanes,Math.min(y1,y2)-3,Math.max(y1,y2)+3);
         const x=kind==='recovery'?Math.max(7,minLeft-60):Math.max(7,minLeft-15-lane*8);
         points=[[a.left-2,y1],[x,y1],[x,y2],[b.left-5,y2]];
       } else if (sameColumn) {
-        const wing=from.closest('.a1-region')?.dataset.wing;
-        const rightSide=wing==='after' || wing==='centre';
-        const sameSideBefore=all.slice(0,index).filter(x=>Math.abs(x.ac.left-x.bc.left)<3 && (x.from.closest('.a1-region')?.dataset.wing===wing)).length;
+        const rightSide=fromSide==='right', key=wing+':'+fromSide;
+        if (!sideLanes.has(key)) sideLanes.set(key,[]);
+        const lane=reserveLane(sideLanes.get(key),Math.min(y1,y2)-3,Math.max(y1,y2)+3);
         const edge=rightSide?Math.max(ac.right,bc.right):Math.min(ac.left,bc.left);
         const nextEdge=rightSide?Math.min(bounds.width-5,...cells.filter(c=>c.left>edge+3).map(c=>c.left)):Math.max(5,...cells.filter(c=>c.right<edge-3).map(c=>c.right));
-        const offset=kind==='recovery'?Math.min(60,Math.max(12,Math.abs(nextEdge-edge)-12)):17+sameSideBefore*10;
-        const x=edge+(rightSide?offset:-offset);
+        const offset=kind==='recovery'?Math.min(60,Math.max(12,Math.abs(nextEdge-edge)-12)):17+lane*8;
+        const x=Math.max(8,Math.min(bounds.width-8,edge+(rightSide?offset:-offset)));
         points=rightSide?[[a.right+2,y1],[x,y1],[x,y2],[b.right+5,y2]]:[[a.left-2,y1],[x,y1],[x,y2],[b.left-5,y2]];
       } else {
         const forward=bc.left>ac.left, x1=forward?a.right+2:a.left-2,x2=forward?b.left-5:b.right+5;
@@ -259,10 +286,10 @@
       const marker=kind==='recovery'?'stpa-arrow-recovery':kind==='feedback'?'stpa-arrow-feedback':'stpa-arrow';
       return `<path class="stpa-connection${kind==='optional'?' is-optional':''}${kind==='feedback'?' is-feedback':''}${kind==='recovery'?' is-recovery':''}" data-link="${esc(link.id || link.from+'→'+link.to)}" data-from="${esc(link.from)}" data-to="${esc(link.to)}" d="${d}" marker-end="url(#${marker})"><title>${esc(link.label || 'Possible contribution')}</title></path>${crossbar}`;
     }).join('');
-    const marker=(id,color)=>`<marker id="${id}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M1.5 1.5 6.5 4 1.5 6.5" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker>`;
-    const recoveryMarker='<marker id="stpa-arrow-recovery" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 7 4 1 7z" fill="#6d8976"/></marker>';
-    const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="11" refY="4" markerWidth="11" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
+    const marker=(id,color)=>`<marker id="${id}" viewBox="0 0 8 8" refX="7" refY="4" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M1.5 1.5 6.5 4 1.5 6.5" fill="none" stroke="${color}" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></marker>`;
+    const recoveryMarker='<marker id="stpa-arrow-recovery" viewBox="0 0 8 8" refX="7" refY="4" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M1 1 7 4 1 7z" fill="#7e8088"/></marker>';
+    const feedbackMarker='<marker id="stpa-arrow-feedback" viewBox="0 0 12 8" refX="11" refY="4" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="8" orient="auto"><path d="m1 1 4 3-4 3m5-6 4 3-4 3" fill="none" stroke="#928896" stroke-width="1.1"/></marker>';
     svg.innerHTML=`<defs>${marker('stpa-arrow','#928896')}${recoveryMarker}${feedbackMarker}</defs>${paths}`;
   }
-  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide};
+  window.AuspexSTPA={get model(){return model;},get overlayNames(){return overlayNames();},use,has,node,renderMap,analysis,guide,research,staticPage,draw,projectedLinks,targetButton,barrierGlyph,conditionLabel,barrierStates,barriers,barrierView,stateGuide,recoveryGuide,sourceNumber,notedTitle};
 })();

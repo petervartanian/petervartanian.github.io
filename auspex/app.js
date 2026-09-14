@@ -231,7 +231,7 @@
 
   function evidenceButtons(ids) {
     const groups = [...new Set(ids.map((id) => passages.get(id).source))];
-    return groups.map((id) => `<button class="source-dot" data-passages="${ids.filter((p) => passages.get(p).source === id).join(' ')}" aria-haspopup="dialog" aria-controls="source-dialog" title="${escape(sources.get(id).title)}" aria-label="Read source evidence: ${escape(sources.get(id).title)}"><span class="source-disc" aria-hidden="true"></span></button>`).join('');
+    return groups.map((id,index) => `<button class="source-dot" data-passages="${ids.filter((p) => passages.get(p).source === id).join(' ')}" aria-haspopup="dialog" aria-controls="source-dialog" title="${window.AuspexSTPA.sourceNumber(index)}. ${escape(sources.get(id).title)}" aria-label="Read source evidence ${window.AuspexSTPA.sourceNumber(index)}: ${escape(sources.get(id).title)}"><span class="source-disc" aria-hidden="true">${window.AuspexSTPA.sourceNumber(index)}</span></button>`).join('');
   }
 
   const stepLabel = (step) => stpaNode(step)?.title || step.shortLabel || window.AuspexLabels?.[state.pathway]?.[step.number - 1] || step.text;
