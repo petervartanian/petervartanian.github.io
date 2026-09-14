@@ -439,7 +439,7 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
       ctx.fillText(label, textX, showCount ? y - 3 : y + 1);
       if (showCount) {
         ctx.font = '9px "Helvetica Neue",Arial,sans-serif'; ctx.fillStyle = '#80909A';
-        ctx.fillText(state.assessment === 'impact' ? `${lane.count} ${lane.count === 1 ? 'event' : 'events'}` : 'No severity rank', textX, y + 11);
+        ctx.fillText(state.assessment === 'impact' ? `${lane.count} ${lane.count === 1 ? 'event' : 'events'}` : 'No severity score', textX, y + 11);
       }
     }
     const tickCount = narrow ? 4 : width < 900 ? 6 : 9;
