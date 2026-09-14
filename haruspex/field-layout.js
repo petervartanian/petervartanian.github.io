@@ -136,6 +136,17 @@
     const center = event => event._time.center;
     const ordered = events.filter(event => finite(center(event))).sort((a, b) => center(a) - center(b) || a.id.localeCompare(b.id));
     const uncertain = events.filter(event => !finite(center(event))).sort((a, b) => a.id.localeCompare(b.id));
+    const boundGroups = new Map();
+    for (const event of uncertain) {
+      const key = `${event._time.start}:${event._time.end}`;
+      if (!boundGroups.has(key)) boundGroups.set(key, []);
+      boundGroups.get(key).push(event);
+    }
+    const scatteredSlot = new Map();
+    for (const members of boundGroups.values()) {
+      members.sort((a,b) => eventRandom(a.id)() - eventRandom(b.id)() || a.id.localeCompare(b.id));
+      members.forEach((event,index) => scatteredSlot.set(event.id,{index,count:members.length}));
+    }
     const slots = ordered.map((event, index) => ({ event, low: index / ordered.length, high: (index + 1) / ordered.length }));
     for (const event of uncertain) {
       if (!ordered.length) { slots.push({ event, low: 0, high: 1 }); continue; }
@@ -160,7 +171,9 @@
     for (const { event, low, high } of slots) {
       const random = eventRandom(event.id), r = radius(event);
       const inset = Math.min(.025, (r * 1.6 + 2) / width);
-      const fraction = low + (.05 + random() * .9) * (high - low);
+      const slot = scatteredSlot.get(event.id);
+      const placement = slot ? (slot.index + .15 + random() * .7) / slot.count : .05 + random() * .9;
+      const fraction = low + placement * (high - low);
       const u = inset + fraction * (1 - inset * 2);
       const x = rect.left + u * width;
       const envelope = mode === 'knot' ? .08 + Math.sin(u * Math.PI) * .92
@@ -203,21 +216,27 @@
         end: target || { ...old, radius: 0, vy: 0 } };
     }) };
   }
-  function calendarFrame(plan, progress, duration) {
-    const t = Math.max(0, Math.min(1, progress)), ease = t * t * (3 - 2 * t);
-    const seconds = duration / 1000;
-    const blend = (a, b, velocity = 0) => ({
-      value: a + (b - a) * ease + velocity * seconds * t * (1 - t) ** 2,
-      velocity: (b - a) * 6 * t * (1 - t) / seconds + velocity * (1 - 4 * t + 3 * t * t),
-    });
-    // Interpolate the camera, then project every event through that same camera.
-    // A logarithmic span stays positive even when a fast zoom is interrupted.
-    const [a, b] = plan.from.range, [c, d] = plan.to.range;
-    const [va, vb] = plan.from.rangeVelocity || [0, 0];
-    const center = blend((a + b) / 2, (c + d) / 2, (va + vb) / 2);
-    const logSpan = blend(Math.log(b - a), Math.log(d - c), (vb - va) / (b - a));
+  function interpolate(a, b, velocity, t, duration) {
+    const ease = t * t * (3 - 2 * t), seconds = duration / 1000;
+    return { value: a + (b - a) * ease + velocity * seconds * t * (1 - t) ** 2,
+      velocity: (b - a) * 6 * t * (1 - t) / seconds + velocity * (1 - 4 * t + 3 * t * t) };
+  }
+  function rangeFrame(from, to, velocity, t, duration) {
+    const [a, b] = from, [c, d] = to, [va, vb] = velocity || [0, 0];
+    const center = interpolate((a + b) / 2, (c + d) / 2, (va + vb) / 2, t, duration);
+    const logSpan = interpolate(Math.log(b - a), Math.log(d - c), (vb - va) / (b - a), t, duration);
     const span = Math.exp(logSpan.value), spanVelocity = span * logSpan.velocity;
-    const range = t === 0 ? [...plan.from.range] : t === 1 ? [...plan.to.range] : [center.value - span / 2, center.value + span / 2];
+    return {
+      range: t === 0 ? [...from] : t === 1 ? [...to] : [center.value - span / 2, center.value + span / 2],
+      velocity: [center.velocity - spanVelocity / 2, center.velocity + spanVelocity / 2],
+    };
+  }
+  function calendarFrame(plan, progress, duration) {
+    const t = Math.max(0, Math.min(1, progress));
+    const blend = (a, b, velocity = 0) => interpolate(a, b, velocity, t, duration);
+    // One camera drives both the calendar axis and every date-anchored point.
+    const dateCamera = rangeFrame(plan.from.range, plan.to.range, plan.from.rangeVelocity, t, duration);
+    const range = dateCamera.range;
     const geometry = { ...plan.to.geometry };
     for (const key of ['left', 'right', 'top', 'bottom']) geometry[key] = blend(plan.from.geometry[key], plan.to.geometry[key]).value;
     const points = plan.pairs.map(({ start, end }) => {
@@ -230,7 +249,44 @@
         radius: blend(start.radius, end.radius).value,
         paintRadius: Math.max(start.paintRadius || start.radius, end.paintRadius || end.radius), alpha: 1 };
     }).filter(p => p.time !== null);
-    return { range, rangeVelocity: [center.velocity - spanVelocity / 2, center.velocity + spanVelocity / 2], geometry, points };
+    return { range, rangeVelocity: dateCamera.velocity, geometry, points };
+  }
+  // These windows are positions within one schematic bow-tie, never dates.
+  function bowtieWindow(phase = 'all') {
+    return { ...({
+      all: { left:0, right:1, top:0, bottom:1 },
+      before: { left:0, right:.32, top:.04, bottom:.96 },
+      during: { left:.345, right:.655, top:.22, bottom:.78 },
+      after: { left:.68, right:1, top:.04, bottom:.96 },
+    }[phase] || { left:0, right:1, top:0, bottom:1 }) };
+  }
+  function bowtieProject(points, { camera, rect, ids = null }) {
+    return points.filter(point => !ids || ids.has(point.event.id)).map(point => ({ ...point,
+      x: rect.left + (point.worldX - camera.left) / (camera.right - camera.left) * (rect.right - rect.left),
+      y: rect.top + (point.worldY - camera.top) / (camera.bottom - camera.top) * (rect.bottom - rect.top),
+    }));
+  }
+  function bowtieFrame(plan, progress, duration) {
+    const t = Math.max(0, Math.min(1, progress));
+    const base = calendarFrame({ ...plan, pairs:[] }, t, duration);
+    const start = plan.from.bowCamera, end = plan.to.bowCamera, velocity = plan.from.bowVelocity || {};
+    const horizontal = rangeFrame([start.left,start.right], [end.left,end.right], [velocity.left || 0,velocity.right || 0], t, duration);
+    const vertical = rangeFrame([start.top,start.bottom], [end.top,end.bottom], [velocity.top || 0,velocity.bottom || 0], t, duration);
+    const camera = { left:horizontal.range[0],right:horizontal.range[1],top:vertical.range[0],bottom:vertical.range[1] };
+    const bowVelocity = { left:horizontal.velocity[0],right:horizontal.velocity[1],top:vertical.velocity[0],bottom:vertical.velocity[1] };
+    const members = plan.pairs.map(({start,end}) => ({ ...end,
+      radius: interpolate(start.radius,end.radius,0,t,duration).value,
+      paintRadius: Math.max(start.paintRadius || start.radius,end.paintRadius || end.radius), alpha:1,
+    }));
+    const points = bowtieProject(members,{camera,rect:base.geometry}).map(point => {
+      const u = (point.worldX-camera.left)/(camera.right-camera.left);
+      const v = (point.worldY-camera.top)/(camera.bottom-camera.top);
+      return { ...point,
+        vx: -(base.geometry.right-base.geometry.left)*(bowVelocity.left+u*(bowVelocity.right-bowVelocity.left))/(camera.right-camera.left),
+        vy: -(base.geometry.bottom-base.geometry.top)*(bowVelocity.top+v*(bowVelocity.bottom-bowVelocity.top))/(camera.bottom-camera.top),
+      };
+    });
+    return { ...base, bowCamera:camera, bowVelocity, points };
   }
   // Fixed calendar ticks travel across the screen during a pan. They do not
   // stay at fixed pixels while their printed dates change underneath them.
@@ -242,5 +298,5 @@
     for (let time = Math.ceil(range[0] / step) * step; time <= range[1]; time += step) ticks.push(time);
     return ticks;
   }
-  root.HaruspexLayout = Object.freeze({ create, project, bowtie, calendarTime, calendarPlan, calendarFrame, timeTicks });
+  root.HaruspexLayout = Object.freeze({ create, project, bowtie, calendarTime, calendarPlan, calendarFrame, bowtieWindow, bowtieProject, bowtieFrame, timeTicks });
 })(typeof window === 'undefined' ? globalThis : window);

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import './field-layout.js';
-const { create, project, bowtie, calendarTime, calendarPlan, calendarFrame, timeTicks } = globalThis.HaruspexLayout;
+const { create, project, bowtie, calendarTime, calendarPlan, calendarFrame, bowtieWindow, bowtieProject, bowtieFrame, timeTicks } = globalThis.HaruspexLayout;
 const DAY = 86400000;
 const rect = { left: 40, right: 1240, top: 80, bottom: 700 };
 const event = (id, time) => ({ id, _time: time });
@@ -153,9 +153,49 @@ const during=phaseSnapshot('during',true), after=phaseSnapshot('after',true);
 const sharedDate=Date.UTC(2026,6,15);
 assert(Math.abs(xAt(sharedDate,during.range)-xAt(sharedDate,after.range)) < (rect.right-rect.left)*.2, 'II to III should only shift a July date a small distance');
 assert.equal(JSON.stringify(events), untouched, 'Animation must not modify source records');
+// Bow-tie focus is a camera over one stable role-based form. It never assigns
+// source times to its schematic positions, including the unknown-start cases.
+const boxes = {before:[.025,.30,.08,.92],during:[.365,.635,.255,.745],after:[.70,.975,.08,.92]};
+const world = Object.entries(boxes).flatMap(([phase,[left,right,top,bottom]]) => bowtie({
+  events:events.filter(e=>assignments.get(e.id).lifecycle_id===phase),
+  rect:{left:left*1200,right:right*1200,top:top*600,bottom:bottom*600},
+  mode:phase==='during'?'knot':phase,
+}).map(p=>({...p,worldX:p.x/1200,worldY:p.y/600})));
+const bowState = phase => Object.assign(bowtieProject(world,{camera:bowtieWindow(phase),rect,
+  ids: phase==='all'?null:new Set(events.filter(e=>assignments.get(e.id).lifecycle_id===phase).map(e=>e.id)),
+}), {range:phase==='all'?fullRange:phaseSnapshot(phase).range,geometry:rect,bowCamera:bowtieWindow(phase),rangeVelocity:[0,0]});
+for (const [fromPhase,toPhase] of [['all','before'],['before','during'],['during','after'],['after','before'],['during','all']]) {
+  const from=bowState(fromPhase),to=bowState(toPhase),plan=calendarPlan(from,to);
+  for (const t of [0,.25,.5,.75,1]) {
+    const frame=bowtieFrame(plan,t,1550);
+    assert(frame.range[1]>frame.range[0]);
+    for (const p of frame.points) {
+      close(p.x,rect.left+(p.worldX-frame.bowCamera.left)/(frame.bowCamera.right-frame.bowCamera.left)*(rect.right-rect.left),'Bow marks must stay in their own form during focus');
+      assert.equal(p.time,undefined,'A schematic bow-tie position must not be returned as a timestamp');
+      assert.equal(p.alpha,1,'Bow-tie focus moves through the form without a field crossfade');
+    }
+  }
+  const first=bowtieFrame(plan,0,1550),last=bowtieFrame(plan,1,1550);
+  for (const [expected,frame] of [[from,first],[to,last]]) for (const p of expected) {
+    const q=frame.points.find(x=>x.event.id===p.event.id);
+    close(p.x,q.x,'Bow-tie must not jump at either endpoint');close(p.y,q.y,'Bow-tie y continuity');
+  }
+  const middle=bowtieFrame(plan,.4,1550);
+  const interrupted=Object.assign(middle.points,{range:middle.range,rangeVelocity:middle.rangeVelocity,geometry:middle.geometry,bowCamera:middle.bowCamera,bowVelocity:middle.bowVelocity});
+  const reversal=bowtieFrame(calendarPlan(interrupted,from),0,1550);
+  for (const p of middle.points) {
+    const q=reversal.points.find(x=>x.event.id===p.event.id);
+    close(p.x,q.x,'Interrupted bow-tie x must continue');close(p.y,q.y,'Interrupted bow-tie y must continue');
+    close(p.radius,q.radius,'Interrupted bow-tie size must continue');
+  }
+}
+const openImpact = bowState('before').filter(p=>p.event._time.openStart && !['context','unresolved'].includes(severity.get(p.event.id).band));
+assert.equal(openImpact.length,9);
+assert((Math.max(...openImpact.map(p=>p.x))-Math.min(...openImpact.map(p=>p.x)))/(rect.right-rect.left)>.5,'The nine actual Impact open starts must not form a vertical stack');
+assert.equal(JSON.stringify(events),untouched,'Restoring bow-tie geometry must leave all source records intact');
 const range = [Date.UTC(2026, 4, 1), Date.UTC(2026, 6, 30)];
 const ticks = timeTicks(range);
 const shifted = timeTicks(range.map(t => t + DAY));
 assert(ticks.filter(t => shifted.includes(t)).length >= ticks.length - 1, 'Calendar tick identities must persist during a pan.');
 assert(ticks.every((t, i) => !i || t > ticks[i - 1]));
-console.log(`Passed: source bounds, stable schematic placement across widths, no serial-ID patterns, calendar-aligned phase overlap, interruption continuity, positive zoom ranges, source-anchored open bounds, and no final-frame jumps.`);
+console.log(`Passed: source bounds, stable schematic placement across widths, no serial-ID patterns, calendar-aligned phase overlap, interruption continuity, positive zoom ranges, source-anchored open bounds, stable bow-tie focus and reversals, scattered open starts, and no final-frame jumps.`);
