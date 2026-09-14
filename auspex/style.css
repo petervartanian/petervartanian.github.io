@@ -425,6 +425,7 @@ body:has(dialog[open]) { overflow: hidden; }
   html:has(#selected-pathway:not([hidden])) { scroll-padding-top: 125px; }
   .opening { grid-template-columns: 1fr; gap: 24px; }
   .opening h1 { width: 100%; max-width: 360px; font-size: clamp(54px, 13vw, 82px); }
+  .opening-display { gap: .8em; }
   .opening-copy > .opening-premise, .opening-copy > .opening-question { font-size: 18px; }
   .overview-groups { grid-template-columns: 1fr; }
   .overview-search { gap: 8px; }
