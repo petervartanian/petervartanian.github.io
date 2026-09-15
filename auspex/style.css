@@ -94,24 +94,12 @@ h1, h2, h3 { font-weight: 400; }
   .risk-spectrum { background: var(--risk-spectrum); background-clip: text; -webkit-background-clip: text; color: transparent; }
 }
 .opening-copy { min-width: 0; width: 100%; max-width: 660px; justify-self: end; }
-.opening-copy > p { margin: 0; font: 400 clamp(18px, 1.5vw, 22px)/1.5 var(--sans); text-align: left; text-wrap: wrap; }
+.opening-copy > p { margin: 0; font: 400 clamp(18px, 1.5vw, 22px)/1.5 var(--sans); text-align: right; text-wrap: wrap; }
 @supports (text-box-trim: trim-both) {
   .opening-display > .headline-line, .opening-copy > p { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 }
 .opening-premise { display: block; width: 100%; color: var(--ink); }
-.opening-tail { display: inline-flex; align-items: center; white-space: nowrap; vertical-align: baseline; }
-.premise-terminal { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 .opening-question { display: block; width: 100%; margin-top: 1em; color: var(--brand-accent); font-style: italic; }
-/* Align the last visible circle with the shared text edge. */
-.opening-sources { display: inline-flex; gap: 0; height: 24px; margin-inline: 3px -4.5px; vertical-align: middle; font: inherit; line-height: 1; white-space: nowrap; text-indent: 0; }
-.opening-sources .source-dot { width: 24px; height: 24px; min-width: 24px; min-height: 24px; color: var(--ink); }
-.opening-sources .source-disc { background: var(--intro-source-colors) #e4e5e7; color: var(--ink); }
-.opening-sources a:nth-child(1) { --intro-source-colors: linear-gradient(125deg,#e5d6df,#ebe9e8 48%,#e9dfcc); }
-.opening-sources a:nth-child(2) { --intro-source-colors: linear-gradient(125deg,#e7dfc8,#e8ebe4 48%,#d5e2d5); }
-.opening-sources a:nth-child(3) { --intro-source-colors: linear-gradient(125deg,#d1e1da,#e4e9e9 48%,#d1dfe9); }
-.opening-sources a:nth-child(4) { --intro-source-colors: linear-gradient(125deg,#d5dfed,#e9e8ec 48%,#e3d6e8); }
-.opening-sources .source-dot:hover { background: transparent; text-decoration: none; }
-.opening-sources .source-dot:hover .source-disc { outline: 1px solid color-mix(in srgb,var(--ink) 25%,transparent); outline-offset: 1px; }
 
 main { max-width: 1600px; margin: 0 auto; padding: 0 var(--edge) 60px; }
 .section-heading { display: flex; min-height: 24px; gap: 14px; align-items: center; font: 14px/1.5 var(--sans); margin: 0; white-space: nowrap; }
