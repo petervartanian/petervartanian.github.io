@@ -37,6 +37,7 @@
   --sans: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
   --mono: 'SFMono-Regular', Consolas, monospace;
   --edge: clamp(22px, 4.8vw, 80px);
+  --opening-gap: clamp(36px, 7vw, 112px);
 }
 * { box-sizing: border-box; }
 html { scroll-padding-top: 28px; }
@@ -65,7 +66,12 @@ h1, h2, h3 { font-weight: 400; }
 .skip { position: fixed; left: var(--edge); top: -80px; z-index: 20; padding: 12px 20px; background: var(--ink); color: var(--page); }
 .skip:focus { top: 12px; }
 .masthead { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 118px; margin: 0 var(--edge); border-bottom: 1px solid var(--line); }
-.authorship { display: flex; align-items: center; padding-block: 12px; }
+/* The masthead and title share the same left column. */
+.masthead:has(.authorship) { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.1fr); gap: var(--opening-gap); width: calc(100% - 2 * var(--edge)); max-width: calc(1600px - 2 * var(--edge)); margin-inline: auto; }
+.authorship { display: flex; align-items: center; width: 100%; max-width: 440px; padding-block: 12px; container-type: inline-size; }
+.masthead:has(.authorship) .institution-marks { justify-self: end; }
+/* X-OSCOPE is 5.058em wide in Sorts Mill Goudy with the brand tracking. */
+.authorship .brand { font-size: 19.77cqw; }
 .site-credit { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 24px; max-width: 1600px; margin: 0 auto; padding: 0 var(--edge) 28px; font: 400 11px/1.5 var(--sans); color: var(--quiet); }
 .site-credit > span { display: inline-block; padding-block: 14px; }
 .credit-heart { display: inline-block; width: 1em; height: 1em; vertical-align: -.08em; fill: #858585; }
@@ -80,7 +86,7 @@ h1, h2, h3 { font-weight: 400; }
 @supports (text-box-trim: trim-both) {
   .brand > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 }
-.opening { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.1fr); align-items: center; gap: clamp(36px, 7vw, 112px); max-width: 1600px; margin: 0 auto; padding: 40px var(--edge) 48px; }
+.opening { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.1fr); align-items: center; gap: var(--opening-gap); max-width: 1600px; margin: 0 auto; padding: 40px var(--edge) 48px; }
 .opening h1 { min-width: 0; width: 100%; max-width: 440px; margin: 0; font: 500 clamp(54px, 6.3vw, 90px)/1 var(--sans); letter-spacing: -.065em; text-align: left; }
 .opening-display { display: flex; flex-direction: column; justify-content: space-between; gap: .38em; }
 .opening-display > * { flex-shrink: 0; }
@@ -394,8 +400,9 @@ body:has(dialog[open]) { overflow: hidden; }
   .map-label { font-size: 12px; }
 }
 @media (max-width: 800px) {
+  :root { --opening-gap: 24px; }
   .masthead { min-height: 72px; }
-  .opening { gap: 24px; padding-block: 22px 32px; }
+  .opening { padding-block: 22px 32px; }
   .masthead-credit { flex-direction: column; align-items: end; gap: 0; }
   .institution-marks { gap: 18px; }
   .institution-marks img { width: 115px; }
@@ -419,6 +426,9 @@ body:has(dialog[open]) { overflow: hidden; }
   .return-map { display: inline-block; }
 }
 @media (max-width: 700px) {
+  .masthead:has(.authorship) { grid-template-columns: 1fr; gap: 0; padding-block: 5px 12px; }
+  .authorship { max-width: 360px; padding-block: 10px; }
+  .masthead:has(.authorship) .institution-marks { width: 100%; justify-content: space-between; padding-top: 8px; border-top: 1px solid var(--line); }
   html:has(#selected-pathway:not([hidden])) { scroll-padding-top: 125px; }
   .opening { grid-template-columns: 1fr; gap: 24px; }
   .opening h1 { width: 100%; max-width: 360px; font-size: clamp(54px, 13vw, 82px); }
