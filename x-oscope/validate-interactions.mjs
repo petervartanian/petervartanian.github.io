@@ -24,9 +24,9 @@ let geometryMobile=false;
 const matchMedia=query=>({matches:geometryMobile && query==='(max-width: 740px)',addEventListener(){}});
 const history={pushState(a,b,next){url=String(next)},replaceState(a,b,next){url=String(next)}};
 const context=vm.createContext({window:{matchMedia,scrollTo(){}},document,location,history,URL,URLSearchParams,matchMedia,requestAnimationFrame(){},addEventListener(type,fn){windowListeners[type]=fn},console});
-for(const file of ['data.js','families.js','stpa-data.js','inspection.js','stpa.js']) vm.runInContext(await read(file),context);
+for(const file of ['data.js','families.js','scenarios.js','stpa-data.js','inspection.js','stpa.js']) vm.runInContext(await read(file),context);
 let app=await read('app.js');
-app=app.slice(0,app.lastIndexOf('\n  readLocation();'))+'\nwindow.test={state,readLocation,selectPathway,selectIncident,showOverview,renderOverview,renderEvidenceMap,incidentChoiceDate};})();';
+app=app.slice(0,app.lastIndexOf('\n  readLocation();'))+'\nwindow.test={state,openX,readLocation,selectX,toggleX,selectPathway,selectIncident,showOverview,renderOverview,renderEvidenceMap,incidentChoiceDate};})();';
 vm.runInContext(app,context);
 const {test,AuspexSTPA:stpa}=context.window;
 test.showOverview();
@@ -37,6 +37,51 @@ assert(overview().includes('>X-Extras</span>') && overview().includes('0 compari
 assert(!overview().includes('data-overview-pathway="H-'));
 assert(!overview().includes('Bonus') && !overview().includes('Bounded comparisons'));
 assert.equal(context.window.AuspexFamilies.groups.flatMap(g=>g.families).reduce((n,f)=>n+f.count,0),95);
+assert(overview().includes('1 to explore · 19 scenarios in the review'));
+const nestedOpen = id => new RegExp(`data-x-address="${id.replace('.', '\\.')}"[^>]* open>`).test(overview());
+for (const address of ['A', 'A-IV', 'A-IV-1', 'A-IV-1.c']) {
+ url=`file:///fixture/x-oscope/index.html?x=${address.toLowerCase()}`;test.readLocation();
+ assert.equal(test.state.x,address);
+ assert.equal(new URL(url).searchParams.get('x'),address);
+ assert.equal(test.state.pathway,'');
+ assert(element('#selected-pathway').hidden);
+ for(const node of context.window.XoscopeScenarios.trail(address)) assert(nestedOpen(node.id),`${node.id} must open for ${address}`);
+}
+test.toggleX('A-IV-1.c',true);
+assert.equal(test.state.x,'A-IV-1');assert(!nestedOpen('A-IV-1.c'));assert(nestedOpen('A-IV-1'));
+test.toggleX('A-IV-1',true);
+assert.equal(test.state.x,'A-IV');assert(!nestedOpen('A-IV-1'));assert(nestedOpen('A-IV'));
+test.toggleX('A-IV',true);
+assert.equal(test.state.x,'A');assert(!nestedOpen('A-IV'));assert(nestedOpen('A'));
+test.toggleX('A',true);
+assert.equal(test.state.x,'');assert.equal(new URL(url).search,'');assert(!nestedOpen('A'));
+test.selectX('A-IV-1.c',true);
+assert.equal(new URL(url).searchParams.get('x'),'A-IV-1.c');
+url='file:///fixture/x-oscope/index.html?x=A-IV-1';windowListeners.popstate();
+assert(nestedOpen('A-IV-1') && !nestedOpen('A-IV-1.c'),'History restores the selected nesting depth');
+url='file:///fixture/x-oscope/index.html?x=A-IV-1.c';windowListeners.popstate();
+assert(nestedOpen('A-IV-1.c'),'History restores the variant');
+for (const query of ['x=A-IV-999', 'x=X-1', 'x=A-IV-1.z']) {
+ url=`file:///fixture/x-oscope/index.html?${query}`;test.readLocation();
+ assert.equal(test.state.x,'');assert.equal(new URL(url).search,'');
+}
+url='file:///fixture/x-oscope/index.html?x=A-IV-1.c&p=A-1&i=AFK-2024';test.readLocation();
+assert.equal(test.state.pathway,'');assert.equal(test.state.incident,'');assert.equal(new URL(url).search,'?x=A-IV-1.c');
+test.selectPathway(context.window.AuspexData.pathways[0].id);
+assert.equal(test.state.x,'');assert(!new URL(url).searchParams.has('x'),'Legacy case navigation clears the scenario address');
+test.showOverview();
+for (const query of ['Banks adapt', 'A-IV-1.c', 'v.1c']) {
+ element('#overview-search').value=query;test.renderOverview();
+ assert(overview().includes('data-x-target="A-IV-1.c" data-x-match="true"'));
+ assert(nestedOpen('A') && nestedOpen('A-IV') && nestedOpen('A-IV-1'));
+ assert(!overview().includes('Independent Takeover'));
+}
+for (const query of ['Production Web', 'Andrew Critch', 'A-IV-1']) {
+ element('#overview-search').value=query;test.renderOverview();
+ assert(overview().includes('data-x-target="A-IV-1" data-x-match="true"'));
+}
+test.showOverview();
+assert(!nestedOpen('A') && !nestedOpen('A-IV-1.c'));
 element('#overview-search').value='A-IV';
 test.renderOverview();
 assert(overview().includes('Handover') && !overview().includes('Independent Takeover'),'Address search selects the correct family');

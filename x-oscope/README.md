@@ -8,6 +8,27 @@ Serve the repository root and open `/x-oscope/`. The interface also works direct
 `index.html`, using local assets and a bundled data file. No runtime dependencies.
 `pathways.html` provides a static reader of the worked examples without JavaScript.
 
+## Review hierarchy and first scenario
+
+The overview nests x-groups → x-families → document scenarios → author-supplied
+variants. `families.js` preserves the review's family summaries and counts;
+`scenarios.js` supplies the available scenarios, document mappings and nested reader.
+The first is A-IV Handover → A-IV-1 The Production Web → A-IV-1.c Banks adapt.
+The `.c` suffix follows Critch's v.1c; it does not count as another scenario.
+The family shows 1 available scenario against 19 in the review.
+
+`?x=A-IV-1` and `?x=A-IV-1.c` open every ancestor, survive reload, and support
+browser history. Group and family addresses work with the same `x` parameter.
+Breadcrumb links can be bookmarked or copied; search includes scenario titles,
+variant names, addresses and original-document metadata. Existing `p=` case
+addresses remain separate. A valid `x=` address takes precedence if both occur.
+
+Critch's public document is mapped to the scenario and the specific variant passage.
+The review is cited separately for classification. The private draft PDF is not
+published. This is an editorial summary of a hypothetical scenario, with no
+incident evidence or likelihood assigned. Validate additions with
+`node x-oscope/validate-scenarios.mjs` and `node x-oscope/validate-interactions.mjs`.
+
 ## Six STPA worked examples
 
 A-1, B-1, C-1, D-1, E-1, and F-1 use the models in `stpa-[a-f]1.json`.

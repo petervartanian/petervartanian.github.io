@@ -59,7 +59,9 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const narrow = matchMedia('(max-width: 800px)');
   const compactMap = matchMedia('(max-width: 700px)');
-  const state = { pathway: '', target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false, strengthen: false };
+  const state = { x: '', pathway: '', target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false, strengthen: false };
+  const scenarioLibrary = window.XoscopeScenarios;
+  const openX = new Set();
   const isSTPA = (id = state.pathway) => !!window.AuspexSTPA?.has(id);
   const pathwayTitle = p => window.AuspexSTPAModels?.[p.id]?.title || p.title;
   const overlayConfig = () => window.AuspexSTPA?.model?.presentation.overlays[state.incident];
@@ -124,6 +126,8 @@
   };
 
   function normalize() {
+    state.x = scenarioLibrary?.resolve(state.x) || '';
+    if (state.x) state.pathway = '';
     if (!pathways.has(state.pathway)) {
       Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false, strengthen: false });
       window.AuspexSTPA?.use('');
@@ -167,9 +171,12 @@
   }
 
   function writeLocation(replace = false) {
+    // Nested addresses position their own disclosure after reload and history.
+    if ('scrollRestoration' in history) history.scrollRestoration = state.x ? 'manual' : 'auto';
     const url = new URL(location.href);
     url.search = '';
     url.hash = '';
+    if (state.x) url.searchParams.set('x', state.x);
     if (state.pathway) url.searchParams.set('p', pathwayCode(pathways.get(state.pathway)));
     if (state.target) url.searchParams.set('t', state.target);
     if (state.incident) url.searchParams.set('i', state.incident);
@@ -188,6 +195,10 @@
 
   function readLocation() {
     const params = new URLSearchParams(location.search);
+    state.x = scenarioLibrary?.resolve(params.get('x')) || '';
+    openX.clear();
+    scenarioLibrary?.trail(state.x).forEach(node => openX.add(node.id));
+    $('#overview-search').value = '';
     state.pathway = aliases.get((params.get('p') || '').toLowerCase()) || params.get('p') || '';
     state.target = params.get('t') || '';
     state.overlay = isSTPA() && params.has('i');
@@ -208,6 +219,7 @@
     }
     render();
     writeLocation(true);
+    if (state.x) revealX();
   }
 
   function sourceList(ids) {
@@ -461,7 +473,7 @@
     $('.skip').href = enhanced ? '#incidents-title' : p ? '#pathway-title' : '#choose-title';
     $('.skip').textContent = enhanced ? 'Overlay an incident' : 'Choose a pathway';
     if (!p) {
-      document.title = 'X-oscope';
+      document.title = state.x ? `X-oscope · ${state.x} · ${scenarioLibrary.nodes.get(state.x).title}` : 'X-oscope';
       $('#pathway-family').textContent = '';
       $('#selected-code').textContent = '';
       $('#selected-name').textContent = '';
@@ -491,6 +503,8 @@
 
   function selectPathway(id, reveal = false) {
     if (!pathways.has(id)) return;
+    state.x = '';
+    openX.clear();
     const enteringPathway = !state.pathway;
     state.pathway = id;
     state.overlay = false;
@@ -533,6 +547,7 @@
       ...group,
       families: group.families.filter((family) => terms.every((term) => searchable([
         group.id, group.title, family.id, family.title, family.premise, family.chain.flat().join(' '),
+        scenarioLibrary?.searchText(family.id) || '',
       ].join(' ')).includes(term))),
     })).filter((group) => group.families.length);
     const familyCount = familyGroups.reduce((count, group) => count + group.families.length, 0);
@@ -546,12 +561,17 @@
       const code = pathwayCode(p);
       return `<li><button class="overview-pathway" data-group="${p.group}" data-overview-pathway="${p.id}"><span class="code">${escape(code)}</span><span>${escape(pathwayTitle(p))}${count ? `<small class="pathway-coverage">${countLabel(count)}</small>` : ''}</span>${icon('right', 'choice-icon')}</button></li>`;
     };
-    const familyRows = familyGroups.map((group) => `<details class="overview-group" data-x-group="${group.id}"${terms.length ? ' open' : ''}>
-      <summary><span class="cluster-index">${group.id}</span><span class="cluster-text">${escape(group.title)}</span><small class="cluster-count">${group.families.length} ${group.families.length === 1 ? 'family' : 'families'}</small></summary>
-      <div class="x-families">${group.families.map((family) => `<details class="x-family" data-x-family="${family.id}" id="family-${family.id}">
-        <summary><span class="code">${family.id}</span><span>${escape(family.title)}</span><small class="x-scenario-count">${family.count} ${family.count === 1 ? 'scenario' : 'scenarios'} in the review</small></summary>
-        <div class="x-family-reading"><h4>Premise</h4><p>${escape(family.premise)}</p><h4>Causal pathway</h4><ol>${family.chain.map(([title, text]) => `<li><strong>${escape(title)}</strong>${escape(text)}</li>`).join('')}</ol><p class="x-family-source">Family overview adapted from <cite>${escape(window.AuspexFamilies.source)}</cite>, ${escape(family.pages)} (September 15, 2026 draft). Counts refer to source scenarios in the review.</p></div>
-      </details>`).join('')}</div>
+    const familyRows = familyGroups.map((group) => `<details class="overview-group" data-x-group="${group.id}" data-x-address="${group.id}"${terms.length || openX.has(group.id) ? ' open' : ''}>
+      <summary data-x-target="${group.id}"><span class="cluster-index">${group.id}</span><span class="cluster-text">${escape(group.title)}</span><small class="cluster-count">${group.families.length} ${group.families.length === 1 ? 'family' : 'families'}</small></summary>
+      <div class="x-families">${group.families.map((family) => {
+        const entries = scenarioLibrary?.familyScenarios(family.id) || [];
+        const searchOpen = scenarioLibrary?.search(family, terms).open.has(family.id);
+        const overview = `<div class="x-family-reading"><h4>Premise</h4><p>${escape(family.premise)}</p><h4>Causal pathway</h4><ol>${family.chain.map(([title, text]) => `<li><strong>${escape(title)}</strong>${escape(text)}</li>`).join('')}</ol><p class="x-family-source">Family overview adapted from <cite>${escape(window.AuspexFamilies.source)}</cite>, ${escape(family.pages)} (September 15, 2026 draft). Counts refer to source scenarios in the review.</p></div>`;
+        return `<details class="x-family" data-x-family="${family.id}" data-x-address="${family.id}" id="family-${family.id}"${openX.has(family.id) || searchOpen ? ' open' : ''}>
+        <summary data-x-target="${family.id}"><span class="code">${family.id}</span><span>${escape(family.title)}</span><small class="x-scenario-count">${entries.length ? `${entries.length} to explore · ` : ''}${family.count} ${family.count === 1 ? 'scenario' : 'scenarios'} in the review</small></summary>
+        ${entries.length ? `${scenarioLibrary.render(family, openX, terms)}<details class="x-family-background"><summary>About the ${escape(family.title)} family</summary>${overview}</details>` : overview}
+      </details>`;
+      }).join('')}</div>
     </details>`).join('');
     const extras = comparisons.length ? `<details class="overview-group comparisons" data-group="H"${terms.length ? ' open' : ''}><summary><span class="cluster-text">X-Extras</span><small class="cluster-count">${comparisons.length} comparison${comparisons.length === 1 ? '' : 's'}</small></summary><ul>${comparisons.map(pathwayItem).join('')}</ul></details>` : (!terms.length || terms.every(term => searchable('X-Extras comparisons').includes(term))) ? `<section class="overview-group comparisons" data-group="H" aria-labelledby="extras-heading"><div class="comparisons-heading"><span class="cluster-text" id="extras-heading">X-Extras</span><small class="cluster-count">0 comparisons</small></div></section>` : '';
     const previous = existing.length ? `<section class="overview-existing"><h3>Existing pathways</h3><ul>${existing.map(pathwayItem).join('')}</ul></section>` : '';
@@ -560,10 +580,13 @@
   $('#overview-search').addEventListener('input', renderOverview);
   $('#overview-search').addEventListener('keydown', (event) => {
     if (!['Enter', 'ArrowDown'].includes(event.key)) return;
-    const first = $('#overview-incidents [data-search-incident]') || $('#overview-groups .x-family > summary') || $('#overview-groups [data-overview-pathway]');
+    const first = $('#overview-groups [data-x-match]') || $('#overview-incidents [data-search-incident]') || $('#overview-groups .x-family > summary') || $('#overview-groups [data-overview-pathway]');
     if (!first) return;
     event.preventDefault();
-    if (event.key === 'Enter') first.click();
+    if (event.key === 'Enter') {
+      if (first.dataset.xTarget) selectX(first.dataset.xTarget, true);
+      else first.click();
+    }
     else {
       for (let parent = first.parentElement; parent; parent = parent.parentElement) {
         if (parent.tagName === 'DETAILS') parent.open = true;
@@ -572,9 +595,63 @@
     }
   });
   $('#overview-groups').addEventListener('click', (event) => {
+    const link = event.target.closest('[data-x-link]');
+    if (link) {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      selectX(link.dataset.xLink, true);
+      return;
+    }
+    const summary = event.target.closest('summary[data-x-target]');
+    if (summary && scenarioLibrary) {
+      event.preventDefault();
+      if ($('#overview-search').value.trim()) selectX(summary.dataset.xTarget, true);
+      else toggleX(summary.dataset.xTarget, summary.parentElement.open);
+      return;
+    }
     const button = event.target.closest('[data-overview-pathway]');
     if (button) selectPathway(button.dataset.overviewPathway, true);
   });
+  function revealX(address = state.x, scroll = true) {
+    const summary = $(`[data-x-target="${address}"]`);
+    if (!summary) return;
+    summary.focus({ preventScroll: true });
+    if (scroll) summary.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }
+  function selectX(address, reveal = false) {
+    const id = scenarioLibrary?.resolve(address);
+    if (!id) return;
+    state.x = id;
+    state.pathway = '';
+    openX.clear();
+    scenarioLibrary.trail(id).forEach(node => openX.add(node.id));
+    $('#overview-search').value = '';
+    normalize();
+    render();
+    writeLocation();
+    if (reveal) revealX();
+    announce(`${id} · ${scenarioLibrary.nodes.get(id).title}`);
+  }
+  function toggleX(address, wasOpen) {
+    const id = scenarioLibrary.resolve(address);
+    if (!id) return;
+    // Capture actual disclosure state, including ancestors opened by search.
+    document.querySelectorAll('#overview-groups details[data-x-address][open]').forEach(detail => openX.add(detail.dataset.xAddress));
+    if (wasOpen) {
+      for (const candidate of openX) if (scenarioLibrary.trail(candidate).some(node => node.id === id)) openX.delete(candidate);
+      state.x = scenarioLibrary.nodes.get(id).parent;
+    } else {
+      scenarioLibrary.trail(id).forEach(node => openX.add(node.id));
+      state.x = id;
+    }
+    // Once a result is selected, browsing resumes in the full hierarchy.
+    $('#overview-search').value = '';
+    document.title = state.x ? `X-oscope · ${state.x} · ${scenarioLibrary.nodes.get(state.x).title}` : 'X-oscope';
+    renderOverview();
+    writeLocation();
+    revealX(id, false);
+    announce(`${id} · ${scenarioLibrary.nodes.get(id).title} ${wasOpen ? 'collapsed' : 'expanded'}`);
+  }
   function incidentResults(terms, all = false) {
     if (!terms.length && !all) return '';
     const text = (a) => searchable(`${a.incident} ${incidents.get(a.incident).title} ${a.scope}`);
@@ -587,6 +664,8 @@
   function selectIncident(id) {
     const a = data.assessments.find((item) => item.id === id);
     if (!a) return;
+    state.x = '';
+    openX.clear();
     const enteringPathway = !state.pathway;
     state.pathway = a.pathway;
     state.overlay = isSTPA(a.pathway);
@@ -609,6 +688,8 @@
     if (result) selectIncident(result.dataset.searchIncident);
   });
   function showOverview() {
+    state.x = '';
+    openX.clear();
     state.pathway = '';
     normalize();
     $('#overview-search').value = '';
@@ -1031,12 +1112,13 @@
     if ($('#source-dialog').open) $('#source-dialog').close();
     if ($('#method-dialog').open) $('#method-dialog').close();
     readLocation();
-    announce(state.pathway ? `${pathwayCode(pathways.get(state.pathway))} · ${pathwayTitle(pathways.get(state.pathway))}` : 'Choose a pathway');
+    announce(state.x ? `${state.x} · ${scenarioLibrary.nodes.get(state.x).title}` : state.pathway ? `${pathwayCode(pathways.get(state.pathway))} · ${pathwayTitle(pathways.get(state.pathway))}` : 'Choose a pathway');
   });
 
   readLocation();
   $('#app').hidden = false;
   $('#fallback').hidden = true;
+  if (state.x) revealX();
   new ResizeObserver(drawConnections).observe($('#pathway-map'));
   document.fonts.ready.then(drawConnections);
   // Fit the headline to the copy's measured height, retaining the type proportions.
