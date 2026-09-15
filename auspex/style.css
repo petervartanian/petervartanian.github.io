@@ -94,7 +94,7 @@ h1, h2, h3 { font-weight: 400; }
   .risk-spectrum { background: var(--risk-spectrum); background-clip: text; -webkit-background-clip: text; color: transparent; }
 }
 .opening-copy { min-width: 0; width: 100%; max-width: 660px; justify-self: end; }
-.opening-copy > p { margin: 0; font: 400 clamp(18px, 1.5vw, 22px)/1.5 var(--sans); text-align: justify; text-align-last: justify; text-wrap: balance; }
+.opening-copy > p { margin: 0; font: 400 clamp(18px, 1.5vw, 22px)/1.5 var(--sans); text-align: left; text-wrap: wrap; }
 @supports (text-box-trim: trim-both) {
   .opening-display > .headline-line, .opening-copy > p { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 }
