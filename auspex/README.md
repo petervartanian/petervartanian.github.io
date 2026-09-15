@@ -293,8 +293,8 @@ hardware-governance scope and limitations.
 - `data.js`: local bundle of those four data files, for HTTP and direct-file use.
 - `pathways.html`: generated static reader of the same register.
 - `validate.mjs`: structural, referential, evidence-scope and bundle checks.
-- `mark.svg`: bird mark inherited from Auspex.
-- `identity.html`, `assets/haruspex-mark.svg`: bird and entrail-mark specimens.
+- `mark.svg`: X-oscope’s X inside an open circular lens; shared by the masthead and favicon.
+- `identity.html`, `assets/haruspex-mark.svg`: scope and entrail-mark specimens.
 - `framework.js`, `assessment.js`: retained source records from the earlier prototype;
   neither is loaded by this interface.
 - `assets/provenance.json`: provenance for the MIT AIRI and ERO marks in the masthead.
