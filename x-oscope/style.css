@@ -70,10 +70,10 @@ h1, h2, h3 { font-weight: 400; }
 .masthead:has(.authorship) { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.1fr); gap: var(--opening-gap); width: calc(100% - 2 * var(--edge)); max-width: calc(1600px - 2 * var(--edge)); margin-inline: auto; }
 .authorship { display: flex; align-items: center; width: 100%; max-width: 440px; padding-block: 12px; container-type: inline-size; }
 .masthead:has(.authorship) .institution-marks { justify-self: end; }
-/* X-OSCOPE is 5.058em wide in Sorts Mill Goudy with the brand tracking. */
-.authorship .brand { min-height: 44px; height: 44px; font-size: 19.77cqw; }
-/* Keep the title width while fitting the capitals to the visible logo height. */
-.authorship .brand > span { transform: scaleY(calc(var(--partner-logo-height) / 1cap)); transform-origin: center; }
+/* Size the sans-serif name to the full title column. */
+.authorship .brand { min-height: 44px; height: 44px; font-size: 22.1023cqw; }
+/* Retain the full width with capitals 20% shorter than the logo height. */
+.authorship .brand > span { transform: scaleY(calc(var(--partner-logo-height) * .8 / 1cap)); transform-origin: center; }
 .site-credit { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 24px; max-width: 1600px; margin: 0 auto; padding: 0 var(--edge) 28px; font: 400 11px/1.5 var(--sans); color: var(--quiet); }
 .site-credit > span { display: inline-block; padding-block: 14px; }
 .credit-heart { display: inline-block; width: 1em; height: 1em; vertical-align: -.08em; fill: #858585; }
@@ -83,7 +83,7 @@ h1, h2, h3 { font-weight: 400; }
 .institution-marks { display: flex; align-items: center; gap: 30px; }
 .institution-marks a { display: flex; align-items: center; min-height: 44px; }
 .institution-marks img { display: block; width: var(--partner-logo-width); height: auto; max-height: 42px; object-fit: contain; filter: grayscale(1) brightness(.35); mix-blend-mode: multiply; }
-.brand { display: inline-flex; align-items: center; min-height: 48px; font: 38px/1 Auspex, Georgia, serif; text-decoration: none; letter-spacing: -.035em; white-space: nowrap; }
+.brand { display: inline-flex; align-items: center; min-height: 48px; font: 400 38px/1 var(--sans); text-decoration: none; letter-spacing: -.035em; white-space: nowrap; }
 .brand > span { display: block; }
 @supports (text-box-trim: trim-both) {
   .brand > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
