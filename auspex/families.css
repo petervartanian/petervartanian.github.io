@@ -7,20 +7,20 @@
 .overview-group[data-x-group] > summary { grid-template-rows: auto auto; min-height: 112px; }
 .overview-group[data-x-group] > summary > .cluster-index { grid-row: 1 / 3; }
 .overview-group[data-x-group] > summary::after { grid-row: 1 / 3; }
-.overview-group[data-x-group] .x-families { padding: 0 24px 24px; display: grid; gap: 12px; }
-.x-family[data-x-family='A-I'] { --family-color: #79438a; --family-tint: #f1e5f5; }
-.x-family[data-x-family='A-II'] { --family-color: #3d6bb0; --family-tint: #e3ebf8; }
-.x-family[data-x-family='A-III'] { --family-color: #208988; --family-tint: #dcf1ef; }
-.x-family[data-x-family='A-IV'] { --family-color: #397038; --family-tint: #e5f0df; }
-.x-family[data-x-family='B-I'] { --family-color: #b77625; --family-tint: #f8e9d5; }
-.x-family[data-x-family='B-II'] { --family-color: #929c36; --family-tint: #eff1d4; }
-.x-family[data-x-family='C-I'] { --family-color: #c65c3f; --family-tint: #fae5dc; }
-.x-family[data-x-family='C-II'] { --family-color: #ae4473; --family-tint: #f5e2ed; }
+.overview-group[data-x-group] .x-families { padding: 0 48px 28px; display: grid; gap: 12px; background: var(--tint); }
+.x-family[data-x-family='A-I'] { --family-color: #79438a; --family-tint: #d7bade; }
+.x-family[data-x-family='A-II'] { --family-color: #5159a0; --family-tint: #c7c9ee; }
+.x-family[data-x-family='A-III'] { --family-color: #207669; --family-tint: #b8ddd5; }
+.x-family[data-x-family='A-IV'] { --family-color: #527033; --family-tint: #c4d9a9; }
+.x-family[data-x-family='B-I'] { --family-color: #92521d; --family-tint: #ecc198; }
+.x-family[data-x-family='B-II'] { --family-color: #657226; --family-tint: #d7df91; }
+.x-family[data-x-family='C-I'] { --family-color: #a8472e; --family-tint: #eeb2a0; }
+.x-family[data-x-family='C-II'] { --family-color: #953b70; --family-tint: #ddb0cb; }
 .x-family { --accent: var(--family-color); --tint: var(--family-tint); background: var(--family-tint); border-left: 4px solid var(--family-color); }
 details.x-family > summary { display: grid; grid-template-columns: 62px minmax(0, 1fr) max-content 24px; align-items: center; width: 100%; min-height: 70px; margin: 0; padding: 16px; gap: 16px; box-shadow: none; border-radius: 0; color: var(--ink); font: 500 17px/1.4 var(--sans); }
 .x-family > summary::after { grid-column: 4; color: var(--ink); }
 .x-family > summary .code { color: var(--ink); font-size: 12px; }
-.x-family .x-scenario-count { margin: 0; color: var(--muted); font: 11px/1.5 var(--sans); }
+.x-family .x-scenario-count { margin: 0; color: var(--ink); font: 11px/1.5 var(--sans); }
 .x-family-reading { padding: 0 20px 20px; color: var(--ink); font: 15px/1.6 var(--sans); }
 .x-family-reading p { margin: 4px 0 18px; max-width: 85ch; }
 .x-family-reading h4 { margin: 16px 0 6px; font: 500 12px/1.5 var(--sans); }
@@ -28,7 +28,7 @@ details.x-family > summary { display: grid; grid-template-columns: 62px minmax(0
 .x-family-reading li { padding: 7px 0 7px 6px; }
 .x-family-reading li::marker { color: var(--ink); font-weight: 500; }
 .x-family-reading li strong { display: block; font-weight: 500; }
-.x-family-reading .x-family-source { margin: 18px 0 0; color: var(--muted); font: 11px/1.5 var(--sans); }
+.x-family-reading .x-family-source { margin: 18px 0 0; color: var(--ink); font: 11px/1.5 var(--sans); }
 /* Start the replacement label at the former Bonus word's left edge. */
 .overview-group.comparisons > summary { grid-template-columns: minmax(0, 1fr) 24px; column-gap: 22px; padding-left: 24px; }
 .overview-group.comparisons > summary > .cluster-text { grid-column: 1; grid-row: 1; max-width: none; margin-left: 4px; }
@@ -39,7 +39,7 @@ details.x-family > summary { display: grid; grid-template-columns: 62px minmax(0
 .overview-existing ul { list-style: none; padding: 0; }
 @media (max-width: 700px) {
   .overview-group.comparisons > summary { padding-left: 18px; }
-  .overview-group[data-x-group] .x-families { padding: 0 16px 16px; }
+  .overview-group[data-x-group] .x-families { padding: 0 28px 20px; }
   details.x-family > summary { grid-template-columns: 54px minmax(0, 1fr) 24px; gap: 8px 12px; padding: 14px 12px; font-size: 15px; }
   .x-family > summary::after { grid-column: 3; grid-row: 1 / 3; }
   .x-family .x-scenario-count { grid-column: 2; }
