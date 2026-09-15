@@ -33,7 +33,8 @@ test.showOverview();
 const overview=()=>elements.get('#overview-groups').innerHTML;
 assert.equal((overview().match(/data-x-group=/g)||[]).length,3,'The opening has three presentation groups');
 assert.equal((overview().match(/data-x-family=/g)||[]).length,8,'All eight family pathways are available');
-assert(overview().includes('X-Extras') && overview().includes('6 comparisons'));
+assert(overview().includes('>Extras</span>') && overview().includes('6 comparisons'));
+assert(!overview().includes('X-Extras') && !overview().includes('>X-1<'));
 assert(!overview().includes('Bonus') && !overview().includes('Bounded comparisons'));
 assert.equal(context.window.AuspexFamilies.groups.flatMap(g=>g.families).reduce((n,f)=>n+f.count,0),95);
 element('#overview-search').value='A-IV';
@@ -41,10 +42,16 @@ test.renderOverview();
 assert(overview().includes('Handover') && !overview().includes('Independent Takeover'),'Address search selects the correct family');
 element('#overview-search').value='X-1';
 test.renderOverview();
-assert(overview().includes('data-overview-pathway="H-01"'),'New comparison addresses retain the existing assessment');
+assert(overview().includes('data-overview-pathway="H-01"'),'Legacy comparison searches retain the existing assessment');
 element('#overview-search').value='no-such-family-xyz';
 test.renderOverview();
 assert(overview().includes('No matching'));
+for (const address of ['1', 'X-1', 'Bonus-1']) {
+ url=`file:///fixture/x-oscope/index.html?p=${address}`;
+ test.readLocation();
+ assert.equal(test.state.pathway, 'H-01', 'Current and legacy comparison addresses resolve to the same case');
+ assert.equal(element('#selected-code').textContent, '1');
+}
 test.showOverview();
 const matchesSelector=(target,selector)=>selector.split(',').some(part=>{
  const candidate=part.trim();

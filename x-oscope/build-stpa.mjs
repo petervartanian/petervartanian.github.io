@@ -12,7 +12,7 @@ const context = vm.createContext({ window: { AuspexSTPAModels: registry, AuspexS
 vm.runInContext(await read('stpa.js'), context);
 const presentation = context.window.AuspexSTPA;
 const [catalogue, assessments, evidence, incidents] = await Promise.all(['pathways.json','assessments.json','evidence.json','incidents.json'].map(parse));
-const displayCode = pathway => pathway.group === 'H' ? `X-${Number(pathway.id.split('-')[1])}` : pathway.displayId;
+const displayCode = pathway => pathway.group === 'H' ? String(Number(pathway.id.split('-')[1])) : pathway.displayId;
 const sources = new Map(evidence.sources.map(s => [s.id,s]));
 const passages = new Map(evidence.passages.map(p => [p.id,p]));
 for (const model of models) {
@@ -66,8 +66,8 @@ for (let i = starts.length - 1; i >= 0; i--) {
   if (end < 0) throw new Error(`Missing reader boundary ${p.id}`);
   html = html.slice(0, match.index) + `<article id="${p.id}" data-group="${p.group}" data-unworked="true"><p class="eyebrow">${displayCode(p)} · Pathway</p><h2>${esc(p.title)}</h2></article>` + html.slice(end);
 }
-html = html.replace('<h2>Bonus · Comparison cases</h2>', '<h2>X-Extras</h2>');
-html = html.replace(/href="style.css(?:\?[^\"]*)?"/, 'href="style.css?v=24.9"');
+html = html.replace(/<h2>(?:Bonus · Comparison cases|X-Extras)<\/h2>/, '<h2>Extras</h2>');
+html = html.replace(/href="style.css(?:\?[^\"]*)?"/, 'href="style.css?v=24.10"');
 html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=34.3"');
 const key=`<!-- MAP-KEY-START --><section id="map-key" class="a1-static-key"><h2>Path & barrier key</h2>${presentation.pathsGuide(true)}</section><!-- MAP-KEY-END -->`;
 if (html.includes('<!-- MAP-KEY-START -->')) html=html.replace(/<!-- MAP-KEY-START -->[\s\S]*?<!-- MAP-KEY-END -->/,key);

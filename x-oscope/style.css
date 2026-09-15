@@ -149,7 +149,7 @@ main { max-width: 1600px; margin: 0 auto; padding: 0 var(--edge) 60px; }
 .result-group h3 { gap: 12px; }
 
 .overview-group[open] { background: var(--tint); }
-.overview-group[data-group='H'] { background: var(--surface); }
+.overview-group[data-group='H'] { background: transparent; }
 .overview-group summary:hover .cluster-text { color: var(--accent); }
 .overview-group small { display: block; font: 12px/1.5 var(--sans); color: var(--accent); margin-top: 10px; }
 .overview-group ul { list-style: none; padding: 0 24px 22px; margin: 0; }
@@ -168,6 +168,8 @@ main { max-width: 1600px; margin: 0 auto; padding: 0 var(--edge) 60px; }
 .pathway-trigger > #selected-name { max-width: 1030px; text-wrap: pretty; }
 .code { font: 11px/1.6 var(--mono); color: var(--muted); white-space: nowrap; }
 :is(.pathway-trigger, .overview-pathway, .pathway-result, .incident-result-route) > .code { display: inline-flex; align-items: center; justify-content: center; justify-self: start; flex: 0 0 auto; width: max-content; min-height: 24px; padding: 4px 8px; background: var(--accent); color: var(--page); font: 500 11px/1.45 var(--mono); }
+/* Extras use plain comparison numbers across entry points. */
+.overview-pathway[data-group='H'] > .code, .result-group[data-group='H'] .pathway-result > .code, .incident-result-route[data-group='H'] > .code, #app[data-group='H'] .pathway-trigger > .code { padding: 0; background: transparent; color: var(--accent); }
 .trigger-arrow { margin-left: auto; color: var(--accent); font: 28px/1 var(--sans); padding-inline: 6px; }
 .pathway-heading { padding: 12px 0 0; }
 .eyebrow { font: 11px/1.7 var(--sans); color: var(--muted); margin: 0; }

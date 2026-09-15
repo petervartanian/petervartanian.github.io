@@ -10,7 +10,7 @@ Serve the repository root and open `/x-oscope/`. The interface also works direct
 
 ## Seven STPA worked examples
 
-A-1, B-1, C-1, D-1, E-1, F-1, and X-1 use the models in `stpa-[a-fh]1.json`.
+A-1, B-1, C-1, D-1, E-1, F-1, and Extra 1 use the models in `stpa-[a-fh]1.json`.
 I selects a pathway; II places dated incident evidence on its relevant component;
 III inspects the barrier. The dated choices are always visible. Select a case to add
 its card, another to switch, or the selected case / × to clear it. There are no
@@ -87,7 +87,7 @@ A small gap keeps the mark clear on single, double, dashed and dotted lines; the
 current pathway. A safeguard is an intentional barrier; proposed identifies its status,
 not its protective performance. Actual barrier states stay attached to incident evidence.
 
-Pathway labels use A-1 and X-1 in the interface and static reader. Old A.1, Bonus-1, and Bonus.1 links and
+Pathway labels use A-1 through F-1; Extras use plain numbers 1–6 in the interface and static reader. Old A.1, X-1, Bonus-1, and Bonus.1 links and
 searches remain supported; internal component addresses and evidence anchors are stable.
 Every map has a clickable key for path types, barriers, and recovery
 versus reinforcement. It includes conditional consequences and feedback, even when
@@ -123,7 +123,7 @@ Maven and Replicator expose proposed safeguards with unassessed performance and 
 questions. Their announcements remain contextual evidence. Later corrective changes are
 dated; new improvements are labeled “Proposed change.” Scope notes use paired
 asterisks and smaller text. The Myanmar counter-speech intervention is Backfiring in
-the attributed account. X-1 separates the FTC allegations from the mathematical
+the attributed account. Extra 1 separates the FTC allegations from the mathematical
 predictive-policing comparison and includes the latter’s feedback loop and correction.
 
 Models may override assessments and add evidence by stable ID. Build and validate:
@@ -149,7 +149,7 @@ Visible IDs follow the family letters; canonical evidence addresses remain stabl
 - D-1–D-2 (B-01–B-02): pandemics.
 - E-1–E-7 (S-01–S-07): sectoral and cross-sector catastrophes.
 - F-1–F-2 (F-01–F-02): informational ecosystems and collective response.
-- X-1–X-6 (H-01–H-06): comparison cases.
+- Extras 1–6 (H-01–H-06): comparison cases.
 
 Each pathway preserves the register's causal steps, required conditions, source basis,
 candidate barriers, variants and weakest bridge. Political lock-in and nuclear famine
@@ -322,7 +322,8 @@ locally hosted Space Grotesk (`assets/FONT-LICENSES.txt`), with system sans-seri
   and the review's scenario counts; these counts do not imply that all 95 individual
   source-scenario maps have been imported. The family content is a paraphrase of the
   September 15, 2026 draft, not an empirical assessment.
-- X-Extras has a count derived from its six existing comparisons. Its heading starts at
+- Extras has a count derived from its six existing comparisons. It uses plain rows and
+  unboxed numbers with slate accents, without shaded overview blocks. Its heading starts at
   the former Bonus label position. Blue, gold, and rose group backgrounds contain wider
   family color ranges, defined in `families.css`. The earlier worked pathways and their
   evidence remain accessible through search, the selector, and existing links.

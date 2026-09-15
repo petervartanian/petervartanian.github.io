@@ -34,9 +34,9 @@ for (const name of ['index.html', 'pathways.html', 'identity.html']) {
   const canonical = `${origin}/x-oscope/${name === 'index.html' ? '' : name}`;
   assert(html.includes(`<link rel="canonical" href="${canonical}">`), `${name}: incorrect canonical address`);
   if (name === 'pathways.html') {
-    assert(html.includes('<h2>X-Extras</h2>'), 'Static reader must use the current comparison label');
-    assert(!/Bonus-\d+/.test(html), 'Static reader still displays or links a retired comparison address');
-    for (let number = 1; number <= 6; number++) assert(html.includes(`X-${number} — `), `Missing comparison address X-${number}`);
+    assert(html.includes('<h2>Extras</h2>'), 'Static reader must use the current comparison label');
+    assert(!/(?:Bonus|X)-[1-6]\b/.test(html), 'Static reader still displays or links a retired comparison address');
+    for (let number = 1; number <= 6; number++) assert(html.includes(`<a href="#H-0${number}">${number} — `), `Missing comparison number ${number}`);
   }
   for (const match of html.matchAll(/<(?:a|link|script|img)\b[^>]*\b(?:href|src)="([^"]+)"[^>]*>/g)) {
     await checkReference(match[1], path);
