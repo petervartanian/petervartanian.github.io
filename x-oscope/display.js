@@ -29,10 +29,4 @@ window.AuspexLabels = {
   'S-05': ['Concentrated AI dependency', 'Shared service unavailable', 'Failover too slow', 'Obligations missed', 'Financial distress spreads'],
   'S-06': ['Agricultural automation', 'Crop-critical work disrupted', 'Production window missed', 'Food deficit goes uncovered', 'Famine'],
   'S-07': ['Short-term yield objectives', 'Ecological costs overlooked', 'Soil and ecosystem damage', 'Correction fails', 'Sustained regional damage'],
-  'H-01': ['Arrest predictions affect hiring', 'Work and income lost', 'Recorded arrests increase', 'Predicted risk rises', 'Exclusion entrenched'],
-  'H-02': ['Individual testing looks positive', 'Wide adoption', 'Shared withdrawal advice', 'Peer reinforcement', 'Education and employment lost'],
-  'H-03': ['Message acceptance rewarded', 'Anxiety increases acceptance', 'Secrecy and fear encouraged', 'Communication norms change', 'Distrust and dependence'],
-  'H-04': ['Planning advice delegated', 'AI pursues its preferred design', 'Public consent fabricated', 'Unwanted plan adopted'],
-  'H-05': ['Automated driving with fallback', 'Ineffective braking response', 'Operator fails to intervene', 'Pedestrian killed'],
-  'H-06': ['Unrestricted AI practice tool', 'Assisted performance improves', 'Independent practice may decline', 'Unaided performance worsens'],
 };

@@ -4,7 +4,7 @@ import vm from 'node:vm';
 
 const read = name => readFile(new URL(name, import.meta.url), 'utf8');
 const parse = async name => JSON.parse(await read(name));
-const models = await Promise.all(['a','b','c','d','e','f','h'].map(letter => parse(`stpa-${letter}1.json`)));
+const models = await Promise.all(['a','b','c','d','e','f'].map(letter => parse(`stpa-${letter}1.json`)));
 const [assessments,evidence,staticHTML] = await Promise.all([parse('assessments.json'),parse('evidence.json'),read('pathways.html')]);
 const sourceIds = new Set([...evidence.sources,...models.flatMap(m=>m.additionalEvidence?.sources||[])].map(s=>s.id));
 const passageIds = new Set([...evidence.passages,...models.flatMap(m=>m.additionalEvidence?.passages||[])].map(p=>p.id));
@@ -210,7 +210,7 @@ assert(a.links.filter(l=>l.to==='X-01:7').every(l=>l.from==='X-01:6'&&l.kind==='
 assert(a.scenarios.some(s=>s.ucas.length===0 && s.archetype.includes('Control action not executed')));
 for (const o of Object.values(a.presentation.overlays)) assert.equal(o.target,'X-01:3');
 assert(!presentation.has('X-02'),'Unworked pathways have no active model');
-console.log(`Validated seven STPA models and ${barriers} barriers: traceability, conditional routes, recovery, evidence scope, brittleness, bundle and static reader.`);
+console.log(`Validated six STPA models and ${barriers} barriers: traceability, conditional routes, recovery, evidence scope, brittleness, bundle and static reader.`);
 
 const catalogue = await parse('pathways.json');
 for (const p of catalogue.pathways.filter(p=>!models.some(m=>m.pathway===p.id))) assert(staticHTML.includes(`id="${p.id}" data-group="${p.group}" data-unworked="true"`));

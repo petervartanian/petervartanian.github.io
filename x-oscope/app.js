@@ -30,8 +30,8 @@
   };
   const icon = (name, className = '') => `<svg class="ui-icon ${className}" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="${icons[name]}"/></svg>`;
   const pathways = new Map(data.pathways.map((p) => [p.id, p]));
-  const pathwayCode = (p) => p.group === 'H' ? p.displayId.split('-').pop() : p.displayId;
-  const aliases = new Map(data.pathways.flatMap((p) => [p.displayId, p.displayId.replace('-', '.'), pathwayCode(p), ...(p.group === 'H' ? [`X-${pathwayCode(p)}`] : [])].map(label => [label.toLowerCase(), p.id])));
+  const pathwayCode = (p) => p.group === 'H' ? `X-${p.displayId.split('-').pop()}` : p.displayId;
+  const aliases = new Map(data.pathways.flatMap((p) => [p.displayId, p.displayId.replace('-', '.'), pathwayCode(p)].map(label => [label.toLowerCase(), p.id])));
   const incidents = new Map(data.incidents.map((i) => [i.id, i]));
   const sources = new Map(data.evidence.sources.map((s) => [s.id, s]));
   const passages = new Map(data.evidence.passages.map((p) => [p.id, p]));
@@ -43,7 +43,7 @@
   const roleLabel = (step) => stpaNode(step)?.role || step.roles.map((id) => roles.get(id).label).join(' · ');
   const stageLabel = (step) => stpaNode(step)?.role || step.aiStages.map((id) => aiStages.get(id).label).join(' · ');
   const relationLabels = { component: 'Component evidence', 'mechanism-comparison': 'Mechanism comparison', challenge: 'Evidence challenging the link', countermeasure: 'Countermeasure evidence' };
-  const groupLabel = (id) => id === 'H' ? 'Extras' : `${groups.get(id).ordinal} (${groups.get(id).shortTitle})`;
+  const groupLabel = (id) => id === 'H' ? 'X-Extras' : `${groups.get(id).ordinal} (${groups.get(id).shortTitle})`;
   // Family motifs encode subject matter, never severity or evidence strength.
   const familyMotifs = {
     X: '<ellipse cx="27" cy="12" rx="24" ry="10"/><ellipse cx="27" cy="12" rx="15" ry="6"/><ellipse cx="27" cy="12" rx="5" ry="2"/>',
@@ -512,7 +512,7 @@
   const searchable = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   const searchIndex = new Map(data.pathways.map((p) => [p.id, searchable([
     p.id, p.displayId, pathwayCode(p), p.displayId.replace('-', '.'), pathwayTitle(p), data.groups.find(g=>g.id===p.group).title,
-    ...(p.group === 'H' ? ['Extras', 'X-Extras', `X-${pathwayCode(p)}`] : []),
+    ...(p.group === 'H' ? ['X-Extras', 'comparisons'] : []),
     ...(isSTPA(p.id) ? [p.title, p.endpoint, p.conditions, p.basis, p.variants,
     p.reach.local, p.reach.systemic || '', p.steps.flatMap((s) => [...s.roles.map((id) => roles.get(id).label), ...s.aiStages.map((id) => aiStages.get(id).label)]).join(' '),
     data.groups.find((g) => g.id === p.group).title,
@@ -553,7 +553,7 @@
         <div class="x-family-reading"><h4>Premise</h4><p>${escape(family.premise)}</p><h4>Causal pathway</h4><ol>${family.chain.map(([title, text]) => `<li><strong>${escape(title)}</strong>${escape(text)}</li>`).join('')}</ol><p class="x-family-source">Family overview adapted from <cite>${escape(window.AuspexFamilies.source)}</cite>, ${escape(family.pages)} (September 15, 2026 draft). Counts refer to source scenarios in the review.</p></div>
       </details>`).join('')}</div>
     </details>`).join('');
-    const extras = comparisons.length ? `<details class="overview-group comparisons" data-group="H"${terms.length ? ' open' : ''}><summary><span class="cluster-text">Extras</span><small class="cluster-count">${comparisons.length} comparison${comparisons.length === 1 ? '' : 's'}</small></summary><ul>${comparisons.map(pathwayItem).join('')}</ul></details>` : '';
+    const extras = comparisons.length ? `<details class="overview-group comparisons" data-group="H"${terms.length ? ' open' : ''}><summary><span class="cluster-text">X-Extras</span><small class="cluster-count">${comparisons.length} comparison${comparisons.length === 1 ? '' : 's'}</small></summary><ul>${comparisons.map(pathwayItem).join('')}</ul></details>` : (!terms.length || terms.every(term => searchable('X-Extras comparisons').includes(term))) ? `<section class="overview-group comparisons" data-group="H" aria-labelledby="extras-heading"><div class="comparisons-heading"><span class="cluster-text" id="extras-heading">X-Extras</span><small class="cluster-count">0 comparisons</small></div></section>` : '';
     const previous = existing.length ? `<section class="overview-existing"><h3>Existing pathways</h3><ul>${existing.map(pathwayItem).join('')}</ul></section>` : '';
     $('#overview-groups').innerHTML = familyRows + extras + previous || '<p class="no-results">No matching pathways or families</p>';
   }

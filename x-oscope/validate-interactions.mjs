@@ -33,8 +33,8 @@ test.showOverview();
 const overview=()=>elements.get('#overview-groups').innerHTML;
 assert.equal((overview().match(/data-x-group=/g)||[]).length,3,'The opening has three presentation groups');
 assert.equal((overview().match(/data-x-family=/g)||[]).length,8,'All eight family pathways are available');
-assert(overview().includes('>Extras</span>') && overview().includes('6 comparisons'));
-assert(!overview().includes('X-Extras') && !overview().includes('>X-1<'));
+assert(overview().includes('>X-Extras</span>') && overview().includes('0 comparisons'));
+assert(!overview().includes('data-overview-pathway="H-'));
 assert(!overview().includes('Bonus') && !overview().includes('Bounded comparisons'));
 assert.equal(context.window.AuspexFamilies.groups.flatMap(g=>g.families).reduce((n,f)=>n+f.count,0),95);
 element('#overview-search').value='A-IV';
@@ -42,15 +42,15 @@ test.renderOverview();
 assert(overview().includes('Handover') && !overview().includes('Independent Takeover'),'Address search selects the correct family');
 element('#overview-search').value='X-1';
 test.renderOverview();
-assert(overview().includes('data-overview-pathway="H-01"'),'Legacy comparison searches retain the existing assessment');
+assert(overview().includes('No matching'), 'Removed comparison codes must not produce results');
 element('#overview-search').value='no-such-family-xyz';
 test.renderOverview();
 assert(overview().includes('No matching'));
-for (const address of ['1', 'X-1', 'Bonus-1']) {
+for (const address of ['1', 'Bonus-1', 'Bonus.1', ...Array.from({length:6}, (_,i)=>`X-${i+1}`), ...Array.from({length:6}, (_,i)=>`H-0${i+1}`)]) {
  url=`file:///fixture/x-oscope/index.html?p=${address}`;
  test.readLocation();
- assert.equal(test.state.pathway, 'H-01', 'Current and legacy comparison addresses resolve to the same case');
- assert.equal(element('#selected-code').textContent, '1');
+ assert.equal(test.state.pathway, '', 'Deleted comparison links must return to the overview');
+ assert(element('#selected-pathway').hidden);
 }
 test.showOverview();
 const matchesSelector=(target,selector)=>selector.split(',').some(part=>{
@@ -94,8 +94,6 @@ const incidentLabels={
  'NE-2003':['Northeast blackout','August 14th 2003'],
  'MYA-2017':['Myanmar investigation','2014–2017'],
  'ETA-2021':['Ethiopia investigation','2020–2022'],
- 'HRI-2012':['HireRight screening case','August 2012'],
- 'PFL-2018':['Predictive-policing feedback study','February 2018'],
 };
 for(const [day,ordinal] of [[1,'1st'],[2,'2nd'],[3,'3rd'],[4,'4th'],[11,'11th'],[12,'12th'],[13,'13th'],[21,'21st'],[22,'22nd'],[23,'23rd'],[31,'31st']]) {
  assert.equal(test.incidentChoiceDate(`Published ${day} January 2024`),`January ${ordinal} 2024`,'US date ordinal');
@@ -359,7 +357,7 @@ for(const p of context.window.AuspexData.pathways.filter(p=>!stpa.has(p.id))) {
  assert.equal(test.state.safeguard,'');assert.equal(test.state.inspect,false);
  assert(!new URL(url).searchParams.has('s'));assert.equal(map(),'');
 }
-assert.equal(proposedCount,68);
+assert.equal(proposedCount,57);
 
 // Every incident assessment retains its state, its evidence, and its identity when exploring a change.
 let incidentImprovements=0;
@@ -387,7 +385,7 @@ for(const m of models) {
   }
  }
 }
-assert.equal(incidentImprovements,19);
+assert.equal(incidentImprovements,17);
 for(const params of ['p=A-2&strengthen=1','p=A-1&strengthen=1','p=A-1&s=missing&strengthen=1']) {
  url='file:///fixture/x-oscope/index.html?'+params;test.readLocation();
  assert.equal(test.state.strengthen,false);assert(!new URL(url).searchParams.has('strengthen'));
@@ -508,8 +506,8 @@ for(const mobile of [false,true])for(const expanded of [false,true])for(const m 
 }
 document.querySelector=originalQuery;document.querySelectorAll=originalAll;
 Object.defineProperty(document,'activeElement',activeDescriptor);geometryMobile=false;
-assert.equal(drawnRoutes,272);
+assert.equal(drawnRoutes,228);
 assert(levelRoutes>0 && curvedRoutes>0);
 assert.equal(connectedArrows,models.reduce((n,m)=>n+m.links.length,0)*4);
 assert.equal(dashedArrows,models.reduce((n,m)=>n+m.links.filter(l=>l.kind==='optional').length,0)*4);
-console.log(`Passed all ${count} incident flows and ${proposedCount} individual barrier inspections across seven models, 35 tailored improvements and 19 incident improvement views, unchanged source states, legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks cover compact and expanded-card layouts with no diagonal route segments, square arrow approaches, and correctly aligned B-1 connections. They also match all ${drawnRoutes} desktop/mobile barrier marks to their controls, all ${connectedArrows} arrows to destination borders, and all ${dashedArrows} dashed arrow endings. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);
+console.log(`Passed all ${count} incident flows and ${proposedCount} individual barrier inspections across six models, 30 tailored improvements and 17 incident improvement views, unchanged source states, legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 25 blank cases. Isolated draw checks cover compact and expanded-card layouts with no diagonal route segments, square arrow approaches, and correctly aligned B-1 connections. They also match all ${drawnRoutes} desktop/mobile barrier marks to their controls, all ${connectedArrows} arrows to destination borders, and all ${dashedArrows} dashed arrow endings. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);

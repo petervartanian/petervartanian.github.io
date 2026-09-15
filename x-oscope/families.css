@@ -34,11 +34,14 @@ details.x-family > summary { display: grid; grid-template-columns: 62px minmax(0
 .overview-group.comparisons > summary > .cluster-text { grid-column: 1; grid-row: 1; max-width: none; margin-left: 4px; }
 .overview-group.comparisons > summary > .cluster-count { grid-column: 1; grid-row: 2; margin-left: 4px; }
 .overview-group.comparisons > summary::after { grid-column: 2; grid-row: 1 / 3; }
+.overview-group.comparisons > .comparisons-heading { display: grid; align-content: center; gap: 8px; min-height: 88px; padding: 18px 28px; color: var(--accent); font: 500 16px/1.3 var(--sans); }
+.comparisons-heading > .cluster-count { margin: 0; }
 .overview-existing { padding-top: 8px; }
 .overview-existing h3 { font: 12px/1.5 var(--sans); color: var(--muted); }
 .overview-existing ul { list-style: none; padding: 0; }
 @media (max-width: 700px) {
   .overview-group.comparisons > summary { padding-left: 18px; }
+  .overview-group.comparisons > .comparisons-heading { padding-inline: 22px; }
   details.x-family > summary { grid-template-columns: 54px minmax(0, 1fr) 24px; gap: 8px 12px; padding: 14px 12px; font-size: 15px; }
   .x-family > summary::after { grid-column: 3; grid-row: 1 / 3; }
   .x-family .x-scenario-count { grid-column: 2; }

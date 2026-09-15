@@ -8,9 +8,9 @@ Serve the repository root and open `/x-oscope/`. The interface also works direct
 `index.html`, using local assets and a bundled data file. No runtime dependencies.
 `pathways.html` provides a static reader of the worked examples without JavaScript.
 
-## Seven STPA worked examples
+## Six STPA worked examples
 
-A-1, B-1, C-1, D-1, E-1, F-1, and Extra 1 use the models in `stpa-[a-fh]1.json`.
+A-1, B-1, C-1, D-1, E-1, and F-1 use the models in `stpa-[a-f]1.json`.
 I selects a pathway; II places dated incident evidence on its relevant component;
 III inspects the barrier. The dated choices are always visible. Select a case to add
 its card, another to switch, or the selected case / × to clear it. There are no
@@ -87,8 +87,10 @@ A small gap keeps the mark clear on single, double, dashed and dotted lines; the
 current pathway. A safeguard is an intentional barrier; proposed identifies its status,
 not its protective performance. Actual barrier states stay attached to incident evidence.
 
-Pathway labels use A-1 through F-1; Extras use plain numbers 1–6 in the interface and static reader. Old A.1, X-1, Bonus-1, and Bonus.1 links and
-searches remain supported; internal component addresses and evidence anchors are stable.
+Pathway labels retain their A–F prefixes. X-Extras is empty; future comparisons retain
+the X- prefix. The six earlier comparison cases and their source articles have been
+deleted. Their X-1–X-6, Bonus, and internal H links return to the overview. Existing
+A.1 aliases and the retained pathways’ evidence anchors remain supported.
 Every map has a clickable key for path types, barriers, and recovery
 versus reinforcement. It includes conditional consequences and feedback, even when
 those marks are absent from the currently selected map. The static reader includes
@@ -96,7 +98,7 @@ the same definitions at `pathways.html#map-key`. Proposed safeguards are subordi
 to Barriers in the key, alongside the state explanations. Proposed and assessed
 barriers share a thin card frame and the relevant state symbol.
 
-The other 30 entries show their titles and no case content, in both the application and
+The other 25 entries show their titles and no case content, in both the application and
 static reader. Their underlying catalogue records are retained for future work.
 
 `barrier-states.json` defines seven symbols: Reinforced, Holding, Crumbling, Broken,
@@ -123,8 +125,7 @@ Maven and Replicator expose proposed safeguards with unassessed performance and 
 questions. Their announcements remain contextual evidence. Later corrective changes are
 dated; new improvements are labeled “Proposed change.” Scope notes use paired
 asterisks and smaller text. The Myanmar counter-speech intervention is Backfiring in
-the attributed account. Extra 1 separates the FTC allegations from the mathematical
-predictive-policing comparison and includes the latter’s feedback loop and correction.
+the attributed account.
 
 Models may override assessments and add evidence by stable ID. Build and validate:
 
@@ -140,7 +141,7 @@ The catalogue below describes retained source data, including unworked entries.
 
 ## Content
 
-The register contains 31 catastrophe pathway hypotheses and six bounded-harm comparisons.
+The register contains 31 catastrophe pathway hypotheses. X-Extras currently has no cases.
 Visible IDs follow the family letters; canonical evidence addresses remain stable:
 
 - A-1–A-6 (X-01–X-06): extinction and permanent global disempowerment.
@@ -149,7 +150,7 @@ Visible IDs follow the family letters; canonical evidence addresses remain stabl
 - D-1–D-2 (B-01–B-02): pandemics.
 - E-1–E-7 (S-01–S-07): sectoral and cross-sector catastrophes.
 - F-1–F-2 (F-01–F-02): informational ecosystems and collective response.
-- Extras 1–6 (H-01–H-06): comparison cases.
+- X-Extras: empty; the X- prefix is reserved for future comparisons.
 
 Each pathway preserves the register's causal steps, required conditions, source basis,
 candidate barriers, variants and weakest bridge. Political lock-in and nuclear famine
@@ -201,15 +202,12 @@ informs the separation of realized from potential harms and the modular classifi
 
 ## Incident and barrier records
 
-Seventy-three distinct case records supply 85 exact-component mappings across all
-31 base pathways and six bounded comparisons. They include:
+Sixty-three distinct case records supply 73 exact-component mappings across the
+31 retained pathways. They include:
 
 - OpenAI–Hugging Face: internal-network persistence and reported containment; renderer
   shutdown and failed alert escalation. X-02:2–3 concerns persistence; X-04:2 connects
   OpenAI's reward-hacking findings to proxy exploitation. Both are component evidence.
-- Tempe pedestrian collision: the human fallback failure in H-05.
-- GPT-based mathematics tutoring: measured unaided performance at H-06:4. The outcome
-  is attached to a state, not used to validate the uncertain learning-process mediator.
 - A deployed care-allocation algorithm: proxy failure, biased allocation and a tested
   correction, connected to X-04 and S-03 using one stable incident identity.
 - Klarna's staffing reversal; AI-assisted military-supplier theft and state surveillance;
@@ -322,9 +320,9 @@ locally hosted Space Grotesk (`assets/FONT-LICENSES.txt`), with system sans-seri
   and the review's scenario counts; these counts do not imply that all 95 individual
   source-scenario maps have been imported. The family content is a paraphrase of the
   September 15, 2026 draft, not an empirical assessment.
-- Extras has a count derived from its six existing comparisons. It uses plain rows and
-  unboxed numbers with slate accents, without shaded overview blocks. Its heading starts at
-  the former Bonus label position. Blue, gold, and rose group backgrounds contain wider
+- X-Extras displays 0 comparisons without an expansion control. Its heading starts at
+  the former Bonus label position. Deleted comparison maps and their special page theme
+  are removed; any future comparisons retain X-prefixed addresses. Blue, gold, and rose group backgrounds contain wider
   family color ranges, defined in `families.css`. The earlier worked pathways and their
   evidence remain accessible through search, the selector, and existing links.
   Choosing one opens its causal map and incident reading; “All pathways” clears the selection.
