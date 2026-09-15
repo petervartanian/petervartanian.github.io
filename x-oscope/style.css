@@ -65,17 +65,21 @@ h1, h2, h3 { font-weight: 400; }
 .skip { position: fixed; left: var(--edge); top: -80px; z-index: 20; padding: 12px 20px; background: var(--ink); color: var(--page); }
 .skip:focus { top: 12px; }
 .masthead { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 118px; margin: 0 var(--edge); border-bottom: 1px solid var(--line); }
-.authorship { padding-block: 12px; }
+.authorship { display: flex; align-items: center; padding-block: 12px; }
 .site-credit { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 24px; max-width: 1600px; margin: 0 auto; padding: 0 var(--edge) 28px; font: 400 11px/1.5 var(--sans); color: var(--quiet); }
 .site-credit > span { display: inline-block; padding-block: 14px; }
 .credit-heart { display: inline-block; width: 1em; height: 1em; vertical-align: -.08em; fill: #858585; }
 .credit-project { margin-left: auto; text-align: right; }
 .masthead-credit { display: flex; align-items: center; gap: clamp(24px, 4vw, 60px); }
 .masthead-credit > a { font-size: 12px; text-decoration: none; min-height: 44px; display: flex; align-items: center; }
-.institution-marks { display: flex; align-items: center; gap: 30px; padding-left: 30px; border-left: 1px solid var(--line); }
+.institution-marks { display: flex; align-items: center; gap: 30px; }
 .institution-marks a { display: flex; align-items: center; min-height: 44px; }
 .institution-marks img { display: block; width: 150px; height: auto; max-height: 42px; object-fit: contain; filter: grayscale(1) brightness(.35); mix-blend-mode: multiply; }
-.brand { display: inline-flex; align-items: center; min-height: 48px; font: 38px/1 Auspex, Georgia, serif; text-decoration: none; letter-spacing: -.035em; }
+.brand { display: inline-flex; align-items: center; min-height: 48px; font: 38px/1 Auspex, Georgia, serif; text-decoration: none; letter-spacing: -.035em; white-space: nowrap; }
+.brand > span { display: block; }
+@supports (text-box-trim: trim-both) {
+  .brand > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
+}
 .opening { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.1fr); align-items: center; gap: clamp(36px, 7vw, 112px); max-width: 1600px; margin: 0 auto; padding: 40px var(--edge) 48px; }
 .opening h1 { min-width: 0; width: 100%; max-width: 440px; margin: 0; font: 500 clamp(54px, 6.3vw, 90px)/1 var(--sans); letter-spacing: -.065em; text-align: left; }
 .opening-display { display: flex; flex-direction: column; justify-content: space-between; gap: .38em; }
@@ -444,6 +448,10 @@ body:has(dialog[open]) { overflow: hidden; }
   .map-edge { flex-direction: row; gap: 28px; transform: translateY(-50%); }
   .map-node > .map-count { max-width: 72px; white-space: normal; text-align: right; }
   .endpoint { text-align: left; }
+}
+@media (max-width: 600px) {
+  .masthead { gap: 18px; }
+  .brand { font-size: 33px; }
 }
 @media (max-width: 480px) {
   :root { --edge: 22px; }
