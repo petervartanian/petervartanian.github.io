@@ -75,8 +75,10 @@ h1, h2, h3 { font-weight: 400; }
 .institution-marks { display: flex; align-items: center; gap: 30px; padding-left: 30px; border-left: 1px solid var(--line); }
 .institution-marks a { display: flex; align-items: center; min-height: 44px; }
 .institution-marks img { display: block; width: 150px; height: auto; max-height: 42px; object-fit: contain; filter: grayscale(1) brightness(.35); mix-blend-mode: multiply; }
-.brand { display: inline-flex; align-items: center; gap: 10px; font: 38px/1 Auspex, Georgia, serif; text-decoration: none; letter-spacing: -.035em; }
-.brand img { display: block; }
+.brand { display: inline-flex; align-items: center; gap: 1px; padding: 9px 19px 10px 11px; background: #141e2d; color: #fff4d9; font: 40px/1 Auspex, Georgia, serif; text-decoration: none; letter-spacing: -.035em; white-space: nowrap; }
+.brand:hover { color: #fff4d9; background: #1d2b3f; }
+.brand img { display: block; width: 48px; height: 48px; mix-blend-mode: lighten; }
+.brand > span { padding-top: 4px; }
 .opening { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.1fr); align-items: center; gap: clamp(36px, 7vw, 112px); max-width: 1600px; margin: 0 auto; padding: 40px var(--edge) 48px; }
 .opening h1 { min-width: 0; width: 100%; max-width: 440px; margin: 0; font: 500 clamp(54px, 6.3vw, 90px)/1 var(--sans); letter-spacing: -.065em; text-align: left; }
 .opening-display { display: flex; flex-direction: column; justify-content: space-between; gap: .38em; }
@@ -446,15 +448,17 @@ body:has(dialog[open]) { overflow: hidden; }
   .map-node > .map-count { max-width: 72px; white-space: normal; text-align: right; }
   .endpoint { text-align: left; }
 }
-@media (max-width: 480px) {
-  :root { --edge: 22px; }
-  .brand { font-size: 33px; gap: 6px; }
-  .brand img { width: 41px; height: 41px; }
+@media (max-width: 600px) {
   .masthead { flex-wrap: wrap; gap: 0; padding-block: 5px 12px; }
   .masthead-credit { display: contents; }
   .institution-marks { width: 100%; justify-content: space-between; padding: 8px 0 0; border-left: 0; border-top: 1px solid var(--line); }
   .institution-marks img { width: 135px; }
   .authorship { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding-block: 10px; }
+}
+@media (max-width: 480px) {
+  :root { --edge: 22px; }
+  .brand { font-size: 35px; padding: 7px 16px 8px 9px; }
+  .brand img { width: 41px; height: 41px; }
   .masthead-credit > a { margin-left: auto; font-size: 11px; }
   .role-definitions > div { grid-template-columns: 1fr; gap: 6px; }
   .role-definitions dt small { display: inline; margin-left: 12px; }
@@ -477,8 +481,8 @@ body:has(dialog[open]) { overflow: hidden; }
   .chooser { flex-wrap: wrap; row-gap: 8px; }
   .chooser-context { max-width: 100%; margin-left: auto; }
   :root { --edge: 18px; }
-  .brand { font-size: 30px; }
-  .brand img { width: 34px; }
+  .brand { font-size: 32px; }
+  .brand img { width: 38px; height: 38px; }
   .map-label { font-size: 12px; }
   .incident-visual text { font-size: calc(var(--label-size) * 1.35px); }
 }
@@ -491,6 +495,7 @@ body:has(dialog[open]) { overflow: hidden; }
   .workspace { display: block; }
   .barrier-column { position: static; border-left: 0; padding: 24px 0 0; margin-top: 30px; }
   .pathway-map { break-inside: avoid; }
+  .brand { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
   .brand img { filter: none; }
   .observation-text { display: block; }
   main { padding: 0; }
