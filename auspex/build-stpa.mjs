@@ -47,7 +47,7 @@ for (const model of models) {
   if (!nextArticle) throw new Error(`Missing next static article after ${model.pathway}`);
   const next = start + 1 + nextArticle.index;
   const marker = model.displayId.replace(/[-.]/g,'');
-  const article = `<article id="${model.pathway}" data-group="${pathway.group}"><p class="eyebrow">${model.displayId} · Pathway</p>${presentation.staticPage()}<!-- ${marker}-EVIDENCE-START -->${mappedEvidence(model)}<!-- ${marker}-EVIDENCE-END --><a href="./?p=${model.displayId}">Explore ${model.displayId} in Auspex ↗</a></article>`;
+  const article = `<article id="${model.pathway}" data-group="${pathway.group}"><p class="eyebrow">${model.displayId} · Pathway</p>${presentation.staticPage()}<!-- ${marker}-EVIDENCE-START -->${mappedEvidence(model)}<!-- ${marker}-EVIDENCE-END --><a href="./?p=${model.displayId}">Explore ${model.displayId} in X-oscope ↗</a></article>`;
   html = html.slice(0,start) + article + html.slice(next);
   html = html.replace(new RegExp(`(<a href="#${model.pathway}">)[^<]*(</a>)`), `$1${model.displayId} — ${esc(model.title)}$2`);
 }
@@ -64,7 +64,7 @@ for (let i = starts.length - 1; i >= 0; i--) {
   if (end < 0) throw new Error(`Missing reader boundary ${p.id}`);
   html = html.slice(0, match.index) + `<article id="${p.id}" data-group="${p.group}" data-unworked="true"><p class="eyebrow">${p.displayId} · Pathway</p><h2>${esc(p.title)}</h2></article>` + html.slice(end);
 }
-html = html.replace(/href="style.css(?:\?[^\"]*)?"/, 'href="style.css?v=23.9"');
+html = html.replace(/href="style.css(?:\?[^\"]*)?"/, 'href="style.css?v=24.1"');
 html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=34.3"');
 const key=`<!-- MAP-KEY-START --><section id="map-key" class="a1-static-key"><h2>Path & barrier key</h2>${presentation.pathsGuide(true)}</section><!-- MAP-KEY-END -->`;
 if (html.includes('<!-- MAP-KEY-START -->')) html=html.replace(/<!-- MAP-KEY-START -->[\s\S]*?<!-- MAP-KEY-END -->/,key);

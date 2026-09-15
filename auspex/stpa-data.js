@@ -835,7 +835,7 @@ window.AuspexSTPAModels = {
         "title": "Stanford AI Lab · Causal abstraction",
         "url": "https://ai.stanford.edu/blog/causal-abstraction/",
         "locator": "The importance of interventions; Causal abstraction",
-        "use": "Background on causal abstraction. This research does not validate the Auspex scenario or establish formal abstraction guarantees here."
+        "use": "Background on causal abstraction. This research does not validate the X-oscope scenario or establish formal abstraction guarantees here."
       },
       {
         "id": "PATE",
@@ -845,7 +845,7 @@ window.AuspexSTPAModels = {
         "use": "Distinguishes precursor signals, their reliability, and organizational response. Supports the context and warning-sign treatment, not an obligatory stage 0."
       }
     ],
-    "limits": "A bounded first-pass STPA application, not an exhaustive analysis. The four unsafe-action categories are illustrated across selected control actions. A complete analysis would examine every relevant action in every category and refine it with domain experts. Scenario milestones and limit types are explicit Auspex conventions. No incident count is converted to a probability. No barrier independence or complete model coverage is assumed.",
+    "limits": "A bounded first-pass STPA application, not an exhaustive analysis. The four unsafe-action categories are illustrated across selected control actions. A complete analysis would examine every relevant action in every category and refine it with domain experts. Scenario milestones and limit types are explicit X-oscope conventions. No incident count is converted to a probability. No barrier independence or complete model coverage is assumed.",
     "roleTypes": [
       {
         "id": "condition",
@@ -883,7 +883,7 @@ window.AuspexSTPAModels = {
         "definition": "A response re-establishes enforceable safety constraints within a specified boundary. Its success requires verification."
       }
     ],
-    "schema": "A-1 uses the shared STPA structure: losses, hazards, controllers, control actions and feedback, unsafe actions, causal scenarios, constraints, and evidence. The number of displayed milestones depends on the scenario. The role labels below are Auspex’s presentation vocabulary. They are not an additional STPA sequence.",
+    "schema": "A-1 uses the shared STPA structure: losses, hazards, controllers, control actions and feedback, unsafe actions, causal scenarios, constraints, and evidence. The number of displayed milestones depends on the scenario. The role labels below are X-oscope’s presentation vocabulary. They are not an additional STPA sequence.",
     "presentation": {
       "conditions": {
         "X-01:4": "Authority granted without effective limits",

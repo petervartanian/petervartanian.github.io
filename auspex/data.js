@@ -5102,7 +5102,7 @@ window.AuspexData = {
       "id": "F-01",
       "title": "Engagement-driven amplification enables mass violence",
       "endpoint": "mass violence and displacement in a conflict-affected population",
-      "basis": "R, [ERF] §4.1 supplies the amplification and collective-behavior mechanism; [MYA] and [ETA] supply attributed incident reconstructions. The full conditional chain is an Auspex reconstruction.",
+      "basis": "R, [ERF] §4.1 supplies the amplification and collective-behavior mechanism; [MYA] and [ETA] supply attributed incident reconstructions. The full conditional chain is an X-oscope reconstruction.",
       "sources": [
         "ERF",
         "MYA",
@@ -15781,7 +15781,7 @@ window.AuspexData = {
   "typology": {
     "version": "1.0",
     "title": "Causal-role typology",
-    "basis": "An Auspex adaptation of bow-tie risk analysis. Mechanisms, propagation, and consequence distance extend its hazard–threat–loss-of-control–consequence structure. These are editorial annotations of the cited pathways, not classifications supplied or endorsed by their authors.",
+    "basis": "An X-oscope adaptation of bow-tie risk analysis. Mechanisms, propagation, and consequence distance extend its hazard–threat–loss-of-control–consequence structure. These are editorial annotations of the cited pathways, not classifications supplied or endorsed by their authors.",
     "roles": [
       {
         "id": "condition",

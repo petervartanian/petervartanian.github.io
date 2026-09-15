@@ -1,4 +1,6 @@
-# Auspex
+# X-oscope
+
+The public name is X-oscope. The existing `/auspex/` address and internal identifiers remain stable.
 
 Choose a pathway and inspect its barriers. Add an incident to examine case evidence.
 
@@ -291,7 +293,7 @@ hardware-governance scope and limitations.
 - `data.js`: local bundle of those four data files, for HTTP and direct-file use.
 - `pathways.html`: generated static reader of the same register.
 - `validate.mjs`: structural, referential, evidence-scope and bundle checks.
-- `mark.svg`: original Auspex bird.
+- `mark.svg`: bird mark inherited from Auspex.
 - `identity.html`, `assets/haruspex-mark.svg`: bird and entrail-mark specimens.
 - `framework.js`, `assessment.js`: retained source records from the earlier prototype;
   neither is loaded by this interface.
@@ -326,8 +328,7 @@ locally hosted Space Grotesk (`assets/FONT-LICENSES.txt`), with system sans-seri
   Only a valid explicit `p` URL parameter opens a pathway directly. Invalid IDs return to
   the overview. Browser history restores the overview as well as selected readings.
 - The two-line headline uses ordinary, unstretched lettering. Its desktop container follows
-  the paragraph height; on phones it uses its natural height. The paragraph remains justified
-  with its last line left-aligned.
+  the paragraph height; on phones it uses its natural height. Both introductory text blocks are right-aligned, with normal word spacing and no inline citation markers.
 - The canvas is near-neutral cool white (`#f7f9fc`). A–F have distinct colors and
   monochrome-readable motifs, repeated in category cards, the selected family heading,
   and the pathway selector: A charcoal/converging rings, B purple/one controlling node above three subordinate nodes,

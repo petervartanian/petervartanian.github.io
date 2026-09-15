@@ -461,7 +461,7 @@
     $('.skip').href = enhanced ? '#incidents-title' : p ? '#pathway-title' : '#choose-title';
     $('.skip').textContent = enhanced ? 'Overlay an incident' : 'Choose a pathway';
     if (!p) {
-      document.title = 'Auspex';
+      document.title = 'X-oscope';
       $('#pathway-family').textContent = '';
       $('#selected-code').textContent = '';
       $('#selected-name').textContent = '';
@@ -476,7 +476,7 @@
     const endpoint = p.endpoint.split(';')[0];
     $('#pathway-endpoint').textContent = endpoint.charAt(0).toUpperCase() + endpoint.slice(1);
     $('#pathway-endpoint').hidden = isSTPA(p.id);
-    document.title = `Auspex · ${pathwayCode(p)}`;
+    document.title = `X-oscope · ${pathwayCode(p)}`;
     if (!enhanced) {
       $('#workspace').hidden = true;
       for (const selector of ['#map-nodes','#map-connections','#stpa-barrier-controls','#incident-rail','#step-detail','#barrier-panel','#pathway-details']) $(selector).innerHTML = '';
