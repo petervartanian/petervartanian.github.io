@@ -85,6 +85,12 @@ h1, h2, h3 { font-weight: 400; }
 .institution-marks img { display: block; width: var(--partner-logo-width); height: auto; max-height: 42px; object-fit: contain; filter: grayscale(1) brightness(.35); mix-blend-mode: multiply; }
 .brand { display: inline-flex; align-items: center; min-height: 48px; font: 400 38px/1 var(--sans); text-decoration: none; letter-spacing: -.035em; white-space: nowrap; }
 .brand > span { display: block; }
+@supports (-webkit-text-stroke: 1px currentColor) {
+  .brand > span { -webkit-text-fill-color: transparent; -webkit-text-stroke: 1.15px currentColor; }
+}
+@media (forced-colors: active) {
+  .brand > span { -webkit-text-fill-color: currentColor; -webkit-text-stroke: 0; }
+}
 @supports (text-box-trim: trim-both) {
   .brand > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
 }
