@@ -65,13 +65,15 @@ h1, h2, h3 { font-weight: 400; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 .skip { position: fixed; left: var(--edge); top: -80px; z-index: 20; padding: 12px 20px; background: var(--ink); color: var(--page); }
 .skip:focus { top: 12px; }
-.masthead { display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 118px; margin: 0 var(--edge); border-bottom: 1px solid var(--line); }
+.masthead { --partner-logo-width: 150px; --partner-logo-height: min(42px, calc(var(--partner-logo-width) * 120 / 401.3)); display: flex; justify-content: space-between; align-items: center; gap: 24px; min-height: 118px; margin: 0 var(--edge); border-bottom: 1px solid var(--line); }
 /* The masthead and title share the same left column. */
 .masthead:has(.authorship) { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.1fr); gap: var(--opening-gap); width: calc(100% - 2 * var(--edge)); max-width: calc(1600px - 2 * var(--edge)); margin-inline: auto; }
 .authorship { display: flex; align-items: center; width: 100%; max-width: 440px; padding-block: 12px; container-type: inline-size; }
 .masthead:has(.authorship) .institution-marks { justify-self: end; }
 /* X-OSCOPE is 5.058em wide in Sorts Mill Goudy with the brand tracking. */
-.authorship .brand { font-size: 19.77cqw; }
+.authorship .brand { min-height: 44px; height: 44px; font-size: 19.77cqw; }
+/* Keep the title width while fitting the capitals to the visible logo height. */
+.authorship .brand > span { transform: scaleY(calc(var(--partner-logo-height) / 1cap)); transform-origin: center; }
 .site-credit { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 24px; max-width: 1600px; margin: 0 auto; padding: 0 var(--edge) 28px; font: 400 11px/1.5 var(--sans); color: var(--quiet); }
 .site-credit > span { display: inline-block; padding-block: 14px; }
 .credit-heart { display: inline-block; width: 1em; height: 1em; vertical-align: -.08em; fill: #858585; }
@@ -80,7 +82,7 @@ h1, h2, h3 { font-weight: 400; }
 .masthead-credit > a { font-size: 12px; text-decoration: none; min-height: 44px; display: flex; align-items: center; }
 .institution-marks { display: flex; align-items: center; gap: 30px; }
 .institution-marks a { display: flex; align-items: center; min-height: 44px; }
-.institution-marks img { display: block; width: 150px; height: auto; max-height: 42px; object-fit: contain; filter: grayscale(1) brightness(.35); mix-blend-mode: multiply; }
+.institution-marks img { display: block; width: var(--partner-logo-width); height: auto; max-height: 42px; object-fit: contain; filter: grayscale(1) brightness(.35); mix-blend-mode: multiply; }
 .brand { display: inline-flex; align-items: center; min-height: 48px; font: 38px/1 Auspex, Georgia, serif; text-decoration: none; letter-spacing: -.035em; white-space: nowrap; }
 .brand > span { display: block; }
 @supports (text-box-trim: trim-both) {
@@ -401,11 +403,10 @@ body:has(dialog[open]) { overflow: hidden; }
 }
 @media (max-width: 800px) {
   :root { --opening-gap: 24px; }
-  .masthead { min-height: 72px; }
+  .masthead { --partner-logo-width: 115px; min-height: 72px; }
   .opening { padding-block: 22px 32px; }
   .masthead-credit { flex-direction: column; align-items: end; gap: 0; }
   .institution-marks { gap: 18px; }
-  .institution-marks img { width: 115px; }
   .opening-copy > .opening-premise, .opening-copy > .opening-question { font-size: 18px; }
   .chooser-context { flex-direction: column; align-items: end; gap: 0; }
   .overview-group > summary { font-size: 22px; }
@@ -466,10 +467,9 @@ body:has(dialog[open]) { overflow: hidden; }
 @media (max-width: 480px) {
   :root { --edge: 22px; }
   .brand { min-height: 44px; font-size: 33px; }
-  .masthead { flex-wrap: wrap; gap: 0; padding-block: 5px 12px; }
+  .masthead { --partner-logo-width: 135px; flex-wrap: wrap; gap: 0; padding-block: 5px 12px; }
   .masthead-credit { display: contents; }
   .institution-marks { width: 100%; justify-content: space-between; padding: 8px 0 0; border-left: 0; border-top: 1px solid var(--line); }
-  .institution-marks img { width: 135px; }
   .authorship { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding-block: 10px; }
   .masthead-credit > a { margin-left: auto; font-size: 11px; }
   .role-definitions > div { grid-template-columns: 1fr; gap: 6px; }
