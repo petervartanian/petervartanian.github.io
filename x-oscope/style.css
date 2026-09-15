@@ -49,8 +49,8 @@ body { margin: 0; background: var(--page); color: var(--ink); font: 14px/1.65 va
 [data-group='B'] { --accent: #397038; --tint: #e5f0df; }
 [data-group='S'] { --accent: #866009; --tint: #f5edcf; }
 [data-group='F'] { --accent: #23678b; --tint: #e0eef5; }
-[data-group='H'] { --accent: #8c5438; --tint: #f3e7d0; }
-[data-group='H'], body:has(#app[data-group='H']) { --page: #fff9ec; --surface: #f4eddf; --line: #e0d7c7; }
+[data-group='H'] { --accent: #545561; --tint: #cdd1db; }
+[data-group='H'], body:has(#app[data-group='H']) { --page: #f6f6f9; --surface: #e7e8ee; --line: #c9ccd6; }
 button, input { font: inherit; color: inherit; }
 button { cursor: pointer; border: 0; border-radius: 0; background: none; padding: 0; }
 button:hover, a:hover { color: var(--accent); }
@@ -86,10 +86,10 @@ h1, h2, h3 { font-weight: 400; }
 .brand { display: inline-flex; align-items: center; min-height: 48px; font: 400 38px/1 var(--sans); text-decoration: none; letter-spacing: -.035em; white-space: nowrap; }
 .brand > span { display: block; }
 @supports (-webkit-text-stroke: 1px currentColor) {
-  .brand > span { -webkit-text-fill-color: transparent; -webkit-text-stroke: 1.15px currentColor; }
+  .opening-display > .headline-line:first-child { -webkit-text-fill-color: transparent; -webkit-text-stroke: 1.15px currentColor; }
 }
 @media (forced-colors: active) {
-  .brand > span { -webkit-text-fill-color: currentColor; -webkit-text-stroke: 0; }
+  .opening-display > .headline-line:first-child { -webkit-text-fill-color: currentColor; -webkit-text-stroke: 0; }
 }
 @supports (text-box-trim: trim-both) {
   .brand > span { text-box-trim: trim-both; text-box-edge: cap alphabetic; }
@@ -149,7 +149,7 @@ main { max-width: 1600px; margin: 0 auto; padding: 0 var(--edge) 60px; }
 .result-group h3 { gap: 12px; }
 
 .overview-group[open] { background: var(--tint); }
-.overview-group[data-group='H'] { background: var(--page); }
+.overview-group[data-group='H'] { background: var(--surface); }
 .overview-group summary:hover .cluster-text { color: var(--accent); }
 .overview-group small { display: block; font: 12px/1.5 var(--sans); color: var(--accent); margin-top: 10px; }
 .overview-group ul { list-style: none; padding: 0 24px 22px; margin: 0; }
