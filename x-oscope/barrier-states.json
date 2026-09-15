@@ -1,0 +1,133 @@
+{
+  "version": "2.0",
+  "scope": "States describe the named protection under the conditions examined.",
+  "coverage": "These seven states describe incident evidence and possible changes along AI risk pathways. Brittleness concerns the dependencies of any barrier. Recovery is a separate route.",
+  "states": [
+    {
+      "id": "reinforced",
+      "label": "Reinforced",
+      "definition": "The protective arrangement has been strengthened relative to an identified baseline.",
+      "question": "What changed, and what evidence tests the resulting improvement?",
+      "source": "PSA",
+      "path": "M12 5v22M19 5v22M10 5h11M10 27h11",
+      "example": "Stronger review reduced sabotage success from about 10% to 1% in the experiment. Some attacks still succeeded.",
+      "exampleSource": "SAB"
+    },
+    {
+      "id": "intact",
+      "label": "Holding",
+      "definition": "The barrier delivered its specified protection in the cited conditions.",
+      "question": "What demand, scope, and duration did the evidence actually cover?",
+      "source": "CAA-P",
+      "path": "M16 5v22M12 5h8M12 27h8",
+      "example": "A human maintainer caught and rejected an agent’s malicious contribution.",
+      "exampleSource": "AISI"
+    },
+    {
+      "id": "degrading",
+      "label": "Crumbling",
+      "definition": "Protection is weakening as capability, access, workload, or other conditions change.",
+      "question": "Which dependency is eroding? Is the change observed or projected?",
+      "source": "CAA-E",
+      "path": "M16 5v7l-3 3 5 3-2 3v6M12 5h8M12 27h8m10-14 2 2M10 22l-2 2",
+      "example": "Projected in D.1: protection that depends on weak fallback models could erode as those models become more capable.",
+      "exampleSource": "AN26"
+    },
+    {
+      "id": "failed",
+      "label": "Broken",
+      "definition": "The barrier failed to deliver a required protective effect on demand.",
+      "question": "Was the failure in detection, decision, execution, timing, or the final effect?",
+      "source": "HSE",
+      "path": "M14 5v7l-3 3M21 20l-3 3v5M10 5h8M14 28h8",
+      "example": "The research relay regained access within days of account bans. Lasting exclusion failed.",
+      "exampleSource": "AN26"
+    },
+    {
+      "id": "absent",
+      "label": "Absent",
+      "definition": "A relevant protection is missing, disabled, or removed.",
+      "question": "Who can restore the protection, and who can remove it?",
+      "source": "AN26",
+      "path": "M12 5h8M12 27h8M16 8v3m0 10v3",
+      "example": "The Mali surveillance platform’s warrant check was removed from its dossier component.",
+      "exampleSource": "AN26"
+    },
+    {
+      "id": "backfiring",
+      "label": "Backfiring",
+      "definition": "The attempted protection strengthens the harmful mechanism.",
+      "question": "Does the intervention reduce harm, or feed the process it is meant to stop?",
+      "source": "MYA",
+      "path": "M16 5v7l4 4-4 4v7M12 5h8M12 27h8",
+      "example": "Amnesty reports that anti-hate stickers increased the visibility of the harmful posts they opposed.",
+      "exampleSource": "MYA"
+    },
+    {
+      "id": "unknown",
+      "label": "Unassessed",
+      "definition": "The evidence does not establish the barrier’s relevant protective performance.",
+      "question": "What evidence or test would establish whether it works?",
+      "source": "CAA-P",
+      "path": "M16 4v3m0 18v3M12 12c0-5 8-5 8 0 0 3-4 3-4 6m0 3h0",
+      "example": "The sabotage monitor became suspicious. Whether that led to an effective stop was not tested.",
+      "exampleSource": "SAB"
+    }
+  ],
+  "sources": [
+    {
+      "id": "PSA",
+      "title": "Norwegian safety regulator · Principles for barrier management",
+      "url": "https://www.havtil.no/contentassets/43fc402b97e64a7cbabdf91c64b349cb/barriers-memorandum-2017-eng.pdf",
+      "use": "Functionality, integrity, robustness, performance requirements, and maintaining protection over time."
+    },
+    {
+      "id": "HSE",
+      "title": "HSE · Control systems",
+      "url": "https://www.hse.gov.uk/comah/sragtech/techmeascontsyst.htm",
+      "use": "Required function, availability, performance, testing, and degradation."
+    },
+    {
+      "id": "CAA-P",
+      "title": "UK CAA · Evaluating control effectiveness",
+      "url": "https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/safety-risk-priorities/evaluating-using-control-effectiveness/",
+      "use": "Suitability for the threat and confidence that the control will perform."
+    },
+    {
+      "id": "CAA-E",
+      "title": "UK CAA · Escalation factors",
+      "url": "https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/bowtie-elements/escalation-factors/",
+      "use": "Conditions that reduce or defeat a protective function."
+    },
+    {
+      "id": "CAA-R",
+      "title": "UK CAA · Recovery controls",
+      "url": "https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/bowtie-elements/recovery-controls/",
+      "use": "Interruption or mitigation after the top event; a recovery control can itself be reinforced."
+    },
+    {
+      "id": "AN26",
+      "title": "Anthropic · Misuse investigations, September 2026",
+      "url": "https://www.anthropic.com/threat-intelligence-report-september-2026",
+      "use": "Reported access restrictions, removed controls, and dependence on fallback capability."
+    },
+    {
+      "id": "SAB",
+      "title": "Anthropic · Sabotage evaluations",
+      "url": "https://www.anthropic.com/research/sabotage-evaluations",
+      "use": "Compared reviewers and a monitor that detected suspicious behavior."
+    },
+    {
+      "id": "AISI",
+      "title": "AISI · Unsanctioned agent behaviour during cyber testing",
+      "url": "https://www.aisi.gov.uk/blog/incident-report-unsanctioned-agent-behaviour-during-cyber-testing",
+      "use": "Maintainer review rejected the malicious contribution."
+    },
+    {
+      "id": "MYA",
+      "title": "Amnesty · Myanmar investigation",
+      "url": "https://www.amnesty.org/en/latest/news/2022/09/myanmar-facebooks-systems-promoted-violence-against-rohingya-meta-owes-reparations-new-report/",
+      "use": "Reported counter-speech and ranking interaction."
+    }
+  ]
+}

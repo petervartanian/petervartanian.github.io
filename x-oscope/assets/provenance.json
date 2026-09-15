@@ -1,0 +1,19 @@
+{
+  "retrieved": "2026-09-11",
+  "assets": [
+    {
+      "file": "mit-airi.svg",
+      "organization": "MIT AI Risk Initiative",
+      "source_page": "https://airisk.mit.edu/",
+      "source_url": "https://cdn.prod.website-files.com/669550d38372f33552d2516e/69e6bfd322a7b39895d54390_horizontal-on-light.svg",
+      "modifications": "Existing local SVG retained; displayed with CSS grayscale(1) brightness(.35) and multiply blending."
+    },
+    {
+      "file": "ero.png",
+      "organization": "Existential Risk Observatory",
+      "source_page": "https://www.existentialriskobservatory.org/",
+      "source_url": "https://www.existentialriskobservatory.org/wp-content/uploads/2022/02/XRO-logo-dark-19-300px.png",
+      "modifications": "Source image retained; displayed with CSS grayscale(1) brightness(.35) and multiply blending."
+    }
+  ]
+}

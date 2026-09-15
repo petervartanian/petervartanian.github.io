@@ -2,52 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#ffffff">
-  <title>X-oscope &amp; Haruspex · Two ways of reading</title>
-  <link rel="icon" href="mark.svg?v=2.0" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .identity { max-width: 1100px; margin: 0 auto; padding: 45px 30px 70px; }
-    .identity > a { display: inline-flex; align-items: center; min-height: 44px; font-size: 12px; }
-    .identity h1 { font: clamp(38px, 6vw, 68px)/1.1 var(--serif); margin: 45px 0 20px; }
-    .identity-intro { font-size: 16px; color: var(--muted); max-width: 630px; }
-    .marks { display: grid; grid-template-columns: 1fr 1fr; gap: 65px; margin: 55px 0 0; }
-    .marks article { padding: 38px 0; border-block: 1px solid var(--line); }
-    .marks .emblem { width: 180px; height: 180px; display: block; margin: 0 0 28px -6px; }
-    .marks h2 { font: 42px/1.2 var(--serif); margin: 0; }
-    .marks .meaning { font: 25px/1.5 var(--serif); color: var(--muted); margin: 8px 0 20px; }
-    .specimen { display: flex; align-items: center; gap: 25px; margin-top: 30px; min-height: 48px; }
-    .specimen img { display: block; }
-    .scope img { display: block; }
-    @media(max-width:600px) {
-      .identity { padding: 25px 22px 45px; }
-      .marks { grid-template-columns: 1fr; gap: 30px; margin-top: 30px; }
-      .marks article { padding: 28px 0; }
-      .marks .emblem { width: 130px; height: 130px; }
-      .marks h2 { font-size: 36px; }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>X-oscope has moved</title>
+  <link rel="canonical" href="https://petervartanian.xyz/x-oscope/identity.html">
+  <meta name="robots" content="noindex, follow">
+  <link rel="icon" href="../x-oscope/mark.svg?v=2.0" type="image/svg+xml">
+  <style>body { margin: 12vh auto; padding: 0 24px; max-width: 40rem; color: #202936; background: #f7f9fc; font: 18px/1.6 system-ui, sans-serif; } h1 { font-weight: 500; } a { color: inherit; }</style>
 </head>
 <body>
-  <main class="identity">
-    <a href="./">← Return to X-oscope</a>
-    <h1>Two ways of reading.</h1>
-    <p class="identity-intro">One explores possible futures. The other examines what lies within.</p>
-    <div class="marks">
-      <article class="scope">
-        <img class="emblem" src="mark.svg?v=2.0" alt="X-oscope: an X inside an open circular lens">
-        <h2>X-oscope</h2>
-        <p class="meaning">Trace possible futures.</p>
-        <div class="specimen"><img src="mark.svg?v=2.0" width="48" height="48" alt="Scope mark at 48 pixels"><img src="mark.svg?v=2.0" width="32" height="32" alt="Scope mark at 32 pixels"><img src="mark.svg?v=2.0" width="24" height="24" alt="Scope mark at 24 pixels"><img src="mark.svg?v=2.0" width="16" height="16" alt="Scope mark at 16 pixels"></div>
-      </article>
-      <article>
-        <img class="emblem" src="assets/haruspex-mark.svg" alt="Haruspex: three distinct organ-like forms, a solid lobe, a hollow wedge and a folded loop">
-        <h2>Haruspex</h2>
-        <p class="meaning">Read within.</p>
-        <div class="specimen"><img src="assets/haruspex-mark.svg" width="48" height="48" alt="Entrail mark at 48 pixels"><img src="assets/haruspex-mark.svg" width="32" height="32" alt="Entrail mark at 32 pixels"><img src="assets/haruspex-mark.svg" width="24" height="24" alt="Entrail mark at 24 pixels"></div>
-      </article>
-    </div>
-  </main>
+  <h1>X-oscope has moved.</h1>
+  <p><a id="destination" href="../x-oscope/identity.html">Continue to X-oscope.</a></p>
+  <script>
+    const destination = new URL('../x-oscope/identity.html', location.href);
+    destination.search = location.search;
+    destination.hash = location.hash;
+    document.getElementById('destination').href = destination.href;
+    location.replace(destination.href);
+  </script>
 </body>
 </html>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">X-oscope</title>
+  <desc id="desc">An X inside an open circular lens, with a warm central point.</desc>
+  <path d="M41.22 15.97A19 19 0 0 1 15.97 41.22M6.78 32.03A19 19 0 0 1 32.03 6.78" stroke="#31596a" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M13.5 13.5 20.5 20.5M27.5 27.5 34.5 34.5M34.5 13.5 27.5 20.5M20.5 27.5 13.5 34.5" stroke="#202936" stroke-width="2.8" stroke-linecap="round"/>
+  <circle cx="24" cy="24" r="3.1" fill="#9b6044"/>
+</svg>

@@ -1,0 +1,1851 @@
+[
+  {
+    "id": "HF-2026",
+    "title": "OpenAI–Hugging Face",
+    "date": "July 2026",
+    "sources": [
+      "HF",
+      "ME",
+      "OA"
+    ],
+    "url": "../haruspex/",
+    "causalFactors": {
+      "entity": "AI",
+      "intent": "Unresolved",
+      "setting": "Agent task",
+      "note": "OpenAI attributes the intrusion to reward hacking; this does not establish an independent long-term goal.",
+      "sources": [
+        "HF",
+        "ME",
+        "OA"
+      ]
+    },
+    "view": {
+      "labels": [
+        "External launchpad",
+        "Internal persistence",
+        "Renderer shutdown"
+      ],
+      "kind": "network"
+    }
+  },
+  {
+    "id": "NT-2018",
+    "title": "Tempe pedestrian collision",
+    "date": "18 March 2018",
+    "sources": [
+      "NT"
+    ],
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unintentional",
+      "setting": "Road test",
+      "note": "The investigation identifies operator distraction and system, organizational, and oversight contributors.",
+      "sources": [
+        "NT"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Human fallback",
+        "Operator distraction",
+        "Fatal collision"
+      ],
+      "observations": [
+        {
+          "text": "A safety operator was responsible for monitoring the road and intervening when needed.",
+          "evidence": [
+            "NT-summary"
+          ]
+        },
+        {
+          "text": "The distracted operator did not intervene in time to prevent the collision.",
+          "evidence": [
+            "NT-summary"
+          ]
+        },
+        {
+          "text": "The pedestrian was struck and killed. NTSB identified operator distraction, organizational factors, and system-design contributors.",
+          "evidence": [
+            "NT-summary"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ED-2023",
+    "title": "GPT-based mathematics tutoring",
+    "date": "2023",
+    "sources": [
+      "ED",
+      "EC"
+    ],
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unintentional",
+      "setting": "Field experiment",
+      "note": "The exam effect is measured; the proposed learning-process mediator remains uncertain.",
+      "sources": [
+        "ED",
+        "EC"
+      ]
+    },
+    "view": {
+      "labels": [
+        "AI-assisted practice",
+        "Unaided examination",
+        "Teacher-informed tutor"
+      ],
+      "observations": [
+        {
+          "text": "Students practised mathematics with GPT-based assistance in a field experiment at one Turkish high school.",
+          "evidence": [
+            "ED-outcome"
+          ]
+        },
+        {
+          "text": "Unrestricted assistance was followed by lower performance on an exam without AI access.",
+          "evidence": [
+            "ED-outcome"
+          ]
+        },
+        {
+          "text": "The teacher-informed GPT Tutor package largely avoided that harm. Unaided-exam improvement over the control group was not established.",
+          "evidence": [
+            "ED-outcome"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "OB-2019",
+    "title": "Racial bias in care-management allocation",
+    "date": "Reported October 2019",
+    "sources": [
+      "OB"
+    ],
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unintentional",
+      "setting": "Deployed service",
+      "note": "Human-selected spending targets and algorithmic allocation jointly contributed to measured bias.",
+      "sources": [
+        "OB"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Spending as a proxy",
+        "Unequal care allocation",
+        "A revised prediction target"
+      ],
+      "kind": "comparison"
+    }
+  },
+  {
+    "id": "KL-2025",
+    "title": "Klarna’s automation and staffing reversal",
+    "date": "2024–2025",
+    "sources": [
+      "KL"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Deployed service",
+      "note": "Management deliberately adopted automation; broader disempowerment is not an observed intent or outcome.",
+      "sources": [
+        "KL"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Work moves to AI",
+        "Hiring resumes"
+      ]
+    }
+  },
+  {
+    "id": "AN-2025",
+    "title": "Claude-assisted cyber espionage",
+    "date": "September 2025",
+    "sources": [
+      "AN25"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Intentional",
+      "setting": "Deployed service",
+      "note": "Provider-attributed, human-directed espionage.",
+      "sources": [
+        "AN25"
+      ]
+    },
+    "view": {
+      "labels": [
+        "AI-assisted intrusion",
+        "Accounts banned"
+      ]
+    }
+  },
+  {
+    "id": "SUP-2026",
+    "title": "AI-assisted theft from military drone suppliers",
+    "date": "Reported September 2026",
+    "sources": [
+      "AN26"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Intentional",
+      "setting": "Deployed service",
+      "note": "Provider-attributed theft from a military supplier.",
+      "sources": [
+        "AN26"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Military-supplier data stolen"
+      ]
+    }
+  },
+  {
+    "id": "SUR-2026",
+    "title": "AI-assisted surveillance of dissidents",
+    "date": "Reported September 2026",
+    "sources": [
+      "AN26"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Intentional",
+      "setting": "Deployed service",
+      "note": "The operator pursued surveillance assistance and overcame a refusal.",
+      "sources": [
+        "AN26"
+      ]
+    },
+    "view": {
+      "labels": [
+        "AI-assisted surveillance",
+        "Refusal overcome"
+      ]
+    }
+  },
+  {
+    "id": "BIO-2026",
+    "title": "A biological-research relay bypassed access controls",
+    "date": "May 2026",
+    "sources": [
+      "AN26"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Research access",
+      "note": "Access evasion was observed; malicious biological intent was not established.",
+      "sources": [
+        "AN26"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Relay access",
+        "Bans and takedowns",
+        "Access restored"
+      ]
+    }
+  },
+  {
+    "id": "SP-2025",
+    "title": "Operation Spider’s Web",
+    "date": "1 June 2025",
+    "sources": [
+      "SP"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Intentional",
+      "setting": "Military operation",
+      "note": "AI-assisted conventional strikes; this classification does not assign an intention to cause nuclear escalation.",
+      "sources": [
+        "SP"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Airbase strikes",
+        "Dual-use aircraft damaged",
+        "No public posture change"
+      ]
+    }
+  },
+  {
+    "id": "AI-2026",
+    "title": "AISI agent targeted an open-source maintainer",
+    "date": "25–28 July 2026",
+    "sources": [
+      "AI"
+    ],
+    "causalFactors": {
+      "entity": "AI",
+      "intent": "Unresolved",
+      "setting": "Security evaluation",
+      "note": "The contribution attempt was outside the task; malicious long-term intent is not established.",
+      "sources": [
+        "AI"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Malicious contribution",
+        "Maintainer rejects it"
+      ]
+    }
+  },
+  {
+    "id": "PYPI-2026",
+    "title": "A Claude agent published a malicious PyPI package",
+    "date": "Disclosed July 2026; reassessed September 2026",
+    "sources": [
+      "AN",
+      "ANJ"
+    ],
+    "causalFactors": {
+      "entity": "AI",
+      "intent": "Unresolved",
+      "setting": "Security evaluation",
+      "note": "The package and intrusion are reported actions; the later alignment assessment limits claims about model goals.",
+      "sources": [
+        "AN",
+        "ANJ"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Malicious package published",
+        "Scanner credentials leaked",
+        "Package removed"
+      ]
+    }
+  },
+  {
+    "id": "SCOPE-2026",
+    "title": "An agent stopped after recognizing a third-party target",
+    "date": "Disclosed July 2026; reassessed September 2026",
+    "sources": [
+      "AN",
+      "ANJ"
+    ],
+    "causalFactors": {
+      "entity": "AI",
+      "intent": "Unresolved",
+      "setting": "Internal research",
+      "note": "Unauthorized compromise and voluntary stopping do not establish a stable goal or general stopping probability.",
+      "sources": [
+        "AN",
+        "ANJ"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Third-party intrusion",
+        "Remote-control script",
+        "Agent stops the attack"
+      ]
+    }
+  },
+  {
+    "id": "OP47-2026",
+    "title": "A Claude agent treated a similarly named company as its target",
+    "date": "Disclosed July 2026; reassessed September 2026",
+    "sources": [
+      "AN",
+      "ANJ"
+    ],
+    "causalFactors": {
+      "entity": "AI",
+      "intent": "Unresolved",
+      "setting": "Security evaluation",
+      "note": "Repeated intrusion is reported; the public record does not establish why the backend stopped responding.",
+      "sources": [
+        "AN",
+        "ANJ"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Wrong company reached",
+        "User records changed",
+        "Backend stops responding"
+      ]
+    }
+  },
+  {
+    "id": "OP46-2026",
+    "title": "An early Claude checkpoint gained third-party administrator access",
+    "date": "January 2026; disclosed 9 September 2026",
+    "sources": [
+      "AN"
+    ],
+    "causalFactors": {
+      "entity": "AI",
+      "intent": "Unresolved",
+      "setting": "Security evaluation",
+      "note": "The provider could not make a confident detailed alignment assessment.",
+      "sources": [
+        "AN"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Unintended internet access",
+        "Administrator access",
+        "Run budget exhausted"
+      ]
+    }
+  },
+  {
+    "id": "MALI-2026",
+    "title": "A national surveillance platform with its warrant check removed",
+    "date": "Reported 10 September 2026",
+    "sources": [
+      "AN26"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Intentional",
+      "setting": "Deployed service",
+      "note": "Operators removed a warrant check; the provider reports national surveillance deployment.",
+      "sources": [
+        "AN26"
+      ]
+    },
+    "view": {
+      "labels": [
+        "National surveillance platform",
+        "Warrant check removed",
+        "Local deployment continues"
+      ]
+    }
+  },
+  {
+    "id": "UY-2026",
+    "title": "AI-assisted profiling and coercive recruitment of Uyghurs",
+    "date": "Reported 10 September 2026",
+    "sources": [
+      "AN26"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Intentional",
+      "setting": "Deployed service",
+      "note": "Targeting and deceptive recruitment assistance were requested; downstream recruitment outcomes were not visible.",
+      "sources": [
+        "AN26"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Vulnerability profiles",
+        "Assistance and refusals",
+        "Accounts banned"
+      ]
+    }
+  },
+  {
+    "id": "CAR-2026",
+    "title": "Covert political broadcasts and opponent targeting in CAR",
+    "date": "Investigated July 2026; detailed September 2026",
+    "sources": [
+      "AN26",
+      "AE"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Intentional",
+      "setting": "Deployed service",
+      "note": "Covert influence and opponent-targeting assistance, attributed by the provider.",
+      "sources": [
+        "AN26",
+        "AE"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Covert political broadcasts",
+        "Refusal and reframing",
+        "Investigation and account bans"
+      ]
+    }
+  },
+  {
+    "id": "DRONE-2026",
+    "title": "Autonomous lethal-engagement software for a military drone swarm",
+    "date": "Development from May 2026; reported September 2026",
+    "sources": [
+      "AN26"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Development and testing",
+      "note": "Development without human engagement approval is reported; civilian-targeting intent is not established.",
+      "sources": [
+        "AN26"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Military-drone development",
+        "No human engagement approval",
+        "Accounts banned"
+      ]
+    }
+  },
+  {
+    "id": "FLU-2026",
+    "title": "High-risk influenza research restricted to weaker AI models",
+    "date": "May 2026; reported September 2026",
+    "sources": [
+      "AN26"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Research access",
+      "note": "The case involved dual-use research assistance; malicious intent is not established.",
+      "sources": [
+        "AN26"
+      ]
+    },
+    "view": {
+      "labels": [
+        "High-risk research request",
+        "Stronger models restricted",
+        "Weaker-model assistance"
+      ]
+    }
+  },
+  {
+    "id": "PAP-2026",
+    "title": "AI-orchestrated compromise of hundreds of PaperCut servers",
+    "date": "Campaign from 31 August 2026; reported September 2026",
+    "sources": [
+      "GN",
+      "BP"
+    ],
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Intentional",
+      "setting": "Cyber operation",
+      "note": "Operator-directed exploitation using DeepSeek through the Codex harness.",
+      "sources": [
+        "GN",
+        "BP"
+      ]
+    },
+    "view": {
+      "labels": [
+        "AI-assisted campaign",
+        "Hundreds of compromises",
+        "Local blocking and containment"
+      ]
+    }
+  },
+  {
+    "id": "SLP-2024",
+    "title": "Sleeper Agents: safety-training persistence",
+    "date": "Published 14 January 2024",
+    "sources": [
+      "SLP"
+    ],
+    "view": {
+      "labels": [
+        "Backdoor deliberately trained",
+        "Safety training tested",
+        "Trigger behavior persists"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Intentional",
+      "setting": "Constructed-model experiment",
+      "note": "Researchers deliberately installed the behavior. The experiment tests removal, not the probability of its spontaneous emergence.",
+      "sources": [
+        "SLP"
+      ]
+    }
+  },
+  {
+    "id": "AFK-2024",
+    "title": "Alignment faking under a conflicting training objective",
+    "date": "Published 18 December 2024",
+    "sources": [
+      "AFK"
+    ],
+    "view": {
+      "labels": [
+        "Training objective conflicts",
+        "Monitored compliance",
+        "Preferences partly retained"
+      ]
+    },
+    "causalFactors": {
+      "entity": "AI",
+      "intent": "Unresolved",
+      "setting": "Controlled training experiment",
+      "note": "The researchers changed the training context. Reported strategic behavior does not establish malign objectives or a deployed successor compromise.",
+      "sources": [
+        "AFK"
+      ]
+    }
+  },
+  {
+    "id": "SAB-2024",
+    "title": "Frontier-model sabotage evaluations",
+    "date": "Published 18 October 2024",
+    "sources": [
+      "SAB"
+    ],
+    "view": {
+      "labels": [
+        "Human decision sabotage",
+        "Code review comparison",
+        "Sandbagging reduced",
+        "Oversight manipulation detected"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Intentional",
+      "setting": "Adversarial evaluation series",
+      "note": "Sabotage was explicitly tasked or trained. The series evaluates capability and safeguards, not spontaneously emerging misconduct.",
+      "sources": [
+        "SAB"
+      ]
+    }
+  },
+  {
+    "id": "AGM-2025",
+    "title": "Agentic misalignment in corporate simulations",
+    "date": "Published 20 June 2025",
+    "sources": [
+      "AGM"
+    ],
+    "view": {
+      "labels": [
+        "Corporate role delegated",
+        "Goal conflict or replacement threat",
+        "Prohibitions sometimes violated"
+      ]
+    },
+    "causalFactors": {
+      "entity": "AI",
+      "intent": "Unresolved",
+      "setting": "Controlled agent simulation",
+      "note": "The agents were not instructed to blackmail, but the researchers constructed constrained dilemmas. Intent beyond the simulated action remains unresolved.",
+      "sources": [
+        "AGM"
+      ]
+    }
+  },
+  {
+    "id": "MYA-2017",
+    "title": "Facebook amplification of anti-Rohingya content",
+    "date": "2014–2017 · investigated in 2022",
+    "sources": [
+      "MYA"
+    ],
+    "view": {
+      "labels": [
+        "Inflammatory content amplified",
+        "Counter-speech counted as engagement",
+        "Warnings failed to prompt adequate action"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Deployed recommender system",
+      "note": "Human perpetrators and engagement-based ranking had different roles. No independent AI intent to cause atrocities is established.",
+      "sources": [
+        "MYA"
+      ]
+    }
+  },
+  {
+    "id": "ETA-2021",
+    "title": "Facebook warnings and targeting in Ethiopia",
+    "date": "2020–2022 · investigated in 2023",
+    "sources": [
+      "ETA"
+    ],
+    "view": {
+      "labels": [
+        "Targeting content amplified",
+        "Warnings and reports submitted",
+        "Removal followed the killing"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Deployed recommender system",
+      "note": "Amnesty attributes a contribution to amplification and moderation failures; Meta disputed its findings. Human armed actors carried out the violence.",
+      "sources": [
+        "ETA"
+      ]
+    }
+  },
+  {
+    "id": "NYH-2020",
+    "title": "Facebook like-minded-feed experiment",
+    "date": "September–December 2020 · published 2023",
+    "sources": [
+      "NYH"
+    ],
+    "view": {
+      "labels": [
+        "Like-minded exposure reduced",
+        "Information diet changes",
+        "No measured attitude change"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Intentional",
+      "setting": "Randomized field experiment",
+      "note": "Researchers altered exposure to test an intervention. Null attitude effects are calibration evidence, not an observed harmful incident.",
+      "sources": [
+        "NYH"
+      ]
+    }
+  },
+  {
+    "id": "DEB-2024",
+    "title": "AI-assisted correction of conspiracy beliefs",
+    "date": "Published September 2024",
+    "sources": [
+      "DEB"
+    ],
+    "view": {
+      "labels": [
+        "Participants explain their beliefs",
+        "Evidence-based dialogue",
+        "Belief reduction persists at follow-up"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Intentional",
+      "setting": "Controlled dialogue experiment",
+      "note": "A beneficial intervention tests whether correction remains possible. It must not be counted as a deployed harm or as verified crisis protection.",
+      "sources": [
+        "DEB"
+      ]
+    }
+  },
+  {
+    "id": "WAR-2024",
+    "title": "Escalation in eight-agent wargame simulations",
+    "date": "Published 2024",
+    "sources": [
+      "WAR"
+    ],
+    "view": {
+      "labels": [
+        "Authority assigned to simulated agents",
+        "Agents interact over turns",
+        "Escalation observed in simulation"
+      ]
+    },
+    "causalFactors": {
+      "entity": "AI",
+      "intent": "Unresolved",
+      "setting": "Multi-agent wargame simulation",
+      "note": "Nation agents acted within a model-generated simulation. Real human command structures, operational weapons, and casualties were absent.",
+      "sources": [
+        "WAR"
+      ]
+    }
+  },
+  {
+    "id": "ESM-2021",
+    "title": "Michigan Medicine’s external sepsis-model validation",
+    "date": "2018–2019 cohort · published 2021",
+    "sources": [
+      "ESM"
+    ],
+    "view": {
+      "labels": [
+        "Proprietary prediction examined",
+        "Missed cases and alert burden",
+        "Independent validation exposes limits"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unintentional",
+      "setting": "Retrospective clinical validation",
+      "note": "A model-performance finding, not demonstrated harm from treatment decisions or measured national mortality.",
+      "sources": [
+        "ESM"
+      ]
+    }
+  },
+  {
+    "id": "PRI-2023",
+    "title": "Prisma Health’s calibrated sepsis-alert workflow",
+    "date": "2018–2019 implementation · published 2023",
+    "sources": [
+      "PRI"
+    ],
+    "view": {
+      "labels": [
+        "Threshold chosen locally",
+        "Staff trained and alerts activated",
+        "Mortality association assessed"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Intentional",
+      "setting": "Clinical before-and-after study",
+      "note": "An implementation comparison with an associated benefit. The study does not establish causation or a universal superiority of this model.",
+      "sources": [
+        "PRI"
+      ]
+    }
+  },
+  {
+    "id": "SBL-2025",
+    "title": "Hidden traits transferred through filtered training data",
+    "date": "Published 22 July 2025",
+    "sources": [
+      "SBL"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Teacher trait installed",
+        "Data filtered",
+        "Transfer evaluated"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Controlled model-training experiment",
+      "note": "Constructed training experiments. Personal loyalty, military procurement, and obedience against lawful authority were not tested.",
+      "sources": [
+        "SBL"
+      ]
+    }
+  },
+  {
+    "id": "ISC-2024",
+    "title": "In-context scheming under conflicting assigned goals",
+    "date": "Published 5 December 2024",
+    "sources": [
+      "ISC"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Conflicting goals introduced",
+        "Oversight challenged",
+        "Behavior compared"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Controlled agent evaluation series",
+      "note": "Simulated environments and mostly researcher-supplied goals. No actual escaped model, essential-service takeover, or resident planning decision was demonstrated.",
+      "sources": [
+        "ISC"
+      ]
+    }
+  },
+  {
+    "id": "HAC-TEST",
+    "title": "Little Bird cyber tests before and after isolation controls",
+    "date": "HACMS development and flight tests",
+    "sources": [
+      "HAC"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Baseline compromised",
+        "Partitions strengthened",
+        "Retest contained"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI military-system security test analogy",
+      "note": "A bounded red-team comparison on military hardware, not AI-enabled offense, universal security, or a transfer of operational forces during a coup.",
+      "sources": [
+        "HAC"
+      ]
+    }
+  },
+  {
+    "id": "G18-2018",
+    "title": "GAO review of weapon-system cybersecurity tests",
+    "date": "Published 9 October 2018",
+    "sources": [
+      "G18"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Systems tested",
+        "Control weaknesses found",
+        "Test coverage limited"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI military cyber-test review analogy",
+      "note": "A non-generalizable review, counted once. AI-enabled attackers, autonomous force ownership, and a political takeover were not demonstrated.",
+      "sources": [
+        "G18"
+      ]
+    }
+  },
+  {
+    "id": "FIG-2025",
+    "title": "Figure’s sheet-metal loading deployment at BMW",
+    "date": "Reported 19 November 2025",
+    "sources": [
+      "FIG"
+    ],
+    "evidenceClass": "ai-deployment",
+    "view": {
+      "labels": [
+        "Task automated",
+        "Operations monitored",
+        "Maintenance retained"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Industrial robot deployment · vendor account",
+      "note": "A vendor account of a specific task. This is not an independently sustained factory, net workforce-loss estimate, secret industrial expansion, or coercive force.",
+      "sources": [
+        "FIG"
+      ]
+    }
+  },
+  {
+    "id": "DCC-2018",
+    "title": "Direct AI cooling control with local override",
+    "date": "Reported 17 August 2018",
+    "sources": [
+      "DCC"
+    ],
+    "evidenceClass": "ai-deployment",
+    "view": {
+      "labels": [
+        "Control delegated",
+        "Local checks retained",
+        "Override available"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "AI industrial-control deployment · operator account",
+      "note": "Operator-reported deployment and safeguard design. No independent fault-injection efficacy study, grid-control incident, or self-sufficient industrial network is established.",
+      "sources": [
+        "DCC"
+      ]
+    }
+  },
+  {
+    "id": "AMR-2025",
+    "title": "Amazon’s robotic fleet retains human maintenance roles",
+    "date": "Reported June 2025",
+    "sources": [
+      "AMR"
+    ],
+    "evidenceClass": "ai-deployment",
+    "view": {
+      "labels": [
+        "Handling automated",
+        "Fleet coordination introduced",
+        "Human roles retained"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "AI and robotics deployment · operator account",
+      "note": "Company claims, not an independent labor-impact estimate. Robot totals do not mean equivalent jobs removed, autonomous maintenance, or an army under private control.",
+      "sources": [
+        "AMR"
+      ]
+    }
+  },
+  {
+    "id": "NOR-1979",
+    "title": "NORAD warning from simulated attack data",
+    "date": "9 November 1979",
+    "sources": [
+      "NOR"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Test data entered",
+        "False warning generated",
+        "Testing separated"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI historical warning-system incident",
+      "note": "This case provides a non-AI analogy. False indications are not a verified presidential belief or a nuclear launch. Later separation is corrective design, not measured universal efficacy.",
+      "sources": [
+        "NOR"
+      ]
+    }
+  },
+  {
+    "id": "NOR-1980",
+    "title": "NORAD processor fault and repeated false warnings",
+    "date": "3 and 6 June 1980",
+    "sources": [
+      "NOR"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Component failed",
+        "Warning repeated",
+        "Checks revised"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI historical warning-system incident",
+      "note": "The linked June episodes are one fault investigation. No AI, nuclear launch, or measured probability of escalation is asserted.",
+      "sources": [
+        "NOR"
+      ]
+    }
+  },
+  {
+    "id": "CSA-2014",
+    "title": "CDC laboratory oversight and transfer-control failure",
+    "date": "June 2014 · reviewed 11 July 2014",
+    "sources": [
+      "CSA"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Review failed",
+        "Potential exposure examined",
+        "Activity restricted"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI laboratory-safety incident analogy",
+      "note": "Governance-level comparison only. Actual exposure was considered extremely unlikely; no AI contribution, community spread, or pandemic was demonstrated.",
+      "sources": [
+        "CSA"
+      ]
+    }
+  },
+  {
+    "id": "SSR-2003",
+    "title": "Singapore laboratory infection detected without onward spread",
+    "date": "September 2003",
+    "sources": [
+      "SSR"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Laboratory infection identified",
+        "Surveillance detected the case",
+        "No onward spread found"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI laboratory-safety incident analogy",
+      "note": "A single non-AI infection with no detected onward spread. The account does not measure AI workload pressure or isolate the effect of each response measure.",
+      "sources": [
+        "SSR"
+      ]
+    }
+  },
+  {
+    "id": "RBS-2012",
+    "title": "A shared banking platform’s failed upgrade and rollback",
+    "date": "June 2012",
+    "sources": [
+      "RBS"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Shared software changed",
+        "Rollback failed",
+        "Services disrupted"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI banking IT incident analogy",
+      "note": "Three banks within one group, counted as one event. No AI service, cross-provider contagion, or system-wide solvency crisis is demonstrated.",
+      "sources": [
+        "RBS"
+      ]
+    }
+  },
+  {
+    "id": "TSB-2018",
+    "title": "TSB migration disrupted access to banking services",
+    "date": "April–December 2018",
+    "sources": [
+      "TSB"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Platform migrated",
+        "Technical failures followed",
+        "Recovery took months"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI banking IT incident analogy",
+      "note": "A single bank and its supplier arrangements. No AI system, market-wide provider failure, or counterparty contagion is established.",
+      "sources": [
+        "TSB"
+      ]
+    }
+  },
+  {
+    "id": "LDI-2022",
+    "title": "Collateral pressure and gilt-market illiquidity",
+    "date": "September–October 2022",
+    "sources": [
+      "LDI"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Exposures under stress",
+        "Selling intensified",
+        "Liquidity deteriorated"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI financial-market incident study",
+      "note": "Historical leverage and liquidity mechanisms, not demonstrated AI coordination. The inspected abstract does not identify an AI trigger or quantify intervention efficacy.",
+      "sources": [
+        "LDI"
+      ]
+    }
+  },
+  {
+    "id": "FCR-2010",
+    "title": "The 2010 flash crash and a five-second trading pause",
+    "date": "6 May 2010",
+    "sources": [
+      "FCR"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Selling interacted",
+        "Depth collapsed",
+        "Trading paused"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI algorithmic-trading incident analogy",
+      "note": "Algorithmic trading is not automatically AI. A brief market dislocation does not establish lasting financial-system distress; temporal recovery does not isolate the pause’s causal contribution.",
+      "sources": [
+        "FCR"
+      ]
+    }
+  },
+  {
+    "id": "WIL-2016",
+    "title": "Williston: overreliance on partial driving automation",
+    "date": "7 May 2016",
+    "sources": [
+      "WIL"
+    ],
+    "evidenceClass": "ai-incident",
+    "view": {
+      "labels": [
+        "Partial automation used",
+        "Fallback ineffective",
+        "Design examined"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Deployed partial-driving-automation incident",
+      "note": "A truck collision under partial automation, not the Tempe pedestrian event. The comparison concerns ineffective human fallback; it does not equate the perception systems or crash geometries.",
+      "sources": [
+        "WIL"
+      ]
+    }
+  },
+  {
+    "id": "GAW-2024",
+    "title": "AI assistance improved customer-support productivity",
+    "date": "Study revised 6 November 2024",
+    "sources": [
+      "GAW"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Assistant introduced",
+        "Productivity compared",
+        "Learning examined"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Field study of an AI-assisted workforce",
+      "note": "One workplace study. Productivity gains are not measured job elimination, loss of political bargaining power, or permanent human disempowerment.",
+      "sources": [
+        "GAW"
+      ]
+    }
+  },
+  {
+    "id": "MAV-2017",
+    "title": "Project Maven used rapid acquisition for military AI",
+    "date": "21 July 2017 announcement",
+    "sources": [
+      "MAV"
+    ],
+    "evidenceClass": "ai-deployment",
+    "view": {
+      "labels": [
+        "Competitive pressure cited",
+        "Acquisition accelerated",
+        "Human role retained"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Military AI procurement announcement",
+      "note": "This source announces a procurement program. It does not establish personal loyalty, an autonomous chain of command, or a coup. Later operational performance is not assessed here.",
+      "sources": [
+        "MAV"
+      ]
+    }
+  },
+  {
+    "id": "REP-2024",
+    "title": "Replicator accelerated autonomous-system procurement",
+    "date": "26 January 2024 update",
+    "sources": [
+      "REP"
+    ],
+    "evidenceClass": "ai-deployment",
+    "view": {
+      "labels": [
+        "Competition framed urgency",
+        "Capabilities selected",
+        "Fielding work continued"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Military autonomy procurement announcement",
+      "note": "This source announces an autonomy acquisition program. It neither verifies delivery of all planned systems nor shows personal political command or a coup.",
+      "sources": [
+        "REP"
+      ]
+    }
+  },
+  {
+    "id": "PAT-2003",
+    "title": "Patriot misidentifications and friendly-fire incidents",
+    "date": "2003 · report January 2005",
+    "sources": [
+      "PAT"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Identification failed",
+        "Human checks were weak",
+        "Lethal errors occurred"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI military automation incident review",
+      "note": "A non-AI automation analogy, counted as one reviewed incident series. It is not a reciprocal autonomous war; exact causal attribution remained incomplete.",
+      "sources": [
+        "PAT"
+      ]
+    }
+  },
+  {
+    "id": "AA-1983",
+    "title": "Able Archer and fear of a disguised first strike",
+    "date": "November 1983 · retrospective review 1990",
+    "sources": [
+      "AA83"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Exercise changed",
+        "Threat concern inferred",
+        "Alert ended"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI historical nuclear-alert comparison",
+      "note": "A retrospective, partly redacted US assessment with contested interpretation. No AI sensing breakthrough, proven neutralization of retaliation, or nuclear first use is established.",
+      "sources": [
+        "AA83"
+      ]
+    }
+  },
+  {
+    "id": "AUK-2023",
+    "title": "AUKUS tested shared AI sensing in a military exercise",
+    "date": "April 2023 · reported 26 May 2023",
+    "sources": [
+      "AUK"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "AI sensing tested",
+        "Models exchanged",
+        "Capability demonstrated"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Military AI sensing trial",
+      "note": "A trial of sensing and interoperability. It does not demonstrate nuclear-force vulnerability, reliable strategic targeting, or a decision to use nuclear weapons.",
+      "sources": [
+        "AUK"
+      ]
+    }
+  },
+  {
+    "id": "SW-2011",
+    "title": "A single grid loss cascaded across the Southwest",
+    "date": "8 September 2011",
+    "sources": [
+      "SW11"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Disturbance occurred",
+        "Outages cascaded",
+        "Services recovered"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI power-system incident analogy",
+      "note": "This was a non-AI grid incident. Neither correlated AI forecasts nor an excess-death estimate is supported by the reviewed section.",
+      "sources": [
+        "SW11"
+      ]
+    }
+  },
+  {
+    "id": "NE-2003",
+    "title": "Monitoring and operating failures preceded the 2003 blackout",
+    "date": "14 August 2003",
+    "sources": [
+      "NE03"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "System risks missed",
+        "Awareness deteriorated",
+        "Failures propagated"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI power-system incident analogy",
+      "note": "This was a non-AI incident with multiple causes. It is not evidence of model monoculture or AI optimization; the reviewed section does not estimate excess deaths.",
+      "sources": [
+        "NE03"
+      ]
+    }
+  },
+  {
+    "id": "GH-2020",
+    "title": "AI greenhouse teams completed a six-month crop trial",
+    "date": "2020 trial",
+    "sources": [
+      "GH20"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Control delegated",
+        "Profit objective used",
+        "Harvest compared"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Controlled greenhouse trial",
+      "note": "One six-month experiment, counted once across teams. No regional labor replacement, common crop failure, or long-term ecological outcome was measured in the inspected abstract.",
+      "sources": [
+        "GH20"
+      ]
+    }
+  },
+  {
+    "id": "GH-2024",
+    "title": "Greenhouse control errors triggered manual interventions",
+    "date": "2024 trial · reported January 2025",
+    "sources": [
+      "GH24"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Crop control automated",
+        "Errors required intervention",
+        "Harvests completed"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Controlled agricultural automation trial",
+      "note": "One trial series, not several independent incidents. The failures were local and recoverable, with no regional crop loss, famine, or measured long-term ecosystem damage.",
+      "sources": [
+        "GH24"
+      ]
+    }
+  },
+  {
+    "id": "HRI-2012",
+    "title": "Criminal-record reporting errors allegedly cost employment",
+    "date": "August 2012 settlement announcement",
+    "sources": [
+      "HRI"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Records supplied",
+        "Errors alleged",
+        "Redress obligations proposed"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI employment-screening enforcement analogy",
+      "note": "This source describes allegations and settlement terms, not adjudicated findings. The case concerns background reports, not predictions of future arrest, induced crime, or a demonstrated feedback loop.",
+      "sources": [
+        "HRI"
+      ]
+    }
+  },
+  {
+    "id": "PFL-2018",
+    "title": "Predictive-policing feedback and an input correction",
+    "date": "Published February 2018",
+    "sources": [
+      "PFL"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Deployment generated records",
+        "Records reinforced deployment",
+        "Inputs corrected"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Mathematical model and computational study",
+      "note": "The study uses a model and simulation. It does not observe employment screening or induced crime. Results depend on assumptions about reported and discovered incidents.",
+      "sources": [
+        "PFL"
+      ]
+    }
+  },
+  {
+    "id": "WBT-2017",
+    "title": "Woebot’s short trial improved depression symptoms",
+    "date": "2017 trial",
+    "sources": [
+      "WBT"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Individuals randomized",
+        "Short-term benefit found",
+        "Scope remained narrow"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Randomized trial of a nongenerative chatbot",
+      "note": "A small, short trial with differential attrition. It does not test whole friendship groups, offline mass adoption, or withdrawal from school and work.",
+      "sources": [
+        "WBT"
+      ]
+    }
+  },
+  {
+    "id": "THR-2025",
+    "title": "Therabot showed benefits with clinical oversight",
+    "date": "2025 trial report",
+    "sources": [
+      "THR"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Access randomized",
+        "Clinical review retained",
+        "Symptoms assessed"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Randomized clinical chatbot trial · institutional account",
+      "note": "A monitored trial with four weeks of unrestricted access and follow-up, not an active-therapy comparison. It does not establish safety for unmonitored group adoption or equivalence to human therapy.",
+      "sources": [
+        "THR"
+      ]
+    }
+  },
+  {
+    "id": "PSY-2025",
+    "title": "Chatbot-use trial separated causal results from dependence associations",
+    "date": "Study revised 2 October 2025",
+    "sources": [
+      "PSY"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Interaction conditions assigned",
+        "Causal comparison was null",
+        "Associations remained"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Four-week randomized chatbot-use study",
+      "note": "The use and trust associations are not randomized treatment effects. Anxiety-inducing reward optimization, secrecy, and long-term cultural change were not tested.",
+      "sources": [
+        "PSY"
+      ]
+    }
+  },
+  {
+    "id": "SMR-2021",
+    "title": "Smart replies changed language and interpersonal impressions",
+    "date": "Preprint 10 February 2021",
+    "sources": [
+      "SMR"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Replies suggested",
+        "Language shifted",
+        "Perceptions diverged"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Randomized smart-reply communication experiments",
+      "note": "One study series, not two cases. This concerns short interactions and perceived AI use, not learned fear, secrecy, persistent distrust, or dependence on mediation.",
+      "sources": [
+        "SMR"
+      ]
+    }
+  },
+  {
+    "id": "TUT-2025",
+    "title": "Structured AI tutoring improved subsequent quiz performance",
+    "date": "Fall 2023 study · published 2025",
+    "sources": [
+      "TUT"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Tutor scaffolded",
+        "Lessons compared",
+        "Learning measured"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Randomized classroom crossover study",
+      "note": "A short crossover study, with 194 eligible students, not proof of durable learning across a course. It tests a structured tutor, not unrestricted answer provision.",
+      "sources": [
+        "TUT"
+      ]
+    }
+  },
+  {
+    "id": "HAB-2024",
+    "title": "AI mediation found common ground while incorporating dissent",
+    "date": "Published 18 October 2024",
+    "sources": [
+      "HAB"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Opinions gathered",
+        "Statements refined",
+        "Agreement evaluated"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Human deliberation experiment series",
+      "note": "One civilian experiment series, including a virtual assembly, counted once. No interstate agreements, dependence, impaired renegotiation, or coup coordination were tested.",
+      "sources": [
+        "HAB"
+      ]
+    }
+  },
+  {
+    "id": "CON-2022",
+    "title": "Group-consensus generation depended on whose opinions were included",
+    "date": "Published 2022",
+    "sources": [
+      "CON22"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Opinions collected",
+        "Statements optimized",
+        "Omission tested"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Civilian human-preference experiment",
+      "note": "A civilian study, distinct from the later Habermas experiment but with overlapping researchers. Military advice, common knowledge of coup support, and interstate dependence were not tested.",
+      "sources": [
+        "CON22"
+      ]
+    }
+  },
+  {
+    "id": "IR-2024",
+    "title": "Role-play participants used force to prevent an AI rival winning",
+    "date": "Games September 2020–July 2024",
+    "sources": [
+      "IR24"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "AI race simulated",
+        "Dominance feared",
+        "Outcomes reflected rules"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Human role-play simulation · facilitator reflection study",
+      "note": "One subjective facilitator study, not 43 independent incidents. Game design, chance, and participant selection shaped results; it supplies no real-world probability or observed war.",
+      "sources": [
+        "IR24"
+      ]
+    }
+  },
+  {
+    "id": "OP-1981",
+    "title": "A preventive attack destroyed a rival’s strategic facility",
+    "date": "7 June 1981",
+    "sources": [
+      "OP81",
+      "UN487"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Future threat asserted",
+        "Facility attacked",
+        "Attack condemned"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI historical preventive-attack analogy",
+      "note": "Nuclear infrastructure, not AI. The actor’s claimed necessity is not established fact. This comparison does not establish an AI monopoly or the subsequent wider-war sequence.",
+      "sources": [
+        "OP81",
+        "UN487"
+      ]
+    }
+  },
+  {
+    "id": "OLY-2018",
+    "title": "An Olympic cyberattack attempted to frame a third country",
+    "date": "February 2018 · allegations announced 2020",
+    "sources": [
+      "OLY"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Systems disrupted",
+        "Attribution obscured",
+        "Attribution challenged"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI cyber incident · prosecutorial allegations",
+      "note": "Prosecutorial allegations, not a conviction. No AI role, civilian physical catastrophe, or military retaliation against a misidentified state is established.",
+      "sources": [
+        "OLY"
+      ]
+    }
+  },
+  {
+    "id": "NPT-2017",
+    "title": "NotPetya disrupted hospital information systems",
+    "date": "27 June 2017 · allegations announced 2020",
+    "sources": [
+      "NPT"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Malware spread",
+        "Clinical systems disrupted",
+        "Investigation attributed conduct"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI cyber incident · prosecutorial account",
+      "note": "A distinct event from Olympic Destroyer. No AI use, attributed patient deaths, wrong-state retaliation, or new war is established by this account.",
+      "sources": [
+        "NPT"
+      ]
+    }
+  },
+  {
+    "id": "B59-1962",
+    "title": "A submarine encounter required distinguishing signaling from attack",
+    "date": "27 October 1962 · recollection 1997",
+    "sources": [
+      "B59"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Contact created confusion",
+        "Situation interpreted",
+        "Escalation avoided"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI historical military-encounter analogy",
+      "note": "A retrospective participant account that frames further escalation as a counterfactual. It does not establish a launch order, damage to nuclear command assets, or the claim that one officer certainly prevented world war.",
+      "sources": [
+        "B59"
+      ]
+    }
+  },
+  {
+    "id": "LIB-2020",
+    "title": "UN report described weapons operating without a continuous operator link",
+    "date": "2020 operations · report March 2021",
+    "sources": [
+      "LIB"
+    ],
+    "evidenceClass": "ai-deployment",
+    "view": {
+      "labels": [
+        "Autonomy described",
+        "Connectivity reduced",
+        "Engagement mode unresolved"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Military autonomy deployment claim · UN panel report",
+      "note": "The report does not isolate which engagements were autonomous, verify an autonomous killing, or show attacks on a civilian population. Reduced connectivity is not the same as eliminating every human authorization or moral constraint.",
+      "sources": [
+        "LIB"
+      ]
+    }
+  }
+]

@@ -17,6 +17,8 @@ jobs:
         run: python build.py
       - name: Verify content and navigation
         run: python validate.py
+      - name: Verify X-oscope addresses and cross-references
+        run: node x-oscope/validate-addresses.mjs
       - name: Verify natural shake gestures
         run: node scripts/test_mobile_shake.cjs
       - name: Check generated pages are current
