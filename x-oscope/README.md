@@ -294,8 +294,8 @@ hardware-governance scope and limitations.
 - `data.js`: local bundle of those four data files, for HTTP and direct-file use.
 - `pathways.html`: generated static reader of the same register.
 - `validate.mjs`: structural, referential, evidence-scope and bundle checks.
-- `mark.svg`: X-oscope’s X inside an open circular lens; shared by the masthead and favicon.
-- `identity.html`, `assets/haruspex-mark.svg`: scope and entrail-mark specimens.
+- X-oscope uses a plain text name in the masthead and reader, with no symbol or browser icon. `mark.svg` remains available only for older cached pages.
+- `identity.html`, `assets/haruspex-mark.svg`: plain X-oscope name and the existing Haruspex specimen.
 - `framework.js`, `assessment.js`: retained source records from the earlier prototype;
   neither is loaded by this interface.
 - `assets/provenance.json`: provenance for the MIT AIRI and ERO marks in the masthead.

@@ -67,7 +67,7 @@ for (let i = starts.length - 1; i >= 0; i--) {
   html = html.slice(0, match.index) + `<article id="${p.id}" data-group="${p.group}" data-unworked="true"><p class="eyebrow">${displayCode(p)} · Pathway</p><h2>${esc(p.title)}</h2></article>` + html.slice(end);
 }
 html = html.replace('<h2>Bonus · Comparison cases</h2>', '<h2>X-Extras</h2>');
-html = html.replace(/href="style.css(?:\?[^\"]*)?"/, 'href="style.css?v=24.1"');
+html = html.replace(/href="style.css(?:\?[^\"]*)?"/, 'href="style.css?v=24.3"');
 html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=34.3"');
 const key=`<!-- MAP-KEY-START --><section id="map-key" class="a1-static-key"><h2>Path & barrier key</h2>${presentation.pathsGuide(true)}</section><!-- MAP-KEY-END -->`;
 if (html.includes('<!-- MAP-KEY-START -->')) html=html.replace(/<!-- MAP-KEY-START -->[\s\S]*?<!-- MAP-KEY-END -->/,key);
