@@ -310,10 +310,19 @@ locally hosted Space Grotesk (`assets/FONT-LICENSES.txt`), with system sans-seri
 
 ## Interaction
 
-- The landing view has no selected pathway. It offers searchable, expandable topic families.
-  The workflow uses I–III; its six pathway families use A–F, with a Bonus family.
-  This follows the common Roman numeral → capital letter outline convention.
-  Choosing a pathway opens its typed causal map and incident reading; “All pathways” clears the selection.
+- The landing view has no selected pathway. Three full-width presentation groups use the
+  platinum review's grouping: influence passes to AI systems; power concentrates in a narrow
+  human group; and AI extends what humans can destroy. Their eight family entries use
+  A-I through A-IV, B-I through B-II, and C-I through C-II. Each expands to a family-level
+  premise and causal pathway. `families.js` records the source, printed-page locators,
+  and the review's scenario counts; these counts do not imply that all 95 individual
+  source-scenario maps have been imported. The family content is a paraphrase of the
+  September 15, 2026 draft, not an empirical assessment.
+- X-Extras has a count derived from its six existing comparisons. Its heading starts at
+  the former Bonus label position. Blue, gold, and rose group backgrounds contain wider
+  family color ranges, defined in `families.css`. The earlier worked pathways and their
+  evidence remain accessible through search, the selector, and existing links.
+  Choosing one opens its causal map and incident reading; “All pathways” clears the selection.
   Only a valid explicit `p` URL parameter opens a pathway directly. Invalid IDs return to
   the overview. Browser history restores the overview as well as selected readings.
 - The two-line headline uses ordinary, unstretched lettering. Its desktop container follows

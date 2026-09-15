@@ -30,7 +30,8 @@
   };
   const icon = (name, className = '') => `<svg class="ui-icon ${className}" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="${icons[name]}"/></svg>`;
   const pathways = new Map(data.pathways.map((p) => [p.id, p]));
-  const aliases = new Map(data.pathways.flatMap((p) => [p.displayId, p.displayId.replace('-', '.')].map(label => [label.toLowerCase(), p.id])));
+  const pathwayCode = (p) => p.group === 'H' ? `X-${p.displayId.split('-').pop()}` : p.displayId;
+  const aliases = new Map(data.pathways.flatMap((p) => [p.displayId, p.displayId.replace('-', '.'), pathwayCode(p)].map(label => [label.toLowerCase(), p.id])));
   const incidents = new Map(data.incidents.map((i) => [i.id, i]));
   const sources = new Map(data.evidence.sources.map((s) => [s.id, s]));
   const passages = new Map(data.evidence.passages.map((p) => [p.id, p]));
@@ -42,7 +43,7 @@
   const roleLabel = (step) => stpaNode(step)?.role || step.roles.map((id) => roles.get(id).label).join(' · ');
   const stageLabel = (step) => stpaNode(step)?.role || step.aiStages.map((id) => aiStages.get(id).label).join(' · ');
   const relationLabels = { component: 'Component evidence', 'mechanism-comparison': 'Mechanism comparison', challenge: 'Evidence challenging the link', countermeasure: 'Countermeasure evidence' };
-  const groupLabel = (id) => `${groups.get(id).ordinal} (${groups.get(id).shortTitle})`;
+  const groupLabel = (id) => id === 'H' ? 'X-Extras' : `${groups.get(id).ordinal} (${groups.get(id).shortTitle})`;
   // Family motifs encode subject matter, never severity or evidence strength.
   const familyMotifs = {
     X: '<ellipse cx="27" cy="12" rx="24" ry="10"/><ellipse cx="27" cy="12" rx="15" ry="6"/><ellipse cx="27" cy="12" rx="5" ry="2"/>',
@@ -169,7 +170,7 @@
     const url = new URL(location.href);
     url.search = '';
     url.hash = '';
-    if (state.pathway) url.searchParams.set('p', pathways.get(state.pathway).displayId);
+    if (state.pathway) url.searchParams.set('p', pathwayCode(pathways.get(state.pathway)));
     if (state.target) url.searchParams.set('t', state.target);
     if (state.incident) url.searchParams.set('i', state.incident);
     if (state.incident && state.exploration) url.searchParams.set('explore', '1');
@@ -203,7 +204,7 @@
     if (params.has('o') && Number.isInteger(requestedObservation) && requestedObservation >= 0 && requestedObservation < observationEntries().length) state.observation = requestedObservation;
     state.question = state.pathway && state.inspect && !isSTPA() ? Math.max(0, questionNames.indexOf(params.get('q'))) : 0;
     if (requested !== [state.pathway, state.incident, state.barrier].join('|') && (params.has('i') || params.has('b') || (params.has('p') && !pathways.has(params.get('p'))))) {
-      announce(state.pathway ? `${pathways.get(state.pathway).displayId} · ${pathwayTitle(pathways.get(state.pathway))}` : 'Choose a pathway');
+      announce(state.pathway ? `${pathwayCode(pathways.get(state.pathway))} · ${pathwayTitle(pathways.get(state.pathway))}` : 'Choose a pathway');
     }
     render();
     writeLocation(true);
@@ -467,15 +468,15 @@
       renderOverview();
       return;
     }
-    $('#selected-code').textContent = p.displayId;
+    $('#selected-code').textContent = pathwayCode(p);
     const selectedTitle = pathwayTitle(p);
     $('#selected-name').textContent = selectedTitle;
-    $('#choose-pathway').setAttribute('aria-label', `Choose a pathway: ${p.displayId} · ${selectedTitle}`);
+    $('#choose-pathway').setAttribute('aria-label', `Choose a pathway: ${pathwayCode(p)} · ${selectedTitle}`);
     $('#pathway-family').innerHTML = `${familyMotif(p.group)}<span>${escape(groupLabel(p.group))}</span>`;
     const endpoint = p.endpoint.split(';')[0];
     $('#pathway-endpoint').textContent = endpoint.charAt(0).toUpperCase() + endpoint.slice(1);
     $('#pathway-endpoint').hidden = isSTPA(p.id);
-    document.title = `Auspex · ${p.displayId}`;
+    document.title = `Auspex · ${pathwayCode(p)}`;
     if (!enhanced) {
       $('#workspace').hidden = true;
       for (const selector of ['#map-nodes','#map-connections','#stpa-barrier-controls','#incident-rail','#step-detail','#barrier-panel','#pathway-details']) $(selector).innerHTML = '';
@@ -504,13 +505,13 @@
     normalize();
     render();
     writeLocation();
-    announce(`${pathways.get(id).displayId} · ${pathwayTitle(pathways.get(id))}`);
+    announce(`${pathwayCode(pathways.get(id))} · ${pathwayTitle(pathways.get(id))}`);
     if (reveal) focusAndReveal($('#pathway-title'), enteringPathway);
   }
 
   const searchable = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   const searchIndex = new Map(data.pathways.map((p) => [p.id, searchable([
-    p.id, p.displayId, p.displayId.replace('-', '.'), pathwayTitle(p), data.groups.find(g=>g.id===p.group).title,
+    p.id, p.displayId, pathwayCode(p), p.displayId.replace('-', '.'), pathwayTitle(p), data.groups.find(g=>g.id===p.group).title,
     ...(isSTPA(p.id) ? [p.title, p.endpoint, p.conditions, p.basis, p.variants,
     p.reach.local, p.reach.systemic || '', p.steps.flatMap((s) => [...s.roles.map((id) => roles.get(id).label), ...s.aiStages.map((id) => aiStages.get(id).label)]).join(' '),
     data.groups.find((g) => g.id === p.group).title,
@@ -526,26 +527,46 @@
   function renderOverview() {
     const terms = searchable($('#overview-search').value.trim()).split(/\s+/).filter(Boolean);
     const results = matchingPathways(terms);
-    $('#overview-count').textContent = terms.length ? `${results.length} pathway${results.length===1?'':'s'}` : '';
     $('#overview-incidents').innerHTML = incidentResults(terms);
-    $('#overview-groups').innerHTML = results.length ? data.groups.map((group) => {
-      const members = results.filter((p) => p.group === group.id);
-      if (!members.length) return '';
-      return `<details class="overview-group${group.id === 'H' ? ' comparisons' : ''}" data-group="${group.id}"${terms.length ? ' open' : ''}><summary><span class="cluster-index">${group.ordinal}</span><span class="cluster-text">${escape(group.shortTitle)}</span>${familyMotif(group.id)}<small class="cluster-count">${members.length} ${group.id === 'H' ? 'comparison' : 'pathway'}${members.length===1?'':'s'}</small></summary><ul>${members.map((p) => {
-        const count = isSTPA(p.id) ? data.assessments.filter((a) => a.pathway === p.id).length : 0;
-        return `<li><button class="overview-pathway" data-overview-pathway="${p.id}"><span class="code">${p.displayId}</span><span>${escape(pathwayTitle(p))}${count ? `<small class="pathway-coverage">${countLabel(count)}</small>` : ''}</span>${icon('right', 'choice-icon')}</button></li>`;
-      }).join('')}</ul></details>`;
-    }).join('') : '<p class="no-results">No matching pathways</p>';
+    const familyGroups = (window.AuspexFamilies?.groups || []).map((group) => ({
+      ...group,
+      families: group.families.filter((family) => terms.every((term) => searchable([
+        group.id, group.title, family.id, family.title, family.premise, family.chain.flat().join(' '),
+      ].join(' ')).includes(term))),
+    })).filter((group) => group.families.length);
+    const familyCount = familyGroups.reduce((count, group) => count + group.families.length, 0);
+    const comparisons = data.pathways.filter((p) => p.group === 'H' && terms.every((term) =>
+      searchable(`X-Extras X-${p.displayId.split('-').pop()} comparisons ${searchIndex.get(p.id)}`).includes(term)));
+    const existing = terms.length ? results.filter((p) => p.group !== 'H') : [];
+    const total = familyCount + comparisons.length + existing.length;
+    $('#overview-count').textContent = terms.length ? `${total} result${total === 1 ? '' : 's'}` : '';
+    const pathwayItem = (p) => {
+      const count = isSTPA(p.id) ? data.assessments.filter((a) => a.pathway === p.id).length : 0;
+      const code = pathwayCode(p);
+      return `<li><button class="overview-pathway" data-group="${p.group}" data-overview-pathway="${p.id}"><span class="code">${escape(code)}</span><span>${escape(pathwayTitle(p))}${count ? `<small class="pathway-coverage">${countLabel(count)}</small>` : ''}</span>${icon('right', 'choice-icon')}</button></li>`;
+    };
+    const familyRows = familyGroups.map((group) => `<details class="overview-group" data-x-group="${group.id}"${terms.length ? ' open' : ''}>
+      <summary><span class="cluster-index">${group.id}</span><span class="cluster-text">${escape(group.title)}</span><small class="cluster-count">${group.families.length} ${group.families.length === 1 ? 'family' : 'families'}</small></summary>
+      <div class="x-families">${group.families.map((family) => `<details class="x-family" data-x-family="${family.id}" id="family-${family.id}">
+        <summary><span class="code">${family.id}</span><span>${escape(family.title)}</span><small class="x-scenario-count">${family.count} ${family.count === 1 ? 'scenario' : 'scenarios'} in the review</small></summary>
+        <div class="x-family-reading"><h4>Premise</h4><p>${escape(family.premise)}</p><h4>Causal pathway</h4><ol>${family.chain.map(([title, text]) => `<li><strong>${escape(title)}</strong>${escape(text)}</li>`).join('')}</ol><p class="x-family-source">Family overview adapted from <cite>${escape(window.AuspexFamilies.source)}</cite>, ${escape(family.pages)} (September 15, 2026 draft). Counts refer to source scenarios in the review.</p></div>
+      </details>`).join('')}</div>
+    </details>`).join('');
+    const extras = comparisons.length ? `<details class="overview-group comparisons" data-group="H"${terms.length ? ' open' : ''}><summary><span class="cluster-text">X-Extras</span><small class="cluster-count">${comparisons.length} comparison${comparisons.length === 1 ? '' : 's'}</small></summary><ul>${comparisons.map(pathwayItem).join('')}</ul></details>` : '';
+    const previous = existing.length ? `<section class="overview-existing"><h3>Existing pathways</h3><ul>${existing.map(pathwayItem).join('')}</ul></section>` : '';
+    $('#overview-groups').innerHTML = familyRows + extras + previous || '<p class="no-results">No matching pathways or families</p>';
   }
   $('#overview-search').addEventListener('input', renderOverview);
   $('#overview-search').addEventListener('keydown', (event) => {
     if (!['Enter', 'ArrowDown'].includes(event.key)) return;
-    const first = $('#overview-incidents [data-search-incident]') || $('#overview-groups [data-overview-pathway]');
+    const first = $('#overview-incidents [data-search-incident]') || $('#overview-groups .x-family > summary') || $('#overview-groups [data-overview-pathway]');
     if (!first) return;
     event.preventDefault();
     if (event.key === 'Enter') first.click();
     else {
-      if (first.closest('details')) first.closest('details').open = true;
+      for (let parent = first.parentElement; parent; parent = parent.parentElement) {
+        if (parent.tagName === 'DETAILS') parent.open = true;
+      }
       first.focus();
     }
   });
@@ -560,7 +581,7 @@
     const words = termPatterns(terms);
     const exact = candidates.filter((a) => words.every((word) => word.test(text(a))));
     const matches = exact.length ? exact : candidates;
-    return matches.length ? `<section class="incident-matches"><h3>Incidents</h3>${matches.map((a) => `<button class="incident-result" data-search-incident="${a.id}"><span>${escape(incidents.get(a.incident).title)}</span><span class="incident-result-route" data-group="${pathways.get(a.pathway).group}"><span class="code">${pathways.get(a.pathway).displayId}</span>${icon('right', 'choice-icon')}</span></button>`).join('')}</section>` : '';
+    return matches.length ? `<section class="incident-matches"><h3>Incidents</h3>${matches.map((a) => `<button class="incident-result" data-search-incident="${a.id}"><span>${escape(incidents.get(a.incident).title)}</span><span class="incident-result-route" data-group="${pathways.get(a.pathway).group}"><span class="code">${pathwayCode(pathways.get(a.pathway))}</span>${icon('right', 'choice-icon')}</span></button>`).join('')}</section>` : '';
   }
   function selectIncident(id) {
     const a = data.assessments.find((item) => item.id === id);
@@ -609,7 +630,7 @@
     $('#pathway-results').innerHTML = incidentResults(terms) + (results.length ? data.groups.map((group) => {
       const members = results.filter((p) => p.group === group.id);
       if (!members.length) return '';
-       return `<section class="result-group${group.id === 'H' ? ' comparison-group' : ''}" data-group="${group.id}" aria-labelledby="group-${group.id}"><h3 id="group-${group.id}">${familyMotif(group.id)}${escape(groupLabel(group.id))}<span>${members.length}</span></h3><ul>${members.map((p) => `<li><button class="pathway-result" data-pathway="${p.id}" aria-current="${p.id === state.pathway}"><span class="code">${p.displayId}</span><span>${escape(pathwayTitle(p))}</span>${icon(p.id === state.pathway ? 'check' : 'right', 'choice-icon result-arrow')}</button></li>`).join('')}</ul></section>`;
+       return `<section class="result-group${group.id === 'H' ? ' comparison-group' : ''}" data-group="${group.id}" aria-labelledby="group-${group.id}"><h3 id="group-${group.id}">${familyMotif(group.id)}${escape(groupLabel(group.id))}<span>${members.length}</span></h3><ul>${members.map((p) => `<li><button class="pathway-result" data-pathway="${p.id}" aria-current="${p.id === state.pathway}"><span class="code">${pathwayCode(p)}</span><span>${escape(pathwayTitle(p))}</span>${icon(p.id === state.pathway ? 'check' : 'right', 'choice-icon result-arrow')}</button></li>`).join('')}</ul></section>`;
     }).join('') : '<p class="no-results">No matching pathways</p>');
     $('#pathway-results').scrollTop = 0;
   }
@@ -1009,7 +1030,7 @@
     if ($('#source-dialog').open) $('#source-dialog').close();
     if ($('#method-dialog').open) $('#method-dialog').close();
     readLocation();
-    announce(state.pathway ? `${pathways.get(state.pathway).displayId} · ${pathwayTitle(pathways.get(state.pathway))}` : 'Choose a pathway');
+    announce(state.pathway ? `${pathwayCode(pathways.get(state.pathway))} · ${pathwayTitle(pathways.get(state.pathway))}` : 'Choose a pathway');
   });
 
   readLocation();
