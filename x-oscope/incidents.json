@@ -30,6 +30,96 @@
     }
   },
   {
+    "id": "NT-2018",
+    "title": "Tempe pedestrian collision",
+    "date": "18 March 2018",
+    "sources": [
+      "NT"
+    ],
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unintentional",
+      "setting": "Road test",
+      "note": "The investigation identifies operator distraction and system, organizational, and oversight contributors.",
+      "sources": [
+        "NT"
+      ]
+    },
+    "view": {
+      "labels": [
+        "Human fallback",
+        "Operator distraction",
+        "Fatal collision"
+      ],
+      "observations": [
+        {
+          "text": "A safety operator was responsible for monitoring the road and intervening when needed.",
+          "evidence": [
+            "NT-summary"
+          ]
+        },
+        {
+          "text": "The distracted operator did not intervene in time to prevent the collision.",
+          "evidence": [
+            "NT-summary"
+          ]
+        },
+        {
+          "text": "The pedestrian was struck and killed. NTSB identified operator distraction, organizational factors, and system-design contributors.",
+          "evidence": [
+            "NT-summary"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "ED-2023",
+    "title": "GPT-based mathematics tutoring",
+    "date": "2023",
+    "sources": [
+      "ED",
+      "EC"
+    ],
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unintentional",
+      "setting": "Field experiment",
+      "note": "The exam effect is measured; the proposed learning-process mediator remains uncertain.",
+      "sources": [
+        "ED",
+        "EC"
+      ]
+    },
+    "view": {
+      "labels": [
+        "AI-assisted practice",
+        "Unaided examination",
+        "Teacher-informed tutor"
+      ],
+      "observations": [
+        {
+          "text": "Students practised mathematics with GPT-based assistance in a field experiment at one Turkish high school.",
+          "evidence": [
+            "ED-outcome"
+          ]
+        },
+        {
+          "text": "Unrestricted assistance was followed by lower performance on an exam without AI access.",
+          "evidence": [
+            "ED-outcome"
+          ]
+        },
+        {
+          "text": "The teacher-informed GPT Tutor package largely avoided that harm. Unaided-exam improvement over the control group was not established.",
+          "evidence": [
+            "ED-outcome"
+          ]
+        }
+      ]
+    }
+  },
+  {
     "id": "OB-2019",
     "title": "Racial bias in care-management allocation",
     "date": "Reported October 2019",
@@ -1107,6 +1197,31 @@
     }
   },
   {
+    "id": "WIL-2016",
+    "title": "Williston: overreliance on partial driving automation",
+    "date": "7 May 2016",
+    "sources": [
+      "WIL"
+    ],
+    "evidenceClass": "ai-incident",
+    "view": {
+      "labels": [
+        "Partial automation used",
+        "Fallback ineffective",
+        "Design examined"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Deployed partial-driving-automation incident",
+      "note": "A truck collision under partial automation, not the Tempe pedestrian event. The comparison concerns ineffective human fallback; it does not equate the perception systems or crash geometries.",
+      "sources": [
+        "WIL"
+      ]
+    }
+  },
+  {
     "id": "GAW-2024",
     "title": "AI assistance improved customer-support productivity",
     "date": "Study revised 6 November 2024",
@@ -1353,6 +1468,181 @@
       "note": "One trial series, not several independent incidents. The failures were local and recoverable, with no regional crop loss, famine, or measured long-term ecosystem damage.",
       "sources": [
         "GH24"
+      ]
+    }
+  },
+  {
+    "id": "HRI-2012",
+    "title": "Criminal-record reporting errors allegedly cost employment",
+    "date": "August 2012 settlement announcement",
+    "sources": [
+      "HRI"
+    ],
+    "evidenceClass": "non-ai-analogy",
+    "view": {
+      "labels": [
+        "Records supplied",
+        "Errors alleged",
+        "Redress obligations proposed"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human",
+      "intent": "Unresolved",
+      "setting": "Non-AI employment-screening enforcement analogy",
+      "note": "This source describes allegations and settlement terms, not adjudicated findings. The case concerns background reports, not predictions of future arrest, induced crime, or a demonstrated feedback loop.",
+      "sources": [
+        "HRI"
+      ]
+    }
+  },
+  {
+    "id": "PFL-2018",
+    "title": "Predictive-policing feedback and an input correction",
+    "date": "Published February 2018",
+    "sources": [
+      "PFL"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Deployment generated records",
+        "Records reinforced deployment",
+        "Inputs corrected"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Mathematical model and computational study",
+      "note": "The study uses a model and simulation. It does not observe employment screening or induced crime. Results depend on assumptions about reported and discovered incidents.",
+      "sources": [
+        "PFL"
+      ]
+    }
+  },
+  {
+    "id": "WBT-2017",
+    "title": "Woebot’s short trial improved depression symptoms",
+    "date": "2017 trial",
+    "sources": [
+      "WBT"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Individuals randomized",
+        "Short-term benefit found",
+        "Scope remained narrow"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Randomized trial of a nongenerative chatbot",
+      "note": "A small, short trial with differential attrition. It does not test whole friendship groups, offline mass adoption, or withdrawal from school and work.",
+      "sources": [
+        "WBT"
+      ]
+    }
+  },
+  {
+    "id": "THR-2025",
+    "title": "Therabot showed benefits with clinical oversight",
+    "date": "2025 trial report",
+    "sources": [
+      "THR"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Access randomized",
+        "Clinical review retained",
+        "Symptoms assessed"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Randomized clinical chatbot trial · institutional account",
+      "note": "A monitored trial with four weeks of unrestricted access and follow-up, not an active-therapy comparison. It does not establish safety for unmonitored group adoption or equivalence to human therapy.",
+      "sources": [
+        "THR"
+      ]
+    }
+  },
+  {
+    "id": "PSY-2025",
+    "title": "Chatbot-use trial separated causal results from dependence associations",
+    "date": "Study revised 2 October 2025",
+    "sources": [
+      "PSY"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Interaction conditions assigned",
+        "Causal comparison was null",
+        "Associations remained"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Four-week randomized chatbot-use study",
+      "note": "The use and trust associations are not randomized treatment effects. Anxiety-inducing reward optimization, secrecy, and long-term cultural change were not tested.",
+      "sources": [
+        "PSY"
+      ]
+    }
+  },
+  {
+    "id": "SMR-2021",
+    "title": "Smart replies changed language and interpersonal impressions",
+    "date": "Preprint 10 February 2021",
+    "sources": [
+      "SMR"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Replies suggested",
+        "Language shifted",
+        "Perceptions diverged"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Randomized smart-reply communication experiments",
+      "note": "One study series, not two cases. This concerns short interactions and perceived AI use, not learned fear, secrecy, persistent distrust, or dependence on mediation.",
+      "sources": [
+        "SMR"
+      ]
+    }
+  },
+  {
+    "id": "TUT-2025",
+    "title": "Structured AI tutoring improved subsequent quiz performance",
+    "date": "Fall 2023 study · published 2025",
+    "sources": [
+      "TUT"
+    ],
+    "evidenceClass": "ai-study",
+    "view": {
+      "labels": [
+        "Tutor scaffolded",
+        "Lessons compared",
+        "Learning measured"
+      ]
+    },
+    "causalFactors": {
+      "entity": "Human and AI",
+      "intent": "Unresolved",
+      "setting": "Randomized classroom crossover study",
+      "note": "A short crossover study, with 194 eligible students, not proof of durable learning across a course. It tests a structured tutor, not unrestricted answer provision.",
+      "sources": [
+        "TUT"
       ]
     }
   },

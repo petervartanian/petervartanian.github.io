@@ -16,7 +16,7 @@ const display = { window: {} };
 vm.runInNewContext(await readFile(new URL('display.js', import.meta.url), 'utf8'), display);
 assert.deepEqual(Object.keys(display.window.AuspexLabels).sort(), [...pathways.values()].filter((p) => !p.steps.every((s) => s.shortLabel)).map((p) => p.id).sort());
 const groups = unique(catalogue.groups, 'group');
-assert.deepEqual(catalogue.groups.map((g) => g.ordinal), ['A', 'B', 'C', 'D', 'E', 'F', 'X']);
+assert.deepEqual(catalogue.groups.map((g) => g.ordinal), ['A', 'B', 'C', 'D', 'E', 'F', 'Bonus']);
 const roles = unique(catalogue.typology.roles, 'causal role');
 const aiStages = unique(catalogue.typology.aiStages, 'AI stage');
 const controlRoles = unique(catalogue.typology.barrierRoles, 'barrier role');
@@ -32,7 +32,7 @@ for (const a of assessments) for (const b of a.barriers) if (b.view) inspection.
 unique(assessments, 'assessment');
 const allTargets = new Map();
 assert.equal(catalogue.pathways.filter((p) => !p.comparison).length, 31);
-assert.equal(catalogue.pathways.filter((p) => p.comparison).length, 0, 'Removed Extras must not remain in the catalogue');
+assert.equal(catalogue.pathways.filter((p) => p.comparison).length, 6);
 assert.equal(catalogue.pathways.filter((p) => p.endpoint.startsWith('human extinction') || p.endpoint.startsWith('extinction of')).length, 2);
 for (const p of pathways.values()) {
   assert(groups.has(p.group), p.id);
@@ -154,7 +154,8 @@ for (const a of assessments) {
 }
 // Component evidence must not silently become a completed transition.
 assert.equal(assessments.find((a) => a.id === 'HF-X02').targets[0].state, 'component');
-assert(!assessments.some(a => a.pathway.startsWith('H-')), 'Removed Extras must have no remaining assessments');
+assert.equal(assessments.find((a) => a.id === 'ED-H06').targets[0].kind, 'node');
+for (const id of ['H-04', 'H-05', 'H-06']) assert.equal(pathways.get(id).reach.systemic, null, `${id}: bounded comparison must not acquire an unsupported systemic outcome`);
 const bundled = { window: {} };
 vm.runInNewContext(await readFile(new URL('data.js', import.meta.url), 'utf8'), bundled);
 assert.deepEqual(JSON.parse(JSON.stringify(bundled.window.AuspexData)), {

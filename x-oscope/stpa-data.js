@@ -6483,6 +6483,1083 @@ window.AuspexSTPAModels = {
         }
       ]
     }
+  },
+  "H-01": {
+    "roleTypes": [
+      {
+        "id": "condition",
+        "label": "Enabling condition",
+        "definition": "A circumstance makes a route possible. It does not by itself establish a hazard."
+      },
+      {
+        "id": "unsafe-action",
+        "label": "Unsafe control action",
+        "definition": "An action or omission linked to its controller, hazardous context, and affected constraint."
+      },
+      {
+        "id": "scenario",
+        "label": "Loss scenario",
+        "definition": "An explanation of how control can become inadequate, including feedback and execution problems."
+      },
+      {
+        "id": "hazard",
+        "label": "Hazardous state",
+        "definition": "A system state that can produce a loss together with relevant environmental conditions."
+      },
+      {
+        "id": "amplifier",
+        "label": "Optional amplifier",
+        "definition": "A factor that could strengthen a route but is not required in every version."
+      },
+      {
+        "id": "loss",
+        "label": "Loss",
+        "definition": "An outcome stakeholders seek to prevent, kept distinct from its contributing causes."
+      },
+      {
+        "id": "recovery",
+        "label": "Recovery",
+        "definition": "A response re-establishes enforceable safety constraints within a specified boundary. Its success requires verification."
+      }
+    ],
+    "version": "1.3",
+    "pathway": "H-01",
+    "displayId": "Bonus-1",
+    "title": "Screening, selective records, and persistent exclusion",
+    "status": "STPA worked example · bounded comparison",
+    "summary": "Can decisions and the records they generate entrench exclusion beyond effective correction?",
+    "scope": "The hypothetical scenario connects employment screening with record suppliers, policing allocation, model updates, and independent redress. These functions belong to analytically distinct organizations. No single controller is assumed to command the whole system.",
+    "purpose": "Protect access to employment, accurate and contestable records, and effective correction of repeated exclusion.",
+    "boundary": "This is a bounded discrimination scenario, not an extinction pathway. Neither cited case establishes the combined employment–policing cycle.",
+    "numbering": "0 gives the context. 1.x identifies precursors, 2.x the loss-of-control event, and 3.x conditional consequences. R identifies a possible recovery outcome. These numbers locate scenario components. They are not STPA method steps or a measure of proximity to catastrophe. The return arrow represents feedback, not an extra observed incident.",
+    "bowtie": "The centre is exclusion beyond effective correction. Downstream record feedback can renew earlier screening risk. Recovery interrupts that loop and repairs affected decisions.",
+    "schema": "Losses, hazards, controls, unsafe actions, and scenarios are traced by IDs. This prospective analysis is separate from the retrospective case evidence.",
+    "limits": "A fictional cross-institutional scenario is compared with a non-AI enforcement record and a mathematical study. Causal links between unemployment, enforcement, and future exclusion require independent evidence.",
+    "losses": [
+      {
+        "id": "L1",
+        "title": "Unwarranted loss of employment",
+        "text": "People lose work or income because unsuitable or inaccurate information governs a decision."
+      },
+      {
+        "id": "L2",
+        "title": "Persistent discriminatory exclusion",
+        "text": "Repeated decisions entrench disadvantage and make effective redress inaccessible to an affected population."
+      }
+    ],
+    "hazards": [
+      {
+        "id": "H1",
+        "title": "Exclusion beyond effective correction",
+        "text": "Consequential exclusion propagates through decisions while timely challenge and correction cannot constrain it.",
+        "losses": [
+          "L1",
+          "L2"
+        ]
+      },
+      {
+        "id": "H2",
+        "title": "Selective records treated as independent risk evidence",
+        "text": "The system reuses records shaped by its own decisions without adequately accounting for selection or limits of use.",
+        "losses": [
+          "L1",
+          "L2"
+        ]
+      }
+    ],
+    "controllers": [
+      {
+        "id": "C1",
+        "title": "Employer / screening decision authority",
+        "responsibility": "Approve or suspend consequential screening use and reconsider affected decisions.",
+        "feedback": "Disputed-record notices, review outcomes, and independent checks of decision effects.",
+        "assumption": "Decision authority remains able to change an outcome before it becomes irreversible."
+      },
+      {
+        "id": "C2",
+        "title": "Record supplier",
+        "responsibility": "Match, update, and correct the records supplied.",
+        "feedback": "Source corrections, identity discrepancies, and dispute results.",
+        "assumption": "A corrected record reaches every recipient that continues to rely on it."
+      },
+      {
+        "id": "C3",
+        "title": "Enforcement allocation authority",
+        "responsibility": "Set and revise patrol allocation and the collection of discovery records.",
+        "feedback": "Allocation history, independently reported incidents, and local effects.",
+        "assumption": "Discovered records depend partly on where enforcement looked."
+      },
+      {
+        "id": "C4",
+        "title": "Model and data steward",
+        "responsibility": "Admit updates, correct selection effects, and bound reuse.",
+        "feedback": "Data provenance, drift checks, and independent outcome observations.",
+        "assumption": "A statistical correction may depend on assumptions that change in deployment."
+      },
+      {
+        "id": "C5",
+        "title": "Independent review and redress",
+        "responsibility": "Require timely correction, suspension, or reconsideration.",
+        "feedback": "Affected-person reports, audited records, and confirmation that instructions changed decisions.",
+        "assumption": "A formal correction order must reach an actor able to enforce it."
+      },
+      {
+        "id": "C6",
+        "title": "Screening and allocation pipeline",
+        "responsibility": "Apply approved data and decision rules within contestable limits.",
+        "feedback": "Approved data, correction instructions, and limits on use.",
+        "assumption": "Separate deployments may share records and create cumulative effects."
+      }
+    ],
+    "controlLoops": [
+      {
+        "id": "CA1",
+        "controller": "C1",
+        "process": "C6",
+        "action": "Approve, suspend, or reconsider screening",
+        "feedback": "The pipeline reports affected decisions, disputed records, and the effect of suspension.",
+        "constraints": [
+          "SC1",
+          "SC2",
+          "SC5"
+        ]
+      },
+      {
+        "id": "CA2",
+        "controller": "C2",
+        "process": "C6",
+        "action": "Supply or correct records",
+        "feedback": "Recipients acknowledge correction and identify derived records that still retain the error.",
+        "constraints": [
+          "SC1",
+          "SC4",
+          "SC5"
+        ]
+      },
+      {
+        "id": "CA3",
+        "controller": "C3",
+        "process": "C6",
+        "action": "Set and revise enforcement allocation",
+        "feedback": "Independent incident reports and allocation history reveal selective discovery.",
+        "constraints": [
+          "SC3",
+          "SC4"
+        ]
+      },
+      {
+        "id": "CA4",
+        "controller": "C4",
+        "process": "C6",
+        "action": "Approve model inputs and updates",
+        "feedback": "Audits compare updated predictions with independently sampled observations.",
+        "constraints": [
+          "SC3",
+          "SC4"
+        ]
+      },
+      {
+        "id": "CA5",
+        "controller": "C5",
+        "process": "C1",
+        "action": "Require reconsideration or suspension",
+        "feedback": "Decision-makers confirm changed outcomes and unresolved cases.",
+        "constraints": [
+          "SC2",
+          "SC5"
+        ]
+      }
+    ],
+    "constraints": [
+      {
+        "id": "SC1",
+        "title": "Check record accuracy and fitness",
+        "text": "Consequential screening must use correctly matched, current information appropriate to the decision.",
+        "hazards": [
+          "H1",
+          "H2"
+        ],
+        "owners": [
+          "C1",
+          "C2"
+        ],
+        "role": "Prevention",
+        "test": "Do identity, duplication, and update checks block a materially wrong record before use?",
+        "limit": "Mistaken identity or an incorrect match can link someone to the wrong record. Stale sources and uncertain proxies can also make the record misleading.",
+        "nodes": [
+          "H-01:1",
+          "H-01:2",
+          "H-01:R"
+        ],
+        "improvement": {
+          "title": "A record checked before reuse",
+          "proposal": "Record suppliers and receiving decision-makers would verify identity, current status, and fitness for the stated use before consequential reuse. Uncertain matches would be held for review.",
+          "test": "A safe audit using synthetic records would introduce an outdated record and a plausible mistaken identity to test whether review catches them before they change a decision.",
+          "remaining": "The underlying record may still omit context or contain an error that neither party can verify."
+        }
+      },
+      {
+        "id": "SC2",
+        "title": "Make challenge change decisions",
+        "text": "Affected people must be able to obtain timely review that can suspend or change consequential exclusion.",
+        "hazards": [
+          "H1"
+        ],
+        "owners": [
+          "C1",
+          "C5"
+        ],
+        "role": "Prevention and recovery",
+        "test": "Does a valid dispute reach a decision-maker and change the decision within the relevant window?",
+        "limit": "An appeal can arrive too late or be too costly to pursue. Inaccessible notices may prevent a person from challenging the decision at all, and a reviewer without authority may be unable to change it.",
+        "nodes": [
+          "H-01:2",
+          "H-01:5",
+          "H-01:R"
+        ],
+        "improvement": {
+          "title": "A challenge with the power to pause",
+          "proposal": "A person could challenge an adverse record through an accessible reviewer empowered to pause the consequential decision. The decision-maker would be required to act on a substantiated correction.",
+          "test": "A synthetic challenge would be traced through the full process to test whether someone without specialist help can reach an empowered reviewer before the decision takes effect.",
+          "remaining": "Delay, cost, or fear of retaliation could prevent a person from using the process at all."
+        }
+      },
+      {
+        "id": "SC3",
+        "title": "Account for selective discovery",
+        "text": "Updates must account for how earlier allocations shaped the records being learned from.",
+        "hazards": [
+          "H2"
+        ],
+        "owners": [
+          "C3",
+          "C4"
+        ],
+        "role": "Prevention",
+        "test": "Does the proposed correction prevent feedback under changed reporting and discovery patterns?",
+        "limit": "A correction fitted to the wrong discovery process can retain or introduce bias.",
+        "nodes": [
+          "H-01:3",
+          "H-01:4",
+          "H-01:R"
+        ],
+        "improvement": {
+          "title": "A view beyond earlier enforcement",
+          "proposal": "The enforcement authority and data steward would audit the model against independent observations that do not simply repeat earlier enforcement allocations. Review would examine how the correction treats unobserved activity before its outputs are used to allocate attention.",
+          "test": "A controlled simulation would vary the relationship between reporting and discovery. It would test whether the correction still avoids concentrating attention because earlier attention generated more records.",
+          "remaining": "Independent observations may be sparse, and their selection may carry a different bias."
+        }
+      },
+      {
+        "id": "SC4",
+        "title": "Bound reuse across decisions",
+        "text": "Records and predictions must not be reused outside a demonstrated, appropriate purpose without review.",
+        "hazards": [
+          "H1",
+          "H2"
+        ],
+        "owners": [
+          "C2",
+          "C3",
+          "C4"
+        ],
+        "role": "Prevention",
+        "test": "Can provenance and purpose restrictions prevent unsupported reuse across deployments?",
+        "limit": "Restrictions may not follow copied data or information recreated through proxy variables. When responsibility is spread across recipients, no one may ensure that the restriction is enforced.",
+        "nodes": [
+          "H-01:1",
+          "H-01:3",
+          "H-01:4",
+          "H-01:R"
+        ],
+        "improvement": {
+          "title": "Terms of reuse that follow the record",
+          "proposal": "Each transfer would carry the authorized purpose and provenance, and recipients would review any new use. An accountable record of recipients would allow restrictions and corrections to follow the data.",
+          "test": "A synthetic audit would attempt a materially different use and send a correction downstream. It would test whether recipients can be identified and the new use is held for review.",
+          "remaining": "Unrecorded copies or derived proxies could carry the same information beyond those restrictions."
+        }
+      },
+      {
+        "id": "SC5",
+        "title": "Verify correction reaches outcomes",
+        "text": "Recovery must verify corrected records, reconsidered decisions, and interruption of renewed feedback.",
+        "hazards": [
+          "H1",
+          "H2"
+        ],
+        "owners": [
+          "C1",
+          "C2",
+          "C5"
+        ],
+        "role": "Recovery",
+        "test": "After correction, do downstream records and decisions change and remain corrected?",
+        "limit": "Correcting one record may leave derived records unchanged or take too long to reach them. A continuing input loop can recreate the same exclusion.",
+        "nodes": [
+          "H-01:2",
+          "H-01:4",
+          "H-01:5",
+          "H-01:R"
+        ],
+        "improvement": {
+          "title": "A correction that reaches the decision",
+          "proposal": "Recipients would confirm that a correction reached their records and that affected decisions were reconsidered. An independent reviewer would take responsibility for unresolved downstream effects.",
+          "test": "A synthetic corrected record would be traced through its recipients to check the resulting decisions and later reuse, beyond whether the database update succeeded.",
+          "remaining": "A recipient may be missing from the record, or the same adverse inference may persist through another data field."
+        }
+      }
+    ],
+    "nodes": [
+      {
+        "number": "1.1",
+        "wing": "before",
+        "role": "Condition",
+        "title": "Records govern screening",
+        "shortLabel": "Records govern screening",
+        "text": "Criminal-history or predicted-risk records influence consequential screening.",
+        "requires": "Records are used in the decision and are unsuitable, inaccurate, or poorly contested.",
+        "mechanism": "Reliance on a record can transfer its errors or untested assumptions into a decision.",
+        "constraints": [
+          "SC1",
+          "SC4"
+        ],
+        "sources": [
+          "TA",
+          "HRI"
+        ],
+        "scenarios": [
+          "LS1"
+        ],
+        "type": "condition",
+        "references": [
+          "H2"
+        ],
+        "id": "H-01:1"
+      },
+      {
+        "number": "2.1",
+        "wing": "centre",
+        "role": "Loss of control · H1",
+        "title": "Exclusion outruns correction",
+        "shortLabel": "Exclusion outruns correction",
+        "text": "Exclusion becomes consequential while effective review or correction fails to constrain it.",
+        "requires": "An adverse decision, material effects, and inadequate timely correction.",
+        "mechanism": "A mistaken screening result can become a sustained loss when the correction process cannot change the outcome.",
+        "constraints": [
+          "SC1",
+          "SC2",
+          "SC5"
+        ],
+        "sources": [
+          "TA",
+          "HRI"
+        ],
+        "scenarios": [
+          "LS1",
+          "LS2"
+        ],
+        "type": "hazard",
+        "references": [
+          "H1"
+        ],
+        "id": "H-01:2"
+      },
+      {
+        "number": "3.1",
+        "wing": "after",
+        "role": "Conditional feedback mechanism",
+        "title": "Selective enforcement shapes records",
+        "shortLabel": "Selective enforcement shapes records",
+        "text": "Where enforcement is allocated changes what it discovers and records.",
+        "requires": "Allocation affects discovery. The employment-to-enforcement bridge remains separately unestablished.",
+        "mechanism": "Selective observation can change recorded arrests without a corresponding change in underlying offending.",
+        "constraints": [
+          "SC3",
+          "SC4"
+        ],
+        "sources": [
+          "PFL",
+          "TA"
+        ],
+        "scenarios": [
+          "LS3"
+        ],
+        "type": "scenario",
+        "references": [
+          "H2"
+        ],
+        "id": "H-01:3"
+      },
+      {
+        "number": "3.2",
+        "wing": "after",
+        "role": "Feedback",
+        "title": "Records reinforce future decisions",
+        "shortLabel": "Records reinforce future decisions",
+        "text": "Records shaped by earlier decisions feed later predictions and allocation.",
+        "requires": "Updates reuse those records without an adequate selection correction.",
+        "mechanism": "Learning from a deployment’s own discoveries can renew the initial pattern. Cross-domain reuse requires additional support.",
+        "constraints": [
+          "SC3",
+          "SC4",
+          "SC5"
+        ],
+        "sources": [
+          "PFL",
+          "TA"
+        ],
+        "scenarios": [
+          "LS3",
+          "LS4"
+        ],
+        "type": "scenario",
+        "references": [
+          "H2"
+        ],
+        "id": "H-01:4"
+      },
+      {
+        "number": "3.3",
+        "wing": "after",
+        "role": "Loss · L2",
+        "title": "Disadvantage persists",
+        "shortLabel": "Disadvantage persists",
+        "text": "Repeated consequential exclusion entrenches disadvantage.",
+        "requires": "Sustained exposure, cumulative effects, and failure of correction or exit.",
+        "mechanism": "A recurrent process can make local losses persistent, but neither case establishes this full societal outcome.",
+        "constraints": [
+          "SC2",
+          "SC5"
+        ],
+        "sources": [
+          "TA"
+        ],
+        "scenarios": [
+          "LS4"
+        ],
+        "type": "loss",
+        "references": [
+          "L2"
+        ],
+        "id": "H-01:5"
+      },
+      {
+        "number": "R",
+        "wing": "recovery",
+        "role": "Recovery",
+        "title": "Decisions and records corrected",
+        "shortLabel": "Decisions and records corrected",
+        "text": "Effective review corrects records and affected decisions and interrupts renewed feedback.",
+        "requires": "Correction propagates, consequential decisions change, and recurrence is monitored.",
+        "mechanism": "Recovery acts on the affected system and outcomes. Reinforcing a check is a separate change to a barrier.",
+        "constraints": [
+          "SC1",
+          "SC2",
+          "SC3",
+          "SC4",
+          "SC5"
+        ],
+        "sources": [
+          "STPA",
+          "HRI",
+          "PFL"
+        ],
+        "scenarios": [],
+        "type": "recovery",
+        "references": [],
+        "id": "H-01:R"
+      }
+    ],
+    "links": [
+      {
+        "id": "H-01:1>2",
+        "from": "H-01:1",
+        "to": "H-01:2",
+        "label": "Screening is consequential and review does not constrain it",
+        "kind": "contribution",
+        "constraints": [
+          "SC1",
+          "SC2"
+        ]
+      },
+      {
+        "id": "H-01:2>3",
+        "from": "H-01:2",
+        "to": "H-01:3",
+        "label": "Additional social and enforcement conditions are required. The case does not establish them.",
+        "kind": "optional",
+        "constraints": [
+          "SC2",
+          "SC4"
+        ]
+      },
+      {
+        "id": "H-01:3>4",
+        "from": "H-01:3",
+        "to": "H-01:4",
+        "label": "Selective discovery is reused in an update",
+        "kind": "contribution",
+        "constraints": [
+          "SC3"
+        ]
+      },
+      {
+        "id": "H-01:4>1",
+        "from": "H-01:4",
+        "to": "H-01:1",
+        "label": "Records are reused in later screening",
+        "kind": "feedback",
+        "constraints": [
+          "SC1",
+          "SC4"
+        ]
+      },
+      {
+        "id": "H-01:4>5",
+        "from": "H-01:4",
+        "to": "H-01:5",
+        "label": "Repeated decisions accumulate and redress fails",
+        "kind": "continuation",
+        "constraints": [
+          "SC2",
+          "SC5"
+        ]
+      },
+      {
+        "id": "H-01:2>R",
+        "from": "H-01:2",
+        "to": "H-01:R",
+        "label": "Timely correction changes records and outcomes",
+        "kind": "recovery",
+        "constraints": [
+          "SC2",
+          "SC5"
+        ]
+      }
+    ],
+    "unsafeActions": [
+      {
+        "id": "UCA1",
+        "type": "Unsafe action provided",
+        "loop": "CA1",
+        "controller": "C1",
+        "action": "Approves consequential screening",
+        "context": "The record is materially inaccurate or unsuitable and the decision can cause exclusion.",
+        "hazards": [
+          "H1",
+          "H2"
+        ],
+        "constraints": [
+          "SC1",
+          "SC2"
+        ]
+      },
+      {
+        "id": "UCA2",
+        "type": "Required action absent",
+        "loop": "CA2",
+        "controller": "C2",
+        "action": "Does not propagate a verified correction",
+        "context": "Recipients continue to use the incorrect record in consequential decisions.",
+        "hazards": [
+          "H1"
+        ],
+        "constraints": [
+          "SC1",
+          "SC5"
+        ]
+      },
+      {
+        "id": "UCA3",
+        "type": "Wrong timing or order",
+        "loop": "CA5",
+        "controller": "C5",
+        "action": "Requires reconsideration too late",
+        "context": "The relevant employment opportunity or effective remedy has already been lost.",
+        "hazards": [
+          "H1"
+        ],
+        "constraints": [
+          "SC2",
+          "SC5"
+        ]
+      },
+      {
+        "id": "UCA4",
+        "type": "Applied too long or stopped too soon",
+        "loop": "CA4",
+        "controller": "C4",
+        "action": "Continues an input correction after its assumptions fail",
+        "context": "Changed reporting or discovery processes make the update reinforce selective records.",
+        "hazards": [
+          "H2"
+        ],
+        "constraints": [
+          "SC3",
+          "SC4"
+        ]
+      }
+    ],
+    "scenarios": [
+      {
+        "id": "LS1",
+        "title": "A record error survives the decision",
+        "archetype": "Inadequate process model",
+        "text": "Decision-makers treat a record as current and correctly matched when it is not.",
+        "ucas": [
+          "UCA1"
+        ],
+        "hazards": [
+          "H1",
+          "H2"
+        ],
+        "nodes": [
+          "H-01:1",
+          "H-01:2"
+        ],
+        "evidence": [
+          "HRI"
+        ],
+        "unknown": "The case does not establish automated future-arrest prediction."
+      },
+      {
+        "id": "LS2",
+        "title": "Redress cannot act in time",
+        "archetype": "Missing or delayed feedback",
+        "text": "A dispute does not lead to a timely changed decision.",
+        "ucas": [
+          "UCA2",
+          "UCA3"
+        ],
+        "hazards": [
+          "H1"
+        ],
+        "nodes": [
+          "H-01:2"
+        ],
+        "evidence": [
+          "HRI"
+        ],
+        "unknown": "How often effective correction succeeds in the hypothetical system is unknown."
+      },
+      {
+        "id": "LS3",
+        "title": "Selective discovery becomes apparent risk",
+        "archetype": "Inadequate feedback",
+        "text": "Allocation changes discovery, and new records are reused without an adequate correction.",
+        "ucas": [
+          "UCA4"
+        ],
+        "hazards": [
+          "H2"
+        ],
+        "nodes": [
+          "H-01:3",
+          "H-01:4"
+        ],
+        "evidence": [
+          "PFL"
+        ],
+        "unknown": "Transfer from the mathematical study to any particular deployment requires testing."
+      },
+      {
+        "id": "LS4",
+        "title": "Corrected records are recreated downstream",
+        "archetype": "Control action not executed or ineffective",
+        "text": "A recipient retains derived data or a feedback process regenerates the same misleading pattern.",
+        "ucas": [
+          "UCA2",
+          "UCA4"
+        ],
+        "hazards": [
+          "H1",
+          "H2"
+        ],
+        "nodes": [
+          "H-01:4",
+          "H-01:5"
+        ],
+        "evidence": [
+          "TA",
+          "STPA"
+        ],
+        "unknown": "Neither reviewed case demonstrates the entire employment–policing–exclusion loop."
+      }
+    ],
+    "limitingConditions": [
+      {
+        "kind": "Safeguard",
+        "example": "Correction reaches both the record and the consequential decision.",
+        "question": "Does a successful appeal actually change downstream use?"
+      },
+      {
+        "kind": "Institutional boundary",
+        "example": "A record is not available or authorized for cross-domain reuse.",
+        "question": "Does that boundary remain enforceable when copying becomes easier?"
+      },
+      {
+        "kind": "Model assumption",
+        "example": "Input correction matches the reporting and discovery process.",
+        "question": "How does protection change when that process shifts?"
+      }
+    ],
+    "sources": [
+      {
+        "id": "STPA",
+        "title": "Leveson & Thomas · STPA Handbook (2018)",
+        "url": "https://psas.scripts.mit.edu/home/get_file.php?name=STPA_handbook.pdf",
+        "locator": "Chapter 2, pp. 14–53; Chapter 6, pp. 101–115",
+        "use": "This source supplies the method for analyzing losses, hazards, constraints, control structure, contextual unsafe actions, causal scenarios, and leading indicators."
+      },
+      {
+        "id": "CAA",
+        "title": "UK Civil Aviation Authority · Bowtie elements",
+        "url": "https://www.caa.co.uk/safety-initiatives/working-with-industry/bowtie/bowtie-elements/",
+        "locator": "Hazard, top event, threats, consequences, preventive/recovery controls, escalation factors",
+        "use": "This source supplies the presentation vocabulary. A bow-tie hazard source and an STPA hazardous system state are not interchangeable definitions."
+      },
+      {
+        "id": "TA",
+        "title": "Critch & Russell · TASRA",
+        "url": "https://arxiv.org/html/2306.06924v1",
+        "locator": "Section 2.1, story 1a",
+        "use": "This source presents a fictional cross-institutional hypothesis. It does not describe an observed causal chain."
+      },
+      {
+        "id": "HRI",
+        "title": "FTC · HireRight settlement announcement (2012)",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2012/08/employment-background-screening-company-pay-26-million-penalty-multiple-violations-fair-credit",
+        "locator": "Allegations about accuracy and disputes; settlement notice",
+        "use": "This source provides a non-AI screening comparison. Allegations and proposed settlement terms are not adjudicated findings."
+      },
+      {
+        "id": "PFL",
+        "title": "Ensign et al. · Runaway Feedback Loops in Predictive Policing",
+        "url": "https://proceedings.mlr.press/v81/ensign18a.html",
+        "locator": "Abstract and paper, PMLR 81:160–171",
+        "use": "This source provides mathematical and computational evidence for selective-data feedback and a correction within its assumptions."
+      }
+    ],
+    "assessments": [
+      {
+        "id": "HRI-2012-H-01",
+        "pathway": "H-01",
+        "pathwayVersion": "1.0",
+        "incident": "HRI-2012",
+        "status": "source-summary",
+        "relation": "mechanism-comparison",
+        "targets": [
+          {
+            "id": "H-01:1-2",
+            "kind": "edge",
+            "state": "component",
+            "label": "Criminal-record screening can exclude people from employment"
+          }
+        ],
+        "scope": "This case provides a narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
+        "evidence": [
+          "HRI-2012-account"
+        ],
+        "trace": [
+          {
+            "text": "Employers used criminal-history reports.",
+            "evidence": [
+              "HRI-2012-account"
+            ]
+          },
+          {
+            "text": "The FTC alleged materially inaccurate reports and employment denials.",
+            "evidence": [
+              "HRI-2012-account"
+            ]
+          },
+          {
+            "text": "Settlement terms addressed accuracy, access, and disputes.",
+            "evidence": [
+              "HRI-2012-account"
+            ]
+          }
+        ],
+        "barriers": [
+          {
+            "id": "record-accuracy",
+            "title": "Record accuracy checks",
+            "outcome": "Failures alleged by the FTC",
+            "role": "prevention",
+            "action": "Identity matching, updates, and duplicate checks should stop materially wrong records before they affect screening.",
+            "efficacy": "The FTC alleged inaccurate and wrong-person reports and resulting employment denials. The announcement is not an adjudicated finding.",
+            "durability": "Faster screening or wider data reuse can propagate an error before it is corrected.",
+            "failure": "Incorrect matching, stale sources, or delayed correction allow unsuitable records to remain in use.",
+            "target": "H-01:1-2",
+            "evidence": [
+              "HRI-2012-account"
+            ],
+            "dependencies": [],
+            "reinforcement": {
+              "proposal": "Record suppliers and receiving decision-makers would assess record matching and correction propagation before consequential reuse.",
+              "test": "An audit would trace a corrected record through every recipient and check whether affected decisions change.",
+              "basis": "This is an analyst proposal. The case did not evaluate it.",
+              "evidence": [
+                "HRI-2012-account"
+              ]
+            },
+            "view": {
+              "input": "Criminal-history records",
+              "control": "Accuracy checks",
+              "result": "Inaccurate reports alleged",
+              "dependency": "Matching and timely correction",
+              "failureRoute": "Wrong or outdated records reach employers",
+              "failureObserved": true
+            }
+          }
+        ],
+        "reach": {
+          "local": "The FTC alleged that inaccurate, duplicated, and wrong-person criminal records caused employment denials. The proposed settlement included accuracy and dispute-handling obligations, without an admission of violation.",
+          "systemic": "This case provides a narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
+          "evidence": [
+            "HRI-2012-account"
+          ]
+        }
+      },
+      {
+        "id": "PFL-2018-H-01",
+        "pathway": "H-01",
+        "pathwayVersion": "1.0",
+        "incident": "PFL-2018",
+        "status": "source-summary",
+        "relation": "mechanism-comparison",
+        "targets": [
+          {
+            "id": "H-01:3-4",
+            "kind": "edge",
+            "state": "component",
+            "label": "Enforcement-generated records can reinforce a prediction"
+          }
+        ],
+        "scope": "This study provides a comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
+        "evidence": [
+          "PFL-2018-account"
+        ],
+        "trace": [
+          {
+            "text": "The model linked patrol allocation to discovered incidents.",
+            "evidence": [
+              "PFL-2018-account"
+            ]
+          },
+          {
+            "text": "Reusing these records produced a feedback loop.",
+            "evidence": [
+              "PFL-2018-account"
+            ]
+          },
+          {
+            "text": "The proposed correction prevented the modeled runaway loop.",
+            "evidence": [
+              "PFL-2018-account"
+            ]
+          }
+        ],
+        "barriers": [
+          {
+            "id": "PFL-2018-correction",
+            "title": "Correction for enforcement-generated data",
+            "outcome": "Modeled feedback was prevented",
+            "role": "prevention",
+            "action": "The study changed inputs to account for selective discovery.",
+            "efficacy": "The correction prevented runaway feedback under its assumptions.",
+            "durability": "Real reporting and discovery processes must match those assumptions.",
+            "failure": "Distribution changes can invalidate the correction.",
+            "view": {
+              "input": "Selective records",
+              "control": "Input correction",
+              "result": "Feedback contained",
+              "dependency": "Model assumptions",
+              "observation": 2,
+              "failureRoute": "Distribution changes can invalidate the correction",
+              "failureObserved": false
+            },
+            "target": "H-01:3-4",
+            "evidence": [
+              "PFL-2018-account"
+            ],
+            "dependencies": [
+              {
+                "label": "Model assumptions",
+                "assessment": "Real reporting and discovery processes must match those assumptions.",
+                "basis": "Editorial dependency assessment",
+                "evidence": [
+                  "PFL-2018-account"
+                ]
+              }
+            ],
+            "reinforcement": {
+              "label": "Selection-bias audit",
+              "proposal": "An independent audit would examine whether the correction’s assumptions match reporting and discovery in deployment.",
+              "test": "The audit would compare independent observations and subgroup outcomes to assess whether the model correction is effective.",
+              "basis": "This is an editorial proposal. Its effectiveness is unassessed.",
+              "evidence": [
+                "PFL-2018-account"
+              ]
+            }
+          }
+        ],
+        "reach": {
+          "local": "The study shows how police-discovered records can reinforce deployment to the same areas. Its input correction prevents the modeled runaway feedback. Reported incidents alone do not fully remove it.",
+          "systemic": "This study provides a comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
+          "evidence": [
+            "PFL-2018-account"
+          ]
+        }
+      }
+    ],
+    "presentation": {
+      "conditions": {
+        "H-01:2": "If exclusion becomes effective before correction",
+        "H-01:3": "Only with additional allocation and discovery conditions",
+        "H-01:4": "If selective records are reused without adequate correction",
+        "H-01:5": "If exclusion recurs and redress remains ineffective",
+        "H-01:R": "If correction reaches records and decisions"
+      },
+      "fidelity": "Two component comparisons inform this bounded model. Neither establishes the combined hypothetical loop. Recovery is an alternative outcome, not a stage leading to further exclusion.",
+      "overlays": {
+        "HRI-2012": {
+          "title": "HireRight screening case",
+          "kind": "Non-AI enforcement record",
+          "relation": "mechanism",
+          "target": "H-01:1-2",
+          "anchor": "H-01:1",
+          "observed": "The FTC alleged that inaccurate background reports led to employment denials.",
+          "notEstablished": "The announcement does not establish AI arrest prediction or the subsequent feedback loop. Allegations were not adjudicated findings.",
+          "limit": "This case supports a comparison between inaccurate screening records and employment exclusion.",
+          "barriers": {
+            "record-accuracy": {
+              "title": "Record accuracy checks",
+              "result": "The FTC alleged material failures in record checks.",
+              "condition": "failed",
+              "conditionBasis": "Broken describes the alleged checking failures in this account. It is not a judicial finding.",
+              "limitType": "safeguard",
+              "strongerAI": "More rapid screening and easier data reuse could spread an error before correction. Better matching could help. Test correction speed and downstream decisions.",
+              "reinforcement": {
+                "proposal": "Record suppliers and receiving decision-makers would verify identity and whether records are current before consequential reuse. They would also check that corrections reach downstream recipients.",
+                "test": "Does a corrected record change every affected decision within the useful time window?",
+                "status": "proposed"
+              }
+            }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "H-01:4",
+            "question": "Could disputed records keep shaping later automated decisions?",
+            "basis": "The FTC alleged inaccurate screening reports and failures to investigate disputes.",
+            "unresolved": "The case does not establish AI use or a feedback loop. We would need to trace whether disputed records were reused and whether they continued to affect later decisions.",
+            "sources": [
+              "HRI"
+            ]
+          }
+        },
+        "PFL-2018": {
+          "title": "Predictive-policing feedback study",
+          "kind": "Mathematical and computational study",
+          "relation": "mechanism",
+          "target": "H-01:3-4",
+          "anchor": "H-01:3",
+          "observed": "An input correction prevented runaway feedback within the study’s model.",
+          "notEstablished": "The study did not establish effects on employment or show that its correction works across real deployments. It did not demonstrate an actual cycle of exclusion.",
+          "limit": "Protection depends on the study’s reporting and discovery assumptions.",
+          "barriers": {
+            "PFL-2018-correction": {
+              "title": "Correction for selective discovery",
+              "result": "The corrected model avoided the runaway loop.",
+              "condition": "intact",
+              "states": [
+                "intact",
+                "reinforced"
+              ],
+              "conditionBasis": "Holding and reinforced apply to the corrected mathematical setup, relative to its uncorrected baseline.",
+              "limitType": "mixed",
+              "strongerAI": "Protection is brittle to incorrect assumptions about discovery and reporting. More adaptive allocation could change those processes. The correction must be retested.",
+              "reinforcement": {
+                "proposal": "The enforcement authority and data steward would assess selection assumptions against independent observations and outcomes.",
+                "test": "Does the correction still prevent feedback when reporting and discovery patterns change?",
+                "status": "proposed"
+              }
+            }
+          },
+          "tentative": {
+            "status": "tentative",
+            "origin": "editorial",
+            "target": "H-01:5",
+            "question": "Could the modeled feedback produce persistent disadvantage in practice?",
+            "basis": "The study demonstrates how discovered records can reinforce repeated allocation and tests an input correction.",
+            "unresolved": "The study did not establish long-term effects on people. We would need deployment evidence showing whether selective records repeatedly change decisions and whether those decisions sustain disadvantage.",
+            "sources": [
+              "PFL"
+            ]
+          }
+        }
+      },
+      "context": [
+        {
+          "title": "System setting",
+          "text": "The hypothetical scenario connects employment screening with record suppliers, policing allocation, model updates, and independent redress. These functions belong to analytically distinct organizations. No single controller is assumed to command the whole system.",
+          "sources": [],
+          "targets": [
+            {
+              "node": "H-01:1",
+              "label": "Records",
+              "text": "Employment screening depends on record suppliers."
+            },
+            {
+              "node": "H-01:3",
+              "label": "Allocation",
+              "text": "Policing allocation and model updates are analytically distinct functions."
+            },
+            {
+              "node": "H-01:R",
+              "label": "Redress",
+              "text": "Independent redress spans organizations. No single controller commands the whole system."
+            }
+          ]
+        }
+      ],
+      "cloud": {
+        "origin": "scenario-setting",
+        "conditions": [
+          "Records circulate between organizations",
+          "Enforcement shapes what gets recorded"
+        ],
+        "actors": [
+          {
+            "controller": "C1",
+            "label": "Employers",
+            "role": "make & reconsider decisions"
+          },
+          {
+            "controller": "C2",
+            "label": "Record suppliers",
+            "role": "supply & correct records"
+          },
+          {
+            "controller": "C3",
+            "label": "Allocation authorities",
+            "role": "direct enforcement"
+          },
+          {
+            "controller": "C4",
+            "label": "Data stewards",
+            "role": "govern updates & reuse"
+          },
+          {
+            "controller": "C5",
+            "label": "Independent review",
+            "role": "require redress"
+          }
+        ],
+        "summary": "What gets recorded depends partly on where enforcement looks. Those records can travel to other decision-makers, while correction must cross the same organizational boundaries."
+      }
+    }
   }
 };
 window.AuspexSTPAData = window.AuspexSTPAModels['X-01'];

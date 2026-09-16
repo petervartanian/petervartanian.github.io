@@ -151,6 +151,21 @@
       "url": "https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents"
     },
     {
+      "id": "NT",
+      "title": "NTSB · Tempe automated test vehicle collision",
+      "url": "https://www.ntsb.gov/investigations/Pages/HWY18MH010.aspx"
+    },
+    {
+      "id": "ED",
+      "title": "Bastani et al. · Generative AI without guardrails can harm learning",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12232635/"
+    },
+    {
+      "id": "EC",
+      "title": "PNAS · Correction to Bastani et al.",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12403119/"
+    },
+    {
       "id": "OB",
       "title": "Chicago Booth Review · How Racial Bias Infected a Major Health-Care Algorithm",
       "url": "https://www.chicagobooth.edu/review/how-racial-bias-infected-major-health-care-algorithm"
@@ -425,6 +440,15 @@
       "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
     },
     {
+      "id": "WIL",
+      "title": "NTSB · Williston partial-automation collision investigation",
+      "url": "https://www.ntsb.gov/investigations/Pages/HWY16FH018.aspx",
+      "retrievedAt": "2026-09-13",
+      "access": "Primary publisher page; selected relevant sections inspected",
+      "retrievalSha256": "c3b384d5e7333cb7c11b9b8911340b47d4ee302e1bb4bae0d1fece3eda231d43",
+      "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+    },
+    {
       "id": "GAW",
       "title": "Brynjolfsson, Li and Raymond · Generative AI at Work",
       "url": "https://arxiv.org/abs/2304.11771v2",
@@ -512,6 +536,69 @@
       "retrievedAt": "2026-09-13",
       "access": "Primary publisher page; selected relevant sections inspected",
       "retrievalSha256": "d26f2af31808a461def48b5b800d0fece8e66d108e4c54906fe325e8fcbb6375",
+      "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+    },
+    {
+      "id": "HRI",
+      "title": "FTC · HireRight background-screening settlement announcement",
+      "url": "https://www.ftc.gov/news-events/news/press-releases/2012/08/employment-background-screening-company-pay-26-million-penalty-multiple-violations-fair-credit",
+      "retrievedAt": "2026-09-13",
+      "access": "Primary publisher page; selected relevant sections inspected",
+      "retrievalSha256": "e5d2d6b973606739b477eab9823ca0cc765e86c2477a8db55a6f5c209504a119",
+      "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+    },
+    {
+      "id": "PFL",
+      "title": "Ensign et al. · Runaway Feedback Loops in Predictive Policing",
+      "url": "https://proceedings.mlr.press/v81/ensign18a.html",
+      "retrievedAt": "2026-09-13",
+      "access": "Author abstract in conference proceedings inspected",
+      "retrievalSha256": "159bf3be83b364a0522497631a04a22c8770fb918218d4e3b5357112263bcdfa",
+      "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+    },
+    {
+      "id": "WBT",
+      "title": "Fitzpatrick et al. · Woebot randomized trial",
+      "url": "https://mental.jmir.org/2017/2/e19/",
+      "retrievedAt": "2026-09-13",
+      "access": "Methods, results, and limitations inspected",
+      "retrievalSha256": "ae65e730466a1d9d539ca2ae3082f55736eeee46b72b9fd709d1b216e9bd0608",
+      "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+    },
+    {
+      "id": "THR",
+      "title": "Dartmouth · Therabot randomized trial account",
+      "url": "https://home.dartmouth.edu/news/2025/03/first-therapy-chatbot-trial-yields-mental-health-benefits",
+      "retrievedAt": "2026-09-13",
+      "access": "Research institution account inspected; trial linked to DOI 10.1056/AIoa2400802",
+      "retrievalSha256": "49616f1b6610c82f600ba2d241126fbedd07495477a810b945114f670862c66b",
+      "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+    },
+    {
+      "id": "PSY",
+      "title": "Fang et al. · Extended chatbot use, randomized study",
+      "url": "https://arxiv.org/abs/2503.17473v2",
+      "retrievedAt": "2026-09-13",
+      "access": "Revised abstract, 2 October 2025, inspected; earlier abstract conclusions not substituted",
+      "retrievalSha256": "791d617af5bc50f9b41e86bb8bbd8700cbea61474654f929d2ecb039c457e8a4",
+      "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+    },
+    {
+      "id": "SMR",
+      "title": "Hohenstein et al. · AI communication and social relationships",
+      "url": "https://arxiv.org/abs/2102.05756",
+      "retrievedAt": "2026-09-13",
+      "access": "Author preprint abstract (10 February 2021) inspected; publication also located, inaccessible in this retrieval",
+      "retrievalSha256": "80703a7bd97523ea3b698aae14586d5ef9bdc9ba8027529b4bc885d0581bc5ec",
+      "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+    },
+    {
+      "id": "TUT",
+      "title": "Kestin et al. · AI tutoring versus active learning",
+      "url": "https://www.nature.com/articles/s41598-025-97652-6",
+      "retrievedAt": "2026-09-13",
+      "access": "Results, design, and limitations inspected; DOI 10.1038/s41598-025-97652-6",
+      "retrievalSha256": "929aeff98b1bbd987c35a513110943c5fa71ea78d332e3738f134563c3ce0958",
       "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
     },
     {
@@ -666,6 +753,24 @@
       "kind": "quote",
       "text": "We agreed all other questions were also out of scope, including the effectiveness of safeguards, the extent of the security compromise that occurred, and the effectiveness of OpenAI’s investigation process and planned remediation steps.",
       "scope": "A scope statement, not evidence that safeguards failed. The report’s conclusions cannot settle questions it excluded."
+    },
+    {
+      "id": "NT-summary",
+      "source": "NT",
+      "title": "Probable cause and contributing factors",
+      "locator": "Investigation summary · Probable Cause",
+      "kind": "summary",
+      "text": "NTSB identifies the safety operator’s distraction as the probable cause, with contributing factors in safety risk assessment, operator oversight, automation complacency, and organizational safety culture. System-design and government-oversight decisions also contributed.",
+      "scope": "March 18, 2018 · Tempe, Arizona · One fatal collision."
+    },
+    {
+      "id": "ED-outcome",
+      "source": "ED",
+      "title": "Assisted practice and unaided performance",
+      "locator": "Main text · Results and Discussion",
+      "kind": "summary",
+      "text": "In a field experiment at a Turkish high school, unrestricted GPT-based assistance improved practice performance but reduced subsequent unaided exam performance. The teacher-informed GPT Tutor package largely avoided the measured negative effect, without establishing an unaided-exam improvement over control.",
+      "scope": "The learning-process mediator remains uncertain. The tutoring package bundled design changes; the experiment does not isolate the efficacy of one feature."
     },
     {
       "id": "OB-proxy",
@@ -1123,6 +1228,15 @@
       "scope": "Algorithmic trading is not automatically AI. A brief market dislocation does not establish lasting financial-system distress; temporal recovery does not isolate the pause’s causal contribution."
     },
     {
+      "id": "WIL-2016-account",
+      "source": "WIL",
+      "title": "Williston: overreliance on partial driving automation",
+      "locator": "What Happened; What We Found",
+      "kind": "summary",
+      "text": "NTSB attributed the fatal crash to a truck’s failure to yield and the car driver’s inattention from overreliance on automation. Design permitting prolonged disengagement contributed.",
+      "scope": "A truck collision under partial automation, not the Tempe pedestrian event. The comparison concerns ineffective human fallback; it does not equate the perception systems or crash geometries."
+    },
+    {
       "id": "GAW-2024-account",
       "source": "GAW",
       "title": "AI assistance improved customer-support productivity",
@@ -1211,6 +1325,69 @@
       "kind": "summary",
       "text": "WUR reports an irrigation interruption and harvest-date errors requiring interventions. Teams nevertheless completed harvests; scoring included resource costs and biological pest-management choices.",
       "scope": "One trial series, not several independent incidents. The failures were local and recoverable, with no regional crop loss, famine, or measured long-term ecosystem damage."
+    },
+    {
+      "id": "HRI-2012-account",
+      "source": "HRI",
+      "title": "Criminal-record reporting errors allegedly cost employment",
+      "locator": "Allegations, proposed settlement and non-admission notice",
+      "kind": "summary",
+      "text": "The FTC alleged that inaccurate, duplicated, and wrong-person criminal records caused employment denials. The proposed settlement included accuracy and dispute-handling obligations, without an admission of violation.",
+      "scope": "This source describes allegations and settlement terms, not adjudicated findings. The case concerns background reports, not predictions of future arrest, induced crime, or a demonstrated feedback loop."
+    },
+    {
+      "id": "PFL-2018-account",
+      "source": "PFL",
+      "title": "Predictive-policing feedback and an input correction",
+      "locator": "Abstract",
+      "kind": "summary",
+      "text": "The study shows how police-discovered records can reinforce deployment to the same areas. Its input correction prevents the modeled runaway feedback; reported incidents alone do not fully remove it.",
+      "scope": "The study uses a model and simulation. It does not observe employment screening or induced crime. Results depend on assumptions about reported and discovered incidents."
+    },
+    {
+      "id": "WBT-2017-account",
+      "source": "WBT",
+      "title": "Woebot’s short trial improved depression symptoms",
+      "locator": "Methods; intention-to-treat results; attrition",
+      "kind": "summary",
+      "text": "Seventy young adults were randomized to Woebot or information. Depression scores improved more with Woebot over two weeks; the between-group anxiety difference was not significant.",
+      "scope": "A small, short trial with differential attrition. It does not test whole friendship groups, offline mass adoption, or withdrawal from school and work."
+    },
+    {
+      "id": "THR-2025-account",
+      "source": "THR",
+      "title": "Therabot showed benefits with clinical oversight",
+      "locator": "Trial design, follow-up and clinical oversight paragraphs",
+      "kind": "summary",
+      "text": "Dartmouth reports symptom improvements among 106 Therabot users compared with 104 controls without access. Clinicians reviewed conversations and remained ready to intervene.",
+      "scope": "A monitored trial with four weeks of unrestricted access and follow-up, not an active-therapy comparison. It does not establish safety for unmonitored group adoption or equivalence to human therapy."
+    },
+    {
+      "id": "PSY-2025-account",
+      "source": "PSY",
+      "title": "Chatbot-use trial separated causal results from dependence associations",
+      "locator": "Abstract, version 2",
+      "kind": "summary",
+      "text": "Among 981 participants, assigned conditions produced no significant outcome differences. Greater voluntary use and greater trust or social attraction were associated with worse outcomes or dependence.",
+      "scope": "The use and trust associations are not randomized treatment effects. Anxiety-inducing reward optimization, secrecy, and long-term cultural change were not tested."
+    },
+    {
+      "id": "SMR-2021-account",
+      "source": "SMR",
+      "title": "Smart replies changed language and interpersonal impressions",
+      "locator": "Author abstract",
+      "kind": "summary",
+      "text": "Two experiments found more efficient, positive communication with algorithmic replies. Participants were evaluated less favorably when partners suspected algorithmic assistance.",
+      "scope": "One study series, not two cases. This concerns short interactions and perceived AI use, not learned fear, secrecy, persistent distrust, or dependence on mediation."
+    },
+    {
+      "id": "TUT-2025-account",
+      "source": "TUT",
+      "title": "Structured AI tutoring improved subsequent quiz performance",
+      "locator": "Results; Context, limitations; Study population and design",
+      "kind": "summary",
+      "text": "Students learned with scaffolded AI tutoring or active classroom instruction. The AI condition produced higher subsequent quiz performance in two lessons; the design included expert solutions and guided interaction.",
+      "scope": "A short crossover study, with 194 eligible students, not proof of durable learning across a course. It tests a structured tutor, not unrestricted answer provision."
     },
     {
       "id": "HAB-2024-account",

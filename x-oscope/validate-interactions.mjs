@@ -24,80 +24,11 @@ let geometryMobile=false;
 const matchMedia=query=>({matches:geometryMobile && query==='(max-width: 740px)',addEventListener(){}});
 const history={pushState(a,b,next){url=String(next)},replaceState(a,b,next){url=String(next)}};
 const context=vm.createContext({window:{matchMedia,scrollTo(){}},document,location,history,URL,URLSearchParams,matchMedia,requestAnimationFrame(){},addEventListener(type,fn){windowListeners[type]=fn},console});
-for(const file of ['data.js','families.js','scenarios.js','stpa-data.js','inspection.js','stpa.js']) vm.runInContext(await read(file),context);
+for(const file of ['data.js','stpa-data.js','inspection.js','stpa.js']) vm.runInContext(await read(file),context);
 let app=await read('app.js');
-app=app.slice(0,app.lastIndexOf('\n  readLocation();'))+'\nwindow.test={state,openX,readLocation,selectX,toggleX,selectPathway,selectIncident,showOverview,renderOverview,renderEvidenceMap,incidentChoiceDate};})();';
+app=app.slice(0,app.lastIndexOf('\n  readLocation();'))+'\nwindow.test={state,readLocation,selectPathway,selectIncident,showOverview,renderEvidenceMap,incidentChoiceDate};})();';
 vm.runInContext(app,context);
 const {test,AuspexSTPA:stpa}=context.window;
-test.showOverview();
-const overview=()=>elements.get('#overview-groups').innerHTML;
-assert.equal((overview().match(/data-x-group=/g)||[]).length,3,'The opening has three presentation groups');
-assert.equal((overview().match(/data-x-family=/g)||[]).length,8,'All eight family pathways are available');
-assert(overview().includes('>X-Extras</span>') && overview().includes('0 comparisons'));
-assert(!overview().includes('data-overview-pathway="H-'));
-assert(!overview().includes('Bonus') && !overview().includes('Bounded comparisons'));
-assert.equal(context.window.AuspexFamilies.groups.flatMap(g=>g.families).reduce((n,f)=>n+f.count,0),95);
-assert(overview().includes('1 to explore · 19 scenarios in the review'));
-const nestedOpen = id => new RegExp(`data-x-address="${id.replace('.', '\\.')}"[^>]* open>`).test(overview());
-for (const address of ['A', 'A-IV', 'A-IV-1', 'A-IV-1.c']) {
- url=`file:///fixture/x-oscope/index.html?x=${address.toLowerCase()}`;test.readLocation();
- assert.equal(test.state.x,address);
- assert.equal(new URL(url).searchParams.get('x'),address);
- assert.equal(test.state.pathway,'');
- assert(element('#selected-pathway').hidden);
- for(const node of context.window.XoscopeScenarios.trail(address)) assert(nestedOpen(node.id),`${node.id} must open for ${address}`);
-}
-test.toggleX('A-IV-1.c',true);
-assert.equal(test.state.x,'A-IV-1');assert(!nestedOpen('A-IV-1.c'));assert(nestedOpen('A-IV-1'));
-test.toggleX('A-IV-1',true);
-assert.equal(test.state.x,'A-IV');assert(!nestedOpen('A-IV-1'));assert(nestedOpen('A-IV'));
-test.toggleX('A-IV',true);
-assert.equal(test.state.x,'A');assert(!nestedOpen('A-IV'));assert(nestedOpen('A'));
-test.toggleX('A',true);
-assert.equal(test.state.x,'');assert.equal(new URL(url).search,'');assert(!nestedOpen('A'));
-test.selectX('A-IV-1.c',true);
-assert.equal(new URL(url).searchParams.get('x'),'A-IV-1.c');
-url='file:///fixture/x-oscope/index.html?x=A-IV-1';windowListeners.popstate();
-assert(nestedOpen('A-IV-1') && !nestedOpen('A-IV-1.c'),'History restores the selected nesting depth');
-url='file:///fixture/x-oscope/index.html?x=A-IV-1.c';windowListeners.popstate();
-assert(nestedOpen('A-IV-1.c'),'History restores the variant');
-for (const query of ['x=A-IV-999', 'x=X-1', 'x=A-IV-1.z']) {
- url=`file:///fixture/x-oscope/index.html?${query}`;test.readLocation();
- assert.equal(test.state.x,'');assert.equal(new URL(url).search,'');
-}
-url='file:///fixture/x-oscope/index.html?x=A-IV-1.c&p=A-1&i=AFK-2024';test.readLocation();
-assert.equal(test.state.pathway,'');assert.equal(test.state.incident,'');assert.equal(new URL(url).search,'?x=A-IV-1.c');
-test.selectPathway(context.window.AuspexData.pathways[0].id);
-assert.equal(test.state.x,'');assert(!new URL(url).searchParams.has('x'),'Legacy case navigation clears the scenario address');
-test.showOverview();
-for (const query of ['Banks adapt', 'A-IV-1.c', 'v.1c']) {
- element('#overview-search').value=query;test.renderOverview();
- assert(overview().includes('data-x-target="A-IV-1.c" data-x-match="true"'));
- assert(nestedOpen('A') && nestedOpen('A-IV') && nestedOpen('A-IV-1'));
- assert(!overview().includes('Independent Takeover'));
-}
-for (const query of ['Production Web', 'Andrew Critch', 'A-IV-1']) {
- element('#overview-search').value=query;test.renderOverview();
- assert(overview().includes('data-x-target="A-IV-1" data-x-match="true"'));
-}
-test.showOverview();
-assert(!nestedOpen('A') && !nestedOpen('A-IV-1.c'));
-element('#overview-search').value='A-IV';
-test.renderOverview();
-assert(overview().includes('Handover') && !overview().includes('Independent Takeover'),'Address search selects the correct family');
-element('#overview-search').value='X-1';
-test.renderOverview();
-assert(overview().includes('No matching'), 'Removed comparison codes must not produce results');
-element('#overview-search').value='no-such-family-xyz';
-test.renderOverview();
-assert(overview().includes('No matching'));
-for (const address of ['1', 'Bonus-1', 'Bonus.1', ...Array.from({length:6}, (_,i)=>`X-${i+1}`), ...Array.from({length:6}, (_,i)=>`H-0${i+1}`)]) {
- url=`file:///fixture/x-oscope/index.html?p=${address}`;
- test.readLocation();
- assert.equal(test.state.pathway, '', 'Deleted comparison links must return to the overview');
- assert(element('#selected-pathway').hidden);
-}
-test.showOverview();
 const matchesSelector=(target,selector)=>selector.split(',').some(part=>{
  const candidate=part.trim();
  const attribute=candidate.match(/\[data-([\w-]+)(?:="([^"]*)")?\]/);
@@ -139,6 +70,8 @@ const incidentLabels={
  'NE-2003':['Northeast blackout','August 14th 2003'],
  'MYA-2017':['Myanmar investigation','2014–2017'],
  'ETA-2021':['Ethiopia investigation','2020–2022'],
+ 'HRI-2012':['HireRight screening case','August 2012'],
+ 'PFL-2018':['Predictive-policing feedback study','February 2018'],
 };
 for(const [day,ordinal] of [[1,'1st'],[2,'2nd'],[3,'3rd'],[4,'4th'],[11,'11th'],[12,'12th'],[13,'13th'],[21,'21st'],[22,'22nd'],[23,'23rd'],[31,'31st']]) {
  assert.equal(test.incidentChoiceDate(`Published ${day} January 2024`),`January ${ordinal} 2024`,'US date ordinal');
@@ -402,7 +335,7 @@ for(const p of context.window.AuspexData.pathways.filter(p=>!stpa.has(p.id))) {
  assert.equal(test.state.safeguard,'');assert.equal(test.state.inspect,false);
  assert(!new URL(url).searchParams.has('s'));assert.equal(map(),'');
 }
-assert.equal(proposedCount,57);
+assert.equal(proposedCount,68);
 
 // Every incident assessment retains its state, its evidence, and its identity when exploring a change.
 let incidentImprovements=0;
@@ -430,7 +363,7 @@ for(const m of models) {
   }
  }
 }
-assert.equal(incidentImprovements,17);
+assert.equal(incidentImprovements,19);
 for(const params of ['p=A-2&strengthen=1','p=A-1&strengthen=1','p=A-1&s=missing&strengthen=1']) {
  url='file:///fixture/x-oscope/index.html?'+params;test.readLocation();
  assert.equal(test.state.strengthen,false);assert(!new URL(url).searchParams.has('strengthen'));
@@ -551,8 +484,8 @@ for(const mobile of [false,true])for(const expanded of [false,true])for(const m 
 }
 document.querySelector=originalQuery;document.querySelectorAll=originalAll;
 Object.defineProperty(document,'activeElement',activeDescriptor);geometryMobile=false;
-assert.equal(drawnRoutes,228);
+assert.equal(drawnRoutes,272);
 assert(levelRoutes>0 && curvedRoutes>0);
 assert.equal(connectedArrows,models.reduce((n,m)=>n+m.links.length,0)*4);
 assert.equal(dashedArrows,models.reduce((n,m)=>n+m.links.filter(l=>l.kind==='optional').length,0)*4);
-console.log(`Passed all ${count} incident flows and ${proposedCount} individual barrier inspections across six models, 30 tailored improvements and 17 incident improvement views, unchanged source states, legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 25 blank cases. Isolated draw checks cover compact and expanded-card layouts with no diagonal route segments, square arrow approaches, and correctly aligned B-1 connections. They also match all ${drawnRoutes} desktop/mobile barrier marks to their controls, all ${connectedArrows} arrows to destination borders, and all ${dashedArrows} dashed arrow endings. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);
+console.log(`Passed all ${count} incident flows and ${proposedCount} individual barrier inspections across seven models, 35 tailored improvements and 19 incident improvement views, unchanged source states, legacy lens links, URL round-trips and history, keyboard access and Escape, focus restoration, independent case switching/clearing, legacy links, cloud context, and all 30 blank cases. Isolated draw checks cover compact and expanded-card layouts with no diagonal route segments, square arrow approaches, and correctly aligned B-1 connections. They also match all ${drawnRoutes} desktop/mobile barrier marks to their controls, all ${connectedArrows} arrows to destination borders, and all ${dashedArrows} dashed arrow endings. Authored geometry and source/logic checks only; browser behavior and actual layout are not exercised.`);

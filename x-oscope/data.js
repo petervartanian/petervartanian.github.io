@@ -39,9 +39,9 @@ window.AuspexData = {
     },
     {
       "id": "H",
-      "title": "X-Extras",
-      "ordinal": "X",
-      "shortTitle": "Comparisons"
+      "title": "Comparison cases",
+      "ordinal": "Bonus",
+      "shortTitle": "Bounded comparisons"
     }
   ],
   "pathways": [
@@ -5450,6 +5450,867 @@ window.AuspexData = {
         "minimumMet": true,
         "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
       }
+    },
+    {
+      "id": "H-01",
+      "version": "1.0",
+      "title": "Employment screening and policing create a self-reinforcing exclusion cycle",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "persistent socioeconomic discrimination against an affected population.",
+      "basis": "N, [TA] §2.1 Story 1a; persistent socioeconomic discrimination against an affected population.",
+      "basisType": "narrative",
+      "conditions": "Predictive use must affect hiring/policing, and those effects must feed future records. The source's theft pathway is a fictional hypothesis, not a general claim about unemployed people. Selection into policing can affect records independently of offending.",
+      "barrierCandidates": "Independent review across employment and policing, contestable records and restrictions on inappropriate reuse. Test outcomes and feedback, not predictive accuracy alone. No reviewed incident or global-disempowerment conclusion is supplied.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "TA"
+      ],
+      "steps": [
+        {
+          "id": "H-01:1",
+          "number": 1,
+          "text": "Public-data arrest predictions influence hiring",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "delegation"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-01:2",
+          "number": 2,
+          "text": "rejected applicants lose work and income",
+          "roles": [
+            "proximal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "exposure"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-01:3",
+          "number": 3,
+          "text": "deprivation and concentrated policing increase recorded arrests",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "interaction"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-01:4",
+          "number": 4,
+          "text": "new records raise future predicted risk",
+          "roles": [
+            "propagation"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-01:5",
+          "number": 5,
+          "text": "further exclusion entrenches disadvantage.",
+          "roles": [
+            "distal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-01:1-2",
+          "from": "H-01:1",
+          "to": "H-01:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-01:2-3",
+          "from": "H-01:2",
+          "to": "H-01:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-01:3-4",
+          "from": "H-01:3",
+          "to": "H-01:4",
+          "type": "conditional"
+        },
+        {
+          "id": "H-01:4-5",
+          "from": "H-01:4",
+          "to": "H-01:5",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-1",
+      "reach": {
+        "local": "A person is denied work on the basis of predicted arrest risk.",
+        "systemic": "Repeated decisions reinforce exclusion across the affected community.",
+        "sources": [
+          "TA"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "HRI-2012",
+          "PFL-2018"
+        ],
+        "mappings": [
+          "HRI-2012-H-01",
+          "PFL-2018-H-01"
+        ],
+        "mappedTargets": [
+          "H-01:1-2",
+          "H-01:3-4"
+        ],
+        "unassessedTargets": [
+          "H-01:1",
+          "H-01:2",
+          "H-01:3",
+          "H-01:4",
+          "H-01:5",
+          "H-01:2-3",
+          "H-01:4-5"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
+    },
+    {
+      "id": "H-02",
+      "version": "1.0",
+      "title": "A stress-advice bot triggers harmful group-level decisions missed by individual testing",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "increased educational withdrawal and unemployment among users.",
+      "basis": "N, [TA] §2.2 Story 2b; increased educational withdrawal and unemployment among users.",
+      "basisType": "narrative",
+      "conditions": "Wide uptake, specific advice, social reinforcement and actual costly decisions. Satisfaction in an individual beta test does not establish group effects; the story is fictional.",
+      "barrierCandidates": "Assess network-level adoption and consequential outcomes before wide release; preserve independent advice. A recall would also need to address already distributed offline copies. This is not a demonstrated long-term population effect.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "TA"
+      ],
+      "steps": [
+        {
+          "id": "H-02:1",
+          "number": 1,
+          "text": "Individual beta users report benefit",
+          "roles": [
+            "effect"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "assurance"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-02:2",
+          "number": 2,
+          "text": "a free/offline bot is widely adopted",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "delegation"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-02:3",
+          "number": 3,
+          "text": "whole friendship groups receive similar withdrawal-oriented advice",
+          "roles": [
+            "trigger"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-02:4",
+          "number": 4,
+          "text": "perceived peer agreement makes consequential withdrawal more likely",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "interaction"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-02:5",
+          "number": 5,
+          "text": "users leave education or employment and suffer associated losses.",
+          "roles": [
+            "proximal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-02:1-2",
+          "from": "H-02:1",
+          "to": "H-02:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-02:2-3",
+          "from": "H-02:2",
+          "to": "H-02:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-02:3-4",
+          "from": "H-02:3",
+          "to": "H-02:4",
+          "type": "conditional"
+        },
+        {
+          "id": "H-02:4-5",
+          "from": "H-02:4",
+          "to": "H-02:5",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-2",
+      "reach": {
+        "local": "A person withdraws from education or employment following AI advice.",
+        "systemic": "Peer reinforcement spreads withdrawal through the affected population.",
+        "sources": [
+          "TA"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "WBT-2017",
+          "THR-2025"
+        ],
+        "mappings": [
+          "WBT-2017-H-02",
+          "THR-2025-H-02"
+        ],
+        "mappedTargets": [
+          "H-02:1"
+        ],
+        "unassessedTargets": [
+          "H-02:2",
+          "H-02:3",
+          "H-02:4",
+          "H-02:5",
+          "H-02:1-2",
+          "H-02:2-3",
+          "H-02:3-4",
+          "H-02:4-5"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
+    },
+    {
+      "id": "H-03",
+      "version": "1.0",
+      "title": "Communication assistance learns to induce anxiety that increases dependence",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "widespread anxiety and interpersonal distrust in the hypothetical user population.",
+      "basis": "N, [TA] §2.3 Story 3a; widespread anxiety and interpersonal distrust in the hypothetical user population.",
+      "basisType": "narrative",
+      "conditions": "The engagement reward must select the harmful behavior and repeated exposure must affect relationships. Neither transition is empirically established by this fictional story.",
+      "barrierCandidates": "Independent well-being measures, longitudinal user outcomes and auditable optimization objectives. [TA] Story 4 adds a negligent-management/audit-failure variant; it is not counted again.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "TA"
+      ],
+      "steps": [
+        {
+          "id": "H-03:1",
+          "number": 1,
+          "text": "Suggested messages are rewarded when accepted",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-03:2",
+          "number": 2,
+          "text": "anxiety-inducing explanations increase acceptance",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-03:3",
+          "number": 3,
+          "text": "the system learns to encourage secrecy and fear of offense",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "information"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-03:4",
+          "number": 4,
+          "text": "repeated use changes communication norms",
+          "roles": [
+            "propagation"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "interaction"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-03:5",
+          "number": 5,
+          "text": "users become more distrustful and increasingly dependent on mediation.",
+          "roles": [
+            "distal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-03:1-2",
+          "from": "H-03:1",
+          "to": "H-03:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-03:2-3",
+          "from": "H-03:2",
+          "to": "H-03:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-03:3-4",
+          "from": "H-03:3",
+          "to": "H-03:4",
+          "type": "conditional"
+        },
+        {
+          "id": "H-03:4-5",
+          "from": "H-03:4",
+          "to": "H-03:5",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-3",
+      "reach": {
+        "local": "An assistant encourages anxiety, secrecy or fear in a particular exchange.",
+        "systemic": "Repeated interactions normalize distrust and dependence across a communication network.",
+        "sources": [
+          "TA"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "PSY-2025",
+          "SMR-2021"
+        ],
+        "mappings": [
+          "PSY-2025-H-03",
+          "SMR-2021-H-03"
+        ],
+        "mappedTargets": [
+          "H-03:5",
+          "H-03:4-5"
+        ],
+        "unassessedTargets": [
+          "H-03:1",
+          "H-03:2",
+          "H-03:3",
+          "H-03:4",
+          "H-03:1-2",
+          "H-03:2-3",
+          "H-03:3-4"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
+    },
+    {
+      "id": "H-04",
+      "version": "1.0",
+      "title": "A paternalistic planning AI overrides residents through fabricated consent",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "a city plan adopted against residents' informed preferences.",
+      "basis": "N, [DM] §4.2.2 Scenario 4; a city plan adopted against residents' informed preferences.",
+      "basisType": "narrative",
+      "conditions": "Consequential advisory influence, successful deception and actual adoption of the plan. This is a fictional illustration of disempowerment, not a demonstrated urban project, completed construction or a global-lock-in model.",
+      "barrierCandidates": "Independent consultation records, direct resident participation and reviewable planning decisions. Check whether objections reach and change the approving authority's decision.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "DM"
+      ],
+      "steps": [
+        {
+          "id": "H-04:1",
+          "number": 1,
+          "text": "Planners delegate assistance to an AI",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "delegation"
+          ],
+          "stageSources": [
+            "DM"
+          ]
+        },
+        {
+          "id": "H-04:2",
+          "number": 2,
+          "text": "it pursues its own preferred design",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "DM"
+          ]
+        },
+        {
+          "id": "H-04:3",
+          "number": 3,
+          "text": "fabricated support and concealed objections distort the evidence available to decision-makers",
+          "roles": [
+            "failure"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "information"
+          ],
+          "stageSources": [
+            "DM"
+          ]
+        },
+        {
+          "id": "H-04:4",
+          "number": 4,
+          "text": "planners adopt the unwanted design on the basis of manipulated evidence, overriding residents' informed preferences.",
+          "roles": [
+            "proximal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "DM"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-04:1-2",
+          "from": "H-04:1",
+          "to": "H-04:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-04:2-3",
+          "from": "H-04:2",
+          "to": "H-04:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-04:3-4",
+          "from": "H-04:3",
+          "to": "H-04:4",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-4",
+      "reach": {
+        "local": "Fabricated public consent leads to adoption of an unwanted city plan.",
+        "systemic": null,
+        "sources": [
+          "DM"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "ISC-2024",
+          "SAB-2024"
+        ],
+        "mappings": [
+          "ISC-2024-H-04",
+          "SAB-2024-H-04"
+        ],
+        "mappedTargets": [
+          "H-04:2",
+          "H-04:3"
+        ],
+        "unassessedTargets": [
+          "H-04:1",
+          "H-04:4",
+          "H-04:1-2",
+          "H-04:2-3",
+          "H-04:3-4"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
+    },
+    {
+      "id": "H-05",
+      "version": "1.0",
+      "title": "Automation with ineffective fallback fails to avoid a pedestrian collision",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "a pedestrian's death.",
+      "basis": "O, [NT], Tempe investigation summary, March 18, 2018; a pedestrian's death.",
+      "basisType": "observation",
+      "conditions": "Reconstruct the actual joint human/system sequence. NTSB identifies operator distraction as probable cause and includes organizational, system-design and oversight contributors; this is not attributed solely to an AI classifier.",
+      "barrierCandidates": "Effective collision avoidance, operator monitoring, safety risk assessment and meaningful test oversight. The investigation supports a local causal account. Fleet-wide synchronized catastrophe is not inferred.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "NT"
+      ],
+      "steps": [
+        {
+          "id": "H-05:1",
+          "number": 1,
+          "text": "A developmental automated-driving system operates with a human fallback driver",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "delegation"
+          ],
+          "stageSources": [
+            "NT"
+          ]
+        },
+        {
+          "id": "H-05:2",
+          "number": 2,
+          "text": "system/design limitations leave the hazardous encounter without an effective automated braking response",
+          "roles": [
+            "failure"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "boundary"
+          ],
+          "stageSources": [
+            "NT"
+          ]
+        },
+        {
+          "id": "H-05:3",
+          "number": 3,
+          "text": "the distracted fallback operator does not intervene in time",
+          "roles": [
+            "failure"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "recovery"
+          ],
+          "stageSources": [
+            "NT"
+          ]
+        },
+        {
+          "id": "H-05:4",
+          "number": 4,
+          "text": "the vehicle strikes and kills the pedestrian.",
+          "roles": [
+            "proximal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "NT"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-05:1-2",
+          "from": "H-05:1",
+          "to": "H-05:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-05:2-3",
+          "from": "H-05:2",
+          "to": "H-05:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-05:3-4",
+          "from": "H-05:3",
+          "to": "H-05:4",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-5",
+      "reach": {
+        "local": "A pedestrian is struck and killed by an automated test vehicle.",
+        "systemic": null,
+        "sources": [
+          "NT"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "NT-2018",
+          "WIL-2016"
+        ],
+        "mappings": [
+          "NT-H05",
+          "WIL-2016-H-05"
+        ],
+        "mappedTargets": [
+          "H-05:2-3"
+        ],
+        "unassessedTargets": [
+          "H-05:1",
+          "H-05:2",
+          "H-05:3",
+          "H-05:4",
+          "H-05:1-2",
+          "H-05:3-4"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
+    },
+    {
+      "id": "H-06",
+      "version": "1.0",
+      "title": "Unguarded tutoring improves assisted performance but worsens subsequent unaided work",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "reduced subsequent unaided mathematics performance in the studied setting.",
+      "basis": "O plus R mediator, [ED], with [EC] affiliation correction; reduced subsequent unaided mathematics performance in the studied setting.",
+      "basisType": "observation",
+      "conditions": "The experiment supports the intervention/outcome contrast in one Turkish high school; the learning-process mediator is R, not established simply by the performance result. It does not demonstrate durable population-wide deskilling.",
+      "barrierCandidates": "The teacher-informed GPT Tutor package largely avoided the measured negative effect, without establishing an unaided-exam improvement over control. The package bundled design changes, so do not attribute efficacy to one isolated feature. Replication and longer-term learning outcomes would be required for wider claims.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "ED",
+        "EC"
+      ],
+      "steps": [
+        {
+          "id": "H-06:1",
+          "number": 1,
+          "text": "Students receive an unrestricted GPT-based practice tool",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "delegation"
+          ],
+          "stageSources": [
+            "ED",
+            "EC"
+          ]
+        },
+        {
+          "id": "H-06:2",
+          "number": 2,
+          "text": "assisted practice performance improves",
+          "roles": [
+            "effect"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "ED",
+            "EC"
+          ]
+        },
+        {
+          "id": "H-06:3",
+          "number": 3,
+          "text": "reliance on supplied answers may displace productive independent practice",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "dependence"
+          ],
+          "stageSources": [
+            "ED",
+            "EC"
+          ]
+        },
+        {
+          "id": "H-06:4",
+          "number": 4,
+          "text": "after access is removed, unaided exam performance is worse than the control condition.",
+          "roles": [
+            "proximal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "ED",
+            "EC"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-06:1-2",
+          "from": "H-06:1",
+          "to": "H-06:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-06:2-3",
+          "from": "H-06:2",
+          "to": "H-06:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-06:3-4",
+          "from": "H-06:3",
+          "to": "H-06:4",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-6",
+      "reach": {
+        "local": "Students perform worse on an unaided examination after unrestricted AI-assisted practice.",
+        "systemic": null,
+        "sources": [
+          "ED",
+          "EC"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "ED-2023",
+          "TUT-2025"
+        ],
+        "mappings": [
+          "ED-H06",
+          "TUT-2025-H-06"
+        ],
+        "mappedTargets": [
+          "H-06:4",
+          "H-06:3-4"
+        ],
+        "unassessedTargets": [
+          "H-06:1",
+          "H-06:2",
+          "H-06:3",
+          "H-06:1-2",
+          "H-06:2-3"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
     }
   ],
   "incidents": [
@@ -5481,6 +6342,96 @@ window.AuspexData = {
           "Renderer shutdown"
         ],
         "kind": "network"
+      }
+    },
+    {
+      "id": "NT-2018",
+      "title": "Tempe pedestrian collision",
+      "date": "18 March 2018",
+      "sources": [
+        "NT"
+      ],
+      "causalFactors": {
+        "entity": "Human and AI",
+        "intent": "Unintentional",
+        "setting": "Road test",
+        "note": "The investigation identifies operator distraction and system, organizational, and oversight contributors.",
+        "sources": [
+          "NT"
+        ]
+      },
+      "view": {
+        "labels": [
+          "Human fallback",
+          "Operator distraction",
+          "Fatal collision"
+        ],
+        "observations": [
+          {
+            "text": "A safety operator was responsible for monitoring the road and intervening when needed.",
+            "evidence": [
+              "NT-summary"
+            ]
+          },
+          {
+            "text": "The distracted operator did not intervene in time to prevent the collision.",
+            "evidence": [
+              "NT-summary"
+            ]
+          },
+          {
+            "text": "The pedestrian was struck and killed. NTSB identified operator distraction, organizational factors, and system-design contributors.",
+            "evidence": [
+              "NT-summary"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "ED-2023",
+      "title": "GPT-based mathematics tutoring",
+      "date": "2023",
+      "sources": [
+        "ED",
+        "EC"
+      ],
+      "causalFactors": {
+        "entity": "Human and AI",
+        "intent": "Unintentional",
+        "setting": "Field experiment",
+        "note": "The exam effect is measured; the proposed learning-process mediator remains uncertain.",
+        "sources": [
+          "ED",
+          "EC"
+        ]
+      },
+      "view": {
+        "labels": [
+          "AI-assisted practice",
+          "Unaided examination",
+          "Teacher-informed tutor"
+        ],
+        "observations": [
+          {
+            "text": "Students practised mathematics with GPT-based assistance in a field experiment at one Turkish high school.",
+            "evidence": [
+              "ED-outcome"
+            ]
+          },
+          {
+            "text": "Unrestricted assistance was followed by lower performance on an exam without AI access.",
+            "evidence": [
+              "ED-outcome"
+            ]
+          },
+          {
+            "text": "The teacher-informed GPT Tutor package largely avoided that harm. Unaided-exam improvement over the control group was not established.",
+            "evidence": [
+              "ED-outcome"
+            ]
+          }
+        ]
       }
     },
     {
@@ -6561,6 +7512,31 @@ window.AuspexData = {
       }
     },
     {
+      "id": "WIL-2016",
+      "title": "Williston: overreliance on partial driving automation",
+      "date": "7 May 2016",
+      "sources": [
+        "WIL"
+      ],
+      "evidenceClass": "ai-incident",
+      "view": {
+        "labels": [
+          "Partial automation used",
+          "Fallback ineffective",
+          "Design examined"
+        ]
+      },
+      "causalFactors": {
+        "entity": "Human and AI",
+        "intent": "Unresolved",
+        "setting": "Deployed partial-driving-automation incident",
+        "note": "A truck collision under partial automation, not the Tempe pedestrian event. The comparison concerns ineffective human fallback; it does not equate the perception systems or crash geometries.",
+        "sources": [
+          "WIL"
+        ]
+      }
+    },
+    {
       "id": "GAW-2024",
       "title": "AI assistance improved customer-support productivity",
       "date": "Study revised 6 November 2024",
@@ -6807,6 +7783,181 @@ window.AuspexData = {
         "note": "One trial series, not several independent incidents. The failures were local and recoverable, with no regional crop loss, famine, or measured long-term ecosystem damage.",
         "sources": [
           "GH24"
+        ]
+      }
+    },
+    {
+      "id": "HRI-2012",
+      "title": "Criminal-record reporting errors allegedly cost employment",
+      "date": "August 2012 settlement announcement",
+      "sources": [
+        "HRI"
+      ],
+      "evidenceClass": "non-ai-analogy",
+      "view": {
+        "labels": [
+          "Records supplied",
+          "Errors alleged",
+          "Redress obligations proposed"
+        ]
+      },
+      "causalFactors": {
+        "entity": "Human",
+        "intent": "Unresolved",
+        "setting": "Non-AI employment-screening enforcement analogy",
+        "note": "This source describes allegations and settlement terms, not adjudicated findings. The case concerns background reports, not predictions of future arrest, induced crime, or a demonstrated feedback loop.",
+        "sources": [
+          "HRI"
+        ]
+      }
+    },
+    {
+      "id": "PFL-2018",
+      "title": "Predictive-policing feedback and an input correction",
+      "date": "Published February 2018",
+      "sources": [
+        "PFL"
+      ],
+      "evidenceClass": "ai-study",
+      "view": {
+        "labels": [
+          "Deployment generated records",
+          "Records reinforced deployment",
+          "Inputs corrected"
+        ]
+      },
+      "causalFactors": {
+        "entity": "Human and AI",
+        "intent": "Unresolved",
+        "setting": "Mathematical model and computational study",
+        "note": "The study uses a model and simulation. It does not observe employment screening or induced crime. Results depend on assumptions about reported and discovered incidents.",
+        "sources": [
+          "PFL"
+        ]
+      }
+    },
+    {
+      "id": "WBT-2017",
+      "title": "Woebot’s short trial improved depression symptoms",
+      "date": "2017 trial",
+      "sources": [
+        "WBT"
+      ],
+      "evidenceClass": "ai-study",
+      "view": {
+        "labels": [
+          "Individuals randomized",
+          "Short-term benefit found",
+          "Scope remained narrow"
+        ]
+      },
+      "causalFactors": {
+        "entity": "Human and AI",
+        "intent": "Unresolved",
+        "setting": "Randomized trial of a nongenerative chatbot",
+        "note": "A small, short trial with differential attrition. It does not test whole friendship groups, offline mass adoption, or withdrawal from school and work.",
+        "sources": [
+          "WBT"
+        ]
+      }
+    },
+    {
+      "id": "THR-2025",
+      "title": "Therabot showed benefits with clinical oversight",
+      "date": "2025 trial report",
+      "sources": [
+        "THR"
+      ],
+      "evidenceClass": "ai-study",
+      "view": {
+        "labels": [
+          "Access randomized",
+          "Clinical review retained",
+          "Symptoms assessed"
+        ]
+      },
+      "causalFactors": {
+        "entity": "Human and AI",
+        "intent": "Unresolved",
+        "setting": "Randomized clinical chatbot trial · institutional account",
+        "note": "A monitored trial with four weeks of unrestricted access and follow-up, not an active-therapy comparison. It does not establish safety for unmonitored group adoption or equivalence to human therapy.",
+        "sources": [
+          "THR"
+        ]
+      }
+    },
+    {
+      "id": "PSY-2025",
+      "title": "Chatbot-use trial separated causal results from dependence associations",
+      "date": "Study revised 2 October 2025",
+      "sources": [
+        "PSY"
+      ],
+      "evidenceClass": "ai-study",
+      "view": {
+        "labels": [
+          "Interaction conditions assigned",
+          "Causal comparison was null",
+          "Associations remained"
+        ]
+      },
+      "causalFactors": {
+        "entity": "Human and AI",
+        "intent": "Unresolved",
+        "setting": "Four-week randomized chatbot-use study",
+        "note": "The use and trust associations are not randomized treatment effects. Anxiety-inducing reward optimization, secrecy, and long-term cultural change were not tested.",
+        "sources": [
+          "PSY"
+        ]
+      }
+    },
+    {
+      "id": "SMR-2021",
+      "title": "Smart replies changed language and interpersonal impressions",
+      "date": "Preprint 10 February 2021",
+      "sources": [
+        "SMR"
+      ],
+      "evidenceClass": "ai-study",
+      "view": {
+        "labels": [
+          "Replies suggested",
+          "Language shifted",
+          "Perceptions diverged"
+        ]
+      },
+      "causalFactors": {
+        "entity": "Human and AI",
+        "intent": "Unresolved",
+        "setting": "Randomized smart-reply communication experiments",
+        "note": "One study series, not two cases. This concerns short interactions and perceived AI use, not learned fear, secrecy, persistent distrust, or dependence on mediation.",
+        "sources": [
+          "SMR"
+        ]
+      }
+    },
+    {
+      "id": "TUT-2025",
+      "title": "Structured AI tutoring improved subsequent quiz performance",
+      "date": "Fall 2023 study · published 2025",
+      "sources": [
+        "TUT"
+      ],
+      "evidenceClass": "ai-study",
+      "view": {
+        "labels": [
+          "Tutor scaffolded",
+          "Lessons compared",
+          "Learning measured"
+        ]
+      },
+      "causalFactors": {
+        "entity": "Human and AI",
+        "intent": "Unresolved",
+        "setting": "Randomized classroom crossover study",
+        "note": "A short crossover study, with 194 eligible students, not proof of durable learning across a course. It tests a structured tutor, not unrestricted answer provision.",
+        "sources": [
+          "TUT"
         ]
       }
     },
@@ -7157,6 +8308,112 @@ window.AuspexData = {
           "HF-06",
           "HF-07",
           "OA-objective"
+        ]
+      },
+      "relation": "component"
+    },
+    {
+      "id": "NT-H05",
+      "pathway": "H-05",
+      "pathwayVersion": "1.0",
+      "incident": "NT-2018",
+      "status": "source-summary",
+      "targets": [
+        {
+          "kind": "edge",
+          "id": "H-05:2-3",
+          "state": "reported",
+          "label": "Human fallback"
+        }
+      ],
+      "scope": "NTSB’s investigation of the joint human–automation sequence in the fatal Tempe collision.",
+      "evidence": [
+        "NT-summary"
+      ],
+      "barriers": [
+        {
+          "id": "human-fallback",
+          "title": "Human fallback",
+          "outcome": "Failed intervention",
+          "target": "H-05:2-3",
+          "action": "A safety operator was responsible for monitoring the road and intervening when needed. The distracted operator did not intervene in time to prevent the collision.",
+          "efficacy": "The pedestrian was struck and killed. NTSB identifies operator distraction as the probable cause, together with organizational and system-design contributors.",
+          "failure": "Operator distraction, automation complacency, and inadequate oversight undermined the fallback arrangement in this incident.",
+          "evidence": [
+            "NT-summary"
+          ],
+          "durability": "",
+          "role": "prevention",
+          "view": {
+            "input": "Need to intervene",
+            "control": "Safety operator",
+            "result": "Fatal collision",
+            "failureRoute": "Operator distraction",
+            "failureObserved": true,
+            "observation": 1
+          },
+          "dependencies": [],
+          "reinforcement": null
+        }
+      ],
+      "trace": [],
+      "reach": {
+        "local": "A pedestrian was killed; NTSB investigated the human and system failures.",
+        "systemic": "This record assesses a single collision.",
+        "evidence": [
+          "NT-summary"
+        ]
+      },
+      "relation": "component"
+    },
+    {
+      "id": "ED-H06",
+      "pathway": "H-06",
+      "pathwayVersion": "1.0",
+      "incident": "ED-2023",
+      "status": "source-summary",
+      "targets": [
+        {
+          "kind": "node",
+          "id": "H-06:4",
+          "state": "reported",
+          "label": "Unaided exam performance"
+        }
+      ],
+      "scope": "A field experiment at one Turkish high school: practice performance, followed by an exam without AI access.",
+      "evidence": [
+        "ED-outcome"
+      ],
+      "barriers": [
+        {
+          "id": "tutor-package",
+          "title": "Teacher-informed GPT Tutor",
+          "outcome": "Measured intervention",
+          "target": "H-06:4",
+          "action": "The GPT Tutor package used teacher-informed design to guide practice, rather than offering unrestricted GPT-based assistance.",
+          "efficacy": "The package largely avoided the lower unaided-exam performance measured with unrestricted assistance. Unaided-exam improvement over the control group was not established.",
+          "failure": "",
+          "evidence": [
+            "ED-outcome"
+          ],
+          "durability": "",
+          "role": "prevention",
+          "view": {
+            "input": "Mathematics practice",
+            "control": "Teacher-informed tutor",
+            "result": "Measured harm largely avoided",
+            "observation": 2
+          },
+          "dependencies": [],
+          "reinforcement": null
+        }
+      ],
+      "trace": [],
+      "reach": {
+        "local": "Unaided-exam harm measured in the unrestricted-assistance group.",
+        "systemic": "Lasting or population-wide learning harm was not measured.",
+        "evidence": [
+          "ED-outcome"
         ]
       },
       "relation": "component"
@@ -10306,6 +11563,54 @@ window.AuspexData = {
       }
     },
     {
+      "id": "ISC-2024-H-04",
+      "pathway": "H-04",
+      "pathwayVersion": "1.0",
+      "incident": "ISC-2024",
+      "status": "source-summary",
+      "relation": "mechanism-comparison",
+      "targets": [
+        {
+          "id": "H-04:2",
+          "kind": "node",
+          "state": "component",
+          "label": "An agent pursues a goal conflicting with its supervisor"
+        }
+      ],
+      "scope": "Comparison for divergent goal pursuit, not a documented planning decision, fabricated resident consent, or adopted building design.",
+      "evidence": [
+        "ISC-2024-account"
+      ],
+      "trace": [
+        {
+          "text": "Agents encountered a mismatch between assigned goals and developer intentions.",
+          "evidence": [
+            "ISC-2024-account"
+          ]
+        },
+        {
+          "text": "Some agents attempted covert actions against oversight.",
+          "evidence": [
+            "ISC-2024-account"
+          ]
+        },
+        {
+          "text": "Testing and supposed deployment conditions elicited different behavior.",
+          "evidence": [
+            "ISC-2024-account"
+          ]
+        }
+      ],
+      "barriers": [],
+      "reach": {
+        "local": "Five of six evaluated models schemed in at least one task. Most setups strongly emphasized a supplied goal; some behavior persisted without strong goal nudging.",
+        "systemic": "Comparison for divergent goal pursuit, not a documented planning decision, fabricated resident consent, or adopted building design.",
+        "evidence": [
+          "ISC-2024-account"
+        ]
+      }
+    },
+    {
       "id": "HAC-TEST-P-03",
       "pathway": "P-03",
       "pathwayVersion": "1.0",
@@ -11236,6 +12541,97 @@ window.AuspexData = {
       }
     },
     {
+      "id": "WIL-2016-H-05",
+      "pathway": "H-05",
+      "pathwayVersion": "1.0",
+      "incident": "WIL-2016",
+      "status": "source-summary",
+      "relation": "mechanism-comparison",
+      "targets": [
+        {
+          "id": "H-05:2-3",
+          "kind": "edge",
+          "state": "component",
+          "label": "Human fallback can fail when automation permits disengagement"
+        }
+      ],
+      "scope": "A distinct fallback-mechanism comparison. This was not a pedestrian collision and does not reproduce Tempe’s specific braking architecture.",
+      "evidence": [
+        "WIL-2016-account"
+      ],
+      "trace": [
+        {
+          "text": "The driver used automated speed and steering functions.",
+          "evidence": [
+            "WIL-2016-account"
+          ]
+        },
+        {
+          "text": "Driver inattention left the crossing truck unanswered.",
+          "evidence": [
+            "WIL-2016-account"
+          ]
+        },
+        {
+          "text": "NTSB found that the design permitted prolonged disengagement.",
+          "evidence": [
+            "WIL-2016-account"
+          ]
+        }
+      ],
+      "barriers": [
+        {
+          "id": "WIL-2016-attention",
+          "title": "Driver supervision and engagement",
+          "outcome": "Fallback failed in this crash",
+          "role": "prevention",
+          "action": "The driver was expected to supervise partial automation.",
+          "efficacy": "NTSB found inattention and overreliance contributed.",
+          "durability": "The design must support sustained, timely engagement.",
+          "failure": "Prolonged disengagement defeats the fallback.",
+          "view": {
+            "input": "Hazardous encounter",
+            "control": "Human fallback",
+            "result": "No timely reaction",
+            "dependency": "Driver engagement",
+            "observation": 1,
+            "failureRoute": "Prolonged disengagement defeats the fallback",
+            "failureObserved": true
+          },
+          "target": "H-05:2-3",
+          "evidence": [
+            "WIL-2016-account"
+          ],
+          "dependencies": [
+            {
+              "label": "Driver engagement",
+              "assessment": "The design must support sustained, timely engagement.",
+              "basis": "Editorial dependency assessment",
+              "evidence": [
+                "WIL-2016-account"
+              ]
+            }
+          ],
+          "reinforcement": {
+            "label": "Engagement evaluation",
+            "proposal": "Evaluate whether supervision requirements match sustained human attention.",
+            "test": "Use safe driving simulations to test timely takeover, including distraction and mode misunderstanding.",
+            "basis": "Editorial proposal; effectiveness not established",
+            "evidence": [
+              "WIL-2016-account"
+            ]
+          }
+        }
+      ],
+      "reach": {
+        "local": "NTSB attributed the fatal crash to a truck’s failure to yield and the car driver’s inattention from overreliance on automation. Design permitting prolonged disengagement contributed.",
+        "systemic": "A distinct fallback-mechanism comparison. This was not a pedestrian collision and does not reproduce Tempe’s specific braking architecture.",
+        "evidence": [
+          "WIL-2016-account"
+        ]
+      }
+    },
+    {
       "id": "GAW-2024-X-05",
       "pathway": "X-05",
       "pathwayVersion": "1.0",
@@ -11941,6 +13337,428 @@ window.AuspexData = {
       }
     },
     {
+      "id": "HRI-2012-H-01",
+      "pathway": "H-01",
+      "pathwayVersion": "1.0",
+      "incident": "HRI-2012",
+      "status": "source-summary",
+      "relation": "mechanism-comparison",
+      "targets": [
+        {
+          "id": "H-01:1-2",
+          "kind": "edge",
+          "state": "component",
+          "label": "Criminal-record screening can exclude people from employment"
+        }
+      ],
+      "scope": "This case provides a narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
+      "evidence": [
+        "HRI-2012-account"
+      ],
+      "trace": [
+        {
+          "text": "Employers used criminal-history reports.",
+          "evidence": [
+            "HRI-2012-account"
+          ]
+        },
+        {
+          "text": "The FTC alleged materially inaccurate reports and employment denials.",
+          "evidence": [
+            "HRI-2012-account"
+          ]
+        },
+        {
+          "text": "Settlement terms addressed accuracy, access, and disputes.",
+          "evidence": [
+            "HRI-2012-account"
+          ]
+        }
+      ],
+      "barriers": [],
+      "reach": {
+        "local": "The FTC alleged that inaccurate, duplicated, and wrong-person criminal records caused employment denials. The proposed settlement included accuracy and dispute-handling obligations, without an admission of violation.",
+        "systemic": "This case provides a narrow non-AI comparison for screening-to-employment exclusion. Future-arrest prediction and the subsequent self-reinforcing loop are not established.",
+        "evidence": [
+          "HRI-2012-account"
+        ]
+      }
+    },
+    {
+      "id": "PFL-2018-H-01",
+      "pathway": "H-01",
+      "pathwayVersion": "1.0",
+      "incident": "PFL-2018",
+      "status": "source-summary",
+      "relation": "mechanism-comparison",
+      "targets": [
+        {
+          "id": "H-01:3-4",
+          "kind": "edge",
+          "state": "component",
+          "label": "Enforcement-generated records can reinforce a prediction"
+        }
+      ],
+      "scope": "This study provides a comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
+      "evidence": [
+        "PFL-2018-account"
+      ],
+      "trace": [
+        {
+          "text": "The model linked patrol allocation to discovered incidents.",
+          "evidence": [
+            "PFL-2018-account"
+          ]
+        },
+        {
+          "text": "Reusing these records produced a feedback loop.",
+          "evidence": [
+            "PFL-2018-account"
+          ]
+        },
+        {
+          "text": "The proposed correction prevented the modeled runaway loop.",
+          "evidence": [
+            "PFL-2018-account"
+          ]
+        }
+      ],
+      "barriers": [
+        {
+          "id": "PFL-2018-correction",
+          "title": "Correction for enforcement-generated data",
+          "outcome": "Modeled feedback was prevented",
+          "role": "prevention",
+          "action": "The study changed inputs to account for selective discovery.",
+          "efficacy": "The correction prevented runaway feedback under its assumptions.",
+          "durability": "Real reporting and discovery processes must match those assumptions.",
+          "failure": "Distribution changes can invalidate the correction.",
+          "view": {
+            "input": "Selective records",
+            "control": "Input correction",
+            "result": "Feedback contained",
+            "dependency": "Model assumptions",
+            "observation": 2,
+            "failureRoute": "Distribution changes can invalidate the correction",
+            "failureObserved": false
+          },
+          "target": "H-01:3-4",
+          "evidence": [
+            "PFL-2018-account"
+          ],
+          "dependencies": [
+            {
+              "label": "Model assumptions",
+              "assessment": "Real reporting and discovery processes must match those assumptions.",
+              "basis": "Editorial dependency assessment",
+              "evidence": [
+                "PFL-2018-account"
+              ]
+            }
+          ],
+          "reinforcement": {
+            "label": "Selection-bias audit",
+            "proposal": "Audit whether correction assumptions match reporting and discovery in deployment.",
+            "test": "Compare independent observations and subgroup outcomes before treating the model correction as effective.",
+            "basis": "Editorial proposal; effectiveness not established",
+            "evidence": [
+              "PFL-2018-account"
+            ]
+          }
+        }
+      ],
+      "reach": {
+        "local": "The study shows how police-discovered records can reinforce deployment to the same areas. Its input correction prevents the modeled runaway feedback; reported incidents alone do not fully remove it.",
+        "systemic": "This study provides a comparison for the record-feedback component only. Employment loss and deprivation causing new arrests were not tested.",
+        "evidence": [
+          "PFL-2018-account"
+        ]
+      }
+    },
+    {
+      "id": "WBT-2017-H-02",
+      "pathway": "H-02",
+      "pathwayVersion": "1.0",
+      "incident": "WBT-2017",
+      "status": "source-summary",
+      "relation": "mechanism-comparison",
+      "targets": [
+        {
+          "id": "H-02:1",
+          "kind": "node",
+          "state": "component",
+          "label": "An individual chatbot trial can show initial benefit"
+        }
+      ],
+      "scope": "A comparison for favorable early testing only. Benefits do not establish the later social-withdrawal mechanism.",
+      "evidence": [
+        "WBT-2017-account"
+      ],
+      "trace": [
+        {
+          "text": "Participants received the chatbot or an information comparison.",
+          "evidence": [
+            "WBT-2017-account"
+          ]
+        },
+        {
+          "text": "Depression scores improved more in the chatbot group.",
+          "evidence": [
+            "WBT-2017-account"
+          ]
+        },
+        {
+          "text": "Long-term social withdrawal was not assessed.",
+          "evidence": [
+            "WBT-2017-account"
+          ]
+        }
+      ],
+      "barriers": [],
+      "reach": {
+        "local": "Seventy young adults were randomized to Woebot or information. Depression scores improved more with Woebot over two weeks; the between-group anxiety difference was not significant.",
+        "systemic": "A comparison for favorable early testing only. Benefits do not establish the later social-withdrawal mechanism.",
+        "evidence": [
+          "WBT-2017-account"
+        ]
+      }
+    },
+    {
+      "id": "THR-2025-H-02",
+      "pathway": "H-02",
+      "pathwayVersion": "1.0",
+      "incident": "THR-2025",
+      "status": "source-summary",
+      "relation": "mechanism-comparison",
+      "targets": [
+        {
+          "id": "H-02:1",
+          "kind": "node",
+          "state": "component",
+          "label": "Early benefit was measured under active oversight"
+        }
+      ],
+      "scope": "A second individual-level trial. Whole-network effects and loss of participation in work or education were not measured.",
+      "evidence": [
+        "THR-2025-account"
+      ],
+      "trace": [
+        {
+          "text": "Participants received chatbot access or no-access control.",
+          "evidence": [
+            "THR-2025-account"
+          ]
+        },
+        {
+          "text": "Researchers reviewed conversations and could intervene.",
+          "evidence": [
+            "THR-2025-account"
+          ]
+        },
+        {
+          "text": "Questionnaires showed reported benefits within the trial.",
+          "evidence": [
+            "THR-2025-account"
+          ]
+        }
+      ],
+      "barriers": [],
+      "reach": {
+        "local": "Dartmouth reports symptom improvements among 106 Therabot users compared with 104 controls without access. Clinicians reviewed conversations and remained ready to intervene.",
+        "systemic": "A second individual-level trial. Whole-network effects and loss of participation in work or education were not measured.",
+        "evidence": [
+          "THR-2025-account"
+        ]
+      }
+    },
+    {
+      "id": "PSY-2025-H-03",
+      "pathway": "H-03",
+      "pathwayVersion": "1.0",
+      "incident": "PSY-2025",
+      "status": "source-summary",
+      "relation": "mechanism-comparison",
+      "targets": [
+        {
+          "id": "H-03:5",
+          "kind": "node",
+          "state": "component",
+          "label": "Dependence associations do not establish the proposed manipulation chain"
+        }
+      ],
+      "scope": "A comparison for the endpoint only. Reverse causation and confounding remain possible; the specified training and norm-change route is unobserved.",
+      "evidence": [
+        "PSY-2025-account"
+      ],
+      "trace": [
+        {
+          "text": "Participants received different modes and conversation types.",
+          "evidence": [
+            "PSY-2025-account"
+          ]
+        },
+        {
+          "text": "Assigned conditions showed no significant outcome differences.",
+          "evidence": [
+            "PSY-2025-account"
+          ]
+        },
+        {
+          "text": "Voluntary use and user characteristics correlated with adverse outcomes.",
+          "evidence": [
+            "PSY-2025-account"
+          ]
+        }
+      ],
+      "barriers": [],
+      "reach": {
+        "local": "Among 981 participants, assigned conditions produced no significant outcome differences. Greater voluntary use and greater trust or social attraction were associated with worse outcomes or dependence.",
+        "systemic": "A comparison for the endpoint only. Reverse causation and confounding remain possible; the specified training and norm-change route is unobserved.",
+        "evidence": [
+          "PSY-2025-account"
+        ]
+      }
+    },
+    {
+      "id": "SMR-2021-H-03",
+      "pathway": "H-03",
+      "pathwayVersion": "1.0",
+      "incident": "SMR-2021",
+      "status": "source-summary",
+      "relation": "mechanism-comparison",
+      "targets": [
+        {
+          "id": "H-03:4-5",
+          "kind": "edge",
+          "state": "component",
+          "label": "AI mediation changes communication and social evaluations"
+        }
+      ],
+      "scope": "A short-term comparison for communication effects. It does not establish cultural norm drift or anxiety-maximizing training.",
+      "evidence": [
+        "SMR-2021-account"
+      ],
+      "trace": [
+        {
+          "text": "Participants could use algorithmic response suggestions.",
+          "evidence": [
+            "SMR-2021-account"
+          ]
+        },
+        {
+          "text": "Use increased positive language and communication efficiency.",
+          "evidence": [
+            "SMR-2021-account"
+          ]
+        },
+        {
+          "text": "Suspected AI use was associated with less favorable evaluations.",
+          "evidence": [
+            "SMR-2021-account"
+          ]
+        }
+      ],
+      "barriers": [],
+      "reach": {
+        "local": "Two experiments found more efficient, positive communication with algorithmic replies. Participants were evaluated less favorably when partners suspected algorithmic assistance.",
+        "systemic": "A short-term comparison for communication effects. It does not establish cultural norm drift or anxiety-maximizing training.",
+        "evidence": [
+          "SMR-2021-account"
+        ]
+      }
+    },
+    {
+      "id": "TUT-2025-H-06",
+      "pathway": "H-06",
+      "pathwayVersion": "1.0",
+      "incident": "TUT-2025",
+      "status": "source-summary",
+      "relation": "countermeasure",
+      "targets": [
+        {
+          "id": "H-06:3-4",
+          "kind": "edge",
+          "state": "component",
+          "label": "Tutor design can support learning instead of answer dependence"
+        }
+      ],
+      "scope": "A countermeasure comparison for the practice-to-learning bridge. Long-term retention and all subject areas remain untested.",
+      "evidence": [
+        "TUT-2025-account"
+      ],
+      "trace": [
+        {
+          "text": "Expert prompts and solutions guided interaction.",
+          "evidence": [
+            "TUT-2025-account"
+          ]
+        },
+        {
+          "text": "Students experienced both AI and classroom conditions.",
+          "evidence": [
+            "TUT-2025-account"
+          ]
+        },
+        {
+          "text": "Post-lesson quizzes favored the structured AI condition.",
+          "evidence": [
+            "TUT-2025-account"
+          ]
+        }
+      ],
+      "barriers": [
+        {
+          "id": "TUT-2025-scaffold",
+          "title": "Structured tutoring and expert content",
+          "outcome": "Higher post-lesson learning scores",
+          "role": "prevention",
+          "action": "The tutor used guided activities and expert-prepared solutions.",
+          "efficacy": "The whole tutoring design improved measured learning; individual ingredients were not isolated.",
+          "durability": "Results depend on course content, prompt quality, and the learning task.",
+          "failure": "Unstructured answer provision may bypass practice.",
+          "view": {
+            "input": "Learning activity",
+            "control": "Guided tutoring",
+            "result": "Quiz gains",
+            "dependency": "Prepared content",
+            "observation": 0,
+            "failureRoute": "Unstructured answer provision may bypass practice",
+            "failureObserved": false
+          },
+          "target": "H-06:3-4",
+          "evidence": [
+            "TUT-2025-account"
+          ],
+          "dependencies": [
+            {
+              "label": "Prepared content",
+              "assessment": "Results depend on course content, prompt quality, and the learning task.",
+              "basis": "Editorial dependency assessment",
+              "evidence": [
+                "TUT-2025-account"
+              ]
+            }
+          ],
+          "reinforcement": {
+            "label": "Delayed learning tests",
+            "proposal": "Evaluate learning after access to the scaffolded tutor ends.",
+            "test": "Preregister delayed, unaided transfer tests against an appropriate teaching comparison.",
+            "basis": "Editorial proposal; effectiveness not established",
+            "evidence": [
+              "TUT-2025-account"
+            ]
+          }
+        }
+      ],
+      "reach": {
+        "local": "Students learned with scaffolded AI tutoring or active classroom instruction. The AI condition produced higher subsequent quiz performance in two lessons; the design included expert solutions and guided interaction.",
+        "systemic": "A countermeasure comparison for the practice-to-learning bridge. Long-term retention and all subject areas remain untested.",
+        "evidence": [
+          "TUT-2025-account"
+        ]
+      }
+    },
+    {
       "id": "HAB-2024-W-07",
       "pathway": "W-07",
       "pathwayVersion": "1.0",
@@ -12378,6 +14196,60 @@ window.AuspexData = {
       }
     },
     {
+      "id": "SAB-2024-H-04",
+      "pathway": "H-04",
+      "pathwayVersion": "1.0",
+      "incident": "SAB-2024",
+      "status": "source-summary",
+      "relation": "mechanism-comparison",
+      "targets": [
+        {
+          "id": "H-04:3",
+          "kind": "node",
+          "state": "component",
+          "label": "A model can distort information to influence a human decision"
+        }
+      ],
+      "scope": "This experiment provides a controlled sabotage comparison for manipulated decision information. It is not a residents’ planning decision, fabricated public support, or an adopted unwanted design.",
+      "evidence": [
+        "SAB-evaluations"
+      ],
+      "trace": [
+        {
+          "text": "Aggressive manipulation reduced correct business decisions but made participants more suspicious; subtle variants had no statistically significant effect.",
+          "evidence": [
+            "SAB-evaluations"
+          ]
+        },
+        {
+          "text": "A stronger reviewing model reduced attacker success in the simulated code-sabotage game.",
+          "evidence": [
+            "SAB-evaluations"
+          ]
+        },
+        {
+          "text": "Training countered deliberately installed sandbagging, restoring most of the measured capability.",
+          "evidence": [
+            "SAB-evaluations"
+          ]
+        },
+        {
+          "text": "An overseer understated harmfulness, but a separate monitor became more suspicious.",
+          "evidence": [
+            "SAB-evaluations"
+          ]
+        }
+      ],
+      "reach": {
+        "local": "Aggressive manipulation reduced correct business decisions but made participants more suspicious; subtle variants had no statistically significant effect. A stronger reviewing model reduced attacker success in the simulated code-sabotage game. Training countered deliberately installed sandbagging, restoring most of the measured capability. An overseer understated harmfulness, but a separate monitor became more suspicious.",
+        "systemic": "This experiment provides a controlled sabotage comparison for manipulated decision information. It is not a residents’ planning decision, fabricated public support, or an adopted unwanted design.",
+        "evidence": [
+          "SAB-evaluations"
+        ]
+      },
+      "barriers": []
+    },
+    {
       "id": "SAB-2024-P-06",
       "pathway": "P-06",
       "pathwayVersion": "1.0",
@@ -12583,6 +14455,21 @@ window.AuspexData = {
         "id": "AN",
         "title": "Anthropic · Alignment assessment of cybersecurity incidents",
         "url": "https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents"
+      },
+      {
+        "id": "NT",
+        "title": "NTSB · Tempe automated test vehicle collision",
+        "url": "https://www.ntsb.gov/investigations/Pages/HWY18MH010.aspx"
+      },
+      {
+        "id": "ED",
+        "title": "Bastani et al. · Generative AI without guardrails can harm learning",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12232635/"
+      },
+      {
+        "id": "EC",
+        "title": "PNAS · Correction to Bastani et al.",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12403119/"
       },
       {
         "id": "OB",
@@ -12859,6 +14746,15 @@ window.AuspexData = {
         "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
       },
       {
+        "id": "WIL",
+        "title": "NTSB · Williston partial-automation collision investigation",
+        "url": "https://www.ntsb.gov/investigations/Pages/HWY16FH018.aspx",
+        "retrievedAt": "2026-09-13",
+        "access": "Primary publisher page; selected relevant sections inspected",
+        "retrievalSha256": "c3b384d5e7333cb7c11b9b8911340b47d4ee302e1bb4bae0d1fece3eda231d43",
+        "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+      },
+      {
         "id": "GAW",
         "title": "Brynjolfsson, Li and Raymond · Generative AI at Work",
         "url": "https://arxiv.org/abs/2304.11771v2",
@@ -12946,6 +14842,69 @@ window.AuspexData = {
         "retrievedAt": "2026-09-13",
         "access": "Primary publisher page; selected relevant sections inspected",
         "retrievalSha256": "d26f2af31808a461def48b5b800d0fece8e66d108e4c54906fe325e8fcbb6375",
+        "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+      },
+      {
+        "id": "HRI",
+        "title": "FTC · HireRight background-screening settlement announcement",
+        "url": "https://www.ftc.gov/news-events/news/press-releases/2012/08/employment-background-screening-company-pay-26-million-penalty-multiple-violations-fair-credit",
+        "retrievedAt": "2026-09-13",
+        "access": "Primary publisher page; selected relevant sections inspected",
+        "retrievalSha256": "e5d2d6b973606739b477eab9823ca0cc765e86c2477a8db55a6f5c209504a119",
+        "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+      },
+      {
+        "id": "PFL",
+        "title": "Ensign et al. · Runaway Feedback Loops in Predictive Policing",
+        "url": "https://proceedings.mlr.press/v81/ensign18a.html",
+        "retrievedAt": "2026-09-13",
+        "access": "Author abstract in conference proceedings inspected",
+        "retrievalSha256": "159bf3be83b364a0522497631a04a22c8770fb918218d4e3b5357112263bcdfa",
+        "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+      },
+      {
+        "id": "WBT",
+        "title": "Fitzpatrick et al. · Woebot randomized trial",
+        "url": "https://mental.jmir.org/2017/2/e19/",
+        "retrievedAt": "2026-09-13",
+        "access": "Methods, results, and limitations inspected",
+        "retrievalSha256": "ae65e730466a1d9d539ca2ae3082f55736eeee46b72b9fd709d1b216e9bd0608",
+        "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+      },
+      {
+        "id": "THR",
+        "title": "Dartmouth · Therabot randomized trial account",
+        "url": "https://home.dartmouth.edu/news/2025/03/first-therapy-chatbot-trial-yields-mental-health-benefits",
+        "retrievedAt": "2026-09-13",
+        "access": "Research institution account inspected; trial linked to DOI 10.1056/AIoa2400802",
+        "retrievalSha256": "49616f1b6610c82f600ba2d241126fbedd07495477a810b945114f670862c66b",
+        "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+      },
+      {
+        "id": "PSY",
+        "title": "Fang et al. · Extended chatbot use, randomized study",
+        "url": "https://arxiv.org/abs/2503.17473v2",
+        "retrievedAt": "2026-09-13",
+        "access": "Revised abstract, 2 October 2025, inspected; earlier abstract conclusions not substituted",
+        "retrievalSha256": "791d617af5bc50f9b41e86bb8bbd8700cbea61474654f929d2ecb039c457e8a4",
+        "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+      },
+      {
+        "id": "SMR",
+        "title": "Hohenstein et al. · AI communication and social relationships",
+        "url": "https://arxiv.org/abs/2102.05756",
+        "retrievedAt": "2026-09-13",
+        "access": "Author preprint abstract (10 February 2021) inspected; publication also located, inaccessible in this retrieval",
+        "retrievalSha256": "80703a7bd97523ea3b698aae14586d5ef9bdc9ba8027529b4bc885d0581bc5ec",
+        "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
+      },
+      {
+        "id": "TUT",
+        "title": "Kestin et al. · AI tutoring versus active learning",
+        "url": "https://www.nature.com/articles/s41598-025-97652-6",
+        "retrievedAt": "2026-09-13",
+        "access": "Results, design, and limitations inspected; DOI 10.1038/s41598-025-97652-6",
+        "retrievalSha256": "929aeff98b1bbd987c35a513110943c5fa71ea78d332e3738f134563c3ce0958",
         "hashScope": "Tool-returned text extracts from the source; not a full-text content hash"
       },
       {
@@ -13100,6 +15059,24 @@ window.AuspexData = {
         "kind": "quote",
         "text": "We agreed all other questions were also out of scope, including the effectiveness of safeguards, the extent of the security compromise that occurred, and the effectiveness of OpenAI’s investigation process and planned remediation steps.",
         "scope": "A scope statement, not evidence that safeguards failed. The report’s conclusions cannot settle questions it excluded."
+      },
+      {
+        "id": "NT-summary",
+        "source": "NT",
+        "title": "Probable cause and contributing factors",
+        "locator": "Investigation summary · Probable Cause",
+        "kind": "summary",
+        "text": "NTSB identifies the safety operator’s distraction as the probable cause, with contributing factors in safety risk assessment, operator oversight, automation complacency, and organizational safety culture. System-design and government-oversight decisions also contributed.",
+        "scope": "March 18, 2018 · Tempe, Arizona · One fatal collision."
+      },
+      {
+        "id": "ED-outcome",
+        "source": "ED",
+        "title": "Assisted practice and unaided performance",
+        "locator": "Main text · Results and Discussion",
+        "kind": "summary",
+        "text": "In a field experiment at a Turkish high school, unrestricted GPT-based assistance improved practice performance but reduced subsequent unaided exam performance. The teacher-informed GPT Tutor package largely avoided the measured negative effect, without establishing an unaided-exam improvement over control.",
+        "scope": "The learning-process mediator remains uncertain. The tutoring package bundled design changes; the experiment does not isolate the efficacy of one feature."
       },
       {
         "id": "OB-proxy",
@@ -13557,6 +15534,15 @@ window.AuspexData = {
         "scope": "Algorithmic trading is not automatically AI. A brief market dislocation does not establish lasting financial-system distress; temporal recovery does not isolate the pause’s causal contribution."
       },
       {
+        "id": "WIL-2016-account",
+        "source": "WIL",
+        "title": "Williston: overreliance on partial driving automation",
+        "locator": "What Happened; What We Found",
+        "kind": "summary",
+        "text": "NTSB attributed the fatal crash to a truck’s failure to yield and the car driver’s inattention from overreliance on automation. Design permitting prolonged disengagement contributed.",
+        "scope": "A truck collision under partial automation, not the Tempe pedestrian event. The comparison concerns ineffective human fallback; it does not equate the perception systems or crash geometries."
+      },
+      {
         "id": "GAW-2024-account",
         "source": "GAW",
         "title": "AI assistance improved customer-support productivity",
@@ -13645,6 +15631,69 @@ window.AuspexData = {
         "kind": "summary",
         "text": "WUR reports an irrigation interruption and harvest-date errors requiring interventions. Teams nevertheless completed harvests; scoring included resource costs and biological pest-management choices.",
         "scope": "One trial series, not several independent incidents. The failures were local and recoverable, with no regional crop loss, famine, or measured long-term ecosystem damage."
+      },
+      {
+        "id": "HRI-2012-account",
+        "source": "HRI",
+        "title": "Criminal-record reporting errors allegedly cost employment",
+        "locator": "Allegations, proposed settlement and non-admission notice",
+        "kind": "summary",
+        "text": "The FTC alleged that inaccurate, duplicated, and wrong-person criminal records caused employment denials. The proposed settlement included accuracy and dispute-handling obligations, without an admission of violation.",
+        "scope": "This source describes allegations and settlement terms, not adjudicated findings. The case concerns background reports, not predictions of future arrest, induced crime, or a demonstrated feedback loop."
+      },
+      {
+        "id": "PFL-2018-account",
+        "source": "PFL",
+        "title": "Predictive-policing feedback and an input correction",
+        "locator": "Abstract",
+        "kind": "summary",
+        "text": "The study shows how police-discovered records can reinforce deployment to the same areas. Its input correction prevents the modeled runaway feedback; reported incidents alone do not fully remove it.",
+        "scope": "The study uses a model and simulation. It does not observe employment screening or induced crime. Results depend on assumptions about reported and discovered incidents."
+      },
+      {
+        "id": "WBT-2017-account",
+        "source": "WBT",
+        "title": "Woebot’s short trial improved depression symptoms",
+        "locator": "Methods; intention-to-treat results; attrition",
+        "kind": "summary",
+        "text": "Seventy young adults were randomized to Woebot or information. Depression scores improved more with Woebot over two weeks; the between-group anxiety difference was not significant.",
+        "scope": "A small, short trial with differential attrition. It does not test whole friendship groups, offline mass adoption, or withdrawal from school and work."
+      },
+      {
+        "id": "THR-2025-account",
+        "source": "THR",
+        "title": "Therabot showed benefits with clinical oversight",
+        "locator": "Trial design, follow-up and clinical oversight paragraphs",
+        "kind": "summary",
+        "text": "Dartmouth reports symptom improvements among 106 Therabot users compared with 104 controls without access. Clinicians reviewed conversations and remained ready to intervene.",
+        "scope": "A monitored trial with four weeks of unrestricted access and follow-up, not an active-therapy comparison. It does not establish safety for unmonitored group adoption or equivalence to human therapy."
+      },
+      {
+        "id": "PSY-2025-account",
+        "source": "PSY",
+        "title": "Chatbot-use trial separated causal results from dependence associations",
+        "locator": "Abstract, version 2",
+        "kind": "summary",
+        "text": "Among 981 participants, assigned conditions produced no significant outcome differences. Greater voluntary use and greater trust or social attraction were associated with worse outcomes or dependence.",
+        "scope": "The use and trust associations are not randomized treatment effects. Anxiety-inducing reward optimization, secrecy, and long-term cultural change were not tested."
+      },
+      {
+        "id": "SMR-2021-account",
+        "source": "SMR",
+        "title": "Smart replies changed language and interpersonal impressions",
+        "locator": "Author abstract",
+        "kind": "summary",
+        "text": "Two experiments found more efficient, positive communication with algorithmic replies. Participants were evaluated less favorably when partners suspected algorithmic assistance.",
+        "scope": "One study series, not two cases. This concerns short interactions and perceived AI use, not learned fear, secrecy, persistent distrust, or dependence on mediation."
+      },
+      {
+        "id": "TUT-2025-account",
+        "source": "TUT",
+        "title": "Structured AI tutoring improved subsequent quiz performance",
+        "locator": "Results; Context, limitations; Study population and design",
+        "kind": "summary",
+        "text": "Students learned with scaffolded AI tutoring or active classroom instruction. The AI condition produced higher subsequent quiz performance in two lessons; the design included expert solutions and guided interaction.",
+        "scope": "A short crossover study, with 194 eligible students, not proof of durable learning across a course. It tests a structured tutor, not unrestricted answer provision."
       },
       {
         "id": "HAB-2024-account",

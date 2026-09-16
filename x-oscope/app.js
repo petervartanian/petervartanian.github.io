@@ -30,8 +30,7 @@
   };
   const icon = (name, className = '') => `<svg class="ui-icon ${className}" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="${icons[name]}"/></svg>`;
   const pathways = new Map(data.pathways.map((p) => [p.id, p]));
-  const pathwayCode = (p) => p.group === 'H' ? `X-${p.displayId.split('-').pop()}` : p.displayId;
-  const aliases = new Map(data.pathways.flatMap((p) => [p.displayId, p.displayId.replace('-', '.'), pathwayCode(p)].map(label => [label.toLowerCase(), p.id])));
+  const aliases = new Map(data.pathways.flatMap((p) => [p.displayId, p.displayId.replace('-', '.')].map(label => [label.toLowerCase(), p.id])));
   const incidents = new Map(data.incidents.map((i) => [i.id, i]));
   const sources = new Map(data.evidence.sources.map((s) => [s.id, s]));
   const passages = new Map(data.evidence.passages.map((p) => [p.id, p]));
@@ -43,7 +42,7 @@
   const roleLabel = (step) => stpaNode(step)?.role || step.roles.map((id) => roles.get(id).label).join(' · ');
   const stageLabel = (step) => stpaNode(step)?.role || step.aiStages.map((id) => aiStages.get(id).label).join(' · ');
   const relationLabels = { component: 'Component evidence', 'mechanism-comparison': 'Mechanism comparison', challenge: 'Evidence challenging the link', countermeasure: 'Countermeasure evidence' };
-  const groupLabel = (id) => id === 'H' ? 'X-Extras' : `${groups.get(id).ordinal} (${groups.get(id).shortTitle})`;
+  const groupLabel = (id) => `${groups.get(id).ordinal} (${groups.get(id).shortTitle})`;
   // Family motifs encode subject matter, never severity or evidence strength.
   const familyMotifs = {
     X: '<ellipse cx="27" cy="12" rx="24" ry="10"/><ellipse cx="27" cy="12" rx="15" ry="6"/><ellipse cx="27" cy="12" rx="5" ry="2"/>',
@@ -59,9 +58,7 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const narrow = matchMedia('(max-width: 800px)');
   const compactMap = matchMedia('(max-width: 700px)');
-  const state = { x: '', pathway: '', target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false, strengthen: false };
-  const scenarioLibrary = window.XoscopeScenarios;
-  const openX = new Set();
+  const state = { pathway: '', target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false, strengthen: false };
   const isSTPA = (id = state.pathway) => !!window.AuspexSTPA?.has(id);
   const pathwayTitle = p => window.AuspexSTPAModels?.[p.id]?.title || p.title;
   const overlayConfig = () => window.AuspexSTPA?.model?.presentation.overlays[state.incident];
@@ -126,8 +123,6 @@
   };
 
   function normalize() {
-    state.x = scenarioLibrary?.resolve(state.x) || '';
-    if (state.x) state.pathway = '';
     if (!pathways.has(state.pathway)) {
       Object.assign(state, { pathway: '', target: '', incident: '', barrier: '', safeguard: '', constraint: '', observation: 0, question: 0, overlay: false, exploration: false, inspect: false, strengthen: false });
       window.AuspexSTPA?.use('');
@@ -171,13 +166,10 @@
   }
 
   function writeLocation(replace = false) {
-    // Nested addresses position their own disclosure after reload and history.
-    if ('scrollRestoration' in history) history.scrollRestoration = state.x ? 'manual' : 'auto';
     const url = new URL(location.href);
     url.search = '';
     url.hash = '';
-    if (state.x) url.searchParams.set('x', state.x);
-    if (state.pathway) url.searchParams.set('p', pathwayCode(pathways.get(state.pathway)));
+    if (state.pathway) url.searchParams.set('p', pathways.get(state.pathway).displayId);
     if (state.target) url.searchParams.set('t', state.target);
     if (state.incident) url.searchParams.set('i', state.incident);
     if (state.incident && state.exploration) url.searchParams.set('explore', '1');
@@ -195,10 +187,6 @@
 
   function readLocation() {
     const params = new URLSearchParams(location.search);
-    state.x = scenarioLibrary?.resolve(params.get('x')) || '';
-    openX.clear();
-    scenarioLibrary?.trail(state.x).forEach(node => openX.add(node.id));
-    $('#overview-search').value = '';
     state.pathway = aliases.get((params.get('p') || '').toLowerCase()) || params.get('p') || '';
     state.target = params.get('t') || '';
     state.overlay = isSTPA() && params.has('i');
@@ -215,11 +203,10 @@
     if (params.has('o') && Number.isInteger(requestedObservation) && requestedObservation >= 0 && requestedObservation < observationEntries().length) state.observation = requestedObservation;
     state.question = state.pathway && state.inspect && !isSTPA() ? Math.max(0, questionNames.indexOf(params.get('q'))) : 0;
     if (requested !== [state.pathway, state.incident, state.barrier].join('|') && (params.has('i') || params.has('b') || (params.has('p') && !pathways.has(params.get('p'))))) {
-      announce(state.pathway ? `${pathwayCode(pathways.get(state.pathway))} · ${pathwayTitle(pathways.get(state.pathway))}` : 'Choose a pathway');
+      announce(state.pathway ? `${pathways.get(state.pathway).displayId} · ${pathwayTitle(pathways.get(state.pathway))}` : 'Choose a pathway');
     }
     render();
     writeLocation(true);
-    if (state.x) revealX();
   }
 
   function sourceList(ids) {
@@ -473,22 +460,22 @@
     $('.skip').href = enhanced ? '#incidents-title' : p ? '#pathway-title' : '#choose-title';
     $('.skip').textContent = enhanced ? 'Overlay an incident' : 'Choose a pathway';
     if (!p) {
-      document.title = state.x ? `X-oscope · ${state.x} · ${scenarioLibrary.nodes.get(state.x).title}` : 'X-oscope';
+      document.title = 'X-oscope';
       $('#pathway-family').textContent = '';
       $('#selected-code').textContent = '';
       $('#selected-name').textContent = '';
       renderOverview();
       return;
     }
-    $('#selected-code').textContent = pathwayCode(p);
+    $('#selected-code').textContent = p.displayId;
     const selectedTitle = pathwayTitle(p);
     $('#selected-name').textContent = selectedTitle;
-    $('#choose-pathway').setAttribute('aria-label', `Choose a pathway: ${pathwayCode(p)} · ${selectedTitle}`);
+    $('#choose-pathway').setAttribute('aria-label', `Choose a pathway: ${p.displayId} · ${selectedTitle}`);
     $('#pathway-family').innerHTML = `${familyMotif(p.group)}<span>${escape(groupLabel(p.group))}</span>`;
     const endpoint = p.endpoint.split(';')[0];
     $('#pathway-endpoint').textContent = endpoint.charAt(0).toUpperCase() + endpoint.slice(1);
     $('#pathway-endpoint').hidden = isSTPA(p.id);
-    document.title = `X-oscope · ${pathwayCode(p)}`;
+    document.title = `X-oscope · ${p.displayId}`;
     if (!enhanced) {
       $('#workspace').hidden = true;
       for (const selector of ['#map-nodes','#map-connections','#stpa-barrier-controls','#incident-rail','#step-detail','#barrier-panel','#pathway-details']) $(selector).innerHTML = '';
@@ -503,8 +490,6 @@
 
   function selectPathway(id, reveal = false) {
     if (!pathways.has(id)) return;
-    state.x = '';
-    openX.clear();
     const enteringPathway = !state.pathway;
     state.pathway = id;
     state.overlay = false;
@@ -519,14 +504,13 @@
     normalize();
     render();
     writeLocation();
-    announce(`${pathwayCode(pathways.get(id))} · ${pathwayTitle(pathways.get(id))}`);
+    announce(`${pathways.get(id).displayId} · ${pathwayTitle(pathways.get(id))}`);
     if (reveal) focusAndReveal($('#pathway-title'), enteringPathway);
   }
 
   const searchable = (value) => value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   const searchIndex = new Map(data.pathways.map((p) => [p.id, searchable([
-    p.id, p.displayId, pathwayCode(p), p.displayId.replace('-', '.'), pathwayTitle(p), data.groups.find(g=>g.id===p.group).title,
-    ...(p.group === 'H' ? ['X-Extras', 'comparisons'] : []),
+    p.id, p.displayId, p.displayId.replace('-', '.'), pathwayTitle(p), data.groups.find(g=>g.id===p.group).title,
     ...(isSTPA(p.id) ? [p.title, p.endpoint, p.conditions, p.basis, p.variants,
     p.reach.local, p.reach.systemic || '', p.steps.flatMap((s) => [...s.roles.map((id) => roles.get(id).label), ...s.aiStages.map((id) => aiStages.get(id).label)]).join(' '),
     data.groups.find((g) => g.id === p.group).title,
@@ -542,116 +526,33 @@
   function renderOverview() {
     const terms = searchable($('#overview-search').value.trim()).split(/\s+/).filter(Boolean);
     const results = matchingPathways(terms);
+    $('#overview-count').textContent = terms.length ? `${results.length} pathway${results.length===1?'':'s'}` : '';
     $('#overview-incidents').innerHTML = incidentResults(terms);
-    const familyGroups = (window.AuspexFamilies?.groups || []).map((group) => ({
-      ...group,
-      families: group.families.filter((family) => terms.every((term) => searchable([
-        group.id, group.title, family.id, family.title, family.premise, family.chain.flat().join(' '),
-        scenarioLibrary?.searchText(family.id) || '',
-      ].join(' ')).includes(term))),
-    })).filter((group) => group.families.length);
-    const familyCount = familyGroups.reduce((count, group) => count + group.families.length, 0);
-    const comparisons = data.pathways.filter((p) => p.group === 'H' && terms.every((term) =>
-      searchable(`comparisons ${searchIndex.get(p.id)}`).includes(term)));
-    const existing = terms.length ? results.filter((p) => p.group !== 'H') : [];
-    const total = familyCount + comparisons.length + existing.length;
-    $('#overview-count').textContent = terms.length ? `${total} result${total === 1 ? '' : 's'}` : '';
-    const pathwayItem = (p) => {
-      const count = isSTPA(p.id) ? data.assessments.filter((a) => a.pathway === p.id).length : 0;
-      const code = pathwayCode(p);
-      return `<li><button class="overview-pathway" data-group="${p.group}" data-overview-pathway="${p.id}"><span class="code">${escape(code)}</span><span>${escape(pathwayTitle(p))}${count ? `<small class="pathway-coverage">${countLabel(count)}</small>` : ''}</span>${icon('right', 'choice-icon')}</button></li>`;
-    };
-    const familyRows = familyGroups.map((group) => `<details class="overview-group" data-x-group="${group.id}" data-x-address="${group.id}"${terms.length || openX.has(group.id) ? ' open' : ''}>
-      <summary data-x-target="${group.id}"><span class="cluster-index">${group.id}</span><span class="cluster-text">${escape(group.title)}</span><small class="cluster-count">${group.families.length} ${group.families.length === 1 ? 'family' : 'families'}</small></summary>
-      <div class="x-families">${group.families.map((family) => {
-        const entries = scenarioLibrary?.familyScenarios(family.id) || [];
-        const searchOpen = scenarioLibrary?.search(family, terms).open.has(family.id);
-        const overview = `<div class="x-family-reading"><h4>Premise</h4><p>${escape(family.premise)}</p><h4>Causal pathway</h4><ol>${family.chain.map(([title, text]) => `<li><strong>${escape(title)}</strong>${escape(text)}</li>`).join('')}</ol><p class="x-family-source">Family overview adapted from <cite>${escape(window.AuspexFamilies.source)}</cite>, ${escape(family.pages)} (September 15, 2026 draft). Counts refer to source scenarios in the review.</p></div>`;
-        return `<details class="x-family" data-x-family="${family.id}" data-x-address="${family.id}" id="family-${family.id}"${openX.has(family.id) || searchOpen ? ' open' : ''}>
-        <summary data-x-target="${family.id}"><span class="code">${family.id}</span><span>${escape(family.title)}</span><small class="x-scenario-count">${entries.length ? `${entries.length} to explore · ` : ''}${family.count} ${family.count === 1 ? 'scenario' : 'scenarios'} in the review</small></summary>
-        ${entries.length ? `${scenarioLibrary.render(family, openX, terms)}<details class="x-family-background"><summary>About the ${escape(family.title)} family</summary>${overview}</details>` : overview}
-      </details>`;
-      }).join('')}</div>
-    </details>`).join('');
-    const extras = comparisons.length ? `<details class="overview-group comparisons" data-group="H"${terms.length ? ' open' : ''}><summary><span class="cluster-text">X-Extras</span><small class="cluster-count">${comparisons.length} comparison${comparisons.length === 1 ? '' : 's'}</small></summary><ul>${comparisons.map(pathwayItem).join('')}</ul></details>` : (!terms.length || terms.every(term => searchable('X-Extras comparisons').includes(term))) ? `<section class="overview-group comparisons" data-group="H" aria-labelledby="extras-heading"><div class="comparisons-heading"><span class="cluster-text" id="extras-heading">X-Extras</span><small class="cluster-count">0 comparisons</small></div></section>` : '';
-    const previous = existing.length ? `<section class="overview-existing"><h3>Existing pathways</h3><ul>${existing.map(pathwayItem).join('')}</ul></section>` : '';
-    $('#overview-groups').innerHTML = familyRows + extras + previous || '<p class="no-results">No matching pathways or families</p>';
+    $('#overview-groups').innerHTML = results.length ? data.groups.map((group) => {
+      const members = results.filter((p) => p.group === group.id);
+      if (!members.length) return '';
+      return `<details class="overview-group${group.id === 'H' ? ' comparisons' : ''}" data-group="${group.id}"${terms.length ? ' open' : ''}><summary><span class="cluster-index">${group.ordinal}</span><span class="cluster-text">${escape(group.shortTitle)}</span>${familyMotif(group.id)}<small class="cluster-count">${members.length} ${group.id === 'H' ? 'comparison' : 'pathway'}${members.length===1?'':'s'}</small></summary><ul>${members.map((p) => {
+        const count = isSTPA(p.id) ? data.assessments.filter((a) => a.pathway === p.id).length : 0;
+        return `<li><button class="overview-pathway" data-overview-pathway="${p.id}"><span class="code">${p.displayId}</span><span>${escape(pathwayTitle(p))}${count ? `<small class="pathway-coverage">${countLabel(count)}</small>` : ''}</span>${icon('right', 'choice-icon')}</button></li>`;
+      }).join('')}</ul></details>`;
+    }).join('') : '<p class="no-results">No matching pathways</p>';
   }
   $('#overview-search').addEventListener('input', renderOverview);
   $('#overview-search').addEventListener('keydown', (event) => {
     if (!['Enter', 'ArrowDown'].includes(event.key)) return;
-    const first = $('#overview-groups [data-x-match]') || $('#overview-incidents [data-search-incident]') || $('#overview-groups .x-family > summary') || $('#overview-groups [data-overview-pathway]');
+    const first = $('#overview-incidents [data-search-incident]') || $('#overview-groups [data-overview-pathway]');
     if (!first) return;
     event.preventDefault();
-    if (event.key === 'Enter') {
-      if (first.dataset.xTarget) selectX(first.dataset.xTarget, true);
-      else first.click();
-    }
+    if (event.key === 'Enter') first.click();
     else {
-      for (let parent = first.parentElement; parent; parent = parent.parentElement) {
-        if (parent.tagName === 'DETAILS') parent.open = true;
-      }
+      if (first.closest('details')) first.closest('details').open = true;
       first.focus();
     }
   });
   $('#overview-groups').addEventListener('click', (event) => {
-    const link = event.target.closest('[data-x-link]');
-    if (link) {
-      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      event.preventDefault();
-      selectX(link.dataset.xLink, true);
-      return;
-    }
-    const summary = event.target.closest('summary[data-x-target]');
-    if (summary && scenarioLibrary) {
-      event.preventDefault();
-      if ($('#overview-search').value.trim()) selectX(summary.dataset.xTarget, true);
-      else toggleX(summary.dataset.xTarget, summary.parentElement.open);
-      return;
-    }
     const button = event.target.closest('[data-overview-pathway]');
     if (button) selectPathway(button.dataset.overviewPathway, true);
   });
-  function revealX(address = state.x, scroll = true) {
-    const summary = $(`[data-x-target="${address}"]`);
-    if (!summary) return;
-    summary.focus({ preventScroll: true });
-    if (scroll) summary.scrollIntoView({ block: 'start', behavior: 'instant' });
-  }
-  function selectX(address, reveal = false) {
-    const id = scenarioLibrary?.resolve(address);
-    if (!id) return;
-    state.x = id;
-    state.pathway = '';
-    openX.clear();
-    scenarioLibrary.trail(id).forEach(node => openX.add(node.id));
-    $('#overview-search').value = '';
-    normalize();
-    render();
-    writeLocation();
-    if (reveal) revealX();
-    announce(`${id} · ${scenarioLibrary.nodes.get(id).title}`);
-  }
-  function toggleX(address, wasOpen) {
-    const id = scenarioLibrary.resolve(address);
-    if (!id) return;
-    // Capture actual disclosure state, including ancestors opened by search.
-    document.querySelectorAll('#overview-groups details[data-x-address][open]').forEach(detail => openX.add(detail.dataset.xAddress));
-    if (wasOpen) {
-      for (const candidate of openX) if (scenarioLibrary.trail(candidate).some(node => node.id === id)) openX.delete(candidate);
-      state.x = scenarioLibrary.nodes.get(id).parent;
-    } else {
-      scenarioLibrary.trail(id).forEach(node => openX.add(node.id));
-      state.x = id;
-    }
-    // Once a result is selected, browsing resumes in the full hierarchy.
-    $('#overview-search').value = '';
-    document.title = state.x ? `X-oscope · ${state.x} · ${scenarioLibrary.nodes.get(state.x).title}` : 'X-oscope';
-    renderOverview();
-    writeLocation();
-    revealX(id, false);
-    announce(`${id} · ${scenarioLibrary.nodes.get(id).title} ${wasOpen ? 'collapsed' : 'expanded'}`);
-  }
   function incidentResults(terms, all = false) {
     if (!terms.length && !all) return '';
     const text = (a) => searchable(`${a.incident} ${incidents.get(a.incident).title} ${a.scope}`);
@@ -659,13 +560,11 @@
     const words = termPatterns(terms);
     const exact = candidates.filter((a) => words.every((word) => word.test(text(a))));
     const matches = exact.length ? exact : candidates;
-    return matches.length ? `<section class="incident-matches"><h3>Incidents</h3>${matches.map((a) => `<button class="incident-result" data-search-incident="${a.id}"><span>${escape(incidents.get(a.incident).title)}</span><span class="incident-result-route" data-group="${pathways.get(a.pathway).group}"><span class="code">${pathwayCode(pathways.get(a.pathway))}</span>${icon('right', 'choice-icon')}</span></button>`).join('')}</section>` : '';
+    return matches.length ? `<section class="incident-matches"><h3>Incidents</h3>${matches.map((a) => `<button class="incident-result" data-search-incident="${a.id}"><span>${escape(incidents.get(a.incident).title)}</span><span class="incident-result-route" data-group="${pathways.get(a.pathway).group}"><span class="code">${pathways.get(a.pathway).displayId}</span>${icon('right', 'choice-icon')}</span></button>`).join('')}</section>` : '';
   }
   function selectIncident(id) {
     const a = data.assessments.find((item) => item.id === id);
     if (!a) return;
-    state.x = '';
-    openX.clear();
     const enteringPathway = !state.pathway;
     state.pathway = a.pathway;
     state.overlay = isSTPA(a.pathway);
@@ -688,8 +587,6 @@
     if (result) selectIncident(result.dataset.searchIncident);
   });
   function showOverview() {
-    state.x = '';
-    openX.clear();
     state.pathway = '';
     normalize();
     $('#overview-search').value = '';
@@ -712,7 +609,7 @@
     $('#pathway-results').innerHTML = incidentResults(terms) + (results.length ? data.groups.map((group) => {
       const members = results.filter((p) => p.group === group.id);
       if (!members.length) return '';
-       return `<section class="result-group${group.id === 'H' ? ' comparison-group' : ''}" data-group="${group.id}" aria-labelledby="group-${group.id}"><h3 id="group-${group.id}">${familyMotif(group.id)}${escape(groupLabel(group.id))}<span>${members.length}</span></h3><ul>${members.map((p) => `<li><button class="pathway-result" data-pathway="${p.id}" aria-current="${p.id === state.pathway}"><span class="code">${pathwayCode(p)}</span><span>${escape(pathwayTitle(p))}</span>${icon(p.id === state.pathway ? 'check' : 'right', 'choice-icon result-arrow')}</button></li>`).join('')}</ul></section>`;
+       return `<section class="result-group${group.id === 'H' ? ' comparison-group' : ''}" data-group="${group.id}" aria-labelledby="group-${group.id}"><h3 id="group-${group.id}">${familyMotif(group.id)}${escape(groupLabel(group.id))}<span>${members.length}</span></h3><ul>${members.map((p) => `<li><button class="pathway-result" data-pathway="${p.id}" aria-current="${p.id === state.pathway}"><span class="code">${p.displayId}</span><span>${escape(pathwayTitle(p))}</span>${icon(p.id === state.pathway ? 'check' : 'right', 'choice-icon result-arrow')}</button></li>`).join('')}</ul></section>`;
     }).join('') : '<p class="no-results">No matching pathways</p>');
     $('#pathway-results').scrollTop = 0;
   }
@@ -1112,13 +1009,12 @@
     if ($('#source-dialog').open) $('#source-dialog').close();
     if ($('#method-dialog').open) $('#method-dialog').close();
     readLocation();
-    announce(state.x ? `${state.x} · ${scenarioLibrary.nodes.get(state.x).title}` : state.pathway ? `${pathwayCode(pathways.get(state.pathway))} · ${pathwayTitle(pathways.get(state.pathway))}` : 'Choose a pathway');
+    announce(state.pathway ? `${pathways.get(state.pathway).displayId} · ${pathwayTitle(pathways.get(state.pathway))}` : 'Choose a pathway');
   });
 
   readLocation();
   $('#app').hidden = false;
   $('#fallback').hidden = true;
-  if (state.x) revealX();
   new ResizeObserver(drawConnections).observe($('#pathway-map'));
   document.fonts.ready.then(drawConnections);
   // Fit the headline to the copy's measured height, retaining the type proportions.

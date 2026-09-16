@@ -34,14 +34,13 @@ for (const name of ['index.html', 'pathways.html', 'identity.html']) {
   const canonical = `${origin}/x-oscope/${name === 'index.html' ? '' : name}`;
   assert(html.includes(`<link rel="canonical" href="${canonical}">`), `${name}: incorrect canonical address`);
   if (name === 'pathways.html') {
-    assert(html.includes('<h2>X-Extras</h2><p>0 comparisons</p>'), 'Static reader must keep an empty X-Extras section');
-    assert(!/(?:id|href)="#?H-0[1-6]/.test(html), 'Removed Extras must have no reader articles or links');
+    for (let i = 1; i <= 6; i++) assert(html.includes(`id="H-0${i}"`), 'Restored comparison must have a reader article');
   }
   for (const match of html.matchAll(/<(?:a|link|script|img)\b[^>]*\b(?:href|src)="([^"]+)"[^>]*>/g)) {
     await checkReference(match[1], path);
   }
 }
-for (const name of ['style.css', 'stpa.css', 'controls.css', 'families.css']) {
+for (const name of ['style.css', 'stpa.css', 'controls.css']) {
   const path = `x-oscope/${name}`;
   for (const match of (await read(path)).matchAll(/url\(\s*['"]?([^)'"\s]+)['"]?\s*\)/g)) {
     if (!match[1].startsWith('#')) await checkReference(match[1], path, false);

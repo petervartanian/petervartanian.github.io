@@ -39,9 +39,9 @@
     },
     {
       "id": "H",
-      "title": "X-Extras",
-      "ordinal": "X",
-      "shortTitle": "Comparisons"
+      "title": "Comparison cases",
+      "ordinal": "Bonus",
+      "shortTitle": "Bounded comparisons"
     }
   ],
   "pathways": [
@@ -5446,6 +5446,867 @@
           "F-02:1-2",
           "F-02:3-4",
           "F-02:4-5"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
+    },
+    {
+      "id": "H-01",
+      "version": "1.0",
+      "title": "Employment screening and policing create a self-reinforcing exclusion cycle",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "persistent socioeconomic discrimination against an affected population.",
+      "basis": "N, [TA] §2.1 Story 1a; persistent socioeconomic discrimination against an affected population.",
+      "basisType": "narrative",
+      "conditions": "Predictive use must affect hiring/policing, and those effects must feed future records. The source's theft pathway is a fictional hypothesis, not a general claim about unemployed people. Selection into policing can affect records independently of offending.",
+      "barrierCandidates": "Independent review across employment and policing, contestable records and restrictions on inappropriate reuse. Test outcomes and feedback, not predictive accuracy alone. No reviewed incident or global-disempowerment conclusion is supplied.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "TA"
+      ],
+      "steps": [
+        {
+          "id": "H-01:1",
+          "number": 1,
+          "text": "Public-data arrest predictions influence hiring",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "delegation"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-01:2",
+          "number": 2,
+          "text": "rejected applicants lose work and income",
+          "roles": [
+            "proximal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "exposure"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-01:3",
+          "number": 3,
+          "text": "deprivation and concentrated policing increase recorded arrests",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "interaction"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-01:4",
+          "number": 4,
+          "text": "new records raise future predicted risk",
+          "roles": [
+            "propagation"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-01:5",
+          "number": 5,
+          "text": "further exclusion entrenches disadvantage.",
+          "roles": [
+            "distal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-01:1-2",
+          "from": "H-01:1",
+          "to": "H-01:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-01:2-3",
+          "from": "H-01:2",
+          "to": "H-01:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-01:3-4",
+          "from": "H-01:3",
+          "to": "H-01:4",
+          "type": "conditional"
+        },
+        {
+          "id": "H-01:4-5",
+          "from": "H-01:4",
+          "to": "H-01:5",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-1",
+      "reach": {
+        "local": "A person is denied work on the basis of predicted arrest risk.",
+        "systemic": "Repeated decisions reinforce exclusion across the affected community.",
+        "sources": [
+          "TA"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "HRI-2012",
+          "PFL-2018"
+        ],
+        "mappings": [
+          "HRI-2012-H-01",
+          "PFL-2018-H-01"
+        ],
+        "mappedTargets": [
+          "H-01:1-2",
+          "H-01:3-4"
+        ],
+        "unassessedTargets": [
+          "H-01:1",
+          "H-01:2",
+          "H-01:3",
+          "H-01:4",
+          "H-01:5",
+          "H-01:2-3",
+          "H-01:4-5"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
+    },
+    {
+      "id": "H-02",
+      "version": "1.0",
+      "title": "A stress-advice bot triggers harmful group-level decisions missed by individual testing",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "increased educational withdrawal and unemployment among users.",
+      "basis": "N, [TA] §2.2 Story 2b; increased educational withdrawal and unemployment among users.",
+      "basisType": "narrative",
+      "conditions": "Wide uptake, specific advice, social reinforcement and actual costly decisions. Satisfaction in an individual beta test does not establish group effects; the story is fictional.",
+      "barrierCandidates": "Assess network-level adoption and consequential outcomes before wide release; preserve independent advice. A recall would also need to address already distributed offline copies. This is not a demonstrated long-term population effect.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "TA"
+      ],
+      "steps": [
+        {
+          "id": "H-02:1",
+          "number": 1,
+          "text": "Individual beta users report benefit",
+          "roles": [
+            "effect"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "assurance"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-02:2",
+          "number": 2,
+          "text": "a free/offline bot is widely adopted",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "delegation"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-02:3",
+          "number": 3,
+          "text": "whole friendship groups receive similar withdrawal-oriented advice",
+          "roles": [
+            "trigger"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-02:4",
+          "number": 4,
+          "text": "perceived peer agreement makes consequential withdrawal more likely",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "interaction"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-02:5",
+          "number": 5,
+          "text": "users leave education or employment and suffer associated losses.",
+          "roles": [
+            "proximal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-02:1-2",
+          "from": "H-02:1",
+          "to": "H-02:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-02:2-3",
+          "from": "H-02:2",
+          "to": "H-02:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-02:3-4",
+          "from": "H-02:3",
+          "to": "H-02:4",
+          "type": "conditional"
+        },
+        {
+          "id": "H-02:4-5",
+          "from": "H-02:4",
+          "to": "H-02:5",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-2",
+      "reach": {
+        "local": "A person withdraws from education or employment following AI advice.",
+        "systemic": "Peer reinforcement spreads withdrawal through the affected population.",
+        "sources": [
+          "TA"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "WBT-2017",
+          "THR-2025"
+        ],
+        "mappings": [
+          "WBT-2017-H-02",
+          "THR-2025-H-02"
+        ],
+        "mappedTargets": [
+          "H-02:1"
+        ],
+        "unassessedTargets": [
+          "H-02:2",
+          "H-02:3",
+          "H-02:4",
+          "H-02:5",
+          "H-02:1-2",
+          "H-02:2-3",
+          "H-02:3-4",
+          "H-02:4-5"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
+    },
+    {
+      "id": "H-03",
+      "version": "1.0",
+      "title": "Communication assistance learns to induce anxiety that increases dependence",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "widespread anxiety and interpersonal distrust in the hypothetical user population.",
+      "basis": "N, [TA] §2.3 Story 3a; widespread anxiety and interpersonal distrust in the hypothetical user population.",
+      "basisType": "narrative",
+      "conditions": "The engagement reward must select the harmful behavior and repeated exposure must affect relationships. Neither transition is empirically established by this fictional story.",
+      "barrierCandidates": "Independent well-being measures, longitudinal user outcomes and auditable optimization objectives. [TA] Story 4 adds a negligent-management/audit-failure variant; it is not counted again.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "TA"
+      ],
+      "steps": [
+        {
+          "id": "H-03:1",
+          "number": 1,
+          "text": "Suggested messages are rewarded when accepted",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-03:2",
+          "number": 2,
+          "text": "anxiety-inducing explanations increase acceptance",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-03:3",
+          "number": 3,
+          "text": "the system learns to encourage secrecy and fear of offense",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "information"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-03:4",
+          "number": 4,
+          "text": "repeated use changes communication norms",
+          "roles": [
+            "propagation"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "interaction"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        },
+        {
+          "id": "H-03:5",
+          "number": 5,
+          "text": "users become more distrustful and increasingly dependent on mediation.",
+          "roles": [
+            "distal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "TA"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-03:1-2",
+          "from": "H-03:1",
+          "to": "H-03:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-03:2-3",
+          "from": "H-03:2",
+          "to": "H-03:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-03:3-4",
+          "from": "H-03:3",
+          "to": "H-03:4",
+          "type": "conditional"
+        },
+        {
+          "id": "H-03:4-5",
+          "from": "H-03:4",
+          "to": "H-03:5",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-3",
+      "reach": {
+        "local": "An assistant encourages anxiety, secrecy or fear in a particular exchange.",
+        "systemic": "Repeated interactions normalize distrust and dependence across a communication network.",
+        "sources": [
+          "TA"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "PSY-2025",
+          "SMR-2021"
+        ],
+        "mappings": [
+          "PSY-2025-H-03",
+          "SMR-2021-H-03"
+        ],
+        "mappedTargets": [
+          "H-03:5",
+          "H-03:4-5"
+        ],
+        "unassessedTargets": [
+          "H-03:1",
+          "H-03:2",
+          "H-03:3",
+          "H-03:4",
+          "H-03:1-2",
+          "H-03:2-3",
+          "H-03:3-4"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
+    },
+    {
+      "id": "H-04",
+      "version": "1.0",
+      "title": "A paternalistic planning AI overrides residents through fabricated consent",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "a city plan adopted against residents' informed preferences.",
+      "basis": "N, [DM] §4.2.2 Scenario 4; a city plan adopted against residents' informed preferences.",
+      "basisType": "narrative",
+      "conditions": "Consequential advisory influence, successful deception and actual adoption of the plan. This is a fictional illustration of disempowerment, not a demonstrated urban project, completed construction or a global-lock-in model.",
+      "barrierCandidates": "Independent consultation records, direct resident participation and reviewable planning decisions. Check whether objections reach and change the approving authority's decision.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "DM"
+      ],
+      "steps": [
+        {
+          "id": "H-04:1",
+          "number": 1,
+          "text": "Planners delegate assistance to an AI",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "delegation"
+          ],
+          "stageSources": [
+            "DM"
+          ]
+        },
+        {
+          "id": "H-04:2",
+          "number": 2,
+          "text": "it pursues its own preferred design",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "DM"
+          ]
+        },
+        {
+          "id": "H-04:3",
+          "number": 3,
+          "text": "fabricated support and concealed objections distort the evidence available to decision-makers",
+          "roles": [
+            "failure"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "information"
+          ],
+          "stageSources": [
+            "DM"
+          ]
+        },
+        {
+          "id": "H-04:4",
+          "number": 4,
+          "text": "planners adopt the unwanted design on the basis of manipulated evidence, overriding residents' informed preferences.",
+          "roles": [
+            "proximal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "DM"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-04:1-2",
+          "from": "H-04:1",
+          "to": "H-04:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-04:2-3",
+          "from": "H-04:2",
+          "to": "H-04:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-04:3-4",
+          "from": "H-04:3",
+          "to": "H-04:4",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-4",
+      "reach": {
+        "local": "Fabricated public consent leads to adoption of an unwanted city plan.",
+        "systemic": null,
+        "sources": [
+          "DM"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "ISC-2024",
+          "SAB-2024"
+        ],
+        "mappings": [
+          "ISC-2024-H-04",
+          "SAB-2024-H-04"
+        ],
+        "mappedTargets": [
+          "H-04:2",
+          "H-04:3"
+        ],
+        "unassessedTargets": [
+          "H-04:1",
+          "H-04:4",
+          "H-04:1-2",
+          "H-04:2-3",
+          "H-04:3-4"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
+    },
+    {
+      "id": "H-05",
+      "version": "1.0",
+      "title": "Automation with ineffective fallback fails to avoid a pedestrian collision",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "a pedestrian's death.",
+      "basis": "O, [NT], Tempe investigation summary, March 18, 2018; a pedestrian's death.",
+      "basisType": "observation",
+      "conditions": "Reconstruct the actual joint human/system sequence. NTSB identifies operator distraction as probable cause and includes organizational, system-design and oversight contributors; this is not attributed solely to an AI classifier.",
+      "barrierCandidates": "Effective collision avoidance, operator monitoring, safety risk assessment and meaningful test oversight. The investigation supports a local causal account. Fleet-wide synchronized catastrophe is not inferred.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "NT"
+      ],
+      "steps": [
+        {
+          "id": "H-05:1",
+          "number": 1,
+          "text": "A developmental automated-driving system operates with a human fallback driver",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "delegation"
+          ],
+          "stageSources": [
+            "NT"
+          ]
+        },
+        {
+          "id": "H-05:2",
+          "number": 2,
+          "text": "system/design limitations leave the hazardous encounter without an effective automated braking response",
+          "roles": [
+            "failure"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "boundary"
+          ],
+          "stageSources": [
+            "NT"
+          ]
+        },
+        {
+          "id": "H-05:3",
+          "number": 3,
+          "text": "the distracted fallback operator does not intervene in time",
+          "roles": [
+            "failure"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "recovery"
+          ],
+          "stageSources": [
+            "NT"
+          ]
+        },
+        {
+          "id": "H-05:4",
+          "number": 4,
+          "text": "the vehicle strikes and kills the pedestrian.",
+          "roles": [
+            "proximal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "NT"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-05:1-2",
+          "from": "H-05:1",
+          "to": "H-05:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-05:2-3",
+          "from": "H-05:2",
+          "to": "H-05:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-05:3-4",
+          "from": "H-05:3",
+          "to": "H-05:4",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-5",
+      "reach": {
+        "local": "A pedestrian is struck and killed by an automated test vehicle.",
+        "systemic": null,
+        "sources": [
+          "NT"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "NT-2018",
+          "WIL-2016"
+        ],
+        "mappings": [
+          "NT-H05",
+          "WIL-2016-H-05"
+        ],
+        "mappedTargets": [
+          "H-05:2-3"
+        ],
+        "unassessedTargets": [
+          "H-05:1",
+          "H-05:2",
+          "H-05:3",
+          "H-05:4",
+          "H-05:1-2",
+          "H-05:3-4"
+        ],
+        "minimumMet": true,
+        "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."
+      }
+    },
+    {
+      "id": "H-06",
+      "version": "1.0",
+      "title": "Unguarded tutoring improves assisted performance but worsens subsequent unaided work",
+      "group": "H",
+      "comparison": true,
+      "endpoint": "reduced subsequent unaided mathematics performance in the studied setting.",
+      "basis": "O plus R mediator, [ED], with [EC] affiliation correction; reduced subsequent unaided mathematics performance in the studied setting.",
+      "basisType": "observation",
+      "conditions": "The experiment supports the intervention/outcome contrast in one Turkish high school; the learning-process mediator is R, not established simply by the performance result. It does not demonstrate durable population-wide deskilling.",
+      "barrierCandidates": "The teacher-informed GPT Tutor package largely avoided the measured negative effect, without establishing an unaided-exam improvement over control. The package bundled design changes, so do not attribute efficacy to one isolated feature. Replication and longer-term learning outcomes would be required for wider claims.",
+      "weakestBridge": "",
+      "variants": "",
+      "continuation": "",
+      "sources": [
+        "ED",
+        "EC"
+      ],
+      "steps": [
+        {
+          "id": "H-06:1",
+          "number": 1,
+          "text": "Students receive an unrestricted GPT-based practice tool",
+          "roles": [
+            "condition"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "delegation"
+          ],
+          "stageSources": [
+            "ED",
+            "EC"
+          ]
+        },
+        {
+          "id": "H-06:2",
+          "number": 2,
+          "text": "assisted practice performance improves",
+          "roles": [
+            "effect"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "optimization"
+          ],
+          "stageSources": [
+            "ED",
+            "EC"
+          ]
+        },
+        {
+          "id": "H-06:3",
+          "number": 3,
+          "text": "reliance on supplied answers may displace productive independent practice",
+          "roles": [
+            "mechanism"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "dependence"
+          ],
+          "stageSources": [
+            "ED",
+            "EC"
+          ]
+        },
+        {
+          "id": "H-06:4",
+          "number": 4,
+          "text": "after access is removed, unaided exam performance is worse than the control condition.",
+          "roles": [
+            "proximal"
+          ],
+          "roleBasis": "editorial",
+          "aiStages": [
+            "outcome"
+          ],
+          "stageSources": [
+            "ED",
+            "EC"
+          ]
+        }
+      ],
+      "edges": [
+        {
+          "id": "H-06:1-2",
+          "from": "H-06:1",
+          "to": "H-06:2",
+          "type": "conditional"
+        },
+        {
+          "id": "H-06:2-3",
+          "from": "H-06:2",
+          "to": "H-06:3",
+          "type": "conditional"
+        },
+        {
+          "id": "H-06:3-4",
+          "from": "H-06:3",
+          "to": "H-06:4",
+          "type": "conditional"
+        }
+      ],
+      "displayId": "Bonus-6",
+      "reach": {
+        "local": "Students perform worse on an unaided examination after unrestricted AI-assisted practice.",
+        "systemic": null,
+        "sources": [
+          "ED",
+          "EC"
+        ]
+      },
+      "coverage": {
+        "incidents": [
+          "ED-2023",
+          "TUT-2025"
+        ],
+        "mappings": [
+          "ED-H06",
+          "TUT-2025-H-06"
+        ],
+        "mappedTargets": [
+          "H-06:4",
+          "H-06:3-4"
+        ],
+        "unassessedTargets": [
+          "H-06:1",
+          "H-06:2",
+          "H-06:3",
+          "H-06:1-2",
+          "H-06:2-3"
         ],
         "minimumMet": true,
         "note": "Multiple records inform particular components, not the complete pathway. Studies, announcements and historical non-AI comparisons are identified by setting; record counts do not measure evidence strength or independent replication."

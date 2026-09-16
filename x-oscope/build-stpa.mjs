@@ -3,7 +3,7 @@ import vm from 'node:vm';
 
 const read = name => readFile(new URL(name, import.meta.url), 'utf8');
 const parse = async name => JSON.parse(await read(name));
-const models = await Promise.all(['a','b','c','d','e','f'].map(letter => parse(`stpa-${letter}1.json`)));
+const models = await Promise.all(['a','b','c','d','e','f','h'].map(letter => parse(`stpa-${letter}1.json`)));
 const barrierStates = await parse('barrier-states.json');
 const registry = Object.fromEntries(models.map(model => [model.pathway, model]));
 const bundle = `// Generated from STPA models and barrier-states.json by build-stpa.mjs.\nwindow.AuspexSTPAModels = ${JSON.stringify(registry, null, 2)};\nwindow.AuspexSTPAData = window.AuspexSTPAModels['X-01'];\nwindow.AuspexBarrierStateData = ${JSON.stringify(barrierStates, null, 2)};\n`;
@@ -12,7 +12,6 @@ const context = vm.createContext({ window: { AuspexSTPAModels: registry, AuspexS
 vm.runInContext(await read('stpa.js'), context);
 const presentation = context.window.AuspexSTPA;
 const [catalogue, assessments, evidence, incidents] = await Promise.all(['pathways.json','assessments.json','evidence.json','incidents.json'].map(parse));
-const displayCode = pathway => pathway.group === 'H' ? `X-${Number(pathway.id.split('-')[1])}` : pathway.displayId;
 const sources = new Map(evidence.sources.map(s => [s.id,s]));
 const passages = new Map(evidence.passages.map(p => [p.id,p]));
 for (const model of models) {
@@ -48,13 +47,12 @@ for (const model of models) {
   if (!nextArticle) throw new Error(`Missing next static article after ${model.pathway}`);
   const next = start + 1 + nextArticle.index;
   const marker = model.displayId.replace(/[-.]/g,'');
-  const code = displayCode(pathway);
-  const article = `<article id="${model.pathway}" data-group="${pathway.group}"><p class="eyebrow">${code} · Pathway</p>${presentation.staticPage()}<!-- ${marker}-EVIDENCE-START -->${mappedEvidence(model)}<!-- ${marker}-EVIDENCE-END --><a href="./?p=${code}">Explore ${code} in X-oscope ↗</a></article>`;
+  const article = `<article id="${model.pathway}" data-group="${pathway.group}"><p class="eyebrow">${model.displayId} · Pathway</p>${presentation.staticPage()}<!-- ${marker}-EVIDENCE-START -->${mappedEvidence(model)}<!-- ${marker}-EVIDENCE-END --><a href="./?p=${model.displayId}">Explore ${model.displayId} in X-oscope ↗</a></article>`;
   html = html.slice(0,start) + article + html.slice(next);
-  html = html.replace(new RegExp(`(<a href="#${model.pathway}">)[^<]*(</a>)`), `$1${code} — ${esc(model.title)}$2`);
+  html = html.replace(new RegExp(`(<a href="#${model.pathway}">)[^<]*(</a>)`), `$1${model.displayId} — ${esc(model.title)}$2`);
 }
 for (const p of catalogue.pathways) {
-  html = html.replace(new RegExp(`(<a href="#${p.id}">)[^<]*(</a>)`), `$1${displayCode(p)} — ${esc(registry[p.id]?.title || p.title)}$2`);
+  html = html.replace(new RegExp(`(<a href="#${p.id}">)[^<]*(</a>)`), `$1${p.displayId} — ${esc(registry[p.id]?.title || p.title)}$2`);
 }
 // Keep unworked titles addressable while leaving their content blank.
 const starts = [...html.matchAll(/<article id="([^"]+)" data-group="([^"]+)"[^>]*>/g)];
@@ -64,14 +62,13 @@ for (let i = starts.length - 1; i >= 0; i--) {
   const p = catalogue.pathways.find(p => p.id === match[1]);
   const end = starts[i + 1]?.index ?? html.indexOf('</main>', match.index);
   if (end < 0) throw new Error(`Missing reader boundary ${p.id}`);
-  html = html.slice(0, match.index) + `<article id="${p.id}" data-group="${p.group}" data-unworked="true"><p class="eyebrow">${displayCode(p)} · Pathway</p><h2>${esc(p.title)}</h2></article>` + html.slice(end);
+  html = html.slice(0, match.index) + `<article id="${p.id}" data-group="${p.group}" data-unworked="true"><p class="eyebrow">${p.displayId} · Pathway</p><h2>${esc(p.title)}</h2></article>` + html.slice(end);
 }
-html = html.replace(/<h2>(?:Bonus · Comparison cases|Extras)<\/h2>/, '<h2>X-Extras</h2>');
-html = html.replace(/href="style.css(?:\?[^\"]*)?"/, 'href="style.css?v=24.12"');
-html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=34.3"');
+html = html.replace(/href="style.css(?:\?[^\"]*)?"/, 'href="style.css?v=20260916.1"');
+html = html.replace(/href="stpa.css(?:\?[^\"]*)?"/, 'href="stpa.css?v=20260916.1"');
 const key=`<!-- MAP-KEY-START --><section id="map-key" class="a1-static-key"><h2>Path & barrier key</h2>${presentation.pathsGuide(true)}</section><!-- MAP-KEY-END -->`;
 if (html.includes('<!-- MAP-KEY-START -->')) html=html.replace(/<!-- MAP-KEY-START -->[\s\S]*?<!-- MAP-KEY-END -->/,key);
 else html=html.replace('</nav>',`</nav>${key}`);
 if (!html.includes('href="#map-key"')) html=html.replace('<h1>Choose a pathway</h1>','<h1>Choose a pathway</h1><p><a href="#map-key">Path & barrier key ↗</a></p>');
 await writeFile(new URL('pathways.html', import.meta.url), html);
-console.log('Built six worked examples, barrier states and matching readers; other entries are blank.');
+console.log('Built seven worked examples, barrier states and matching readers; other entries are blank.');
