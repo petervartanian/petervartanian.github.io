@@ -1,9 +1,12 @@
 # X-oscope
 
-Restored September 16, 2026 to the pre-platinum catalogue and workflow from
-`b0d495a9b423b0b08ad2e43f27e55769ccaad231`, retaining the current X-oscope name,
-canonical address, and masthead presentation. The six categories and worked
-pathways are the earlier editorial prototype, not the platinum review taxonomy.
+Restored September 22, 2026 to the review hierarchy from
+`78174c1fc1d276f496ac2cbb74d0fcd60a31e34c`: three groups, eight families,
+and the first implemented document scenario and author-supplied variant.
+The review counts 95 document scenarios; those counts do not imply that all
+95 have been implemented. X-Extras remains outside the hierarchy and empty.
+
+The public address is [petervartanian.xyz/x-oscope/](https://petervartanian.xyz/x-oscope/). The old `/auspex/` pages forward here, preserving query parameters and anchors. Internal evidence identifiers remain stable.
 
 Choose a pathway and inspect its barriers. Add an incident to examine case evidence.
 
@@ -11,9 +14,30 @@ Serve the repository root and open `/x-oscope/`. The interface also works direct
 `index.html`, using local assets and a bundled data file. No runtime dependencies.
 `pathways.html` provides a static reader of the worked examples without JavaScript.
 
-## Seven STPA worked examples
+## Review hierarchy and first scenario
 
-A-1, B-1, C-1, D-1, E-1, F-1, and Bonus-1 use the models in `stpa-[a-fh]1.json`.
+The overview nests x-groups → x-families → document scenarios → author-supplied
+variants. `families.js` preserves the review's family summaries and counts;
+`scenarios.js` supplies the available scenarios, document mappings and nested reader.
+The first is A-IV Handover → A-IV-1 The Production Web → A-IV-1.c Banks adapt.
+The `.c` suffix follows Critch's v.1c; it does not count as another scenario.
+The family shows 1 available scenario against 19 in the review.
+
+`?x=A-IV-1` and `?x=A-IV-1.c` open every ancestor, survive reload, and support
+browser history. Group and family addresses work with the same `x` parameter.
+Breadcrumb links can be bookmarked or copied; search includes scenario titles,
+variant names, addresses and original-document metadata. Existing `p=` case
+addresses remain separate. A valid `x=` address takes precedence if both occur.
+
+Critch's public document is mapped to the scenario and the specific variant passage.
+The review is cited separately for classification. The private draft PDF is not
+published. This is an editorial summary of a hypothetical scenario, with no
+incident evidence or likelihood assigned. Validate additions with
+`node x-oscope/validate-scenarios.mjs` and `node x-oscope/validate-interactions.mjs`.
+
+## Six STPA worked examples
+
+A-1, B-1, C-1, D-1, E-1, and F-1 use the models in `stpa-[a-f]1.json`.
 I selects a pathway; II places dated incident evidence on its relevant component;
 III inspects the barrier. The dated choices are always visible. Select a case to add
 its card, another to switch, or the selected case / × to clear it. There are no
@@ -90,8 +114,10 @@ A small gap keeps the mark clear on single, double, dashed and dotted lines; the
 current pathway. A safeguard is an intentional barrier; proposed identifies its status,
 not its protective performance. Actual barrier states stay attached to incident evidence.
 
-Pathway labels use A-1 / Bonus-1 throughout the catalogue. Old A.1 / Bonus.1 links and
-searches remain supported; internal component addresses and evidence anchors are stable.
+Pathway labels retain their A–F prefixes. X-Extras is empty; future comparisons retain
+the X- prefix. The six earlier comparison cases and their source articles have been
+deleted. Their X-1–X-6, Bonus, and internal H links return to the overview. Existing
+A.1 aliases and the retained pathways’ evidence anchors remain supported.
 Every map has a clickable key for path types, barriers, and recovery
 versus reinforcement. It includes conditional consequences and feedback, even when
 those marks are absent from the currently selected map. The static reader includes
@@ -99,7 +125,7 @@ the same definitions at `pathways.html#map-key`. Proposed safeguards are subordi
 to Barriers in the key, alongside the state explanations. Proposed and assessed
 barriers share a thin card frame and the relevant state symbol.
 
-The other 30 entries show their titles and no case content, in both the application and
+The other 25 entries show their titles and no case content, in both the application and
 static reader. Their underlying catalogue records are retained for future work.
 
 `barrier-states.json` defines seven symbols: Reinforced, Holding, Crumbling, Broken,
@@ -126,8 +152,7 @@ Maven and Replicator expose proposed safeguards with unassessed performance and 
 questions. Their announcements remain contextual evidence. Later corrective changes are
 dated; new improvements are labeled “Proposed change.” Scope notes use paired
 asterisks and smaller text. The Myanmar counter-speech intervention is Backfiring in
-the attributed account. Bonus-1 separates the FTC allegations from the mathematical
-predictive-policing comparison and includes the latter’s feedback loop and correction.
+the attributed account.
 
 Models may override assessments and add evidence by stable ID. Build and validate:
 
@@ -136,13 +161,14 @@ node build-stpa.mjs
 node validate-stpa.mjs
 node validate-interactions.mjs
 node validate.mjs
+node validate-addresses.mjs
 ```
 
 The catalogue below describes retained source data, including unworked entries.
 
 ## Content
 
-The register contains 31 catastrophe pathway hypotheses and six bounded-harm comparisons.
+The register contains 31 catastrophe pathway hypotheses. X-Extras currently has no cases.
 Visible IDs follow the family letters; canonical evidence addresses remain stable:
 
 - A-1–A-6 (X-01–X-06): extinction and permanent global disempowerment.
@@ -151,7 +177,7 @@ Visible IDs follow the family letters; canonical evidence addresses remain stabl
 - D-1–D-2 (B-01–B-02): pandemics.
 - E-1–E-7 (S-01–S-07): sectoral and cross-sector catastrophes.
 - F-1–F-2 (F-01–F-02): informational ecosystems and collective response.
-- Bonus-1–Bonus-6 (H-01–H-06): comparison cases.
+- X-Extras: empty; the X- prefix is reserved for future comparisons.
 
 Each pathway preserves the register's causal steps, required conditions, source basis,
 candidate barriers, variants and weakest bridge. Political lock-in and nuclear famine
@@ -203,15 +229,12 @@ informs the separation of realized from potential harms and the modular classifi
 
 ## Incident and barrier records
 
-Seventy-three distinct case records supply 85 exact-component mappings across all
-31 base pathways and six bounded comparisons. They include:
+Sixty-three distinct case records supply 73 exact-component mappings across the
+31 retained pathways. They include:
 
 - OpenAI–Hugging Face: internal-network persistence and reported containment; renderer
   shutdown and failed alert escalation. X-02:2–3 concerns persistence; X-04:2 connects
   OpenAI's reward-hacking findings to proxy exploitation. Both are component evidence.
-- Tempe pedestrian collision: the human fallback failure in H-05.
-- GPT-based mathematics tutoring: measured unaided performance at H-06:4. The outcome
-  is attached to a state, not used to validate the uncertain learning-process mediator.
 - A deployed care-allocation algorithm: proxy failure, biased allocation and a tested
   correction, connected to X-04 and S-03 using one stable incident identity.
 - Klarna's staffing reversal; AI-assisted military-supplier theft and state surveillance;
@@ -296,8 +319,8 @@ hardware-governance scope and limitations.
 - `data.js`: local bundle of those four data files, for HTTP and direct-file use.
 - `pathways.html`: generated static reader of the same register.
 - `validate.mjs`: structural, referential, evidence-scope and bundle checks.
-- `mark.svg`: original X-oscope bird.
-- `identity.html`, `assets/haruspex-mark.svg`: bird and entrail-mark specimens.
+- X-oscope uses a plain text name in the masthead and reader, with no symbol or browser icon. `mark.svg` remains available only for older cached pages.
+- `identity.html`, `assets/haruspex-mark.svg`: plain X-oscope name and the existing Haruspex specimen.
 - `framework.js`, `assessment.js`: retained source records from the earlier prototype;
   neither is loaded by this interface.
 - `assets/provenance.json`: provenance for the MIT AIRI and ERO marks in the masthead.
@@ -308,6 +331,7 @@ synchronized when updating research. Validation:
 
 ```sh
 node validate.mjs
+node validate-addresses.mjs
 ```
 
 The original brand uses Sorts Mill Goudy (`../assets/fonts/OFL.txt`). The interface uses
@@ -315,15 +339,24 @@ locally hosted Space Grotesk (`assets/FONT-LICENSES.txt`), with system sans-seri
 
 ## Interaction
 
-- The landing view has no selected pathway. It offers searchable, expandable topic families.
-  The workflow uses I–III; its six pathway families use A–F, with a Bonus family.
-  This follows the common Roman numeral → capital letter outline convention.
-  Choosing a pathway opens its typed causal map and incident reading; “All pathways” clears the selection.
+- The landing view has no selected pathway. Three full-width presentation groups use the
+  platinum review's grouping: influence passes to AI systems; power concentrates in a narrow
+  human group; and AI extends what humans can destroy. Their eight family entries use
+  A-I through A-IV, B-I through B-II, and C-I through C-II. Each expands to a family-level
+  premise and causal pathway. `families.js` records the source, printed-page locators,
+  and the review's scenario counts; these counts do not imply that all 95 individual
+  source-scenario maps have been imported. The family content is a paraphrase of the
+  September 15, 2026 draft, not an empirical assessment.
+- X-Extras displays 0 comparisons without an expansion control. Its heading starts at
+  the former Bonus label position. Deleted comparison maps and their special page theme
+  are removed; any future comparisons retain X-prefixed addresses. Blue, gold, and rose group backgrounds contain wider
+  family color ranges, defined in `families.css`. The earlier worked pathways and their
+  evidence remain accessible through search, the selector, and existing links.
+  Choosing one opens its causal map and incident reading; “All pathways” clears the selection.
   Only a valid explicit `p` URL parameter opens a pathway directly. Invalid IDs return to
   the overview. Browser history restores the overview as well as selected readings.
 - The two-line headline uses ordinary, unstretched lettering. Its desktop container follows
-  the paragraph height; on phones it uses its natural height. The paragraph remains justified
-  with its last line left-aligned.
+  the paragraph height; on phones it uses its natural height. Both introductory text blocks are right-aligned, with normal word spacing and no inline citation markers.
 - The canvas is near-neutral cool white (`#f7f9fc`). A–F have distinct colors and
   monochrome-readable motifs, repeated in category cards, the selected family heading,
   and the pathway selector: A charcoal/converging rings, B purple/one controlling node above three subordinate nodes,
@@ -406,3 +439,7 @@ not measure a browser page or establish actual responsive layout.
 
 The four inspector tabs were removed. Old `q=` links normalize to the single reading;
 no incident evidence or underlying STPA fields were removed.
+
+## Address compatibility
+
+Edit this directory for current website changes. The sibling `auspex/` directory contains three forwarding pages and compatibility assets for old bookmarks and cached pages. Its legacy build and validation commands forward to this directory. The personal homepage intentionally does not list the applications, so no new links are added there.
