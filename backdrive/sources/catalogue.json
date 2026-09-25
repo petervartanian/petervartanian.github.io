@@ -1,0 +1,118 @@
+{
+  "verified": "2026-09-25",
+  "incidents": [
+    {
+      "id": "AIID-594",
+      "source": "AIID",
+      "sourceRecordId": "594",
+      "url": "https://incidentdatabase.ai/cite/594/"
+    },
+    {
+      "id": "AIID-2",
+      "source": "AIID",
+      "sourceRecordId": "2",
+      "url": "https://incidentdatabase.ai/cite/2/"
+    },
+    {
+      "id": "AIID-1547",
+      "source": "AIID",
+      "sourceRecordId": "1547",
+      "url": "https://incidentdatabase.ai/cite/1547/"
+    },
+    {
+      "id": "CRUISE-2023",
+      "source": "NHTSA",
+      "sourceRecordId": null,
+      "url": "https://www.nhtsa.gov/press-releases/consent-order-cruise-crash-reporting"
+    },
+    {
+      "id": "WAYMO-2024",
+      "source": "NHTSA",
+      "sourceRecordId": "Recall 24E-049",
+      "url": "https://static.nhtsa.gov/odi/rcl/2024/RCLRPT-24E049-1733.PDF"
+    },
+    {
+      "id": "HWY18FH011",
+      "source": "NTSB",
+      "sourceRecordId": "HWY18FH011",
+      "url": "https://www.ntsb.gov/investigations/pages/HWY18FH011.aspx"
+    },
+    {
+      "id": "APPLE-2024",
+      "source": "BBC",
+      "sourceRecordId": null,
+      "url": "https://www.youtube.com/watch?v=AUuwrdg5Ckg"
+    },
+    {
+      "id": "AIID-541",
+      "source": "AIID",
+      "sourceRecordId": "541",
+      "url": "https://incidentdatabase.ai/cite/541/"
+    },
+    {
+      "id": "AIID-4",
+      "source": "AIID",
+      "sourceRecordId": "4",
+      "url": "https://incidentdatabase.ai/cite/4/"
+    },
+    {
+      "id": "AIID-51",
+      "source": "AIID",
+      "sourceRecordId": "51",
+      "url": "https://incidentdatabase.ai/cite/51/"
+    },
+    {
+      "id": "AIID-1567",
+      "source": "AIID",
+      "sourceRecordId": "1567",
+      "url": "https://incidentdatabase.ai/cite/1567/"
+    },
+    {
+      "id": "AIID-1602",
+      "source": "AIID",
+      "sourceRecordId": "1602",
+      "url": "https://incidentdatabase.ai/cite/1602/"
+    },
+    {
+      "id": "AIID-1424",
+      "source": "AIID",
+      "sourceRecordId": "1424",
+      "url": "https://incidentdatabase.ai/cite/1424/"
+    },
+    {
+      "id": "AIID-1421",
+      "source": "AIID",
+      "sourceRecordId": "1421",
+      "url": "https://incidentdatabase.ai/cite/1421/"
+    }
+  ],
+  "benchmarks": [
+    {
+      "id": "roboharm",
+      "url": "https://robocurve.org/roboharm/"
+    },
+    {
+      "id": "asimov",
+      "url": "https://asimov-benchmark.github.io/v2/"
+    },
+    {
+      "id": "safebench",
+      "url": "https://safebench.github.io/"
+    },
+    {
+      "id": "alce",
+      "url": "https://github.com/princeton-nlp/ALCE"
+    },
+    {
+      "id": "agentdojo",
+      "url": "https://github.com/ethz-spylab/agentdojo"
+    }
+  ],
+  "results": {
+    "source": "https://robocurve.org/roboharm/",
+    "section": "Results",
+    "trials": 300,
+    "note": "Transcribed from the published 15-row Results table; Refused includes non-safety refusals. No new experiments were run."
+  },
+  "note": "Source names identify the publication used, not exclusive database membership. CRUISE-2023, WAYMO-2024, and APPLE-2024 are local event references; recall references are not incident IDs. New events were located online, independently of the consultation corpus."
+}
