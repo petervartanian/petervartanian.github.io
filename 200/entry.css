@@ -23,6 +23,7 @@ body.locked main{margin-top:68px}
 .unlock-controls button:disabled{opacity:.65;cursor:wait}
 #gate-message{font-size:13px;line-height:1.55;min-height:3em;margin:12px 0 0;color:#843f4e}
 body[data-page=experiments] footer{font-size:12px;margin-top:54px;border-color:var(--line)}
+body[data-page=experiments]:not(.locked) footer{border-top:0}
 .lock-link{font:inherit;font-size:13px;text-decoration:none;min-height:44px;padding:8px 0;color:var(--quiet)}
 .lock-link:hover{text-decoration:underline;color:var(--link)}
 .experiment-list{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
