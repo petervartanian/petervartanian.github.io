@@ -21,3 +21,13 @@ The homepage has an interactive SVG mobile with varied coloured shapes and a sus
 The build updates only the personal pages. Other applications in the repository are neither modified nor linked from the personal site.
 
 Shared links use four 1200 × 630 preview images with backgrounds matching their pages. The preview artwork can be regenerated with `scripts/preview_cards.py` (Pillow) and `scripts/render_preview_cards.cjs` (Sharp); these optional tools are not needed to build the site. Approved PNGs live in `assets/img/social-*.png`.
+
+## 200
+
+`/200/` is an unlisted experiment directory. Its catalog and Arcolens resources are encrypted with AES-256-GCM before publication. The password derives a non-extractable browser key using PBKDF2-SHA-256 with a random 32-byte salt and 600,000 iterations. No password or plaintext Arcolens export is committed. The existing public tools retain their original direct URLs; inclusion in this directory does not make those older routes private.
+
+A service worker scoped to `/200/` decrypts pages and downloads after unlocking. An eight-hour session stores a non-extractable key in IndexedDB, never the password; Lock clears access and returns open experiment tabs to the gate. Decrypted responses use `Cache-Control: no-store`. The directory is excluded from the sitemap and has `noindex, nofollow` metadata. Client-side encryption depends on password strength and is not server-side authorization or an account system.
+
+To update Arcolens, run `scripts/build-200.mjs` with `--arcolens-source` pointing to its approved `simon-review` directory and `--delivery-manifest` pointing to `v2/review/completion/DELIVERY_MANIFEST.json`. Supply the existing password on standard input. The builder verifies every source checksum, encrypts each resource, and emits only ciphertext and public encryption parameters into `200/vault/`. It does not alter the source analysis or call an LLM. Rebuilding with a different password re-encrypts the current files; old ciphertext in Git history remains tied to its original password.
+
+Run `node --test scripts/test-200.mjs` for routing, wrong-password, tampering, session, and logout checks. Run `node scripts/verify-200.mjs` with the password on standard input to decrypt and check every packaged resource and internal link. Public site builds do not need the password and do not rebuild the encrypted resources.

@@ -302,7 +302,7 @@ for old, destination in [('artifacts', '/portfolio/'), ('writing', '/portfolio/'
     (directory / 'index.html').write_text(f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0; url={destination}"><link rel="canonical" href="https://petervartanian.xyz{destination}"><meta name="robots" content="noindex"><title>Page moved</title></head><body><p>This page has moved. <a href="{destination}">Continue to writing.</a></p></body></html>')
 
 page('home', 'Page not found', 'This page could not be found.', '<h1>Page not found</h1><p><a href="/">Return to the homepage.</a></p>', '/404-temp/')
-(ROOT / '404.html').write_text((ROOT / '404-temp/index.html').read_text().replace('https://petervartanian.xyz/404-temp/', 'https://petervartanian.xyz/404.html'))
+(ROOT / '404.html').write_text((ROOT / '404-temp/index.html').read_text().replace('https://petervartanian.xyz/404-temp/', 'https://petervartanian.xyz/404.html').replace('</head>', '<script src="/200/deep-link.js" defer></script>\n</head>'))
 (ROOT / '404-temp/index.html').unlink()
 (ROOT / '404-temp').rmdir()
 

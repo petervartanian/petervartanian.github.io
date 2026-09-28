@@ -1,0 +1,41 @@
+body[data-page=experiments]{--paper:#e7f0ed;--ink:#244b51;--link:#216773;--quiet:#506b6e;--line:#acc6c5;background:var(--paper);font-family:"Avenir Next",Avenir,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body[data-page=experiments] .page{width:min(880px,calc(100% - 48px))}
+body[data-page=experiments] header{width:100%;padding-top:38px;display:flex;align-items:center;justify-content:space-between;gap:20px;text-align:left}
+body[data-page=experiments] .site-name{font-size:25px;line-height:1.4;margin:0}
+body[data-page=experiments] main{margin-top:50px}
+.entry-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:30px}
+.entry-heading h1{margin:0;font-family:inherit}
+.status-code{display:flex;gap:0;font-size:clamp(90px,16vw,142px);font-weight:500;line-height:.95;letter-spacing:-.085em;margin-left:-.045em}
+.status-code span:nth-child(1){color:#216773}.status-code span:nth-child(2){color:#786886}.status-code span:nth-child(3){color:#a36c53}
+.section-name{display:block;font-size:16px;font-weight:500;letter-spacing:.015em;margin-top:18px}
+body.locked .page{width:min(440px,calc(100% - 44px))}
+body.locked header{justify-content:center;padding-top:58px}
+body.locked .entry-heading{justify-content:center;text-align:center;margin-bottom:42px}
+body.locked .status-code{justify-content:center}
+body.locked main{margin-top:68px}
+#unlock{max-width:345px;margin:0 auto}
+#unlock label{display:block;font-size:13px;margin-bottom:8px}
+.unlock-controls{display:flex;align-items:stretch;gap:8px}
+.unlock-controls input{min-width:0;flex:1;border:1px solid #86a8ab;background:#f8fbfa;border-radius:5px;min-height:46px;padding:10px 12px;font-family:inherit;font-size:16px;line-height:1.4;color:var(--ink)}
+.unlock-controls input:focus-visible{outline:2px solid #786886;outline-offset:3px}
+.unlock-controls input[aria-invalid=true]{border-color:#a36066}
+.unlock-controls button{border:1px solid var(--link);background:var(--link);color:#fff;border-radius:5px;padding:10px 20px;min-width:88px;font-family:inherit;font-size:14px;font-weight:500;line-height:1.4;text-decoration:none;min-height:46px}
+.unlock-controls button:disabled{opacity:.65;cursor:wait}
+#gate-message{font-size:13px;line-height:1.55;min-height:3em;margin:12px 0 0;color:#843f4e}
+body[data-page=experiments] footer{font-size:12px;margin-top:54px;border-color:var(--line)}
+.lock-link{font:inherit;font-size:13px;text-decoration:none;min-height:44px;padding:8px 0;color:var(--quiet)}
+.lock-link:hover{text-decoration:underline;color:var(--link)}
+.experiment-list{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.experiment-list li{margin:0;border-bottom:1px solid var(--line)}
+.experiment-link{display:grid;grid-template-columns:52px minmax(0,1fr) 24px;align-items:center;gap:20px;padding:23px 6px;color:var(--ink);text-decoration:none;border-radius:0;transition:background .15s ease}
+.experiment-link:hover{background:#dce9e5}
+.experiment-link h2{font-family:inherit;font-size:23px;font-weight:500;line-height:1.35;letter-spacing:-.02em;margin:0 0 5px;color:var(--accent,var(--link))}
+.experiment-link p{font-size:13px;line-height:1.6;margin:0;max-width:620px;color:var(--quiet)}
+.experiment-mark{display:flex;align-items:center;justify-content:center;color:var(--accent,var(--link));height:48px}
+.experiment-mark svg{width:36px;height:36px;overflow:visible}
+.experiment-mark .wordmark-icon{width:38px;height:38px}
+.experiment-mark text{font-family:inherit}
+.open-arrow{font-size:23px;font-weight:400;color:var(--accent,var(--link));justify-self:end}
+.experiment-foot{font-size:12px;margin-top:22px;color:var(--quiet)}
+@media(max-width:600px){body[data-page=experiments] .page{width:calc(100% - 36px)}body[data-page=experiments] header{padding-top:24px}.site-name{font-size:23px!important}body[data-page=experiments] main{margin-top:32px}.experiment-link{grid-template-columns:34px minmax(0,1fr) 18px;gap:13px;padding:20px 0}.experiment-link h2{font-size:20px}.experiment-link p{font-size:12px}.experiment-mark svg{width:30px;height:30px}body.locked main{margin-top:56px}.entry-heading{margin-bottom:24px}.status-code{font-size:108px}}
+@media(prefers-reduced-motion:reduce){.experiment-link{transition:none}}
