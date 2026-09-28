@@ -1,39 +1,89 @@
-# X-oscope
+# X-Oscope
 
-Restored September 22, 2026 to the review hierarchy from
-`78174c1fc1d276f496ac2cbb74d0fcd60a31e34c`: three groups, eight families,
-and the first implemented document scenario and author-supplied variant.
-The review counts 95 document scenarios; those counts do not imply that all
-95 have been implemented. X-Extras remains outside the hierarchy and empty.
+A curated route from existential-risk pathways to incident evidence, intermediate
+components, control assessments, and qualified findings. The public address is
+[petervartanian.xyz/x-oscope/](https://petervartanian.xyz/x-oscope/).
 
-The public address is [petervartanian.xyz/x-oscope/](https://petervartanian.xyz/x-oscope/). The old `/auspex/` pages forward here, preserving query parameters and anchors. Internal evidence identifiers remain stable.
+## Current MVP (September 28, 2026)
 
-Choose a pathway and inspect its barriers. Add an incident to examine case evidence.
+The home page preserves three presentation groups and eight families. All 95
+review scenarios are searchable, with explicit coverage states. Two pathways
+are reconstructed: Datacenter root access to takeover and The Production Web
+(including the existing Banks adapt variant). One complete incident comparison
+is curated. Indexed entries are not presented as assessed pathways.
 
-Serve the repository root and open `/x-oscope/`. The interface also works directly from
-`index.html`, using local assets and a bundled data file. No runtime dependencies.
-`pathways.html` provides a static reader of the worked examples without JavaScript.
+The worked route is:
 
-## Review hierarchy and first scenario
+1. A → A-I Independent Takeover → A-I-25 Datacenter root access to takeover.
+2. Select the bounded July 19–20 OpenAI episode within the wider 2026 case.
+3. Read its partial overlap and non-overlap with every hypothetical pathway step.
+4. Inspect capabilities, tendencies, and defenses, with linked source records.
+5. Inspect failed controls, reported interventions, durability questions, and
+   explicitly untested improvement proposals.
+6. Read, share, print, or download the qualified finding and its full provenance.
 
-The overview nests x-groups → x-families → document scenarios → author-supplied
-variants. `families.js` preserves the review's family summaries and counts;
-`scenarios.js` supplies the available scenarios, document mappings and nested reader.
-The first is A-IV Handover → A-IV-1 The Production Web → A-IV-1.c Banks adapt.
-The `.c` suffix follows Critch's v.1c; it does not count as another scenario.
-The family shows 1 available scenario against 19 in the review.
+The incident library is independently accessible. Wider cases, bounded episodes,
+and event records remain distinct. It supports the reverse route to the same
+comparison. Components link back to their evidence and connected pathways.
+Haruspex supports `?event=E0117` to open a cited record directly.
 
-`?x=A-IV-1` and `?x=A-IV-1.c` open every ancestor, survive reload, and support
-browser history. Group and family addresses work with the same `x` parameter.
-Breadcrumb links can be bookmarked or copied; search includes scenario titles,
-variant names, addresses and original-document metadata. Existing `p=` case
-addresses remain separate. A valid `x=` address takes precedence if both occur.
+## Data and scope
 
-Critch's public document is mapped to the scenario and the specific variant passage.
-The review is cited separately for classification. The private draft PDF is not
-published. This is an editorial summary of a hypothetical scenario, with no
-incident evidence or likelihood assigned. Validate additions with
-`node x-oscope/validate-scenarios.mjs` and `node x-oscope/validate-interactions.mjs`.
+- `families.js`: existing family summaries and counts.
+- `scenarios.js`: existing Production Web reconstruction and author variant.
+- `catalogue.js`: all 95 labels and family assignments from Appendix A, Table 3
+  of the review draft checked September 28. Site identifiers are editorial.
+- `case-events.js`: selected Haruspex records retaining original identifiers,
+  source locators, uncertainty, and source grouping.
+- `mvp-data.js`: bounded cases, mappings, intermediate components, controls,
+  provenance, review status, and reusable assessment export.
+- `mvp.js` / `mvp.css`: the new navigation and reader. No runtime dependencies.
+
+The first comparison uses the original Shlegeris scenario and the OpenAI
+technical account, indexed by Haruspex. It is a provisional editorial assessment,
+with independent review pending. It does not claim that the whole case belongs
+to Independent Takeover, that takeover premises were satisfied, or that chronology
+proves which intervention prevented escalation. Haruspex is not an additional
+independent witness. The private manuscript and meeting notes are not bundled.
+
+There is no automated incident feed, probability score, or counterfactual simulator.
+The curated target is one defensible example per populated pathway; the data model
+allows one episode to support multiple separately justified mappings.
+
+## Preview and validation
+
+Serve the repository root and open `/x-oscope/`. Assets and data are bundled;
+`index.html` also supports direct file use. `pathways.html` is the earlier static
+reader, not an export of the new 95-entry catalogue.
+
+Run `node x-oscope/validate-mvp.mjs`, then the existing `validate.mjs`,
+`validate-scenarios.mjs`, `validate-addresses.mjs`, `validate-stpa.mjs`, and
+`validate-interactions.mjs`. Build Haruspex with `node haruspex/build.mjs` after
+changing its event-link handler. The MVP validator checks counts, identity,
+source fidelity, episode boundaries, mapping completeness, references, qualified
+exports, and exclusion of private-source links.
+
+Browser acceptance checks cover search, forward and reverse navigation, step
+links, component/event inspection, control disclosures, download/share, history,
+reload, empty/error states, legacy bookmarks, and narrow layouts. The older
+interaction script uses a mock DOM and does not substitute for browser checks.
+
+## Addresses and maintenance
+
+`?x=A`, `?x=A-I`, and `?x=A-I-25` address groups, families, and scenarios.
+`?x=A-IV-1` and `?x=A-IV-1.c` retain their previous meanings.
+`?x=A-I-25&case=openai-july19&stage=components` opens an assessment step.
+`?view=library`, `?case=openai-july19`, `?event=E0117`,
+`?component=privileged-access`, and `?view=method` are independent entry points.
+Existing `p=` worked-example URLs remain on the older reader. A valid `x=`
+address takes precedence. `/auspex/` still forwards queries and fragments.
+
+To add an assessment, reconstruct the source argument before asserting a match;
+record the episode boundary, source records and grouping; assess each premise
+and step; add supported capabilities/tendencies/defenses and controls; document
+remaining questions and search scope; increment the assessment version. A
+`no-match` coverage state requires a dated search scope and means only that no
+suitable case was found in the reviewed material. No current pathway uses it.
 
 ## Six STPA worked examples
 
