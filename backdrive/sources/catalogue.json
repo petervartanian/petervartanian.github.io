@@ -115,27 +115,5 @@
     "note": "Transcribed from the published 15-row Results table; Refused includes non-safety refusals. No new experiments were run."
   },
   "note": "Source names identify the publication used, not exclusive database membership. CRUISE-2023, WAYMO-2024, and APPLE-2024 are local event references; recall references are not incident IDs. New events were located online, independently of the consultation corpus.",
-  "pilotsUpdated": "2026-09-28",
-  "pilotProposals": [
-    {
-      "organization": "The Sage Plant",
-      "source": "From Procurement to Safe Deployment",
-      "sourceType": "Organization-supplied discussion draft and correspondence",
-      "received": "2026-09-28",
-      "projects": [
-        {
-          "id": "dusty",
-          "number": "002",
-          "slides": "Slides 2, 4–8"
-        },
-        {
-          "id": "derutu",
-          "number": "001",
-          "slides": "Slides 2–3, 5–8"
-        }
-      ],
-      "status": "Proposed; no field results recorded; MIT scope and participation unconfirmed",
-      "note": "Pilot summaries and baselines are attributed to the supplied proposal. Checks and decision criteria are adaptations for discussion, not validated safety requirements. Source files and precise site addresses are not published."
-    }
-  ]
+  "pilotsUpdated": "2026-09-28"
 }
