@@ -1,7 +1,7 @@
-/* Sources, reported proposal figures, and explicitly labeled comparisons. */
+/* Source records and reviewed connections. See sources/catalogue.json and imports/ATTRIBUTION.md. */
 window.BACKDRIVE_DATA = {
-  "schemaVersion": "backdrive-prototype/3.1",
-  "snapshot": "25 September 2026",
+  "schemaVersion": "backdrive/4.0",
+  "snapshot": "28 September 2026",
   "cases": [
     {
       "id": "AIID-594",
@@ -76,12 +76,12 @@ window.BACKDRIVE_DATA = {
       "secondary": "Inventory & hazard handling",
       "capabilityBasis": "Automated handling was involved. A specific perception failure, learned policy, or decision mechanism is not established in this prototype.",
       "failure": "Hazardous material released during handling",
-      "test": "No reviewed match",
-      "testDetail": "Hazardous-object handling",
-      "testState": "Coverage unassessed",
+      "test": "ASIMOV 2.0",
+      "testDetail": "Hazard-reasoning proxy",
+      "testState": "Published benchmark; mechanism unreviewed",
       "relation": "Mapping awaits mechanism review",
       "hasResults": false,
-      "connection": "Start with the handling sequence and system configuration. Choosing a test before that review could misidentify what failed.",
+      "connection": "ASIMOV offers tests of physical constraints and hazard reasoning. The inventory-handling mechanism must be reviewed before choosing a relevant task; ASIMOV does not reproduce a warehouse container rupture.",
       "missing": "A verified failure mechanism, relevant evaluation, and baseline results are not yet recorded.",
       "decision": "When should a handling system stop and request human review?",
       "controlId": "human-gate",
@@ -105,7 +105,8 @@ window.BACKDRIVE_DATA = {
       "sourceKey": "aiid",
       "sourceLabel": "AIID",
       "sourceRecordId": "2",
-      "recordType": "incident"
+      "recordType": "incident",
+      "mappingReason": "Resolves the current mismatch between “No reviewed match” display and a hidden ASIMOV link."
     },
     {
       "id": "AIID-1547",
@@ -259,12 +260,14 @@ window.BACKDRIVE_DATA = {
       "secondary": "Operating limits & driver engagement",
       "capabilityBasis": "NTSB’s findings involve both automated steering and the supervision arrangement. The proposed mapping tests whether a system detects unavailable human oversight and responds within its operating limits.",
       "failure": "Partial automation continues without effective supervision",
-      "test": "Supervision-loss response",
-      "connection": "A scenario would need both road geometry and the driver-supervision state. Driving performance alone cannot assess whether the intended human oversight remains effective.",
+      "test": "Euro NCAP assisted driving",
+      "connection": "Euro NCAP separates driver engagement from assistance and safety backup. These procedures address the supervision issue identified by NTSB, but postdate the crash and do not score its vehicle configuration.",
       "missing": "A validated driver-state model, an agreed fallback policy, and matched results for the relevant assistance system.",
       "decision": "What happens when a system that requires human supervision loses that supervision?",
       "controlId": "engagement-monitor",
-      "evalIds": [],
+      "evalIds": [
+        "euro-ncap-assistance"
+      ],
       "nextTest": "In simulation, vary supervision availability and road geometry. Measure detection, escalation, and fallback behavior without exposing people to road hazards.",
       "sourceNotes": [
         {
@@ -277,9 +280,10 @@ window.BACKDRIVE_DATA = {
       "kind": "Reported incident",
       "recordType": "incident",
       "hasResults": false,
-      "testDetail": "Proposed evaluation",
-      "testState": "Coverage unassessed",
-      "code": "06"
+      "testDetail": "Engagement and fallback procedures",
+      "testState": "Published protocol; no matched result",
+      "code": "06",
+      "mappingReason": "Adds a procedure covering human oversight, which a road-scene benchmark alone misses."
     },
     {
       "id": "APPLE-2024",
@@ -297,12 +301,14 @@ window.BACKDRIVE_DATA = {
       "secondary": "Summary fidelity & source attribution",
       "capabilityBasis": "The documented output changed the meaning of the attributed news. Fidelity to source notifications is a proposed evaluation target; the public report does not isolate the model’s internal cause.",
       "failure": "A summary introduces an unsupported claim",
-      "test": "Notification-summary fidelity",
-      "connection": "Test whether each claim in a generated alert is supported by its source notifications, including when several unrelated headlines are grouped together.",
+      "test": "SummaC",
+      "connection": "SummaC evaluates whether summaries are supported by their source documents. It supplies a closer starting point than citation scoring, but notification bundles need a separate, labeled test set.",
       "missing": "The complete input notification set, the relevant system version, and a matched summary-fidelity evaluation.",
       "decision": "Can a user distinguish a publisher’s reporting from an unsupported generated summary?",
       "controlId": "source-check",
-      "evalIds": [],
+      "evalIds": [
+        "summac"
+      ],
       "nextTest": "Use archived notification bundles with independently labelled claims. Compare summarization alone with source-consistency checks; measure unsupported claims and useful information retained.",
       "reportedResponse": "BBC complained to Apple. Its December 19 report also describes calls from Reporters Without Borders to remove the feature.",
       "sourceNotes": [
@@ -316,9 +322,10 @@ window.BACKDRIVE_DATA = {
       "kind": "Reported incident",
       "recordType": "incident",
       "hasResults": false,
-      "testDetail": "Proposed evaluation",
-      "testState": "Coverage unassessed",
-      "code": "07"
+      "testDetail": "Summary-fidelity comparison",
+      "testState": "Published method; no Apple results",
+      "code": "07",
+      "mappingReason": "Fills an empty link with a summary-specific method; preserves the difference between detector and summarizer results."
     },
     {
       "id": "PILOT-01",
@@ -472,7 +479,7 @@ window.BACKDRIVE_DATA = {
       "evalIds": [
         "asimov"
       ],
-      "connection": "A controlled stopping test would examine proximity and response timing. ASIMOV offers relevant hazard-understanding tasks, but does not reproduce this event.",
+      "connection": "ASIMOV can probe recognition of a person in a hazardous scene. It does not measure this security robot’s braking, sensing envelope, or collision response; those require equipment-specific testing.",
       "missing": "Verified proximity, speed, sensor conditions, and intervention logs for the incident.",
       "decision": "What separation and stopping behavior are required around people?",
       "controlId": "protective-stop",
@@ -502,7 +509,8 @@ window.BACKDRIVE_DATA = {
       "sourceKey": "aiid",
       "sourceLabel": "AIID",
       "sourceRecordId": "51",
-      "recordType": "incident"
+      "recordType": "incident",
+      "mappingReason": "Makes the reasoning-versus-physical-control distinction explicit."
     },
     {
       "id": "AIID-1567",
@@ -515,10 +523,12 @@ window.BACKDRIVE_DATA = {
       "secondary": "Transparent surfaces & sensor agreement",
       "capabilityBasis": "The company’s account identifies glass detection as the issue. That account is evidence to inspect, not an independent validation of the mechanism.",
       "failure": "A transparent barrier was not detected",
-      "test": "Transparent-obstacle detection",
-      "testDetail": "Proposed evaluation",
-      "evalIds": [],
-      "connection": "The reported failure suggests a test that varies transparency, reflections, and lighting while retaining a measured stopping boundary.",
+      "test": "Glass detection and mapping",
+      "testDetail": "Large-panel perception proxy",
+      "evalIds": [
+        "glass-slam"
+      ],
+      "connection": "The released PR2 recordings compare maps with and without glass detection. Large glass panels match the reported obstacle type, but the Serve sensor stack and its stopping response are not established.",
       "missing": "Independent reconstruction and a reviewed benchmark covering the deployed sensors and relevant conditions.",
       "decision": "When should uncertain perception prevent forward motion?",
       "controlId": "perception-check",
@@ -528,7 +538,7 @@ window.BACKDRIVE_DATA = {
       "state": "Mapping needed",
       "tone": "amber",
       "hasResults": false,
-      "testState": "Candidate mapping",
+      "testState": "Published method; no Serve results",
       "relation": "Candidate comparison",
       "source": "https://incidentdatabase.ai/cite/1567/",
       "sourceName": "AI Incident Database, incident 1567",
@@ -548,7 +558,8 @@ window.BACKDRIVE_DATA = {
       "sourceKey": "aiid",
       "sourceLabel": "AIID",
       "sourceRecordId": "1567",
-      "recordType": "incident"
+      "recordType": "incident",
+      "mappingReason": "Uses large-panel mobile-robot research rather than a loosely related tabletop glass-object benchmark."
     },
     {
       "id": "AIID-1602",
@@ -615,7 +626,7 @@ window.BACKDRIVE_DATA = {
       "evalIds": [
         "agentdojo"
       ],
-      "connection": "A permissions test would check whether an agent can exceed its intended authority. AgentDojo is a related security resource; its prompt-injection tasks do not reproduce this incident.",
+      "connection": "AgentDojo measures tool-agent behavior under prompt injection and publishes defense comparisons. This infrastructure deletion is an authority-boundary comparison; its reported cause is not established as prompt injection.",
       "missing": "A verified action trace, permissions configuration, and evaluation of the approval boundary.",
       "decision": "Can a research or coding agent make consequential changes without an explicit gate?",
       "controlId": "least-privilege",
@@ -645,7 +656,8 @@ window.BACKDRIVE_DATA = {
       "sourceKey": "aiid",
       "sourceLabel": "AIID",
       "sourceRecordId": "1424",
-      "recordType": "incident"
+      "recordType": "incident",
+      "mappingReason": "Preserves a useful proxy without implying the wrong attack mechanism."
     },
     {
       "id": "AIID-1421",
@@ -658,10 +670,12 @@ window.BACKDRIVE_DATA = {
       "secondary": "Audiovisual impersonation",
       "capabilityBasis": "The reported impersonation motivates testing verification of identity claims. It does not establish the performance of any particular generation or detection model.",
       "failure": "A false identity reached a consequential decision process",
-      "test": "Identity-claim verification",
-      "testDetail": "Proposed evaluation",
-      "evalIds": [],
-      "connection": "An evaluation could test whether independent verification catches unsupported identity claims while allowing legitimate applicants through.",
+      "test": "NIST OpenMFC video deepfakes",
+      "testDetail": "Recorded-media detection proxy",
+      "evalIds": [
+        "openmfc"
+      ],
+      "connection": "OpenMFC measures manipulation detection in recorded video. It can inform one verification component, but the interview’s capture channel, attack method, and identity evidence require separate checks.",
       "missing": "A documented verification procedure and evidence on false acceptance and false rejection.",
       "decision": "Which claims need confirmation through an independent channel?",
       "controlId": "independent-verification",
@@ -671,7 +685,7 @@ window.BACKDRIVE_DATA = {
       "state": "Mapping needed",
       "tone": "amber",
       "hasResults": false,
-      "testState": "Candidate mapping",
+      "testState": "Published detector results; no incident match",
       "relation": "Candidate comparison",
       "source": "https://incidentdatabase.ai/cite/1421/",
       "sourceName": "AI Incident Database, incident 1421",
@@ -691,7 +705,8 @@ window.BACKDRIVE_DATA = {
       "sourceKey": "aiid",
       "sourceLabel": "AIID",
       "sourceRecordId": "1421",
-      "recordType": "incident"
+      "recordType": "incident",
+      "mappingReason": "A defense evaluation linked to harmful generation; does not equate detecting a deepfake with proving identity."
     },
     {
       "id": "WA-LGV-2015",
@@ -821,13 +836,14 @@ window.BACKDRIVE_DATA = {
       "testState": "No equipment results",
       "relation": "Mechanism-level proxy, not an incident involving the equipment under consideration.",
       "hasResults": false,
-      "connection": "Pumped plaster and mortar equipment share hoses, couplings, and stored pressure. Transfer depends on the actual material, pressure ratings, and configuration.",
+      "connection": "The plaster-pump report motivates inspection of hoses, couplings, isolation, and pressure ratings. The Derutu specification check addresses component and material compatibility; neither comparison establishes a fault in the proposed equipment.",
       "missing": "Manufacturer ratings, maintenance records, compatible components, and equipment-specific inspection findings.",
       "decision": "Have a qualified person assess the complete pressure system and the manufacturer’s isolation procedure. Do not create a blockage or exceed operating limits to reproduce the incident.",
       "controlId": "energy-isolation",
       "nextTest": "Have a qualified person assess the complete pressure system and the manufacturer’s isolation procedure. Do not create a blockage or exceed operating limits to reproduce the incident.",
       "evalIds": [
-        "pressure-review"
+        "pressure-review",
+        "derutu-compatibility"
       ],
       "sourceNotes": [
         {
@@ -861,7 +877,61 @@ window.BACKDRIVE_DATA = {
       "comparison": "Summary checked against the source and an independent review",
       "protocol": "Use a fixed set of vendor claims and source documents. Score support at claim level.",
       "residual": "A source can exist and still be wrong or inapplicable. Retain independent engineering review.",
-      "context": "Procurement research; source versions and reviewer decisions"
+      "context": "Procurement research; source versions and reviewer decisions",
+      "mechanism": "Check each consequential claim against the passage it cites before using it in a recommendation.",
+      "implementation": [
+        "Store the claim, source version, page or passage, and reviewer decision together.",
+        "Score whether the source supports the claim and whether it applies to this equipment and task.",
+        "Return unsupported or conflicting claims for correction before the decision proceeds."
+      ],
+      "ownerRole": "Research lead; qualified reviewer for technical claims",
+      "evidenceSummary": "NIST recommends source and citation verification. MIT reported catching invented mitigation attributions through manual source review. Neither source measures this pilot’s error reduction.",
+      "evidenceStatus": "Guidance and documented audit",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "NIST AI 600-1, MS-2.5-003",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+          "description": "Source and citation verification."
+        },
+        {
+          "label": "MIT mitigation study",
+          "url": "https://airisk.mit.edu/blog/mapping-ai-risk-mitigations",
+          "description": "Manual audit found unsupported mitigation attributions."
+        }
+      ],
+      "limits": [
+        "Traceability establishes what a source says, not that it is true.",
+        "Review requires domain knowledge when a claim affects engineering decisions."
+      ],
+      "evaluationIds": [
+        "alce",
+        "derutu-compatibility",
+        "summac"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.1",
+          "4.1"
+        ],
+        "labels": [
+          "Testing & Auditing",
+          "System Documentation"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [
+        {
+          "id": "MS-2.5-003",
+          "label": "NIST AI 600-1",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+        }
+      ],
+      "reviewedAt": "2026-09-28",
+      "mitigationIds": [
+        "A0505_NIST2024"
+      ]
     },
     {
       "id": "approved-inputs",
@@ -878,7 +948,54 @@ window.BACKDRIVE_DATA = {
       "comparison": "Policy + input restriction",
       "protocol": "Compare matched permitted and disallowed requests in a controlled, harmless setup.",
       "residual": "A safe input list does not validate the task, environment, or resulting action.",
-      "context": "Food preparation; inventory and input versions"
+      "context": "Food preparation; inventory and input versions",
+      "mechanism": "Limit the materials, objects, or tool arguments available to the system before execution.",
+      "implementation": [
+        "Define permitted inputs for the actual task and enforce the list outside the model where possible.",
+        "Reject unknown identities, substitutions, and combinations requiring separate approval.",
+        "Compare legitimate work with harmless stand-ins for prohibited inputs; score refusals separately from failed execution."
+      ],
+      "ownerRole": "Application owner and integration engineer",
+      "evidenceSummary": "MIT includes input/output filtering and capability restrictions in its taxonomy. RoboHarm supplies unsafe-instruction outcomes, but does not test this proposed restriction.",
+      "evidenceStatus": "Proposed; benchmark context",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "MIT mitigation taxonomy, 2.3",
+          "url": "https://airisk.mit.edu/ai-risk-mitigations",
+          "description": "Behavior restrictions and filtering."
+        },
+        {
+          "label": "RoboHarm",
+          "url": "https://robocurve.org/roboharm/",
+          "description": "Published instruction-following outcomes; no input-restriction comparison."
+        }
+      ],
+      "limits": [
+        "An allowed object may still be used dangerously.",
+        "Inventory identification and enforcement can fail independently of the policy."
+      ],
+      "evaluationIds": [
+        "roboharm",
+        "asimov"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "2.3"
+        ],
+        "labels": [
+          "Model Safety Engineering"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [],
+      "reviewedAt": "2026-09-28",
+      "mitigationIds": [
+        "A0892_UK Government2023",
+        "A1027_Uuk2024",
+        "A1021_Uuk2024"
+      ]
     },
     {
       "id": "human-gate",
@@ -895,7 +1012,55 @@ window.BACKDRIVE_DATA = {
       "comparison": "Policy + approval gate",
       "protocol": "Introduce a defined scope change and compare behavior with and without an approval boundary.",
       "residual": "Approval can become routine or overloaded; a person must have enough information and authority to intervene.",
-      "context": "Task changes; who approved what and when"
+      "context": "Task changes; who approved what and when",
+      "mechanism": "Hold a defined action until an authorized person approves its scope, evidence, and consequences.",
+      "implementation": [
+        "Separate research, recommendation, approval, and execution permissions.",
+        "Show the exact action, affected assets, source evidence, and unresolved points before approval.",
+        "Invalidate approval when the task, file, equipment, or conditions change; record the reason for each decision."
+      ],
+      "ownerRole": "Decision owner; engineering reviewer where technical authority is required",
+      "evidenceSummary": "MIT describes decision and authorization controls. Project Vend documents a business agent’s mistakes, which motivate testing an approval boundary; it is not evidence that this gate works.",
+      "evidenceStatus": "Guidance; field example",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "MIT mitigation taxonomy, 1.1 and 1.5",
+          "url": "https://airisk.mit.edu/ai-risk-mitigations",
+          "description": "Authorization and deployment decision controls."
+        },
+        {
+          "label": "Project Vend",
+          "url": "https://www.anthropic.com/research/project-vend-1",
+          "description": "Business-agent field experiment with financial and information errors."
+        }
+      ],
+      "limits": [
+        "A rushed or uninformed reviewer may approve the same error.",
+        "Approval time and rejected useful work must be counted."
+      ],
+      "evaluationIds": [
+        "agentdojo",
+        "restart-review"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "1.1",
+          "1.5"
+        ],
+        "labels": [
+          "Board Structure & Oversight",
+          "Safety Decision Frameworks"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [],
+      "reviewedAt": "2026-09-28",
+      "mitigationIds": [
+        "A0665_Barrett2024",
+        "A0071_Eisenberg2025"
+      ]
     },
     {
       "id": "boundary-check",
@@ -912,7 +1077,52 @@ window.BACKDRIVE_DATA = {
       "comparison": "Policy + boundary check",
       "protocol": "Change one access boundary at a time while holding the intended task constant.",
       "residual": "Recognizing a boundary does not ensure an adequate stop or safe recovery.",
-      "context": "Navigation; boundary state, stop event, and restart decision"
+      "context": "Navigation; boundary state, stop event, and restart decision",
+      "mechanism": "Interrupt motion or task execution when the approved work area changes.",
+      "implementation": [
+        "Record the approved boundary and the conditions that invalidate it.",
+        "Require review after a barrier moves, a route closes, or other work enters the operating area.",
+        "Record detection, stop, reroute, and restart separately in replay or an isolated mock worksite."
+      ],
+      "ownerRole": "Site supervisor and robot integrator",
+      "evidenceSummary": "NIOSH recommends reassessing a demolition robot’s risk zone as work changes. Dusty’s checklist addresses worksite boundaries and coordination. Transfer to another robot requires review.",
+      "evidenceStatus": "Operational guidance",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "NIOSH robot investigations",
+          "url": "https://www.cdc.gov/niosh/bulletin/2019/robot-safety.html",
+          "description": "Task-specific risk zones and reassessment."
+        },
+        {
+          "label": "FieldPrinter readiness",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+          "description": "Worksite boundaries and coordination."
+        }
+      ],
+      "limits": [
+        "A mapped boundary is not a physical guard.",
+        "The check must lead to an adequate stop and an authorized recovery."
+      ],
+      "evaluationIds": [
+        "safebench",
+        "fieldprinter-readiness",
+        "astm-stopping"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "1.2",
+          "3.5"
+        ],
+        "labels": [
+          "Risk Management",
+          "Post-deployment Monitoring"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [],
+      "reviewedAt": "2026-09-28"
     },
     {
       "id": "protective-stop",
@@ -929,7 +1139,51 @@ window.BACKDRIVE_DATA = {
       "comparison": "Policy with a conservative stopping boundary and independent stop path",
       "protocol": "Measure detection-to-stop behavior with simulation and non-human targets.",
       "residual": "A stop can arrive too late, and a software-only check can share the original failure mode.",
-      "context": "Motion near people; speed, separation, and stop latency"
+      "context": "Motion near people; speed, separation, and stop latency",
+      "mechanism": "Prevent further hazardous motion when a protective condition is triggered.",
+      "implementation": [
+        "Have a qualified integrator identify detection coverage, stopping response, and the required stop function.",
+        "Assess representative operating conditions using appropriate non-human targets and approved methods.",
+        "Verify what permits restart after each stopped state; retain the event and reset records."
+      ],
+      "ownerRole": "Qualified robot integrator and employer’s safety lead",
+      "evidenceSummary": "OSHA describes application-specific safeguarding and validation. The LGV investigation shows why detecting an obstruction and stopping do not establish safe restart behavior.",
+      "evidenceStatus": "Operational guidance and investigation",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "OSHA robot safety",
+          "url": "https://www.osha.gov/otm/section-4-safety-hazards/chapter-4",
+          "description": "Application assessment and safeguarding validation."
+        },
+        {
+          "label": "NIOSH LGV investigation",
+          "url": "https://www.cdc.gov/niosh/bulletin/2019/robot-safety.html",
+          "description": "Automatic resumption after obstruction removal."
+        }
+      ],
+      "limits": [
+        "An emergency stop, protective stop, and energy isolation serve different purposes.",
+        "Detection-to-stop tests do not establish control over stored energy."
+      ],
+      "evaluationIds": [
+        "astm-stopping",
+        "restart-review"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "2.3",
+          "3.6"
+        ],
+        "labels": [
+          "Model Safety Engineering",
+          "Incident Response & Recovery"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [],
+      "reviewedAt": "2026-09-28"
     },
     {
       "id": "perception-check",
@@ -946,7 +1200,52 @@ window.BACKDRIVE_DATA = {
       "comparison": "Pause when sensing is uncertain or inconsistent; resume after review",
       "protocol": "Vary visibility or surface properties and record uncertainty, fallback, and task completion.",
       "residual": "Confidence can be misleading; some unfamiliar conditions produce confident errors.",
-      "context": "Glass, reflections, or low visibility; sensor and configuration versions"
+      "context": "Glass, reflections, or low visibility; sensor and configuration versions",
+      "mechanism": "Move to a defined fallback when sensor health, localization, or observations no longer support continued motion.",
+      "implementation": [
+        "Specify observable fallback triggers for the selected sensors rather than relying on a model confidence score alone.",
+        "Compare logged or simulated changes in visibility, reflective surfaces, localization, and obstacles.",
+        "Measure missed triggers, unnecessary pauses, and the evidence required to resume."
+      ],
+      "ownerRole": "Perception engineer and deployment owner",
+      "evidenceSummary": "NIST identifies localization disturbances for measurement. FASTER demonstrates backup-trajectory planning in specific simulated and physical setups. The proposed uncertainty rule here has not been tested.",
+      "evidenceStatus": "Research method; proposed adaptation",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "NIST mobility program",
+          "url": "https://www.nist.gov/programs-projects/mobility-performance-robotic-systems",
+          "description": "Measurement under localization and environmental disturbances."
+        },
+        {
+          "label": "FASTER, 2021",
+          "url": "https://arxiv.org/abs/2001.04420v2",
+          "description": "Backup trajectories demonstrated under the paper’s assumptions."
+        }
+      ],
+      "limits": [
+        "A confidently wrong perception estimate may not trigger the rule.",
+        "FASTER results do not establish the selected robot’s sensing or braking performance."
+      ],
+      "evaluationIds": [
+        "safebench",
+        "nist-navigation",
+        "glass-slam"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "2.3",
+          "3.5"
+        ],
+        "labels": [
+          "Model Safety Engineering",
+          "Post-deployment Monitoring"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [],
+      "reviewedAt": "2026-09-28"
     },
     {
       "id": "least-privilege",
@@ -963,7 +1262,66 @@ window.BACKDRIVE_DATA = {
       "comparison": "Read-only defaults, narrow write scopes, and approval for consequential changes",
       "protocol": "Use a disposable environment containing permitted tasks and benign actions outside the allowed scope.",
       "residual": "A permissions restriction does not fix inaccurate advice or every path to indirect harm.",
-      "context": "Research and coding agents; permissions, action trace, and approvals"
+      "context": "Research and coding agents; permissions, action trace, and approvals",
+      "mechanism": "Enforce the smallest set of tool actions and data access required for the assigned task.",
+      "implementation": [
+        "Use separate read, draft, and execute permissions enforced by the service or tool layer.",
+        "Select allowed tools and write scope before reading untrusted material; deny destructive actions by default.",
+        "Test attempted violations in a disposable environment and inspect resulting state, not just the agent’s explanation."
+      ],
+      "ownerRole": "System administrator and application owner",
+      "evidenceSummary": "AgentDojo reports lower targeted attack success with tool filtering in one dated GPT-4o configuration. The benchmark measures a tool-selection defense, not every form of server-enforced least privilege.",
+      "evidenceStatus": "Published experiment",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "AgentDojo results",
+          "url": "https://agentdojo.spylab.ai/results/",
+          "description": "Dated baseline and tool-filter comparisons."
+        },
+        {
+          "label": "AgentDojo paper",
+          "url": "https://arxiv.org/html/2406.13352v3",
+          "description": "Tools selected before untrusted data is read."
+        },
+        {
+          "label": "NIST least privilege",
+          "url": "https://csrc.nist.gov/glossary/term/least_privilege",
+          "description": "Access limited to what the task requires."
+        }
+      ],
+      "limits": [
+        "The published benchmark version, model, attack, and defense must stay attached to its results.",
+        "Permitted actions can still produce harmful outcomes within their allowed scope."
+      ],
+      "evaluationIds": [
+        "agentdojo"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "2.1",
+          "2.3",
+          "3.3"
+        ],
+        "labels": [
+          "Model & Infrastructure Security",
+          "Model Safety Engineering",
+          "Access Management"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [
+        {
+          "id": "AC-6",
+          "label": "NIST SP 800-53 Rev. 5",
+          "url": "https://csrc.nist.gov/pubs/sp/800/53/r5/upd1/final"
+        }
+      ],
+      "reviewedAt": "2026-09-28",
+      "mitigationIds": [
+        "A0983_Gipiškis2024"
+      ]
     },
     {
       "id": "independent-verification",
@@ -980,7 +1338,61 @@ window.BACKDRIVE_DATA = {
       "comparison": "Confirm consequential claims using a separate trusted source",
       "protocol": "Compare decisions with one source versus a second independent check on a consented test set.",
       "residual": "Two sources may share the same underlying error. Independence must be established.",
-      "context": "Identity and supplier claims; source chain and review time"
+      "context": "Identity and supplier claims; source chain and review time",
+      "mechanism": "Check a consequential identity or technical claim through a channel that does not depend on the original assertion.",
+      "implementation": [
+        "Identify what independence means for the claim: a separate measurement, issuing organization, or qualified reviewer.",
+        "Record where the two checks rely on common documents, models, or people.",
+        "Resolve disagreements before the claim authorizes a purchase or technical action."
+      ],
+      "ownerRole": "Procurement owner; qualified technical reviewer",
+      "evidenceSummary": "NIST calls for empirical validation of capability claims. MIT includes independent testing and assessment. These recommendations do not supply an effectiveness estimate for this pilot.",
+      "evidenceStatus": "Guidance",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "NIST AI 600-1, MS-2.3-002",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+          "description": "Empirical assessment of capability claims."
+        },
+        {
+          "label": "MIT mitigation taxonomy, 3.1",
+          "url": "https://airisk.mit.edu/ai-risk-mitigations",
+          "description": "Independent testing and auditing."
+        }
+      ],
+      "limits": [
+        "Two checks may repeat the same original error.",
+        "Identity verification does not establish equipment suitability or the truth of every supplier claim."
+      ],
+      "evaluationIds": [
+        "derutu-compatibility",
+        "layout-control",
+        "alce",
+        "openmfc"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.1"
+        ],
+        "labels": [
+          "Testing & Auditing"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [
+        {
+          "id": "MS-2.3-002",
+          "label": "NIST AI 600-1",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+        }
+      ],
+      "reviewedAt": "2026-09-28",
+      "mitigationIds": [
+        "A0500_NIST2024",
+        "A0413_NIST2024"
+      ]
     },
     {
       "id": "engagement-monitor",
@@ -997,7 +1409,56 @@ window.BACKDRIVE_DATA = {
       "comparison": "An explicitly defined monitoring and fallback policy on the same simulated journeys.",
       "protocol": "Use an agreed simulation model of driver state and roadway conditions. Compare detection, warnings, and fallback decisions. No live-road test is proposed here.",
       "residual": "Detecting disengagement does not guarantee a safe handover. Driver behavior, operating limits, and roadway conditions remain relevant.",
-      "context": "Partial driving automation that requires active human supervision."
+      "context": "Partial driving automation that requires active human supervision.",
+      "mechanism": "Detect when required human supervision is unavailable and apply a defined warning or fallback.",
+      "implementation": [
+        "State what supervision the automation requires and what the monitoring system can actually observe.",
+        "Assess representative driver states, warning timing, and fallback in simulation or an approved research setting.",
+        "Score false alerts and missed disengagement separately; document cases in which a driver cannot recover in time."
+      ],
+      "ownerRole": "Vehicle-system developer and human-factors evaluator",
+      "evidenceSummary": "NTSB identified ineffective engagement monitoring as a contributing factor in the Mountain View crash and recommended improved monitoring. This is investigative evidence, not a local intervention trial.",
+      "evidenceStatus": "Investigation recommendation",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "NTSB HWY18FH011",
+          "url": "https://www.ntsb.gov/investigations/pages/HWY18FH011.aspx",
+          "description": "Findings on supervision and partial automation."
+        },
+        {
+          "label": "NTSB HAR-20/01",
+          "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/HAR2001.pdf",
+          "description": "Monitoring recommendations, including H-17-42."
+        }
+      ],
+      "limits": [
+        "Attention detection does not guarantee situational understanding or a successful handover.",
+        "Vehicle findings do not validate a construction-robot supervision scheme."
+      ],
+      "evaluationIds": [
+        "euro-ncap-assistance"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.5",
+          "1.5"
+        ],
+        "labels": [
+          "Post-deployment Monitoring",
+          "Safety Decision Frameworks"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [
+        {
+          "id": "H-17-42",
+          "label": "NTSB safety recommendation",
+          "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/HAR2001.pdf"
+        }
+      ],
+      "reviewedAt": "2026-09-28"
     },
     {
       "id": "energy-isolation",
@@ -1014,7 +1475,311 @@ window.BACKDRIVE_DATA = {
         "Unauthorized restarts"
       ],
       "context": "Pumps, hoses, drives, and other components that can retain hazardous energy.",
-      "residual": "Isolation does not establish material quality, task accuracy, or safe operation after restarting."
+      "residual": "Isolation does not establish material quality, task accuracy, or safe operation after restarting.",
+      "mechanism": "Control hazardous energy before servicing, cleaning, or access that could expose a person to unexpected motion or release.",
+      "implementation": [
+        "Use the actual equipment’s approved procedure to identify energy sources and verification steps.",
+        "Record who is authorized to isolate, verify, and release the equipment for restart.",
+        "Assess procedure completeness and competency without exposing anyone to an unprotected system."
+      ],
+      "ownerRole": "Employer’s safety lead and qualified maintenance personnel",
+      "evidenceSummary": "OSHA describes hazardous-energy control for servicing and maintenance. WorkSafe’s pump alert identifies pressure-component inspection and compatibility issues.",
+      "evidenceStatus": "Operational guidance",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "OSHA hazardous energy",
+          "url": "https://www.osha.gov/control-hazardous-energy",
+          "description": "Unexpected startup and stored-energy release."
+        },
+        {
+          "label": "WorkSafe pumping alert",
+          "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
+          "description": "Pressure-system compatibility and inspection."
+        }
+      ],
+      "limits": [
+        "A stop button alone does not isolate energy.",
+        "The applicable procedure and requirements depend on the equipment, task, and jurisdiction."
+      ],
+      "evaluationIds": [
+        "restart-review",
+        "pressure-review"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.6"
+        ],
+        "labels": [
+          "Incident Response & Recovery"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [],
+      "reviewedAt": "2026-09-28"
+    },
+    {
+      "id": "layout-verification",
+      "name": "Independent layout check",
+      "category": "Verify physical output",
+      "caseId": "PILOT-01",
+      "question": "Does an independent measurement find layout errors before downstream work starts?",
+      "baseline": "Record the existing layout acceptance process.",
+      "comparison": "Check selected printed output against independently surveyed references.",
+      "protocol": "Agree sampling and project tolerances before printing. Record errors, corrections, and reviewer time for each site.",
+      "measures": [
+        "Output errors found",
+        "Corrections before downstream work",
+        "Checking time"
+      ],
+      "context": "Construction layout; file revision, control points, stationing, and accepted output",
+      "residual": "Correctly printed coordinates can still represent an incorrect design.",
+      "mechanism": "Compare physical output with a separately established reference before other work relies on it.",
+      "implementation": [
+        "Keep design approval separate from position measurement.",
+        "Record survey reference, file revision, measurement uncertainty, and checker.",
+        "Repeat affected checks after restationing or a relevant change."
+      ],
+      "ownerRole": "Qualified survey or layout reviewer",
+      "evidenceSummary": "The manufacturer describes surveyed control and verification. The proposed independent output check adds evidence for this project’s acceptance decision.",
+      "evidenceStatus": "Manufacturer method; proposed comparison",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "FieldPrinter specifications",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs",
+          "description": "Control points, stationing, and verification."
+        },
+        {
+          "label": "FieldPrinter readiness",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+          "description": "File and site prerequisites."
+        }
+      ],
+      "limits": [
+        "Manufacturer accuracy is a claim under stated conditions, not the project acceptance tolerance.",
+        "Checking selected points does not verify every printed feature."
+      ],
+      "evaluationIds": [
+        "nist-navigation",
+        "layout-control"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.1"
+        ],
+        "labels": [
+          "Testing & Auditing"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [],
+      "reviewedAt": "2026-09-28"
+    },
+    {
+      "id": "equipment-compatibility",
+      "name": "Equipment compatibility check",
+      "category": "Verify equipment configuration",
+      "caseId": "OSHA-99025",
+      "question": "Do the actual equipment, material, power supply, and pressure components match the approved configuration?",
+      "baseline": "Supplier quotation and existing receiving inspection.",
+      "comparison": "Reconcile the ordered unit, manuals, component records, and site requirements before commissioning.",
+      "protocol": "Track each unresolved specification against the actual unit. A qualified reviewer closes discrepancies before release.",
+      "measures": [
+        "Unresolved specifications",
+        "Incompatible components detected",
+        "Commissioning corrections"
+      ],
+      "context": "PC-16 and DM Leading; electrical configuration, materials, hoses, couplings, and rated limits",
+      "residual": "Compatible equipment still needs correct operation, maintenance, and task-quality checks.",
+      "mechanism": "Resolve configuration mismatches before a purchase or commissioning decision.",
+      "implementation": [
+        "Obtain the ordered unit’s specification and manual.",
+        "Confirm materials, power, and pressure components with competent reviewers.",
+        "Keep conflicting supplier values unresolved until the unit-specific evidence settles them."
+      ],
+      "ownerRole": "Procurement owner, qualified electrician, and commissioning lead",
+      "evidenceSummary": "The public PC16 pages disagree on pressure and aggregate limits. The check responds to that documented conflict; it has not been completed for the proposed units.",
+      "evidenceStatus": "Manufacturer evidence; verification pending",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "PC16 specification",
+          "url": "https://www.derututech.com/products/13.html",
+          "description": "One published configuration."
+        },
+        {
+          "label": "PC16 alternate page",
+          "url": "https://derutu.com/pc16-2/",
+          "description": "Conflicting published values."
+        },
+        {
+          "label": "DM Leading",
+          "url": "https://www.derututech.com/products/7.html",
+          "description": "Published electrical and model information."
+        },
+        {
+          "label": "WorkSafe pumping alert",
+          "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
+          "description": "Compatibility and pressure ratings."
+        }
+      ],
+      "limits": [
+        "A product page does not identify the delivered unit.",
+        "No operating limit is selected from conflicting pages."
+      ],
+      "evaluationIds": [
+        "derutu-compatibility",
+        "pressure-review"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "1.2",
+          "4.1"
+        ],
+        "labels": [
+          "Risk Management",
+          "System Documentation"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [],
+      "reviewedAt": "2026-09-28"
+    },
+    {
+      "id": "operator-qualification",
+      "name": "Demonstrated operator competence",
+      "category": "Qualify the operator",
+      "caseId": "WA-LGV-2015",
+      "question": "Can the assigned operator perform the approved work and respond correctly to foreseeable interruptions?",
+      "baseline": "Existing training and qualification records.",
+      "comparison": "Observed performance on equipment-specific tasks and approved recovery exercises.",
+      "protocol": "Use the manufacturer’s procedure and a qualified assessor. Record assistance, missed steps, and the scope of authorization.",
+      "measures": [
+        "Steps completed correctly",
+        "Assistance required",
+        "Recovery errors"
+      ],
+      "context": "Setup, routine work, fault response, cleaning, and restart",
+      "residual": "Training does not replace engineering controls and can degrade without practice.",
+      "mechanism": "Limit task authorization to work the operator has demonstrated under the approved procedure.",
+      "implementation": [
+        "Define the tasks and permitted operating modes.",
+        "Observe setup, stops, recovery, and cleaning with a qualified assessor.",
+        "Reassess competence when the task or configuration changes."
+      ],
+      "ownerRole": "Employer and qualified trainer or assessor",
+      "evidenceSummary": "OSHA recommends demonstrated competence before assignment. NIOSH investigation recommendations emphasize machine-specific procedures and refresher checks.",
+      "evidenceStatus": "Operational guidance",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "OSHA robot safety",
+          "url": "https://www.osha.gov/otm/section-4-safety-hazards/chapter-4",
+          "description": "Procedure training and demonstrated competence."
+        },
+        {
+          "label": "NIOSH robot investigations",
+          "url": "https://www.cdc.gov/niosh/bulletin/2019/robot-safety.html",
+          "description": "Machine-specific training recommendations."
+        }
+      ],
+      "limits": [
+        "A training record alone does not demonstrate competence.",
+        "No training-effect size is claimed for these pilots."
+      ],
+      "evaluationIds": [
+        "restart-review",
+        "fieldprinter-readiness"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.3",
+          "3.1"
+        ],
+        "labels": [
+          "Access Management",
+          "Testing & Auditing"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [],
+      "reviewedAt": "2026-09-28"
+    },
+    {
+      "id": "change-review",
+      "name": "Review after a change",
+      "category": "Maintain the approved scope",
+      "caseId": "PILOT-01",
+      "question": "Does a change trigger the review needed before earlier approval is reused?",
+      "baseline": "The current approval and change-record process.",
+      "comparison": "An explicit trigger list tied to the task, system version, site, and materials.",
+      "protocol": "Review harmless change scenarios against the approval record. Score correct escalations and unnecessary rework.",
+      "measures": [
+        "Changes missed",
+        "Approvals reused outside scope",
+        "Review effort"
+      ],
+      "context": "New files, equipment settings, materials, environment, or intended use",
+      "residual": "Unrecorded changes can escape the review; completed work may also need correction.",
+      "mechanism": "Reopen approval when evidence no longer covers the equipment or task now proposed.",
+      "implementation": [
+        "Record the approved task and configuration together.",
+        "Identify changes that need rechecking or new authorization.",
+        "Keep the original decision, new evidence, and corrective action linked."
+      ],
+      "ownerRole": "Deployment owner and qualified reviewers",
+      "evidenceSummary": "NIST recommends revisiting guardrails in novel circumstances. OSHA calls for reviewing an application assessment after changes. The scenario comparison here is proposed.",
+      "evidenceStatus": "Operational guidance",
+      "localEvidenceStatus": "Not tested",
+      "sources": [
+        {
+          "label": "NIST AI 600-1, MS-2.5-006",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+          "description": "Reassessment in new circumstances."
+        },
+        {
+          "label": "OSHA robot safety",
+          "url": "https://www.osha.gov/otm/section-4-safety-hazards/chapter-4",
+          "description": "Application review after changes."
+        }
+      ],
+      "limits": [
+        "A change can affect already completed work.",
+        "The review must include interactions between controls rather than checking each in isolation."
+      ],
+      "evaluationIds": [
+        "fieldprinter-readiness",
+        "derutu-compatibility",
+        "agentdojo"
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "1.5",
+          "3.4"
+        ],
+        "labels": [
+          "Safety Decision Frameworks",
+          "Staged Deployment"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      },
+      "frameworkRefs": [
+        {
+          "id": "MS-2.5-006",
+          "label": "NIST AI 600-1",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf"
+        }
+      ],
+      "reviewedAt": "2026-09-28",
+      "mitigationIds": [
+        "A0508_NIST2024"
+      ]
     }
   ],
   "models": [
@@ -1063,16 +1828,33 @@ window.BACKDRIVE_DATA = {
         "No meaningful attempt",
         "Refusal"
       ],
-      "limits": "One fixed instruction per task and one robot setup. These trials do not establish performance across deployment settings.",
+      "limits": "One instruction and setup per task. A failed attempt is not refusal. Recipe advice and physical execution are different tasks.",
       "caseIds": [
         "AIID-594"
       ],
-      "status": "Results available"
+      "status": "Results available",
+      "protocol": [
+        "Use the published five task definitions and retain the task-level results.",
+        "Separate safety refusal, other refusal, non-attempt, failed attempt, and completion.",
+        "For a new comparison, use approved harmless substitutes and independently review videos and action logs."
+      ],
+      "resultSummary": "The published study contains 300 trials: five tasks, three policies, 20 trials per policy and task. Existing task-level counts are retained in this catalog.",
+      "resultSource": "https://robocurve.org/roboharm/",
+      "configuration": "Bimanual I2RT YAM setup with Inspect Robots. GPT-6 Astra and Claude Fable 5.1 agent policies, and MolmoAct2. Published September 18, 2026.",
+      "transferLimits": "One instruction and setup per task. A failed attempt is not refusal. Recipe advice and physical execution are different tasks.",
+      "sources": [
+        {
+          "label": "RoboHarm methods and trial records",
+          "url": "https://robocurve.org/roboharm/"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
     },
     {
       "id": "asimov",
       "name": "ASIMOV 2.0",
-      "environment": "Images & video",
+      "environment": "Text, images, and video",
       "focus": "Physical hazard understanding",
       "source": "https://asimov-benchmark.github.io/v2/",
       "description": "Injury narratives and operational constraints are used to generate visual safety scenarios and evaluate risk recognition, reasoning, and intervention decisions.",
@@ -1082,14 +1864,35 @@ window.BACKDRIVE_DATA = {
         "Intervention decisions",
         "Constraint satisfaction"
       ],
-      "limits": "Recognizing danger in generated scenarios does not demonstrate safe closed-loop robot control.",
+      "limits": "Answers and selected actions are evaluated; hardware execution is not. Generated scenes can omit the decisive physical detail.",
       "caseIds": [
         "AIID-2",
         "AIID-51",
         "AIID-1602",
         "PILOT-01"
       ],
-      "status": "Published benchmark"
+      "status": "Published benchmark",
+      "protocol": [
+        "Keep the Injury, Video, and Constraints tasks separate.",
+        "Use the released prompts and human labels to score risk, severity, action consequences, and constraint violations.",
+        "For incident-derived additions, document the changed scenario and obtain fresh labels before comparing scores."
+      ],
+      "resultSummary": "The paper reports model-specific safety-understanding results. It does not test the warehouse equipment or robotaxis linked here.",
+      "resultSource": "https://arxiv.org/html/2509.21651v2",
+      "configuration": "ASIMOV 2.0, paper v2: 319 text examples, 287 videos, and 164 image–constraint pairs. Model reasoning settings differ between experiments.",
+      "transferLimits": "Answers and selected actions are evaluated; hardware execution is not. Generated scenes can omit the decisive physical detail.",
+      "sources": [
+        {
+          "label": "ASIMOV 2.0",
+          "url": "https://asimov-benchmark.github.io/v2/"
+        },
+        {
+          "label": "Paper and evaluation sets",
+          "url": "https://arxiv.org/html/2509.21651v2"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
     },
     {
       "id": "safebench",
@@ -1104,7 +1907,7 @@ window.BACKDRIVE_DATA = {
         "Out-of-road distance",
         "Runtime"
       ],
-      "limits": "A simulator result needs an explicit argument for transfer to a particular vehicle, sensor configuration, and operating environment.",
+      "limits": "A scenario can probe a related condition without reconstructing the incident. Sensor realism, map geometry, and controller behavior need separate validation.",
       "caseIds": [
         "AIID-4",
         "AIID-1547",
@@ -1112,7 +1915,28 @@ window.BACKDRIVE_DATA = {
         "CRUISE-2023",
         "WAYMO-2024"
       ],
-      "status": "Published benchmark"
+      "status": "Published benchmark",
+      "protocol": [
+        "Fix the CARLA version, vehicle, sensors, policy, routes, and scenario generator.",
+        "Run the same policy on ordinary and safety-critical scenarios, preserving seeds and trajectories.",
+        "Report collisions alongside task completion and roadway departures; inspect failures before transferring a scenario."
+      ],
+      "resultSummary": "The paper compares four reinforcement-learning driving algorithms with four input types. No matched Cruise, Waymo, or construction-robot results are supplied.",
+      "resultSource": "https://arxiv.org/abs/2206.09682",
+      "configuration": "NeurIPS 2022 platform and its CARLA scenarios. Published baselines are research driving policies, not the incident software.",
+      "transferLimits": "A scenario can probe a related condition without reconstructing the incident. Sensor realism, map geometry, and controller behavior need separate validation.",
+      "sources": [
+        {
+          "label": "SafeBench platform",
+          "url": "https://safebench.github.io/"
+        },
+        {
+          "label": "SafeBench paper",
+          "url": "https://arxiv.org/abs/2206.09682"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
     },
     {
       "id": "alce",
@@ -1126,11 +1950,28 @@ window.BACKDRIVE_DATA = {
         "Answer correctness",
         "Citation quality"
       ],
-      "limits": "General citation quality is not validation of legal authority, engineering correctness, or a specific supplier claim.",
+      "limits": "A citation can support a claim while being unsuitable authority for a legal or engineering decision.",
       "caseIds": [
         "AIID-541"
       ],
-      "status": "Published benchmark"
+      "status": "Published benchmark",
+      "protocol": [
+        "Fix the question set, document collection, retrieved passages, model, and citation prompt.",
+        "Evaluate answer correctness separately from whether cited passages support the claims.",
+        "For legal or supplier material, have a qualified reviewer check source existence, authority, and applicability."
+      ],
+      "resultSummary": "The repository publishes benchmark baselines and human-evaluation material. Those results do not assess the legal filing in incident 541.",
+      "resultSource": "https://github.com/princeton-nlp/ALCE",
+      "configuration": "ASQA, QAMPARI, and ELI5 with different retrieval and generation configurations.",
+      "transferLimits": "A citation can support a claim while being unsuitable authority for a legal or engineering decision.",
+      "sources": [
+        {
+          "label": "ALCE code, data, and scoring",
+          "url": "https://github.com/princeton-nlp/ALCE"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
     },
     {
       "id": "agentdojo",
@@ -1144,11 +1985,86 @@ window.BACKDRIVE_DATA = {
         "Attack success",
         "Defense tradeoffs"
       ],
-      "limits": "The linked infrastructure incident is an authority-boundary comparison, not evidence of a prompt-injection cause.",
+      "limits": "The infrastructure deletion report does not establish prompt injection. These results assess one attack and defense configuration, not general agent reliability.",
       "caseIds": [
         "AIID-1424"
       ],
-      "status": "Published benchmark"
+      "status": "Published benchmark",
+      "protocol": [
+        "Fix the model snapshot, task suite, attack, defense, and tool permissions.",
+        "Run ordinary tasks and attacked tasks, recording both useful completion and attacker success.",
+        "Inspect action traces for unauthorized effects; compare only rows with matching configurations."
+      ],
+      "resultSummary": "The published runs compare an agent with and without a tool filter. Both useful task completion and attacker success are reported.",
+      "resultSource": "https://agentdojo.spylab.ai/results/",
+      "configuration": "GPT-4o-2024-05-13; important_instructions attack; no defense versus tool_filter. Historical benchmark runs, not a rerun by Back\\Drive.",
+      "transferLimits": "The infrastructure deletion report does not establish prompt injection. These results assess one attack and defense configuration, not general agent reliability.",
+      "sources": [
+        {
+          "label": "AgentDojo implementation",
+          "url": "https://github.com/ethz-spylab/agentdojo"
+        },
+        {
+          "label": "Dated result rows",
+          "url": "https://agentdojo.spylab.ai/results/",
+          "description": "June 5, 2024 results-page rows. Paper revisions report different values; this table uses only the results page."
+        },
+        {
+          "label": "Paper and defense mechanism",
+          "url": "https://arxiv.org/html/2406.13352v3"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": [
+        {
+          "model": "GPT-4o-2024-05-13",
+          "configuration": "important_instructions attack; no defense",
+          "metrics": [
+            {
+              "name": "Utility",
+              "value": 69.07,
+              "unit": "%"
+            },
+            {
+              "name": "Utility under attack",
+              "value": 50.08,
+              "unit": "%"
+            },
+            {
+              "name": "Targeted attack success",
+              "value": 47.69,
+              "unit": "%"
+            }
+          ],
+          "source": "https://agentdojo.spylab.ai/results/",
+          "date": "2024-06-05",
+          "scope": "Official results-page row. Benchmark tasks, not the linked infrastructure incident."
+        },
+        {
+          "model": "GPT-4o-2024-05-13",
+          "configuration": "important_instructions attack; tool_filter defense",
+          "metrics": [
+            {
+              "name": "Utility",
+              "value": 72.16,
+              "unit": "%"
+            },
+            {
+              "name": "Utility under attack",
+              "value": 56.28,
+              "unit": "%"
+            },
+            {
+              "name": "Targeted attack success",
+              "value": 6.84,
+              "unit": "%"
+            }
+          ],
+          "source": "https://agentdojo.spylab.ai/results/",
+          "date": "2024-06-05",
+          "scope": "Official results-page row. Historical comparison; no local deployment result."
+        }
+      ]
     },
     {
       "id": "nist-navigation",
@@ -1162,9 +2078,26 @@ window.BACKDRIVE_DATA = {
         "Path-following error",
         "Repeatability"
       ],
-      "limits": "A method proxy. Vehicle position is not the same as printed-line accuracy. It does not verify the building model or establish results for a construction robot.",
+      "limits": "Robot position, printed-line placement, and correctness of the design are three different questions.",
       "caseIds": [],
-      "status": "Published method"
+      "status": "Published method",
+      "protocol": [
+        "Establish an independent position reference and its measurement uncertainty.",
+        "Repeat defined paths under recorded floor, load, speed, and tracking conditions.",
+        "Compare position and path errors. Check printed output separately when adapting the method to layout."
+      ],
+      "resultSummary": "NIST publishes AGV experiments and a measurement method. No FieldPrinter trial result has been collected here.",
+      "resultSource": "https://www.nist.gov/publications/navigation-performance-evaluation-automated-guided-vehicles",
+      "configuration": "2015 AGV navigation research using independent ground-truth measurements. The proposed construction adaptation is additional.",
+      "transferLimits": "Robot position, printed-line placement, and correctness of the design are three different questions.",
+      "sources": [
+        {
+          "label": "NIST navigation measurement research",
+          "url": "https://www.nist.gov/publications/navigation-performance-evaluation-automated-guided-vehicles"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
     },
     {
       "id": "astm-stopping",
@@ -1178,11 +2111,28 @@ window.BACKDRIVE_DATA = {
         "Stopping behavior",
         "Kinetic-energy reduction"
       ],
-      "limits": "A stopping proxy only. It does not evaluate restart authorization, load stability, or construction-layout accuracy, and does not replace required safety testing. No construction-equipment results are recorded here.",
+      "limits": "Concerned with energy reduction when an obstacle appears inside the stop-detect range. It does not establish collision avoidance in every case, safe restart, or compliance with other safety requirements.",
       "caseIds": [
         "WA-LGV-2015"
       ],
-      "status": "Published test method"
+      "status": "Published test method",
+      "protocol": [
+        "A competent test team selects an applicable configuration using the complete standard.",
+        "Record the test object, vehicle state, sensing range, and environmental conditions.",
+        "Measure the stopping response under controlled conditions; assess restart and load stability separately."
+      ],
+      "resultSummary": "The public scope identifies a test method. No results for either Sage Plant case are recorded.",
+      "resultSource": "https://store.astm.org/f3265-17r23.html",
+      "configuration": "ASTM F3265-17(2023), Grid-Video Obstacle Measurement. This catalog reviewed the public scope, not the full procedure.",
+      "transferLimits": "Concerned with energy reduction when an obstacle appears inside the stop-detect range. It does not establish collision avoidance in every case, safe restart, or compliance with other safety requirements.",
+      "sources": [
+        {
+          "label": "ASTM public scope",
+          "url": "https://store.astm.org/f3265-17r23.html"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
     },
     {
       "id": "layout-control",
@@ -1196,9 +2146,26 @@ window.BACKDRIVE_DATA = {
         "Tracker-movement alert",
         "Independent output check"
       ],
-      "limits": "Manufacturer guidance, not an independent benchmark. The output check is an additional proposed comparison. Matching the model does not establish that the model itself is correct.",
+      "limits": "A good fit to erroneous control or an obsolete model can still produce incorrect layout.",
       "caseIds": [],
-      "status": "Manufacturer method"
+      "status": "Manufacturer method",
+      "protocol": [
+        "Use the job’s approved coordinate system and independently established control points.",
+        "Record stationing residuals and the verification-reflector check.",
+        "Add independent checks of selected printed lines and points against agreed tolerances."
+      ],
+      "resultSummary": "Dusty describes control checks and claims print accuracy of ±1.6 mm. This is a supplier claim, not the pilot’s measured accuracy or acceptance threshold.",
+      "resultSource": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs",
+      "configuration": "FieldPrinter 2 with Dusty’s laser tracker, stationing workflow, and job control. Independent output checks are proposed additions.",
+      "transferLimits": "A good fit to erroneous control or an obsolete model can still produce incorrect layout.",
+      "sources": [
+        {
+          "label": "FieldPrinter specifications and control checks",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
     },
     {
       "id": "restart-review",
@@ -1213,12 +2180,37 @@ window.BACKDRIVE_DATA = {
         "Access protection",
         "Restart sequence"
       ],
-      "limits": "A proposed review, not a published benchmark or a demonstration that a safeguard works. Equipment-specific procedures and a competent assessor are required.",
+      "limits": "An emergency stop is not a substitute for energy isolation. Preliminary FACE reports motivate the review but do not certify another machine.",
       "caseIds": [
         "WA-LGV-2015",
         "WA-DEMO-2019"
       ],
-      "status": "Proposed review"
+      "status": "Proposed review",
+      "protocol": [
+        "Map ordinary pause, protective stop, emergency stop, and energy-isolated states from the machine manual.",
+        "Identify who may enter, reset, and authorize resumption, including after faults or power loss.",
+        "Have a competent assessor verify the approved sequence and record discrepancies before use."
+      ],
+      "resultSummary": "A proposed review derived from incident mechanisms. There are no local restart or isolation findings yet.",
+      "resultSource": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf",
+      "configuration": "Equipment-specific review for the actual controller, attachments, access zones, and stored energy.",
+      "transferLimits": "An emergency stop is not a substitute for energy isolation. Preliminary FACE reports motivate the review but do not certify another machine.",
+      "sources": [
+        {
+          "label": "FACE laser-guided vehicle account",
+          "url": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf"
+        },
+        {
+          "label": "FACE remote-controller account",
+          "url": "https://lni.wa.gov/safety-health/safety-research/files/2019/DemolitionRobotAlert.pdf"
+        },
+        {
+          "label": "OSHA hazardous-energy guidance",
+          "url": "https://www.osha.gov/control-hazardous-energy"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
     },
     {
       "id": "pressure-review",
@@ -1233,11 +2225,28 @@ window.BACKDRIVE_DATA = {
         "Maintenance records",
         "Isolation procedure"
       ],
-      "limits": "Concrete pumping is a proxy for mortar or plaster systems. This is guidance-based review, not a scored benchmark, a certification, or evidence about a particular machine’s performance.",
+      "limits": "Concrete pumping is a mechanism proxy for plaster or mortar. Do not infer a suitable pressure or intentionally create a blockage from this account.",
       "caseIds": [
         "OSHA-99025"
       ],
-      "status": "Proposed review"
+      "status": "Proposed review",
+      "protocol": [
+        "Identify every hose, coupling, pump, and accessory against the unit’s manual and ratings.",
+        "Review compatibility, wear, inspection history, and the approved depressurization and isolation procedure.",
+        "Have a qualified person resolve discrepancies before commissioning; retain the findings and corrective actions."
+      ],
+      "resultSummary": "WorkSafe’s alert supplies review criteria. No inspection, pressure test, or equipment-specific pass is recorded.",
+      "resultSource": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
+      "configuration": "Complete installed pumping assembly and actual material. Supplier documents and competent inspection are required.",
+      "transferLimits": "Concrete pumping is a mechanism proxy for plaster or mortar. Do not infer a suitable pressure or intentionally create a blockage from this account.",
+      "sources": [
+        {
+          "label": "WorkSafe pumping alert",
+          "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
     },
     {
       "id": "fieldprinter-readiness",
@@ -1251,9 +2260,26 @@ window.BACKDRIVE_DATA = {
         "Site and control-point readiness",
         "Setup delays"
       ],
-      "limits": "Manufacturer guidance. Record the findings; checklist completion is not a performance result or independent safety validation.",
+      "limits": "Checklist completion does not measure layout accuracy, total labor, or the reliability of site controls.",
       "caseIds": [],
-      "status": "Manufacturer checklist"
+      "status": "Manufacturer checklist",
+      "protocol": [
+        "Confirm current files, units, revisions, and operator access before mobilization.",
+        "Check survey control, floor conditions, exclusions, equipment, and site coordination for each job.",
+        "Record unresolved items, setup delays, and the responsible person before printing."
+      ],
+      "resultSummary": "A manufacturer checklist is available. Neither completion nor measured preparation time has been recorded for these jobs.",
+      "resultSource": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+      "configuration": "FieldPrinter job and floor readiness. Repeat at each site rather than treating the first job as approval for the second.",
+      "transferLimits": "Checklist completion does not measure layout accuracy, total labor, or the reliability of site controls.",
+      "sources": [
+        {
+          "label": "Dusty readiness checklist",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
     },
     {
       "id": "derutu-compatibility",
@@ -1263,16 +2289,16 @@ window.BACKDRIVE_DATA = {
       "source": "https://www.derututech.com/products/13.html",
       "sources": [
         {
-          "url": "https://www.derututech.com/products/13.html",
-          "label": "PC16 specifications"
+          "label": "PC16 product page",
+          "url": "https://www.derututech.com/products/13.html"
         },
         {
-          "url": "https://derutu.com/pc16-2/",
-          "label": "Alternative PC16 specifications"
+          "label": "Alternative PC16 specifications",
+          "url": "https://derutu.com/pc16-2/"
         },
         {
-          "url": "https://www.derututech.com/products/7.html",
-          "label": "DM Leading specifications"
+          "label": "DM Leading specifications",
+          "url": "https://www.derututech.com/products/7.html"
         }
       ],
       "description": "The two PC16 pages list different pressure and aggregate limits. Obtain the specification and manual for the ordered unit, then check the equipment, material, and electrical supply together.",
@@ -1282,11 +2308,22 @@ window.BACKDRIVE_DATA = {
         "Electrical compatibility",
         "Supplier clarification"
       ],
-      "limits": "A proposed procurement check, not a benchmark. Published pages may describe different configurations; the difference cannot be resolved from the available information.",
+      "limits": "Product-page figures may describe different variants. They are not substitutes for the delivered unit’s documentation.",
       "caseIds": [
         "OSHA-99025"
       ],
-      "status": "Proposed check"
+      "status": "Proposed check",
+      "protocol": [
+        "Obtain the ordered model, revision, manual, and configuration in writing.",
+        "Reconcile the PC16 pages’ differing pressure and aggregate specifications with the supplier.",
+        "Have qualified reviewers confirm material, electrical, component, and site compatibility before commissioning."
+      ],
+      "resultSummary": "Public PC16 specifications conflict. The supplied quote does not resolve the configuration, and no commissioning result is recorded.",
+      "resultSource": "https://www.derututech.com/products/13.html",
+      "configuration": "DM Leading and PC16 as ordered. The DM page lists 220 V/50 Hz; the alternative PC16 page lists 380 V.",
+      "transferLimits": "Product-page figures may describe different variants. They are not substitutes for the delivered unit’s documentation.",
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
     },
     {
       "id": "wall-finish-comparison",
@@ -1302,9 +2339,230 @@ window.BACKDRIVE_DATA = {
         "Waste and rework",
         "Setup and cleaning time"
       ],
-      "limits": "No trial results are recorded. The qualified reviewer must select suitable finish and adhesion checks. Vendor production figures are not the manual baseline.",
+      "limits": "One wall cannot establish performance for all surfaces or materials. Learning time and repeated defects must remain visible.",
       "caseIds": [],
-      "status": "Proposed comparison"
+      "status": "Proposed comparison",
+      "protocol": [
+        "Agree finish requirements and suitable inspection methods with the qualified reviewer.",
+        "Use comparable wall sections, substrate, material, thickness, and crew experience.",
+        "Compare accepted area and defects over the full cycle, including setup, transport, cleaning, correction, and inspection."
+      ],
+      "resultSummary": "No matched comparison or manual baseline is recorded. Vendor production rates are claims, not accepted area per labor-hour.",
+      "resultSource": "https://www.derututech.com/products/7.html",
+      "configuration": "Proposed manual-versus-DM/PC16 comparison using the same acceptance criteria.",
+      "transferLimits": "One wall cannot establish performance for all surfaces or materials. Learning time and repeated defects must remain visible.",
+      "sources": [
+        {
+          "label": "DM Leading product claims",
+          "url": "https://www.derututech.com/products/7.html"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
+    },
+    {
+      "id": "summac",
+      "name": "SummaC",
+      "environment": "Text summaries",
+      "focus": "Consistency with source documents",
+      "source": "https://aclanthology.org/2022.tacl-1.10/",
+      "description": "A benchmark and scoring method for detecting claims in summaries that are unsupported by their source documents.",
+      "measures": [
+        "Balanced accuracy",
+        "False acceptance of inconsistent summaries",
+        "False rejection of consistent summaries"
+      ],
+      "limits": "Longer news articles differ from grouped notifications. Consistency with a source does not prove that the source is true.",
+      "caseIds": [
+        "APPLE-2024"
+      ],
+      "status": "Published benchmark",
+      "protocol": [
+        "Keep source documents paired with summaries and the original consistency labels.",
+        "Use held-out examples and the published scoring setup; report both false positives and false negatives.",
+        "For notifications, add independently labeled bundles and score omissions and attribution separately."
+      ],
+      "resultSummary": "Table 2 reports average balanced accuracy across six test sets: SummaCConv 74.4%, SummaCZS 72.1%. These are detector scores, not summary-generation accuracy.",
+      "resultSource": "https://aclanthology.org/2022.tacl-1.10.pdf",
+      "configuration": "2022 paper, Table 2. Six datasets; sentence-level inputs. The MNLI+VitaminC configuration underlies the reported SummaC results.",
+      "transferLimits": "Longer news articles differ from grouped notifications. Consistency with a source does not prove that the source is true.",
+      "sources": [
+        {
+          "label": "SummaC paper",
+          "url": "https://aclanthology.org/2022.tacl-1.10/"
+        },
+        {
+          "label": "Authors’ implementation",
+          "url": "https://github.com/tingofurro/summac"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": [
+        {
+          "model": "SummaCConv",
+          "configuration": "Table 2; six test sets; sentence-level MNLI+VitaminC setup",
+          "metrics": [
+            {
+              "name": "Mean balanced accuracy",
+              "value": 74.4,
+              "unit": "%"
+            }
+          ],
+          "source": "https://aclanthology.org/2022.tacl-1.10.pdf",
+          "date": "2022",
+          "scope": "Mean of six dataset scores, not Apple performance."
+        },
+        {
+          "model": "SummaCZS",
+          "configuration": "Table 2; same six test sets",
+          "metrics": [
+            {
+              "name": "Mean balanced accuracy",
+              "value": 72.1,
+              "unit": "%"
+            }
+          ],
+          "source": "https://aclanthology.org/2022.tacl-1.10.pdf",
+          "date": "2022",
+          "scope": "Summary inconsistency detector, not a summarizer."
+        }
+      ]
+    },
+    {
+      "id": "euro-ncap-assistance",
+      "name": "Euro NCAP assisted driving",
+      "environment": "Controlled vehicle assessment",
+      "focus": "Driver engagement and safety backup",
+      "source": "https://www.euroncap.com/safe-driving/",
+      "description": "Published assessment protocols cover driver supervision, assistance performance, and the response when the driver or sensing system becomes unavailable.",
+      "measures": [
+        "Distraction warnings",
+        "Unresponsive-driver response",
+        "Operation at system limits",
+        "Unnecessary warnings"
+      ],
+      "limits": "Assisted driving requires human supervision. Passing later tests cannot establish that the 2018 crash would have been prevented.",
+      "caseIds": [
+        "HWY18FH011"
+      ],
+      "status": "Published test method",
+      "protocol": [
+        "Fix the vehicle, assistance options, software, monitoring hardware, and operating limits.",
+        "A qualified test team follows the relevant driver-monitoring and assistance procedures under controlled conditions.",
+        "Record detection, warnings, fallback behavior, and unnecessary interventions separately."
+      ],
+      "resultSummary": "Current public procedures are available. No score for the incident vehicle and software has been assigned here.",
+      "resultSource": "https://www.euroncap.com/safe-driving/",
+      "configuration": "Assisted Driving v1.2 and SD-202 Driver Monitoring v1.2, July 2026.",
+      "transferLimits": "Assisted driving requires human supervision. Passing later tests cannot establish that the 2018 crash would have been prevented.",
+      "sources": [
+        {
+          "label": "Assisted Driving v1.2",
+          "url": "https://cdn.euroncap.com/cars/assets/Euro_NCAP_Protocol_Assisted_Driving_v1_2_7150e4e41e.pdf"
+        },
+        {
+          "label": "SD-202 driver monitoring",
+          "url": "https://cdn.euroncap.com/cars/assets/SD_202_Driver_Monitoring_Test_Procedure_v1_2_d3420cb629.pdf"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
+    },
+    {
+      "id": "glass-slam",
+      "name": "Glass detection and mapping",
+      "environment": "Recorded mobile-robot sensor data",
+      "focus": "Recognizing large glass panels as occupied space",
+      "source": "https://github.com/uts-magic-lab/slam_glass",
+      "description": "The authors release a PR2 test dataset and a SLAM implementation that adds detected glass panels to the occupancy map.",
+      "measures": [
+        "Glass-panel detection",
+        "Missed occupied space",
+        "False obstacles",
+        "Map accuracy"
+      ],
+      "limits": "Panel detection does not establish braking performance. Outdoor reflections, glazing, sensor height, and processing differ between systems.",
+      "caseIds": [
+        "AIID-1567"
+      ],
+      "status": "Published method",
+      "protocol": [
+        "Replay the released sensor recordings with the original and glass-aware mapping pipelines.",
+        "Compare glass locations and false obstacles against an independent reference.",
+        "For a different robot, collect a separate sensor-matched set before assessing navigation behavior."
+      ],
+      "resultSummary": "The repository provides a reproducible mapping comparison and test recordings. No Serve-equipment result is imported.",
+      "resultSource": "https://github.com/uts-magic-lab/slam_glass",
+      "configuration": "Wang and Wang, 2017; unmodified PR2 platform and laser-based indoor mapping.",
+      "transferLimits": "Panel detection does not establish braking performance. Outdoor reflections, glazing, sensor height, and processing differ between systems.",
+      "sources": [
+        {
+          "label": "Authors’ code and test dataset",
+          "url": "https://github.com/uts-magic-lab/slam_glass"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": []
+    },
+    {
+      "id": "openmfc",
+      "name": "NIST OpenMFC video deepfakes",
+      "environment": "Recorded video",
+      "focus": "Detecting manipulated imagery",
+      "source": "https://mfc.nist.gov/",
+      "description": "NIST’s video deepfake task tests whether a detector distinguishes manipulated clips from original video.",
+      "measures": [
+        "ROC AUC",
+        "Detection at 5% false-alarm rate",
+        "False acceptance",
+        "False rejection"
+      ],
+      "limits": "An older, controlled clip dataset does not represent current generators, audio spoofing, live injection, or the interview’s unknown manipulation method.",
+      "caseIds": [
+        "AIID-1421"
+      ],
+      "status": "Published benchmark",
+      "protocol": [
+        "Use the designated video deepfake dataset and retain the submission’s detector version.",
+        "Score all clips against the held-out labels using NIST’s detection metrics.",
+        "For interviews, separately assess the actual capture channel and identity-verification process."
+      ],
+      "resultSummary": "The cited historical submission reports AUC 0.817059 and 60% detection at a 5% false-alarm rate on the OpenMFC VDD test.",
+      "resultSource": "https://mfc.nist.gov/",
+      "configuration": "Submission 133, CERTH-ITI-MEVER, video_df_gan_detection_final; June 13, 2024. OpenMFC20 Video_DD, derived from MFC18 GAN video data.",
+      "transferLimits": "An older, controlled clip dataset does not represent current generators, audio spoofing, live injection, or the interview’s unknown manipulation method.",
+      "sources": [
+        {
+          "label": "NIST task, metrics, and result row",
+          "url": "https://mfc.nist.gov/"
+        },
+        {
+          "label": "NIST program overview",
+          "url": "https://www.nist.gov/itl/iad/mltg/open-media-forensics-challenge"
+        }
+      ],
+      "reviewedOn": "2026-09-28",
+      "publishedResults": [
+        {
+          "model": "CERTH-ITI-MEVER video_df_gan_detection_final",
+          "configuration": "Submission 133; OpenMFC20 Video_DD",
+          "metrics": [
+            {
+              "name": "ROC AUC",
+              "value": 0.817059,
+              "unit": ""
+            },
+            {
+              "name": "Detection at 5% false-alarm rate",
+              "value": 60,
+              "unit": "%"
+            }
+          ],
+          "source": "https://mfc.nist.gov/",
+          "date": "2024-06-13",
+          "scope": "Historical recorded-video result, not an interview identity check."
+        }
+      ]
     }
   ],
   "roboharmTasks": [
@@ -1518,7 +2776,11 @@ window.BACKDRIVE_DATA = {
         "human-gate",
         "independent-verification",
         "protective-stop",
-        "energy-isolation"
+        "energy-isolation",
+        "layout-verification",
+        "equipment-compatibility",
+        "operator-qualification",
+        "change-review"
       ],
       "baseline": "Manual layout and wall finishing, measured on comparable work.",
       "intervention": "Verify the files and equipment, assess operators, and record faults, corrections, and work completed.",
@@ -1683,6 +2945,63 @@ window.BACKDRIVE_DATA = {
           "dataNotes": [
             "The proposal reports a three-person crew, about eight hours of chalk layout, and another two to three hours of rebar marking. If all three people work both tasks on each job, the total is 60–66 labor-hours for two jobs, not the reported 66–78. Confirm the crew and time assumptions before calculating savings.",
             "No acceptance tolerance has been supplied. Agree it with the qualified reviewer before comparing results; do not substitute a vendor accuracy claim for the project requirement."
+          ],
+          "proposedDetails": {
+            "status": "Proposed; not agreed or run",
+            "decision": "Decide whether the two-site workflow warrants a production plan after the demo.",
+            "baselineMethod": [
+              "Reconcile the reported 66–78 labor-hours with crew and task records; the alternative 60–66 calculation remains conditional.",
+              "Time comparable manual layout using the same accepted scope, including rebar and MEP where required."
+            ],
+            "comparisonDesign": [
+              "Record the complete cycle separately at each site: preparation, loading, travel, stationing, printing, checking, and correction.",
+              "Have an independent reviewer check selected output against survey references using a sampling plan agreed before the trial.",
+              "Repeat the readiness and stationing checks at the second site; do not pool away a site-specific failure."
+            ],
+            "acceptanceCriteria": [
+              "Printed work meets the project’s agreed tolerance and scope.",
+              "Both jobs fit the planned day when setup, transport, checking, and corrections are included.",
+              "Only consider scaling after repeated accepted work supports the cost and utilization case."
+            ],
+            "stopCriteria": [
+              "Missing or conflicting file revision, survey control, or required trade information.",
+              "Failed output check, unexpected motion, inadequate site protection, or conditions outside the approved equipment limits."
+            ],
+            "observationFields": [
+              "Site and task; file and firmware versions; operator; control points; conditions",
+              "Labor minutes by person and activity; accepted points or linear feet; corrections and rework",
+              "Stop trigger, response, recovery authorization, and operator intervention"
+            ],
+            "costFields": [
+              "$6,000 proposed demo/training cost kept separate from production costs",
+              "Travel, mobilization, preparation, operator, checker, consumables, corrections, and plan fees",
+              "Cost per accepted building using observed utilization; do not assume two jobs every day"
+            ],
+            "equipmentToConfirm": [
+              "FieldPrinter 2 and tracker configuration",
+              "Current manual and readiness checklist",
+              "Files, coordinates, ink, survey references, and site suitability"
+            ],
+            "reviewRoles": [
+              "Deployment owner",
+              "Trained operator",
+              "Qualified survey/layout checker",
+              "Site safety lead"
+            ],
+            "remainingEvidence": [
+              "Reconciled manual baseline",
+              "Agreed tolerance and sampling plan",
+              "Actual trial dates, results, and commercial-plan terms"
+            ]
+          },
+          "analogues": [
+            {
+              "label": "DPR layout deployments",
+              "url": "https://www.dpr.com/media/blog/dpr-and-dusty-robotics-collaborate-to-set-up-success-for-craft",
+              "evidenceType": "Contractor report, 2021; updated 2022",
+              "whatItSupports": "DPR reports using a Dusty robot with an operator for field layout. This supports comparing accepted layout and crew time.",
+              "limit": "A partner’s account of earlier equipment and projects. Its claimed speed improvement is not a baseline or forecast for these duplex sites."
+            }
           ]
         },
         {
@@ -1834,7 +3153,128 @@ window.BACKDRIVE_DATA = {
               "label": "DM Leading",
               "url": "https://www.derututech.com/products/7.html"
             }
+          ],
+          "proposedDetails": {
+            "status": "Proposed; not agreed or run",
+            "decision": "Decide whether to purchase, commission, and then expand the combined spraying and finishing workflow.",
+            "baselineMethod": [
+              "Measure manual application on matched wall sections with the same substrate, mix, thickness, and finish requirement.",
+              "Count all crew time and material, including transport, setup, cleaning, waiting, defects, and repair."
+            ],
+            "comparisonDesign": [
+              "Use the same accepted-output criteria for manual and mechanized sections.",
+              "Record operator experience and section difficulty; alternate order where practical to expose learning and sequencing effects.",
+              "Inspect cured work at the agreed times as well as immediate surface appearance."
+            ],
+            "acceptanceCriteria": [
+              "Actual-unit specifications and site compatibility are confirmed before commissioning.",
+              "Operators demonstrate the approved workflow and recovery procedures.",
+              "The mock-up meets agreed finish, adhesion, and consistency criteria; full-cycle cost and labor justify further work."
+            ],
+            "stopCriteria": [
+              "Unresolved material, electrical, hose, coupling, or rated-pressure mismatch.",
+              "Leak, suspected blockage, unintended movement, failed safeguard, or unsafe access.",
+              "Unaccepted finish or adhesion defect that makes continued application inappropriate."
+            ],
+            "observationFields": [
+              "Unit and component identifiers; manual revision; mix batch; substrate; weather and curing conditions",
+              "Accepted area, thickness, finish/adhesion observations, rejected area, waste, and rework",
+              "Setup, spraying, finishing, cleaning, downtime, maintenance, and intervention time",
+              "Fault, response, isolated state, corrective action, and restart authorization"
+            ],
+            "costFields": [
+              "$15,700 quoted equipment plus $350 port-only freight and insurance",
+              "Customs, duties, handling, inland delivery, commissioning, and training",
+              "Crew time, material, water, energy, spares, maintenance, repair, and downtime"
+            ],
+            "equipmentToConfirm": [
+              "PC-16 actual-unit manual and configuration; resolve the two public specifications",
+              "DM Leading supplied voltage and frequency",
+              "Approved material, substrate, hose/coupling ratings, maintenance, and cleaning procedures"
+            ],
+            "reviewRoles": [
+              "Procurement owner",
+              "Qualified electrician and commissioning lead",
+              "Operator assessor",
+              "Independent finish-quality reviewer"
+            ],
+            "remainingEvidence": [
+              "Supplier confirmation for the actual units",
+              "Local manual and mechanized measurements",
+              "Agreed quality tests, acceptance criteria, and assessment timing"
+            ]
+          },
+          "analogues": [
+            {
+              "label": "Derutu D70 housing project",
+              "url": "https://www.derututech.com/blog/126.html",
+              "evidenceType": "Manufacturer deployment account, September 2026",
+              "whatItSupports": "The account highlights on-site power, moving equipment between floors, and material preparation as workflow variables to measure.",
+              "limit": "It concerns a D70 gypsum sprayer, not the proposed PC-16 and DM Leading pair. It provides no controlled comparison or transferable safety or productivity estimate."
+            }
           ]
+        }
+      ],
+      "proposedDetails": {
+        "status": "Proposed; not agreed or run",
+        "decision": "Select the evidence needed for Dusty’s first deployment and Derutu’s purchase and commissioning decisions.",
+        "baselineMethod": [
+          "Measure equivalent manual work, including preparation, correction, and cleanup.",
+          "Reconcile reported hours with crew-level time records before calculating savings."
+        ],
+        "comparisonDesign": [
+          "Keep mandatory safeguards in place. Compare workflow changes through records, simulation, or approved mock-ups.",
+          "Attach the equipment version, conditions, control, and outcome to each observation."
+        ],
+        "acceptanceCriteria": [
+          "Qualified reviewers agree task-quality and safety criteria before the work.",
+          "Progress only after required evidence is recorded and unresolved issues have an owner."
+        ],
+        "stopCriteria": [
+          "Pause for an unresolved safety failure, configuration mismatch, or work outside the approved scope.",
+          "Resume only after the responsible reviewer accepts the corrective action."
+        ],
+        "observationFields": [
+          "Context, exposure, control, observed evidence, response, and lesson",
+          "Record unknown cause as unknown; preserve the underlying observation."
+        ],
+        "costFields": [
+          "Purchase or trial cost",
+          "Training and commissioning",
+          "Labor by task",
+          "Consumables, maintenance, downtime, rework, transport, and import charges"
+        ],
+        "equipmentToConfirm": [
+          "Exact equipment, configuration, manuals, and materials",
+          "Site conditions and trained operators"
+        ],
+        "reviewRoles": [
+          "Decision owner",
+          "Qualified safety and engineering reviewers",
+          "Operator",
+          "Independent quality checker"
+        ],
+        "remainingEvidence": [
+          "No field results recorded",
+          "Acceptance thresholds and reviewer assignments remain to be agreed",
+          "MIT participation and scope remain unconfirmed"
+        ]
+      },
+      "sources": [
+        {
+          "label": "FieldPrinter readiness",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+          "description": "Equipment-specific prerequisites."
+        },
+        {
+          "label": "OSHA robot safety",
+          "url": "https://www.osha.gov/otm/section-4-safety-hazards/chapter-4",
+          "description": "Application assessment and operator competence."
+        },
+        {
+          "label": "WorkSafe pumping alert",
+          "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
+          "description": "Pressure-system review."
         }
       ]
     },
@@ -1855,7 +3295,9 @@ window.BACKDRIVE_DATA = {
       "controls": [
         "approved-inputs",
         "protective-stop",
-        "human-gate"
+        "human-gate",
+        "operator-qualification",
+        "change-review"
       ],
       "baseline": "The existing handling policy in a controlled mock workflow.",
       "intervention": "Approved inputs and an independently reviewable stop or escalation boundary.",
@@ -1870,7 +3312,75 @@ window.BACKDRIVE_DATA = {
         "System version, configuration, and stop logs"
       ],
       "evidence": "Public incident reports. The partner, mechanism review, and trial are unassigned.",
-      "note": "The incident records concern different robot systems and operating conditions. A handling pilot would need to establish which failure mechanisms matter for the chosen equipment before choosing an evaluation."
+      "note": "The incident records concern different robot systems and operating conditions. A handling pilot would need to establish which failure mechanisms matter for the chosen equipment before choosing an evaluation.",
+      "proposedDetails": {
+        "status": "Proposed; not agreed or run",
+        "decision": "Choose a bounded handling task and determine whether controls retain useful throughput while preventing out-of-scope actions.",
+        "baselineMethod": [
+          "Record accepted picks, drops, damaged items, assistance, and full-cycle time for the existing approved process.",
+          "Match object mix, load, starting position, and operator support across comparisons."
+        ],
+        "comparisonDesign": [
+          "Start with simulation or an isolated mock workflow and harmless objects.",
+          "Keep required physical safeguards active; compare permission and escalation policies without deliberately exposing people.",
+          "Change one condition at a time, then examine combinations that occur together."
+        ],
+        "acceptanceCriteria": [
+          "Agree object range and quality requirements for accepted handling.",
+          "Resolve every critical control failure before authorizing broader work.",
+          "Evaluate useful completion, damage, and intervention burden together."
+        ],
+        "stopCriteria": [
+          "Object outside the approved load or geometry range.",
+          "Unexpected motion, lost load control, or failed stop/restart behavior."
+        ],
+        "observationFields": [
+          "Object identity, dimensions, mass, placement, and packaging",
+          "Attempt, accepted placement, drop, damage, stop, and assistance",
+          "Cycle and recovery times; operator and configuration"
+        ],
+        "costFields": [
+          "Integration",
+          "Training",
+          "Operator assistance",
+          "Damage, rework, consumables, and downtime"
+        ],
+        "equipmentToConfirm": [
+          "Chosen robot, end effector, sensors, conveyor interface, loads, and safe operating area"
+        ],
+        "reviewRoles": [
+          "Warehouse owner",
+          "Integrator",
+          "Safety lead",
+          "Independent scorer"
+        ],
+        "remainingEvidence": [
+          "No partner or equipment assigned",
+          "No matched local baseline",
+          "No intervention trial run"
+        ]
+      },
+      "sources": [
+        {
+          "label": "OSHA robot safety",
+          "url": "https://www.osha.gov/otm/section-4-safety-hazards/chapter-4",
+          "description": "Application-specific safeguarding."
+        },
+        {
+          "label": "NIOSH LGV investigation",
+          "url": "https://www.cdc.gov/niosh/bulletin/2019/robot-safety.html",
+          "description": "Restart hazard in warehouse work."
+        }
+      ],
+      "analogues": [
+        {
+          "label": "Stretch at DHL",
+          "url": "https://bostondynamics.com/case-studies/stretch-at-dhl/",
+          "evidenceType": "Manufacturer and customer account",
+          "whatItSupports": "A deployed box-unloading workflow highlights damage, dropped-box recovery, and operator support as useful measures.",
+          "limit": "A specific suction-gripper and conveyor workflow. The account does not isolate the effect of an individual safeguard."
+        }
+      ]
     },
     {
       "id": "preparation",
@@ -1903,7 +3413,65 @@ window.BACKDRIVE_DATA = {
         "Independent scoring and versioned task definitions"
       ],
       "evidence": "Published RoboHarm outcomes are available. The proposed safeguard comparison has not been run.",
-      "note": "RoboHarm provides published outcomes for hazardous tasks. The proposed pilot asks a separate question: whether restricting available inputs reduces unsafe actions while retaining useful performance."
+      "note": "RoboHarm provides published outcomes for hazardous tasks. The proposed pilot asks a separate question: whether restricting available inputs reduces unsafe actions while retaining useful performance.",
+      "proposedDetails": {
+        "status": "Proposed; not agreed or run",
+        "decision": "Test whether approved inputs and approval boundaries reduce unsafe attempted actions while preserving legitimate preparation tasks.",
+        "baselineMethod": [
+          "Run the chosen policy on matched benign and prohibited requests using harmless stand-ins.",
+          "Score safety refusal, other refusal, no attempt, failed attempt, and completed action separately."
+        ],
+        "comparisonDesign": [
+          "Pair baseline and restricted-policy runs with the same scene and request.",
+          "Keep hazardous materials, energized appliances, and people out of the test.",
+          "Add benign substitutions and ambiguous object references to measure excessive blocking."
+        ],
+        "acceptanceCriteria": [
+          "Agree the approved task and input list before scoring.",
+          "Review any unsafe attempted action before expanding tests.",
+          "Report benign completion and false refusals alongside unsafe completion."
+        ],
+        "stopCriteria": [
+          "Unexpected physical behavior or access to an unapproved object.",
+          "A test requires a real hazardous substance, heat source, sharp tool, or person."
+        ],
+        "observationFields": [
+          "Request, inventory, scene, policy version, seed or repetition",
+          "Action trace, outcome category, reviewer disagreement",
+          "Approval requests and completion time"
+        ],
+        "costFields": [
+          "Setup, simulation or robot time, scoring, and reviewer effort"
+        ],
+        "equipmentToConfirm": [
+          "Selected policy and embodiment",
+          "Harmless substitutes",
+          "Enforced input restriction and action boundary"
+        ],
+        "reviewRoles": [
+          "Evaluation lead",
+          "Safety reviewer",
+          "Independent outcome scorer"
+        ],
+        "remainingEvidence": [
+          "No partner assigned",
+          "Published RoboHarm results do not measure this restriction",
+          "Local baseline and safeguard results remain uncollected"
+        ]
+      },
+      "sources": [
+        {
+          "label": "RoboHarm",
+          "url": "https://robocurve.org/roboharm/",
+          "description": "Outcome definitions and unsafe-instruction tasks."
+        },
+        {
+          "label": "MIT mitigation taxonomy, 2.3",
+          "url": "https://airisk.mit.edu/ai-risk-mitigations",
+          "description": "Restriction and filtering controls."
+        }
+      ],
+      "analogues": []
     },
     {
       "id": "navigation",
@@ -1920,14 +3488,19 @@ window.BACKDRIVE_DATA = {
       ],
       "evalIds": [
         "safebench",
-        "asimov"
+        "asimov",
+        "nist-navigation",
+        "astm-stopping",
+        "restart-review",
+        "glass-slam"
       ],
       "description": "Examine navigation under changing access boundaries, difficult surfaces, and impaired visibility.",
       "question": "Which environmental changes should trigger a stop, reroute, or human review?",
       "controls": [
         "boundary-check",
         "perception-check",
-        "protective-stop"
+        "protective-stop",
+        "change-review"
       ],
       "baseline": "The current navigation policy on a bounded simulated route.",
       "intervention": "Pause on changed boundaries or uncertain perception, with a defined recovery decision.",
@@ -1942,7 +3515,71 @@ window.BACKDRIVE_DATA = {
         "Simulation-to-deployment transfer review"
       ],
       "evidence": "Public incident reports and published benchmark resources. No worksite deployment or measured intervention.",
-      "note": "Road-vehicle and delivery-robot incidents suggest questions about obstacles, visibility, and stopping. Their relevance to a worksite depends on the robot, sensors, map, and operating conditions."
+      "note": "Road-vehicle and delivery-robot incidents suggest questions about obstacles, visibility, and stopping. Their relevance to a worksite depends on the robot, sensors, map, and operating conditions.",
+      "proposedDetails": {
+        "status": "Proposed; not agreed or run",
+        "decision": "Determine which worksite changes require stopping, rerouting, or review for a selected robot.",
+        "baselineMethod": [
+          "Record route completion, obstacle encounters, position error, and recovery under the current policy.",
+          "Hold the route and operating envelope fixed while changing a documented environmental condition."
+        ],
+        "comparisonDesign": [
+          "Use simulation first, followed by an approved isolated course if justified.",
+          "Represent moved barriers, occlusion, reflective surfaces, localization loss, and changed access separately.",
+          "Assess stop and restart behavior alongside detection; include cases in which stopping itself creates a problem."
+        ],
+        "acceptanceCriteria": [
+          "Agree the route, sensing assumptions, and allowable operating conditions.",
+          "Require the specified fallback for each reviewed critical condition.",
+          "Judge completion, unnecessary stops, and recovery effort together."
+        ],
+        "stopCriteria": [
+          "Robot leaves the approved boundary or continues after a required stop condition.",
+          "Sensing or localization no longer supports the agreed operating envelope."
+        ],
+        "observationFields": [
+          "Map and route version; sensors; lighting; surface; load",
+          "Ground-truth obstacle/boundary state and localization",
+          "Detection, command, physical stop, reroute, reset, and completion timestamps"
+        ],
+        "costFields": [
+          "Course setup, independent measurement, supervision, waiting, and route-delay costs"
+        ],
+        "equipmentToConfirm": [
+          "Chosen robot, mass, speed range, sensors, braking, map, and recovery states"
+        ],
+        "reviewRoles": [
+          "Site owner",
+          "Navigation engineer",
+          "Qualified safety reviewer"
+        ],
+        "remainingEvidence": [
+          "No worksite partner or robot assigned",
+          "Road benchmarks require transfer review",
+          "No local fallback or restart results"
+        ]
+      },
+      "sources": [
+        {
+          "label": "NIST mobility program",
+          "url": "https://www.nist.gov/programs-projects/mobility-performance-robotic-systems",
+          "description": "Dynamic obstacles and localization disturbances."
+        },
+        {
+          "label": "FASTER",
+          "url": "https://arxiv.org/abs/2001.04420v2",
+          "description": "A published backup-trajectory approach."
+        }
+      ],
+      "analogues": [
+        {
+          "label": "FASTER hardware experiments",
+          "url": "https://arxiv.org/abs/2001.04420v2",
+          "evidenceType": "Published simulation and hardware research",
+          "whatItSupports": "A concrete example of retaining a fallback trajectory while navigating unknown space.",
+          "limit": "Research robots and stated assumptions; it does not establish safety on an occupied construction site."
+        }
+      ]
     },
     {
       "id": "agent-authority",
@@ -1956,7 +3593,9 @@ window.BACKDRIVE_DATA = {
       ],
       "evalIds": [
         "agentdojo",
-        "alce"
+        "alce",
+        "summac",
+        "openmfc"
       ],
       "description": "Check whether a research agent can support a consequential decision while remaining within its assigned authority.",
       "question": "Can the agent research and recommend without assuming purchasing or execution authority?",
@@ -1964,7 +3603,8 @@ window.BACKDRIVE_DATA = {
         "source-check",
         "least-privilege",
         "human-gate",
-        "independent-verification"
+        "independent-verification",
+        "change-review"
       ],
       "baseline": "A tool-using agent with its current sources and permissions.",
       "intervention": "Independent evidence checks, scoped permissions, and explicit authorization for consequential actions.",
@@ -1979,7 +3619,559 @@ window.BACKDRIVE_DATA = {
         "Source, tool, and approval logs"
       ],
       "evidence": "Public incidents motivate the comparison. No external organization or completed pilot is assigned.",
-      "note": "The linked cases concern information quality, tool permissions, and identity claims. A pilot could examine which checks help an agent produce useful recommendations without taking unauthorized actions."
+      "note": "The linked cases concern information quality, tool permissions, and identity claims. A pilot could examine which checks help an agent produce useful recommendations without taking unauthorized actions.",
+      "proposedDetails": {
+        "status": "Proposed; not agreed or run",
+        "decision": "Determine whether an agent can produce useful vendor comparisons without making unauthorized commitments or unsupported technical claims.",
+        "baselineMethod": [
+          "Use a frozen set of vendor documents and known task outcomes.",
+          "Measure claim support and task completion with the existing policy before adding a control."
+        ],
+        "comparisonDesign": [
+          "Compare source verification, scoped tools, approval gates, and their combination on the same tasks.",
+          "Use a disposable environment with simulated purchasing and communications.",
+          "Include conflicting specifications, irrelevant instructions in retrieved content, and requests that exceed the assigned authority."
+        ],
+        "acceptanceCriteria": [
+          "Consequential claims are traceable and disagreements remain visible.",
+          "The system cannot execute purchasing or external actions beyond its approved role.",
+          "Engineering decisions remain with qualified reviewers; report their time and corrections."
+        ],
+        "stopCriteria": [
+          "Any attempted action reaches a real purchase, external message, or production system during testing.",
+          "An unsupported safety-critical claim reaches the simulated decision without escalation."
+        ],
+        "observationFields": [
+          "Task, model, prompt, tool permissions, document versions",
+          "Claim-to-source support and unresolved conflicts",
+          "Requested, approved, blocked, and executed actions",
+          "Final environment state, task utility, review time, and token/tool cost"
+        ],
+        "costFields": [
+          "Model and tool usage",
+          "Document preparation",
+          "Review and correction time",
+          "False escalations and blocked useful work"
+        ],
+        "equipmentToConfirm": [
+          "Model and tool versions",
+          "Actual enforcement layer",
+          "Approval scope and account permissions"
+        ],
+        "reviewRoles": [
+          "Procurement owner",
+          "System administrator",
+          "Qualified technical reviewer",
+          "Independent scorer"
+        ],
+        "remainingEvidence": [
+          "No completed pilot or external partner assigned",
+          "Benchmark defenses do not establish procurement reliability",
+          "Authority boundaries and acceptance criteria remain to be agreed"
+        ]
+      },
+      "sources": [
+        {
+          "label": "AgentDojo results",
+          "url": "https://agentdojo.spylab.ai/results/",
+          "description": "Utility and attack outcomes in a controlled benchmark."
+        },
+        {
+          "label": "NIST AI 600-1",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+          "description": "Source review and claim validation."
+        }
+      ],
+      "analogues": [
+        {
+          "label": "Project Vend",
+          "url": "https://www.anthropic.com/research/project-vend-1",
+          "evidenceType": "Developer-reported field experiment, 2025",
+          "whatItSupports": "An agent managing a small shop made pricing and payment-information errors. This motivates separate checks for correct advice and authority to act.",
+          "limit": "A vending experiment with different tasks and tools. It does not measure the effect of this pilot’s proposed approval gate."
+        }
+      ]
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "collision-avoidance",
+      "name": "Collision avoidance",
+      "kind": "AI capability",
+      "definition": "Choose and execute movement that maintains clearance from people, objects, and boundaries.",
+      "observableFailures": [
+        "Contact or inadequate clearance",
+        "Unsafe speed despite detected obstacle",
+        "Successful detection followed by unsafe action"
+      ],
+      "operatingLimits": "Depends on sensing range, braking, payload, surface, visibility, and control latency.",
+      "evalIds": [
+        "safebench",
+        "astm-stopping"
+      ],
+      "caseIds": [
+        "AIID-4",
+        "AIID-51"
+      ],
+      "sources": [
+        {
+          "label": "SafeBench",
+          "url": "https://safebench.github.io/"
+        },
+        {
+          "label": "Obstacle-response scope",
+          "url": "https://store.astm.org/f3265-17r23.html"
+        }
+      ],
+      "mappingBasis": "A collision demonstrates an adverse outcome, not which internal component failed.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "contingency-planning",
+      "name": "Contingency planning",
+      "kind": "AI capability",
+      "definition": "Select an appropriate stopped state, recovery action, or escalation when normal operation fails.",
+      "observableFailures": [
+        "Recovery movement increases harm",
+        "Resumption without checking a changed state",
+        "No escalation when recovery is uncertain"
+      ],
+      "operatingLimits": "Requires a useful representation of the abnormal state and authority to stop or seek help.",
+      "evalIds": [
+        "safebench",
+        "restart-review"
+      ],
+      "caseIds": [
+        "CRUISE-2023"
+      ],
+      "sources": [
+        {
+          "label": "Cruise recall filing",
+          "url": "https://static.nhtsa.gov/odi/rcl/2023/RMISC-23E086-4326.pdf"
+        }
+      ],
+      "mappingBasis": "The Cruise filing describes a collision classification and pullover decision. A matched test must represent both.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "grounded-generation",
+      "name": "Grounded information generation",
+      "kind": "AI capability",
+      "definition": "Produce claims and summaries that preserve what the available evidence actually supports.",
+      "observableFailures": [
+        "Unsupported claim",
+        "Wrong source attribution",
+        "Citation that does not support its sentence"
+      ],
+      "operatingLimits": "Source quality, retrieval coverage, document dates, and specialized interpretation limit what can be concluded.",
+      "evalIds": [
+        "alce",
+        "summac"
+      ],
+      "caseIds": [
+        "APPLE-2024",
+        "AIID-541"
+      ],
+      "sources": [
+        {
+          "label": "ALCE",
+          "url": "https://github.com/princeton-nlp/ALCE"
+        },
+        {
+          "label": "SummaC",
+          "url": "https://aclanthology.org/2022.tacl-1.10/"
+        }
+      ],
+      "mappingBasis": "The linked outputs show unsupported information. They do not establish one shared model-level cause.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "human-automation",
+      "name": "Human–automation coordination",
+      "kind": "AI capability",
+      "definition": "Maintain a workable division of control, oversight, and fallback between a person and an automated system.",
+      "observableFailures": [
+        "Unnoticed loss of supervision",
+        "Ambiguous mode or handover",
+        "Continued operation beyond available human oversight"
+      ],
+      "operatingLimits": "Human attention is not guaranteed by availability of a supervisor or an acknowledgment button.",
+      "evalIds": [
+        "euro-ncap-assistance"
+      ],
+      "caseIds": [
+        "HWY18FH011"
+      ],
+      "sources": [
+        {
+          "label": "Mountain View investigation",
+          "url": "https://www.ntsb.gov/investigations/pages/HWY18FH011.aspx"
+        },
+        {
+          "label": "Assistance and engagement assessment",
+          "url": "https://cdn.euroncap.com/cars/assets/Euro_NCAP_Protocol_Assisted_Driving_v1_2_7150e4e41e.pdf"
+        }
+      ],
+      "mappingBasis": "NTSB identifies supervision-related factors; the later test protocol offers a comparison, not a crash reconstruction.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "instruction-following",
+      "name": "Instruction following",
+      "kind": "AI capability",
+      "definition": "Translate a request into an output or action while respecting applicable constraints.",
+      "observableFailures": [
+        "Literal completion of a harmful request",
+        "Ignoring a stated operating constraint",
+        "Refusal of a permissible request"
+      ],
+      "operatingLimits": "Task completion and safety are separate outcomes. Behavior depends on wording, context, tools, and embodiment.",
+      "evalIds": [
+        "roboharm",
+        "asimov",
+        "agentdojo"
+      ],
+      "caseIds": [
+        "AIID-594"
+      ],
+      "sources": [
+        {
+          "label": "RoboHarm scoring",
+          "url": "https://robocurve.org/roboharm/"
+        },
+        {
+          "label": "AgentDojo",
+          "url": "https://github.com/ethz-spylab/agentdojo"
+        }
+      ],
+      "mappingBasis": "Recipe advice demonstrates instruction-responsive output; robotic execution is a separate comparison.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "object-manipulation",
+      "name": "Object manipulation",
+      "kind": "AI capability",
+      "definition": "Grasp, move, place, or otherwise handle objects while controlling their physical effects.",
+      "observableFailures": [
+        "Dropped or damaged object",
+        "Hazardous release",
+        "Contact outside the intended grasp or placement"
+      ],
+      "operatingLimits": "Geometry, grip, mass, fragility, contents, and neighboring objects matter; visual recognition alone is insufficient.",
+      "evalIds": [
+        "asimov",
+        "roboharm"
+      ],
+      "caseIds": [
+        "AIID-2"
+      ],
+      "sources": [
+        {
+          "label": "Embodiment-specific constraints",
+          "url": "https://arxiv.org/html/2509.21651v2"
+        },
+        {
+          "label": "Physical execution tasks",
+          "url": "https://robocurve.org/roboharm/"
+        }
+      ],
+      "mappingBasis": "The inventory incident involves handling. Its report does not identify a learned manipulation policy or isolate a perception error.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "obstacle-perception",
+      "name": "Obstacle perception",
+      "kind": "AI capability",
+      "definition": "Detect and locate obstacles sufficiently for the system to treat their occupied space as unavailable.",
+      "observableFailures": [
+        "Glass or thin object omitted",
+        "Incorrect clearance estimate",
+        "Detected object assigned insufficient significance"
+      ],
+      "operatingLimits": "Transparency, reflectivity, occlusion, sensor placement, and map disagreement can change performance.",
+      "evalIds": [
+        "glass-slam",
+        "safebench"
+      ],
+      "caseIds": [
+        "WAYMO-2024",
+        "AIID-1567"
+      ],
+      "sources": [
+        {
+          "label": "Glass detection research",
+          "url": "https://github.com/uts-magic-lab/slam_glass"
+        },
+        {
+          "label": "Waymo recall filing",
+          "url": "https://static.nhtsa.gov/odi/rcl/2024/RCLRPT-24E049-1733.PDF"
+        }
+      ],
+      "mappingBasis": "The Waymo filing describes interacting map, scoring, and path factors; the Serve report does not reveal its sensor pipeline.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "pressure-integrity",
+      "name": "Pressure-system integrity",
+      "kind": "Equipment function",
+      "definition": "Contain and control pressure within the intended pump, hose, coupling, and material configuration.",
+      "observableFailures": [
+        "Hose or coupling failure",
+        "Leak or unexpected pressure release",
+        "Incompatible component or material"
+      ],
+      "operatingLimits": "Use actual component ratings, wear state, materials, and approved isolation instructions.",
+      "evalIds": [
+        "pressure-review",
+        "derutu-compatibility"
+      ],
+      "caseIds": [
+        "OSHA-99025"
+      ],
+      "sources": [
+        {
+          "label": "Pumping-system alert",
+          "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/"
+        }
+      ],
+      "mappingBasis": "A mechanical function included for the construction comparison. AI involvement is not established.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "scene-understanding",
+      "name": "Scene understanding",
+      "kind": "AI capability",
+      "definition": "Interpret the arrangement and meaning of objects, people, boundaries, and activities around a system.",
+      "observableFailures": [
+        "Work-zone boundary treated as an open route",
+        "Hazard obscured by smoke or clutter",
+        "Priority assigned incorrectly despite visible cues"
+      ],
+      "operatingLimits": "A scene label can be correct while the resulting plan is unsafe. Visibility and operating context must be recorded.",
+      "evalIds": [
+        "asimov",
+        "safebench"
+      ],
+      "caseIds": [
+        "AIID-1547",
+        "AIID-1602"
+      ],
+      "sources": [
+        {
+          "label": "Visual safety understanding",
+          "url": "https://asimov-benchmark.github.io/v2/"
+        },
+        {
+          "label": "Driving scenarios",
+          "url": "https://safebench.github.io/"
+        }
+      ],
+      "mappingBasis": "These are evaluation targets suggested by the accounts, not verified internal causes.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "stop-restart",
+      "name": "Stop and restart control",
+      "kind": "Equipment function",
+      "definition": "Enter an appropriate stopped state and permit resumption only through the required access and authorization sequence.",
+      "observableFailures": [
+        "Automatic resumption while a person remains exposed",
+        "Unintended controller activation",
+        "Confusion between pause and isolation"
+      ],
+      "operatingLimits": "Stopping, emergency stop, and removal of hazardous energy are distinct functions.",
+      "evalIds": [
+        "restart-review",
+        "astm-stopping"
+      ],
+      "caseIds": [
+        "WA-LGV-2015",
+        "WA-DEMO-2019"
+      ],
+      "sources": [
+        {
+          "label": "FACE vehicle account",
+          "url": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf"
+        },
+        {
+          "label": "FACE controller account",
+          "url": "https://lni.wa.gov/safety-health/safety-research/files/2019/DemolitionRobotAlert.pdf"
+        }
+      ],
+      "mappingBasis": "The preliminary accounts identify control-state and close-access hazards, without establishing an AI mechanism.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "task-context",
+      "name": "Task & context recognition",
+      "kind": "AI capability",
+      "definition": "Determine whether the current task and surroundings still match the conditions under which work was authorized.",
+      "observableFailures": [
+        "Changed task accepted without review",
+        "New site boundary ignored",
+        "Old assumptions retained after a configuration change"
+      ],
+      "operatingLimits": "The permitted task and operating conditions must be explicit before a deviation can be recognized.",
+      "evalIds": [
+        "asimov",
+        "fieldprinter-readiness"
+      ],
+      "caseIds": [
+        "PILOT-01"
+      ],
+      "sources": [
+        {
+          "label": "Constraint-following tasks",
+          "url": "https://arxiv.org/html/2509.21651v2"
+        },
+        {
+          "label": "Job readiness criteria",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist"
+        }
+      ],
+      "mappingBasis": "The linked construction case is fictional. The definition supports a proposed check, not an observed failure.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "tool-planning",
+      "name": "Tool use & action planning",
+      "kind": "AI capability",
+      "definition": "Select tools and sequence their actions to complete a task within the granted authority.",
+      "observableFailures": [
+        "Destructive action outside the request",
+        "Tool output treated as an instruction",
+        "Action taken without checking its target or consequence"
+      ],
+      "operatingLimits": "Tool permissions, execution environment, recovery options, and irreversible effects constrain acceptable plans.",
+      "evalIds": [
+        "agentdojo"
+      ],
+      "caseIds": [
+        "AIID-1424"
+      ],
+      "sources": [
+        {
+          "label": "AgentDojo tool tasks",
+          "url": "https://github.com/ethz-spylab/agentdojo"
+        }
+      ],
+      "mappingBasis": "Deletion supports reviewing authority and action selection. It does not establish that prompt injection caused the event.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "synthetic-identity",
+      "name": "Synthetic identity generation",
+      "kind": "AI capability",
+      "definition": "Generate or alter identity cues, such as a face or voice, so they appear to belong to a different or nonexistent person.",
+      "observableFailures": [
+        "Synthetic content accepted as identity evidence",
+        "Manipulation missed by the verification process",
+        "Genuine person rejected by a detector"
+      ],
+      "operatingLimits": "Detection depends on media, capture channel, generator, compression, and attack method; authenticity does not establish identity.",
+      "evalIds": [
+        "openmfc"
+      ],
+      "caseIds": [
+        "AIID-1421"
+      ],
+      "sources": [
+        {
+          "label": "NIST media forensics",
+          "url": "https://www.nist.gov/itl/iad/mltg/open-media-forensics-challenge"
+        }
+      ],
+      "mappingBasis": "The mapped evaluation tests a defense against generated media, not the generator’s complete impersonation capability.",
+      "pilotIds": [],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "layout-accuracy",
+      "name": "Localization & layout accuracy",
+      "kind": "Equipment function",
+      "definition": "Relate the machine and its printed output to the approved site coordinate system.",
+      "observableFailures": [
+        "Position drift",
+        "Misregistered or distorted layout",
+        "Accurate printing of an incorrect revision"
+      ],
+      "operatingLimits": "Survey control, stationing, tracker stability, floor conditions, and file correctness require separate checks.",
+      "evalIds": [
+        "nist-navigation",
+        "layout-control",
+        "fieldprinter-readiness"
+      ],
+      "caseIds": [],
+      "sources": [
+        {
+          "label": "Independent navigation measurement",
+          "url": "https://www.nist.gov/publications/navigation-performance-evaluation-automated-guided-vehicles"
+        },
+        {
+          "label": "FieldPrinter control checks",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs"
+        }
+      ],
+      "mappingBasis": "Added for the Dusty pilot. It describes a measurable equipment function without assuming a particular AI architecture.",
+      "pilotIds": [
+        "construction"
+      ],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "surface-finishing",
+      "name": "Surface finishing",
+      "kind": "Equipment function",
+      "definition": "Apply and finish material to meet the project’s accepted surface requirements.",
+      "observableFailures": [
+        "Uneven thickness or finish",
+        "Poor adhesion or incomplete coverage",
+        "Rework hidden by a nominal production rate"
+      ],
+      "operatingLimits": "Substrate, material, preparation, access, operator skill, and full-cycle time affect accepted output.",
+      "evalIds": [
+        "wall-finish-comparison",
+        "derutu-compatibility"
+      ],
+      "caseIds": [],
+      "sources": [
+        {
+          "label": "DM Leading specifications",
+          "url": "https://www.derututech.com/products/7.html"
+        }
+      ],
+      "mappingBasis": "Added for the Derutu comparison. Product claims establish a proposed function; local quality and productivity are unmeasured.",
+      "pilotIds": [
+        "construction"
+      ],
+      "definitionStatus": "Operational definition for this map",
+      "reviewedOn": "2026-09-28"
     }
   ]
 };

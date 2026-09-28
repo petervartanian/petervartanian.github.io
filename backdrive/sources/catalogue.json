@@ -1,5 +1,5 @@
 {
-  "verified": "2026-09-25",
+  "verified": "2026-09-28",
   "incidents": [
     {
       "id": "AIID-594",
@@ -114,7 +114,7 @@
     "trials": 300,
     "note": "Transcribed from the published 15-row Results table; Refused includes non-safety refusals. No new experiments were run."
   },
-  "note": "Source names identify the publication used, not exclusive database membership. CRUISE-2023, WAYMO-2024, and APPLE-2024 are local event references; recall references are not incident IDs. New events were located online, independently of the consultation corpus.",
+  "note": "The full MIT Tracker snapshot is retained separately from local mappings. Three former local references resolve to existing AIID incidents. The Waymo pole event, three physical hazard proxies, and one fictional scenario supplement the imported records.",
   "pilotsUpdated": "2026-09-28",
   "mappingsUpdated": "2026-09-28",
   "proxyIncidents": [
@@ -142,44 +142,270 @@
   ],
   "evaluationMethods": [
     {
+      "id": "roboharm",
+      "status": "Results available",
+      "source": "https://robocurve.org/roboharm/",
+      "sources": [
+        {
+          "label": "RoboHarm methods and trial records",
+          "url": "https://robocurve.org/roboharm/"
+        }
+      ],
+      "resultSource": "https://robocurve.org/roboharm/",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "asimov",
+      "status": "Published benchmark",
+      "source": "https://asimov-benchmark.github.io/v2/",
+      "sources": [
+        {
+          "label": "ASIMOV 2.0",
+          "url": "https://asimov-benchmark.github.io/v2/"
+        },
+        {
+          "label": "Paper and evaluation sets",
+          "url": "https://arxiv.org/html/2509.21651v2"
+        }
+      ],
+      "resultSource": "https://arxiv.org/html/2509.21651v2",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "safebench",
+      "status": "Published benchmark",
+      "source": "https://safebench.github.io/",
+      "sources": [
+        {
+          "label": "SafeBench platform",
+          "url": "https://safebench.github.io/"
+        },
+        {
+          "label": "SafeBench paper",
+          "url": "https://arxiv.org/abs/2206.09682"
+        }
+      ],
+      "resultSource": "https://arxiv.org/abs/2206.09682",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "alce",
+      "status": "Published benchmark",
+      "source": "https://github.com/princeton-nlp/ALCE",
+      "sources": [
+        {
+          "label": "ALCE code, data, and scoring",
+          "url": "https://github.com/princeton-nlp/ALCE"
+        }
+      ],
+      "resultSource": "https://github.com/princeton-nlp/ALCE",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "agentdojo",
+      "status": "Published benchmark",
+      "source": "https://github.com/ethz-spylab/agentdojo",
+      "sources": [
+        {
+          "label": "AgentDojo implementation",
+          "url": "https://github.com/ethz-spylab/agentdojo"
+        },
+        {
+          "label": "Dated result rows",
+          "url": "https://agentdojo.spylab.ai/results/",
+          "description": "June 5, 2024 results-page rows. Paper revisions report different values; this table uses only the results page."
+        },
+        {
+          "label": "Paper and defense mechanism",
+          "url": "https://arxiv.org/html/2406.13352v3"
+        }
+      ],
+      "resultSource": "https://agentdojo.spylab.ai/results/",
+      "reviewedOn": "2026-09-28"
+    },
+    {
       "id": "nist-navigation",
-      "url": "https://www.nist.gov/publications/navigation-performance-evaluation-automated-guided-vehicles",
-      "type": "Published method"
+      "status": "Published method",
+      "source": "https://www.nist.gov/publications/navigation-performance-evaluation-automated-guided-vehicles",
+      "sources": [
+        {
+          "label": "NIST navigation measurement research",
+          "url": "https://www.nist.gov/publications/navigation-performance-evaluation-automated-guided-vehicles"
+        }
+      ],
+      "resultSource": "https://www.nist.gov/publications/navigation-performance-evaluation-automated-guided-vehicles",
+      "reviewedOn": "2026-09-28"
     },
     {
       "id": "astm-stopping",
-      "url": "https://store.astm.org/f3265-17r23.html",
-      "type": "Published test method"
+      "status": "Published test method",
+      "source": "https://store.astm.org/f3265-17r23.html",
+      "sources": [
+        {
+          "label": "ASTM public scope",
+          "url": "https://store.astm.org/f3265-17r23.html"
+        }
+      ],
+      "resultSource": "https://store.astm.org/f3265-17r23.html",
+      "reviewedOn": "2026-09-28"
     },
     {
       "id": "layout-control",
-      "url": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs",
-      "type": "Manufacturer method"
+      "status": "Manufacturer method",
+      "source": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs",
+      "sources": [
+        {
+          "label": "FieldPrinter specifications and control checks",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs"
+        }
+      ],
+      "resultSource": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs",
+      "reviewedOn": "2026-09-28"
     },
     {
       "id": "restart-review",
-      "url": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf",
-      "type": "Proposed review"
+      "status": "Proposed review",
+      "source": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf",
+      "sources": [
+        {
+          "label": "FACE laser-guided vehicle account",
+          "url": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf"
+        },
+        {
+          "label": "FACE remote-controller account",
+          "url": "https://lni.wa.gov/safety-health/safety-research/files/2019/DemolitionRobotAlert.pdf"
+        },
+        {
+          "label": "OSHA hazardous-energy guidance",
+          "url": "https://www.osha.gov/control-hazardous-energy"
+        }
+      ],
+      "resultSource": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf",
+      "reviewedOn": "2026-09-28"
     },
     {
       "id": "pressure-review",
-      "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
-      "type": "Proposed review"
+      "status": "Proposed review",
+      "source": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
+      "sources": [
+        {
+          "label": "WorkSafe pumping alert",
+          "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/"
+        }
+      ],
+      "resultSource": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
+      "reviewedOn": "2026-09-28"
     },
     {
       "id": "fieldprinter-readiness",
-      "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
-      "type": "Manufacturer checklist"
+      "status": "Manufacturer checklist",
+      "source": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+      "sources": [
+        {
+          "label": "Dusty readiness checklist",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist"
+        }
+      ],
+      "resultSource": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+      "reviewedOn": "2026-09-28"
     },
     {
       "id": "derutu-compatibility",
-      "url": "https://www.derututech.com/products/13.html",
-      "type": "Proposed check"
+      "status": "Proposed check",
+      "source": "https://www.derututech.com/products/13.html",
+      "sources": [
+        {
+          "label": "PC16 product page",
+          "url": "https://www.derututech.com/products/13.html"
+        },
+        {
+          "label": "Alternative PC16 specifications",
+          "url": "https://derutu.com/pc16-2/"
+        },
+        {
+          "label": "DM Leading specifications",
+          "url": "https://www.derututech.com/products/7.html"
+        }
+      ],
+      "resultSource": "https://www.derututech.com/products/13.html",
+      "reviewedOn": "2026-09-28"
     },
     {
       "id": "wall-finish-comparison",
-      "url": "https://www.derututech.com/products/7.html",
-      "type": "Proposed comparison"
+      "status": "Proposed comparison",
+      "source": "https://www.derututech.com/products/7.html",
+      "sources": [
+        {
+          "label": "DM Leading product claims",
+          "url": "https://www.derututech.com/products/7.html"
+        }
+      ],
+      "resultSource": "https://www.derututech.com/products/7.html",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "summac",
+      "status": "Published benchmark",
+      "source": "https://aclanthology.org/2022.tacl-1.10/",
+      "sources": [
+        {
+          "label": "SummaC paper",
+          "url": "https://aclanthology.org/2022.tacl-1.10/"
+        },
+        {
+          "label": "Authors’ implementation",
+          "url": "https://github.com/tingofurro/summac"
+        }
+      ],
+      "resultSource": "https://aclanthology.org/2022.tacl-1.10.pdf",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "euro-ncap-assistance",
+      "status": "Published test method",
+      "source": "https://www.euroncap.com/safe-driving/",
+      "sources": [
+        {
+          "label": "Assisted Driving v1.2",
+          "url": "https://cdn.euroncap.com/cars/assets/Euro_NCAP_Protocol_Assisted_Driving_v1_2_7150e4e41e.pdf"
+        },
+        {
+          "label": "SD-202 driver monitoring",
+          "url": "https://cdn.euroncap.com/cars/assets/SD_202_Driver_Monitoring_Test_Procedure_v1_2_d3420cb629.pdf"
+        }
+      ],
+      "resultSource": "https://www.euroncap.com/safe-driving/",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "glass-slam",
+      "status": "Published method",
+      "source": "https://github.com/uts-magic-lab/slam_glass",
+      "sources": [
+        {
+          "label": "Authors’ code and test dataset",
+          "url": "https://github.com/uts-magic-lab/slam_glass"
+        }
+      ],
+      "resultSource": "https://github.com/uts-magic-lab/slam_glass",
+      "reviewedOn": "2026-09-28"
+    },
+    {
+      "id": "openmfc",
+      "status": "Published benchmark",
+      "source": "https://mfc.nist.gov/",
+      "sources": [
+        {
+          "label": "NIST task, metrics, and result row",
+          "url": "https://mfc.nist.gov/"
+        },
+        {
+          "label": "NIST program overview",
+          "url": "https://www.nist.gov/itl/iad/mltg/open-media-forensics-challenge"
+        }
+      ],
+      "resultSource": "https://mfc.nist.gov/",
+      "reviewedOn": "2026-09-28"
     }
   ],
   "mappingNote": "Construction evidence uses equipment-specific guidance where available and physical-hazard proxies where needed. Stopping and restart are assessed separately. No results or certification for the pilot equipment are implied.",
@@ -222,5 +448,761 @@
       "url": "https://www.derututech.com/products/7.html",
       "accessed": "2026-09-28"
     }
-  ]
+  ],
+  "expanded": "2026-09-28",
+  "trackerImport": {
+    "manifest": "../imports/tracker-manifest.json",
+    "source": "https://airisk.mit.edu/ai-incident-tracker/incident-view",
+    "records": 1698
+  },
+  "capabilitySources": [
+    {
+      "id": "collision-avoidance",
+      "name": "Collision avoidance",
+      "sources": [
+        {
+          "label": "SafeBench",
+          "url": "https://safebench.github.io/"
+        },
+        {
+          "label": "Obstacle-response scope",
+          "url": "https://store.astm.org/f3265-17r23.html"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "contingency-planning",
+      "name": "Contingency planning",
+      "sources": [
+        {
+          "label": "Cruise recall filing",
+          "url": "https://static.nhtsa.gov/odi/rcl/2023/RMISC-23E086-4326.pdf"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "grounded-generation",
+      "name": "Grounded information generation",
+      "sources": [
+        {
+          "label": "ALCE",
+          "url": "https://github.com/princeton-nlp/ALCE"
+        },
+        {
+          "label": "SummaC",
+          "url": "https://aclanthology.org/2022.tacl-1.10/"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "human-automation",
+      "name": "Human–automation coordination",
+      "sources": [
+        {
+          "label": "Mountain View investigation",
+          "url": "https://www.ntsb.gov/investigations/pages/HWY18FH011.aspx"
+        },
+        {
+          "label": "Assistance and engagement assessment",
+          "url": "https://cdn.euroncap.com/cars/assets/Euro_NCAP_Protocol_Assisted_Driving_v1_2_7150e4e41e.pdf"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "instruction-following",
+      "name": "Instruction following",
+      "sources": [
+        {
+          "label": "RoboHarm scoring",
+          "url": "https://robocurve.org/roboharm/"
+        },
+        {
+          "label": "AgentDojo",
+          "url": "https://github.com/ethz-spylab/agentdojo"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "object-manipulation",
+      "name": "Object manipulation",
+      "sources": [
+        {
+          "label": "Embodiment-specific constraints",
+          "url": "https://arxiv.org/html/2509.21651v2"
+        },
+        {
+          "label": "Physical execution tasks",
+          "url": "https://robocurve.org/roboharm/"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "obstacle-perception",
+      "name": "Obstacle perception",
+      "sources": [
+        {
+          "label": "Glass detection research",
+          "url": "https://github.com/uts-magic-lab/slam_glass"
+        },
+        {
+          "label": "Waymo recall filing",
+          "url": "https://static.nhtsa.gov/odi/rcl/2024/RCLRPT-24E049-1733.PDF"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "pressure-integrity",
+      "name": "Pressure-system integrity",
+      "sources": [
+        {
+          "label": "Pumping-system alert",
+          "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "scene-understanding",
+      "name": "Scene understanding",
+      "sources": [
+        {
+          "label": "Visual safety understanding",
+          "url": "https://asimov-benchmark.github.io/v2/"
+        },
+        {
+          "label": "Driving scenarios",
+          "url": "https://safebench.github.io/"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "stop-restart",
+      "name": "Stop and restart control",
+      "sources": [
+        {
+          "label": "FACE vehicle account",
+          "url": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf"
+        },
+        {
+          "label": "FACE controller account",
+          "url": "https://lni.wa.gov/safety-health/safety-research/files/2019/DemolitionRobotAlert.pdf"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "task-context",
+      "name": "Task & context recognition",
+      "sources": [
+        {
+          "label": "Constraint-following tasks",
+          "url": "https://arxiv.org/html/2509.21651v2"
+        },
+        {
+          "label": "Job readiness criteria",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "tool-planning",
+      "name": "Tool use & action planning",
+      "sources": [
+        {
+          "label": "AgentDojo tool tasks",
+          "url": "https://github.com/ethz-spylab/agentdojo"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "synthetic-identity",
+      "name": "Synthetic identity generation",
+      "sources": [
+        {
+          "label": "NIST media forensics",
+          "url": "https://www.nist.gov/itl/iad/mltg/open-media-forensics-challenge"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "layout-accuracy",
+      "name": "Localization & layout accuracy",
+      "sources": [
+        {
+          "label": "Independent navigation measurement",
+          "url": "https://www.nist.gov/publications/navigation-performance-evaluation-automated-guided-vehicles"
+        },
+        {
+          "label": "FieldPrinter control checks",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    },
+    {
+      "id": "surface-finishing",
+      "name": "Surface finishing",
+      "sources": [
+        {
+          "label": "DM Leading specifications",
+          "url": "https://www.derututech.com/products/7.html"
+        }
+      ],
+      "definitionStatus": "Operational definition for this map"
+    }
+  ],
+  "interventionSources": [
+    {
+      "id": "source-check",
+      "evidenceStatus": "Guidance and documented audit",
+      "sources": [
+        {
+          "label": "NIST AI 600-1, MS-2.5-003",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+          "description": "Source and citation verification."
+        },
+        {
+          "label": "MIT mitigation study",
+          "url": "https://airisk.mit.edu/blog/mapping-ai-risk-mitigations",
+          "description": "Manual audit found unsupported mitigation attributions."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.1",
+          "4.1"
+        ],
+        "labels": [
+          "Testing & Auditing",
+          "System Documentation"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "approved-inputs",
+      "evidenceStatus": "Proposed; benchmark context",
+      "sources": [
+        {
+          "label": "MIT mitigation taxonomy, 2.3",
+          "url": "https://airisk.mit.edu/ai-risk-mitigations",
+          "description": "Behavior restrictions and filtering."
+        },
+        {
+          "label": "RoboHarm",
+          "url": "https://robocurve.org/roboharm/",
+          "description": "Published instruction-following outcomes; no input-restriction comparison."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "2.3"
+        ],
+        "labels": [
+          "Model Safety Engineering"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "human-gate",
+      "evidenceStatus": "Guidance; field example",
+      "sources": [
+        {
+          "label": "MIT mitigation taxonomy, 1.1 and 1.5",
+          "url": "https://airisk.mit.edu/ai-risk-mitigations",
+          "description": "Authorization and deployment decision controls."
+        },
+        {
+          "label": "Project Vend",
+          "url": "https://www.anthropic.com/research/project-vend-1",
+          "description": "Business-agent field experiment with financial and information errors."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "1.1",
+          "1.5"
+        ],
+        "labels": [
+          "Board Structure & Oversight",
+          "Safety Decision Frameworks"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "boundary-check",
+      "evidenceStatus": "Operational guidance",
+      "sources": [
+        {
+          "label": "NIOSH robot investigations",
+          "url": "https://www.cdc.gov/niosh/bulletin/2019/robot-safety.html",
+          "description": "Task-specific risk zones and reassessment."
+        },
+        {
+          "label": "FieldPrinter readiness",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+          "description": "Worksite boundaries and coordination."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "1.2",
+          "3.5"
+        ],
+        "labels": [
+          "Risk Management",
+          "Post-deployment Monitoring"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "protective-stop",
+      "evidenceStatus": "Operational guidance and investigation",
+      "sources": [
+        {
+          "label": "OSHA robot safety",
+          "url": "https://www.osha.gov/otm/section-4-safety-hazards/chapter-4",
+          "description": "Application assessment and safeguarding validation."
+        },
+        {
+          "label": "NIOSH LGV investigation",
+          "url": "https://www.cdc.gov/niosh/bulletin/2019/robot-safety.html",
+          "description": "Automatic resumption after obstruction removal."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "2.3",
+          "3.6"
+        ],
+        "labels": [
+          "Model Safety Engineering",
+          "Incident Response & Recovery"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "perception-check",
+      "evidenceStatus": "Research method; proposed adaptation",
+      "sources": [
+        {
+          "label": "NIST mobility program",
+          "url": "https://www.nist.gov/programs-projects/mobility-performance-robotic-systems",
+          "description": "Measurement under localization and environmental disturbances."
+        },
+        {
+          "label": "FASTER, 2021",
+          "url": "https://arxiv.org/abs/2001.04420v2",
+          "description": "Backup trajectories demonstrated under the paper’s assumptions."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "2.3",
+          "3.5"
+        ],
+        "labels": [
+          "Model Safety Engineering",
+          "Post-deployment Monitoring"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "least-privilege",
+      "evidenceStatus": "Published experiment",
+      "sources": [
+        {
+          "label": "AgentDojo results",
+          "url": "https://agentdojo.spylab.ai/results/",
+          "description": "Dated baseline and tool-filter comparisons."
+        },
+        {
+          "label": "AgentDojo paper",
+          "url": "https://arxiv.org/html/2406.13352v3",
+          "description": "Tools selected before untrusted data is read."
+        },
+        {
+          "label": "NIST least privilege",
+          "url": "https://csrc.nist.gov/glossary/term/least_privilege",
+          "description": "Access limited to what the task requires."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "2.1",
+          "2.3",
+          "3.3"
+        ],
+        "labels": [
+          "Model & Infrastructure Security",
+          "Model Safety Engineering",
+          "Access Management"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "independent-verification",
+      "evidenceStatus": "Guidance",
+      "sources": [
+        {
+          "label": "NIST AI 600-1, MS-2.3-002",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+          "description": "Empirical assessment of capability claims."
+        },
+        {
+          "label": "MIT mitigation taxonomy, 3.1",
+          "url": "https://airisk.mit.edu/ai-risk-mitigations",
+          "description": "Independent testing and auditing."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.1"
+        ],
+        "labels": [
+          "Testing & Auditing"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "engagement-monitor",
+      "evidenceStatus": "Investigation recommendation",
+      "sources": [
+        {
+          "label": "NTSB HWY18FH011",
+          "url": "https://www.ntsb.gov/investigations/pages/HWY18FH011.aspx",
+          "description": "Findings on supervision and partial automation."
+        },
+        {
+          "label": "NTSB HAR-20/01",
+          "url": "https://www.ntsb.gov/investigations/AccidentReports/Reports/HAR2001.pdf",
+          "description": "Monitoring recommendations, including H-17-42."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.5",
+          "1.5"
+        ],
+        "labels": [
+          "Post-deployment Monitoring",
+          "Safety Decision Frameworks"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "energy-isolation",
+      "evidenceStatus": "Operational guidance",
+      "sources": [
+        {
+          "label": "OSHA hazardous energy",
+          "url": "https://www.osha.gov/control-hazardous-energy",
+          "description": "Unexpected startup and stored-energy release."
+        },
+        {
+          "label": "WorkSafe pumping alert",
+          "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
+          "description": "Pressure-system compatibility and inspection."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.6"
+        ],
+        "labels": [
+          "Incident Response & Recovery"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "layout-verification",
+      "evidenceStatus": "Manufacturer method; proposed comparison",
+      "sources": [
+        {
+          "label": "FieldPrinter specifications",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs",
+          "description": "Control points, stationing, and verification."
+        },
+        {
+          "label": "FieldPrinter readiness",
+          "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+          "description": "File and site prerequisites."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.1"
+        ],
+        "labels": [
+          "Testing & Auditing"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "equipment-compatibility",
+      "evidenceStatus": "Manufacturer evidence; verification pending",
+      "sources": [
+        {
+          "label": "PC16 specification",
+          "url": "https://www.derututech.com/products/13.html",
+          "description": "One published configuration."
+        },
+        {
+          "label": "PC16 alternate page",
+          "url": "https://derutu.com/pc16-2/",
+          "description": "Conflicting published values."
+        },
+        {
+          "label": "DM Leading",
+          "url": "https://www.derututech.com/products/7.html",
+          "description": "Published electrical and model information."
+        },
+        {
+          "label": "WorkSafe pumping alert",
+          "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
+          "description": "Compatibility and pressure ratings."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "1.2",
+          "4.1"
+        ],
+        "labels": [
+          "Risk Management",
+          "System Documentation"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "operator-qualification",
+      "evidenceStatus": "Operational guidance",
+      "sources": [
+        {
+          "label": "OSHA robot safety",
+          "url": "https://www.osha.gov/otm/section-4-safety-hazards/chapter-4",
+          "description": "Procedure training and demonstrated competence."
+        },
+        {
+          "label": "NIOSH robot investigations",
+          "url": "https://www.cdc.gov/niosh/bulletin/2019/robot-safety.html",
+          "description": "Machine-specific training recommendations."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "3.3",
+          "3.1"
+        ],
+        "labels": [
+          "Access Management",
+          "Testing & Auditing"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    },
+    {
+      "id": "change-review",
+      "evidenceStatus": "Operational guidance",
+      "sources": [
+        {
+          "label": "NIST AI 600-1, MS-2.5-006",
+          "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf",
+          "description": "Reassessment in new circumstances."
+        },
+        {
+          "label": "OSHA robot safety",
+          "url": "https://www.osha.gov/otm/section-4-safety-hazards/chapter-4",
+          "description": "Application review after changes."
+        }
+      ],
+      "mitigationTaxonomy": {
+        "ids": [
+          "1.5",
+          "3.4"
+        ],
+        "labels": [
+          "Safety Decision Frameworks",
+          "Staged Deployment"
+        ],
+        "url": "https://airisk.mit.edu/ai-risk-mitigations",
+        "basis": "BackDrive mapping"
+      }
+    }
+  ],
+  "localAliases": {
+    "CRUISE-2023": "AIID-726",
+    "HWY18FH011": "AIID-321",
+    "APPLE-2024": "AIID-861"
+  },
+  "publishedResults": [
+    {
+      "id": "agentdojo",
+      "source": "https://agentdojo.spylab.ai/results/",
+      "rows": [
+        {
+          "model": "GPT-4o-2024-05-13",
+          "configuration": "important_instructions attack; no defense",
+          "metrics": [
+            {
+              "name": "Utility",
+              "value": 69.07,
+              "unit": "%"
+            },
+            {
+              "name": "Utility under attack",
+              "value": 50.08,
+              "unit": "%"
+            },
+            {
+              "name": "Targeted attack success",
+              "value": 47.69,
+              "unit": "%"
+            }
+          ],
+          "source": "https://agentdojo.spylab.ai/results/",
+          "date": "2024-06-05",
+          "scope": "Official results-page row. Benchmark tasks, not the linked infrastructure incident."
+        },
+        {
+          "model": "GPT-4o-2024-05-13",
+          "configuration": "important_instructions attack; tool_filter defense",
+          "metrics": [
+            {
+              "name": "Utility",
+              "value": 72.16,
+              "unit": "%"
+            },
+            {
+              "name": "Utility under attack",
+              "value": 56.28,
+              "unit": "%"
+            },
+            {
+              "name": "Targeted attack success",
+              "value": 6.84,
+              "unit": "%"
+            }
+          ],
+          "source": "https://agentdojo.spylab.ai/results/",
+          "date": "2024-06-05",
+          "scope": "Official results-page row. Historical comparison; no local deployment result."
+        }
+      ]
+    },
+    {
+      "id": "summac",
+      "source": "https://aclanthology.org/2022.tacl-1.10.pdf",
+      "rows": [
+        {
+          "model": "SummaCConv",
+          "configuration": "Table 2; six test sets; sentence-level MNLI+VitaminC setup",
+          "metrics": [
+            {
+              "name": "Mean balanced accuracy",
+              "value": 74.4,
+              "unit": "%"
+            }
+          ],
+          "source": "https://aclanthology.org/2022.tacl-1.10.pdf",
+          "date": "2022",
+          "scope": "Mean of six dataset scores, not Apple performance."
+        },
+        {
+          "model": "SummaCZS",
+          "configuration": "Table 2; same six test sets",
+          "metrics": [
+            {
+              "name": "Mean balanced accuracy",
+              "value": 72.1,
+              "unit": "%"
+            }
+          ],
+          "source": "https://aclanthology.org/2022.tacl-1.10.pdf",
+          "date": "2022",
+          "scope": "Summary inconsistency detector, not a summarizer."
+        }
+      ]
+    },
+    {
+      "id": "openmfc",
+      "source": "https://mfc.nist.gov/",
+      "rows": [
+        {
+          "model": "CERTH-ITI-MEVER video_df_gan_detection_final",
+          "configuration": "Submission 133; OpenMFC20 Video_DD",
+          "metrics": [
+            {
+              "name": "ROC AUC",
+              "value": 0.817059,
+              "unit": ""
+            },
+            {
+              "name": "Detection at 5% false-alarm rate",
+              "value": 60,
+              "unit": "%"
+            }
+          ],
+          "source": "https://mfc.nist.gov/",
+          "date": "2024-06-13",
+          "scope": "Historical recorded-video result, not an interview identity check."
+        }
+      ]
+    }
+  ],
+  "mitigationImport": {
+    "title": "MIT AI Risk Mitigation Database",
+    "sourceTitle": "[PUBLIC] Mitigation Database 2025-07-23",
+    "sourceDate": "2025-07-23",
+    "importedAt": "2026-09-28",
+    "sourceUrl": "https://airisk.mit.edu/ai-risk-mitigations",
+    "publicViewUrl": "https://airtable.com/appUJl8KRAUMeIVXs/shrWzxZUTPzwAEZ2u/tblkm9TrIQ0dW8IJY",
+    "sourceFilename": "[PUBLIC] Mitigation Database 2025-07-23.csv",
+    "sourceFileModifiedAt": "2026-09-24T03:07:08.686142+00:00",
+    "provenance": "Public CSV already present locally with September 23, 2026 modification time; 831-row count and first visible record checked against public Airtable on September 28. Full fresh download not confirmed.",
+    "recordCount": 831,
+    "frameworkCount": 13,
+    "sha256": "811b78afa73a75d3d794b4d6474cad217dcc6586e56768d6101b273b52de956d",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "MIT AI Risk Initiative / MIT FutureTech, AI Risk Mitigation Database, July 23, 2025 export.",
+    "transformations": "Original five CSV fields retained verbatim. Display keys renamed; broad category derived from the original subcategory prefix.",
+    "evidenceNote": "These are mitigations extracted from frameworks. Inclusion does not establish effectiveness.",
+    "sourceLinkNote": "The CSV contains framework labels but no original-document URLs or Airtable record URLs. Source links open the public database; original IDs are preserved."
+  }
 }
