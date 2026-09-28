@@ -165,7 +165,62 @@
       "id": "pressure-review",
       "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
       "type": "Proposed review"
+    },
+    {
+      "id": "fieldprinter-readiness",
+      "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+      "type": "Manufacturer checklist"
+    },
+    {
+      "id": "derutu-compatibility",
+      "url": "https://www.derututech.com/products/13.html",
+      "type": "Proposed check"
+    },
+    {
+      "id": "wall-finish-comparison",
+      "url": "https://www.derututech.com/products/7.html",
+      "type": "Proposed comparison"
     }
   ],
-  "mappingNote": "The construction links are proposed mechanism-level comparisons. None records a test of the equipment discussed in a pilot. Published methods, manufacturer guidance, and proposed reviews have separate labels."
+  "mappingNote": "Construction evidence uses equipment-specific guidance where available and physical-hazard proxies where needed. Stopping and restart are assessed separately. No results or certification for the pilot equipment are implied.",
+  "pilotProposals": [
+    {
+      "organization": "The Sage Plant",
+      "source": "From Procurement to Safe Deployment",
+      "sourceType": "Organization-supplied discussion draft and correspondence",
+      "received": "2026-09-28",
+      "projects": [
+        {
+          "id": "dusty",
+          "number": "002",
+          "slides": "Slides 2, 4–8"
+        },
+        {
+          "id": "derutu",
+          "number": "001",
+          "slides": "Slides 2–3, 5–8"
+        }
+      ],
+      "status": "Proposed; no field results recorded; MIT scope and participation unconfirmed",
+      "note": "Plans, quotes, and reported baselines come from The Sage Plant proposal. Incident links are hazard comparisons; checks and decision criteria remain proposed. The baseline arithmetic and conflicting manufacturer specifications are identified in the case notes."
+    }
+  ],
+  "manufacturerSources": [
+    {
+      "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+      "accessed": "2026-09-28"
+    },
+    {
+      "url": "https://www.derututech.com/products/13.html",
+      "accessed": "2026-09-28"
+    },
+    {
+      "url": "https://derutu.com/pc16-2/",
+      "accessed": "2026-09-28"
+    },
+    {
+      "url": "https://www.derututech.com/products/7.html",
+      "accessed": "2026-09-28"
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-/* Public source mappings and proposed comparisons; no new field results. */
+/* Sources, reported proposal figures, and explicitly labeled comparisons. */
 window.BACKDRIVE_DATA = {
   "schemaVersion": "backdrive-prototype/3.1",
   "snapshot": "25 September 2026",
@@ -1238,6 +1238,73 @@ window.BACKDRIVE_DATA = {
         "OSHA-99025"
       ],
       "status": "Proposed review"
+    },
+    {
+      "id": "fieldprinter-readiness",
+      "name": "FieldPrinter readiness checks",
+      "environment": "FieldPrinter jobsites",
+      "focus": "Files, site, survey control, and operator preparation",
+      "source": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+      "description": "Dusty’s checklist covers file preparation, survey control, operating conditions, site coordination, and operator preparation. Apply it separately at each job.",
+      "measures": [
+        "File and revision checks",
+        "Site and control-point readiness",
+        "Setup delays"
+      ],
+      "limits": "Manufacturer guidance. Record the findings; checklist completion is not a performance result or independent safety validation.",
+      "caseIds": [],
+      "status": "Manufacturer checklist"
+    },
+    {
+      "id": "derutu-compatibility",
+      "name": "Derutu specification check",
+      "environment": "DM Leading and PC16",
+      "focus": "Confirm the configuration before purchase",
+      "source": "https://www.derututech.com/products/13.html",
+      "sources": [
+        {
+          "url": "https://www.derututech.com/products/13.html",
+          "label": "PC16 specifications"
+        },
+        {
+          "url": "https://derutu.com/pc16-2/",
+          "label": "Alternative PC16 specifications"
+        },
+        {
+          "url": "https://www.derututech.com/products/7.html",
+          "label": "DM Leading specifications"
+        }
+      ],
+      "description": "The two PC16 pages list different pressure and aggregate limits. Obtain the specification and manual for the ordered unit, then check the equipment, material, and electrical supply together.",
+      "measures": [
+        "Model and revision",
+        "Pressure and aggregate limits",
+        "Electrical compatibility",
+        "Supplier clarification"
+      ],
+      "limits": "A proposed procurement check, not a benchmark. Published pages may describe different configurations; the difference cannot be resolved from the available information.",
+      "caseIds": [
+        "OSHA-99025"
+      ],
+      "status": "Proposed check"
+    },
+    {
+      "id": "wall-finish-comparison",
+      "name": "Matched wall-section comparison",
+      "environment": "Manual and mechanized finishing",
+      "focus": "Accepted finish over the full work cycle",
+      "source": "https://www.derututech.com/products/7.html",
+      "description": "A proposed comparison for testing the manufacturer’s claims: use the same substrate and material on comparable sections, then assess finish and total labor under agreed acceptance criteria.",
+      "measures": [
+        "Flatness and finish",
+        "Adhesion",
+        "Accepted area per labor-hour",
+        "Waste and rework",
+        "Setup and cleaning time"
+      ],
+      "limits": "No trial results are recorded. The qualified reviewer must select suitable finish and adhesion checks. Vendor production figures are not the manual baseline.",
+      "caseIds": [],
+      "status": "Proposed comparison"
     }
   ],
   "roboharmTasks": [
@@ -1426,46 +1493,157 @@ window.BACKDRIVE_DATA = {
     {
       "id": "construction",
       "name": "Construction robotics",
-      "partner": "—",
-      "status": "Illustrative",
-      "featured": false,
+      "partner": "The Sage Plant",
+      "status": "Proposed",
+      "featured": true,
       "caseIds": [
         "WA-LGV-2015",
-        "WA-DEMO-2019",
-        "OSHA-99025"
+        "OSHA-99025",
+        "WA-DEMO-2019"
       ],
       "evalIds": [
         "nist-navigation",
-        "astm-stopping",
         "layout-control",
+        "fieldprinter-readiness",
+        "astm-stopping",
         "restart-review",
-        "pressure-review"
+        "derutu-compatibility",
+        "pressure-review",
+        "wall-finish-comparison"
       ],
       "description": "",
-      "question": "How reliably does the equipment perform the task and respond when conditions change?",
+      "question": "Which controls improve safety and task performance?",
       "controls": [
-        "boundary-check",
+        "source-check",
+        "human-gate",
+        "independent-verification",
         "protective-stop",
-        "independent-verification"
+        "energy-isolation"
       ],
-      "baseline": "Measure the existing workflow under the same task and site conditions.",
-      "intervention": "Verify outputs independently and define when work must stop.",
+      "baseline": "Manual layout and wall finishing, measured on comparable work.",
+      "intervention": "Verify the files and equipment, assess operators, and record faults, corrections, and work completed.",
       "readout": [
-        "Task accuracy",
-        "Operator interventions",
-        "Faults and recovery"
+        "Useful findings and unsupported claims",
+        "Unauthorized actions and approval burden",
+        "Task performance, anomalies, and near misses"
       ],
       "required": [
-        "Equipment and operating conditions",
-        "Acceptance criteria",
-        "Qualified review"
+        "A named decision owner and bounded use case",
+        "Vendor evidence and system/configuration versions",
+        "An agreed protocol, stop conditions, and review process"
       ],
-      "evidence": "No field measurements are recorded.",
-      "note": "An illustrative construction example. No participating organization is identified.",
+      "evidence": "No field results are recorded. MIT participation and scope are not confirmed.",
+      "note": "Incident links compare specific hazards on other equipment. Manufacturer guidance and proposed checks are identified separately.",
+      "source": "The Sage Plant, From Procurement to Safe Deployment, discussion draft and correspondence received September 28, 2026.",
+      "recordFields": [
+        [
+          "Context",
+          "Site conditions, task, crew, materials, file version and equipment configuration."
+        ],
+        [
+          "Exposure or hazard",
+          "Who or what could be affected, the failure mode and its trigger."
+        ],
+        [
+          "Control in place",
+          "Safeguard, procedure, training, exclusion zone or verification step."
+        ],
+        [
+          "Observed evidence",
+          "Test result, defect, intervention, near miss, incident, downtime or task performance."
+        ],
+        [
+          "Response",
+          "Continue, correct, retrain, change the control, escalate or stop."
+        ],
+        [
+          "Learning",
+          "What worked, what changed and what the next deployment must require."
+        ]
+      ],
       "projects": [
         {
-          "id": "layout",
-          "label": "Layout",
+          "id": "dusty",
+          "number": "002",
+          "label": "Dusty",
+          "name": "FieldPrinter 2",
+          "stage": "Field trial",
+          "description": "Print two nearby Florida duplex jobs in one day with the same trained operator.",
+          "question": "Can the two jobs be completed accurately in one day, including setup and checking?",
+          "facts": [
+            [
+              "Work",
+              "Construction layout, including the rebar and MEP information required for each job."
+            ],
+            [
+              "Reported manual baseline",
+              "66–78 labor-hours across both projects. The crew-time figures do not yet match this total."
+            ],
+            [
+              "Trial",
+              "One operator, two sites, one day. Repeat setup and calibration at each site."
+            ],
+            [
+              "Demo and training",
+              "$6,000. Choose a production plan after measuring use and cost per building."
+            ]
+          ],
+          "checks": [
+            [
+              "Independent layout check",
+              "Compare selected printed points with independently surveyed references at each site.",
+              "Position error, out-of-tolerance points, corrections, rework"
+            ],
+            [
+              "File and site review",
+              "Check units, revisions, survey control, MEP/rebar scope, obstructions, and protected edges before printing.",
+              "File corrections, missing scope, setup delays"
+            ],
+            [
+              "Stopping and restart",
+              "Use a qualified assessment to check detection, stopping, and permission to resume. Record routine operator interventions during the trial.",
+              "Stop behavior, unexpected motion, intervention time"
+            ],
+            [
+              "Manual comparison",
+              "Time equivalent manual and robot-assisted work, including preparation, travel, checking, and correction.",
+              "Accepted output per labor-hour, total hours, cost per building"
+            ]
+          ],
+          "readout": [
+            "Setup and printing time",
+            "Linear feet or points printed",
+            "Accuracy, corrections and rework",
+            "Crew hours and operator interventions",
+            "File preparation and revision effort",
+            "Actual building cost and projected utilization"
+          ],
+          "commercial": "$6,000 for demo and training in the proposal. This is a trial cost, not a production saving. Commercial plan selection depends on measured utilization.",
+          "required": [
+            "Confirmed baseline and task scope",
+            "Approved files and an independent survey reference",
+            "Acceptance tolerance, operator responsibilities, and stop/recovery criteria"
+          ],
+          "scope": "NIST navigation measurements can inform the position check. Printed output and design correctness need their own checks. The incident comparison concerns restart behavior, not a reported fault in FieldPrinter 2.",
+          "decisions": [
+            [
+              "Proceed",
+              "Accepted layout and workable file preparation at both sites."
+            ],
+            [
+              "Modify",
+              "Correct files, setup, or workflow and repeat the affected checks."
+            ],
+            [
+              "Pause",
+              "Unresolved safety, accuracy, or file-readiness failures."
+            ],
+            [
+              "Scale",
+              "Repeatable accepted work at a measured cost and utilization that justify a production plan."
+            ]
+          ],
+          "sourceSlides": "Slides 2, 4–8",
           "evidenceLinks": [
             {
               "capability": "Position and layout accuracy",
@@ -1480,58 +1658,132 @@ window.BACKDRIVE_DATA = {
               "limit": "Navigation error and print error must be measured separately. Neither verifies the design."
             },
             {
-              "capability": "Obstacle detection and stopping",
+              "capability": "File and site readiness",
+              "url": "https://support.dustyrobotics.com/hc/en-us/articles/53227754033947-FieldPrinter-Pre-Print-Readiness-Checklist",
+              "label": "FieldPrinter readiness checklist",
+              "kind": "Equipment-specific guidance",
+              "evalIds": [
+                "fieldprinter-readiness"
+              ],
+              "transfer": "Use the manufacturer’s checks for files, control points, site conditions, and operator preparation.",
+              "limit": "Completing a checklist does not measure layout accuracy or prove that the trial is safe."
+            },
+            {
+              "capability": "Stopping and restart",
               "caseId": "WA-LGV-2015",
               "kind": "Incident proxy",
               "evalIds": [
-                "astm-stopping"
-              ],
-              "transfer": "Examine where the machine detects an obstacle and how it stops.",
-              "limit": "A forklift has different mass, sensing, and motion. Its incident does not establish a layout-robot fault."
-            },
-            {
-              "capability": "Controlled restart",
-              "caseId": "WA-DEMO-2019",
-              "kind": "Incident proxy",
-              "evalIds": [
+                "astm-stopping",
                 "restart-review"
               ],
-              "transfer": "Check whether close access or handling cables can coincide with enabled motion.",
-              "limit": "The demolition machine was remotely controlled. Transfer requires reviewing the actual controller and stop states."
+              "transfer": "A robot may stop for an obstruction but resume while a person is still exposed. Review the actual stopped states and reset sequence.",
+              "limit": "ASTM F3265 addresses stopping response, not restart authorization. The forklift differs in mass, geometry, and sensing; no FieldPrinter failure is implied."
             }
           ],
-          "checks": [
-            [
-              "Independent survey check",
-              "Compare selected printed points with a reference established independently of the robot.",
-              "Maximum and typical error, out-of-tolerance points, rework"
-            ],
-            [
-              "Obstacle and restart checks",
-              "Have a qualified assessor check stopping and restart states with safe test objects under an approved procedure.",
-              "Stop distance, missed detections, unauthorized restarts"
-            ],
-            [
-              "Matched task comparison",
-              "Compare robot-assisted and existing layout on equivalent work, including setup and checking.",
-              "Accepted output per labor-hour, corrections, interruptions"
-            ]
-          ],
-          "readout": [
-            "Independent position and print measurements",
-            "Stop and restart observations",
-            "Accepted output, labor time, and rework"
-          ],
-          "required": [
-            "A defined equipment configuration and operating area",
-            "Survey reference, task scope, and acceptance tolerances",
-            "Qualified approval of the safety-check procedure"
+          "dataNotes": [
+            "The proposal reports a three-person crew, about eight hours of chalk layout, and another two to three hours of rebar marking. If all three people work both tasks on each job, the total is 60–66 labor-hours for two jobs, not the reported 66–78. Confirm the crew and time assumptions before calculating savings.",
+            "No acceptance tolerance has been supplied. Agree it with the qualified reviewer before comparing results; do not substitute a vendor accuracy claim for the project requirement."
           ]
         },
         {
-          "id": "wall-finishing",
-          "label": "Wall finishing",
+          "id": "derutu",
+          "number": "001",
+          "label": "Derutu",
+          "name": "DM Leading + PC-16",
+          "stage": "Purchase and commissioning",
+          "description": "Spray with PC-16, then level and finish with DM Leading.",
+          "question": "Does the combined workflow produce an acceptable finish with less manual work?",
+          "facts": [
+            [
+              "Equipment quote",
+              "$15,700: DM Leading $9,500 and PC-16 $6,200."
+            ],
+            [
+              "Quoted freight",
+              "$350 for sea freight and insurance to port. Customs, duties, handling, and inland delivery are extra."
+            ],
+            [
+              "Next steps",
+              "Confirm the equipment and materials, commission the machines, train operators, and complete a mock-up before field work."
+            ],
+            [
+              "Manual comparison",
+              "Use the same wall system and material. Labor, finish quality, waste, and maintenance baselines still need measurement."
+            ]
+          ],
+          "checks": [
+            [
+              "Supplier specification check",
+              "Resolve the conflicting PC16 specifications and confirm the ordered configuration, electrical supply, materials, and aggregate limit in writing.",
+              "Model/version, rated limits, power requirements, unresolved differences"
+            ],
+            [
+              "Pressure-system inspection",
+              "Have a qualified person check compatible hoses and couplings, service condition, pressure ratings, and the approved isolation procedure.",
+              "Inspection findings, component records, corrective actions"
+            ],
+            [
+              "Operator and access checks",
+              "Observe assembly, operation, fault response, cleaning, and restart under the approved procedure.",
+              "Missed steps, unintended activation, interventions, near misses"
+            ],
+            [
+              "Matched wall sections",
+              "Compare manual application with spraying and leveling on equivalent sections using the same material and acceptance criteria.",
+              "Finish quality, flatness, adhesion, accepted area per labor-hour, waste, rework"
+            ],
+            [
+              "Full work cycle",
+              "Include setup, cleaning, stoppages, and maintenance when comparing output.",
+              "Total labor, downtime, consumables, maintenance effort"
+            ]
+          ],
+          "readout": [
+            "Setup and cleanup time",
+            "Labor hours and throughput",
+            "Finish quality, adhesion and consistency",
+            "Stoppages, faults and maintenance burden",
+            "Material waste and operator interventions",
+            "Near misses, incidents and corrective actions"
+          ],
+          "commercial": "$15,700 equipment quote plus $350 port-only freight and insurance. Import charges and inland delivery remain additional. These are proposal figures, not a current offer.",
+          "required": [
+            "Confirmed specifications and the manual for the actual unit",
+            "Commissioning and operator qualification",
+            "Agreed wall-quality criteria, comparison area, and stop conditions"
+          ],
+          "scope": "The sources describe mechanized pumping and finishing. They do not establish an AI model or autonomy level. The pump and demolition incidents are physical-hazard comparisons.",
+          "decisions": [
+            [
+              "Proceed",
+              "Confirmed configuration, completed commissioning, and an accepted mock-up."
+            ],
+            [
+              "Modify",
+              "Adjust materials, setup, training, or cleaning and repeat the comparison."
+            ],
+            [
+              "Pause",
+              "Unresolved compatibility, safety, operator, or finish-quality failures."
+            ],
+            [
+              "Scale",
+              "Repeatable accepted work with manageable labor, waste, and maintenance."
+            ]
+          ],
+          "sourceSlides": "Slides 2–3, 5–8",
           "evidenceLinks": [
+            {
+              "capability": "Material and electrical compatibility",
+              "url": "https://www.derututech.com/products/13.html",
+              "label": "PC16 specifications",
+              "kind": "Manufacturer source",
+              "evalIds": [
+                "derutu-compatibility"
+              ],
+              "transfer": "Use the supplier’s documentation to establish the exact configuration and material limits.",
+              "limit": "The published PC16 specifications disagree. Confirm the ordered unit rather than merging values from different pages."
+            },
             {
               "capability": "Pressure-system integrity",
               "caseId": "OSHA-99025",
@@ -1543,52 +1795,45 @@ window.BACKDRIVE_DATA = {
               "limit": "The incident involved a conventional plaster pump. No robot or AI failure was identified."
             },
             {
-              "capability": "Control of unintended motion",
+              "capability": "Unintended motion during access",
               "caseId": "WA-DEMO-2019",
               "kind": "Incident proxy",
               "evalIds": [
                 "restart-review"
               ],
-              "transfer": "Review controls and access around cables, moving parts, and confined work areas.",
-              "limit": "The demolition machine’s mechanism and stored energy differ from finishing equipment."
+              "transfer": "Cable handling can place an operator beside energized equipment. Examine control placement, access, and isolation.",
+              "limit": "The incident involved a different, remote-controlled demolition machine. It does not demonstrate a Derutu fault."
             },
             {
-              "capability": "Controlled restart",
-              "caseId": "WA-LGV-2015",
-              "kind": "Incident proxy",
+              "capability": "Finish quality and productivity",
+              "url": "https://www.derututech.com/products/7.html",
+              "label": "DM Leading specifications",
+              "kind": "Manufacturer source",
               "evalIds": [
-                "restart-review"
+                "wall-finish-comparison"
               ],
-              "transfer": "Check whether clearing a fault can cause operation to resume before the area is clear.",
-              "limit": "Forklift behavior is a prompt for review, not evidence that another machine restarts automatically."
+              "transfer": "Compare manual and mechanized work on matched wall sections, measuring accepted output rather than sprayed area alone.",
+              "limit": "The vendor’s production and finish claims have not been independently verified here. Results will depend on material, substrate, operator, and cleanup."
             }
           ],
-          "checks": [
-            [
-              "Compatibility and inspection",
-              "A qualified reviewer checks the complete pump, hose, material, and power configuration against supplier requirements.",
-              "Ratings, inspection findings, unresolved incompatibilities"
-            ],
-            [
-              "Isolation and operator qualification",
-              "Review the approved cleaning, access, fault-response, and restart procedures with the operator.",
-              "Missed steps, ambiguous states, intervention records"
-            ],
-            [
-              "Finish-quality comparison",
-              "Compare equivalent trial areas with the existing method using a predefined acceptance rubric.",
-              "Accepted area per labor-hour, thickness and flatness, waste, rework"
-            ]
+          "dataNotes": [
+            "PC16 specifications conflict: derututech.com lists 50 bar and 6 mm maximum particle size; derutu.com lists 30 bar and aggregate smaller than 8 mm. Both list 380 V. Do not select an operating limit from these pages; obtain the specification and manual for the actual unit.",
+            "The DM Leading product page lists 220 V, 50 Hz. Confirm the supplied electrical configuration and site compatibility before purchase.",
+            "There are no local throughput, waste, adhesion, or finish measurements. Use matched wall sections to establish them; vendor output claims are not a substitute."
           ],
-          "readout": [
-            "Component and inspection records",
-            "Operator and fault-response observations",
-            "Accepted finish, labor time, waste, and rework"
-          ],
-          "required": [
-            "Confirmed equipment and material specifications",
-            "Qualified commissioning and operator assessment",
-            "Surface-quality criteria and an equivalent comparison area"
+          "noteSources": [
+            {
+              "label": "PC16, derututech.com",
+              "url": "https://www.derututech.com/products/13.html"
+            },
+            {
+              "label": "PC16, derutu.com",
+              "url": "https://derutu.com/pc16-2/"
+            },
+            {
+              "label": "DM Leading",
+              "url": "https://www.derututech.com/products/7.html"
+            }
           ]
         }
       ]
