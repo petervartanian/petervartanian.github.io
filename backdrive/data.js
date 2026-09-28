@@ -1168,24 +1168,14 @@ window.BACKDRIVE_DATA = {
   "pilots": [
     {
       "id": "construction",
-      "name": "Construction AI review",
+      "name": "Construction robotics",
       "partner": "The Sage Plant",
       "status": "Proposed",
       "featured": true,
-      "caseIds": [
-        "AIID-541",
-        "AIID-1424",
-        "AIID-1547",
-        "PILOT-01"
-      ],
-      "evalIds": [
-        "alce",
-        "agentdojo",
-        "asimov",
-        "safebench"
-      ],
-      "description": "Explore AI-assisted research, procurement, and the assessment of robotics proposals with a construction team.",
-      "question": "Which AI recommendations can the team rely on, and what needs human verification?",
+      "caseIds": [],
+      "evalIds": [],
+      "description": "Two proposed cases with The Sage Plant: construction layout and wall finishing.",
+      "question": "Which safeguards should be required before deployment, and what evidence supports proceeding, modifying, pausing or scaling?",
       "controls": [
         "source-check",
         "least-privilege",
@@ -1204,8 +1194,194 @@ window.BACKDRIVE_DATA = {
         "Vendor evidence and system/configuration versions",
         "An agreed protocol, stop conditions, and review process"
       ],
-      "evidence": "Exploratory correspondence and public incident reports. No agreed protocol or trial results.",
-      "note": "The proposal concerns AI-assisted work in construction. The linked records offer examples of unreliable information, uncontrolled tool actions, and navigation failures. They provide starting points for choosing useful comparisons with the team."
+      "evidence": "The organization has supplied proposed workflows, baselines and evaluation questions. No field results are recorded here. MIT participation, responsibilities and scope remain to be agreed.",
+      "note": "The two equipment cases sit within The Sage Plant AI Office. Incident and benchmark links need a task-specific review before being assigned to either case. The AI Office’s research agents and the construction equipment have separate roles.",
+      "source": "The Sage Plant, From Procurement to Safe Deployment, eight-slide discussion draft and accompanying correspondence, September 28, 2026.",
+      "recordFields": [
+        [
+          "Context",
+          "Site conditions, task, crew, materials, file version and equipment configuration."
+        ],
+        [
+          "Exposure or hazard",
+          "Who or what could be affected, the failure mode and its trigger."
+        ],
+        [
+          "Control in place",
+          "Safeguard, procedure, training, exclusion zone or verification step."
+        ],
+        [
+          "Observed evidence",
+          "Test result, defect, intervention, near miss, incident, downtime or task performance."
+        ],
+        [
+          "Response",
+          "Continue, correct, retrain, change the control, escalate or stop."
+        ],
+        [
+          "Learning",
+          "What worked, what changed and what the next deployment must require."
+        ]
+      ],
+      "projects": [
+        {
+          "id": "dusty",
+          "number": "002",
+          "label": "Dusty Robotics",
+          "name": "FieldPrinter 2",
+          "stage": "Proposed field deployment",
+          "description": "Automated construction layout across two nearby Florida duplex sites.",
+          "question": "Can one trained operator print both jobs in one day with acceptable accuracy, workflow fit and cost?",
+          "facts": [
+            [
+              "Proposed trial",
+              "Use the same operator and deployment for both jobs, checking setup, calibration and repeatability."
+            ],
+            [
+              "Manual baseline",
+              "A three-person crew takes about eight hours for chalk layout plus two to three hours for rebar marking. The deck estimates 66–78 labor-hours across both projects."
+            ]
+          ],
+          "checks": [
+            [
+              "Layout verification",
+              "Check accuracy and field usability before accepting the layout.",
+              "Accuracy, corrections, rework and linear feet or points printed."
+            ],
+            [
+              "File and scope checks",
+              "Confirm that files, revisions and MEP/rebar information support the intended work.",
+              "File preparation, revisions, missing information and engineering review effort."
+            ],
+            [
+              "Calibration at each site",
+              "Check whether mobilization and calibration make the two-site schedule repeatable.",
+              "Setup and print time, travel/setup burden, crew hours and operator interventions."
+            ],
+            [
+              "Deployment approval",
+              "Review the trial evidence and measured utilization before choosing a commercial plan.",
+              "Actual cost per building, usable operating days and the effect of corrections or delays."
+            ]
+          ],
+          "readout": [
+            "Setup and printing time",
+            "Linear feet or points printed",
+            "Accuracy, corrections and rework",
+            "Crew hours and operator interventions",
+            "File preparation and revision effort",
+            "Actual building cost and projected utilization"
+          ],
+          "commercial": "The deck assigns $6,000 to demo/training as a validation investment. It makes no production return-on-investment claim; commercial plan selection follows measured utilization.",
+          "required": [
+            "Accuracy tolerances and acceptance criteria",
+            "Approved files, scope and qualified reviewers",
+            "Operator responsibilities, stop conditions and recovery procedure",
+            "Access to observations and agreement on what may be shared"
+          ],
+          "scope": "This is the most deployment-ready case in the supplied proposal. It concerns FieldPrinter 2 in a construction workflow; the deck does not establish use of any frontier model or coverage by an existing benchmark.",
+          "decisions": [
+            [
+              "Proceed",
+              "Accuracy, usability, file readiness and the two-site workflow meet agreed criteria."
+            ],
+            [
+              "Modify",
+              "Correct the files, scope or workflow where the evidence identifies a remediable problem."
+            ],
+            [
+              "Pause",
+              "An unresolved accuracy, readiness or safety concern prevents acceptance."
+            ],
+            [
+              "Scale",
+              "Repeatable performance and measured utilization support a production plan."
+            ]
+          ],
+          "sourceSlides": "Slides 2, 4–8"
+        },
+        {
+          "id": "derutu",
+          "number": "001",
+          "label": "Derutu",
+          "name": "DM Leading + PC-16",
+          "stage": "Proposed procurement and commissioning",
+          "description": "Spray material with PC-16, then level and finish with DM Leading.",
+          "question": "Can the combined workflow safely and consistently reduce manual finishing work on The Sage Plant’s wall system?",
+          "facts": [
+            [
+              "Proposed trial",
+              "Complete pre-purchase checks, commissioning, training and a mock-up before a field trial."
+            ],
+            [
+              "Current comparison",
+              "Manual plastering and finishing. Labor, quality, waste and maintenance baselines still need to be measured for the chosen wall system."
+            ]
+          ],
+          "checks": [
+            [
+              "Material compatibility",
+              "Confirm the material and aggregate limits before committing to the equipment.",
+              "Supplier specifications, mock-up results, adhesion, consistency and finish quality."
+            ],
+            [
+              "Electrical and commissioning checks",
+              "Verify U.S. electrical compatibility, commissioning and emergency-stop operation.",
+              "Configuration, check results, faults and corrective actions."
+            ],
+            [
+              "Operator qualification",
+              "Require demonstrated performance in assembly, spraying, leveling and troubleshooting.",
+              "Training observations, operator interventions, errors and near misses."
+            ],
+            [
+              "Cleaning and maintenance",
+              "Check that the team can clean, maintain and recover the equipment consistently.",
+              "Setup/cleanup time, stoppages, maintenance burden and material waste."
+            ],
+            [
+              "Production approval",
+              "Review safety and task performance before adopting the combined workflow.",
+              "Labor hours, throughput, finish quality, incidents and corrective actions."
+            ]
+          ],
+          "readout": [
+            "Setup and cleanup time",
+            "Labor hours and throughput",
+            "Finish quality, adhesion and consistency",
+            "Stoppages, faults and maintenance burden",
+            "Material waste and operator interventions",
+            "Near misses, incidents and corrective actions"
+          ],
+          "commercial": "The supplied quote totals $15,700 for equipment: $9,500 for DM Leading and $6,200 for PC-16. The quoted $350 sea freight and insurance is port-only; customs, duties, handling and inland delivery are additional buyer responsibilities.",
+          "required": [
+            "Confirmed materials, configuration and supplier documentation",
+            "Acceptance criteria for the mock-up and finished work",
+            "Commissioning, training and operator-qualification requirements",
+            "Decision owner, stop conditions and field observation access"
+          ],
+          "scope": "The deck describes a mechanized workflow without establishing AI capabilities or a degree of autonomy. Equipment safety, AI-assisted procurement and any model evaluation need separate scopes.",
+          "decisions": [
+            [
+              "Proceed",
+              "Compatibility and readiness checks support purchase or the next trial stage."
+            ],
+            [
+              "Modify",
+              "Revise the materials, setup, training or maintenance process and reassess."
+            ],
+            [
+              "Pause",
+              "Compatibility, commissioning or operator qualification remains unresolved."
+            ],
+            [
+              "Scale",
+              "Field evidence supports consistent, safe production with acceptable labor and maintenance demands."
+            ]
+          ],
+          "sourceSlides": "Slides 2–3, 5–8"
+        }
+      ]
     },
     {
       "id": "handling",

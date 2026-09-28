@@ -4,7 +4,7 @@
   const app = document.getElementById('app');
   const dialog = document.getElementById('detail-dialog');
   const pages = [['map','Incidents'],['capabilities','Capabilities'],['evaluations','Evaluations'],['safeguards','Interventions'],['pilots','Pilots']];
-  const state = {mode:'all',page:'map',layout:'table',query:'',source:'all',domain:'all',evidence:'all',kind:'all',sort:'default',direction:1,selected:'AIID-594',detail:'evidence',control:'approved-inputs',pilot:'construction',models:data.models.map(m => m.id),units:'count',evaluation:'roboharm',roboTask:'mixing'};
+  const state = {mode:'all',page:'map',layout:'table',query:'',source:'all',domain:'all',evidence:'all',kind:'all',sort:'default',direction:1,selected:'AIID-594',detail:'evidence',control:'approved-inputs',pilot:'construction',pilotProject:'dusty',models:data.models.map(m => m.id),units:'count',evaluation:'roboharm',roboTask:'mixing'};
   const pilots = data.pilots;
   const h = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const getCase = id => data.cases.find(c => c.id === id);
@@ -97,9 +97,11 @@
   }
   function pilotsPage() {
     const p=pilots.find(p => p.id===state.pilot);
-    return heading('Pilots')+'<section class="data-panel"><div class="table-scroll"><table class="pilot-table"><thead><tr><th>Pilot</th><th>Organization</th><th>Status</th><th>Records</th></tr></thead><tbody>'+pilots.map(p => '<tr class="'+(state.pilot===p.id?'selected-row':'')+'"><td>'+button(h(p.name),'pilot','data-id="'+p.id+'" aria-pressed="'+(state.pilot===p.id)+'"','record-link')+(p.featured?'<span class="featured">Featured</span>':'')+'</td><td>'+h(p.partner)+'</td><td>'+badge(p.status)+'</td><td>'+p.caseIds.length+'</td></tr>').join('')+'</tbody></table></div></section><section class="pilot-detail" id="pilot-detail">'+pilotDetail(p)+'</section>';
+    return heading('Pilots')+'<section class="data-panel"><div class="table-scroll"><table class="pilot-table"><thead><tr><th>Pilot</th><th>Organization</th><th>Status</th><th>Linked records</th></tr></thead><tbody>'+pilots.map(p => '<tr class="'+(state.pilot===p.id?'selected-row':'')+'"><td>'+button(h(p.name),'pilot','data-id="'+p.id+'" aria-pressed="'+(state.pilot===p.id)+'"','record-link')+(p.featured?'<span class="featured">Featured</span>':'')+'</td><td>'+h(p.partner)+'</td><td>'+badge(p.status)+'</td><td>'+(p.caseIds.length||'—')+'</td></tr>').join('')+'</tbody></table></div></section><section class="pilot-detail" id="pilot-detail">'+pilotDetail(p)+'</section>';
   }
+  const selectedPilotProject = p => p.projects?.find(project=>project.id===state.pilotProject)||p.projects?.[0];
   function pilotNotes(p) {
+    if(p.projects)return projectNotes(p,selectedPilotProject(p));
     const caseLinks = p.caseIds.map(id => {
       const record = getCase(id);
       return '<li>'+caseButton(record)+'<span>'+h(record.sourceLabel+', '+record.kind)+'</span></li>';
@@ -111,14 +113,23 @@
     return '<h4 class="note-context">'+h(p.name)+'</h4><p>'+h(p.note)+'</p><p>'+h(p.evidence)+'</p><h4>Incident records</h4><ul class="note-links">'+caseLinks+'</ul><h4>Evaluations to consider</h4><ul class="note-links">'+benchmarkLinks+'</ul><h4>Comparison under consideration</h4><p>'+h(p.baseline)+'</p><p>'+h(p.intervention)+'</p><h4>Possible measures</h4><ul class="note-list">'+p.readout.map(item=>'<li>'+h(item)+'</li>').join('')+'</ul><h4>Still to agree</h4><ul class="note-list">'+p.required.map(item=>'<li>'+h(item)+'</li>').join('')+'</ul>';
   }
   function pilotDetail(p) {
+    if(p.projects)return projectPilotDetail(p,selectedPilotProject(p));
     const controls = p.controls.map(id => {
       const control = getControl(id);
       return '<tr><td>'+button(h(control.name),'open-control','data-id="'+id+'"','record-link')+'</td><td>'+h(control.question)+'</td></tr>';
     }).join('');
     return '<div class="section-heading pilot-heading"><div><h2>'+h(p.name)+'</h2><p>'+h(p.description)+'</p></div>'+(p.featured?'<img class="brand-logo sage-logo" src="assets/sage-plant-original.png" alt="The Sage Plant">':'')+'</div><p class="pilot-question">'+h(p.question)+'</p><div class="table-scroll"><table class="pilot-comparisons"><thead><tr><th>Intervention to examine</th><th>Question to investigate</th></tr></thead><tbody>'+controls+'</tbody></table></div>';
   }
+  function projectNotes(p,project) {
+    return '<h4 class="note-context">'+h(project.label+' '+project.name)+'</h4><h4>Source</h4><p>'+h(p.source)+' '+h(project.sourceSlides)+'.</p><p>'+h(p.evidence)+'</p><h4>Budget reported in the proposal</h4><p>'+h(project.commercial)+'</p><h4>Scope</h4><p>'+h(project.scope)+'</p><p>'+h(p.note)+'</p><h4>Evidence to collect</h4><ul class="note-list">'+project.readout.map(item=>'<li>'+h(item)+'</li>').join('')+'</ul><h4>Observation record</h4><dl class="observation-fields">'+p.recordFields.map(([label,description])=>'<div><dt>'+h(label)+'</dt><dd>'+h(description)+'</dd></div>').join('')+'</dl><h4>Still to agree</h4><ul class="note-list">'+project.required.map(item=>'<li>'+h(item)+'</li>').join('')+'</ul><p class="note-provenance">Checks and decision wording are adapted from the proposal. Acceptance thresholds and a comparison capable of assessing safeguard effectiveness still need to be agreed. No incident or benchmark has yet been mapped to this equipment.</p>';
+  }
+  function projectPilotDetail(p,project) {
+    const choices='<div class="view-switch pilot-project-switch" role="group" aria-label="The Sage Plant pilot cases">'+p.projects.map(item=>button(h(item.label),'pilot-project','data-id="'+item.id+'" aria-pressed="'+(item.id===project.id)+'"',item.id===project.id?'active':'')).join('')+'</div>';
+    const checks=project.checks.map(([control,check,measure])=>'<tr><th scope="row">'+h(control)+'</th><td>'+h(check)+'</td><td>'+h(measure)+'</td></tr>').join('');
+    return '<div class="section-heading pilot-heading"><div><h2>'+h(p.name)+'</h2><p>'+h(p.description)+'</p></div><img class="brand-logo sage-logo" src="assets/sage-plant-original.png" alt="The Sage Plant"></div>'+choices+'<section class="pilot-case" aria-labelledby="pilot-case-title"><div class="pilot-case-heading"><h3 id="pilot-case-title">'+h(project.label+' '+project.name)+'</h3><span>'+h('Pilot #'+project.number+' / '+project.stage)+'</span></div><p class="pilot-question">'+h(project.question)+'</p><dl class="pilot-facts">'+project.facts.map(([label,value])=>'<div><dt>'+h(label)+'</dt><dd>'+h(value)+'</dd></div>').join('')+'</dl><div class="table-scroll"><table class="pilot-checks"><caption class="sr-only">'+h(project.label)+' safeguards and evidence to collect</caption><thead><tr><th scope="col">Safeguard</th><th scope="col">What to check</th><th scope="col">Evidence to collect</th></tr></thead><tbody>'+checks+'</tbody></table></div><section class="pilot-decisions" aria-labelledby="pilot-decisions-title"><h3 id="pilot-decisions-title">Decision criteria to agree</h3><dl>'+project.decisions.map(([label,value])=>'<div><dt>'+h(label)+'</dt><dd>'+h(value)+'</dd></div>').join('')+'</dl></section></section>';
+  }
   function aboutData() {
-    return '<ul class="about-data-copy about-data-list"><li>The map links reported incidents to capabilities and evaluations to investigate possible gaps in coverage.<ul><li>Back\\Drive focuses the same map on robotics, with connections proposed for review.</li></ul></li><li>RoboHarm provides published benchmark results, while the proposed interventions still need testing.</li><li>The Sage Plant is the featured proposed pilot. Other pilots are illustrative examples, and none has been run.</li></ul>';
+    return '<ul class="about-data-copy about-data-list"><li>The map links reported incidents to capabilities and evaluations to investigate possible gaps in coverage.<ul><li>Back\\Drive focuses the same map on robotics, with connections proposed for review.</li></ul></li><li>RoboHarm provides published benchmark results, while the proposed interventions still need testing.</li><li>The Sage Plant’s featured proposal covers Dusty and Derutu. Other pilots are illustrative, and no field results are recorded here.</li></ul>';
   }
   function workspaceNotes() {
     const pilot=state.page==='pilots'?pilots.find(item=>item.id===state.pilot):null;
@@ -277,6 +288,7 @@
     if(action==='control'){state.control=el.dataset.id;shell();}
     if(action==='open-control'){state.control=el.dataset.id;dialog.close();navigate('safeguards');}
     if(action==='pilot'){state.pilot=el.dataset.id;shell();}
+    if(action==='pilot-project'){const p=pilots.find(item=>item.id===state.pilot);if(p?.projects?.some(item=>item.id===el.dataset.id)){state.pilotProject=el.dataset.id;shell();document.querySelector('[data-action="pilot-project"][data-id="'+state.pilotProject+'"]').focus({preventScroll:true});}}
   });
   document.addEventListener('input',event => {if(event.target.id==='record-search'){state.query=event.target.value;refreshRecords();}});
   document.addEventListener('change',event => {
@@ -294,5 +306,9 @@
     i=event.key==='Home'?0:event.key==='End'?3:(i+(event.key==='ArrowRight'?1:3))%4;
     openRecord(state.selected,tabs[i]);dialog.querySelector('[role="tab"][data-detail="'+tabs[i]+'"]').focus();
   });
+  const requestedPilot=new URLSearchParams(location.search).get('pilot');
+  if(pilots.find(p=>p.id==='construction').projects.some(p=>p.id===requestedPilot)){
+    state.mode='robotics';state.page='pilots';state.pilotProject=requestedPilot;
+  }
   shell();
 })();
