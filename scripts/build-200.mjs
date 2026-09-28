@@ -75,7 +75,6 @@ for (const [relative, hash] of Object.entries(delivery.files)) {
     html = html.replace('</head>', '<meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="same-origin"><script type="module" src="/200/session.mjs"></script></head>');
     const actions = '<div class="appbar-actions">';
     if (!html.includes(actions)) throw new Error(`Missing app navigation: ${name}`);
-    html = html.replace(actions, actions + '<a href="/200/" aria-label="All experiments">200</a><button type="button" data-lock style="font:inherit;border:0;background:none;color:inherit;cursor:pointer;padding:6px">Lock</button>');
     bytes = Buffer.from(html);
   }
   const ext = path.extname(name).toLowerCase();
