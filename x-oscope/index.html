@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="stpa.css?v=20260922.1">
   <link rel="stylesheet" href="controls.css?v=20260922.1">
   <link rel="stylesheet" href="families.css?v=20260922.1">
+  <link rel="stylesheet" href="mvp.css?v=20260928.1">
   <script src="data.js?v=20260922.1" defer></script>
   <script src="stpa-data.js?v=20260922.1" defer></script>
   <script src="stpa.js?v=20260922.1" defer></script>
@@ -19,7 +20,11 @@
   <script src="visual.js?v=20260922.1" defer></script>
   <script src="families.js?v=20260922.1" defer></script>
   <script src="scenarios.js?v=20260922.1" defer></script>
-  <script src="app.js?v=20260922.1" defer></script>
+  <script src="catalogue.js?v=20260928.1" defer></script>
+  <script src="case-events.js?v=20260928.1" defer></script>
+  <script src="mvp-data.js?v=20260928.1" defer></script>
+  <script src="mvp.js?v=20260928.1" defer></script>
+  <script src="app.js?v=20260928.1" defer></script>
 <link rel="canonical" href="https://petervartanian.xyz/x-oscope/">
 </head>
 <body>
@@ -33,11 +38,13 @@
   <section class="opening" aria-labelledby="opening-title">
     <h1 id="opening-title" aria-label="Incidents + x-risk"><span class="opening-display" aria-hidden="true"><span class="headline-line">Incidents</span><span class="headline-line headline-risk"><span class="headline-plus"><svg viewBox="0 0 64 80" aria-hidden="true" focusable="false"><path class="plus-ground" d="M4 12H60V68H4Z"/><path class="plus-sign" d="M29 24H35V37H48V43H35V56H29V43H16V37H29Z"/></svg></span><span class="risk-spectrum">x-risk</span></span></span></h1>
     <div class="opening-copy">
-      <p><span class="opening-premise">Recent incidents have exposed failures of control over autonomous AI.</span> <em class="opening-question">As governments experiment with safeguards and researchers examine pathways to catastrophe, what has prevented further escalation — and will those barriers withstand more capable AI?</em></p>
+      <p><span class="opening-premise">What can incidents tell us about existential risk?</span> <em class="opening-question">Follow a pathway, examine what actually happened, and ask which protections could withstand more capable AI.</em></p>
     </div>
   </section>
   </div>
 
+  <nav id="mvp-nav" class="mvp-nav" aria-label="Main navigation" hidden></nav>
+  <main id="mvp" hidden></main>
   <main id="app" hidden>
     <section class="chooser" aria-labelledby="choose-title">
       <h2 id="choose-title" class="section-heading" tabindex="-1"><span class="section-numeral" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle class="section-ring" cx="12" cy="12" r="11.25"/><g transform="translate(10.333333 7) scale(.8333333333)"><path d="M0 0h4v1H2.7v10H4v1h-4v-1H1.3V1H0Z"/></g></svg></span><span class="section-label">Choose a pathway</span></h2>

@@ -162,8 +162,8 @@ assert.deepEqual(JSON.parse(JSON.stringify(bundled.window.AuspexData)), {
   incidents, assessments, evidence, typology: catalogue.typology,
 });
 const html = await readFile(new URL('index.html', import.meta.url), 'utf8');
-assert(html.replace(/<[^>]+>/g, '').includes('Recent incidents have exposed failures of control over autonomous AI.'));
-assert(html.includes('<em class="opening-question">As governments experiment with safeguards and researchers examine pathways to catastrophe, what has prevented further escalation — and will those barriers withstand more capable AI?</em>'));
+assert(html.replace(/<[^>]+>/g, '').includes('What can incidents tell us about existential risk?'));
+assert(html.includes('ask which protections could withstand more capable AI.'));
 assert.equal(catalogue.groups.find(g => g.id === 'F').shortTitle, 'Informational ecosystems');
 const app = await readFile(new URL('app.js', import.meta.url), 'utf8');
 for (const label of ['Choose a pathway', 'Trace the incidents', 'Inspect the barrier']) assert(html.includes(label));

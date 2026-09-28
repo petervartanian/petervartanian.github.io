@@ -1991,4 +1991,13 @@ ontology.scopes.inventory='852 explorable events: 832 canonical events plus 20 w
   window.HaruspexArrival?.init({events, palette:visualData.groups.map(group => group.fill), colorOf:event => eventStyle(event).fill});
   updateSeverityOptions(); renderWorkstreamLegend(); syncControls(); drawCosmos(); refresh(); syncScroll(); $('#bowtie-tab').tabIndex = -1; $('#cast-tab').tabIndex = -1; $('#scene').dataset.view = 'stream';
   scrollGateway=window.HaruspexArrival?.mountGateway({scene:$('#scene'),getPoints:currentPositions,paintPoint:(ctx,point,x,y,alpha)=>shape(ctx,point.event,x,y,point.radius,alpha),isReading:()=>state.view==='cast'});
+  // Curated comparisons can cite one source record without losing its wider context.
+  const linkedEvent = new URLSearchParams(location.search).get('event');
+  if (linkedEvent) {
+    if (eventMap.has(linkedEvent)) requestAnimationFrame(() => {
+      enterField();
+      selectEvent(linkedEvent, { reveal: true });
+    });
+    else notify('That event is not in this inventory. Browse or search the available records.');
+  }
 })();

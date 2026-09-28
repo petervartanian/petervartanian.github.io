@@ -1,6 +1,8 @@
 (() => {
   'use strict';
 
+  if (window.XoscopeMVP?.active) return;
+
   const data = window.AuspexData;
   if (!data?.pathways?.length) return;
 
