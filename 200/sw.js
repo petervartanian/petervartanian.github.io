@@ -43,7 +43,7 @@ async function settingsFile() {
   return settings;
 }
 
-async function getSession() {
+async function getSession(refresh = false) {
   if (!sessionPromise) {
     const currentGeneration = generation;
     sessionPromise = (async () => {
@@ -57,6 +57,16 @@ async function getSession() {
     })().catch(() => null);
   }
   const session = await sessionPromise;
+  // A new encrypted deployment needs a fresh unlock, even in an open tab.
+  if (refresh && session && session.expires > Date.now()) {
+    const settings = await settingsFile();
+    if (settings.manifest !== session.manifest) {
+      generation += 1;
+      sessionPromise = Promise.resolve(null);
+      await sessionStore('delete');
+      return null;
+    }
+  }
   return session && session.expires > Date.now() ? session : null;
 }
 
@@ -108,7 +118,7 @@ self.addEventListener('message', event => {
 });
 
 async function servePrivate(request, path) {
-  const session = await getSession();
+  const session = await getSession(request.mode === 'navigate');
   if (!session) {
     if (request.mode === 'navigate') {
       if (path === 'index.html') return fetch(request, { cache: 'no-store' });

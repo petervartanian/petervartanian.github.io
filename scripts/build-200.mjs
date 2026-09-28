@@ -14,7 +14,7 @@ const source = path.resolve(argument('--arcolens-source'));
 const delivery = JSON.parse(await readFile(argument('--delivery-manifest'), 'utf8'));
 const password = readFileSync(0, 'utf8').replace(/\r?\n$/, '');
 if (!password || password.length > 1024) throw new Error('A password is required on standard input.');
-const output = path.join(root, '200/vault');
+const output = args.includes('--output') ? path.resolve(argument('--output')) : path.join(root, '200/vault');
 await mkdir(output, { recursive: true });
 const salt = randomBytes(32);
 const iterations = 600000;
@@ -40,7 +40,9 @@ async function resource(name, content, type, download) {
   if (download) files[name].download = download;
 }
 
-const lens = await readFile(path.join(path.dirname(source), 'v2/review/presentation-source/brand-mark.svg'), 'utf8');
+const lensPath = args.includes('--brand-mark') ? path.resolve(argument('--brand-mark')) : path.join(path.dirname(source), 'v2/review/presentation-source/brand-mark.svg');
+const lens = await readFile(lensPath, 'utf8');
+const styleVersion = digest(await readFile(path.join(root, '200/entry.css'))).slice(0, 12);
 const marks = {
   arcolens: lens,
   x: '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 8 32 32M32 8 8 32" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="20" cy="20" r="9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>',
@@ -58,7 +60,7 @@ const tools = [
 for (const [, url] of tools.slice(1)) await readFile(path.join(root, url, 'index.html'));
 const links = tools.map(([title, url, description, mark, color]) => `<li><a class="experiment-link" href="${url}" style="--accent:${color}"><span class="experiment-mark" aria-hidden="true">${marks[mark]}</span><span><h2>${title}</h2><p>${description}</p></span><span class="open-arrow" aria-hidden="true">↗</span></a></li>`).join('\n');
 const catalog = `<!doctype html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="same-origin"><title>200 — Experiments</title><link rel="icon" href="/favicon.ico"><link rel="stylesheet" href="/assets/css/personal.css"><link rel="stylesheet" href="/200/entry.css"><script type="module" src="/200/session.mjs"></script></head><body data-page="experiments"><a class="skip" href="#main">Skip to content</a><div class="page"><header><p class="site-name"><a href="/">Peter H. Vartanian</a></p><button class="lock-link" data-lock type="button">Lock</button></header><main id="main"><div class="entry-heading"><h1><span class="status-code" aria-label="200"><span>2</span><span>0</span><span>0</span></span><span class="section-name">Experiments</span></h1></div><ul class="experiment-list">${links}</ul></main><footer><a href="/">Back to the main site</a></footer></div></body></html>`;
-await resource('index.html', Buffer.from(catalog), 'text/html; charset=utf-8');
+await resource('index.html', Buffer.from(catalog.replace('/200/entry.css"', `/200/entry.css?v=${styleVersion}"`)), 'text/html; charset=utf-8');
 
 let originalFiles = 0;
 for (const [relative, hash] of Object.entries(delivery.files)) {
@@ -68,7 +70,7 @@ for (const [relative, hash] of Object.entries(delivery.files)) {
   let bytes = await readFile(path.join(source, name));
   if (digest(bytes) !== hash) throw new Error(`Source checksum changed: ${name}`);
   originalFiles += 1;
-  if (name.endsWith('.html') && !name.startsWith('downloads/')) {
+  if (name.endsWith('.html') && !name.split('/').includes('downloads')) {
     let html = bytes.toString('utf8');
     html = html.replace('</head>', '<meta name="robots" content="noindex, nofollow, noarchive"><meta name="referrer" content="same-origin"><script type="module" src="/200/session.mjs"></script></head>');
     const actions = '<div class="appbar-actions">';
@@ -77,7 +79,7 @@ for (const [relative, hash] of Object.entries(delivery.files)) {
     bytes = Buffer.from(html);
   }
   const ext = path.extname(name).toLowerCase();
-  const download = name.startsWith('downloads/') ? path.basename(name) : null;
+  const download = name.split('/').includes('downloads') ? path.basename(name) : null;
   await resource('arcolens/' + name, bytes, media[ext] || 'application/octet-stream', download);
 }
 const manifest = Buffer.from(JSON.stringify({ version: 1, files }));

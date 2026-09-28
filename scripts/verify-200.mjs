@@ -7,7 +7,8 @@ import { fileURLToPath } from 'node:url';
 import { deriveKey, unpackFile } from '../200/vault-core.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const vault = path.join(root, '200/vault');
+const args = process.argv.slice(2);
+const vault = args.includes('--vault') ? path.resolve(args[args.indexOf('--vault') + 1]) : path.join(root, '200/vault');
 const password = readFileSync(0, 'utf8').replace(/\r?\n$/, '');
 const settings = JSON.parse(await readFile(path.join(vault, 'settings.json'), 'utf8'));
 const key = await deriveKey(password, settings);

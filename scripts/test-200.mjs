@@ -73,7 +73,7 @@ function worker(state = {}) {
   const fetch = async (value, options) => {
     const url = new URL(typeof value === 'string' ? value : value.url, origin);
     requests.push(url.pathname);
-    if (url.pathname === '/200/vault/settings.json') return Response.json(settings);
+    if (url.pathname === '/200/vault/settings.json') return Response.json(state.serverSettings || settings);
     if (url.pathname.startsWith('/200/vault/')) {
       const bytes = payloads.get(url.pathname.split('/').at(-1));
       return bytes ? new Response(bytes) : new Response('Missing', { status: 404 });
@@ -169,6 +169,18 @@ test('logout clears persisted access and returns only experiment tabs to the gat
   assert.deepEqual(instance.navigations, ['/200/']);
   assert.equal((await instance.message('status')).unlocked, false);
   assert.equal((await instance.request('/200/arcolens/downloads/data.csv', 'cors')).status, 401);
+});
+
+test('new deployment returns an open tab to the unlock page before fetching obsolete files', async () => {
+  const instance = worker();
+  await instance.message('unlock', { password });
+  assert.equal((await instance.request('/200/arcolens/')).status, 200);
+  instance.state.serverSettings = { ...settings, manifest: 'e'.repeat(64) + '.bin' };
+  const response = await instance.request('/200/arcolens/');
+  assert.equal(response.status, 302);
+  assert.match(response.headers.get('location'), /next=/);
+  assert.equal(instance.state.value, undefined);
+  assert.equal((await instance.message('status')).unlocked, false);
 });
 
 test('the worker leaves public site routes alone and ignores messages from other pages', async () => {
