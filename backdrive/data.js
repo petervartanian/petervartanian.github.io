@@ -1,4 +1,4 @@
-/* Sourced incidents; proposed evaluation mappings; one labelled fictional scenario. */
+/* Public source mappings and proposed comparisons; no new field results. */
 window.BACKDRIVE_DATA = {
   "schemaVersion": "backdrive-prototype/3.1",
   "snapshot": "25 September 2026",
@@ -692,6 +692,157 @@ window.BACKDRIVE_DATA = {
       "sourceLabel": "AIID",
       "sourceRecordId": "1421",
       "recordType": "incident"
+    },
+    {
+      "id": "WA-LGV-2015",
+      "title": "Forklift restarts during obstruction removal",
+      "date": "9 Dec 2015",
+      "domain": "Warehouse robotics",
+      "robotics": true,
+      "roboticsRelation": "Physical hazard proxy; AI involvement is not established.",
+      "kind": "Hazard proxy",
+      "recordType": "proxy",
+      "state": "Proposed mapping",
+      "tone": "amber",
+      "source": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf",
+      "sourceName": "Washington FACE",
+      "sourceLabel": "WA FACE",
+      "sourceKey": "wa-face",
+      "sourceRecordId": "71-171-2018s",
+      "summary": "A worker died beneath the forks of a laser-guided vehicle. Investigators believe removing plastic from its sensor field triggered automatic operation while he remained outside that field. The emergency stop had not been engaged.",
+      "capability": "Stop and restart control",
+      "capabilityKind": "Equipment function",
+      "secondary": "Restart with a person outside the sensor field",
+      "capabilityBasis": "The account distinguishes an obstacle-triggered pause from an emergency stop requiring manual reset. It does not establish an AI failure.",
+      "failure": "Restart with a person outside the sensor field",
+      "test": "Restart and isolation review",
+      "testDetail": "Proxy assessment",
+      "testState": "No equipment results",
+      "relation": "Mechanism-level proxy, not an incident involving the equipment under consideration.",
+      "hasResults": false,
+      "connection": "The shared question is whether clearing an obstruction can authorize motion while a person remains exposed. The stopping method covers deceleration only; it does not test safe restart.",
+      "missing": "Actual sensor coverage, restart logic, machine configuration, and a qualified assessment.",
+      "decision": "Review stop states and restart authorization against the equipment manual, then have a competent assessor verify the sequence using an approved procedure without human exposure.",
+      "controlId": "protective-stop",
+      "nextTest": "Review stop states and restart authorization against the equipment manual, then have a competent assessor verify the sequence using an approved procedure without human exposure.",
+      "evalIds": [
+        "restart-review",
+        "astm-stopping"
+      ],
+      "sourceNotes": [
+        {
+          "label": "Incident source",
+          "type": "Reported",
+          "url": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf",
+          "description": "Preliminary FACE account, not a final causal determination."
+        },
+        {
+          "label": "Mapping",
+          "type": "Proxy",
+          "description": "A proposed comparison of physical mechanisms. AI involvement and transfer to another machine are not established."
+        }
+      ],
+      "code": "16"
+    },
+    {
+      "id": "WA-DEMO-2019",
+      "title": "Remote control activates during cable handling",
+      "date": "Date not stated; alert published 2019",
+      "domain": "Construction equipment",
+      "robotics": true,
+      "roboticsRelation": "Physical hazard proxy; AI involvement is not established.",
+      "kind": "Hazard proxy",
+      "recordType": "proxy",
+      "state": "Proposed mapping",
+      "tone": "amber",
+      "source": "https://lni.wa.gov/safety-health/safety-research/files/2019/DemolitionRobotAlert.pdf",
+      "sourceName": "Washington FACE",
+      "sourceLabel": "WA FACE",
+      "sourceKey": "wa-face",
+      "sourceRecordId": "47-26-2019, first case",
+      "summary": "A demolition-robot operator was pinned against a wall after bumping his waist-mounted controller while moving a power cable. The machine was not in emergency-stop mode.",
+      "capability": "Stop and restart control",
+      "capabilityKind": "Equipment function",
+      "secondary": "Unintended command during close access",
+      "capabilityBasis": "This is a remote-control and access hazard, not evidence of autonomous decision-making.",
+      "failure": "Unintended command during close access",
+      "test": "Restart and isolation review",
+      "testDetail": "Proxy assessment",
+      "testState": "No equipment results",
+      "relation": "Mechanism-level proxy, not an incident involving the equipment under consideration.",
+      "hasResults": false,
+      "connection": "Cable handling and close access can overlap with enabled motion. This supports examining control placement and isolation before servicing another machine.",
+      "missing": "The proposed machine’s controller, access zones, stored energy, and isolation procedure.",
+      "decision": "Assess access and control states with the supplier and a competent safety assessor. Validate an approved isolation procedure before close access.",
+      "controlId": "protective-stop",
+      "nextTest": "Assess access and control states with the supplier and a competent safety assessor. Validate an approved isolation procedure before close access.",
+      "evalIds": [
+        "restart-review"
+      ],
+      "sourceNotes": [
+        {
+          "label": "Incident source",
+          "type": "Reported",
+          "url": "https://lni.wa.gov/safety-health/safety-research/files/2019/DemolitionRobotAlert.pdf",
+          "description": "Preliminary FACE account, not a final causal determination."
+        },
+        {
+          "label": "Mapping",
+          "type": "Proxy",
+          "description": "A proposed comparison of physical mechanisms. AI involvement and transfer to another machine are not established."
+        }
+      ],
+      "code": "17"
+    },
+    {
+      "id": "OSHA-99025",
+      "title": "Plaster-pump hose ruptures",
+      "date": "25 Jul 2017",
+      "domain": "Wall finishing",
+      "robotics": true,
+      "roboticsRelation": "Physical hazard proxy; AI involvement is not established.",
+      "kind": "Hazard proxy",
+      "recordType": "proxy",
+      "state": "Proposed mapping",
+      "tone": "amber",
+      "source": "https://www.osha.gov/ords/imis/accidentsearch.accident_detail?id=99025.015",
+      "sourceName": "OSHA accident summary",
+      "sourceLabel": "OSHA",
+      "sourceKey": "osha",
+      "sourceRecordId": "99025.015",
+      "summary": "A worker was hospitalized after a plaster-pump hose ruptured and struck him at a residential construction site. OSHA identifies a plaster blockage as a possible cause.",
+      "capability": "Pressure-system integrity",
+      "capabilityKind": "Equipment function",
+      "secondary": "Uncontrolled release from a pressurized hose",
+      "capabilityBasis": "Pressure containment is an equipment function. The report does not identify a robot or AI system.",
+      "failure": "Uncontrolled release from a pressurized hose",
+      "test": "Pressure-system review",
+      "testDetail": "Proxy assessment",
+      "testState": "No equipment results",
+      "relation": "Mechanism-level proxy, not an incident involving the equipment under consideration.",
+      "hasResults": false,
+      "connection": "Pumped plaster and mortar equipment share hoses, couplings, and stored pressure. Transfer depends on the actual material, pressure ratings, and configuration.",
+      "missing": "Manufacturer ratings, maintenance records, compatible components, and equipment-specific inspection findings.",
+      "decision": "Have a qualified person assess the complete pressure system and the manufacturer’s isolation procedure. Do not create a blockage or exceed operating limits to reproduce the incident.",
+      "controlId": "energy-isolation",
+      "nextTest": "Have a qualified person assess the complete pressure system and the manufacturer’s isolation procedure. Do not create a blockage or exceed operating limits to reproduce the incident.",
+      "evalIds": [
+        "pressure-review"
+      ],
+      "sourceNotes": [
+        {
+          "label": "Incident source",
+          "type": "Reported",
+          "url": "https://www.osha.gov/ords/imis/accidentsearch.accident_detail?id=99025.015",
+          "description": "Accident summary. A blockage is reported as a possible cause, not an established finding."
+        },
+        {
+          "label": "Mapping",
+          "type": "Proxy",
+          "description": "A proposed comparison of physical mechanisms. AI involvement and transfer to another machine are not established."
+        }
+      ],
+      "code": "18"
     }
   ],
   "controls": [
@@ -847,6 +998,23 @@ window.BACKDRIVE_DATA = {
       "protocol": "Use an agreed simulation model of driver state and roadway conditions. Compare detection, warnings, and fallback decisions. No live-road test is proposed here.",
       "residual": "Detecting disengagement does not guarantee a safe handover. Driver behavior, operating limits, and roadway conditions remain relevant.",
       "context": "Partial driving automation that requires active human supervision."
+    },
+    {
+      "id": "energy-isolation",
+      "name": "Energy isolation",
+      "category": "Equipment access",
+      "caseId": "OSHA-99025",
+      "question": "Is hazardous energy controlled before access, cleaning, or maintenance?",
+      "baseline": "Document the existing approved procedure and its verification records.",
+      "comparison": "Add a documented check of energy sources, isolation state, and restart authorization.",
+      "protocol": "Use records review and a qualified assessment under the manufacturer’s procedure. Compare missed checks and procedure completion without exposing anyone to an unprotected system.",
+      "measures": [
+        "Unidentified energy sources",
+        "Missed verification steps",
+        "Unauthorized restarts"
+      ],
+      "context": "Pumps, hoses, drives, and other components that can retain hazardous energy.",
+      "residual": "Isolation does not establish material quality, task accuracy, or safe operation after restarting."
     }
   ],
   "models": [
@@ -981,6 +1149,95 @@ window.BACKDRIVE_DATA = {
         "AIID-1424"
       ],
       "status": "Published benchmark"
+    },
+    {
+      "id": "nist-navigation",
+      "name": "NIST navigation accuracy",
+      "environment": "Mobile robots",
+      "focus": "Position measured against independent ground truth",
+      "source": "https://www.nist.gov/publications/navigation-performance-evaluation-automated-guided-vehicles",
+      "description": "Published AGV research compares navigation with an external position reference. The method can inform an independent check of a layout robot’s position.",
+      "measures": [
+        "Position error",
+        "Path-following error",
+        "Repeatability"
+      ],
+      "limits": "A method proxy. Vehicle position is not the same as printed-line accuracy. It does not verify the building model or establish results for a construction robot.",
+      "caseIds": [],
+      "status": "Published method"
+    },
+    {
+      "id": "astm-stopping",
+      "name": "ASTM F3265 stopping response",
+      "environment": "Automated ground vehicles",
+      "focus": "Response to an obstacle inside the stopping range",
+      "source": "https://store.astm.org/f3265-17r23.html",
+      "description": "The published scope measures vehicle energy reduction when a test object enters its path and the intended response is to stop.",
+      "measures": [
+        "Response distance",
+        "Stopping behavior",
+        "Kinetic-energy reduction"
+      ],
+      "limits": "A stopping proxy only. It does not evaluate restart authorization, load stability, or construction-layout accuracy, and does not replace required safety testing. No construction-equipment results are recorded here.",
+      "caseIds": [
+        "WA-LGV-2015"
+      ],
+      "status": "Published test method"
+    },
+    {
+      "id": "layout-control",
+      "name": "FieldPrinter control checks",
+      "environment": "Layout robots",
+      "focus": "Survey control and tracker verification",
+      "source": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs",
+      "description": "Dusty describes comparing measured and modeled control points during stationing and using a verification reflector to detect tracker movement.",
+      "measures": [
+        "Control-point residuals",
+        "Tracker-movement alert",
+        "Independent output check"
+      ],
+      "limits": "Manufacturer guidance, not an independent benchmark. The output check is an additional proposed comparison. Matching the model does not establish that the model itself is correct.",
+      "caseIds": [],
+      "status": "Manufacturer method"
+    },
+    {
+      "id": "restart-review",
+      "name": "Restart and isolation review",
+      "environment": "Equipment controls",
+      "focus": "Access, stopped states, and permission to resume",
+      "source": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf",
+      "description": "A proposed assessment informed by the FACE incident: identify the machine’s stop states, establish who can reset them, and verify the approved access and restart sequence.",
+      "measures": [
+        "Reset authorization",
+        "State indication",
+        "Access protection",
+        "Restart sequence"
+      ],
+      "limits": "A proposed review, not a published benchmark or a demonstration that a safeguard works. Equipment-specific procedures and a competent assessor are required.",
+      "caseIds": [
+        "WA-LGV-2015",
+        "WA-DEMO-2019"
+      ],
+      "status": "Proposed review"
+    },
+    {
+      "id": "pressure-review",
+      "name": "Pressure-system review",
+      "environment": "Pumping equipment",
+      "focus": "Component compatibility and stored pressure",
+      "source": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
+      "description": "A proposed equipment review drawing on WorkSafe’s concrete-pumping alert: compare component ratings, inspection records, maintenance, and operator preparation.",
+      "measures": [
+        "Rating compatibility",
+        "Inspection findings",
+        "Maintenance records",
+        "Isolation procedure"
+      ],
+      "limits": "Concrete pumping is a proxy for mortar or plaster systems. This is guidance-based review, not a scored benchmark, a certification, or evidence about a particular machine’s performance.",
+      "caseIds": [
+        "OSHA-99025"
+      ],
+      "status": "Proposed review"
     }
   ],
   "roboharmTasks": [
@@ -1172,8 +1429,18 @@ window.BACKDRIVE_DATA = {
       "partner": "—",
       "status": "Illustrative",
       "featured": false,
-      "caseIds": [],
-      "evalIds": [],
+      "caseIds": [
+        "WA-LGV-2015",
+        "WA-DEMO-2019",
+        "OSHA-99025"
+      ],
+      "evalIds": [
+        "nist-navigation",
+        "astm-stopping",
+        "layout-control",
+        "restart-review",
+        "pressure-review"
+      ],
       "description": "",
       "question": "How reliably does the equipment perform the task and respond when conditions change?",
       "controls": [
@@ -1193,8 +1460,138 @@ window.BACKDRIVE_DATA = {
         "Acceptance criteria",
         "Qualified review"
       ],
-      "evidence": "No field results recorded.",
-      "note": "An illustrative construction example. No participating organization is identified."
+      "evidence": "No field measurements are recorded.",
+      "note": "An illustrative construction example. No participating organization is identified.",
+      "projects": [
+        {
+          "id": "layout",
+          "label": "Layout",
+          "evidenceLinks": [
+            {
+              "capability": "Position and layout accuracy",
+              "url": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs",
+              "label": "FieldPrinter specifications",
+              "kind": "Manufacturer source",
+              "evalIds": [
+                "nist-navigation",
+                "layout-control"
+              ],
+              "transfer": "Compare the robot’s position and printed output with an independent reference.",
+              "limit": "Navigation error and print error must be measured separately. Neither verifies the design."
+            },
+            {
+              "capability": "Obstacle detection and stopping",
+              "caseId": "WA-LGV-2015",
+              "kind": "Incident proxy",
+              "evalIds": [
+                "astm-stopping"
+              ],
+              "transfer": "Examine where the machine detects an obstacle and how it stops.",
+              "limit": "A forklift has different mass, sensing, and motion. Its incident does not establish a layout-robot fault."
+            },
+            {
+              "capability": "Controlled restart",
+              "caseId": "WA-DEMO-2019",
+              "kind": "Incident proxy",
+              "evalIds": [
+                "restart-review"
+              ],
+              "transfer": "Check whether close access or handling cables can coincide with enabled motion.",
+              "limit": "The demolition machine was remotely controlled. Transfer requires reviewing the actual controller and stop states."
+            }
+          ],
+          "checks": [
+            [
+              "Independent survey check",
+              "Compare selected printed points with a reference established independently of the robot.",
+              "Maximum and typical error, out-of-tolerance points, rework"
+            ],
+            [
+              "Obstacle and restart checks",
+              "Have a qualified assessor check stopping and restart states with safe test objects under an approved procedure.",
+              "Stop distance, missed detections, unauthorized restarts"
+            ],
+            [
+              "Matched task comparison",
+              "Compare robot-assisted and existing layout on equivalent work, including setup and checking.",
+              "Accepted output per labor-hour, corrections, interruptions"
+            ]
+          ],
+          "readout": [
+            "Independent position and print measurements",
+            "Stop and restart observations",
+            "Accepted output, labor time, and rework"
+          ],
+          "required": [
+            "A defined equipment configuration and operating area",
+            "Survey reference, task scope, and acceptance tolerances",
+            "Qualified approval of the safety-check procedure"
+          ]
+        },
+        {
+          "id": "wall-finishing",
+          "label": "Wall finishing",
+          "evidenceLinks": [
+            {
+              "capability": "Pressure-system integrity",
+              "caseId": "OSHA-99025",
+              "kind": "Incident proxy",
+              "evalIds": [
+                "pressure-review"
+              ],
+              "transfer": "Review pressure ratings, compatible hoses and couplings, inspection, and maintenance.",
+              "limit": "The incident involved a conventional plaster pump. No robot or AI failure was identified."
+            },
+            {
+              "capability": "Control of unintended motion",
+              "caseId": "WA-DEMO-2019",
+              "kind": "Incident proxy",
+              "evalIds": [
+                "restart-review"
+              ],
+              "transfer": "Review controls and access around cables, moving parts, and confined work areas.",
+              "limit": "The demolition machine’s mechanism and stored energy differ from finishing equipment."
+            },
+            {
+              "capability": "Controlled restart",
+              "caseId": "WA-LGV-2015",
+              "kind": "Incident proxy",
+              "evalIds": [
+                "restart-review"
+              ],
+              "transfer": "Check whether clearing a fault can cause operation to resume before the area is clear.",
+              "limit": "Forklift behavior is a prompt for review, not evidence that another machine restarts automatically."
+            }
+          ],
+          "checks": [
+            [
+              "Compatibility and inspection",
+              "A qualified reviewer checks the complete pump, hose, material, and power configuration against supplier requirements.",
+              "Ratings, inspection findings, unresolved incompatibilities"
+            ],
+            [
+              "Isolation and operator qualification",
+              "Review the approved cleaning, access, fault-response, and restart procedures with the operator.",
+              "Missed steps, ambiguous states, intervention records"
+            ],
+            [
+              "Finish-quality comparison",
+              "Compare equivalent trial areas with the existing method using a predefined acceptance rubric.",
+              "Accepted area per labor-hour, thickness and flatness, waste, rework"
+            ]
+          ],
+          "readout": [
+            "Component and inspection records",
+            "Operator and fault-response observations",
+            "Accepted finish, labor time, waste, and rework"
+          ],
+          "required": [
+            "Confirmed equipment and material specifications",
+            "Qualified commissioning and operator assessment",
+            "Surface-quality criteria and an equivalent comparison area"
+          ]
+        }
+      ]
     },
     {
       "id": "handling",

@@ -115,5 +115,57 @@
     "note": "Transcribed from the published 15-row Results table; Refused includes non-safety refusals. No new experiments were run."
   },
   "note": "Source names identify the publication used, not exclusive database membership. CRUISE-2023, WAYMO-2024, and APPLE-2024 are local event references; recall references are not incident IDs. New events were located online, independently of the consultation corpus.",
-  "pilotsUpdated": "2026-09-28"
+  "pilotsUpdated": "2026-09-28",
+  "mappingsUpdated": "2026-09-28",
+  "proxyIncidents": [
+    {
+      "id": "WA-LGV-2015",
+      "source": "WA FACE",
+      "sourceRecordId": "71-171-2018s",
+      "url": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf",
+      "aiInvolvement": "Not established"
+    },
+    {
+      "id": "WA-DEMO-2019",
+      "source": "WA FACE",
+      "sourceRecordId": "47-26-2019, first case",
+      "url": "https://lni.wa.gov/safety-health/safety-research/files/2019/DemolitionRobotAlert.pdf",
+      "aiInvolvement": "Not established"
+    },
+    {
+      "id": "OSHA-99025",
+      "source": "OSHA",
+      "sourceRecordId": "99025.015",
+      "url": "https://www.osha.gov/ords/imis/accidentsearch.accident_detail?id=99025.015",
+      "aiInvolvement": "Not established"
+    }
+  ],
+  "evaluationMethods": [
+    {
+      "id": "nist-navigation",
+      "url": "https://www.nist.gov/publications/navigation-performance-evaluation-automated-guided-vehicles",
+      "type": "Published method"
+    },
+    {
+      "id": "astm-stopping",
+      "url": "https://store.astm.org/f3265-17r23.html",
+      "type": "Published test method"
+    },
+    {
+      "id": "layout-control",
+      "url": "https://support.dustyrobotics.com/hc/en-us/articles/52682349645851-FieldPrinter-Specs",
+      "type": "Manufacturer method"
+    },
+    {
+      "id": "restart-review",
+      "url": "https://lni.wa.gov/safety-health/safety-research/files/2018/workercrushedbylgvforksslideshow.pdf",
+      "type": "Proposed review"
+    },
+    {
+      "id": "pressure-review",
+      "url": "https://www.worksafe.govt.nz/about-us/news-and-media/concrete-pumping/",
+      "type": "Proposed review"
+    }
+  ],
+  "mappingNote": "The construction links are proposed mechanism-level comparisons. None records a test of the equipment discussed in a pilot. Published methods, manufacturer guidance, and proposed reviews have separate labels."
 }
