@@ -22,12 +22,8 @@ jobs:
         run: python validate.py
       - name: Verify encrypted experiment access
         run: node --test scripts/test-200.mjs
-      - name: Verify X-oscope addresses and cross-references
-        run: node x-oscope/validate-addresses.mjs
-      - name: Verify scenario nesting and case navigation
-        run: |
-          node x-oscope/validate-scenarios.mjs
-          node x-oscope/validate-interactions.mjs
+      - name: Verify Correlator publication and experiment catalogue
+        run: node --test scripts/test-correlator.mjs
       - name: Verify natural shake gestures
         run: node scripts/test_mobile_shake.cjs
       - name: Check generated pages are current

@@ -1,3 +1,14 @@
+// Update older encrypted catalogues without repackaging unrelated private research.
+for (const link of document.querySelectorAll('.experiment-list a[href="/x-oscope/"]')) {
+  link.href = '/correlator/';
+  link.style.setProperty('--accent', '#634178');
+  link.querySelector('h2').textContent = 'AI Risk Correlator';
+  link.querySelector('p').textContent = 'What do AI incidents tell us about existential risk?';
+  const mark = link.querySelector('.experiment-mark');
+  mark.textContent = 'AI';
+  mark.classList.add('experiment-monogram');
+}
+
 function ask(action) {
   return new Promise(resolve => {
     const worker = navigator.serviceWorker.controller;

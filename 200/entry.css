@@ -36,6 +36,7 @@ body[data-page=experiments]:not(.locked) footer{border-top:0}
 .experiment-mark svg{width:36px;height:36px;overflow:visible}
 .experiment-mark .wordmark-icon{width:38px;height:38px}
 .experiment-mark text{font-family:inherit}
+.experiment-monogram{font-size:24px;font-weight:600;letter-spacing:0}
 .open-arrow{font-size:23px;font-weight:400;color:var(--accent,var(--link));justify-self:end}
 .experiment-foot{font-size:12px;margin-top:22px;color:var(--quiet)}
 @media(max-width:600px){body[data-page=experiments] .page{width:calc(100% - 36px)}body[data-page=experiments] header{padding-top:24px}.site-name{font-size:23px!important}body[data-page=experiments] main{margin-top:32px}.experiment-link{grid-template-columns:34px minmax(0,1fr) 18px;gap:13px;padding:20px 0}.experiment-link h2{font-size:20px}.experiment-link p{font-size:12px}.experiment-mark svg{width:30px;height:30px}body.locked main{margin-top:56px}.entry-heading{margin-bottom:24px}.status-code{font-size:108px}}

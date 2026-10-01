@@ -45,14 +45,14 @@ const lens = await readFile(lensPath, 'utf8');
 const styleVersion = digest(await readFile(path.join(root, '200/entry.css'))).slice(0, 12);
 const marks = {
   arcolens: lens,
-  x: '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 8 32 32M32 8 8 32" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="20" cy="20" r="9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>',
+  correlator: '<span class="experiment-monogram" aria-hidden="true">AI</span>',
   haruspex: '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 29 12 12 22 25 32 7M12 12 32 7M22 25 35 33" fill="none" stroke="currentColor" stroke-width="1.4"/><g fill="currentColor"><circle cx="5" cy="29" r="2.5"/><circle cx="12" cy="12" r="3"/><circle cx="22" cy="25" r="3"/><circle cx="32" cy="7" r="2.5"/><circle cx="35" cy="33" r="2.5"/></g></svg>',
   agency: '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 31V12H17V31M17 31V6H28V31M28 31V20H36V31" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M3 34H38" stroke="currentColor" stroke-width="1.4"/></svg>',
   catalog: '<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M5 10H35M5 20H35M5 30H35M11 6V34M26 6V34" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="11" cy="10" r="3" fill="currentColor"/><circle cx="26" cy="20" r="3" fill="currentColor"/><circle cx="11" cy="30" r="3" fill="currentColor"/></svg>',
 };
 const tools = [
   ['Arcolens', '/200/arcolens/', 'AI incident findings, chart settings, and checks of published claims.', 'arcolens', '#216773'],
-  ['X-oscope', '/x-oscope/', 'Trace incident pathways, examine risks, and inspect proposed safeguards.', 'x', '#756184'],
+  ['AI Risk Correlator', '/correlator/', 'What do AI incidents tell us about existential risk?', 'correlator', '#634178'],
   ['Haruspex', '/haruspex/', 'Explore actions, decisions, and uncertainties in the OpenAI–Hugging Face incident.', 'haruspex', '#98664f'],
   ['Agency Costs', '/agency-costs/', 'Evidence packs, loss accounts, and tools for appraising AI-agent risk.', 'agency', '#537580'],
   ['Catalog of 1+2+3', '/backdrive/', 'Connect incidents, capabilities, and evaluations. Includes BackDrive for robotics.', 'catalog', '#85576e'],
