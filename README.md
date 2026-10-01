@@ -24,7 +24,7 @@ The build updates only the personal pages. Other applications in the repository 
 
 `/correlator/` contains the compiled AI Risk Correlator app, with its own namespaced assets and embeddable views. The source project is maintained separately; the personal-page build must not rewrite these files. The unpublished preprint PDF is not part of the public package. Draft citations point to the access-controlled Overleaf project.
 
-The former `/x-oscope/` and `/auspex/` applications have been removed; their entry pages redirect to `/correlator/`. Git history retains the previous versions. The `/200/` catalogue uses the new name and URL, including a presentation migration for previously encrypted catalogues. Its authentication and encrypted research resources are unchanged.
+The former `/x-oscope/` and `/auspex/` applications and their redirect pages have been removed. Both addresses return 404 and must not be recreated by site builds. The `/200/` catalogue uses the new name and URL, including a presentation migration for previously encrypted catalogues. Its authentication and encrypted research resources are unchanged.
 
 Shared links use four 1200 × 630 preview images with backgrounds matching their pages. The preview artwork can be regenerated with `scripts/preview_cards.py` (Pillow) and `scripts/render_preview_cards.cjs` (Sharp); these optional tools are not needed to build the site. Approved PNGs live in `assets/img/social-*.png`.
 

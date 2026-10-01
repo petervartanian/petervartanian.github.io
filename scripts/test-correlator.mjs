@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import vm from 'node:vm';
@@ -19,12 +19,11 @@ test('Correlator loads its compiled assets from its own subdirectory', () => {
   assert(existsSync(path.join(root, 'correlator/embed.js')));
 });
 
-test('unpublished research is excluded and the old applications are gone', () => {
+test('unpublished research is excluded and retired routes are absent', () => {
   assert(!existsSync(path.join(root, 'correlator/sources/ero-preprint.pdf')));
   assert(!existsSync(path.join(root, 'correlator/assets/preprint-page.png')));
   for (const directory of ['x-oscope', 'auspex']) {
-    assert.deepEqual(readdirSync(path.join(root, directory)), ['index.html']);
-    assert(read(`${directory}/index.html`).includes("location.replace('/correlator/')"));
+    assert(!existsSync(path.join(root, directory)), `Retired route must remain absent: /${directory}/`);
   }
 });
 
