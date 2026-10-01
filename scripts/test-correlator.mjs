@@ -35,7 +35,7 @@ test('existing encrypted catalogues display the new entry without changing sessi
   const timers = [];
   vm.runInNewContext(read('200/session.mjs'), {
     document: {
-      querySelectorAll(selector) { return selector === '.experiment-list a[href="/x-oscope/"]' ? [link] : []; },
+      querySelectorAll(selector) { return selector === '.experiment-list a[href="/x-oscope/"], .experiment-list a[href="/correlator/"]' ? [link] : []; },
       addEventListener(name) { events.push(name); },
     },
     window: { addEventListener(name) { events.push(name); } },
@@ -44,7 +44,7 @@ test('existing encrypted catalogues display the new entry without changing sessi
   assert.equal(link.href, '/correlator/');
   assert.equal(heading.textContent, 'AI Risk Correlator');
   assert.equal(description.textContent, 'What do AI incidents tell us about existential risk?');
-  assert.equal(style['--accent'], '#634178');
+  assert.equal(style['--accent'], '#5f4b8b');
   assert.equal(mark.textContent, 'AI');
   assert.deepEqual(events, ['pageshow', 'visibilitychange']);
   assert.deepEqual(timers, [60000]);

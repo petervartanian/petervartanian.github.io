@@ -52,7 +52,7 @@ const marks = {
 };
 const tools = [
   ['Arcolens', '/200/arcolens/', 'AI incident findings, chart settings, and checks of published claims.', 'arcolens', '#216773'],
-  ['AI Risk Correlator', '/correlator/', 'What do AI incidents tell us about existential risk?', 'correlator', '#634178'],
+  ['AI Risk Correlator', '/correlator/', 'What do AI incidents tell us about existential risk?', 'correlator', '#5f4b8b'],
   ['AI Control Monitor', '/monitor/', 'AI incident evidence, scenarios, and warning signs.', 'correlator', '#393939'],
   ['Haruspex', '/haruspex/', 'Explore actions, decisions, and uncertainties in the OpenAI–Hugging Face incident.', 'haruspex', '#98664f'],
   ['Agency Costs', '/agency-costs/', 'Evidence packs, loss accounts, and tools for appraising AI-agent risk.', 'agency', '#537580'],
