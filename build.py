@@ -128,7 +128,7 @@ mobile += '</g></g></g></svg></div></figure>'
 home = f'''<div class="introduction">
   <p>I am a pertinacious thinker-and-doer who hails from <a href="https://mapcarta.com/N1938447213">Weng</a>, a hamlet in the Tyrolean Alps of Austria.</p>
   <p>I studied diplomacy and world affairs alongside literature and culture at Occidental College in Los Angeles, with additional coursework at Caltech. My work has taken me to the world’s highest deliberative fora, <em>incl.</em> the UN.</p>
-  <p>I now live in Cambridge, Massachusetts. At <a href="https://airisk.mit.edu/">MIT’s AI Risk Initiative</a>, I lead the first ecosystem-wide study of how people interact with AI-incident data(bases). Separately, I work with a venture in stealth.</p>
+  <p>I now live in Cambridge, Massachusetts. At <a href="https://airisk.mit.edu/">MIT’s AI Risk Initiative</a>, I lead the first ecosystem-wide study of how people interact with AI-incident data(bases). I also contribute to an AI venture operating in stealth.</p>
   {mobile}
 </div>'''
 page('home', 'Home', 'Research and writing by Peter H. Vartanian.', home, '/')
@@ -219,7 +219,9 @@ def institution_honors(institution, academic=False):
         items = [item for item in items if item['title'].startswith('ΦBK') == academic]
     return ''.join(f'<li><span class="education-award"><span>{e(item["title"])}</span> <span class="education-award-date">{e(item["date"])}</span></span></li>' for item in items)
 
-experience = '<div class="experience-filter" hidden><label><input type="checkbox" id="primary-only" role="switch" aria-describedby="contribution-key"><span>Primary contributions only</span></label></div><h3>Current</h3><table class="cv-table experience-table" aria-label="Current experience and dates"><tbody>' + experience_rows(cv['experience'][:1]) + '</tbody></table><h3>Previous</h3><table class="cv-table experience-table" aria-label="Previous experience and dates"><tbody>' + experience_rows(cv['experience'][1:]) + '</tbody></table>'
+current_experience = [row for row in cv['experience'] if row['dates'].endswith('Present')]
+previous_experience = [row for row in cv['experience'] if not row['dates'].endswith('Present')]
+experience = '<div class="experience-filter" hidden><label><input type="checkbox" id="primary-only" role="switch" aria-describedby="contribution-key"><span>Primary contributions only</span></label></div><h3>Current</h3><table class="cv-table experience-table" aria-label="Current experience and dates"><tbody>' + experience_rows(current_experience) + '</tbody></table><h3>Previous</h3><table class="cv-table experience-table" aria-label="Previous experience and dates"><tbody>' + experience_rows(previous_experience) + '</tbody></table>'
 
 
 def cv_text(text):

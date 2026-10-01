@@ -23,12 +23,10 @@ PHRASE_BREAKS = {
 
 
 def add_institution_logos(markup):
-    def decorate(match, number=None):
+    def decorate(match):
         name = match[0]
         key = ALIASES[name]
         logo = LOGOS[key]
-        if number is not None:
-            name = f'({number}) {name}'
         if key == 'mckinnon':
             first, second = name.split(' &amp; ', 1)
             name = f'{first} &amp; <br><span class="institution-wide">{second}</span>'
@@ -41,16 +39,11 @@ def add_institution_logos(markup):
 
     parts = re.split(r'(<[^>]+>)', markup)
     for index in range(0, len(parts), 2):
-        if parts[index] == 'MIT AI Risk Initiative &amp; a venture in stealth':
-            institution, venture = parts[index].split(' &amp; ', 1)
-            institution = decorate(NAMES.fullmatch(institution), 1)
-            venture = f'<span class="institution-entry"><span class="institution-logo-slot" aria-hidden="true"></span><span class="institution-name"><span class="institution-text">(2) {venture}</span></span></span>'
-            parts[index] = f'{institution} &amp; {venture}'
+        if parts[index] == 'Stealth AI Research Lab':
+            parts[index] = f'<span class="institution-entry"><span class="institution-logo-slot" aria-hidden="true"></span><span class="institution-name"><span class="institution-text">{parts[index]}</span></span></span>'
         else:
             parts[index] = NAMES.sub(decorate, parts[index])
     result = ''.join(parts)
-    # Keep joint affiliations in the same row, with each name aligned to its mark.
-    result = result.replace('</span></span></span> &amp; <span class="institution-entry">', ' &amp;</span></span></span> <span class="institution-entry">')
     # Keep references immediately after the final name, outside its shaded text.
     result = re.sub(r'</span></span></span>(</span>)?(<sup>.*?</sup>)', lambda m: '</span>' + m[2] + '</span></span>' + (m[1] or ''), result)
     return result

@@ -10,7 +10,8 @@ https://petervartanian.xyz/cv/
 
 | Organization | Dates |
 | --- | --- |
-| **(1) MIT AI Risk Initiative; (2) a venture in stealth**[^i] | Jun. 2026 – Present |
+| **MIT AI Risk Initiative**[^i] | Jun. 2026 – Present |
+| **Stealth AI Research Lab** | Jun. 2026 – Present |
 
 ### Previous
 

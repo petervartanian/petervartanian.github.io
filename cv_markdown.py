@@ -34,7 +34,7 @@ def export_cv(html):
     html = re.sub(r'<table([^>]*)>(.*?)</table>', table, html, flags=re.S)
     html = re.sub(r'<h([1234])[^>]*>(.*?)</h\1>', lambda m: '\n\n' + '#' * int(m[1]) + ' ' + inline(m[2]) + '\n\n', html, flags=re.S)
     html = re.sub(r'<p[^>]*>(.*?)</p>', lambda m: '\n\n' + inline(m[1]) + '\n\n', html, flags=re.S)
-    text = inline(html).replace('MIT AI Risk Initiative & a venture in stealth', '(1) MIT AI Risk Initiative; (2) a venture in stealth')
+    text = inline(html)
     text = re.sub(r'\n[ \t]+', '\n', text)
     text = re.sub(r'\n{3,}', '\n\n', text)
     return text.replace('# Curriculum Vitæ', '# Peter H. Vartanian\n\nCurriculum Vitæ\n\nhttps://petervartanian.xyz/cv/', 1).strip() + '\n'
