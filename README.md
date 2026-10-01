@@ -28,6 +28,10 @@ The former `/x-oscope/` and `/auspex/` applications have been removed; their ent
 
 Shared links use four 1200 × 630 preview images with backgrounds matching their pages. The preview artwork can be regenerated with `scripts/preview_cards.py` (Pillow) and `scripts/render_preview_cards.cjs` (Sharp); these optional tools are not needed to build the site. Approved PNGs live in `assets/img/social-*.png`.
 
+## AI Control Monitor
+
+`/monitor/` contains the compiled AI Control Monitor app, with MIT and IST marks and IBM neutral gray colors. It is listed beside the Correlator in the encrypted `/200/` experiments catalogue. Its assets and embeds are namespaced to `/monitor/`, and the personal-page build leaves them intact. The source is maintained separately. The public package excludes the unpublished preprint PDF and preview; citations retain the access-controlled Overleaf link.
+
 ## 200
 
 `/200/` is an unlisted experiment directory. Its catalog and Arcolens resources are encrypted with AES-256-GCM before publication. The password derives a non-extractable browser key using PBKDF2-SHA-256 with a random 32-byte salt and 600,000 iterations. No password or plaintext Arcolens export is committed. The existing public tools retain their original direct URLs; inclusion in this directory does not make those older routes private.
