@@ -4,72 +4,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>AI Control Monitor | Embedded Views</title>
+    <title>Embedded views | AI Control Monitor</title>
     <style>
-      :root { color-scheme: light; font-family: Arial, sans-serif; color: #202124; background: #f3f4f4; letter-spacing: 0; }
+      @font-face { font-family: Figtree; src: url('./assets/figtree-latin.woff2') format('woff2'); font-style: normal; font-weight: 300 900; font-display: swap; }
+      :root { color-scheme: light; font-family: Figtree, Arial, sans-serif; color: #262626; background: #f4f4f4; }
       * { box-sizing: border-box; }
       body { margin: 0; }
       a { color: inherit; text-underline-offset: 3px; }
-      a:focus-visible { outline: 2px solid #202124; outline-offset: 4px; }
-      .page-heading { max-width: 1240px; margin: 0 auto; padding: 28px 28px 24px; display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-      h1 { margin: 0; font-size: 26px; line-height: 1.25; font-weight: 700; }
-      .page-heading a { font-size: 14px; flex-shrink: 0; }
-      main { padding-bottom: 36px; }
-      section { background: #fff; border-top: 1px solid #d8dcde; border-bottom: 1px solid #d8dcde; margin-bottom: 28px; }
-      .host-heading { border-bottom: 1px solid #d8dcde; }
-      .host-heading-inner { max-width: 1240px; margin: 0 auto; padding: 18px 28px; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-      h2 { margin: 0; font-size: 18px; line-height: 1.35; font-weight: 700; }
-      .host-heading span { font-size: 13px; }
-      .mit .host-heading { background: #393939; color: #fff; }
-      .ero .host-heading { background: #393939; color: #fff; border-top: 3px solid #393939; }
-      .frame-wrap { max-width: 1240px; margin: 0 auto; }
+      a:focus-visible { outline: 2px solid #525252; outline-offset: 4px; }
+      .page-heading { max-width: 1240px; margin: auto; padding: 28px; display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+      h1 { margin: 0; font-size: 26px; font-weight: 650; }
+      .page-heading a { font-size: 14px; }
+      main { padding-bottom: 28px; }
+      section { background: #fff; border-block: 1px solid #e0e0e0; margin-bottom: 28px; }
+      .host-heading { background: #393939; color: #fff; }
+      .host-heading-inner { max-width: 1240px; margin: auto; padding: 18px 28px; display: flex; align-items: baseline; justify-content: space-between; gap: 24px; }
+      h2 { margin: 0; font-size: 18px; font-weight: 600; }
+      .host-heading a { font-size: 13px; }
+      .frame-wrap { max-width: 1240px; margin: auto; }
       iframe { display: block; width: 100%; height: 760px; border: 0; background: #fff; }
       iframe:not([data-embed-ready]) { min-height: 620px; }
-      footer { max-width: 1240px; margin: 0 auto; padding: 0 28px; font-size: 12px; color: #586169; }
-      @media (max-width: 600px) {
-        .page-heading { padding: 22px 16px; align-items: flex-start; flex-direction: column; gap: 10px; }
-        .host-heading-inner { padding: 16px; flex-direction: column; gap: 5px; }
-        h1 { font-size: 24px; }
-        footer { padding: 0 16px; }
-      }
     </style>
   </head>
   <body>
     <header class="page-heading">
       <h1>AI Control Monitor</h1>
-      <a href="./#/scenarios">Open overview</a>
+      <a href="./#/incidents">Open Monitor</a>
     </header>
     <main>
-      <section class="mit" aria-labelledby="mit-heading">
-        <header class="host-heading">
-          <div class="host-heading-inner">
-            <h2 id="mit-heading">MIT AI Risk Initiative</h2>
-            <span>Datacenter root access to takeover</span>
-          </div>
-        </header>
+      <section aria-labelledby="incidents-heading">
+        <header class="host-heading"><div class="host-heading-inner">
+          <h2 id="incidents-heading">Incidents</h2>
+          <a href="./#/incidents">Open this view</a>
+        </div></header>
         <div class="frame-wrap">
-          <iframe
-            data-risk-pathways
-            data-pathway-src="./?embed=1&amp;theme=mit&amp;embedId=mit-pathway#/scenarios/independent-takeover?scenario=datacenter-takeover"
-            title="AI Control Monitor: datacenter takeover scenario, MIT theme"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-downloads"
-          ></iframe>
+          <iframe data-risk-pathways
+            data-pathway-src="./?embed=1&amp;embedId=monitor-incidents#/incidents"
+            title="AI Control Monitor incidents"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-downloads"></iframe>
         </div>
       </section>
-      <section class="ero" aria-labelledby="ero-heading">
-        <header class="host-heading">
-          <div class="host-heading-inner">
-            <h2 id="ero-heading">Institute for Security and Technology</h2>
-            <span>Scenario explorer</span>
-          </div>
-        </header>
+      <section aria-labelledby="indicators-heading">
+        <header class="host-heading"><div class="host-heading-inner">
+          <h2 id="indicators-heading">Indicators</h2>
+          <a href="./#/indicators">Open this view</a>
+        </div></header>
         <div class="frame-wrap">
-          <iframe
-            data-risk-pathways
-            data-pathway-src="./?embed=1&amp;theme=ero&amp;embedId=ero-explorer#/scenarios"
-            title="Scenario explorer, IST theme"
-            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-downloads"
-          ></iframe>
+          <iframe data-risk-pathways
+            data-pathway-src="./?embed=1&amp;embedId=monitor-indicators#/indicators"
+            title="AI Control Monitor indicators and warning criteria"
+            sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-downloads"></iframe>
         </div>
       </section>
     </main>
