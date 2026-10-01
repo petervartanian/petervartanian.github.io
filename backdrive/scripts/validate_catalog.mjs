@@ -309,7 +309,7 @@ await section('HTML asset references, cache hashes, and script order', () => {
     const version = new URL(match[1], 'https://catalog.invalid/').searchParams.get('v');
     if (version) check(/^[a-f0-9]{8,64}$/i.test(version) && digest(file).startsWith(version), `index.html: stale cache hash for ${file}`);
   }
-  const stages = ['imports/tracker.js', 'data.js', 'catalog.js', 'app.js'];
+  const stages = ['imports/tracker.js', 'data.js', 'catalog.js', 'risk-model.js', 'pilot-review.js', 'app.js'];
   for (const file of stages) check(scriptPaths.includes(file), `index.html: missing required script ${file}`);
   for (let i = 1; i < stages.length; i++) check(scriptPaths.indexOf(stages[i - 1]) < scriptPaths.indexOf(stages[i]), `index.html: ${stages[i - 1]} must precede ${stages[i]}`);
   const app = read('app.js');

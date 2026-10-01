@@ -6,6 +6,8 @@
   const pages = [['map','Incidents'],['capabilities','Capabilities'],['evaluations','Evaluations'],['safeguards','Interventions'],['pilots','Pilots']];
   const state = {mode:'all',page:'map',layout:'table',query:'',source:'all',domain:'all',evidence:'all',kind:'all',sort:'default',direction:1,recordPage:1,pageSize:50,selected:'AIID-594',detail:'evidence',control:'approved-inputs',controlView:'applied',mitigationQuery:'',mitigationCategory:'all',mitigationPage:1,pilot:'construction',pilotProject:'dusty',models:data.models.map(m => m.id),units:'count',evaluation:'roboharm',roboTask:'mixing'};
   const pilots = data.pilots;
+  const riskModel = window.BACKDRIVE_RISK_MODEL;
+  Object.assign(state, {risk:'all',entity:'all',intent:'all',timing:'all',contextOpen:false});
   const h = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const getCase = id => data.cases.find(c => c.id === id);
   const getControl = id => data.controls.find(c => c.id === id);
@@ -30,8 +32,8 @@
   const evalName = c => c.test === 'No reviewed match' ? 'Not yet identified' : c.test;
   const hasPublishedComparison = c => c.hasResults || c.evalIds?.some(id=>data.evaluations.find(e=>e.id===id)?.publishedResults?.length);
   const evidenceStatus = c => hasPublishedComparison(c) ? badge('Published comparison','published') : c.recordType === 'proxy' ? badge('Proxy') : c.id === 'PILOT-01' ? badge('Scenario') : !c.evalIds?.length ? badge('Unassessed','unassessed') : badge('Proposed test','proposed');
-  function rows() {
-    let cases = baseCases().filter(c =>
+  function rows(ignoreRisk=false) {
+    let cases = riskModel.select(baseCases(),{risk:ignoreRisk?'all':state.risk,entity:state.entity,intent:state.intent,timing:state.timing}).filter(c =>
       [c.id,c.title,c.summary,c.domain,c.sourceLabel,c.sourceName,c.kind,c.capability,c.test,c.aiPurpose].join(' ').toLowerCase().includes(state.query.toLowerCase()) &&
       (state.source==='all' || (state.source==='other' ? c.source && c.sourceKey!=='aiid' : state.source==='aiid' ? Boolean(c.tracker)||c.sourceKey==='aiid' : c.sourceKey===state.source)) &&
       (state.domain==='all' || c.domain===state.domain) &&
@@ -43,7 +45,11 @@
   function filters() {
     const select = (id,label,options,value) => '<label class="filter-select"><span>'+label+'</span><select id="'+id+'">'+options.map(([v,l]) => '<option value="'+h(v)+'" '+(v===value?'selected':'')+'>'+h(l)+'</option>').join('')+'</select></label>';
     const sources=[...new Map(baseCases().map(c=>[c.sourceKey,c.sourceLabel])).entries()];
-    return '<div class="filters"><label class="search"><span class="sr-only">Search records</span><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="m12 12 5 5"/></svg><input id="record-search" type="search" placeholder="Search incidents, capabilities, evaluations…" value="'+h(state.query)+'"></label><div class="filter-row">'+select('source-filter','Source',[['all','All sources'],['other','Other sources'],...sources],state.source)+select('domain-filter','Domain',[['all','All domains'],...[...new Set(baseCases().map(c=>c.domain))].map(d=>[d,d])],state.domain)+select('kind-filter','Type',[['all','All types'],['incident','Reported incidents'],['scenario','Illustrative scenarios'],['proxy','Hazard proxies']],state.kind)+select('evidence-filter','Evaluation',[['all','Any status'],['published','Published results'],['pending','No mapped results']],state.evidence)+button('Reset','reset','','reset-button')+'</div></div>';
+    const riskOptions='<option value="all">All risks</option>'+riskModel.domains.map(d=>'<optgroup label="'+h(d.id+' '+d.name)+'"><option value="'+h(d.id)+'" '+(state.risk===d.id?'selected':'')+'>All '+h(d.name)+'</option>'+riskModel.risks.filter(r=>r.domainId===d.id).map(r=>'<option value="'+h(r.id)+'" '+(state.risk===r.id?'selected':'')+'>'+h(r.id+' '+r.name)+'</option>').join('')+'</optgroup>').join('')+'<option value="unclassified" '+(state.risk==='unclassified'?'selected':'')+'>Without a risk classification</option>';
+    const contextKeys=[['entity','Entity','All entities'],['intent','Intent','Any intent'],['timing','Lifecycle','Any stage']];
+    const activeContext=contextKeys.filter(([key])=>state[key]!=='all').length;
+    const contextOptions=contextKeys.map(([key,label,all])=>select(key+'-filter',label,[['all',all],...[...new Set(baseCases().map(c=>c.tracker?.[key]).filter(Boolean))].sort().map(v=>[v,v])],state[key])).join('');
+    return '<div class="filters"><label class="search"><span class="sr-only">Search records</span><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8" cy="8" r="5.5"/><path d="m12 12 5 5"/></svg><input id="record-search" type="search" placeholder="Search incidents, capabilities, evaluations…" value="'+h(state.query)+'"></label><div class="filter-row">'+select('source-filter','Source',[['all','All sources'],['other','Other sources'],...sources],state.source)+'<label class="filter-select"><span>Risk</span><select id="risk-filter">'+riskOptions+'</select></label>'+select('domain-filter','Application',[['all','All applications'],...[...new Set(baseCases().map(c=>c.domain))].map(d=>[d,d])],state.domain)+select('kind-filter','Type',[['all','All types'],['incident','Reported incidents'],['scenario','Illustrative scenarios'],['proxy','Hazard proxies']],state.kind)+select('evidence-filter','Evaluation',[['all','Any status'],['published','Published comparisons'],['pending','No published comparisons']],state.evidence)+button('Context'+(activeContext?' ('+activeContext+')':''),'context','aria-expanded="'+state.contextOpen+'" aria-controls="context-filters"','context-toggle')+button('Reset','reset','','reset-button')+'</div><div class="context-filters" id="context-filters" '+(state.contextOpen?'':'hidden')+'>'+contextOptions+'</div></div>';
   }
   function heading(title,right='') { return '<div class="page-heading"><h1>'+title+'</h1>'+right+'</div>'; }
   function tableHeader(key,label) { return '<th scope="col" '+(state.sort===key?'aria-sort="'+(state.direction===1?'ascending':'descending')+'"':'')+'>'+button(label+' <span class="sort-arrow" aria-hidden="true">'+(state.sort===key?(state.direction===1?'↑':'↓'):'↕')+'</span>','sort','data-key="'+key+'"')+'</th>'; }
@@ -70,13 +76,38 @@
     return '<nav class="record-pagination" aria-label="Incident pages">'+button('← Previous','record-page','data-page="'+(state.recordPage-1)+'" '+(state.recordPage===1?'disabled':''))+'<span>Page '+state.recordPage+' of '+pages+'</span>'+button('Next →','record-page','data-page="'+(state.recordPage+1)+'" '+(state.recordPage===pages?'disabled':''))+'</nav>';
   }
   function mapContent() {
+    if(state.layout==='risks')return riskProfiles();
     const cases=rows();
     state.recordPage=Math.max(1,Math.min(state.recordPage,Math.ceil(cases.length/state.pageSize)));
     const visible=cases.slice((state.recordPage-1)*state.pageSize,state.recordPage*state.pageSize);
     return cases.length ? (state.layout==='table'?mapTable(visible):connections(visible))+pagination(cases.length) : empty();
   }
   function mapPage() {
-    return heading('<span class="map-title"><span>Catalog of</span><span class="map-title-symbols"><span class="section-icon">1</span><span class="map-plus">+</span><span class="section-icon">2</span><span class="map-plus">+</span><span class="section-icon">3</span></span></span>','<div class="view-switch" role="group" aria-label="Catalog display">'+['table','connections'].map(l => button(l==='table'?'Table':'Connections','layout','data-layout="'+l+'" aria-pressed="'+(state.layout===l)+'"',state.layout===l?'active':'')).join('')+'</div>')+filters()+'<div class="table-meta" id="record-count">'+resultCount()+'</div><section class="data-panel" id="record-results">'+mapContent()+'</section><div class="browse-links" role="group" aria-labelledby="browse-actions-label"><div class="browse-action-left">'+button('Show records without test results','preset','data-preset="gaps"')+'<span class="action-arrow arrow-left" aria-hidden="true"></span></div><span class="browse-actions-label" id="browse-actions-label">Actions</span><div class="browse-action-right"><span class="action-arrow arrow-right" aria-hidden="true"></span>'+button('Explore published results','open-benchmark','data-id="roboharm"')+'</div></div>';
+    return heading('<span class="map-title"><span>Catalog of</span><span class="map-title-symbols"><span class="section-icon">1</span><span class="map-plus">+</span><span class="section-icon">2</span><span class="map-plus">+</span><span class="section-icon">3</span></span></span>','<div class="view-switch" role="group" aria-label="Catalog display">'+['table','connections','risks'].map(l => button(({table:'Table',connections:'Connections',risks:'Risk profiles'})[l],'layout','data-layout="'+l+'" aria-pressed="'+(state.layout===l)+'"',state.layout===l?'active':'')).join('')+'</div>')+filters()+'<div class="table-meta" id="record-count">'+resultCount()+'</div><section class="data-panel" id="record-results">'+mapContent()+'</section><div class="browse-links" role="group" aria-labelledby="browse-actions-label"><div class="browse-action-left">'+button('Show records without published comparisons','preset','data-preset="gaps"')+'<span class="action-arrow arrow-left" aria-hidden="true"></span></div><span class="browse-actions-label" id="browse-actions-label">Actions</span><div class="browse-action-right"><span class="action-arrow arrow-right" aria-hidden="true"></span>'+button('Explore published comparisons','open-benchmark','data-id="roboharm"')+'</div></div>';
+  }
+  function riskProfiles() {
+    const cohort=rows(true);
+    const selected=riskModel.risks.find(r=>r.id===state.risk);
+    const domain=riskModel.domains.find(d=>d.id===(selected?.domainId||state.risk));
+    const summary=riskModel.summarize(cohort,state.risk);
+    const total=cohort.length;
+    const unclassified=cohort.filter(c=>!riskModel.riskOf(c)).length;
+    const navigation='<nav class="risk-directory" aria-label="Risk profiles">'+button('All risks<span>'+total.toLocaleString()+'</span>','risk-profile','data-id="all" aria-pressed="'+(state.risk==='all')+'"',state.risk==='all'?'selected':'')+riskModel.domains.map(d=>'<div class="risk-domain-label">'+button(h(d.id+' '+d.name),'risk-profile','data-id="'+h(d.id)+'" aria-pressed="'+(state.risk===d.id)+'"')+'</div>'+riskModel.risks.filter(r=>r.domainId===d.id).map(r=>{const n=cohort.filter(c=>riskModel.riskOf(c)===r.id).length;return button('<span class="risk-name"><span class="risk-code">'+h(r.id)+'</span>'+h(r.name)+'</span><span class="risk-count">'+n.toLocaleString()+'</span>','risk-profile','data-id="'+h(r.id)+'" aria-pressed="'+(state.risk===r.id)+'"',state.risk===r.id?'selected':'');}).join('')).join('')+(unclassified?button('Unclassified<span>'+unclassified+'</span>','risk-profile','data-id="unclassified" aria-pressed="'+(state.risk==='unclassified')+'"',state.risk==='unclassified'?'selected':''):'')+'</nav>';
+    const title=selected?selected.id+' '+selected.name:domain?domain.id+' '+domain.name:state.risk==='unclassified'?'Without a risk classification':'Risks in this catalog';
+    const intro=selected?.definition|| (state.risk==='unclassified'?'These records have no MIT risk classification.':'Choose a risk to follow its incident, capability, and evaluation connections.');
+    const profileRecords=summary.records;
+    const mapped=summary.evaluationMappedCount;
+    const metric=(value,label,action,attrs='')=>action?button('<strong>'+value.toLocaleString()+'</strong><span>'+label+'</span>',action,attrs,'profile-metric'):'<div class="profile-metric"><strong>'+value.toLocaleString()+'</strong><span>'+label+'</span></div>';
+    const metrics='<div class="profile-metrics">'+metric(profileRecords.length,'records','risk-records')+metric(mapped,'with evaluation links')+metric(profileRecords.length-mapped,'awaiting evaluation mapping')+'</div>';
+    const available=summary.capabilityNames.map(name=>button(h(name),'capability','data-name="'+h(name)+'"','record-link')).join('');
+    const evalRows=summary.evaluationIds.map(id=>data.evaluations.find(e=>e.id===id)).filter(Boolean).map(e=>'<tr><td>'+button(h(e.name),'open-benchmark','data-id="'+h(e.id)+'"','record-link')+'</td><td>'+h(e.focus)+'</td><td>'+h(e.publishedResults?.length?'Published comparison':e.status)+'</td></tr>').join('');
+    const evaluations=evalRows?'<div class="table-scroll"><table class="profile-evaluations"><thead><tr><th>Evaluation</th><th>What it examines</th><th>Evidence</th></tr></thead><tbody>'+evalRows+'</tbody></table></div>':'<p class="profile-empty">No evaluation connections have been assessed for these records.</p>';
+    const controls=summary.controlIds.map(id=>getControl(id)).filter(Boolean).map(c=>'<li>'+button(h(c.name),'open-control','data-id="'+h(c.id)+'"','record-link')+'<span>'+h(c.question)+'</span></li>').join('');
+    const pilotLinks=summary.pilotIds.map(id=>pilots.find(p=>p.id===id)).filter(Boolean).map(p=>'<li>'+button(h(p.name),'open-pilot','data-id="'+h(p.id)+'"','record-link')+'<span>'+h(p.partner&&p.partner!=='—'?p.partner+' / '+p.status:p.status)+'</span></li>').join('');
+    const examples=profileRecords.slice(0,5).map(c=>'<tr><td>'+caseButton(c,c.id)+'</td><td>'+caseButton(c)+'</td><td>'+h(c.date||'—')+'</td><td>'+evidenceStatus(c)+'</td></tr>').join('');
+    const records=examples?'<div class="profile-section-heading"><h3>Incident records</h3>'+button('View all '+profileRecords.length.toLocaleString()+' →','risk-records','','record-link')+'</div><div class="table-scroll"><table class="profile-incidents"><thead><tr><th>Reference</th><th>Incident</th><th>Date</th><th>Connection</th></tr></thead><tbody>'+examples+'</tbody></table></div>':'<h3>Incident records</h3><p class="profile-empty">No records match the current selection.</p>';
+    const distributions=state.risk==='all'?'<div class="risk-distribution" aria-label="Records by risk domain">'+riskModel.domains.map(d=>{const n=cohort.filter(c=>riskModel.riskOf(c)?.startsWith(d.id+'.')).length;return button('<span>'+h(d.id+' '+d.name)+'</span><span class="risk-bar"><i style="width:'+(total?100*n/total:0)+'%"></i></span><strong>'+n.toLocaleString()+'</strong>','risk-profile','data-id="'+h(d.id)+'"');}).join('')+'</div>':'';
+    return '<div class="risk-workspace">'+navigation+'<article class="risk-profile"><header class="risk-profile-heading"><h2 id="risk-profile-title" tabindex="-1">'+h(title)+'</h2><p>'+h(intro)+'</p></header>'+metrics+distributions+'<section class="profile-section">'+records+'</section><section class="profile-section"><h3>Capabilities</h3>'+(available?'<div class="profile-capabilities">'+available+'</div>':'<p class="profile-empty">No capability connections have been assessed for these records.</p>')+'</section><section class="profile-section"><h3>Evaluations</h3>'+evaluations+'</section><div class="profile-responses"><section class="profile-section"><h3>Interventions</h3>'+(controls?'<ul class="profile-linked-list">'+controls+'</ul>':'<p class="profile-empty">No applied controls are linked yet.</p>')+'</section><section class="profile-section"><h3>Pilots</h3>'+(pilotLinks?'<ul class="profile-linked-list">'+pilotLinks+'</ul>':'<p class="profile-empty">No pilots are linked yet.</p>')+'</section></div><p class="profile-footnote">Counts describe catalog records, not how often a risk occurs. Links are assessments; an unmapped record does not establish an evaluation gap.</p></article></div>';
   }
   function capabilitiesPage() {
     return heading('Capabilities')+filters()+'<div class="table-meta" id="record-count">'+resultCount()+'</div><section class="data-panel" id="record-results">'+capabilityContent()+'</section>';
@@ -84,7 +115,7 @@
   function capabilityGroups() {
     const cases=rows().filter(hasCapability);
     const groups=[...new Set(cases.map(c => c.capability))].map(name => ({name,cases:cases.filter(c => c.capability===name)}));
-    if(['source','domain','evidence','kind'].every(key=>state[key]==='all')){
+    if(['source','domain','evidence','kind','risk','entity','intent','timing'].every(key=>state[key]==='all')){
       for(const definition of data.capabilities||[]){
         if(!definition.caseIds.length&&definition.pilotIds?.length&&[definition.name,definition.definition].join(' ').toLowerCase().includes(state.query.toLowerCase()))groups.push({name:definition.name,cases:[]});
       }
@@ -199,7 +230,7 @@
       const control = getControl(id);
       return '<tr><td>'+button(h(control.name),'open-control','data-id="'+id+'"','record-link')+'</td><td>'+h(control.question)+'</td></tr>';
     }).join('');
-    return '<div class="section-heading pilot-heading"><div><h2>'+h(p.name)+'</h2><p>'+h(p.description)+'</p></div>'+(p.featured?'':'')+'</div><p class="pilot-question">'+h(p.question)+'</p><div class="table-scroll"><table class="pilot-comparisons"><thead><tr><th>Intervention</th><th>Question</th></tr></thead><tbody>'+controls+'</tbody></table></div>';
+    return '<div class="section-heading pilot-heading"><div><h2>'+h(p.name)+'</h2><p>'+h(p.description)+'</p></div>'+(p.featured?'':'')+'</div><p class="pilot-question">'+h(p.question)+'</p><div class="table-scroll"><table class="pilot-comparisons"><thead><tr><th>Intervention</th><th>Question</th></tr></thead><tbody>'+controls+'</tbody></table></div>'+window.BACKDRIVE_PILOT_REVIEW.render(p);
   }
   function projectEvidence(project) {
     if(!project.evidenceLinks?.length)return '';
@@ -220,7 +251,7 @@
   function projectPilotDetail(p,project) {
     const choices='<div class="view-switch pilot-project-switch" role="group" aria-label="Sage Plant cases">'+p.projects.map(item=>button(h(item.label),'pilot-project','data-id="'+item.id+'" aria-pressed="'+(item.id===project.id)+'"',item.id===project.id?'active':'')).join('')+'</div>';
     const checks=project.checks.map(([control,check,measure])=>'<tr><th scope="row">'+h(control)+'</th><td>'+h(check)+'</td><td>'+h(measure)+'</td></tr>').join('');
-    return '<div class="section-heading pilot-heading project-heading"><h2>'+h(p.name)+'</h2><img class="brand-logo sage-logo" src="assets/sage-plant-original.png" alt="The Sage Plant"></div>'+choices+'<section class="pilot-case" aria-labelledby="pilot-case-title"><h3 id="pilot-case-title">'+h(project.name)+'</h3><p class="pilot-task">'+h(project.description)+'</p><dl class="pilot-facts">'+project.facts.map(([label,value])=>'<div><dt>'+h(label)+'</dt><dd>'+h(value)+'</dd></div>').join('')+'</dl>'+projectEvidence(project)+'<div class="table-scroll"><table class="pilot-checks"><caption>Comparisons to run</caption><thead><tr><th scope="col">Check</th><th scope="col">Comparison</th><th scope="col">Measure</th></tr></thead><tbody>'+checks+'</tbody></table></div></section>';
+    return '<div class="section-heading pilot-heading project-heading"><h2>'+h(p.name)+'</h2><img class="brand-logo sage-logo" src="assets/sage-plant-original.png" alt="The Sage Plant"></div>'+choices+'<section class="pilot-case" aria-labelledby="pilot-case-title"><h3 id="pilot-case-title">'+h(project.name)+'</h3><p class="pilot-task">'+h(project.description)+'</p><dl class="pilot-facts">'+project.facts.map(([label,value])=>'<div><dt>'+h(label)+'</dt><dd>'+h(value)+'</dd></div>').join('')+'</dl>'+projectEvidence(project)+'<div class="table-scroll"><table class="pilot-checks"><caption>Comparisons to run</caption><thead><tr><th scope="col">Check</th><th scope="col">Comparison</th><th scope="col">Measure</th></tr></thead><tbody>'+checks+'</tbody></table></div>'+window.BACKDRIVE_PILOT_REVIEW.render(p,project)+'</section>';
   }
   function aboutData() {
     const count=data.trackerImport?.count;
@@ -229,7 +260,7 @@
   }
   function provenanceDetail() {
     const m=data.trackerImport;
-    return '<div class="provenance-facts"><p>'+link('https://airisk.mit.edu/ai-incident-tracker/incident-view','MIT AI Incident Tracker')+' classifies records from the '+link('https://incidentdatabase.ai/','AI Incident Database')+'. Arcola AI runs the classification pipeline.</p>'+(m?'<p><strong>Imported:</strong> '+h(m.count)+' records. <strong>Source updated:</strong> '+h(m.sourceUpdatedAt)+'. <strong>Import date:</strong> '+h(m.importedAt)+'.</p>':'')+'<p>MIT classifications are shared under '+link('https://creativecommons.org/licenses/by/4.0/','CC BY 4.0')+'. The AIID incident collection is shared under '+link('https://incidentdatabase.ai/terms-of-use/','CC BY-SA 4.0')+'. Each AIID record links to its contributor citation.</p><p>Original Tracker titles, summaries, and classifications are retained. The capability, evaluation, intervention, and pilot connections were added for this catalog. They are separate assessments.</p><p>Back\\Drive includes a search-based selection of robotics and physical-system records. This selection may miss relevant reports or include borderline cases; it is not an official Tracker category.</p><p>'+link('imports/ATTRIBUTION.md','Import attribution')+' / '+link('sources/catalogue.json','Source catalog')+'</p></div>';
+    return '<div class="provenance-facts"><p>'+link('https://airisk.mit.edu/ai-incident-tracker/incident-view','MIT AI Incident Tracker')+' classifies records from the '+link('https://incidentdatabase.ai/','AI Incident Database')+'. Arcola AI runs the classification pipeline.</p>'+(m?'<p><strong>Imported:</strong> '+h(m.count)+' records. <strong>Source updated:</strong> '+h(m.sourceUpdatedAt)+'. <strong>Import date:</strong> '+h(m.importedAt)+'.</p>':'')+'<p>MIT classifications are shared under '+link('https://creativecommons.org/licenses/by/4.0/','CC BY 4.0')+'. The AIID incident collection is shared under '+link('https://incidentdatabase.ai/terms-of-use/','CC BY-SA 4.0')+'. Each AIID record links to its contributor citation.</p><p>Risk profiles use the Tracker’s risk taxonomy and entity, intent, and lifecycle classifications. These are automated classifications, not independent findings. Counts describe this catalog, not real-world prevalence.</p><p>Original Tracker titles, summaries, and classifications are retained. The capability, evaluation, intervention, and pilot connections were added for this catalog. They are separate assessments.</p><p>Back\\Drive includes a search-based selection of robotics and physical-system records. This selection may miss relevant reports or include borderline cases; it is not an official Tracker category.</p><p>'+link('imports/ATTRIBUTION.md','Import attribution')+' / '+link('sources/catalogue.json','Source catalog')+'</p></div>';
   }
   function workspaceNotes() {
     const pilot=state.page==='pilots'?pilots.find(item=>item.id===state.pilot):null;
@@ -294,7 +325,7 @@
     document.getElementById('record-results').innerHTML=state.page==='map'?mapContent():capabilityContent();
     document.getElementById('record-count').innerHTML=resultCount();
   }
-  function resetFilters() {state.recordPage=1;state.query='';state.source='all';state.domain='all';state.evidence='all';state.kind='all';}
+  function resetFilters() {state.recordPage=1;state.query='';state.source='all';state.domain='all';state.evidence='all';state.kind='all';state.risk='all';state.entity='all';state.intent='all';state.timing='all';}
   function navigate(page) {if(!pages.some(p => p[0]===page))return;state.page=page;shell();document.getElementById('main').focus({preventScroll:true});}
   function showDialog(title,body) {
     dialog.innerHTML='<div class="dialog-heading"><h2 id="dialog-title">'+h(title)+'</h2>'+button('×','close','aria-label="Close details"','close-button')+'</div><div class="dialog-content">'+body+'</div>';
@@ -410,9 +441,12 @@
     const action=el.dataset.action;
     if(action==='nav'){dialog.close();navigate(el.dataset.page);}
     if(action==='provenance')showDialog('Sources and dates',provenanceDetail());
-    if(action==='mode'){state.mode=el.dataset.mode;resetFilters();shell();document.querySelector('[data-mode="'+state.mode+'"]').focus();}
-    if(action==='layout'){state.layout=el.dataset.layout;shell();}
-    if(action==='reset'){resetFilters();shell();}
+    if(action==='mode'){state.mode=el.dataset.mode;resetFilters();shell();document.querySelector('[data-action="mode"][data-mode="'+state.mode+'"]').focus();}
+    if(action==='layout'){state.layout=el.dataset.layout;shell();document.querySelector('[data-action="layout"][data-layout="'+state.layout+'"]').focus({preventScroll:true});}
+    if(action==='risk-profile'){state.risk=el.dataset.id;state.layout='risks';state.recordPage=1;shell();document.getElementById('risk-profile-title')?.focus({preventScroll:true});}
+    if(action==='risk-records'){state.layout='table';state.recordPage=1;shell();document.getElementById('main').focus({preventScroll:true});}
+    if(action==='context'){state.contextOpen=!state.contextOpen;shell();document.querySelector('[data-action="context"]').focus({preventScroll:true});}
+    if(action==='reset'){resetFilters();shell();document.querySelector('[data-action="reset"]').focus({preventScroll:true});}
     if(action==='record-page'){state.recordPage=Number(el.dataset.page);refreshRecords();document.getElementById('record-count').scrollIntoView({block:'start'});}
     if(action==='sort'){state.recordPage=1;if(state.sort===el.dataset.key)state.direction*=-1;else{state.sort=el.dataset.key;state.direction=1;}refreshRecords();}
     if(action==='benchmark'){state.evaluation=el.dataset.id;shell();}
@@ -435,8 +469,8 @@
   document.addEventListener('change',event => {
     const el=event.target;
     if(el.id==='mitigation-category'){state.mitigationPage=1;state.mitigationCategory=el.value;refreshMitigations();}
-    const key={'source-filter':'source','domain-filter':'domain','evidence-filter':'evidence','kind-filter':'kind'}[el.id];
-    if(key){state.recordPage=1;state[key]=el.value;refreshRecords();}
+    const key={'source-filter':'source','domain-filter':'domain','evidence-filter':'evidence','kind-filter':'kind','risk-filter':'risk','entity-filter':'entity','intent-filter':'intent','timing-filter':'timing'}[el.id];
+    if(key){state.recordPage=1;state[key]=el.value;refreshRecords();const contextButton=document.querySelector('[data-action="context"]');if(contextButton){const n=['entity','intent','timing'].filter(k=>state[k]!=='all').length;contextButton.textContent='Context'+(n?' ('+n+')':'');}}
     if(el.hasAttribute('data-robo-task')){state.roboTask=el.value;document.getElementById('benchmark-detail').innerHTML=benchmarkDetail();document.querySelector('[data-robo-task]').focus();}
     if(el.dataset.model){state.models=el.checked?[...state.models,el.dataset.model]:state.models.filter(id => id!==el.dataset.model);document.querySelectorAll('.results-chart').forEach(chart => {chart.innerHTML=resultsChart(chart.closest('[data-results-task]').dataset.resultsTask);});document.querySelectorAll('[data-model]').forEach(box => {box.checked=state.models.includes(box.dataset.model);});document.querySelectorAll('[data-chart-units]').forEach(select => {select.value=state.units;});}
     if(el.dataset.chartUnits){state.units=el.value;document.querySelectorAll('.results-chart').forEach(chart => {chart.innerHTML=resultsChart(chart.closest('[data-results-task]').dataset.resultsTask);});document.querySelectorAll('[data-model]').forEach(box => {box.checked=state.models.includes(box.dataset.model);});document.querySelectorAll('[data-chart-units]').forEach(select => {select.value=state.units;});}
@@ -448,7 +482,14 @@
     i=event.key==='Home'?0:event.key==='End'?3:(i+(event.key==='ArrowRight'?1:3))%4;
     openRecord(state.selected,tabs[i]);dialog.querySelector('[role="tab"][data-detail="'+tabs[i]+'"]').focus();
   });
-  const pilotQuery=new URLSearchParams(location.search).get('pilot');
+  const route=new URLSearchParams(location.search);
+  if(route.get('view')==='risks'){
+    state.layout='risks';
+    const requestedRisk=route.get('risk');
+    if(requestedRisk==='unclassified'||riskModel.risks.some(r=>r.id===requestedRisk)||riskModel.domains.some(d=>d.id===requestedRisk))state.risk=requestedRisk;
+    if(route.get('mode')==='robotics')state.mode='robotics';
+  }
+  const pilotQuery=route.get('pilot');
   const requestedPilot=({layout:'dusty','wall-finishing':'derutu'})[pilotQuery]||pilotQuery;
   if(pilots.find(p=>p.id==='construction').projects.some(p=>p.id===requestedPilot)){
     state.mode='robotics';state.page='pilots';state.pilotProject=requestedPilot;
