@@ -41,8 +41,11 @@ def add_institution_logos(markup):
 
     parts = re.split(r'(<[^>]+>)', markup)
     for index in range(0, len(parts), 2):
-        if parts[index] == 'MIT AI Risk Initiative &amp; Arcola AI':
-            parts[index] = ' &amp; '.join(decorate(match, number) for number, match in enumerate(NAMES.finditer(parts[index]), 1))
+        if parts[index] == 'MIT AI Risk Initiative &amp; a venture in stealth':
+            institution, venture = parts[index].split(' &amp; ', 1)
+            institution = decorate(NAMES.fullmatch(institution), 1)
+            venture = f'<span class="institution-entry"><span class="institution-logo-slot" aria-hidden="true"></span><span class="institution-name"><span class="institution-text">(2) {venture}</span></span></span>'
+            parts[index] = f'{institution} &amp; {venture}'
         else:
             parts[index] = NAMES.sub(decorate, parts[index])
     result = ''.join(parts)

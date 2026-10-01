@@ -79,7 +79,7 @@ for numeral in ['I.', 'II.', 'III.', 'IV.']:
     check(numeral in cv, f'Missing CV section number {numeral}')
 for entry in data['cv']['experience']:
     org=re.sub(r'[*/]+$','',entry['organization'])
-    names = org.split(' & ') if org == 'MIT AI Risk Initiative & Arcola AI' else [org]
+    names = org.split(' & ') if org == 'MIT AI Risk Initiative & a venture in stealth' else [org]
     check(all(name in cv for name in names) and entry['dates'] in cv,f'Missing CV entry: {org}')
 for section in data['cv']['sections']:
     if section['label'] in ('Education',) or section['label'].startswith('Languages'):continue
@@ -92,7 +92,7 @@ check('<img' not in markdown and '/assets/logos/' not in markdown and '![' not i
 check('download="peter-vartanian-cv.md"' in (ROOT/'cv/index.html').read_text(), 'CV download link is missing')
 for entry in data['cv']['experience']:
     org = re.sub(r'[*/]+$', '', entry['organization'])
-    names = org.split(' & ') if org == 'MIT AI Risk Initiative & Arcola AI' else [org]
+    names = org.split(' & ') if org == 'MIT AI Risk Initiative & a venture in stealth' else [org]
     check(all(name in markdown for name in names) and entry['dates'] in markdown, f'Markdown CV omits {org}')
 for label in ['Experience', 'Education', 'Languages', 'Skills & methods']:
     check(label in markdown, f'Markdown CV omits section {label}')

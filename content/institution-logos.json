@@ -31,18 +31,6 @@
     "note": "Trimmed to visible artwork with transparent edges; natural proportions preserved.",
     "height": 21.99
   },
-  "arcola": {
-    "file": "arcola-a.png",
-    "source": "User-supplied Arcola AI wordmark; first capital A",
-    "painted_area_reference": "mit",
-    "bytes": 1153,
-    "aliases": [
-      "Arcola AI"
-    ],
-    "width": 12.34,
-    "height": 14.18,
-    "note": "First A cropped directly from the supplied logo; original navy color and proportions preserved, with a transparent background."
-  },
   "aire": {
     "file": "ai-risk-explorer-user-transparent.png",
     "source": "Latest user-supplied AI Risk Explorer mark",
