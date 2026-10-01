@@ -126,7 +126,7 @@ for row, (pivot, path, indices) in enumerate(mobile_rows):
 mobile += '</g></g></g></svg></div></figure>'
 
 home = f'''<div class="introduction">
-  <p>I am a pertinacious thinker-and-doer who hails from <a href="https://mapcarta.com/N1938447213">Weng</a>, a hamlet in the Tyrolean Alps.</p>
+  <p>I am a pertinacious thinker-and-doer who hails from <a href="https://mapcarta.com/N1938447213">Weng</a>, a hamlet in the Tyrolean Alps of Austria.</p>
   <p>I studied diplomacy and world affairs alongside literature and culture at Occidental College in Los Angeles, with additional coursework at Caltech. My work has taken me to the world’s highest deliberative fora, <em>incl.</em> the UN.</p>
   <p>I now live in Cambridge, Massachusetts, where I lead — at <a href="https://airisk.mit.edu/">MIT’s AI Risk Initiative</a> and a venture in stealth — the first ecosystem-wide study of how people interact with AI-incident data(bases).</p>
   {mobile}
