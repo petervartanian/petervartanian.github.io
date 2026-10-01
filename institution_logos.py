@@ -39,7 +39,7 @@ def add_institution_logos(markup):
 
     parts = re.split(r'(<[^>]+>)', markup)
     for index in range(0, len(parts), 2):
-        if parts[index] == 'Stealth AI Research Lab':
+        if parts[index] == 'Stealth AI Research Lab?':
             parts[index] = f'<span class="institution-entry"><span class="institution-logo-slot" aria-hidden="true"></span><span class="institution-name"><span class="institution-text">{parts[index]}</span></span></span>'
         else:
             parts[index] = NAMES.sub(decorate, parts[index])
